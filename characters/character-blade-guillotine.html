@@ -1,112 +1,607 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLADE GUILLOTINE // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.icons {
-  text-align: center;
-  
-}
+        .character-visual {
+            position: relative;
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
+    <div class="container">
+        <section class="character-header">
+            <div class="character-visual">
+                <img src="../assets/characters/BLADE GUILLOTINE.png" alt="BLADE GUILLOTINE" class="character-image">
+                <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+            </div>
+            <div class="character-info">
+                <h1 class="character-name">BLADE GUILLOTINE</h1>
+                <p class="character-title">The Living Executioner</p>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-label">True Name</span><span class="stat-value">Unrevealed</span></div>
+                    <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">Unknown</span></div>
+                    <div class="stat-item"><span class="stat-label">Realm</span><span class="stat-value"><a href="../realms/realm-royastella.html" class="wiki-link">Royastella</a></span></div>
+                    <div class="stat-item"><span class="stat-label">Elemental Core</span><span class="stat-value">Darkness</span></div>
+                    <div class="stat-item"><span class="stat-label">Mana State</span><span class="stat-value">Permanently Active (Surge-Capable)</span></div>
+                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Le Couteau (Épée)</span></div>
+                    <div class="stat-item"><span class="stat-label">Blessing</span><span class="stat-value">Moonlight Curse — Suppression</span></div>
+                    <div class="stat-item"><span class="stat-label">Status</span><span class="stat-value">Antagonist (Post-Betrayal)</span></div>
+                </div>
+                <div class="character-quote">"Bring me a champion to test my might, or witness a massacre's bloody light."</div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p>BLADE GUILLOTINE is an anomaly among the Runic Knights—a living executioner archetype whose existence is defined by the dismantling of authority, power structures, and battlefield momentum. While the Runic Knights traditionally embody ruling archetypes, BLADE GUILLOTINE represents the instrument designed to end them.</p>
+                
+                <p>Her battlefield presence is synonymous with abrupt reversals of fortune. Engagements that appear stable or victorious frequently collapse upon her arrival, as she specializes in isolating and dismantling pivotal combatants with surgical inevitability.</p>
+
+                <p>Despite being aligned with the Runic Knights in operational contexts, BLADE GUILLOTINE maintains a fully independent ideology and has never demonstrated true allegiance to their hierarchy or objectives. This is why they never anticipated her betrayal.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Appearance</h2>
+            <div class="section-content">
+                <p>BLADE GUILLOTINE presents as an austere and imposing figure whose aesthetic blends ceremonial executioner symbolism with aristocratic dueling tradition.</p>
+                
+                <h3 class="section-subtitle">Visual Motifs</h3>
+                <ul>
+                    <li>Stark monochromatic or muted color palettes</li>
+                    <li>Sharp, elongated silhouette elements that mirror her épée's design language</li>
+                    <li>Accents reminiscent of judicial or ceremonial attire</li>
+                    <li>Void-aligned energy distortions that subtly disrupt surrounding light</li>
+                </ul>
+                
+                <p>Her presence alone often produces psychological destabilization among both allies and enemies.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Personality</h2>
+            <div class="section-content">
+                <p>BLADE GUILLOTINE operates according to a predator's code rather than a knight's oath.</p>
+                
+                <h3 class="section-subtitle">Core Traits</h3>
+                <ul>
+                    <li><strong>Ruthlessly Pragmatic:</strong> Makes decisions based purely on combat effectiveness</li>
+                    <li><strong>Combat-Obsessed:</strong> Selectively so—only interested in worthy opposition</li>
+                    <li><strong>Indifferent to Consequence:</strong> Utterly unconcerned with collateral damage when deprived of worthy opposition</li>
+                    <li><strong>Honor-Bound:</strong> Displays a strict, personal definition of honor centered on combat excellence</li>
+                </ul>
+
+                <p>She values challenge above ideology and respects only those capable of meeting her standards in battle. Weakness, political maneuvering, or ceremonial authority structures hold no significance to her worldview.</p>
+
+                <p>Her relationship with violence is neither emotional nor malicious. It is recreational, ritualistic, and existentially validating.</p>
+
+                <h3 class="section-subtitle">Speech Pattern</h3>
+                <p>BLADE GUILLOTINE speaks entirely in rhyme, usually in couplets of two lines. This rhyming is an affectation that is never explicitly acknowledged in conversation. When she breaks from rhyme, it signifies a moment of significance, though this too goes unpointed-out by others.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Combat Philosophy</h2>
+            <div class="section-content">
+                <p>BLADE GUILLOTINE specializes in targeted elimination and momentum collapse. Rather than engaging entire forces directly, she dismantles leadership structures, support linchpins, and power amplifiers, causing enemy formations to fracture internally.</p>
+
+                <p>Her fighting style emphasizes:</p>
+                <ul>
+                    <li><strong>Precision Over Spectacle:</strong> Every movement serves a purpose</li>
+                    <li><strong>Minimal Movement, Maximum Lethality:</strong> Economy of motion perfected</li>
+                    <li><strong>Opportunistic Counters:</strong> Exploiting enemy commitment</li>
+                    <li><strong>Psychological Warfare:</strong> Through inevitability rather than intimidation</li>
+                </ul>
+
+                <p>She often deliberately prolongs combat against powerful adversaries to extract maximum engagement value. Her battlefield presence represents the pursuit of excellence through confrontation—she is as eager to be challenged as she is dangerous to face.</p>
+
+                <p>Her offensive philosophy can be summarized as <strong>exaltation through contest</strong>. She does not seek destruction for its own sake, but rather pursues combat as a medium of discovery and self-definition.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Weapon: Le Couteau</h2>
+            <div class="section-content">
+                <p>BLADE GUILLOTINE wields <strong>Le Couteau</strong>, a thrust-optimized épée designed for extreme penetration efficiency and precision targeting. The weapon functions less as a tool and more as an extension of her perceptual combat instincts.</p>
+
+                <h3 class="section-subtitle">Combat Characteristics</h3>
+                <ul>
+                    <li><strong>Exceptional Thrusting Velocity:</strong> Attacks delivered with extreme alignment control</li>
+                    <li><strong>Hyper-Precise Targeting:</strong> Strikes mana conduits and structural weak points with remarkable consistency</li>
+                    <li><strong>Void Resonance:</strong> Disrupts defensive enchantments on contact</li>
+                    <li><strong>Suppression Synergy:</strong> Near-perfect integration with her Moonlight Curse abilities</li>
+                </ul>
+
+                <p>Unlike slash-oriented fencing systems, BLADE GUILLOTINE's technique revolves around direct linear engagement, exploiting minimal openings to deliver decisive, armor-piercing strikes.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Combat Techniques</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Tempo-Driven Dueling Style</h3>
+                <p>BLADE GUILLOTINE utilizes a tempo-driven dueling style centered around elegant thrusting épée technique augmented by high-tier dark magic integration. Her combat presence emphasizes fluid motion, surgical precision, and an almost celebratory appreciation for high-level combat exchanges.</p>
+
+                <h3 class="section-subtitle">Movement Methodology</h3>
+                <ul>
+                    <li><strong>Choreographed Flow:</strong> Movement resembling dance with graceful pivots and sweeping transitions</li>
+                    <li><strong>Continuous Momentum:</strong> Rarely plants stance, maintaining constant motion</li>
+                    <li><strong>Disguised Initiation:</strong> Attack preparation hidden within flowing locomotion</li>
+                    <li><strong>Angle Reset:</strong> Repositioning after each exchange to maintain advantage</li>
+                </ul>
+
+                <h3 class="section-subtitle">Dark Magic Integration</h3>
+                <p>BLADE GUILLOTINE integrates Tier 4 dark magic directly into her blade techniques, favoring enhancement-based applications:</p>
+                <ul>
+                    <li><strong>Thrust Velocity Enhancement:</strong> Magical acceleration of strike speed</li>
+                    <li><strong>Spatial Distortion:</strong> Extending penetration reach beyond physical limits</li>
+                    <li><strong>Kinetic Amplification:</strong> Magnifying impact force at moment of contact</li>
+                    <li><strong>Dueling Purity:</strong> Subtle enhancements that prioritize technique over spectacle</li>
+                </ul>
+
+                <h3 class="section-subtitle">Controlled Escalation</h3>
+                <p>BLADE GUILLOTINE displays a pronounced theatrical flair during combat, maintaining confident composure and expressive body language throughout engagements. Her theatricality reflects competitive enthusiasm—she actively seeks formidable opponents and escalates her output to match or slightly exceed their capability.</p>
+
+                <p>This results in a controlled but deliberate escalation pattern:</p>
+                <ul>
+                    <li>Beginning with refined technical exchanges to observe opponent skill</li>
+                    <li>Gradually introducing enhanced magical reinforcement as needed</li>
+                    <li>Pushing her own limits when confronted with exceptional resistance</li>
+                    <li>Occasionally prioritizing combat satisfaction over tactical efficiency</li>
+                </ul>
+
+                <h3 class="section-subtitle">Multi-Opponent Tactics</h3>
+                <p>In scenarios with multiple adversaries, BLADE GUILLOTINE relies on:</p>
+                <ul>
+                    <li><strong>Mobility Mastery:</strong> Rapid directional shifts and rotational footwork</li>
+                    <li><strong>Line-of-Engagement Management:</strong> Forcing sequential rather than simultaneous engagement</li>
+                    <li><strong>Spacing Manipulation:</strong> Creating dueling flow even against multiple attackers</li>
+                    <li><strong>Preference for Isolation:</strong> Peak effectiveness in one-on-one combat</li>
+                </ul>
+
+                <h3 class="section-subtitle">Finishing Philosophy</h3>
+                <p>Her finishing strikes emphasize inevitability through refinement:</p>
+                <ul>
+                    <li>Applying mounting technical pressure until critical openings appear</li>
+                    <li>Executing high-speed, deeply committed thrust sequences</li>
+                    <li>Combining magical acceleration with spatial compression</li>
+                    <li>Delivering attacks that appear simple but carry catastrophic penetrative force</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Moonlight Curse — Suppression</h2>
+            <div class="section-content">
+                <p>Unlike most elite combatants who wield Starlight Blessings, BLADE GUILLOTINE is bound to a Moonlight Curse. This ability makes her one of the most dangerous anti-elite combatants in recorded history.</p>
+
+                <h3 class="section-subtitle">Passive Effect</h3>
+                <ul>
+                    <li>Constantly weakens active Starlight Blessings within her engagement radius</li>
+                    <li>Reduces enhancement amplification effectiveness</li>
+                    <li>Diminishes defensive miracle potency</li>
+                    <li>Disrupts coordinated resonance effects</li>
+                </ul>
+
+                <h3 class="section-subtitle">Surge State</h3>
+                <p>When activated, her Surge state produces devastating effects:</p>
+                <ul>
+                    <li><strong>Complete Blessing Disable:</strong> Fully negates Starlight Blessings within range</li>
+                    <li><strong>Celestial Severance:</strong> Temporarily cuts off empowerment channels</li>
+                    <li><strong>Forced Equalization:</strong> Opponents must rely solely on inherent skill, physical conditioning, or external systems</li>
+                    <li><strong>Escalated Parameters:</strong> Dramatically increases her suppression potency, physical acceleration, perception speed, and strike lethality</li>
+                </ul>
+
+                <p>Surge cannot be maintained indefinitely but is capable of determining the outcome of entire battles when deployed strategically.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Mana State</h2>
+            <div class="section-content">
+                <p>BLADE GUILLOTINE's Mana Activation remains perpetually online, granting her constant Void-channel reinforcement. This permanent state provides continuous enhancement and sets her apart from combatants who must activate their power.</p>
+
+                <p>Her Surge functions as a manually triggered escalation state, dramatically increasing suppression potency, physical acceleration, perception speed, and strike lethality. While Surge cannot be maintained indefinitely, its strategic deployment can determine the outcome of entire battles.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationship with Starlite 7th</h2>
+            <div class="section-content">
+                <p>BLADE GUILLOTINE occupies a paradoxical position relative to the <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>.</p>
+
+                <p>She has:</p>
+                <ul>
+                    <li>Intervened repeatedly to prevent their defeat</li>
+                    <li>Never accepted formal membership</li>
+                    <li>Demonstrated no loyalty to their mission, only to the existence of compelling adversaries</li>
+                </ul>
+
+                <p>The Starlite 7th regard her as a catastrophic but occasionally indispensable ally. This perception lasts until she betrays them before Symphonic Overture, at which time they see her fully as an antagonist.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Behavioral Patterns</h2>
+            <div class="section-content">
+                <p>BLADE GUILLOTINE is known to:</p>
+                <ul>
+                    <li>Appear without warning during pivotal combat turning points</li>
+                    <li>Ignore lesser opponents entirely</li>
+                    <li>Withdraw instantly if no opponent meets her criteria</li>
+                    <li>Demonstrate complete disinterest in post-conflict consequences</li>
+                    <li>Actively cultivate the existence of powerful opponents rather than eliminate them prematurely</li>
+                </ul>
+
+                <p>Her presence is often interpreted as a harbinger of decisive and irreversible outcomes.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            <div class="section-content">
+                <div class="relationships-grid">
+                    <a href="../factions/faction-starlite-7th.html" class="relationship-card">
+                        <div class="relationship-name">Starlite 7th</div>
+                        <div class="relationship-type">Former Ally / Later Antagonist</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Archetype</h3>
+                <p>BLADE GUILLOTINE embodies the <strong>Living Executioner</strong> archetype—an instrument designed to end power structures and inherited authority through surgical inevitability.</p>
+
+                <h3 class="section-subtitle">Core Themes</h3>
+                <ul>
+                    <li><strong>Collapse of Inherited Authority:</strong> Representing the end of power structures built without merit</li>
+                    <li><strong>Skill as Sovereignty:</strong> The only legitimate form of authority comes from proven capability</li>
+                    <li><strong>Combat as Validation:</strong> Battle as the medium for existential self-definition</li>
+                    <li><strong>Inevitability of Equalization:</strong> All power ultimately faces its counter</li>
+                    <li><strong>Independent Ideology:</strong> Refusing allegiance to hierarchies or objectives beyond personal code</li>
+                    <li><strong>Cultivated Opposition:</strong> Preferring to nurture worthy adversaries rather than eliminate them prematurely</li>
+                </ul>
+
+                <h3 class="section-subtitle">Narrative Function</h3>
+                <p>BLADE GUILLOTINE serves as a narrative force of disruption and reversal. Her ability to suppress Starlight Blessings creates a leveling effect where traditional power hierarchies collapse, forcing combatants to rely on pure skill and conditioning.</p>
+
+                <p>Her betrayal of Starlite 7th before Symphonic Overture represents a critical turning point, transforming her from ambiguous ally to clear antagonist. This shift emphasizes her true nature—she was never loyal to their cause, only to the promise of worthy combat.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> "BLADE GUILLOTINE" evokes the executioner's instrument—swift, precise, inevitable. The name is always fully capitalized, emphasizing her nature as a concept made manifest rather than merely a person.</li>
+                    <li>Her true name remains unrevealed in Royastella</li>
+                    <li>BLADE GUILLOTINE is treated as a Royastellan native despite her true Nexsicon origins</li>
+                    <li>She speaks entirely in rhyme, usually in couplets—an affectation never explicitly acknowledged</li>
+                    <li>When she breaks from rhyme, it signifies a moment of significance, though this goes unpointed-out</li>
+                    <li>Her Moonlight Curse is the inverse of typical Starlight Blessings, suppressing rather than empowering</li>
+                    <li>BLADE maintains perpetually active Mana state with Void-channel reinforcement</li>
+                    <li>She has never displayed interest in governance, conquest, or ideological victory</li>
+                    <li>BLADE does not consider herself a threat to the Runic Knights—their discomfort is not reciprocated</li>
+                    <li>Her combat philosophy treats battles as mutual tests rather than unilateral executions</li>
+                    <li>Le Couteau is optimized for surgical lethality and instantaneous execution strikes</li>
+                    <li>She betrays Starlite 7th before Symphonic Overture, becoming a clear antagonist</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
 </html>

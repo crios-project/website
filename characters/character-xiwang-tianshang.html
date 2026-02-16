@@ -1,112 +1,498 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xīwàng Tiānshàng // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.icons {
-  text-align: center;
-  
-}
+        .character-visual {
+            position: relative;
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
+    <div class="container">
+        <section class="character-header">
+            <div class="character-visual">
+                <img src="../assets/characters/Xīwàng Tiānshàng.png" alt="Xīwàng Tiānshàng" class="character-image">
+                <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas" class="faction-logo">
+            </div>
+            <div class="character-info">
+                <h1 class="character-name">Xīwàng Tiānshàng</h1>
+                <p class="character-title">The Magicless Prodigy</p>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">15</span></div>
+                    <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">5'1" (155 cm)</span></div>
+                    <div class="stat-item"><span class="stat-label">Birth Date</span><span class="stat-value">March 28</span></div>
+                    <div class="stat-item"><span class="stat-label">Ethnicity</span><span class="stat-value">Chinese</span></div>
+                    <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Gold-Orange Gradient (Six Stars)</span></div>
+                    <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a></span></div>
+                    <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Adaptive Improvisation</span></div>
+                    <div class="stat-item"><span class="stat-label">Status</span><span class="stat-value">Missing</span></div>
+                </div>
+                <div class="character-quote">"Aesthetic delicacy is not vulnerability."</div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p>Xīwàng Tiānshàng presents herself with deliberate elegance that borders on theatrical fragility. Immaculate fashion, meticulously painted nails, and carefully curated outfits project the image of someone entirely unsuited for direct conflict. This perception rarely survives first contact. Her combat presence dismantles expectations with unsettling efficiency, frequently overwhelming opponents who mistake aesthetic delicacy for vulnerability.</p>
+                
+                <p>The disappearance of Xīwàng Tiānshàng during the two-year time skip and the destruction of the Tiānshàng familia are the great mysteries of the world: how did someone that powerful get removed from the playing board? What actually happened? These questions drive much of Tiala's actions and mark the beginning of the rift that divided <a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> into <a href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a> and <a href="../factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a>.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Appearance</h2>
+            <div class="section-content">
+                <p>Xīwàng's appearance is characterized by theatrical elegance and meticulous presentation. Her distinctive eyes feature a gold and orange gradient with six stars circling the pupil, creating an otherworldly aesthetic that complements her carefully curated image.</p>
+                
+                <p>Despite standing at only 5'1", her combat presence far exceeds what her stature would suggest. She maintains an image of delicate fragility through immaculate fashion choices and meticulously painted nails, deliberately cultivating a persona that belies her overwhelming combat capabilities.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Combat Philosophy</h2>
+            <div class="section-content">
+                <p>Her fighting style is rooted in adaptive improvisation, favoring situational dominance rather than predetermined technique chains. Xīwàng demonstrates an exceptional talent for dismantling armed opponents by targeting structural weaknesses in their stance, grip, or weapon handling. She excels at disarming maneuvers executed with minimal visible effort, often repurposing confiscated weapons with immediate and flawless proficiency.</p>
+
+                <p>Once armed through these means, she demonstrates intuitive compatibility with weapon systems that would otherwise reject her, wielding them with frightening effectiveness against their original owners. This ability to turn an opponent's strength into their weakness creates a profound psychological disadvantage for those who face her.</p>
+
+                <p>In unarmed combat, Xīwàng transitions into a deceptively direct brawling methodology that conceals extraordinary multi-disciplinary mastery. Her strikes incorporate principles from numerous martial traditions, blending precise joint manipulation, efficient striking geometry, and seamless grappling transitions. She favors close-quarters engagements where her compact stature becomes an advantage, allowing her to operate within blind zones of taller or more heavily armed adversaries. Her attacks emphasize structural collapse of posture and balance, rendering brute strength largely irrelevant against her.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Eidetic Combat Memory</h2>
+            <div class="section-content">
+                <p>Her most destabilizing advantage is her eidetic combat memory. Xīwàng can observe unfamiliar techniques, movement sequences, or weapon methodologies once and reproduce them at operational mastery. She does not merely mimic; she refines. Opponents attempting signature techniques often find those same techniques mirrored back with immediate optimization, sometimes within the same exchange in which they were first deployed.</p>
+
+                <p>This ability creates a uniquely oppressive combat dynamic where every technique an opponent employs becomes a potential weapon to be used against them, often in improved form. The psychological impact of watching one's own mastery turned against oneself cannot be overstated.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">The Magicless Anomaly</h2>
+            <div class="section-content">
+                <p>Despite her overwhelming physical and technical dominance, Xīwàng possesses a singular and highly unusual limitation. She exhibits complete absence of compatibility with conventional magical frameworks:</p>
+                <ul>
+                    <li>Cannot generate Mana</li>
+                    <li>Lacks an Elemental Core</li>
+                    <li>Cannot channel Lúmenai resonance</li>
+                    <li>Cannot vocalize functional Cymoran spell structures</li>
+                    <li>Magically augmented technology frequently destabilizes or fails outright under her direct operation</li>
+                </ul>
+
+                <p>The sole exception occurs when she wields equipment stripped from an opponent mid-engagement, during which such armaments remain temporarily functional under her control. This creates a paradoxical situation where magical weapons work for her only when stolen in combat.</p>
+
+                <h3 class="section-subtitle">Combat Advantage from Absence</h3>
+                <p>This absence of magical presence produces an anomalous combat effect. Many magical detection systems, threat assessments, and predictive combat models fail to register her as a meaningful threat until engagement has already reached irreversible escalation. Opponents reliant on magical perception frequently underestimate or entirely overlook her, granting Xīwàng decisive initiative in most encounters.</p>
+
+                <p>In a world dominated by magic, her complete lack of magical signature makes her effectively invisible to systems designed to detect supernatural threats. She becomes a blind spot in magical awareness, a void where power should exist but doesn't—until it's too late.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Combat Techniques</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Weapon Mastery Through Theft</h3>
+                <ul>
+                    <li><strong>Disarming Precision:</strong> Targeting structural weaknesses in stance, grip, and weapon handling</li>
+                    <li><strong>Immediate Proficiency:</strong> Wielding confiscated weapons with flawless effectiveness</li>
+                    <li><strong>Intuitive Compatibility:</strong> Operating weapon systems that would normally reject unauthorized users</li>
+                    <li><strong>Psychological Reversal:</strong> Using opponents' own weapons against them with superior skill</li>
+                </ul>
+
+                <h3 class="section-subtitle">Unarmed Combat Excellence</h3>
+                <ul>
+                    <li><strong>Multi-Disciplinary Integration:</strong> Blending principles from numerous martial traditions</li>
+                    <li><strong>Joint Manipulation:</strong> Precise targeting of anatomical vulnerabilities</li>
+                    <li><strong>Efficient Striking Geometry:</strong> Maximizing impact through technical precision</li>
+                    <li><strong>Seamless Grappling Transitions:</strong> Flowing between striking and control techniques</li>
+                    <li><strong>Close-Quarters Dominance:</strong> Exploiting compact stature to operate in opponent blind zones</li>
+                    <li><strong>Structural Collapse:</strong> Targeting posture and balance to negate strength advantages</li>
+                </ul>
+
+                <h3 class="section-subtitle">Adaptive Improvisation</h3>
+                <ul>
+                    <li><strong>Situational Dominance:</strong> Favoring battlefield awareness over predetermined patterns</li>
+                    <li><strong>Minimal Visible Effort:</strong> Executing complex maneuvers with deceptive ease</li>
+                    <li><strong>Weakness Exploitation:</strong> Identifying and targeting structural vulnerabilities instantly</li>
+                    <li><strong>Technique Optimization:</strong> Refining observed methods in real-time during combat</li>
+                </ul>
+
+                <h3 class="section-subtitle">Eidetic Combat Replication</h3>
+                <ul>
+                    <li><strong>Single-Observation Mastery:</strong> Achieving operational proficiency from one viewing</li>
+                    <li><strong>Immediate Refinement:</strong> Not just copying but improving upon observed techniques</li>
+                    <li><strong>Same-Exchange Mirroring:</strong> Reflecting techniques back within the same combat sequence</li>
+                    <li><strong>Psychological Warfare:</strong> Demoralizing opponents by perfecting their signature moves</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">The Great Mystery</h2>
+            <div class="section-content">
+                <p>The circumstances surrounding Xīwàng Tiānshàng's disappearance during the two-year time skip remain one of the most profound mysteries in the world. How could someone of her caliber—a combatant who dismantled opponents with frightening efficiency, who could master any technique at a glance, who turned magical detection into a liability for her enemies—simply vanish?</p>
+
+                <p>The simultaneous destruction of the Tiānshàng familia compounds this mystery. The loss of both Xīwàng and her family suggests coordinated action of unprecedented scale and precision. These events catalyzed the schism within Praxis Verax Affinas, with different factions forming conflicting theories about what transpired and how to respond.</p>
+
+                <p>Tiala's subsequent actions are largely motivated by the search for answers about Xīwàng's fate, making this mystery a driving force in the narrative's development.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Archetype</h3>
+                <p>Xīwàng embodies the <strong>Paradoxical Void</strong> archetype—someone whose greatest power comes from absence, who succeeds through what she lacks rather than what she possesses. She represents the blind spot in systems designed to detect everything, the silence that speaks louder than noise.</p>
+
+                <h3 class="section-subtitle">Core Themes</h3>
+                <ul>
+                    <li><strong>Absence as Advantage:</strong> Her lack of magic becomes her greatest tactical asset in a magic-dominated world</li>
+                    <li><strong>Perception vs. Reality:</strong> Her delicate appearance masking overwhelming capability explores gaps between image and truth</li>
+                    <li><strong>Mastery Through Observation:</strong> Her eidetic combat memory suggests themes of learning, adaptation, and intellectual superiority</li>
+                    <li><strong>The Stolen Weapon:</strong> Using opponents' tools against them reflects themes of reversal and appropriation</li>
+                    <li><strong>The Unsolvable Mystery:</strong> Her disappearance represents the narrative power of unanswered questions</li>
+                    <li><strong>Size vs. Impact:</strong> Her small stature contrasted with enormous influence challenges assumptions about power</li>
+                </ul>
+
+                <h3 class="section-subtitle">Narrative Function</h3>
+                <p>Xīwàng serves multiple critical narrative functions. As an active character, she represents the power of technical mastery and adaptive intelligence over raw magical force. Her magicless status challenges the fundamental assumptions of her world, suggesting that absence can be as powerful as presence.</p>
+
+                <p>As a mystery, her disappearance drives character motivations (particularly Tiala's), creates factional conflict (the Praxis Verax Affinas schism), and generates narrative tension through unanswered questions. The simultaneous destruction of the Tiānshàng familia adds layers of conspiracy, suggesting coordinated efforts capable of removing even the most formidable individuals from play.</p>
+
+                <p>Her very existence poses philosophical questions: In a world of magic, what happens when someone without magic becomes the most dangerous person in it? What does that say about the nature of power itself?</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> "Xīwàng Tiānshàng" (希望天上) translates to "Hope; Heavenly" or roughly "Hope in Heaven," creating profound irony given her mysterious disappearance and the hope-driven search for answers about her fate.</li>
+                    <li>Her eyes feature a unique gold and orange gradient with six stars circling the pupil</li>
+                    <li>Despite standing at only 5'1", she overwhelms opponents who mistake her stature for weakness</li>
+                    <li>She can observe any combat technique once and reproduce it at operational mastery, often with immediate refinements</li>
+                    <li>Xīwàng completely lacks magical capability—no Mana generation, no Elemental Core, no spell casting ability</li>
+                    <li>Magical detection systems often fail to register her as a threat, granting her decisive initiative</li>
+                    <li>She can temporarily use magical weapons stolen from opponents mid-combat, despite normally being incompatible with magical technology</li>
+                    <li>Her disappearance and the destruction of the Tiānshàng familia remain the central mysteries driving much of the narrative</li>
+                    <li>These events catalyzed the split of Praxis Verax Affinas into Destiny's Penance and Reason Theory</li>
+                    <li>Her combat style emphasizes structural collapse of opponent posture and balance, making brute strength irrelevant</li>
+                    <li>She cultivates an image of theatrical fragility through immaculate fashion and meticulously painted nails</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
 </html>

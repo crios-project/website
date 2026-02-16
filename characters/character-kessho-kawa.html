@@ -1,112 +1,477 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kesshō Kawa // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.icons {
-  text-align: center;
-  
-}
+        .character-visual {
+            position: relative;
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
+    <div class="container">
+        <section class="character-header">
+            <div class="character-visual">
+                <img src="../assets/characters/Kesshō Kawa.png" alt="Kesshō Kawa" class="character-image">
+                <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas" class="faction-logo">
+            </div>
+            <div class="character-info">
+                <h1 class="character-name">Kesshō Kawa</h1>
+                <p class="character-title">Predatory Acrobat</p>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a></span></div>
+                    <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Magical Girl</span></div>
+                    <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Acrobatic Predation</span></div>
+                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Tenebris Operiet</span></div>
+                    <div class="stat-item"><span class="stat-label">Specialty</span><span class="stat-value">Aerial Mobility</span></div>
+                    <div class="stat-item"><span class="stat-label">Approach</span><span class="stat-value">Relentless Offense</span></div>
+                </div>
+                <div class="character-quote">"Combat should resemble a flawless performance."</div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p>Kesshō Kawa is the magical girl form of <a href="character-ji-lian-xia.html" class="wiki-link">Jí Lián Xiá</a>, though at this point in the timeline, she is actually the transformed state of <a href="character-takino-retsu.html" class="wiki-link">Takino Retsu</a>. She represents a unique intersection of identity and power within the <a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> faction.</p>
+                
+                <p>Kesshō employs an acrobatic, predatory combat methodology characterized by relentless speed, aerial mobility, and flowing blade choreography. Her fighting style emphasizes overwhelming opponents through constant motion and unpredictable attack vectors rather than brute strength or defensive posture.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Combat Philosophy</h2>
+            <div class="section-content">
+                <p>Her movements resemble a dance of calculated aggression. She frequently utilizes spinning strikes, inverted lunges, and mid-air directional shifts to maintain offensive pressure while minimizing exposure to counterattacks. Kesshō rarely remains grounded for extended periods, often using leaps, wall rebounds, and aerial pivots to create multidimensional engagement angles.</p>
+
+                <p>Much like a storm that never settles, she favors continuous attack chains designed to disorient adversaries and force them into reactive defensive patterns. She excels at striking during transitional moments—such as when opponents recover from dodges or prepare counter techniques—demonstrating precise timing and battlefield awareness.</p>
+
+                <p>Kesshō integrates flowing weapon manipulation into her combat rhythm, transitioning seamlessly between rapid slashing sequences and sudden, high-impact finishing strikes. Her blade control allows her to redirect momentum mid-combination, creating deceptive feints that mask her true attack trajectory.</p>
+
+                <p>Despite her aggressive style, Kesshō demonstrates exceptional spatial awareness and balance, allowing her to evade attacks with minimal wasted movement. Her approach prioritizes efficiency, grace, and sustained pressure, embodying a philosophy that combat should resemble a flawless performance rather than a chaotic clash.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Weapon: Tenebris Operiet</h2>
+            <div class="section-content">
+                <p>Her weapon of choice is <strong>Tenebris Operiet</strong>, a blade that complements her flowing, acrobatic combat style. The weapon serves as an extension of her relentless offensive philosophy, enabling rapid strikes and seamless transitions between attack sequences.</p>
+
+                <p>Tenebris Operiet's design supports Kesshō's preference for continuous motion and multidimensional engagement, allowing her to maintain pressure while executing her signature aerial maneuvers and spinning attacks.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Combat Techniques</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Aerial Dominance</h3>
+                <p>Kesshō's mastery of three-dimensional combat creates overwhelming tactical advantages:</p>
+                <ul>
+                    <li><strong>Spinning Strikes:</strong> Rotational attacks that generate momentum and unpredictability</li>
+                    <li><strong>Inverted Lunges:</strong> Unconventional attack angles from airborne positions</li>
+                    <li><strong>Mid-Air Directional Shifts:</strong> Sudden trajectory changes that confound defensive predictions</li>
+                    <li><strong>Wall Rebounds:</strong> Environmental exploitation to maintain continuous aerial presence</li>
+                    <li><strong>Aerial Pivots:</strong> Dynamic repositioning that creates multidimensional engagement angles</li>
+                </ul>
+
+                <h3 class="section-subtitle">Continuous Attack Philosophy</h3>
+                <p>Kesshō's offensive methodology centers on unrelenting pressure:</p>
+                <ul>
+                    <li><strong>Attack Chain Mastery:</strong> Flowing combinations designed to prevent opponent recovery</li>
+                    <li><strong>Transitional Exploitation:</strong> Striking during opponent vulnerability windows</li>
+                    <li><strong>Momentum Redirection:</strong> Converting defensive energy into offensive opportunities</li>
+                    <li><strong>Deceptive Feinting:</strong> Masking true attack trajectories through misdirection</li>
+                </ul>
+
+                <h3 class="section-subtitle">Blade Control</h3>
+                <p>Her weapon manipulation demonstrates technical mastery:</p>
+                <ul>
+                    <li>Seamless transitions between rapid slashing and finishing strikes</li>
+                    <li>Mid-combination momentum redirection for unpredictable attack patterns</li>
+                    <li>Flowing sequences that integrate blade work with acrobatic movement</li>
+                    <li>Precise control enabling both speed and impact</li>
+                </ul>
+
+                <h3 class="section-subtitle">Psychological Warfare</h3>
+                <p>Beyond physical technique, Kesshō employs mental dominance:</p>
+                <ul>
+                    <li><strong>Oppressive Presence:</strong> Creating psychological inevitability through relentless offense</li>
+                    <li><strong>Calculated Calm:</strong> Maintaining unsettling focus amid chaotic movement</li>
+                    <li><strong>Panic Inducement:</strong> Using speed and fluidity to destabilize opponent decision-making</li>
+                    <li><strong>Timing Manipulation:</strong> Creating uncertainty about when attacks will land</li>
+                </ul>
+
+                <h3 class="section-subtitle">Defensive Integration</h3>
+                <p>While prioritizing offense, Kesshō maintains exceptional defensive capabilities:</p>
+                <ul>
+                    <li><strong>Minimal Wasted Movement:</strong> Evasions integrated into offensive flow</li>
+                    <li><strong>Spatial Awareness:</strong> Constant battlefield positioning optimization</li>
+                    <li><strong>Balance Mastery:</strong> Maintaining control through extreme acrobatic maneuvers</li>
+                    <li><strong>Efficient Evasion:</strong> Avoiding damage while sustaining offensive pressure</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            <div class="section-content">
+                <div class="relationships-grid">
+                    <a href="character-ji-lian-xia.html" class="relationship-card">
+                        <div class="relationship-name">Jí Lián Xiá</div>
+                        <div class="relationship-type">Civilian Identity</div>
+                    </a>
+                    <a href="character-takino-retsu.html" class="relationship-card">
+                        <div class="relationship-name">Takino Retsu</div>
+                        <div class="relationship-type">Royastellan Identity</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Archetype</h3>
+                <p>Kesshō embodies the <strong>Predatory Performer</strong> archetype—a combatant who treats battle as both hunt and art form, merging lethal efficiency with aesthetic grace.</p>
+
+                <h3 class="section-subtitle">Core Themes</h3>
+                <ul>
+                    <li><strong>Motion vs. Stillness:</strong> Kesshō represents perpetual movement as both philosophy and survival strategy</li>
+                    <li><strong>Aggression as Art:</strong> Her combat style explores violence as performance, challenging distinctions between brutality and beauty</li>
+                    <li><strong>Predator Psychology:</strong> She embodies calculated hunting instincts wrapped in graceful execution</li>
+                    <li><strong>Identity Complexity:</strong> As both Jí Lián Xiá's form and Takino Retsu's transformed state, she reflects layered selfhood</li>
+                    <li><strong>Pressure as Power:</strong> Her philosophy suggests that sustained aggression creates inevitability</li>
+                </ul>
+
+                <h3 class="section-subtitle">Narrative Function</h3>
+                <p>Kesshō serves as a representation of relentless pursuit and the overwhelming power of sustained offensive pressure. Her complex identity connections to both Jí Lián Xiá and Takino Retsu position her as a narrative bridge between different aspects of character development and transformation. Her combat philosophy—that battle should resemble flawless performance—suggests themes of control, mastery, and the aesthetic dimensions of conflict.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> "Kesshō" (結晶) means "crystal" in Japanese, suggesting both beauty and hardness, while "Kawa" (川) means "river," symbolizing flowing motion—together representing crystalline fluidity and the marriage of grace with relentless force.</li>
+                    <li>She represents a unique case of dual magical girl transformation, being both Jí Lián Xiá's form and Takino Retsu's transformed state</li>
+                    <li>Her combat philosophy explicitly treats battle as performance art rather than mere violence</li>
+                    <li>Kesshō rarely remains grounded, preferring three-dimensional aerial combat over traditional ground-based fighting</li>
+                    <li>Her psychological warfare centers on creating a sense of inevitability through relentless pressure</li>
+                    <li>Despite her aggressive style, she demonstrates exceptional balance and spatial awareness</li>
+                    <li>Her timing allows her to strike during opponent transitional moments when defenses are weakest</li>
+                    <li>Tenebris Operiet enables both rapid slashing sequences and high-impact finishing strikes</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
 </html>

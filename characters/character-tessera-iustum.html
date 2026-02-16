@@ -1,112 +1,466 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tessera Iustum // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.icons {
-  text-align: center;
-  
-}
+        .character-visual {
+            position: relative;
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
+    <div class="container">
+        <section class="character-header">
+            <div class="character-visual">
+                <img src="../assets/characters/Tessera Iustum.png" alt="Tessera Iustum" class="character-image">
+                <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas" class="faction-logo">
+            </div>
+            <div class="character-info">
+                <h1 class="character-name">Tessera Iustum</h1>
+                <p class="character-title">Adaptive Trickster-Combatant</p>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a></span></div>
+                    <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Magical Girl</span></div>
+                    <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Adaptive Improvisation</span></div>
+                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Fallire Fanale</span></div>
+                    <div class="stat-item"><span class="stat-label">Specialty</span><span class="stat-value">Environmental Manipulation</span></div>
+                    <div class="stat-item"><span class="stat-label">Approach</span><span class="stat-value">Misdirection & Momentum</span></div>
+                </div>
+                <div class="character-quote">"The battlefield itself is an extension of my arsenal."</div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p>Tessera Iustum is the magical girl form of <a href="character-claris-quies.html" class="wiki-link">Claris Quies</a>, though at this point in the timeline, she is actually the second magical girl transformation of <a href="character-zafara-quedar.html" class="wiki-link">Zafara Quedar</a>. She represents a unique intersection of identity and power within the <a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> faction.</p>
+                
+                <p>Tessera practices a highly adaptive, improvisational combat style built around environmental manipulation, misdirection, and fluid transitions between offense and defense. Her approach mirrors the unpredictability and kinetic creativity of an expert trickster-combatant, blending acrobatics, object interaction, and precise blade work into a seamless and often overwhelming fighting rhythm.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Combat Philosophy</h2>
+            <div class="section-content">
+                <p>Unlike conventional swordsmen who maintain strict stances or formalized technique chains, Tessera treats the battlefield itself as an extension of her arsenal. She instinctively incorporates surrounding terrain, loose objects, and structural features into her attacks and evasions. Furniture, debris, railings, or even an opponent's weapon can become tools for deflection, redirection, or sudden counterstrikes. This constant adaptation makes her movements difficult to anticipate or strategically counter.</p>
+
+                <p>Tessera favors mobility and momentum over direct confrontation. She employs rapid directional shifts, rolling recoveries, vaulting maneuvers, and exaggerated but controlled falls that double as defensive evasions or setup opportunities. Many of her attacks appear spontaneous, yet they are guided by sharp situational awareness and tactical intuition. She excels at turning disadvantageous positions into sudden counteroffensive openings.</p>
+
+                <p>Her combat presence often appears chaotic or playful, masking a lethally efficient precision. Tessera deliberately creates confusion through erratic rhythm changes, feigned clumsiness, and unconventional attack patterns. Opponents frequently underestimate her during these moments, only to find themselves caught in precisely timed and highly targeted finishing strikes.</p>
+
+                <p>While she rarely relies on overwhelming force, Tessera demonstrates exceptional control, accuracy, and reaction speed. Her fighting philosophy centers on adaptability, opportunism, and the belief that victory belongs to the combatant who best understands and exploits the shifting conditions of battle.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Weapon: Fallire Fanale</h2>
+            <div class="section-content">
+                <p>Her katana, <strong>Fallire Fanale</strong>, is central to her fighting methodology. The weapon's ability to manifest and dematerialize at will allows Tessera to weaponize timing and deception. She frequently dismisses the blade mid-motion to evade grapples, slip through narrow defensive openings, or bait opponents into misjudging her reach. The blade can then be instantly reformed to deliver rapid follow-up strikes, often from unexpected angles or positions. This ability allows her to transition between unarmed martial techniques and armed swordplay without interrupting her combat flow.</p>
+
+                <p>Tessera generally carries the bladeless hilt of Fallire Fanale when not in combat, but she can summon the weapon to the ready in a microsecond. Notably, the weapon hasn't fully accepted Tessera as its wielder yet, suggesting a deeper narrative tension between the blade and its current bearer.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Combat Techniques</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Environmental Manipulation</h3>
+                <p>Tessera's signature approach involves turning the battlefield into her weapon. She demonstrates an innate ability to read spatial dynamics and identify improvised tools within her surroundings:</p>
+                <ul>
+                    <li>Using furniture and debris for deflection and redirection</li>
+                    <li>Incorporating structural features into attack trajectories</li>
+                    <li>Weaponizing opponents' own equipment against them</li>
+                    <li>Creating defensive advantages through terrain exploitation</li>
+                </ul>
+
+                <h3 class="section-subtitle">Blade Manifestation Tactics</h3>
+                <p>The dematerialization capabilities of Fallire Fanale enable unique combat applications:</p>
+                <ul>
+                    <li><strong>Grapple Evasion:</strong> Dismissing the blade to slip through holds or binds</li>
+                    <li><strong>Reach Deception:</strong> Creating uncertainty about attack range and timing</li>
+                    <li><strong>Seamless Transitions:</strong> Moving fluidly between armed and unarmed techniques</li>
+                    <li><strong>Angle Exploitation:</strong> Reforming the blade from unexpected positions for surprise attacks</li>
+                </ul>
+
+                <h3 class="section-subtitle">Movement Philosophy</h3>
+                <p>Tessera's kinetic approach emphasizes:</p>
+                <ul>
+                    <li><strong>Rapid Directional Shifts:</strong> Unpredictable movement patterns that confound tracking</li>
+                    <li><strong>Rolling Recoveries:</strong> Converting defensive maneuvers into offensive opportunities</li>
+                    <li><strong>Vaulting Integration:</strong> Using elevation changes and obstacles as tactical advantages</li>
+                    <li><strong>Controlled Falls:</strong> Exaggerated movements that serve dual defensive and positioning purposes</li>
+                </ul>
+
+                <h3 class="section-subtitle">Psychological Warfare</h3>
+                <p>Beyond physical technique, Tessera employs mental tactics:</p>
+                <ul>
+                    <li><strong>Chaotic Presentation:</strong> Appearing playful or erratic while executing precise plans</li>
+                    <li><strong>Rhythm Variation:</strong> Constantly changing attack tempo to prevent pattern recognition</li>
+                    <li><strong>Feigned Vulnerability:</strong> Using apparent clumsiness to bait overconfidence</li>
+                    <li><strong>Delayed Precision:</strong> Allowing confusion to settle before striking with lethal accuracy</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            <div class="section-content">
+                <div class="relationships-grid">
+                    <a href="character-claris-quies.html" class="relationship-card">
+                        <div class="relationship-name">Claris Quies</div>
+                        <div class="relationship-type">Civilian Identity</div>
+                    </a>
+                    <a href="character-zafara-quedar.html" class="relationship-card">
+                        <div class="relationship-name">Zafara Quedar</div>
+                        <div class="relationship-type">Beestonian Identity</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Archetype</h3>
+                <p>Tessera embodies the <strong>Adaptive Trickster</strong> archetype—a combatant who succeeds not through overwhelming power but through superior understanding of circumstances and creative exploitation of opportunities.</p>
+
+                <h3 class="section-subtitle">Core Themes</h3>
+                <ul>
+                    <li><strong>Adaptability vs. Rigidity:</strong> Tessera represents the triumph of flexibility over fixed methodologies</li>
+                    <li><strong>Perception vs. Reality:</strong> Her chaotic appearance masks precise execution, exploring the gap between how things seem and how they are</li>
+                    <li><strong>Environmental Symbiosis:</strong> Her fighting style embodies integration with surroundings rather than domination of them</li>
+                    <li><strong>Identity Multiplicity:</strong> As a second magical girl form with complex identity connections, she reflects themes of layered selfhood</li>
+                    <li><strong>Incomplete Acceptance:</strong> Fallire Fanale's reluctance to fully bond with her suggests ongoing internal or external conflicts</li>
+                </ul>
+
+                <h3 class="section-subtitle">Narrative Function</h3>
+                <p>Tessera serves as a representation of improvisational mastery and the power of tactical thinking over brute force. Her complex identity connections to both Claris Quies and Zafara Quedar position her as a narrative bridge between different aspects of character development and transformation. The tension with Fallire Fanale introduces potential for character growth and exploration of worthiness, belonging, and acceptance.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> "Tessera" derives from Latin meaning "a small cube" or "token," often used in mosaics—symbolizing how she pieces together disparate elements into a cohesive whole. "Iustum" means "just" or "righteous" in Latin, suggesting moral alignment and proper action within her complex identity framework.</li>
+                    <li>She represents a unique case of dual magical girl transformation, being both Claris Quies's form and Zafara Quedar's second transformation</li>
+                    <li>Fallire Fanale can be summoned to combat readiness in microseconds despite typically existing as just a hilt</li>
+                    <li>The weapon's incomplete acceptance of Tessera as its wielder creates an ongoing tension in their bond</li>
+                    <li>Her combat style deliberately incorporates what appears to be mistakes or clumsiness as tactical deception</li>
+                    <li>Tessera's approach to combat emphasizes understanding and exploiting battlefield conditions over raw power application</li>
+                    <li>She excels at converting disadvantageous positions into sudden counteroffensive advantages</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
 </html>

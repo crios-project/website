@@ -1,112 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amaranthine Breaklight // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.icons {
-  text-align: center;
-  
-}
+        .character-visual {
+            position: relative;
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
+    <div class="container">
+        <section class="character-header">
+            <div class="character-visual">
+                <img src="../assets/characters/Amaranthine Breaklight.png" alt="Amaranthine Breaklight" class="character-image">
+                <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas" class="faction-logo">
+            </div>
+            <div class="character-info">
+                <h1 class="character-name">Amaranthine Breaklight</h1>
+                <p class="character-title">Battlefield Juggernaut</p>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a></span></div>
+                    <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Magical Girl</span></div>
+                    <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Front-Line Dominance</span></div>
+                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Fate (Broadsword)</span></div>
+                    <div class="stat-item"><span class="stat-label">Specialty</span><span class="stat-value">Explosive Power Bursts</span></div>
+                    <div class="stat-item"><span class="stat-label">Approach</span><span class="stat-value">Relentless Pressure</span></div>
+                </div>
+                <div class="character-quote">"Battle is not conflict—it's the unfolding of an outcome that cannot be denied."</div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p>Amaranthine Breaklight is the magical girl form of Ami Hartbreak, though at this point in the timeline, she is actually the second magical girl transformation of <a href="character-aran-letale.html" class="wiki-link">Aran Letale</a>. She represents a powerful intersection of identity and overwhelming force within the <a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> faction.</p>
+                
+                <p>Amaranthine employs a commanding, front-line combat style defined by relentless pressure, explosive power bursts, and seamless integration of martial swordsmanship with overwhelming magical augmentation. Her approach mirrors a battlefield juggernaut—advancing steadily while layering raw force with controlled elemental discharge, allowing her to dominate both close-quarters engagements and mid-range assault exchanges.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Combat Philosophy</h2>
+            <div class="section-content">
+                <p>Amaranthine favors aggressive forward momentum, using heavy, decisive strikes to break defensive formations and overwhelm opponents before they can establish counteroffensive rhythm. Rather than relying on evasive maneuvering, she demonstrates exceptional durability and pain tolerance, allowing her to absorb or deflect incoming damage while maintaining uninterrupted offensive output. Her stance and movement patterns emphasize battlefield control through intimidation and force projection, often compelling opponents to retreat or overcommit under pressure.</p>
+
+                <p>Her combat rhythm alternates between calculated heavy blows and sudden acceleration bursts. These bursts allow her to rapidly close distance, reposition around defensive barriers, or chain follow-up strikes faster than her weapon's size would typically allow. Despite the apparent weight of Fate, Amaranthine wields it with refined efficiency, employing rotational momentum, pivot strikes, and full-body torque to maximize cutting power while conserving stamina during prolonged encounters.</p>
+
+                <p>Psychologically, Amaranthine presents an aura of unshakable determination and inevitability. She rarely demonstrates hesitation once combat begins, maintaining unwavering focus on victory through endurance and escalation. Opponents frequently experience mounting psychological pressure as her attacks intensify rather than diminish over time, creating the impression that defeating her requires surviving an ever-increasing storm of power.</p>
+
+                <p>Amaranthine fights as a force of destiny rather than a conventional warrior. Each strike carries the sensation of inevitability, reinforcing her belief that battle is not merely conflict, but the unfolding of an outcome that cannot be denied.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Weapon: Fate</h2>
+            <div class="section-content">
+                <p>Her broadsword, <strong>Fate</strong>, serves as both a physical weapon and a conduit for concentrated energy release. The blade is constructed to withstand high-impact collision and sustained magical reinforcement, enabling Amaranthine to channel destructive force directly through each swing without compromising structural integrity.</p>
+
+                <p>She frequently empowers her strikes with compressed energy surges that detonate upon impact, transforming otherwise conventional blade arcs into devastating shockwave-generating attacks capable of cleaving through multiple defensive layers simultaneously. This integration of magical augmentation with traditional swordsmanship creates a hybrid combat methodology that combines martial discipline with catastrophic magical output.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Combat Techniques</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Magical Augmentation</h3>
+                <p>Magical augmentation plays a critical role in Amaranthine's fighting methodology. She is capable of temporarily enhancing her physical parameters—strength, speed, and endurance—to catastrophic levels, enabling her to execute large-scale finishing techniques that resemble localized battlefield catastrophes:</p>
+                <ul>
+                    <li><strong>Explosive Ground Fractures:</strong> Devastating plunging strikes that shatter terrain</li>
+                    <li><strong>Radiant Blade Waves:</strong> Energy-infused arcs that project force at mid-range</li>
+                    <li><strong>High-Velocity Plunging Strikes:</strong> Accelerated attacks delivering overwhelming concussive force</li>
+                    <li><strong>Compressed Energy Surges:</strong> Impact-detonating enhancements on each sword swing</li>
+                </ul>
+
+                <h3 class="section-subtitle">Heavy Blade Mastery</h3>
+                <p>Despite Fate's considerable mass, Amaranthine demonstrates refined weapon control:</p>
+                <ul>
+                    <li><strong>Rotational Momentum:</strong> Using spin and torque to amplify cutting power</li>
+                    <li><strong>Pivot Strikes:</strong> Redirecting blade trajectory mid-swing for unexpected angles</li>
+                    <li><strong>Full-Body Torque:</strong> Integrating entire physique into each strike for maximum force</li>
+                    <li><strong>Stamina Conservation:</strong> Efficient technique that enables prolonged combat effectiveness</li>
+                </ul>
+
+                <h3 class="section-subtitle">Pressure Combat</h3>
+                <p>Amaranthine's offensive methodology centers on overwhelming force application:</p>
+                <ul>
+                    <li><strong>Formation Breaking:</strong> Heavy strikes designed to shatter defensive structures</li>
+                    <li><strong>Rhythm Disruption:</strong> Preventing opponents from establishing counteroffensive patterns</li>
+                    <li><strong>Acceleration Bursts:</strong> Sudden speed increases that close distance or enable rapid strike chains</li>
+                    <li><strong>Escalating Intensity:</strong> Attacks that strengthen over time rather than diminish</li>
+                </ul>
+
+                <h3 class="section-subtitle">Tactical Exploitation</h3>
+                <p>Despite her overwhelming offensive nature, Amaranthine retains strong tactical instincts:</p>
+                <ul>
+                    <li><strong>Structural Weakness Identification:</strong> Recognizing gaps in enemy formations and coordination</li>
+                    <li><strong>Defensive Punishment:</strong> Excelling against opponents who rely on turtling strategies</li>
+                    <li><strong>Attrition Warfare:</strong> Using sustained power to fracture shields, barriers, and magical protections</li>
+                    <li><strong>Targeted Pressure Strikes:</strong> Exploiting endurance gaps through focused assault</li>
+                </ul>
+
+                <h3 class="section-subtitle">Durability & Endurance</h3>
+                <p>Rather than evasion, Amaranthine employs resilience as defense:</p>
+                <ul>
+                    <li><strong>Exceptional Pain Tolerance:</strong> Maintaining offensive output despite taking damage</li>
+                    <li><strong>Damage Absorption:</strong> Using durability to trade blows favorably</li>
+                    <li><strong>Uninterrupted Offense:</strong> Refusing to halt attacks even when injured</li>
+                    <li><strong>Intimidation Through Endurance:</strong> Psychological warfare via apparent invulnerability</li>
+                </ul>
+
+                <h3 class="section-subtitle">Psychological Warfare</h3>
+                <p>Beyond physical dominance, Amaranthine employs mental pressure:</p>
+                <ul>
+                    <li><strong>Aura of Inevitability:</strong> Projecting unshakable determination that demoralizes opponents</li>
+                    <li><strong>Mounting Pressure:</strong> Creating psychological stress through escalating attack intensity</li>
+                    <li><strong>Unwavering Focus:</strong> Demonstrating zero hesitation once combat begins</li>
+                    <li><strong>Force Projection:</strong> Using presence and power to compel retreat or overcommitment</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            <div class="section-content">
+                <div class="relationships-grid">
+                    <a href="character-ami-hartbreak.html" class="relationship-card">
+                        <div class="relationship-name">Ami Hartbreak</div>
+                        <div class="relationship-type">Civilian Identity</div>
+                    </a>
+                    <a href="character-aran-letale.html" class="relationship-card">
+                        <div class="relationship-name">Aran Letale</div>
+                        <div class="relationship-type">Original Identity</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Archetype</h3>
+                <p>Amaranthine embodies the <strong>Inevitable Force</strong> archetype—a combatant who represents destiny made manifest, where victory is not earned through cleverness but through the unstoppable application of overwhelming power and will.</p>
+
+                <h3 class="section-subtitle">Core Themes</h3>
+                <ul>
+                    <li><strong>Inevitability vs. Choice:</strong> Amaranthine represents the philosophical tension between predetermined outcomes and free will in conflict</li>
+                    <li><strong>Power as Destiny:</strong> Her combat philosophy treats force as the natural unfolding of fate rather than violence</li>
+                    <li><strong>Endurance vs. Evasion:</strong> She challenges conventional wisdom that survival requires avoiding damage</li>
+                    <li><strong>Identity Multiplicity:</strong> As both Ami Hartbreak's form and Aran Letale's second transformation, she reflects complex layered selfhood</li>
+                    <li><strong>Escalation Philosophy:</strong> Her belief that intensification rather than conservation leads to victory</li>
+                </ul>
+
+                <h3 class="section-subtitle">Narrative Function</h3>
+                <p>Amaranthine serves as a representation of overwhelming force and the power of unshakable will. Her complex identity connections to both Ami Hartbreak and Aran Letale position her as a narrative bridge between different aspects of character development and transformation. Her combat philosophy—that battle is the unfolding of inevitable destiny—suggests themes of predetermination, willpower, and the relationship between force and fate. The weapon name "Fate" reinforces this thematic connection, positioning her as an agent of inexorable outcomes.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> "Amaranthine" derives from "amaranth," a flower that never fades, symbolizing eternal endurance and unfading power. "Breaklight" suggests the shattering of illumination or the breaking dawn of destiny—together representing eternal, unstoppable force that breaks through all resistance.</li>
+                    <li>She represents a unique case of dual magical girl transformation, being both Ami Hartbreak's form and Aran Letale's second transformation</li>
+                    <li>Her weapon Fate is specifically constructed to withstand both high-impact collision and sustained magical reinforcement</li>
+                    <li>Amaranthine's attacks intensify rather than diminish over time, creating mounting psychological pressure on opponents</li>
+                    <li>She employs compressed energy surges that detonate on impact, turning each sword swing into a shockwave-generating attack</li>
+                    <li>Despite wielding a heavy broadsword, she demonstrates refined efficiency through rotational momentum and full-body torque</li>
+                    <li>Her combat philosophy explicitly frames battle as predetermined destiny rather than mere conflict</li>
+                    <li>She excels at attrition warfare, using sustained power output to fracture defensive structures over time</li>
+                    <li>Amaranthine can temporarily enhance strength, speed, and endurance to catastrophic levels for finishing techniques</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
 </html>

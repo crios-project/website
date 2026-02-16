@@ -1,112 +1,914 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jí Lián Xiá // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
 
-.icons {
-  text-align: center;
-  
-}
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .character-form {
+            display: none;
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../characters.html" class="back-link">← All Characters</a>
+    </nav>
+
+    <div class="container">
+        <!-- Form Toggle -->
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Jí Lián Xiá</button>
+            <button class="form-button" onclick="switchForm('ying')">Kesshō Yīng</button>
+            <button class="form-button" onclick="switchForm('ti')">Kesshō² Tǐ</button>
+            <button class="form-button" onclick="switchForm('zhan')">Kesshō³ Zhàn</button>
+        </div>
+
+        <!-- CIVILIAN FORM -->
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Jí Lián Xiá.png" alt="Jí Lián Xiá" class="character-image">
+                    <img src="../assets/icons/Destiny's Penance Icon.png" alt="Destiny's Penance" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Jí Lián Xiá</h1>
+                    <p class="character-title">The Uninterested Observer</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Age</span>
+                            <span class="stat-value">16</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Height</span>
+                            <span class="stat-value">5'4" (163 cm)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Birth Date</span>
+                            <span class="stat-value">May 27</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Ethnicity</span>
+                            <span class="stat-value">Japanese / Chinese</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Hair</span>
+                            <span class="stat-value">Dark Blue → Violet → Black</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Eyes</span>
+                            <span class="stat-value">Grayish Blue</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Faction</span>
+                            <span class="stat-value"><a href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a></span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Key Attribute</span>
+                            <span class="stat-value">Uninterested</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">"But can we like, not tho?"</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Jí Lián Xiá maintains a calm and emotionally detached demeanor. She generally shows little concern for external events and avoids unnecessary involvement in conflict. She prefers stability and comfort, engaging with others only when she has a clear purpose or need.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Appearance</h2>
+                <div class="section-content">
+                    <p>Jí Lián presents with a distinctive aesthetic that reflects her preference for indoor, controlled environments. Her long, flowing hair reaches her waist and features a striking gradient: dark blue fading into dark violet and finally black. Her grayish blue eyes convey quiet observation rather than active engagement.</p>
+                    
+                    <p>Her notably pale complexion results from consistent avoidance of direct sunlight. When visiting the beach—one of her few outdoor interests—she employs extensive sun protection including large protective umbrellas and high-grade sun-blocking lotion.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <p>While previously socially awkward, Jí Lián has grown more composed and is capable of initiating interaction when required. However, she still prefers solitude and quiet environments over social gatherings or high-energy situations.</p>
+                    
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Reserved & Introspective:</strong> Values internal reflection over external engagement</li>
+                        <li><strong>Selectively Approachable:</strong> Engages socially when beneficial or necessary</li>
+                        <li><strong>Minimal Expressiveness:</strong> Shows little emotional reaction to external events</li>
+                        <li><strong>Comfort-Oriented:</strong> Prioritizes predictability and low-stimulation environments</li>
+                        <li><strong>Generally Passive:</strong> Avoids action unless circumstances demand it</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Behavioral Traits</h3>
+                    <ul>
+                        <li>Actively avoids conflict whenever possible</li>
+                        <li>Only engages in combat or confrontation when absolutely necessary</li>
+                        <li>Prefers indoor environments and controlled settings</li>
+                        <li>Demonstrates patience and quiet observation</li>
+                        <li>Practical and deliberate in communication</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Personal Growth</h3>
+                    <p>Jí Lián displays subtle but meaningful personal growth in social capability. While maintaining her preference for solitude, she has developed the ability to navigate social situations more effectively when circumstances require her participation.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Interests & Lifestyle</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Hobbies</h3>
+                    <ul>
+                        <li>Reading books extensively during leisure time</li>
+                        <li>Spending time at the beach in shaded environments</li>
+                        <li>Collecting or studying written knowledge</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Habits</h3>
+                    <p>Jí Lián frequently reads during her leisure time, often choosing secluded and quiet locations. Her beach visits represent a paradox—she enjoys the environment but takes extensive precautions to avoid direct sunlight, demonstrating her characteristic approach of selective engagement with the world.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- KESSHŌ YĪNG FORM -->
+        <div id="ying-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Kesshō Yīng.png" alt="Kesshō Yīng" class="character-image">
+                    <img src="../assets/icons/Destiny's Penance Icon.png" alt="Destiny's Penance" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Kesshō Yīng</h1>
+                    <p class="character-title">Master of Transformation</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Evolution</span>
+                            <span class="stat-value">First Form</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Weapon</span>
+                            <span class="stat-value">Tenebris Operiet</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Combat Style</span>
+                            <span class="stat-value">Adaptive Transformation</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Specialty</span>
+                            <span class="stat-value">Multi-Configuration Mastery</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Approach</span>
+                            <span class="stat-value">Calculated Escalation</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Philosophy</span>
+                            <span class="stat-value">Victory Through Transformation</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">"Victory is achieved through the mastery of transformation itself."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Kesshō Yīng exhibits a matured and highly disciplined evolution of the aggressive, velocity-driven combat doctrine associated with her earlier fighting lineage. Where her younger counterpart <a href="character-kessho-kawa.html" class="wiki-link">Kesshō Kawa</a> emphasizes overwhelming momentum and relentless pursuit, Yīng refines those principles into a calculated and multifaceted sword discipline centered around adaptability, spatial dominance, and deliberate escalation of threat levels.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Weapon: Tenebris Operiet</h2>
+                <div class="section-content">
+                    <p>Her weapon, <strong>Tenebris Operiet</strong>, serves as both the core of her combat identity and a physical manifestation of her tactical philosophy. The blade's transformative architecture allows Yīng to alter her fighting methodology dynamically in response to battlefield conditions, opponent temperament, and engagement distance.</p>
+                    
+                    <p>Rather than committing to a singular weapon style, she treats each configuration of Tenebris Operiet as a distinct combat doctrine, transitioning between them with fluid mechanical precision and minimal telegraphing.</p>
+
+                    <h3 class="section-subtitle">Configuration 1: Standard Longsword + Sheath</h3>
+                    <p>In its standard form, Tenebris Operiet manifests as a double-edged longsword paired with a sheath. In this configuration, Yīng favors controlled dueling techniques built around:</p>
+                    <ul>
+                        <li><strong>Refined Footwork:</strong> Precise positioning for optimal strike delivery</li>
+                        <li><strong>Thrust Vectors:</strong> Measured probing for structural weaknesses</li>
+                        <li><strong>Disciplined Parry Mechanics:</strong> Efficient defensive integration</li>
+                        <li><strong>Edge Alignment Control:</strong> Seamless transitions between slashing and piercing</li>
+                    </ul>
+                    <p>This form represents her most balanced combat state, prioritizing versatility and measured pressure.</p>
+
+                    <h3 class="section-subtitle">Configuration 2: Dual-Wielding (Separated Sheath)</h3>
+                    <p>When the sheath separates and transforms into a secondary blade, Yīng adopts an advanced dual-wielding methodology:</p>
+                    <ul>
+                        <li><strong>Layered Offensive Timing:</strong> Synchronized and staggered strikes creating deceptive cadences</li>
+                        <li><strong>Asymmetric Attack Patterns:</strong> Overwhelming defensive prediction through varied rhythms</li>
+                        <li><strong>Independent Off-Hand Use:</strong> Secondary blade for interception, counter-thrusting, and guard disruption</li>
+                        <li><strong>Multi-Vector Control:</strong> Maintaining continuous pressure across multiple threat angles</li>
+                    </ul>
+                    <p>Particularly dangerous against groups or highly defensive opponents.</p>
+
+                    <h3 class="section-subtitle">Configuration 3: Double-Ended Butterfly Sword</h3>
+                    <p>By attaching the sheath at the hilt to form a double-ended butterfly sword, Yīng transitions into a rotational combat paradigm:</p>
+                    <ul>
+                        <li><strong>Centrifugal Momentum:</strong> Spinning slashes and pivot-driven deflections</li>
+                        <li><strong>Sweeping Area Denial:</strong> Wide rotational arcs controlling engagement zones</li>
+                        <li><strong>Continuous Directional Transitions:</strong> Highly kinetic fighting style</li>
+                        <li><strong>Blurred Defense/Offense:</strong> Rotations that serve both purposes simultaneously</li>
+                    </ul>
+                    <p>Exceptional spatial awareness allows control of large areas while suppressing opponent mobility.</p>
+
+                    <h3 class="section-subtitle">Configuration 4: Elongated Greatblade</h3>
+                    <p>The final transformation—attaching the sheath to the distal end—produces an elongated greatblade:</p>
+                    <ul>
+                        <li><strong>Long-Range Dominance:</strong> Extraordinary reach dictating engagement distance</li>
+                        <li><strong>Precision & Intimidation:</strong> Sweeping cleaves and delayed thrusts exploiting reach</li>
+                        <li><strong>Territorial Control:</strong> Extended feint chains capitalizing on opponent misjudgment</li>
+                        <li><strong>Remarkable Handling:</strong> Maintaining speed despite apparent size through grip transitions</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Philosophy</h2>
+                <div class="section-content">
+                    <p>Yīng's combat rhythm is characterized by smooth, deliberate transitions between weapon configurations. She often alters Tenebris Operiet's form mid-engagement to disrupt opponent pattern recognition, weaponizing unpredictability as a strategic advantage. These transformations are executed with near-seamless integration into her movement sequences, allowing her to convert defensive recoveries into offensive initiations without pause.</p>
+
+                    <p>Her mobility reflects a balance between elegance and lethality. Yīng favors gliding footwork, controlled lunging advances, and rotational disengagements that maintain her positional advantage. She rarely wastes motion, ensuring each step contributes either to angle acquisition, strike preparation, or defensive repositioning. Her battlefield presence often feels methodical and oppressive, as she steadily constricts opponent maneuvering options while expanding her own.</p>
+
+                    <p>Psychologically, Yīng conveys a composed and calculating demeanor in combat. She approaches engagements as exercises in technical mastery rather than raw dominance, frequently studying an opponent's rhythm before escalating her offensive output. Unlike more impulsive duelists, she demonstrates patience, allowing conflicts to unfold at a pace that favors her adaptability and weapon versatility.</p>
+
+                    <p>While her fighting style is rooted in sword mastery, Yīng's greatest strength lies in her ability to transform both her weapon and her tactical identity in real time. She embodies a philosophy that victory is achieved not through singular excellence, but through the mastery of transformation itself—adapting shape, rhythm, and reach until resistance becomes structurally impossible.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- KESSHŌ TǏ FORM -->
+        <div id="ti-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Kesshō Tǐ.png" alt="Kesshō Tǐ" class="character-image">
+                    <img src="../assets/icons/Destiny's Penance Icon.png" alt="Destiny's Penance" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Kesshō Tǐ</h1>
+                    <p class="character-title">Calculated Domination</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Evolution</span>
+                            <span class="stat-value">Second Form</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Weapon</span>
+                            <span class="stat-value">Tenebris Operiet</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Combat Style</span>
+                            <span class="stat-value">Overwhelming Inevitability</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Specialty</span>
+                            <span class="stat-value">Sustained Pressure</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Approach</span>
+                            <span class="stat-value">Aggressive Forward Momentum</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Presence</span>
+                            <span class="stat-value">Tactical Severity</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">"Resistance collapses under sustained pressure."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Kesshō Tǐ mirrors the refined, flowing lethality displayed by Kesshō Yīng, maintaining the same foundation of elegant, high-speed bladework and aerial maneuverability. However, where Yīng embodies grace and precision as an art, Tǐ expresses combat as an unrelenting campaign of calculated domination.</p>
+
+                    <p>Her movements retain their dancer-like fluidity, but each step advances territory, each strike establishes control, and every motion pressures opponents into defensive collapse. She fights with the mentality of overwhelming inevitability—never rushing blindly, yet never allowing adversaries the stability needed to recover or regroup.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Philosophy</h2>
+                <div class="section-content">
+                    <p>Tǐ favors aggressive forward momentum. She chains attacks into prolonged offensive sequences designed to exhaust resistance through layered strike patterns. Rather than relying solely on surgical eliminations, she destabilizes opponents through sustained pressure, forcing errors that she exploits with devastating finishing blows.</p>
+
+                    <p>Unlike Yīng's emphasis on beauty and technical mastery, Tǐ demonstrates tactical severity. She anticipates counterattacks several exchanges ahead and adapts instantly, turning enemy momentum into opportunities for escalation. When facing multiple opponents, she instinctively prioritizes targets whose defeat will cause the greatest strategic collapse among their allies.</p>
+
+                    <p>Her presence on the battlefield often alters the rhythm of combat entirely. Opponents are forced into reactionary fighting, struggling to reclaim initiative as she dictates pacing, spacing, and engagement flow with commanding authority.</p>
+
+                    <p>At her peak, Tǐ's combat becomes less a duel and more a systematic conquest of the battlefield itself, where victory is achieved through relentless advancement and absolute control.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Techniques</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Sustained Offensive Pressure</h3>
+                    <ul>
+                        <li><strong>Prolonged Attack Chains:</strong> Exhausting resistance through layered strike patterns</li>
+                        <li><strong>Error Exploitation:</strong> Forcing mistakes through sustained aggression</li>
+                        <li><strong>Destabilization Focus:</strong> Breaking defensive cohesion before finishing</li>
+                        <li><strong>Territorial Advancement:</strong> Each step claims battlefield space</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Aerial Dominance</h3>
+                    <p>Her aerial combat is particularly oppressive:</p>
+                    <ul>
+                        <li>Using altitude and velocity for tactical positioning</li>
+                        <li>Striking from angles that divide enemy focus and disrupt formations</li>
+                        <li>Alternating between rapid flurries and heavy cleaves</li>
+                        <li>Creating unpredictable tempo shifts that fracture defensive timing</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Strategic Targeting</h3>
+                    <ul>
+                        <li>Anticipating counterattacks several exchanges ahead</li>
+                        <li>Adapting instantly to turn enemy momentum into escalation opportunities</li>
+                        <li>Prioritizing targets whose defeat causes greatest strategic collapse</li>
+                        <li>Identifying keystone combatants in multi-opponent scenarios</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Battlefield Authority</h3>
+                    <ul>
+                        <li><strong>Rhythm Control:</strong> Dictating pacing of entire engagements</li>
+                        <li><strong>Spacing Dominance:</strong> Forcing opponents into reactive positioning</li>
+                        <li><strong>Initiative Suppression:</strong> Preventing adversaries from reclaiming offensive</li>
+                        <li><strong>Flow Command:</strong> Determining when and how combat escalates</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- KESSHŌ ZHÀN FORM -->
+        <div id="zhan-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Kesshō Zhàn.png" alt="Kesshō Zhàn" class="character-image">
+                    <img src="../assets/icons/Destiny's Penance Icon.png" alt="Destiny's Penance" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Kesshō Zhàn</h1>
+                    <p class="character-title">Apex Convergence</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Evolution</span>
+                            <span class="stat-value">Final Form</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Weapon</span>
+                            <span class="stat-value">Tenebris Operiet</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Combat Style</span>
+                            <span class="stat-value">Annihilating Efficiency</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Specialty</span>
+                            <span class="stat-value">Perfect Synchronization</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Approach</span>
+                            <span class="stat-value">Relentless Certainty</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Presence</span>
+                            <span class="stat-value">Terrifying Composure</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">"Combat unfolds according to a rhythm I alone conduct."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Kesshō Zhàn represents the apex convergence of speed, discipline, and annihilating efficiency. Where earlier evolutions of Kesshō Yīng and Kesshō² Tǐ refine technique or expand battlefield authority, Zhàn operates with terrifying composure, blending absolute precision with sustained, overwhelming force.</p>
+
+                    <p>Her movements are no longer simply fluid or aggressive—they are perfectly synchronized with the natural escalation of combat itself, as though every clash unfolds according to a rhythm she alone conducts.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Philosophy</h2>
+                <div class="section-content">
+                    <p>Her fighting style is defined by seamless transition between offensive and defensive states, eliminating the traditional distinction between the two. Every block becomes a strike. Every evasion becomes a counteroffensive. Opponents attempting to create distance find themselves intercepted mid-action, while those who attempt direct confrontation are dismantled through cascading chains of perfectly timed blows.</p>
+
+                    <p>Zhàn demonstrates total mastery over engagement tempo. She accelerates exchanges to disorient foes, then abruptly slows her motion to create false openings that lure opponents into fatal miscalculations. Her strikes carry extraordinary density of force, often collapsing defenses with minimal visible effort. Even restrained attacks possess finishing-level lethality, forcing adversaries into constant retreat or catastrophic overextension.</p>
+
+                    <p>At full exertion, Zhàn's presence transforms battlefields into environments where resistance steadily erodes under unceasing assault. Engagement against her becomes less a contest of strength and more a matter of survival against a force that advances with relentless certainty, leaving devastation in perfectly measured intervals.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Techniques</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Seamless State Transitions</h3>
+                    <ul>
+                        <li><strong>Unified Defense/Offense:</strong> Every block becomes a strike, every evasion a counteroffensive</li>
+                        <li><strong>Mid-Action Interception:</strong> Catching opponents during distance creation attempts</li>
+                        <li><strong>Cascading Chains:</strong> Perfectly timed blow sequences that dismantle confrontation</li>
+                        <li><strong>No Traditional Distinction:</strong> Offensive and defensive states merged completely</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Tempo Mastery</h3>
+                    <ul>
+                        <li><strong>Acceleration:</strong> Disorienting foes through sudden speed increases</li>
+                        <li><strong>Abrupt Deceleration:</strong> Creating false openings for fatal miscalculations</li>
+                        <li><strong>Force Density:</strong> Strikes carrying extraordinary impact with minimal visible effort</li>
+                        <li><strong>Finishing-Level Restraint:</strong> Even controlled attacks possess lethal potency</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Aerial Omnipresence</h3>
+                    <p>Her aerial mobility becomes nearly omnipresent:</p>
+                    <ul>
+                        <li>Attacking from multiple vectors in rapid succession</li>
+                        <li>Initiating from blind angles using spiraling dive patterns</li>
+                        <li>Delivering crushing impacts before transitioning to close-quarters barrages</li>
+                        <li>Ground footwork mirroring aerial unpredictability</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Multi-Opponent Dissolution</h3>
+                    <p>When facing multiple enemies, Zhàn does not divide attention—she dissolves opposition:</p>
+                    <ul>
+                        <li><strong>Rapid Prioritization:</strong> Surgical elimination in rapid succession</li>
+                        <li><strong>Structural Weakness Identification:</strong> Instinctively targeting coordination gaps</li>
+                        <li><strong>Formation Dismantling:</strong> Removing key combatants to collapse entire groups</li>
+                        <li><strong>Thriving in Chaos:</strong> Combat flow accelerates amid escalating numbers</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Inevitable Advance</h3>
+                    <ul>
+                        <li>Resistance erodes under unceasing assault</li>
+                        <li>Engagement becomes survival rather than contest</li>
+                        <li>Force advancing with relentless certainty</li>
+                        <li>Devastation delivered in perfectly measured intervals</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- SHARED SECTIONS -->
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            <div class="section-content">
+                <div class="relationships-grid">
+                    <a href="character-takino-retsu.html" class="relationship-card">
+                        <div class="relationship-name">Takino Retsu</div>
+                        <div class="relationship-type">Royastellan Identity</div>
+                    </a>
+                    <a href="../factions/faction-destinys-penance.html" class="relationship-card">
+                        <div class="relationship-name">Destiny's Penance</div>
+                        <div class="relationship-type">Faction Member</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Archetype</h3>
+                <p>Jí Lián embodies the <strong>Reluctant Participant</strong> archetype—someone fundamentally disinterested in conflict who nonetheless possesses overwhelming capability when circumstances force engagement. Her evolution through combat forms represents the gradual loss of passive detachment.</p>
+
+                <h3 class="section-subtitle">Core Themes</h3>
+                <ul>
+                    <li><strong>Apathy vs. Necessity:</strong> The tension between preference for non-involvement and unavoidable participation</li>
+                    <li><strong>Hidden Capability:</strong> Extreme power concealed beneath disinterested exterior</li>
+                    <li><strong>Evolution Through Engagement:</strong> Each combat form represents increased commitment</li>
+                    <li><strong>Loss of Passivity:</strong> Gradual transformation from observer to active force</li>
+                    <li><strong>Comfort vs. Duty:</strong> Conflict between personal preference and imposed responsibility</li>
+                </ul>
+
+                <h3 class="section-subtitle">Combat Evolution Symbolism</h3>
+                <ul>
+                    <li><strong>Yīng (Master of Transformation):</strong> Adaptability and technical refinement</li>
+                    <li><strong>Tǐ (Calculated Domination):</strong> Sustained pressure and tactical severity</li>
+                    <li><strong>Zhàn (Apex Convergence):</strong> Perfect synchronization and annihilating efficiency</li>
+                </ul>
+
+                <p>Each evolution represents not just increased power, but increased engagement with a world she would rather observe from a distance. The progression from adaptive to dominant to overwhelming mirrors her psychological journey from reluctant to committed to inevitable.</p>
+
+                <h3 class="section-subtitle">Narrative Function</h3>
+                <p>Jí Lián serves as a counterpoint to characters driven by ambition or ideology. She represents the individual pulled into conflict against their natural inclination, whose quiet preference for comfort transforms into overwhelming force when circumstances demand action.</p>
+
+                <p>Her connection to Takino Retsu as an original identity suggests complex layering of selfhood across different contexts and allegiances. The transformation from a Royastellan identity to participation in Destiny's Penance marks a significant shift in engagement level.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> "Jí Lián" (集聯) can mean "to gather/connect," while "Xiá" (峽) means "gorge" or "strait"—suggesting a connector through narrow passages. "Kesshō" (結晶) means "crystal," representing clarity and hardness. Yīng (影) means "shadow," Tǐ (體) means "body/form," and Zhàn (戰) means "battle/war."</li>
+                    <li>She maintains one of the palest complexions among characters due to extreme sun avoidance</li>
+                    <li>Despite enjoying beaches, she uses large umbrellas and high-grade sun-blocking lotion</li>
+                    <li>Her hair features a distinctive gradient: dark blue → violet → black</li>
+                    <li>Jí Lián has grown from socially awkward to composed, though still prefers solitude</li>
+                    <li>Her signature quote "But can we like, not tho?" perfectly encapsulates her disinterested demeanor</li>
+                    <li>She wields Tenebris Operiet, which has four distinct configurations</li>
+                    <li>Each Kesshō form represents escalating engagement with combat despite her natural inclination to avoid it</li>
+                    <li>Zhàn can seamlessly merge offensive and defensive states into unified action</li>
+                    <li>Her combat philosophy centers on transformation—of both weapon and tactical identity</li>
+                    <li>True identity connects to Takino Retsu from Royastella</li>
+                    <li>Member of Destiny's Penance despite her preference for non-involvement</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            document.querySelectorAll('.form-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const selectedForm = document.getElementById(formName + '-form');
+            selectedForm.classList.add('active');
+
+            event.target.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
 </html>

@@ -1,112 +1,755 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fú cì Ánguāng // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
 
-.icons {
-  text-align: center;
-  
-}
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .character-form {
+            display: none;
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../characters.html" class="back-link">← All Characters</a>
+    </nav>
+
+    <div class="container">
+        <!-- Form Toggle -->
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Civilian</button>
+            <button class="form-button" onclick="switchForm('shifang')">Zhòu-chún Shìfàng</button>
+        </div>
+
+        <!-- CIVILIAN FORM -->
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Fú cì Ánguāng.png" alt="Fú cì Ánguāng" class="character-image">
+                    <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Fú cì Ánguāng</h1>
+                    <p class="character-title">Heaven's Dark Light</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Age</span>
+                            <span class="stat-value">8</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Height</span>
+                            <span class="stat-value">4'2" (127 cm)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Heritage</span>
+                            <span class="stat-value">Chinese</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Hair</span>
+                            <span class="stat-value">Light Pink (Twin Buns)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Eyes</span>
+                            <span class="stat-value">Pale Gray</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Family</span>
+                            <span class="stat-value">Tiānshàng</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Affiliation</span>
+                            <span class="stat-value"><a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> (Unofficial)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Legacy Status</span>
+                            <span class="stat-value">Unmanifested</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">"I just want to stay close to big sister."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Fú cì Ánguāng is the younger sister of <a href="character-xiwang-tianshang.html" class="wiki-link">Xīwàng Tiānshàng</a> and a hereditary member of the Tiānshàng family—a lineage widely recognized within Crios as one of the most influential organizations associated with the shadowed strata of society. The Tiānshàng name is traditionally inherited only by descendants who demonstrate the family's distinctive genetic hallmark: a six-star formation embedded within the iris.</p>
+                    
+                    <p>Fú cì has not manifested this trait.</p>
+                    
+                    <p>Despite this absence, she remains acknowledged as part of the family lineage, though her status is regarded as uncertain by observers familiar with Tiānshàng traditions. In contrast, her elder sister has fully manifested the six-star ocular legacy.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Appearance</h2>
+                <div class="section-content">
+                    <p>Fú cì Ánguāng presents with a delicate, almost porcelain-like presence that reinforces her youth and gentleness.</p>
+                    
+                    <h3 class="section-subtitle">Physical Characteristics</h3>
+                    <ul>
+                        <li><strong>Hair:</strong> Light pink, styled into two rounded buns with loose framing strands and decorative twin hair sticks</li>
+                        <li><strong>Eyes:</strong> Pale gray, clear and reflective, lacking the six-star Tiānshàng pattern</li>
+                        <li><strong>General Impression:</strong> Fragile and reserved, often staying physically close to individuals she trusts</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <p>Fú cì is profoundly affectionate, emotionally sincere, and quietly observant.</p>
+                    
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Devoted:</strong> Deeply devoted to Xīwàng Tiānshàng above all else</li>
+                        <li><strong>Shy:</strong> Naturally hesitant in unfamiliar environments</li>
+                        <li><strong>Receptive:</strong> Exceptionally responsive to kindness</li>
+                        <li><strong>Expressive:</strong> Emotionally demonstrative once comfortable</li>
+                        <li><strong>Attached:</strong> Displays strong bonding with trusted individuals</li>
+                    </ul>
+                    
+                    <h3 class="section-subtitle">Emotional Landscape</h3>
+                    <p>Her relationship with her sister defines most of her emotional landscape. Fú cì admires Xīwàng with an intensity that borders on reverence, viewing her not simply as family but as a guiding constant. The prospect of losing her sister represents a psychological fracture point for her identity.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Cultural Context</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Crime in Crios</h3>
+                    <p>Within Crios, the concept of organized crime functions differently from conventional interpretations. The Tiānshàng family is broadly regarded as operating within morally questionable domains, yet their activities don't produce demonstrable or measurable harm. Their reputation persists more as an inherited social certainty than as a body of verifiable accusations.</p>
+                    
+                    <p>The Tiānshàng are therefore feared, distrusted, and quietly respected in equal measure, though few can articulate precisely why.</p>
+                    
+                    <p>Xīwàng Tiānshàng has openly positioned herself in opposition to her family's influence, working toward dismantling the systems that sustain their authority.</p>
+                    
+                    <p>Fú cì is aware of none of the structural implications of this conflict. Her perspective remains deeply personal rather than ideological.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Relationship with Praxis Verax Affinas</h2>
+                <div class="section-content">
+                    <p>Although not formally inducted into <a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a>, Fú cì occupies a uniquely intimate role within the group's social ecosystem.</p>
+                    
+                    <p>She is widely regarded as:</p>
+                    <ul>
+                        <li>A morale anchor</li>
+                        <li>A source of emotional grounding</li>
+                        <li>A protected younger sibling figure to multiple members</li>
+                    </ul>
+                    
+                    <p>Her presence often diffuses tension within the group, and she has gradually overcome her initial social timidity through repeated exposure to their companionship. Members of Praxis Verax Affinas frequently treat her with protective familiarity, though she is rarely excluded from their strategic or social discussions.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Tiānshàng Legacy Status</h2>
+                <div class="section-content">
+                    <p>The Tiānshàng genetic hallmark is traditionally viewed as confirmation of inherited authority and lineage legitimacy.</p>
+                    
+                    <p>Fú cì's lack of manifestation has produced quiet speculation regarding:</p>
+                    <ul>
+                        <li>Her developmental timeline</li>
+                        <li>Her potential divergence from Tiānshàng tradition</li>
+                        <li>Whether the legacy may appear under atypical conditions</li>
+                    </ul>
+                    
+                    <p>No documented cases exist of delayed manifestation beyond early childhood, making her case unusual but not formally unprecedented.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Behavioral Patterns</h2>
+                <div class="section-content">
+                    <p>Fú cì often:</p>
+                    <ul>
+                        <li>Shadows her sister or trusted group members in unfamiliar settings</li>
+                        <li>Displays heightened emotional sensitivity to interpersonal conflict</li>
+                        <li>Expresses curiosity about heroism in simple, literal terms</li>
+                        <li>Uses quiet observational behavior to compensate for social hesitation</li>
+                    </ul>
+                    
+                    <p>She demonstrates a subtle but consistent emotional intuition, often recognizing shifts in group morale before others articulate them.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ZHÒU-CHÚN SHÌFÀNG FORM -->
+        <div id="shifang-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Zhòu-chún Shìfàng.png" alt="Zhòu-chún Shìfàng" class="character-image">
+                    <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Zhòu-chún Shìfàng</h1>
+                    <p class="character-title">Hopeful Ferocity</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Role</span>
+                            <span class="stat-value">Magical Girl (Early Manifestation)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Combat Style</span>
+                            <span class="stat-value">High-Impact Barehanded with some magic</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Specialty</span>
+                            <span class="stat-value">Momentum-Driven Striking</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Approach</span>
+                            <span class="stat-value">Sustained Offensive Pressure</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Magic Compatibility</span>
+                            <span class="stat-value">Limited (Tactical Augmentation)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Transformation Origin</span>
+                            <span class="stat-value">Unknown</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">"I'll protect everyone!"</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Zhòu-chún Shìfàng represents the earliest manifested combat state of the individual who would later evolve into Zhòu-chún Tǎoyàn, emerging during her tenure as Fú cì Ánguāng. At this stage, her fighting style retains emotional openness and kinetic exuberance, lacking the austere lethality and quiet restraint that later define her later forms. Her combat expression is energetic, expressive, and heavily momentum-driven, reflecting both youthful confidence and an instinctive desire to protect rather than dismantle.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Philosophy</h2>
+                <div class="section-content">
+                    <p>Her core fighting methodology centers on high-impact barehanded combat strongly aligned with modernized martial striking disciplines. She favors rapid combination attacks built around fluid punch-kick transitions, aerial repositioning, and explosive closing bursts that overwhelm opponents through sustained offensive pressure.</p>
+                    
+                    <p>Her engagement pattern emphasizes maintaining proximity, forcing adversaries into reactive defense while continuously shifting striking angles. She frequently integrates acrobatic maneuvering into her offensive chains, allowing her to redirect momentum into spinning strikes, rising launchers, and rapid directional feints that destabilize enemy counterattacks.</p>
+                    
+                    <p>Her emotional state significantly influences her combat rhythm. Shìfàng fights with visible warmth and expressive determination, often telegraphing her protective motivations through aggressive interception tactics and body positioning that prioritizes shielding allies. This emotional transparency fuels her stamina and offensive persistence but can also create exploitable moments when she overextends in response to perceived threats against those she cares about.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Techniques</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Striking Methodology</h3>
+                    <ul>
+                        <li><strong>Rapid Combination Attacks:</strong> Fluid punch-kick transitions that maintain constant pressure</li>
+                        <li><strong>Aerial Repositioning:</strong> Using elevation changes to create unexpected attack angles</li>
+                        <li><strong>Explosive Closing Bursts:</strong> Sudden acceleration to eliminate distance</li>
+                        <li><strong>Spinning Strikes:</strong> Momentum-driven rotational attacks</li>
+                        <li><strong>Rising Launchers:</strong> Upward strikes that disrupt opponent positioning</li>
+                        <li><strong>Directional Feints:</strong> Deceptive movements that mask true attack trajectories</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Defensive Structure</h3>
+                    <p>Shìfàng's defensive structure relies heavily on kinetic redirection rather than static guarding:</p>
+                    <ul>
+                        <li><strong>Slipping & Weaving:</strong> Fluid evasions that naturally convert into counteroffensive openings</li>
+                        <li><strong>Rolling Evasions:</strong> Dynamic movement that maintains offensive positioning</li>
+                        <li><strong>Center-of-Gravity Control:</strong> Instant balance recovery after aerial or rotational attacks</li>
+                        <li><strong>Unpredictable Tempo:</strong> Relentless rhythm that makes her difficult to suppress</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Magical Augmentation</h3>
+                    <p>Unlike her elder sister Xīwàng Tiānshàng, Shìfàng retains limited magical compatibility, which she employs as tactical augmentation rather than primary offense:</p>
+                    <ul>
+                        <li><strong>Strike Power Enhancement:</strong> Short-duration boosts to impact force</li>
+                        <li><strong>Movement Acceleration:</strong> Brief speed bursts for closing distance or repositioning</li>
+                        <li><strong>Defensive Buffering:</strong> Momentary protective reinforcement</li>
+                        <li><strong>Transitional Deployment:</strong> Used during windows between attack sequences</li>
+                    </ul>
+                    
+                    <p>These augmentations are modest in output and require deliberate concentration, preventing simultaneous high-level martial execution and magical channeling. As a result, she typically deploys these abilities in transitional windows between attack sequences or during brief disengagements.</p>
+
+                    <h3 class="section-subtitle">Protective Combat Style</h3>
+                    <ul>
+                        <li><strong>Aggressive Interception:</strong> Positioning to intercept threats to allies</li>
+                        <li><strong>Shielding Priority:</strong> Body positioning that prioritizes protecting others</li>
+                        <li><strong>Emotional Transparency:</strong> Visible warmth and determination that fuels stamina</li>
+                        <li><strong>Overextension Risk:</strong> Tendency to commit too aggressively when allies are threatened</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Evolution Potential</h2>
+                <div class="section-content">
+                    <p>Zhòu-chún Shìfàng's fighting style embodies unrestrained momentum and hopeful ferocity. While lacking the surgical precision and controlled devastation associated with her later evolution into Zhòu-chún Tǎoyàn, her blend of acrobatic striking, improvisational flow, and supplementary spell reinforcement creates a combatant defined by overwhelming drive and emotionally charged resilience.</p>
+                    
+                    <p>This early form represents raw potential before refinement—power expressed through enthusiasm rather than calculation, protection motivated by love rather than duty.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- SHARED SECTIONS (Outside form toggles) -->
+        <section class="content-section">
+            <h2 class="section-title">Transformation Phenomenon</h2>
+            <div class="section-content">
+                <p>Fú cì Ánguāng eventually achieves transformation into Zhòu-chún Shìfàng, and later evolves into Zhòu-chún Tǎoyàn. This event remains poorly understood.</p>
+                
+                <h3 class="section-subtitle">Notable Anomalies</h3>
+                <ul>
+                    <li>No recorded Mana Elemental Core alignment prior to transformation</li>
+                    <li>Absence of formal magical training</li>
+                    <li>Lack of documented catalyst event</li>
+                    <li>Manifestation occurring outside known transformation protocols</li>
+                </ul>
+                
+                <p>The transformation has generated significant academic and arcane interest, though Fú cì herself demonstrates little awareness of its theoretical implications. This represents one of the earliest indicators that established magical qualification systems within Crios may be incomplete or flawed.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            <div class="section-content">
+                <div class="relationships-grid">
+                    <a href="character-xiwang-tianshang.html" class="relationship-card">
+                        <div class="relationship-name">Xīwàng Tiānshàng</div>
+                        <div class="relationship-type">Elder Sister / Guiding Constant</div>
+                    </a>
+                    <a href="../factions/faction-praxis-verax-affinas.html" class="relationship-card">
+                        <div class="relationship-name">Praxis Verax Affinas</div>
+                        <div class="relationship-type">Unofficial Member / Morale Anchor</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Archetype</h3>
+                <p>Fú cì embodies the <strong>Latent Potential</strong> archetype—someone whose power exists outside traditional qualification systems, whose transformation emerges from emotional bonds rather than magical prerequisites.</p>
+
+                <h3 class="section-subtitle">Core Themes</h3>
+                <ul>
+                    <li><strong>Inherited Identity Without Certainty:</strong> Bearing a famous name without its traditional markers</li>
+                    <li><strong>Emotional Loyalty as Power:</strong> Suggesting that attachment and devotion can catalyze transformation</li>
+                    <li><strong>Latent Potential Outside Systems:</strong> Challenging magical qualification frameworks through anomalous manifestation</li>
+                    <li><strong>Innocence Within Ambiguity:</strong> Representing purity placed within morally questionable lineage</li>
+                    <li><strong>Protection as Motivation:</strong> Her combat style driven by desire to shield rather than destroy</li>
+                    <li><strong>Evolution Through Experience:</strong> From hopeful ferocity to refined lethality as she matures</li>
+                </ul>
+
+                <h3 class="section-subtitle">Narrative Function</h3>
+                <p>Fú cì functions narratively as a relational anchor connecting high-stakes ideological conflict to personal emotional consequences. Her unverified transformation into Zhòu-chún Shìfàng represents one of the earliest indicators that established magical qualification systems within Crios may be incomplete or flawed.</p>
+                
+                <p>Within group dynamics, she frequently operates as a symbolic younger sibling figure across multiple factions simultaneously, providing emotional grounding and moral clarity in otherwise complex political situations.</p>
+                
+                <p>Her existence poses questions: What if power emerges from love rather than genetics? What if the traditional markers of legitimacy are incomplete? What happens when the systems everyone relies on fail to account for anomalies?</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> "Fú cì Ánguāng" (福赐暗光) translates to "Blessing / Gift bestowed by fortune or heaven" + "Hidden or darkened light"—reflecting a paradoxical identity of illumination that exists beneath shadow, or light that has yet to fully emerge.</li>
+                    <li><strong>Transformation Name:</strong> "Zhòu-chún Shìfàng" represents her earliest combat manifestation, which later evolves into Zhòu-chún Tǎoyàn</li>
+                    <li>Despite being a Tiānshàng family member, she lacks the signature six-star iris pattern that defines the lineage</li>
+                    <li>Her transformation occurred without any recorded Mana Elemental Core, formal training, or catalyst event</li>
+                    <li>She serves as an unofficial morale anchor for Praxis Verax Affinas despite not being a formal member</li>
+                    <li>Fú cì's emotional intuition allows her to recognize shifts in group morale before others articulate them</li>
+                    <li>Her hair is styled in twin rounded buns with decorative hair sticks</li>
+                    <li>At age 8, she stands 4'2" with a delicate, porcelain-like appearance</li>
+                    <li>Her combat style as Shìfàng emphasizes protecting others through aggressive interception</li>
+                    <li>Unlike her sister Xīwàng (who has no magic), Fú cì has limited magical compatibility used for tactical augmentation</li>
+                    <li>The name reflects the paradox of her existence: a dark light, a hidden blessing, potential waiting to emerge</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            document.querySelectorAll('.form-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const selectedForm = document.getElementById(formName + '-form');
+            selectedForm.classList.add('active');
+
+            event.target.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
 </html>

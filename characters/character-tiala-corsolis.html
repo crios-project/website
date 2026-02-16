@@ -1,112 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
-        body {
-  background: #00091B;
-  color: #fff;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiala Corsolis // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff; --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8; --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5); }
+        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
+        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
+        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
+        .back-link:hover { color: var(--accent-cyan); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
+        .form-toggle { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; padding: 20px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; }
+        .form-button { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 12px 24px; background: transparent; border: 2px solid rgba(233, 30, 99, 0.3); color: var(--text-dim); border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
+        .form-button:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+        .form-button.active { background: var(--secondary-pink); border-color: var(--secondary-pink); color: var(--dark-bg); box-shadow: var(--glow-pink); }
+        .character-form { display: none; }
+        .character-form.active { display: block; animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .character-header { display: grid; grid-template-columns: 400px 1fr; gap: 60px; margin-bottom: 60px; }
+        .character-visual { position: relative; }
+        .character-image { width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(233, 30, 99, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
+        .faction-logo { position: absolute; top: 16px; right: 16px; width: 80px; height: auto; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7)); }
+        .character-info { display: flex; flex-direction: column; justify-content: center; }
+        .character-name { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; line-height: 1.1; }
+        .character-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 32px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 24px; }
+        .stat-item { display: flex; flex-direction: column; }
+        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .stat-value { font-family: 'Archivo', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
+        .character-quote { margin-top: 32px; padding: 20px 24px; background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05)); border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif; font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
+        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 12px; padding: 32px; margin-bottom: 32px; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--accent-cyan); margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1rem; }
+        .section-content p { margin-bottom: 16px; }
+        .section-content ul { list-style: none; padding-left: 0; margin: 16px 0; }
+        .section-content li { padding-left: 24px; margin-bottom: 8px; position: relative; }
+        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); }
+        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3); transition: all 0.2s ease; }
+        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
+        @media (max-width: 1024px) { .character-header { grid-template-columns: 1fr; gap: 40px; } .character-visual { max-width: 400px; margin: 0 auto; } .character-name { font-size: 2.5rem; } }
+        @media (max-width: 768px) { .form-toggle { flex-wrap: wrap; } .form-button { flex: 1; min-width: 120px; } .stats-grid { grid-template-columns: 1fr; } .content-section { padding: 24px; } }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
+    <div class="container">
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('base')">Tiala Corsolis</button>
+            <button class="form-button" onclick="switchForm('alulu')">Alulu Caelum</button>
+        </div>
 
+        <div id="base-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Tiala Corsolis.png" alt="Tiala Corsolis" class="character-image">
+                    <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas" class="faction-logo">
+                </div>
+                <div class="character-info">
+                    <h1 class="character-name">Tiala Corsolis</h1>
+                    <p class="character-title">Liminal Entity • Phasewalker</p>
+                    <div class="stats-grid">
+                        <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">15</span></div>
+                        <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">5'6" (168 cm)</span></div>
+                        <div class="stat-item"><span class="stat-label">Birth Date</span><span class="stat-value">March 20</span></div>
+                        <div class="stat-item"><span class="stat-label">Ethnicity</span><span class="stat-value">Black</span></div>
+                        <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Purple</span></div>
+                        <div class="stat-item"><span class="stat-label">Nature</span><span class="stat-value">Cross-Realm Constant</span></div>
+                        <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a></span></div>
+                        <div class="stat-item"><span class="stat-label">Ability</span><span class="stat-value">Phasewalking</span></div>
+                    </div>
+                    <div class="character-quote">"I exist between. Always between."</div>
+                </div>
+            </section>
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Tiala Corsolis exists less as a conventional individual and more as a transitional constant moving between realms. She rarely manifests directly within a single plane of existence, instead expressing herself through alternate presences that emerge across different worlds. These manifestations operate as localized avatars through which her influence is exerted, often without the surrounding populations recognizing their shared origin.</p>
+                    <p><strong>Known Manifestations:</strong></p>
+                    <ul>
+                        <li><a href="character-dissonant-discord.html" class="wiki-link">dissonant discord</a> within <a href="../realms/realm-beeston.html" class="wiki-link">Beeston</a></li>
+                        <li>BLADE GUILLOTINE within <a href="../realms/realm-royastella.html" class="wiki-link">Royastella</a></li>
+                        <li><a href="#" class="wiki-link">Alulu Caelum</a> within <a href="../realms/realm-nexsicon.html" class="wiki-link">Nexsicon</a></li>
+                    </ul>
+                    <p>While these incarnations possess independent personalities, memories, and motivations, they remain intrinsically linked through an underlying metaphysical continuity anchored in Tiala's existence.</p>
+                </div>
+            </section>
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+            <section class="content-section">
+                <h2 class="section-title">Appearance</h2>
+                <div class="section-content">
+                    <p>Tiala presents as a teenage girl of slender but balanced build. Her physical presence carries an understated intensity, often described as quietly radiant. Her purple eyes are particularly striking, frequently perceived as holding layered emotional and perceptual depth that can make sustained eye contact unsettling or mesmerizing.</p>
+                    <p>Her demeanor tends toward calm observation rather than overt emotional expression, contributing to the sense that she is perpetually slightly out of sync with her immediate surroundings.</p>
+                </div>
+            </section>
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+            <section class="content-section">
+                <h2 class="section-title">Nature and Existence</h2>
+                <div class="section-content">
+                    <p>Tiala functions as a liminal entity, naturally positioned between states, identities, and dimensional boundaries. Rather than remaining fixed within a single reality, she traverses existential thresholds through <strong>phasewalking</strong>. These transitions are rarely witnessed directly and frequently leave behind residual distortions in magical, emotional, or conceptual space.</p>
+                    <h3 class="section-subtitle">Cross-Manifestation Consistencies</h3>
+                    <p>Her alternate manifestations do not simply represent disguises or transformations. Each operates as a fully realized iteration shaped by the laws, magic systems, and narrative pressures of its host realm. Despite this fragmentation, certain thematic consistencies persist:</p>
+                    <ul>
+                        <li>Strong associations with culmination or finality</li>
+                        <li>Exceptional combat lethality</li>
+                        <li>Emotional intensity masked beneath controlled composure</li>
+                        <li>A recurring role in events involving systemic upheaval or paradigm shifts</li>
+                    </ul>
+                </div>
+            </section>
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+            <section class="content-section">
+                <h2 class="section-title">Magical Alignment</h2>
+                <div class="section-content">
+                    <p>Tiala's true elemental or metaphysical alignment remains unclassified. Each known manifestation interacts with its respective world's magical structure differently:</p>
+                    <ul>
+                        <li>In <strong>Beeston</strong>: Discordant harmonic anomalies tied to Lúmenai resonance disruption</li>
+                        <li>In <strong>Royastella</strong>: Extreme Dark-aligned phenomena and catastrophic combat expression</li>
+                        <li>In <strong>Nexsicon</strong>: Highly precise and destructive applications of Cymoran combat methodology</li>
+                    </ul>
+                    <p>No singular system fully explains or contains her existence, suggesting her origin lies beyond standard elemental or systemic categorization.</p>
+                </div>
+            </section>
 
-.dot {
-  color: #4FEBFE;
-}
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <p>Direct observations of Tiala herself are exceedingly rare, making definitive personality profiling difficult. However, consistent behavioral threads across her manifestations suggest:</p>
+                    <ul>
+                        <li><strong>Deep Introspection:</strong> Constantly analyzing existence and identity</li>
+                        <li><strong>Restrained Emotion:</strong> Strong internal currents held beneath calm composure</li>
+                        <li><strong>Gravitational Pull:</strong> Naturally drawn toward pivotal or climactic events</li>
+                        <li><strong>Identity Complexity:</strong> Complex relationship with continuity and self-fragmentation</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        <div id="alulu-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Alulu Caelum.png" alt="Alulu Caelum" class="character-image">
+                    <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas" class="faction-logo">
+                </div>
+                <div class="character-info">
+                    <h1 class="character-name">Alulu Caelum</h1>
+                    <p class="character-title">Executioner • Precision Duelist</p>
+                    <div class="stats-grid">
+                        <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Executioner</span></div>
+                        <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Precision Lethality</span></div>
+                        <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Executionist (Slashing Épée)</span></div>
+                        <div class="stat-item"><span class="stat-label">Philosophy</span><span class="stat-value">Single Perfect Strike</span></div>
+                        <div class="stat-item"><span class="stat-label">Primary Tactic</span><span class="stat-value">Structural Targeting</span></div>
+                        <div class="stat-item"><span class="stat-label">Specialization</span><span class="stat-value">Anatomical Exploitation</span></div>
+                    </div>
+                    <div class="character-quote">"One perfect strike outweighs a thousand imperfect ones."</div>
+                </div>
+            </section>
 
-.icons {
-  text-align: center;
-  
-}
+            <section class="content-section">
+                <h2 class="section-title">Combat Profile</h2>
+                <div class="section-content">
+                    <p>Alulu Caelum employs a precision-based executioner combat doctrine centered on calculated lethality, structural targeting, and overwhelming single-strike termination. Her methodology prioritizes efficiency over spectacle, focusing on identifying critical vulnerabilities and exploiting them with decisive, devastating blows.</p>
+                    <h3 class="section-subtitle">Executionist</h3>
+                    <p>A specialized slashing épée engineered for both thrusting penetration and razor-edged cutting arcs. Unlike traditional épée combat, which emphasizes point control and linear fencing exchanges, Alulu integrates extended slashing trajectories that allow her to sever tendons, disable joints, and compromise armor seams with surgical accuracy.</p>
+                    <ul>
+                        <li>Rapid transitions between piercing attacks and sweeping execution strokes</li>
+                        <li>Hybrid dueling and assassination capabilities</li>
+                        <li>Designed for fatal accuracy and minimal wasted motion</li>
+                    </ul>
+                    <p><strong>Note:</strong> She is actively seeking a better weapon as part of her grand plan.</p>
+                </div>
+            </section>
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+            <section class="content-section">
+                <h2 class="section-title">Combat Methodology</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Tactical Approach</h3>
+                    <p>Alulu demonstrates exceptional patience and battlefield composure. Rather than engaging in prolonged exchanges, she studies opponent movement patterns, guard transitions, and stance imbalances. She deliberately pressures enemies into predictable defensive habits before delivering catastrophic counterstrikes.</p>
+                    <h3 class="section-subtitle">Target Priority</h3>
+                    <p>Her attacks frequently target anatomical or structural weak points:</p>
+                    <ul>
+                        <li>Ligaments and tendons</li>
+                        <li>Nerve clusters</li>
+                        <li>Pressure channels</li>
+                        <li>Magical focal nodes</li>
+                    </ul>
+                    <h3 class="section-subtitle">Movement Philosophy</h3>
+                    <p>Her footwork is disciplined and economical, drawing from formal duelist traditions. She maintains strict centerline dominance, advancing with controlled, deliberate steps designed to funnel opponents into restricted movement corridors.</p>
+                    <p>When pressured, she relies on precise parries and micro-adjustments rather than wide evasive maneuvers, conserving energy while maintaining lethal readiness.</p>
+                    <h3 class="section-subtitle">Offensive Bursts</h3>
+                    <p>Alulu's offensive bursts are sudden and explosive. She is known to remain nearly motionless for extended periods before unleashing rapid multi-vector strikes that collapse an opponent's defenses in moments. These bursts often culminate in finishing blows delivered with extreme velocity and force concentration.</p>
+                </div>
+            </section>
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+            <section class="content-section">
+                <h2 class="section-title">Psychological Warfare</h2>
+                <div class="section-content">
+                    <p>Alulu exerts intimidation through composure and inevitability. She rarely telegraphs emotion during battle, projecting an aura of calm finality that unsettles opponents. Her fighting presence communicates a silent promise: every engagement is a measured countdown to execution.</p>
+                </div>
+            </section>
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+            <section class="content-section">
+                <h2 class="section-title">Limitations</h2>
+                <div class="section-content">
+                    <p>While devastating in direct duels, Alulu's style demands acute situational awareness and timing. Extended chaotic combat environments or unpredictable multi-target engagements can disrupt her precision rhythm, requiring her to adapt by creating space or isolating high-priority threats before delivering conclusive strikes.</p>
+                </div>
+            </section>
+        </div>
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> The Phasewalker / Executioner</p>
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>Identity as fragmented continuity across realms</li>
+                    <li>Culmination and finality</li>
+                    <li>Precision over spectacle</li>
+                    <li>The liminal space between worlds</li>
+                    <li>A single perfect strike as philosophy</li>
+                </ul>
+            </div>
+        </section>
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> Tiala — derives from teal color (#008080), symbolizing balance between emotional depth and clarity; Corsolis — combines Latin "Cor" (heart) and "Solis" (sun), reflecting internal intensity and radiant culmination</li>
+                    <li><strong>Cross-Realm Identity:</strong> Exists simultaneously as discord (Beeston), BLADE GUILLOTINE (Royastella), and Alulu Caelum (Nexsicon)</li>
+                    <li><strong>Purple Eyes:</strong> Frequently perceived as holding layered depth that makes sustained eye contact unsettling</li>
+                    <li><strong>Phasewalking:</strong> Leaves residual distortions in magical, emotional, or conceptual space</li>
+                    <li><strong>Combat Philosophy:</strong> "One perfect strike outweighs a thousand imperfect ones"</li>
+                    <li><strong>Weapon Seeking:</strong> Actively searching for a better weapon to replace Executionist</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => form.classList.remove('active'));
+            document.querySelectorAll('.form-button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(formName + '-form').classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
 </html>

@@ -1,112 +1,929 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claris Quies // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
 
-.icons {
-  text-align: center;
-  
-}
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .character-form {
+            display: none;
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../characters.html" class="back-link">← All Characters</a>
+    </nav>
+
+    <div class="container">
+        <!-- Form Toggle -->
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Claris Quies</button>
+            <button class="form-button" onclick="switchForm('vis')">Tessera Vis</button>
+            <button class="form-button" onclick="switchForm('ratio')">Tessera² Ratio</button>
+            <button class="form-button" onclick="switchForm('vastatio')">Vastatio Tessera³</button>
+        </div>
+
+        <!-- CIVILIAN FORM -->
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Claris Quies.png" alt="Claris Quies" class="character-image">
+                    <img src="../assets/icons/Destiny's Penance Icon.png" alt="Destiny's Penance" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Claris Quies</h1>
+                    <p class="character-title">Chaotic Burst of Energy</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Age</span>
+                            <span class="stat-value">15</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Height</span>
+                            <span class="stat-value">5'2" (157 cm)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Birth Date</span>
+                            <span class="stat-value">July 18</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Ethnicity</span>
+                            <span class="stat-value">Latina</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Hair</span>
+                            <span class="stat-value">Platinum Blonde → Blood Red Tips</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Eyes</span>
+                            <span class="stat-value">Golden Orange</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Faction</span>
+                            <span class="stat-value"><a href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a></span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Key Attribute</span>
+                            <span class="stat-value">Effervescent</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">"Fun comes first. Everything else works itself out."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Claris Quies is a chaotic burst of energy whose personality radiates spontaneity and emotional intensity. Equal parts gothic aesthetic and punk irreverence, she thrives in situations where unpredictability reigns. Her presence often disrupts careful planning, but her loyalty to her friends is absolute and unquestionable.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Appearance</h2>
+                <div class="section-content">
+                    <p>Claris presents a striking visual aesthetic blending gothic and punk elements. Her short, messy platinum blonde hair features distinctive blood red gradient tips, with bangs covering her right eye. Her golden orange eyes convey intense emotional presence and boundless energy.</p>
+                    
+                    <p>Standing at 5'2", she carries herself with unrestrained confidence and shameless authenticity, her appearance reflecting her rejection of conventional restraint or social conformity.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <p>Claris is exuberant, impulsive, and gleefully unpredictable. Rather than maturing into restraint, she has grown increasingly energetic and uninhibited over time. She tends to follow whatever option seems the most entertaining or emotionally satisfying in the moment, regardless of consequences. Her shamelessness is worn openly and unapologetically, contributing to both her charm and her volatility.</p>
+
+                    <p>Despite her chaotic tendencies, Claris possesses a deeply rooted protective instinct toward those she considers friends. Beneath her erratic surface lies a steadfast emotional loyalty that manifests fiercely when those she cares about are threatened.</p>
+
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Exuberant & Impulsive:</strong> Acts without hesitation or long-term planning</li>
+                        <li><strong>Gleefully Unpredictable:</strong> Thrives in chaotic situations</li>
+                        <li><strong>Emotionally Authentic:</strong> Gravitates toward genuine emotional expression</li>
+                        <li><strong>Shameless:</strong> Shows little concern for embarrassment or social restraint</li>
+                        <li><strong>Fiercely Loyal:</strong> Maintains strong protective loyalty toward companions</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Behavioral Traits</h3>
+                    <ul>
+                        <li>Frequently acts without hesitation or long-term planning</li>
+                        <li>Gravitates toward excitement, spectacle, and emotional authenticity</li>
+                        <li>Displays dramatic mood shifts that can uplift or destabilize group dynamics</li>
+                        <li>Shows little concern for embarrassment or social restraint</li>
+                        <li>Maintains strong protective loyalty toward companions</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Identity Evolution</h2>
+                <div class="section-content">
+                    <p>Claris represents a stark divergence from her past self as <a href="character-zafara-quedar.html" class="wiki-link">Zafara Quedar</a>. Where Zafara embodied greater control and composure, Claris operates with far less restraint, embracing instinct, chaos, and emotional expression.</p>
+                    
+                    <p>Even though the overt change in personality is significant, Claris still shares plenty of overlapping traits with her younger self, such as her playfulness, love of pranks, and fierce loyalty to her friends. The schism between Destin'y Penance and <a href="../factions/faction-reason-theory.html"></a>Reason Theory</p> is particularly painful for her as not only her best friend Ami but her long sought, long missing older sister Windi are ideologycally aligned against her faction.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Social Dynamics</h2>
+                <div class="section-content">
+                    <p>Claris' relentless energy can mildly exhaust her friends, yet her sincerity and devotion make her an irreplaceable ally. She frequently destabilizes otherwise structured environments but often provides unexpected solutions precisely because of her unconventional thinking.</p>
+                    
+                    <p>Her presence forces those around her to adapt to unpredictability, which can be both challenging and refreshing depending on circumstances and personality compatibility.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- TESSERA VIS FORM -->
+        <div id="vis-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Tessera Vis.png" alt="Tessera Vis" class="character-image">
+                    <img src="../assets/icons/Destiny's Penance Icon.png" alt="Destiny's Penance" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Tessera Vis</h1>
+                    <p class="character-title">Strategic Orchestrator</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Evolution</span>
+                            <span class="stat-value">First Form</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Weapon</span>
+                            <span class="stat-value">Fallire Fanale</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Combat Style</span>
+                            <span class="stat-value">Battlefield Manipulation</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Specialty</span>
+                            <span class="stat-value">Tempo Engineering</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Approach</span>
+                            <span class="stat-value">Controlled Unpredictability</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Philosophy</span>
+                            <span class="stat-value">Strategic Orchestration</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">"Victory belongs to who best dictates the narrative."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Tessera Vis practices an evolved iteration of the adaptive, improvisational combat discipline she displayed in her youth as <a href="character-tessera-iustum.html" class="wiki-link">Tessera Iustum</a>, now refined into a deliberately orchestrated style centered on battlefield manipulation, tempo engineering, and controlled unpredictability.</p>
+                    
+                    <p>Where Tessera Iustum reacted to environmental chaos and opportunistically exploited it, Tessera Vis has developed the ability to manufacture that chaos herself, shaping engagements into conditions that overwhelmingly favor her control and tactical foresight.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Philosophy</h2>
+                <div class="section-content">
+                    <p>Her movements retain the acrobatic fluidity and kinetic creativity that define her foundational combat philosophy, but they now carry an additional layer of calculated precision. Tessera Vis no longer relies purely on instinctual adaptation. Instead, she engineers engagements several steps in advance, subtly guiding opponents into destabilized positions through baited openings, forced movement corridors, and deliberate environmental disruption.</p>
+
+                    <p>Tessera Vis treats the battlefield as a living system that can be destabilized, redirected, and weaponized through deliberate action. She frequently manipulates terrain by collapsing structural elements, displacing objects, or triggering chain-reaction hazards that fracture enemy formation integrity. These disruptions rarely appear accidental. Each environmental shift serves as a setup for mobility lanes, defensive blind spots, or execution corridors that she exploits with lethal efficiency.</p>
+
+                    <p>Her combat philosophy has shifted from opportunistic survival to strategic orchestration. Tessera Vis views battle as a dynamic performance in which victory belongs to the combatant who best dictates narrative structure, emotional pacing, and environmental control. Rather than simply responding to shifting battlefield conditions, she composes them, ensuring that by the time her opponent recognizes the pattern, the outcome has already been decided.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Weapon: Fallire Fanale</h2>
+                <div class="section-content">
+                    <p>Her mastery of <strong>Fallire Fanale</strong> has matured significantly. The blade's ability to manifest and dematerialize at will is no longer used primarily as a reactive deception tool, but as a mechanism for rhythm control and psychological warfare.</p>
+
+                    <p>Tessera Vis intentionally alters weapon presence mid-exchange to disrupt opponent timing, forcing adversaries to second-guess defensive patterns and attack commitments. She frequently initiates engagements unarmed, drawing opponents into aggressive proximity before materializing the blade within striking distance, often at angles that circumvent conventional guard positioning.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Techniques</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Battlefield Manipulation</h3>
+                    <ul>
+                        <li><strong>Structural Collapse:</strong> Deliberately destabilizing terrain elements</li>
+                        <li><strong>Object Displacement:</strong> Moving debris and obstacles to create hazards</li>
+                        <li><strong>Chain-Reaction Hazards:</strong> Triggering cascading environmental failures</li>
+                        <li><strong>Formation Fracturing:</strong> Breaking enemy coordination through terrain disruption</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Structured Unpredictability</h3>
+                    <p>Unlike her younger counterpart who relied on erratic motion, Tessera Vis employs structured unpredictability:</p>
+                    <ul>
+                        <li>Movement patterns that initially appear disciplined and readable</li>
+                        <li>Establishing false familiarity to encourage pattern recognition</li>
+                        <li>Abrupt tempo fractures through aerial vaults and sliding reversals</li>
+                        <li>Feigned missteps transitioning directly into precision counterstrikes</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Momentum Conservation</h3>
+                    <p>Demonstrates heightened mastery of energy efficiency:</p>
+                    <ul>
+                        <li><strong>Economical Acrobatics:</strong> Minimizing wasted motion while preserving chaos illusion</li>
+                        <li><strong>Rolling Recoveries:</strong> Used as integral strike setups, not just evasion</li>
+                        <li><strong>Structural Rebounds:</strong> Exploiting environment for positioning advantages</li>
+                        <li><strong>Controlled Falls:</strong> Repositioning into high-lethality attack vectors</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Psychological Warfare</h3>
+                    <ul>
+                        <li><strong>Controlled Playfulness:</strong> Projecting relaxed demeanor mid-combat</li>
+                        <li><strong>False Security:</strong> Allowing opponents to believe they control flow</li>
+                        <li><strong>Severity Misjudgment:</strong> Encouraging underestimation before escalation</li>
+                        <li><strong>Guided Positioning:</strong> Subtly directing enemies into disadvantageous terrain</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- TESSERA RATIO FORM -->
+        <div id="ratio-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Tessera Ratio.png" alt="Tessera Ratio" class="character-image">
+                    <img src="../assets/icons/Destiny's Penance Icon.png" alt="Destiny's Penance" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Tessera Ratio</h1>
+                    <p class="character-title">Weaponized Uncertainty</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Evolution</span>
+                            <span class="stat-value">Second Form</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Weapon</span>
+                            <span class="stat-value">Fallire Fanale</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Combat Style</span>
+                            <span class="stat-value">Erratic Destabilization</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Specialty</span>
+                            <span class="stat-value">Cascading Misreads</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Approach</span>
+                            <span class="stat-value">Intentional Fragmentation</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Presence</span>
+                            <span class="stat-value">Defensive Impossibility</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">"Certainty deteriorates with each exchange."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Tessera Ratio retains the lethal adaptability and improvisational brilliance that define Tessera Vis, but her combat expression becomes far less predictable and dramatically more destabilizing to opponents. Her movements reject conventional structure, replacing recognizable patterns with erratic timing shifts, misleading rhythm breaks, and intentionally fragmented attack sequences that make defensive planning nearly impossible.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Philosophy</h2>
+                <div class="section-content">
+                    <p>Her fighting style revolves around weaponizing uncertainty. Ratio frequently initiates engagements with feints layered inside other feints, creating cascading misreads that cause enemies to commit to counters against attacks that never arrive. She seamlessly alternates between precision swordplay and environmental exploitation, treating terrain, debris, enemy weapons, and even allied movement as extensions of her arsenal.</p>
+
+                    <p>Ratio thrives when engagements become crowded or structurally unstable. She instinctively manipulates battlefield disorder, turning collapsing terrain, scattered weapons, or multiple combatants into layered hazards that restrict enemy coordination. Opponents attempting to impose order on the fight often find themselves trapped within sequences of overlapping threats triggered by their own movements.</p>
+
+                    <p>At peak performance, Ratio becomes nearly impossible to anticipate. Engagement against her evolves into a psychological battle where certainty deteriorates with each exchange. Opponents are forced into hesitation, overcorrection, or reckless escalation, all of which Ratio exploits with devastating precision while maintaining her signature improvisational dominance.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Techniques</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Layered Deception</h3>
+                    <ul>
+                        <li><strong>Feints Within Feints:</strong> Cascading misreads causing wasted counters</li>
+                        <li><strong>Attack Absence:</strong> Enemies committing to defend against strikes that never arrive</li>
+                        <li><strong>Rhythm Fragmentation:</strong> Intentionally broken patterns preventing adaptation</li>
+                        <li><strong>Misleading Telegraphs:</strong> False indicators that misdirect defensive preparation</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Fallire Fanale Mastery</h3>
+                    <p>The blade becomes an instrument of disorientation:</p>
+                    <ul>
+                        <li>Rapid summoning and dismissal cycles</li>
+                        <li>Striking from unexpected angles during manifestation</li>
+                        <li>Vanishing mid-clash to invalidate defensive commitments</li>
+                        <li>Partial manifestations combined with empty-hand techniques</li>
+                        <li>Unpredictable reach and striking vectors</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Asymmetrical Mobility</h3>
+                    <ul>
+                        <li><strong>Sudden Directional Reversals:</strong> Appearing within guard after baiting attacks</li>
+                        <li><strong>Asymmetrical Footwork:</strong> Deliberately disrupting own tempo</li>
+                        <li><strong>Sliding Pivots:</strong> Repositioning through opponent blind spots</li>
+                        <li><strong>Off-Axis Lunges:</strong> Striking from unconventional angles</li>
+                        <li><strong>Acrobatic Redirections:</strong> Converting defense into multi-step offense</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Disorder Exploitation</h3>
+                    <ul>
+                        <li>Thriving in crowded or structurally unstable engagements</li>
+                        <li>Converting collapsing terrain into layered hazards</li>
+                        <li>Using scattered weapons as environmental threats</li>
+                        <li>Restricting enemy coordination through battlefield chaos</li>
+                        <li>Trapping opponents in overlapping threat sequences</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Psychological Erosion</h3>
+                    <ul>
+                        <li>Forcing hesitation through unpredictability</li>
+                        <li>Inducing overcorrection via misleading patterns</li>
+                        <li>Provoking reckless escalation through uncertainty</li>
+                        <li>Exploiting deteriorating certainty with precision strikes</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- VASTATIO TESSERA FORM -->
+        <div id="vastatio-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Vastatio Tessera.png" alt="Vastatio Tessera" class="character-image">
+                    <img src="../assets/icons/Destiny's Penance Icon.png" alt="Destiny's Penance" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Vastatio Tessera</h1>
+                    <p class="character-title">Absolute Culmination</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Evolution</span>
+                            <span class="stat-value">Final Form</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Weapon</span>
+                            <span class="stat-value">Fallire Fanale</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Combat Style</span>
+                            <span class="stat-value">Structural Dissolution</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Specialty</span>
+                            <span class="stat-value">Overlapping Realities</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Approach</span>
+                            <span class="stat-value">Informational Overload</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Presence</span>
+                            <span class="stat-value">Phenomenon Beyond Comprehension</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">"Structure ceases to function reliably in my presence."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Vastatio Tessera represents the absolute culmination of Tessera's adaptive combat evolution. Where Tessera Vis thrives on improvisation and Tessera² Ratio dismantles structure through destabilization, Vastatio operates on a scale where structure itself ceases to function reliably in her presence.</p>
+
+                    <p>Her combat methodology abandons traditional sequencing entirely, replacing it with overlapping offensive realities that force opponents to process multiple threats that appear to unfold simultaneously.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Philosophy</h2>
+                <div class="section-content">
+                    <p>Her movement is fluid yet violently discontinuous, characterized by abrupt positional shifts that feel less like rapid motion and more like sudden redefinition of space. Vastatio frequently appears to interrupt her own attacks mid-execution only to complete them from an entirely different vector, often leaving afterimages of partially realized strikes that still carry force and consequence.</p>
+
+                    <p>Opponents attempting to track her momentum quickly discover that her engagements lack a stable rhythm, preventing predictive defense or counter-timing.</p>
+
+                    <p>Her battlefield presence actively erodes tactical cohesion. Terrain, debris, enemy formations, and even ongoing attacks lose their reliability as stable reference points. Vastatio instinctively exploits every fluctuation in the environment, converting collapsing footing, misaligned strikes, and disrupted coordination into cascading offensive opportunities. Opponents often find their own attacks redirected into vulnerabilities they unknowingly create while attempting to respond to her.</p>
+
+                    <p>At peak escalation, Vastatio becomes a phenomenon that overwhelms comprehension rather than simply skill. Engagement against her forces adversaries into an escalating state of informational overload, where reaction speed and training lose effectiveness against an opponent who continuously redefines engagement parameters. Combatants attempting to impose order or pattern recognition inevitably find themselves undone by sequences that collapse and reform faster than strategic adaptation can occur.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Techniques</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Overlapping Offensive Realities</h3>
+                    <ul>
+                        <li><strong>Simultaneous Threats:</strong> Multiple attacks appearing to unfold at once</li>
+                        <li><strong>Interrupted Completions:</strong> Attacks stopped mid-execution, completed from different vectors</li>
+                        <li><strong>Afterimage Strikes:</strong> Partially realized attacks that still carry force</li>
+                        <li><strong>Spatial Redefinition:</strong> Positional shifts feeling like space alteration rather than movement</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Fallire Fanale Volatility</h3>
+                    <p>The blade becomes extraordinarily volatile:</p>
+                    <ul>
+                        <li>Manifesting across multiple attack intervals</li>
+                        <li>Appearing fully formed or in segmented flashes</li>
+                        <li>Carving through positioning before disappearing</li>
+                        <li>Treated as recurring event rather than single instrument</li>
+                        <li>Follow-through arcs occurring before initiating motions visibly complete</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Tactical Cohesion Erosion</h3>
+                    <ul>
+                        <li>Terrain losing reliability as stable reference</li>
+                        <li>Enemy formations fracturing under instability</li>
+                        <li>Ongoing attacks becoming unreliable</li>
+                        <li>Exploiting every environmental fluctuation</li>
+                        <li>Converting opponent responses into self-exposing vulnerabilities</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Disruptive Defense</h3>
+                    <p>Abandons conventional guarding:</p>
+                    <ul>
+                        <li><strong>Trajectory Fracturing:</strong> Partial blade manifestations disrupting incoming strikes</li>
+                        <li><strong>Angular Displacement:</strong> Body positioning that redirects rather than blocks</li>
+                        <li><strong>Engagement Inversion:</strong> Transforming defense into immediate offense</li>
+                        <li><strong>Self-Exposing Momentum:</strong> Turning enemy attacks into their own vulnerabilities</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Informational Overload</h3>
+                    <ul>
+                        <li>Forces adversaries into escalating comprehension failure</li>
+                        <li>Reaction speed becomes insufficient</li>
+                        <li>Training loses effectiveness against shifting parameters</li>
+                        <li>Pattern recognition fails as sequences collapse/reform</li>
+                        <li>Strategic adaptation cannot match redefinition speed</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- SHARED SECTIONS -->
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            <div class="section-content">
+                <div class="relationships-grid">
+                    <a href="character-zafara-quedar.html" class="relationship-card">
+                        <div class="relationship-name">Zafara Quedar</div>
+                        <div class="relationship-type">Beestonian Identity</div>
+                    </a>
+                    <a href="../factions/faction-destinys-penance.html" class="relationship-card">
+                        <div class="relationship-name">Destiny's Penance</div>
+                        <div class="relationship-type">Faction Member</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Archetype</h3>
+                <p>Claris embodies the <strong>Liberated Chaos</strong> archetype—someone who has shed prior restraints to embrace spontaneity, emotional authenticity, and unpredictability. Her evolution through combat forms represents the weaponization of chaos itself.</p>
+
+                <h3 class="section-subtitle">Core Themes</h3>
+                <ul>
+                    <li><strong>Transformation vs. Loss:</strong> Is Claris liberation from Zafara's constraints or loss of what made her whole?</li>
+                    <li><strong>Chaos as Strength:</strong> Unpredictability as tactical and strategic advantage</li>
+                    <li><strong>Loyalty Through Chaos:</strong> Maintaining fierce devotion despite erratic behavior</li>
+                    <li><strong>Identity Questions:</strong> Whether dramatic personality change represents growth or fragmentation</li>
+                    <li><strong>Structured Unpredictability:</strong> Chaos that can be engineered and controlled</li>
+                    <li><strong>Reality Dissolution:</strong> Ultimate evolution where structure itself fails</li>
+                </ul>
+
+                <h3 class="section-subtitle">Combat Evolution Symbolism</h3>
+                <ul>
+                    <li><strong>Vis (Strategic Orchestrator):</strong> Manufacturing chaos through battlefield manipulation</li>
+                    <li><strong>Ratio (Weaponized Uncertainty):</strong> Erratic destabilization making defense impossible</li>
+                    <li><strong>Vastatio (Absolute Culmination):</strong> Structural dissolution and informational overload</li>
+                </ul>
+
+                <p>Each evolution represents escalating chaos—from controlled unpredictability to weaponized uncertainty to reality-warping phenomenon. The progression mirrors her personality: from impulsive energy to destabilizing force to something that overwhelms comprehension itself.</p>
+
+                <h3 class="section-subtitle">Narrative Function</h3>
+                <p>Claris serves as an exploration of radical personality transformation and its implications. Her relationship to Zafara raises questions: Can someone change so dramatically and still be the same person? Is uninhibited expression liberation or loss of essential identity components?</p>
+
+                <p>Her combat style—evolving from orchestrated chaos to reality-warping phenomenon—mirrors these questions. At what point does adaptation become something beyond human comprehension? When does flexibility become structural dissolution?</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> "Claris" derives from Latin "clarus" meaning "clear/bright," ironically pairing with "Quies" meaning "quiet/rest"—creating paradox of bright chaos named for clarity and stillness. "Tessera" (mosaic tile) + "Vis" (force/power), "Ratio" (reason/calculation), and "Vastatio" (devastation/laying waste) show progression from controlled force to calculating chaos to utter devastation.</li>
+                    <li>Represents stark divergence from past self as Zafara Quedar</li>
+                    <li>Short, messy platinum blonde hair with blood red gradient tips</li>
+                    <li>Bangs cover her right eye, contributing to gothic aesthetic</li>
+                    <li>Golden orange eyes convey intense emotional presence</li>
+                    <li>Rather than maturing into restraint, has grown more energetic and uninhibited</li>
+                    <li>Signature quote "Fun comes first. Everything else works itself out" encapsulates philosophy</li>
+                    <li>Wields Fallire Fanale, which can manifest and dematerialize at will</li>
+                    <li>Each Tessera form represents escalating chaos weaponization</li>
+                    <li>Vastatio can create afterimages of partially realized strikes that still carry force</li>
+                    <li>At peak, becomes phenomenon that overwhelms comprehension rather than just skill</li>
+                    <li>Member of Destiny's Penance despite chaotic tendencies</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            document.querySelectorAll('.form-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const selectedForm = document.getElementById(formName + '-form');
+            selectedForm.classList.add('active');
+
+            event.target.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
 </html>
