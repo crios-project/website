@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takino Retsu // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff; --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8; --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5); }
+        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
+        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
+        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
+        .back-link:hover { color: var(--accent-cyan); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
+        .form-toggle { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; padding: 20px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; }
+        .form-button { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 12px 24px; background: transparent; border: 2px solid rgba(233, 30, 99, 0.3); color: var(--text-dim); border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
+        .form-button:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+        .form-button.active { background: var(--secondary-pink); border-color: var(--secondary-pink); color: var(--dark-bg); box-shadow: var(--glow-pink); }
+        .character-form { display: none; }
+        .character-form.active { display: block; animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .character-header { display: grid; grid-template-columns: 400px 1fr; gap: 60px; margin-bottom: 60px; }
+        .character-visual { position: relative; }
+        .character-image { width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(233, 30, 99, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
+        .faction-logo { position: absolute; top: 16px; right: 16px; width: 80px; height: auto; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7)); }
+        .character-info { display: flex; flex-direction: column; justify-content: center; }
+        .character-name { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; line-height: 1.1; }
+        .character-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 32px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 24px; }
+        .stat-item { display: flex; flex-direction: column; }
+        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .stat-value { font-family: 'Archivo', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
+        .character-quote { margin-top: 32px; padding: 20px 24px; background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05)); border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif; font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
+        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 12px; padding: 32px; margin-bottom: 32px; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--accent-cyan); margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1rem; }
+        .section-content p { margin-bottom: 16px; }
+        .section-content ul { list-style: none; padding-left: 0; margin: 16px 0; }
+        .section-content li { padding-left: 24px; margin-bottom: 8px; position: relative; }
+        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); }
+        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3); transition: all 0.2s ease; }
+        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
+        .relationships-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
+        .relationship-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 16px; transition: all 0.3s ease; text-decoration: none; display: block; }
+        .relationship-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2); }
+        .relationship-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; margin-bottom: 4px; }
+        .relationship-type { font-size: 0.85rem; color: var(--text-dim); }
+        @media (max-width: 1024px) { .character-header { grid-template-columns: 1fr; gap: 40px; } .character-visual { max-width: 400px; margin: 0 auto; } .character-name { font-size: 2.5rem; } }
+        @media (max-width: 768px) { .form-toggle { flex-wrap: wrap; } .form-button { flex: 1; min-width: 120px; } .stats-grid { grid-template-columns: 1fr; } .content-section { padding: 24px; } }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
+    <div class="container">
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Civilian</button>
+            <button class="form-button" onclick="switchForm('mikado')">Starlit Mikado</button>
+        </div>
+
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Takino Retsu.png" alt="Takino Retsu" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+                <div class="character-info">
+                    <h1 class="character-name">Takino Retsu</h1>
+                    <p class="character-title">Scholar • Recluse</p>
+                    <div class="stats-grid">
+                        <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">14</span></div>
+                        <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">5'4" (163 cm)</span></div>
+                        <div class="stat-item"><span class="stat-label">Birth Date</span><span class="stat-value">May 27</span></div>
+                        <div class="stat-item"><span class="stat-label">Ethnicity</span><span class="stat-value">Japanese and Chinese</span></div>
+                        <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Steel Blue</span></div>
+                        <div class="stat-item"><span class="stat-label">Social Status</span><span class="stat-value">Reclusive Scholar</span></div>
+                        <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> (Secret)</span></div>
+                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span class="stat-value">Uninterested</span></div>
+                    </div>
+                    <div class="character-quote">"I should warn you... this isn't going to be a fair fight."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Takino Retsu is one of the youngest members of <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>, selected under circumstances that strongly imply the involvement of the Royastellan System rather than institutional or political influence. She is characterized by extreme social detachment, minimal emotional display, and an unwavering preference for intellectual solitude.</p>
+                    <p>Despite her reluctance toward social interaction or exertion, Takino functions as one of the team's most strategically vital force multipliers. Her presence dramatically increases the operational ceiling of allied Runic Knights, frequently determining the outcome of large-scale engagements.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Quietly Observant:</strong> Constantly analyzing environment</li>
+                        <li><strong>Socially Hesitant:</strong> Prefers minimal interaction</li>
+                        <li><strong>Intellectually Immersed:</strong> Deep focus on literature and solitary pursuits</li>
+                        <li><strong>Emotionally Restrained:</strong> Not unfriendly, just reserved</li>
+                    </ul>
+                    <h3 class="section-subtitle">Behavioral Traits</h3>
+                    <ul>
+                        <li>Strong preference for reading and scholarly isolation</li>
+                        <li>Avoids outdoor environments whenever possible</li>
+                        <li>Communicates minimally in casual social settings</li>
+                        <li>Frequently mistaken for aloofness or indifference</li>
+                    </ul>
+                    <p>Takino is often described as someone who appears approachable from a distance yet remains emotionally inaccessible in direct interaction. Photography and staged appearances frequently portray her as friendly or gentle, though this perception rarely aligns with her reserved interpersonal habits.</p>
+                    <p>Her conversational engagement is typically limited to subjects of intellectual interest. Outside those parameters, she tends toward brief responses or silence.</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="mikado-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Starlit Mikado.png" alt="Starlit Mikado" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+                <div class="character-info">
+                    <h1 class="character-name">Starlit Mikado</h1>
+                    <p class="character-title">Force Multiplier</p>
+                    <div class="stats-grid">
+                        <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Force Multiplier</span></div>
+                        <div class="stat-item"><span class="stat-label">Elemental Core</span><span class="stat-value">Earth</span></div>
+                        <div class="stat-item"><span class="stat-label">Casting Language</span><span class="stat-value">Portuguese</span></div>
+                        <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Lotus Dominion (Hook Blades)</span></div>
+                        <div class="stat-item"><span class="stat-label">Starlight Blessing</span><span class="stat-value">Amplification</span></div>
+                        <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Efficient / Surgical</span></div>
+                    </div>
+                    <div class="character-quote">"Let's end this quickly."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Profile</h2>
+                <div class="section-content">
+                    <p>As the <strong>Starlit Mikado</strong>, Takino transitions into a combatant defined by calculated efficiency and ruthless optimization.</p>
+                    <p>Her battlefield philosophy is centered around minimizing exertion through maximized effectiveness. Every movement is executed with surgical precision, eliminating unnecessary flourish or redundancy. This results in a combat style that appears almost mechanical in its exactness.</p>
+                    <h3 class="section-subtitle">Lotus Dominion</h3>
+                    <p>A modular pair of short hook blades designed for adaptive engagement.</p>
+                    <p><strong>Base Configuration:</strong></p>
+                    <ul>
+                        <li>Dual independent hook blades optimized for close-range slashing and disarming maneuvers</li>
+                        <li>Balanced for both melee retention and precision throwing</li>
+                    </ul>
+                    <p><strong>Combined Configuration:</strong></p>
+                    <ul>
+                        <li>Blades interlock to form a butterfly sword-style weapon</li>
+                        <li>Provides extended reach and rotational attack patterns</li>
+                        <li>Allows rapid transitions between offensive and defensive stances</li>
+                    </ul>
+                    <h3 class="section-subtitle">Starlight Blessing: Amplification</h3>
+                    <p><strong>Function:</strong> Doubles the output of Mana-based techniques and Starlight Blessings affecting allied units.</p>
+                    <p><strong>Standard Application:</strong></p>
+                    <ul>
+                        <li>Multiplies magical potency and System-granted skill effectiveness by approximately twofold</li>
+                        <li>Significantly enhances group combat viability during coordinated engagements</li>
+                    </ul>
+                    <p><strong>Advanced Realization:</strong></p>
+                    <p>Takino later discovers that Amplification can be recursively applied to herself. By increasing her own output parameters, she extends her amplification effect to approximately threefold when applied to allies.</p>
+                    <p>This recursive enhancement transforms Mikado into one of the most strategically influential figures among Runic Knights, as her presence can exponentially increase overall team capability.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Tactical Role</h2>
+                <div class="section-content">
+                    <p>Within Starlite 7th, Mikado functions as:</p>
+                    <ul>
+                        <li>The team's primary enhancement catalyst</li>
+                        <li>Strategic combat stabilizer</li>
+                        <li>Efficiency optimizer during large-scale confrontations</li>
+                    </ul>
+                    <p>Takino demonstrates little interest in dramatic displays of strength, instead prioritizing rapid engagement termination and resource conservation.</p>
+                    <p>While not emotionally expressive, Takino demonstrates consistent loyalty through performance reliability rather than overt interpersonal warmth.</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            <div class="relationships-grid">
+                <a href="character-itami-serafino.html" class="relationship-card">
+                    <div class="relationship-name">Itami Serafino</div>
+                    <div class="relationship-type">Leader / Starlit Empress</div>
+                </a>
+                <a href="character-marate-jalo.html" class="relationship-card">
+                    <div class="relationship-name">Marate Jalo</div>
+                    <div class="relationship-type">Mentor / Starlit Alpha</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> The Force Multiplier</p>
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>Power derived from quiet intellect rather than overt ambition</li>
+                    <li>Efficiency as a philosophical worldview</li>
+                    <li>Isolation as both shield and limitation</li>
+                    <li>The System's capacity to recognize value beyond social visibility</li>
+                    <li>Latent potential concealed beneath emotional restraint</li>
+                </ul>
+                <p>Her existence challenges assumptions that leadership, influence, or strength must originate from charismatic presence.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> Takino (滝野) — suggests proximity to waterfalls, symbolizing contained but immense natural force; Retsu (烈) — translates to "fierce" or "intense," reflecting her hidden combat ferocity</li>
+                    <li><strong>Hair:</strong> Spiked, layered black hair with extended side strands; skull hair clip on left side</li>
+                    <li><strong>Appearance:</strong> Lean compact frame; steel blue irises; small beauty mark beneath left eye</li>
+                    <li><strong>Design Notes:</strong> Dark grey-blue strapless corset, layered belts, fingerless arm warmers with pink trim, pleated mini-skirt, reinforced tall boots</li>
+                    <li><strong>Accessories:</strong> Black choker with metallic plate accents; minimalist star-shaped pendant necklace</li>
+                    <li><strong>Youngest Member:</strong> Selected by the System itself rather than by Itami or Marate</li>
+                    <li><strong>Recursive Amplification:</strong> Can amplify herself to amplify others threefold - exponential team enhancement</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => form.classList.remove('active'));
+            document.querySelectorAll('.form-button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(formName + '-form').classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

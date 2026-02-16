@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destiny's Penance // CRIOS Faction Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .faction-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .faction-logo {
+            max-width: 500px;
+            height: auto;
+            margin: 0 auto 40px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .faction-tagline {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 24px;
+            border-left: 4px solid var(--secondary-pink);
+            background: rgba(233, 30, 99, 0.05);
+            border-radius: 4px;
+        }
+
+        .faction-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stat-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        .section-content strong {
+            color: var(--text-primary);
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            padding: 24px 28px;
+            margin: 24px 0;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .member-card {
+            background: rgba(20, 20, 25, 0.8);
+            border: 2px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .member-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.3);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .member-info {
+            padding: 20px;
+        }
+
+        .member-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .member-role {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .member-function {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px;
+            text-align: left;
+            border: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .comparison-table th {
+            background: rgba(233, 30, 99, 0.1);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .comparison-table td {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+
+        .warning-banner {
+            background: rgba(233, 30, 99, 0.1);
+            border: 2px dashed var(--secondary-pink);
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin: 24px 0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .warning-icon {
+            font-size: 2rem;
+            color: var(--secondary-pink);
+        }
+
+        .warning-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .faction-logo {
+                max-width: 350px;
+            }
+
+            .faction-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../factions.html" class="back-link">← All Factions</a>
+    </nav>
+
+    <div class="container">
+        <header class="faction-header">
+            <img src="../assets/icons/Destiny's Penance Logo.png" alt="Destiny's Penance" class="faction-logo">
+            <div class="faction-tagline">
+                "Progress toward salvation through acknowledged damnation."
+            </div>
+        </header>
+
+        <div class="faction-stats">
+            <div class="stat-card">
+                <div class="stat-label">Founded</div>
+                <div class="stat-value">Post-PVA</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Members</div>
+                <div class="stat-value">4</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Ideology</div>
+                <div class="stat-value">Pro-Destiny</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Primary Rival</div>
+                <div class="stat-value">Reason Theory</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Status</div>
+                <div class="stat-value">Covert</div>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p><strong>Destiny's Penance</strong> is a covert post-collapse faction formed by <a href="../characters/character-tiala-hartlight.html" class="wiki-link">Tiala Hartlight</a> following the dissolution of <a href="faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas (PVA)</a>. The organization exists as both a continuation of PVA's ultimate objective and a personal act of atonement for the devastation its predecessor caused.</p>
+
+                <p>Operating in the unstable transitional period between the integration of <a href="../realms/realm-royastella.html" class="wiki-link">Royastella</a> and <a href="../realms/realm-beeston.html" class="wiki-link">Beeston</a>, Destiny's Penance functions as a small but highly specialized operational unit focused on preparation for an approaching existential crisis tied to fate, convergence, and multiversal instability.</p>
+
+                <p>Unlike PVA, which operated under rigid ideological structure and aggressive strategic expansion, Destiny's Penance is driven by calculated restraint, emotional burden, and acceptance of necessary moral compromise.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Founding Context</h2>
+            <div class="section-content">
+                <p>The collapse of <a href="faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> resulted in catastrophic consequences across multiple realms, including:</p>
+
+                <ul>
+                    <li>The <a href="../lore/lore-cascade-resonance.html" class="wiki-link">Cascade Resonance Event</a></li>
+                    <li>The disappearance of <a href="../characters/character-xiwang-tianshang.html" class="wiki-link">Xīwàng Tiānshàng</a></li>
+                    <li>The disappearance of <a href="../characters/character-fu-ci-anguang.html" class="wiki-link">Fú cì Ánguāng</a> following the massacre of her family</li>
+                    <li>Large-scale destabilization of mythic and convergent realms</li>
+                </ul>
+
+                <p>The final dissolution of PVA forced Tiala to confront a truth she had long rejected:</p>
+
+                <div class="quote-box">
+                    Even righteous objectives can create monstrous outcomes.
+                </div>
+
+                <p>Despite acknowledging these consequences, Tiala concluded that abandoning her mission would invalidate every sacrifice already made. Destiny's Penance was formed as a continuation of her objective, undertaken with full awareness of the moral and existential cost.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Organizational Philosophy</h2>
+            <div class="section-content">
+                <p>Destiny's Penance operates under a paradoxical doctrine:</p>
+
+                <div class="quote-box">
+                    Progress toward salvation through acknowledged damnation.
+                </div>
+
+                <p>Core ideological pillars include:</p>
+
+                <ul>
+                    <li>Acceptance of irreversible past harm</li>
+                    <li>Strategic pursuit of destiny manipulation</li>
+                    <li>Emotional accountability among members</li>
+                    <li>Controlled preparation for realm convergence</li>
+                    <li>Protection of future reality stability regardless of personal consequence</li>
+                </ul>
+
+                <p>The organization rejects heroism as a guiding principle. Instead, it embraces functional necessity.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Primary Objective</h2>
+            <div class="section-content">
+                <p>The faction's overarching goal is to facilitate safe transition through the upcoming <strong>Royastella–Beeston Integration Event</strong>, while simultaneously preparing for an unknown future catastrophe linked to:</p>
+
+                <ul>
+                    <li>The <a href="../lore/lore-akashic-record.html" class="wiki-link">Akashic Record</a></li>
+                    <li>Mythic relic consolidation</li>
+                    <li>Destiny manipulation</li>
+                    <li>Convergent realm stability</li>
+                </ul>
+
+                <p><strong>Projected integration completion timeline:</strong> Approximately one year</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Known Membership</h2>
+
+            <div class="members-grid">
+                <a href="../characters/character-tiala-hartlight.html" class="member-card">
+                    <img src="../assets/characters/Tiala Hartlight.png" alt="Tiala Hartlight" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Tiala Hartlight</div>
+                        <div class="member-role">Founder / Strategic Director</div>
+                        <div class="member-function">Long-term convergence planning and Akashic pursuit</div>
+                    </div>
+                </a>
+
+                <a href="../characters/character-ji-lian-xia.html" class="member-card">
+                    <img src="../assets/characters/Jí lián Xiá.png" alt="Jí Lián Xiá" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Jí Lián Xiá</div>
+                        <div class="member-role">Stability Analyst / Tactical Support</div>
+                        <div class="member-function">Defensive contingency, observation, and selective engagement</div>
+                    </div>
+                </a>
+
+                <a href="../characters/character-claris-quies.html" class="member-card">
+                    <img src="../assets/characters/Claris Quies.png" alt="Claris Quies" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Claris Quies</div>
+                        <div class="member-role">Wildcard Operative / Emotional Catalyst</div>
+                        <div class="member-function">Adaptive improvisational combat and emotional reinforcement</div>
+                    </div>
+                </a>
+
+                <a href="../characters/character-velia-traicerem.html" class="member-card">
+                    <img src="../assets/characters/Velia Traicerem.png" alt="Velia Traicerem" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Velia Traicerem</div>
+                        <div class="member-role">External Observer / Cultural Integration Liaison</div>
+                        <div class="member-function">Interpersonal bridge between draconic consciousness and human social structure</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationship to Praxis Verax Affinas</h2>
+            <div class="section-content">
+                <p>Destiny's Penance represents both continuation and rejection of PVA ideology.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Praxis Verax Affinas</th>
+                            <th>Destiny's Penance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Expansionist</td>
+                            <td>Containment-focused</td>
+                        </tr>
+                        <tr>
+                            <td>Ideologically rigid</td>
+                            <td>Emotionally self-aware</td>
+                        </tr>
+                        <tr>
+                            <td>Large-scale operations</td>
+                            <td>Small elite unit</td>
+                        </tr>
+                        <tr>
+                            <td>Moral justification</td>
+                            <td>Moral acknowledgment</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>While PVA pursued destiny manipulation as inevitability, Destiny's Penance pursues it as responsibility.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Symbolism</h2>
+            <div class="section-content">
+                <p>The faction name reflects dual thematic meanings:</p>
+
+                <ul>
+                    <li><strong>Destiny</strong> represents inevitability and cosmic progression.</li>
+                    <li><strong>Penance</strong> represents acknowledgement of irreversible harm.</li>
+                </ul>
+
+                <p>Together, the name symbolizes a philosophy of moving forward while consciously bearing the weight of past devastation.</p>
+            </div>
+        </section>
+
+        <div class="warning-banner">
+            <div class="warning-icon">⚠</div>
+            <div>
+                <div class="warning-text">High Convergence Influence Faction</div>
+                <div class="warning-text">Moral Volatility Risk Level: Extreme</div>
+                <div class="warning-text">Multiversal Impact Potential: Undetermined</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

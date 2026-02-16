@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wentea Liso // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff; --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8; --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5); }
+        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
+        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
+        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
+        .back-link:hover { color: var(--accent-cyan); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
+        .form-toggle { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; padding: 20px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; }
+        .form-button { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 12px 24px; background: transparent; border: 2px solid rgba(233, 30, 99, 0.3); color: var(--text-dim); border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
+        .form-button:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+        .form-button.active { background: var(--secondary-pink); border-color: var(--secondary-pink); color: var(--dark-bg); box-shadow: var(--glow-pink); }
+        .character-form { display: none; }
+        .character-form.active { display: block; animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .character-header { display: grid; grid-template-columns: 400px 1fr; gap: 60px; margin-bottom: 60px; }
+        .character-visual { position: relative; }
+        .character-image { width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(233, 30, 99, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
+        .faction-logo { position: absolute; top: 16px; right: 16px; width: 80px; height: auto; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7)); }
+        .character-info { display: flex; flex-direction: column; justify-content: center; }
+        .character-name { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; line-height: 1.1; }
+        .character-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 32px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 24px; }
+        .stat-item { display: flex; flex-direction: column; }
+        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .stat-value { font-family: 'Archivo', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
+        .character-quote { margin-top: 32px; padding: 20px 24px; background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05)); border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif; font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
+        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 12px; padding: 32px; margin-bottom: 32px; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--accent-cyan); margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1rem; }
+        .section-content p { margin-bottom: 16px; }
+        .section-content ul { list-style: none; padding-left: 0; margin: 16px 0; }
+        .section-content li { padding-left: 24px; margin-bottom: 8px; position: relative; }
+        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); }
+        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3); transition: all 0.2s ease; }
+        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
+        .relationships-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
+        .relationship-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 16px; transition: all 0.3s ease; text-decoration: none; display: block; }
+        .relationship-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2); }
+        .relationship-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; margin-bottom: 4px; }
+        .relationship-type { font-size: 0.85rem; color: var(--text-dim); }
+        @media (max-width: 1024px) { .character-header { grid-template-columns: 1fr; gap: 40px; } .character-visual { max-width: 400px; margin: 0 auto; } .character-name { font-size: 2.5rem; } }
+        @media (max-width: 768px) { .form-toggle { flex-wrap: wrap; } .form-button { flex: 1; min-width: 120px; } .stats-grid { grid-template-columns: 1fr; } .content-section { padding: 24px; } }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
+    <div class="container">
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Civilian</button>
+            <button class="form-button" onclick="switchForm('dynast')">Starlit Dynast</button>
+        </div>
+
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Wentea Liso.png" alt="Wentea Liso" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+                <div class="character-info">
+                    <h1 class="character-name">Wentea Liso</h1>
+                    <p class="character-title">Fashion Icon • Model</p>
+                    <div class="stats-grid">
+                        <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">23 (Perceived)</span></div>
+                        <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">6'0" (183 cm)</span></div>
+                        <div class="stat-item"><span class="stat-label">Birth Date</span><span class="stat-value">Classified</span></div>
+                        <div class="stat-item"><span class="stat-label">Ethnicity</span><span class="stat-value">Latino</span></div>
+                        <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Orange</span></div>
+                        <div class="stat-item"><span class="stat-label">Occupation</span><span class="stat-value">Model / Fashion Designer</span></div>
+                        <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> (Secret)</span></div>
+                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span class="stat-value">Cool</span></div>
+                    </div>
+                    <div class="character-quote">"The world is a dark place. Be careful."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Wentea Liso exists as one of the most publicly visible yet personally unknowable members of Starlite 7th. She is internationally recognized as a fashion icon, commercial brand architect, and cultural trendsetter, yet almost no verifiable biographical data exists regarding her origins, family, or early life.</p>
+                    <p>Behind the manufactured public identity lies a paradoxical individual whose outward composure disguises profound absent-mindedness and wandering focus.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Public Persona</h3>
+                    <p>Wentea is widely perceived as:</p>
+                    <ul>
+                        <li>Impossibly calm</li>
+                        <li>Elegantly reserved</li>
+                        <li>Emotionally balanced</li>
+                        <li>Effortlessly sophisticated</li>
+                    </ul>
+                    <p>Her reputation is heavily curated by an extraordinarily effective management and protection network. This network has successfully maintained the illusion of deliberate, refined composure while concealing her genuine tendencies.</p>
+                    <h3 class="section-subtitle">Private Reality</h3>
+                    <ul>
+                        <li>Highly absent-minded</li>
+                        <li>Prone to drifting attention</li>
+                        <li>Socially aloof even among allies</li>
+                        <li>Surprisingly unstructured in personal habits</li>
+                    </ul>
+                    <p>Despite her massive global recognition, verified information about her past remains scarce. Known facts are limited to: she originates from foreign territories, her family remains there with whom she has lost contact, and her public identity may not reflect her original name or history.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Fashion Career</h2>
+                <div class="section-content">
+                    <p>Publicly, Wentea operates as an elite fashion model and founder of a globally successful clothing line. She frequently works with <a href="character-kayre.html" class="wiki-link">Kayre</a>, modeling their designs.</p>
+                    <p>Her handlers maintain an unprecedented level of narrative control over her public presence.</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="dynast-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Starlit Dynast.png" alt="Starlit Dynast" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+                <div class="character-info">
+                    <h1 class="character-name">Starlit Dynast</h1>
+                    <p class="character-title">Endurance Specialist</p>
+                    <div class="stats-grid">
+                        <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Momentum Finisher</span></div>
+                        <div class="stat-item"><span class="stat-label">Elemental Core</span><span class="stat-value">Water</span></div>
+                        <div class="stat-item"><span class="stat-label">Casting Language</span><span class="stat-value">Spanish</span></div>
+                        <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Celestial Regnant (Vajra)</span></div>
+                        <div class="stat-item"><span class="stat-label">Starlight Blessing</span><span class="stat-value">Super Speed</span></div>
+                        <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Relentless Assault</span></div>
+                    </div>
+                    <div class="character-quote">"Momentum is inevitability."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Profile</h2>
+                <div class="section-content">
+                    <p>As the <strong>Starlit Dynast</strong>, Wentea undergoes a near-total personality inversion. The distracted, floating demeanor is replaced with hyper-focused tactical awareness, relentless offensive momentum, controlled emotional intensity, and absolute battlefield clarity.</p>
+                    <p>Dynast is widely regarded as the most psychologically immovable member of the team. Situations that would overwhelm or destabilize other Runic Knights frequently serve as conditions in which she excels.</p>
+                    <h3 class="section-subtitle">Celestial Regnant</h3>
+                    <p>A Runic vajra designed for overwhelming, sustained offensive assault.</p>
+                    <ul>
+                        <li>Functions as both piercing and crushing instrument</li>
+                        <li>Channels rotational momentum into cascading multi-strike sequences</li>
+                        <li>Amplifies velocity-based combat styles</li>
+                        <li>Generates localized storm-like impact patterns during high-speed maneuvering</li>
+                    </ul>
+                    <p>When combined with Dynast's mobility, Celestial Regnant transforms her into a continuous vortex of destructive force capable of dismantling entire enemy formations through rotational strike patterns.</p>
+                    <h3 class="section-subtitle">Starlight Blessing: Super Speed</h3>
+                    <p><strong>Function:</strong> Grants extreme acceleration in both physical movement and cognitive processing.</p>
+                    <p><strong>Physical Effects:</strong></p>
+                    <ul>
+                        <li>Movement velocity far exceeding standard Runic limits</li>
+                        <li>Rapid strike chaining with negligible recovery windows</li>
+                        <li>Near-instantaneous repositioning across combat zones</li>
+                    </ul>
+                    <p><strong>Cognitive Effects:</strong></p>
+                    <ul>
+                        <li>Overclocked neural processing</li>
+                        <li>Perceptual dilation that produces the sensation of slowed external time</li>
+                        <li>Real-time tactical recalibration mid-combat</li>
+                    </ul>
+                    <p>This dual enhancement allows Dynast to operate as both an executioner and battlefield analyst simultaneously. Opponents often perceive her attacks as unavoidable due to the absence of traditional reaction windows.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Tactical Role</h2>
+                <div class="section-content">
+                    <p>Within Starlite 7th, Dynast serves as:</p>
+                    <ul>
+                        <li>The team's endurance specialist</li>
+                        <li>A momentum-based finisher</li>
+                        <li>A strategic stabilizer during chaotic engagements</li>
+                    </ul>
+                    <p>Her calm authority often offsets the emotional volatility present among other members.</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            <div class="relationships-grid">
+                <a href="character-itami-serafino.html" class="relationship-card">
+                    <div class="relationship-name">Itami Serafino</div>
+                    <div class="relationship-type">Leader / Starlit Empress</div>
+                </a>
+                <a href="character-kayre.html" class="relationship-card">
+                    <div class="relationship-name">Kayre</div>
+                    <div class="relationship-type">Friend / Designer</div>
+                </a>
+                <a href="character-marate-jalo.html" class="relationship-card">
+                    <div class="relationship-name">Marate Jalo</div>
+                    <div class="relationship-type">Mentor / Starlit Alpha</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> The Enigma</p>
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>Identity constructed through performance and concealment</li>
+                    <li>The calm surface masking internal fragmentation</li>
+                    <li>Nobility expressed through endurance rather than leadership</li>
+                    <li>Momentum as inevitability</li>
+                    <li>The tension between chosen identity and buried origin</li>
+                </ul>
+                <p>Her narrative presence introduces questions regarding authenticity, manufactured persona, and whether identity can remain stable when built upon curated illusion.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> Wentea — phonetically evokes fluidity and movement, reinforcing water alignment and shifting identity themes; Liso — Spanish for "smooth" or "flat," symbolizing emotional stillness and blank identity presentation</li>
+                    <li><strong>Hair:</strong> Medium-length brown hair with practical layering; diamond-shaped gold and teal hair ornament</li>
+                    <li><strong>Appearance:</strong> Tall streamlined athletic frame; orange irises providing striking contrast</li>
+                    <li><strong>Design Notes:</strong> Forest green tunic, layered bronze chest armor with gold filigree, ceremonial green drapes with diamond ornamentation</li>
+                    <li><strong>Biography Mystery:</strong> Almost no verifiable biographical data exists; origins, family, and early life remain classified</li>
+                    <li><strong>Personality Inversion:</strong> Complete shift from scattered civilian to hyper-focused combatant</li>
+                    <li><strong>Public Identity:</strong> May not reflect original name or history</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => form.classList.remove('active'));
+            document.querySelectorAll('.form-button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(formName + '-form').classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

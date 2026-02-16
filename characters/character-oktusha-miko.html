@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oktusha Miko // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
+
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
+
+        .character-form {
+            display: none;
+        }
+
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-container {
+            position: relative;
+        }
+
+        .heart-symbol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: auto;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../characters.html" class="back-link">← All Characters</a>
+    </nav>
+
+    <div class="container">
+        <!-- Form Toggle -->
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Civilian</button>
+            <button class="form-button" onclick="switchForm('rhythm')">Heart Rhythm</button>
+        </div>
+
+        <!-- CIVILIAN FORM -->
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Oktusha Miko.png" alt="Oktusha Miko" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Oktusha Miko</h1>
+                    <p class="character-title">Civilian Identity</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Oktusha heart.png" alt="Oktusha's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Age</span>
+                                <span class="stat-value">14 → 16</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Height</span>
+                                <span class="stat-value">5'4" → 5'8"</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Birth Date</span>
+                                <span class="stat-value">August 2</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Ethnicity</span>
+                                <span class="stat-value">Indigenous American (Choctaw)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Hair</span>
+                                <span class="stat-value">Light pink, side ponytail</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Eyes</span>
+                                <span class="stat-value">Light gray-blue</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Faction</span>
+                                <span class="stat-value"><a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a></span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Twin</span>
+                                <span class="stat-value"><a href="character-omba-miko.html" class="wiki-link">Omba Miko</a> (Older)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "I don't think I can hold back anymore!"
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Oktusha Miko is physically expressive and kinetic—constantly in motion even at rest. Raised in a culture that prizes leadership and action, Oktusha internalized movement as a form of responsibility rather than expression. She shifts weight, taps rhythms, and paces naturally, finding clarity through motion.</p>
+
+                    <p>Her athletic build and exceptional stamina make her the physical anchor of <a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a>, ensuring the team maintains momentum through combat and emotional strain. Where others deliberate, Oktusha acts—trusting that action creates clarity.</p>
+
+                    <p>Younger twin to <a href="character-omba-miko.html" class="wiki-link">Omba Miko</a>, whose contrasting stillness and analytical nature complements Oktusha's kinetic focus. Oktusha is portrayed as physically expressive and kinetic, often shifting weight, tapping, or pacing. Her design emphasizes motion and balance rather than elegance or ornamentation.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Energetic:</strong> Perpetually in motion, unable to remain still</li>
+                        <li><strong>Focused:</strong> Channels energy into purposeful action</li>
+                        <li><strong>Grounded:</strong> Physical presence anchors the team</li>
+                        <li><strong>Instinctive:</strong> Trusts gut reactions over analysis</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Strengths</h3>
+                    <ul>
+                        <li>Consistency in performance and reliability</li>
+                        <li>Exceptional teamwork and synchronization</li>
+                        <li>Physical intuition and spatial awareness</li>
+                        <li>High stamina and endurance</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Flaws & Internal Conflicts</h3>
+                    <ul>
+                        <li>Impatience with abstraction and theoretical discussion</li>
+                        <li>Difficulty articulating emotions verbally</li>
+                        <li>Struggles when forced to remain still or inactive</li>
+                        <li>Sometimes acts before thinking through consequences</li>
+                    </ul>
+
+                    <p><strong>Core Fear:</strong> Losing control of momentum; being unable to move forward</p>
+                    <p><strong>Core Motivation:</strong> Keep the team moving forward through action</p>
+                    <p><strong>Core Value:</strong> Action creates clarity—movement is meaning</p>
+                    <p><strong>Moral Alignment:</strong> Neutral Good</p>
+                    <p><strong>Emotional Triggers:</strong> Silence, hesitation, stagnation</p>
+                    <p><strong>Habits:</strong> Foot tapping; rhythmic counting under stress</p>
+                    <p><strong>Internal Question:</strong> Can motion substitute for meaning?</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Cultural Background</h2>
+                <div class="section-content">
+                    <p>Oktusha's name and lineage draw from <strong>Choctaw linguistic roots</strong>, emphasizing leadership and environmental rhythm. Her cultural background prizes action and decisive leadership, shaping her approach to both combat and interpersonal relationships.</p>
+
+                    <p>Raised in Beestonian magical society structured around Lúmenai resonance and emotional harmonics, Oktusha represents the physical manifestation of rhythm and tempo within the team's magical framework.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Formative Events</h2>
+                <div class="section-content">
+                    <ul>
+                        <li>Her earliest successful transformation into Heart Rhythm coincided with the team's first fully synchronized Lúmenai manifestation</li>
+                        <li>Informal combat training through repeated field engagements during Beeston's war</li>
+                        <li>Development of physical conditioning and stamina through sustained magical operations</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- HEART RHYTHM FORM -->
+        <div id="rhythm-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Heart Rhythm.png" alt="Heart Rhythm" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Heart Rhythm</h1>
+                    <p class="character-title">Vanguard Combatant</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Oktusha heart.png" alt="Oktusha's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Role</span>
+                                <span class="stat-value">Vanguard / Tempo Keeper</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Essentia</span>
+                                <span class="stat-value">Kórelis (Martial)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Power Level</span>
+                                <span class="stat-value">Moderate, highly consistent</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Combat Style</span>
+                                <span class="stat-value">High-speed melee</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Special Ability</span>
+                                <span class="stat-value">Tempo Control</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Weapon</span>
+                                <span class="stat-value">Tempo Sever</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "Keep moving. Don't stop."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Heart Rhythm Powers</h2>
+                <div class="section-content">
+                    <p>As <strong>Heart Rhythm</strong>, Oktusha transforms motion into magical output, converting speed, impact, and rhythm into destructive force. She specializes in the Martial Arts entwinement <strong>Kórelis</strong>, channeling kinetic energy through precise physical strikes.</p>
+
+                    <p>Oktusha functions as Heart Melody's physical and temporal anchor, ensuring that the team's magic remains synchronized during combat and emotional strain.</p>
+
+                    <h3 class="section-subtitle">Abilities</h3>
+                    <ul>
+                        <li><strong>Temporal Rhythm Stabilization:</strong> Synchronizes team magic through consistent tempo</li>
+                        <li><strong>Repetition Amplification:</strong> Builds power through sustained patterns</li>
+                        <li><strong>Momentum Chaining:</strong> Converts continuous movement into escalating force</li>
+                        <li><strong>Beat Lock:</strong> Locks enemies into predictable patterns</li>
+                        <li><strong>Tempo Drive:</strong> Accelerates team casting speed</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Limitations</h3>
+                    <ul>
+                        <li>Reduced effectiveness when isolated from team</li>
+                        <li>Vulnerable to disruption-based attacks that break rhythm</li>
+                        <li>Requires continuous motion to maintain power</li>
+                    </ul>
+
+                    <p><strong>Philosophy:</strong> Honor through struggle and exhilaration—combat as expression of purpose</p>
+
+                    <p><strong>Combat Role:</strong> Close- to mid-range, movement-driven combat emphasizing flow and continuity. Oktusha rarely leads scenes but prevents the team from collapsing under pressure by maintaining tempo and momentum.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">The Stabilizer</h2>
+                <div class="section-content">
+                    <p>Oktusha serves as Heart Melody's stabilizer and tempo-keeper, anchoring Lúmenai manifestations through cadence, repetition, and physical timing. Her role becomes even more critical following losses within the team—when emotional cohesion falters, physical rhythm provides structure.</p>
+
+                    <p>Viewed as dependable and tireless, Oktusha is rarely credited despite her critical role. She operates as the team's metronome, the beat that keeps everyone synchronized even when everything else falls apart.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Shared Sections -->
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            
+            <div class="relationships-grid">
+                <a href="character-omba-miko.html" class="relationship-card">
+                    <div class="relationship-name">Omba Miko</div>
+                    <div class="relationship-type">Older Twin</div>
+                </a>
+
+                <a href="character-pyara-dana.html" class="relationship-card">
+                    <div class="relationship-name">Pyara Dana</div>
+                    <div class="relationship-type">Leader / Heart Aria</div>
+                </a>
+
+                <a href="character-mahana-sahi.html" class="relationship-card">
+                    <div class="relationship-name">Mahana Sahi</div>
+                    <div class="relationship-type">Successor / Ally</div>
+                </a>
+
+                <a href="character-kali-dana.html" class="relationship-card">
+                    <div class="relationship-name">Kali Dana</div>
+                    <div class="relationship-type">Teammate / Heart Seria</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> The Stabilizer</p>
+                <p><strong>Story Function:</strong> Support / Anchor</p>
+                <p><strong>Character Arc:</strong> Learning to articulate purpose beyond motion</p>
+                <p><strong>Arc Status:</strong> Evolving</p>
+                
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>Rhythm as order and meaning</li>
+                    <li>Continuity through repetition</li>
+                    <li>Action as clarity</li>
+                    <li>The reliability of physical presence when emotional structures fail</li>
+                </ul>
+
+                <p><strong>Foil to:</strong> <a href="character-omba-miko.html" class="wiki-link">Omba Miko</a> — motion versus stillness; instinct versus analysis</p>
+
+                <p><strong>Narrative Function:</strong> Oktusha rarely leads scenes but prevents collapse. She represents the necessity of consistent, unglamorous work that keeps teams functioning.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> Oktusha — Choctaw for "snow"; Miko — Choctaw for "chief"</li>
+                    <li><strong>Design Notes:</strong> Built around motion-first silhouettes; asymmetrical design emphasizes dynamic movement</li>
+                    <li><strong>Symbolism:</strong> Rhythm as order; percussion as foundation; snow as persistent accumulation</li>
+                    <li><strong>Inspiration:</strong> Musical tempo and athletic flow; the drummer who keeps time</li>
+                    <li><strong>Author Notes:</strong> Oktusha rarely leads scenes but prevents collapse—designed as the team's metronome</li>
+                    <li><strong>Continuity:</strong> Height increase post-time skip (5'4" → 5'8") reflects physical maturation and growth</li>
+                    <li><strong>Reputation:</strong> Reliable, understated; often underestimated but critically essential</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            document.querySelectorAll('.form-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const selectedForm = document.getElementById(formName + '-form');
+            selectedForm.classList.add('active');
+
+            event.target.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

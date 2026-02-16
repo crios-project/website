@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ami Hartbreak // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Background effects */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        /* Header Navigation */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .spoiler-toggle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .spoiler-toggle select {
+            margin-left: 8px;
+            padding: 4px 8px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-primary);
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Character Header */
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Character Image Section */
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-heart {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: auto;
+            opacity: 0.9;
+        }
+
+        /* Character Info Section */
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        /* Wiki Links */
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        /* Spoiler Section */
+        .spoiler-section {
+            border: 2px dashed rgba(233, 30, 99, 0.4);
+            background: rgba(233, 30, 99, 0.05);
+            padding: 24px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+
+        .spoiler-warning {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .spoiler-content {
+            display: none;
+        }
+
+        .spoiler-content.revealed {
+            display: block;
+        }
+
+        .reveal-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            padding: 10px 20px;
+            background: var(--dark-panel);
+            border: 1px solid var(--secondary-pink);
+            color: var(--secondary-pink);
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .reveal-button:hover {
+            background: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
+
+        /* Relationships Grid */
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="characters.html" class="back-link">← All Characters</a>
+        <div class="spoiler-toggle">
+            Spoilers: 
+            <select id="spoiler-level">
+                <option value="none">Spoiler-Free</option>
+                <option value="mid">Mid-Story</option>
+                <option value="full">Full Story</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Character Header -->
+        <section class="character-header">
+            <div class="character-visual">
+                <img src="../assets/characters/Ami Breaklight.png" height="30%" alt="Ami Hartbreak" class="character-image">
+                <img src="../assets/icons/Reason Theory Icon.png" alt="Reason Theory" class="faction-logo">
+                <img src="../assets/hearts/Ami heart.png" alt="Ami's Heart Symbol" class="character-heart">
+            </div>
+
+            <div class="character-info">
+                <h1 class="character-name">Ami Hartbreak</h1>
+                <p class="character-title">Co-Founder of Reason Theory</p>
+
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Age</span>
+                        <span class="stat-value">15</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Height</span>
+                        <span class="stat-value">5'1"</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Birth Date</span>
+                        <span class="stat-value">April 10</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Ethnic Background</span>
+                        <span class="stat-value">Black</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Hair</span>
+                        <span class="stat-value">Red to amaranth gradient</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Eyes</span>
+                        <span class="stat-value">Turquoise</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Key Attribute</span>
+                        <span class="stat-value">Graceful</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Faction</span>
+                        <span class="stat-value"><a href="faction-reason-theory.html" class="wiki-link">Reason Theory</a></span>
+                    </div>
+                </div>
+
+                <div class="character-quote">
+                    "If you're going to make an entrance, make sure they never forget it."
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p>Ami Hartbreak carries herself with effortless elegance paired with a mischievous, playful disposition. Once closely tied to <a href="#" class="wiki-link">Praxis Verax Affinas</a>, Ami distanced herself following personal conflict and has since redefined herself through independence, style, and calculated irreverence. While she projects poise and approachability, her playful subversion often reveals itself through elaborate but harmless pranks.</p>
+            </div>
+        </section>
+
+        <!-- Personality Section -->
+        <section class="content-section">
+            <h2 class="section-title">Personality</h2>
+            <div class="section-content">
+                <p>Ami blends charm, composure, and humor into a carefully balanced social presence. She rarely appears flustered or hurried, maintaining a naturally refined aura that draws others toward her. Her easygoing demeanor makes her highly approachable, though she uses this trust as the perfect setup for her mischievous tendencies.</p>
+                
+                <p>Her sense of humor leans toward theatrical irony and lighthearted manipulation. While she enjoys creating chaos for entertainment, she draws a firm personal boundary against causing genuine harm. Her pranks are designed to surprise, embarrass, or inconvenience — never to damage or destroy.</p>
+
+                <h3 class="section-subtitle">Behavioral Traits</h3>
+                <ul>
+                    <li>Maintains impeccable fashion and visual presentation with little visible effort</li>
+                    <li>Uses social charisma as both genuine expression and tactical misdirection</li>
+                    <li>Demonstrates refined composure even while orchestrating elaborate pranks</li>
+                    <li>Exhibits playful defiance toward authority and expectations</li>
+                    <li>Maintains strong emotional independence, often masking deeper feelings behind humor</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Identity Section -->
+        <section class="content-section">
+            <h2 class="section-title">Identity and Name Change</h2>
+            <div class="section-content">
+                <p>Ami's adoption of the surname <strong>Hartbreak</strong> was a deliberate act of provocation directed toward <a href="#" class="wiki-link">Tiala Hartlight</a> following their falling out. The change reflects both her willingness to weaponize symbolism and her inclination toward theatrical personal expression. Despite its outwardly comedic nature, the name represents unresolved emotional complexity beneath her carefree exterior.</p>
+            </div>
+        </section>
+
+        <!-- Spoiler Section: Secret Identity -->
+        <div class="spoiler-section" data-spoiler-level="mid">
+            <div class="spoiler-warning">⚠ Nexsicon Arc Spoiler</div>
+            <button class="reveal-button" onclick="revealSpoiler(this)">Reveal Identity</button>
+            <div class="spoiler-content">
+                <h3 class="section-subtitle">Secret Identity: Heart Sonata</h3>
+                <p>Ami was secretly <strong>Aran Letale</strong>, a member of the <a href="#" class="wiki-link">Heart Melody</a> collective operating under the magical form <strong>Heart Sonata</strong>. This identity remained concealed until the revelation following <a href="#" class="wiki-link">Praxis Verax Affinas</a>' collapse during the Nexsicon Arc.</p>
+            </div>
+        </div>
+
+        <!-- Relationships Section -->
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            
+            <h3 class="section-subtitle">Alliances</h3>
+            <div class="section-content">
+                <p><strong>Windi Lightfall:</strong> After leaving <a href="#" class="wiki-link">Praxis Verax Affinas</a>, Ami formed an alliance with <a href="#" class="wiki-link">Windi Lightfall</a>. Their partnership centers on disrupting the ambitions of their respective siblings. Ami's motivations are rooted in amusement and rebellion, whereas Windi's reasons remain largely undisclosed, creating a partnership built on asymmetrical intent.</p>
+            </div>
+
+            <h3 class="section-subtitle">Conflict</h3>
+            <div class="section-content">
+                <p><strong>Tiala Hartlight:</strong> Ami and Tiala's relationship deteriorated following <a href="#" class="wiki-link">Xīwàng Tiānshàng</a>'s disappearance, culminating in a significant emotional rupture. While Ami outwardly treats the conflict with humor and irreverence, her continued symbolic provocations suggest lingering emotional investment beneath her composed exterior.</p>
+            </div>
+
+            <div class="relationships-grid">
+                <a href="character-tiala.html" class="relationship-card">
+                    <div class="relationship-name">Tiala Hartlight</div>
+                    <div class="relationship-type">Sibling / Rival</div>
+                </a>
+                <a href="character-windi.html" class="relationship-card">
+                    <div class="relationship-name">Windi Lightfall</div>
+                    <div class="relationship-type">Ally / Partner</div>
+                </a>
+                <a href="character-xiwang.html" class="relationship-card">
+                    <div class="relationship-name">Xīwàng Tiānshàng</div>
+                    <div class="relationship-type">Connected</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Philosophy Section -->
+        <section class="content-section">
+            <h2 class="section-title">Personal Philosophy</h2>
+            <div class="section-content">
+                <p>Ami believes life should be enjoyed with style, wit, and controlled unpredictability. She values freedom of expression and views rigid seriousness as something to be gently mocked rather than confronted directly.</p>
+            </div>
+        </section>
+
+        <!-- Social Dynamics Section -->
+        <section class="content-section">
+            <h2 class="section-title">Social Dynamics</h2>
+            <div class="section-content">
+                <p>Ami is widely admired and socially magnetic. Her natural elegance and relaxed confidence cause others to gravitate toward her easily. However, acquaintances often find themselves unexpectedly targeted by her pranks, resulting in a reputation that balances admiration with cautious wariness.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Spoiler system
+        function revealSpoiler(button) {
+            const spoilerSection = button.closest('.spoiler-section');
+            const content = spoilerSection.querySelector('.spoiler-content');
+            content.classList.add('revealed');
+            button.style.display = 'none';
+        }
+
+        // Global spoiler level control
+        document.getElementById('spoiler-level').addEventListener('change', function(e) {
+            const level = e.target.value;
+            localStorage.setItem('criosSpoilerLevel', level);
+            updateSpoilerVisibility(level);
+        });
+
+        function updateSpoilerVisibility(level) {
+            const spoilerSections = document.querySelectorAll('.spoiler-section');
+            spoilerSections.forEach(section => {
+                const requiredLevel = section.getAttribute('data-spoiler-level');
+                if (level === 'full' || (level === 'mid' && requiredLevel === 'mid')) {
+                    section.style.display = 'block';
+                } else if (level === 'none') {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // Load saved spoiler preference
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedLevel = localStorage.getItem('criosSpoilerLevel') || 'none';
+            document.getElementById('spoiler-level').value = savedLevel;
+            updateSpoilerVisibility(savedLevel);
+        });
+    </script>
+</body>
+</html>

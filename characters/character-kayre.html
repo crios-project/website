@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayre // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff; --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8; --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5); }
+        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
+        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
+        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
+        .back-link:hover { color: var(--accent-cyan); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
+        .form-toggle { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; padding: 20px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; }
+        .form-button { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 12px 24px; background: transparent; border: 2px solid rgba(233, 30, 99, 0.3); color: var(--text-dim); border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
+        .form-button:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+        .form-button.active { background: var(--secondary-pink); border-color: var(--secondary-pink); color: var(--dark-bg); box-shadow: var(--glow-pink); }
+        .character-form { display: none; }
+        .character-form.active { display: block; animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .character-header { display: grid; grid-template-columns: 400px 1fr; gap: 60px; margin-bottom: 60px; }
+        .character-visual { position: relative; }
+        .character-image { width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(233, 30, 99, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
+        .faction-logo { position: absolute; top: 16px; right: 16px; width: 80px; height: auto; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7)); }
+        .character-info { display: flex; flex-direction: column; justify-content: center; }
+        .character-name { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; line-height: 1.1; }
+        .character-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 32px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 24px; }
+        .stat-item { display: flex; flex-direction: column; }
+        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .stat-value { font-family: 'Archivo', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
+        .character-quote { margin-top: 32px; padding: 20px 24px; background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05)); border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif; font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
+        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 12px; padding: 32px; margin-bottom: 32px; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--accent-cyan); margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1rem; }
+        .section-content p { margin-bottom: 16px; }
+        .section-content ul { list-style: none; padding-left: 0; margin: 16px 0; }
+        .section-content li { padding-left: 24px; margin-bottom: 8px; position: relative; }
+        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); }
+        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3); transition: all 0.2s ease; }
+        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
+        .relationships-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
+        .relationship-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 16px; transition: all 0.3s ease; text-decoration: none; display: block; }
+        .relationship-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2); }
+        .relationship-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; margin-bottom: 4px; }
+        .relationship-type { font-size: 0.85rem; color: var(--text-dim); }
+        @media (max-width: 1024px) { .character-header { grid-template-columns: 1fr; gap: 40px; } .character-visual { max-width: 400px; margin: 0 auto; } .character-name { font-size: 2.5rem; } }
+        @media (max-width: 768px) { .form-toggle { flex-wrap: wrap; } .form-button { flex: 1; min-width: 120px; } .stats-grid { grid-template-columns: 1fr; } .content-section { padding: 24px; } }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
+    <div class="container">
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Civilian</button>
+            <button class="form-button" onclick="switchForm('rex')">Starlit Rex</button>
+        </div>
+
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Kayre.png" alt="Kayre" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+                <div class="character-info">
+                    <h1 class="character-name">Kayre</h1>
+                    <p class="character-title">Fashion Designer • Minimalist Visionary</p>
+                    <div class="stats-grid">
+                        <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">20</span></div>
+                        <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">6'0" (183 cm)</span></div>
+                        <div class="stat-item"><span class="stat-label">Birth Date</span><span class="stat-value">June 18</span></div>
+                        <div class="stat-item"><span class="stat-label">Ethnicity</span><span class="stat-value">Thai</span></div>
+                        <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Gold</span></div>
+                        <div class="stat-item"><span class="stat-label">Occupation</span><span class="stat-value">Fashion Designer</span></div>
+                        <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> (Secret)</span></div>
+                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span class="stat-value">Withdrawn</span></div>
+                    </div>
+                    <div class="character-quote">"Okay. This is what we're gonna do."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Kayre is a globally recognized fashion designer known for minimalist brilliance, unconventional design philosophy, and an intensely private personal life. Their reserved demeanor contrasts with their extraordinary social perceptiveness, allowing them to navigate public life with calculated subtlety.</p>
+                    <p>Unknown to the public, Kayre joined <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> as the last member, quickly establishing themselves as an indispensable battlefield coordinator through telepathic networking.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Introverted:</strong> Strong preference for solitary environments</li>
+                        <li><strong>Observant:</strong> Exceptional at reading microexpressions and nonverbal communication</li>
+                        <li><strong>Socially Awkward:</strong> Marked difficulty with direct interaction</li>
+                        <li><strong>Creatively Focused:</strong> Finds clarity through design work</li>
+                    </ul>
+                    <h3 class="section-subtitle">Visual Presence</h3>
+                    <ul>
+                        <li>Neutral posture with minimal extraneous motion</li>
+                        <li>Reduced facial expressiveness</li>
+                        <li>Slight downward head tilt during observation</li>
+                        <li>Slow, deliberate movement patterns</li>
+                    </ul>
+                    <p>This visual restraint contributes to their reputation as quietly intense and difficult to read.</p>
+                    <p><strong>Core Value:</strong> Communication as power; observation as protection</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Fashion Career</h2>
+                <div class="section-content">
+                    <p>Kayre's professional reputation is built on innovation through restraint. Their fashion work is widely praised for structural elegance, subtle emotional storytelling, and avant-garde layering techniques.</p>
+                    <p>Their career naturally accommodates their personality, as fashion design allows extensive independence from public-facing obligations. They maintain professional distribution through a partnership with Day Enterprises, arranged through their friendship with <a href="character-daeon-liang.html" class="wiki-link">Daeon Liàng</a>.</p>
+                    <p>Kayre also maintains a friendly working relationship with <a href="character-wentea-liso.html" class="wiki-link">Wentea Liso</a>, who frequently models their designs. Persistent public speculation surrounds the interpersonal dynamics among Kayre, Wentea, and Daeon, though none of the individuals involved acknowledge such rumors.</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="rex-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Starlit Rex.png" alt="Starlit Rex" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+                <div class="character-info">
+                    <h1 class="character-name">Starlit Rex</h1>
+                    <p class="character-title">Telepathic Coordinator</p>
+                    <div class="stats-grid">
+                        <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Strategic Nerve Center</span></div>
+                        <div class="stat-item"><span class="stat-label">Elemental Core</span><span class="stat-value">Water</span></div>
+                        <div class="stat-item"><span class="stat-label">Casting Language</span><span class="stat-value">Greek</span></div>
+                        <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Lionheart Radiance (Arm Cannon)</span></div>
+                        <div class="stat-item"><span class="stat-label">Starlight Blessing</span><span class="stat-value">Telepathy</span></div>
+                        <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Overwatch / Precision Elimination</span></div>
+                    </div>
+                    <div class="character-quote">"Everyone, hold position. I've got the shot."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Profile</h2>
+                <div class="section-content">
+                    <p>The <strong>Starlit Rex</strong> serves as the strategic nerve center of Starlite 7th, providing seamless mental communication and long-range precision support.</p>
+                    <h3 class="section-subtitle">Lionheart Radiance</h3>
+                    <p>A high-output charged arm cannon designed for long-range engagement and precision elimination.</p>
+                    <ul>
+                        <li>Homing energy discharge</li>
+                        <li>Variable charge intensity</li>
+                        <li>Long-distance targeting support</li>
+                    </ul>
+                    <p>Rex utilizes the weapon as both a sniper platform and a surgical strike tool, often coordinating attacks through telepathic synchronization with teammates.</p>
+                    <h3 class="section-subtitle">Starlight Blessing: Telepathy</h3>
+                    <p><strong>Function:</strong> Creates a shared mental network linking members of Starlite 7th.</p>
+                    <ul>
+                        <li>Instantaneous strategic communication</li>
+                        <li>Real-time emotional and sensory feedback sharing</li>
+                        <li>Coordinated multi-angle combat execution</li>
+                        <li>Enhanced group reaction speed</li>
+                    </ul>
+                    <p>The Blessing dramatically reduces communication latency and enables near-perfect tactical cohesion during combat scenarios.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Tactical Role</h2>
+                <div class="section-content">
+                    <p>Rex typically:</p>
+                    <ul>
+                        <li>Maintains rear-line positioning</li>
+                        <li>Provides tactical overwatch</li>
+                        <li>Eliminates isolated or high-priority targets</li>
+                        <li>Directs team synchronization through telepathic networking</li>
+                    </ul>
+                    <p>Unlike frontline members, Rex prioritizes efficiency, battlefield awareness, and strategic continuity over direct confrontation. Their combat approach emphasizes outcome certainty and energy conservation.</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            <div class="relationships-grid">
+                <a href="character-itami-serafino.html" class="relationship-card">
+                    <div class="relationship-name">Itami Serafino</div>
+                    <div class="relationship-type">Leader / Starlit Empress</div>
+                </a>
+                <a href="character-daeon-liang.html" class="relationship-card">
+                    <div class="relationship-name">Daeon Liàng</div>
+                    <div class="relationship-type">Friend / Business Partner</div>
+                </a>
+                <a href="character-wentea-liso.html" class="relationship-card">
+                    <div class="relationship-name">Wentea Liso</div>
+                    <div class="relationship-type">Friend / Model</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> The Coordinator</p>
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>Communication as power</li>
+                    <li>Observation as protection</li>
+                    <li>Emotional subtlety as strength</li>
+                    <li>Leadership through coordination rather than command</li>
+                    <li>Unity over individual dominance</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> Kayre — A mononym emphasizing individuality and abstraction, aligning with their reserved identity and artistic philosophy</li>
+                    <li><strong>Design Notes:</strong> Streetwear meets tactical practicality; loose off-white shirt, high-layered dark scarf, white headphones, studded wristband, heavy black boots</li>
+                    <li><strong>Hair:</strong> Short to medium red-orange hair with angular bangs</li>
+                    <li><strong>Appearance:</strong> Androgynous silhouette; tall, lean frame; half-lidded gold eyes</li>
+                    <li><strong>Fashion Philosophy:</strong> Minimalist brilliance; structural elegance; subtle emotional storytelling</li>
+                    <li><strong>Joined Last:</strong> Most recent addition to Starlite 7th, but became indispensable immediately</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => form.classList.remove('active'));
+            document.querySelectorAll('.form-button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(formName + '-form').classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

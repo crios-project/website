@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyara Dana // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
+
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
+
+        .character-form {
+            display: none;
+        }
+
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-container {
+            position: relative;
+        }
+
+        .heart-symbol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: auto;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../characters.html" class="back-link">← All Characters</a>
+    </nav>
+
+    <div class="container">
+        <!-- Form Toggle -->
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Civilian</button>
+            <button class="form-button" onclick="switchForm('aria')">Heart Aria</button>
+            <button class="form-button" onclick="switchForm('beat')">Heart Beat</button>
+            <button class="form-button" onclick="switchForm('pulse')">Concerto Pulse</button>
+        </div>
+
+        <!-- CIVILIAN FORM -->
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Pyara Dana.png" alt="Pyara Dana" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Pyara Dana</h1>
+                    <p class="character-title">Civilian Identity</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Pyara heart.png" alt="Pyara's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Age</span>
+                                <span class="stat-value">14 (at death)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Height</span>
+                                <span class="stat-value">5'2" (158 cm)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Birth Date</span>
+                                <span class="stat-value">October 26</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Ethnicity</span>
+                                <span class="stat-value">Indian</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Hair</span>
+                                <span class="stat-value">Dual-color black & purple</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Eyes</span>
+                                <span class="stat-value">Light green</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Faction</span>
+                                <span class="stat-value"><a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a></span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Status</span>
+                                <span class="stat-value">Deceased</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "This is not how this ends."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Pyara Dana is the emotional heart and original leader of the <a href="../factions/faction-heart-melody.html" class="wiki-link">Lovely Hearts</a>. Bright, optimistic, and seemingly unshakable, Pyara approaches life with the firm belief that things will work out simply because they must. Her carefree demeanor masks an immense well of natural magical power, much of which she wields instinctively rather than through conscious control.</p>
+
+                    <p>Pyara's unwavering trust in others—especially her older sister <a href="character-kali-dana.html" class="wiki-link">Kali</a>—defines her relationships. She inspires loyalty not through command, but through joy. To Pyara, protecting her friends is as natural as breathing, and she never considers the possibility of failure.</p>
+
+                    <p>In civilian form, Pyara possessed an unassuming physical presence, contrasted sharply by the overwhelming luminosity of her transformed states.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Compassionate:</strong> Deeply empathetic and emotionally attuned to others</li>
+                        <li><strong>Resolute:</strong> Unwavering in commitments and beliefs</li>
+                        <li><strong>Self-sacrificing:</strong> Places others' wellbeing above her own without hesitation</li>
+                        <li><strong>Joyful:</strong> Approaches challenges with infectious optimism</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Strengths</h3>
+                    <ul>
+                        <li>Natural leadership through emotional intelligence</li>
+                        <li>Ability to inspire and stabilize her team</li>
+                        <li>Moral clarity in difficult situations</li>
+                        <li>Instinctive magical power that responds to emotion</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Flaws & Internal Conflicts</h3>
+                    <ul>
+                        <li>Tendency toward overextension and burnout</li>
+                        <li>Martyr complex—struggles to value her own life</li>
+                        <li>Emotional vulnerability when teammates are threatened</li>
+                        <li>Silent resolve often masks deeper fears</li>
+                    </ul>
+
+                    <p><strong>Core Fear:</strong> Failing those she loves</p>
+                    <p><strong>Core Motivation:</strong> Love and responsibility toward others</p>
+                    <p><strong>Core Value:</strong> Collective good over self-preservation</p>
+                    <p><strong>Moral Alignment:</strong> Lawful Good</p>
+                    <p><strong>Internal Question:</strong> Whether her life was worth more than the world she protected</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Formative Events</h2>
+                <div class="section-content">
+                    <ul>
+                        <li>Demon General confrontation</li>
+                        <li>Activation of Coralas ascension artifact</li>
+                        <li>Ascension into Heart Beat</li>
+                        <li>Death during Aria Caesura via Desynchronization Event</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- HEART ARIA FORM -->
+        <div id="aria-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Heart Aria.png" alt="Heart Aria" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Heart Aria</h1>
+                    <p class="character-title">Base Transformation</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Pyara heart.png" alt="Pyara's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Role</span>
+                                <span class="stat-value">Leader / Conductor</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Power Level</span>
+                                <span class="stat-value">Tier 1 Essentia (All types)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Combat Style</span>
+                                <span class="stat-value">Support / Amplification</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Special Ability</span>
+                                <span class="stat-value">Essentia Unlock</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Weapon</span>
+                                <span class="stat-value">Serrata Glissando</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Artifact</span>
+                                <span class="stat-value">Coralas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "Let's go home together."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Heart Aria Powers</h2>
+                <div class="section-content">
+                    <p>As <strong>Heart Aria</strong>, Pyara functions as the conductor of the collective. Rather than dominating combat through raw power, she enables and stabilizes the magic of every other Heart. Her voice anchors group casting and unlocks advanced cooperative spells.</p>
+
+                    <h3 class="section-subtitle">Abilities</h3>
+                    <ul>
+                        <li>Access to all Tier 1 Essentia</li>
+                        <li>Battlefield amplification and coordination</li>
+                        <li>Unique ability to resonate and unlock Essentia in others</li>
+                        <li>Harmonic resonance that stabilizes team magic</li>
+                        <li>Subconscious spellcasting through emotional resonance</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Limitations</h3>
+                    <ul>
+                        <li>Cannot access Tier 2 Entwinements alone (requires team)</li>
+                        <li>Vulnerable during ascension process</li>
+                        <li>Emotional overload can destabilize magic</li>
+                    </ul>
+
+                    <p><strong>Philosophy:</strong> Perseverance through joy and unity</p>
+                    <p><strong>Combat Approach:</strong> Melodic leadership; fights not to defeat enemies, but to ensure friends make it home together</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- HEART BEAT FORM -->
+        <div id="beat-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Heart Beat.png" alt="Heart Beat" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Heart Beat</h1>
+                    <p class="character-title">Ascended State</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Pyara heart.png" alt="Pyara's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Ascension Method</span>
+                                <span class="stat-value">Via Coralas</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Power Level</span>
+                                <span class="stat-value">Tier 2 Entwinements (All)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Combat Role</span>
+                                <span class="stat-value">Reality Stabilization</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Status</span>
+                                <span class="stat-value">Unstable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "I won't let it end like this."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Heart Beat Ascension</h2>
+                <div class="section-content">
+                    <p><strong>Heart Beat</strong> represents Pyara's first ascension through the Coralas artifact. In this state, she gains access to all Tier 2 Entwinements—cooperative magic that requires synchronization between multiple Hearts.</p>
+
+                    <p>The ascension dramatically amplifies her power but introduces dangerous instability. Her luminous presence becomes overwhelming, and the harmonic strain on her physical form begins to show.</p>
+
+                    <p><strong>Coralas Artifact:</strong> An Ascension Artifact in the form of a sword. Becomes more elaborate as the wielder gains power, allowing Heart Aria to access the transformation into Heart Beat and eventually to ascend into Concerto Pulse.</p>
+
+                    <p>Radiant light manifestation during ascension creates visual parallels to demonic dissolution—a deliberate design choice emphasizing the metaphysical cost of such power.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- CONCERTO PULSE FORM -->
+        <div id="pulse-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Concerto Pulse.png" alt="Concerto Pulse" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Concerto Pulse</h1>
+                    <p class="character-title">Final Manifestation</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Pyara heart.png" alt="Pyara's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Classification</span>
+                                <span class="stat-value">Lodesoul-Class</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Power Level</span>
+                                <span class="stat-value">Tier 3 (Lúmira)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Duration</span>
+                                <span class="stat-value">Brief / Fatal</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Fate</span>
+                                <span class="stat-value">Total Annihilation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "I'll protect everyone... no matter what it costs."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">The Final Transformation</h2>
+                <div class="section-content">
+                    <p><strong>Concerto Pulse</strong> is Pyara's ultimate manifestation—a Tier 3 ascension that briefly grants access to Lúmira-level resonance. In this form, she becomes pure harmonic light, stabilizing reality across all of <a href="../realms/realm-beeston.html" class="wiki-link">Beeston</a>.</p>
+
+                    <p>However, the transformation was interrupted by <a href="character-dissonant-discord.html" class="wiki-link">dissonant discord</a>'s Tier 4 harmonic strike, causing a <strong>Desynchronization Event</strong> that fractured Pyara's lodesoul-level essence across realities.</p>
+
+                    <p>The extraction of her ascended essence resulted in complete metaphysical annihilation, creating permanent damage to the Harmonic Lattice and leaving an unresolved absence that <a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a> has never recovered from.</p>
+
+                    <h3 class="section-subtitle">The Mahana Paradox</h3>
+                    <p>The entity known as <a href="character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a> originates from this Desynchronization Event. Whether she is Pyara's reincarnation, a harmonically displaced echo, or an entirely new entity remains deliberately ambiguous.</p>
+
+                    <p>Mahana is a reconstructed harmonic echo attempting to stabilize a melody that was never meant to continue.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Shared Sections -->
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            
+            <div class="relationships-grid">
+                <a href="character-kali-dana.html" class="relationship-card">
+                    <div class="relationship-name">Kali Dana</div>
+                    <div class="relationship-type">Sister / Heart Seria</div>
+                </a>
+
+                <a href="character-mahana-sahi.html" class="relationship-card">
+                    <div class="relationship-name">Mahana Sahi</div>
+                    <div class="relationship-type">Successor / ???</div>
+                </a>
+
+                <a href="character-dissonant-discord.html" class="relationship-card">
+                    <div class="relationship-name">dissonant discord</div>
+                    <div class="relationship-type">Adversary / Killer</div>
+                </a>
+
+                <a href="character-celesin.html" class="relationship-card">
+                    <div class="relationship-name">Celesin the Philharmonious</div>
+                    <div class="relationship-type">Mentor</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> Sacrificial Hero</p>
+                <p><strong>Character Arc:</strong> Ascension through sacrifice</p>
+                <p><strong>Arc Status:</strong> Tragic</p>
+                
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>Love as literal magical force</li>
+                    <li>The cost of leadership and protection</li>
+                    <li>Inevitability of loss despite sacrifice</li>
+                    <li>Whether a song can continue after losing its melody</li>
+                    <li>Music as final harmony before silence</li>
+                </ul>
+
+                <p><strong>Foil to:</strong> <a href="character-dissonant-discord.html" class="wiki-link">dissonant discord</a> — harmony versus dissonance</p>
+
+                <p><strong>Narrative Function:</strong> Pyara's death establishes irreversible stakes for the entire Crios narrative, proving that even protagonists with lodesoul-class power cannot escape consequence.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> Pyara – modification of Pyārā (प्यारा), meaning "cute" or "beloved" in Hindi; Dana – modification of Dānā (दाना), meaning "mage"</li>
+                    <li><strong>Design Notes:</strong> Ascension visually mirrors demonic dissolution to emphasize metaphysical cost</li>
+                    <li><strong>Symbolism:</strong> Music as final harmony; radiant light as both salvation and destruction</li>
+                    <li><strong>Inspiration:</strong> Magical girl martyr archetypes</li>
+                    <li><strong>Author Notes:</strong> Pyara's death establishes irreversible stakes and fundamentally changes Heart Melody's dynamic</li>
+                    <li><strong>Continuity Flags:</strong> Lodesoul implications ripple into later arcs; her death directly catalyzes multiple character transformations</li>
+                    <li><strong>Reputation:</strong> Revered posthumously as Beeston's greatest protector</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            document.querySelectorAll('.form-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const selectedForm = document.getElementById(formName + '-form');
+            selectedForm.classList.add('active');
+
+            event.target.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

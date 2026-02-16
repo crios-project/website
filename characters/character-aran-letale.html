@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aran Letale // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
+
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
+
+        .character-form {
+            display: none;
+        }
+
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-container {
+            position: relative;
+        }
+
+        .heart-symbol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: auto;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../characters.html" class="back-link">← All Characters</a>
+    </nav>
+
+    <div class="container">
+        <!-- Form Toggle -->
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Civilian</button>
+            <button class="form-button" onclick="switchForm('sonata')">Heart Sonata</button>
+        </div>
+
+        <!-- CIVILIAN FORM -->
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Aran Letale.png" alt="Aran Letale" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Aran Letale</h1>
+                    <p class="character-title">Civilian Identity</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Aran heart.png" alt="Aran's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Age</span>
+                                <span class="stat-value">13 → 15</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Height</span>
+                                <span class="stat-value">4'11" → 5'1" (150-155 cm)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Birth Date</span>
+                                <span class="stat-value">April 10</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Ethnicity</span>
+                                <span class="stat-value">Black</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Hair</span>
+                                <span class="stat-value">Deep magenta/purple, asymmetric</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Eyes</span>
+                                <span class="stat-value">Turquoise</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Faction</span>
+                                <span class="stat-value"><a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a></span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Demeanor</span>
+                                <span class="stat-value">Playful, charismatic</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "This is going to be so much fun."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Aran Letale functions as <a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a>'s executioner—rarely the first to act, but often the one who ends a conflict. Her civilian appearance is compact and unassuming, but her posture and gaze suggest constant evaluation.</p>
+
+                    <p>Raised in an environment that rewarded discipline over expression, Aran learned early to compress emotion into action. Lúmenai responded not to her feelings, but to her control of them. Where others channel emotion outward, Aran condenses intent into sharp, decisive action.</p>
+
+                    <p>With deep magenta/purple hair styled asymmetrically—tight braids on the right side, long and voluminous on the left—and striking turquoise eyes, Aran projects a playful, charismatic vibe in casual settings. However, those who observe closely notice the weapon maintenance, the quiet repetition of movements, the constant evaluation behind her smiling eyes.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Reserved:</strong> Keeps true thoughts and feelings carefully guarded</li>
+                        <li><strong>Disciplined:</strong> Maintains rigorous self-control</li>
+                        <li><strong>Observant:</strong> Constantly evaluating situations and people</li>
+                        <li><strong>Precise:</strong> Values exactness and efficiency</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Strengths</h3>
+                    <ul>
+                        <li>Exceptional precision and tactical focus</li>
+                        <li>Self-control under extreme pressure</li>
+                        <li>Hand-to-hand combat expertise</li>
+                        <li>Weapon maintenance and appraisal knowledge</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Flaws & Internal Conflicts</h3>
+                    <ul>
+                        <li>Emotional suppression creates internal pressure</li>
+                        <li>Difficulty expressing vulnerability</li>
+                        <li>Slow adaptation to unpredictable magic</li>
+                        <li>Emotional rigidity limits flexibility</li>
+                    </ul>
+
+                    <p><strong>Core Fear:</strong> Losing control; harming allies through excess force</p>
+                    <p><strong>Core Motivation:</strong> Control over chaos—to be useful through disciplined precision</p>
+                    <p><strong>Core Value:</strong> Strength must be shaped, not unleashed</p>
+                    <p><strong>Moral Alignment:</strong> Lawful Neutral</p>
+                    <p><strong>Emotional Triggers:</strong> Recklessness; wasted effort</p>
+                    <p><strong>Habits:</strong> Weapon maintenance; quiet repetition of movements; perfection-driven practice</p>
+                    <p><strong>Internal Question:</strong> Can control prevent all loss, or does restraint itself create vulnerability?</p>
+                    <p><strong>Secret Fear:</strong> That without rigid control, her power would become indiscriminate and dangerous</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Formative Events</h2>
+                <div class="section-content">
+                    <ul>
+                        <li>Awakening as Heart Sonata through compressed intent rather than emotional overflow</li>
+                        <li>Self-directed combat training focused on repetitive, perfection-driven practice</li>
+                        <li>The death of <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a>, which destabilized her belief that control alone can prevent loss</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- HEART SONATA FORM -->
+        <div id="sonata-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Heart Sonata.png" alt="Heart Sonata" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Heart Sonata</h1>
+                    <p class="character-title">Precision Operative</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Aran heart.png" alt="Aran's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Role</span>
+                                <span class="stat-value">Precision Operative</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Essentia</span>
+                                <span class="stat-value">Férroma (Metal)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Power Level</span>
+                                <span class="stat-value">Tier 2 (Entwinement)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Combat Style</span>
+                                <span class="stat-value">Close-range / Decisive</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Special Ability</span>
+                                <span class="stat-value">Metal Shaping</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Weapon</span>
+                                <span class="stat-value">Cantabile Cleaver</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "One strike. That's all it takes."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Heart Sonata Powers</h2>
+                <div class="section-content">
+                    <p>As <strong>Heart Sonata</strong>, Aran manipulates <strong>Férroma</strong>, the Metal Entwinement (combining Fire and Earth). Her design shifts sharply from civilian form: angular silhouettes, metallic accents, and restrained ornamentation. Unlike the flowing designs of other Hearts, Sonata's aesthetic is rigid and weapon-forward, visually reinforcing her role as the team's edge.</p>
+
+                    <p>Aran represents precision, restraint, and controlled force within Heart Melody. She channels compressed intent and disciplined emotional resonance into sharp, decisive action.</p>
+
+                    <h3 class="section-subtitle">Abilities</h3>
+                    <ul>
+                        <li><strong>Metal Shaping and Reinforcement:</strong> Manipulates metal structures for offense and defense</li>
+                        <li><strong>Weapon Manifestation:</strong> Creates blades and armaments from metal Essentia</li>
+                        <li><strong>Instant Blade Formation:</strong> Conjures weapons with minimal preparation</li>
+                        <li><strong>Defensive Plating:</strong> Creates armor and kinetic resistance barriers</li>
+                        <li><strong>Metallic Barriers:</strong> Redirects impact and blocks attacks</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Limitations</h3>
+                    <ul>
+                        <li>Requires focus and preparation—disruption weakens effectiveness</li>
+                        <li>Reduced flexibility when disrupted emotionally</li>
+                        <li>Slow adaptation to unpredictable magic</li>
+                        <li>Emotional rigidity limits tactical improvisation</li>
+                    </ul>
+
+                    <p><strong>Philosophy:</strong> Strength through calculated execution—violence shaped into utility</p>
+
+                    <p><strong>Combat Approach:</strong> Close-range, decisive strikes with minimal wasted motion. Sonata doesn't overwhelm—she concludes. One perfect strike executed at the exact right moment.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">The Blade</h2>
+                <div class="section-content">
+                    <p>Within Heart Melody, Aran serves as the team's enforcer and counterbalance. Where others represent emotion, growth, or harmony, Sonata represents sharpened intent—the understanding that sometimes problems require clean, decisive resolution.</p>
+
+                    <p>Seen as intimidating, reliable, and emotionally distant, Aran maintains her distance not out of coldness but out of fear. She knows the destructive potential she carries and refuses to let it slip beyond her control.</p>
+
+                    <p>Mentored by <a href="character-celesin.html" class="wiki-link">Celesin the Philharmonious</a>, Aran learned that discipline and restraint aren't limitations—they're the foundation of true strength.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Shared Sections -->
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            
+            <div class="relationships-grid">
+                <a href="character-pyara-dana.html" class="relationship-card">
+                    <div class="relationship-name">Pyara Dana</div>
+                    <div class="relationship-type">Leader / Heart Aria</div>
+                </a>
+
+                <a href="character-oktusha-miko.html" class="relationship-card">
+                    <div class="relationship-name">Oktusha Miko</div>
+                    <div class="relationship-type">Rival / Foil</div>
+                </a>
+
+                <a href="character-zafara-quedar.html" class="relationship-card">
+                    <div class="relationship-name">Zafara Quedar</div>
+                    <div class="relationship-type">Teammate / Opposite</div>
+                </a>
+
+                <a href="character-celesin.html" class="relationship-card">
+                    <div class="relationship-name">Celesin the Philharmonious</div>
+                    <div class="relationship-type">Mentor</div>
+                </a>
+
+                <a href="character-dissonant-discord.html" class="relationship-card">
+                    <div class="relationship-name">dissonant discord</div>
+                    <div class="relationship-type">Enemy</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> The Blade</p>
+                <p><strong>Story Function:</strong> Enforcer / Counterbalance</p>
+                <p><strong>Character Arc:</strong> Learning that control cannot prevent every loss</p>
+                <p><strong>Arc Status:</strong> Evolving</p>
+                
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>Discipline and restraint as strength</li>
+                    <li>Sharpened intent over raw emotion</li>
+                    <li>Violence shaped into utility</li>
+                    <li>The burden of being the executioner</li>
+                    <li>Control versus spontaneity</li>
+                </ul>
+
+                <p><strong>Foil to:</strong> <a href="character-zafara-quedar.html" class="wiki-link">Zafara Quedar</a> (growth versus precision; patience versus decisive force)</p>
+
+                <p><strong>Narrative Function:</strong> Represents the necessity of controlled violence—that some problems require not nurturing or harmony, but clean, decisive resolution.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> Aran — harsh, stony phonetics suggesting sharpness; Letale — from Latin "letalis" meaning "deadly" or "lethal"</li>
+                    <li><strong>Design Notes:</strong> Angular, armored silhouette deliberately contrasts softer Hearts; weapon-forward aesthetic</li>
+                    <li><strong>Symbolism:</strong> Sonata as controlled, deliberate composition; metal as shaped strength; blade as precision</li>
+                    <li><strong>Inspiration:</strong> Precision fighter archetypes; disciplined warriors who compress power</li>
+                    <li><strong>Author Notes:</strong> Represents violence shaped into utility—necessary but controlled</li>
+                    <li><strong>Reputation:</strong> Dangerous, intimidating, reliable; people respect her but keep their distance</li>
+                    <li><strong>Musical Note:</strong> "Sonata" is a structured composition with deliberate movements—fitting for a precise, disciplined fighter</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            document.querySelectorAll('.form-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const selectedForm = document.getElementById(formName + '-form');
+            selectedForm.classList.add('active');
+
+            event.target.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

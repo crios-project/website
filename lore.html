@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lore // CRIOS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Background effects */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        /* Header */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .page-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Accordion Section */
+        .accordion-section {
+            margin-bottom: 24px;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .accordion-section:nth-child(1) { animation-delay: 0.1s; }
+        .accordion-section:nth-child(2) { animation-delay: 0.2s; }
+        .accordion-section:nth-child(3) { animation-delay: 0.3s; }
+        .accordion-section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .accordion-header {
+            background: var(--dark-panel);
+            border: 2px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 28px 32px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accordion-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.05), rgba(0, 217, 255, 0.02));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .accordion-header:hover::before {
+            opacity: 1;
+        }
+
+        .accordion-header:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 24px rgba(0, 217, 255, 0.2);
+        }
+
+        .accordion-header.active {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-color: var(--secondary-pink);
+        }
+
+        .accordion-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .accordion-count {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-left: 12px;
+        }
+
+        .accordion-icon {
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            background: var(--dark-panel);
+            border: 2px solid rgba(233, 30, 99, 0.2);
+            border-top: none;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 2000px;
+            padding: 32px;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .content-card {
+            background: rgba(20, 20, 25, 0.6);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(20, 20, 25, 0.9);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .content-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .content-card-desc {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .content-card-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 12px;
+            display: inline-block;
+        }
+
+        /* Coming Soon Banner */
+        .coming-soon {
+            text-align: center;
+            padding: 40px;
+            background: rgba(233, 30, 99, 0.05);
+            border: 1px dashed rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+        }
+
+        .coming-soon-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .accordion-header {
+                padding: 20px 24px;
+            }
+
+            .accordion-title {
+                font-size: 1.3rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .accordion-content.active {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="index.html" class="back-link">← Home</a>
+        <div class="header-title">Lore Index</div>
+        <div style="width: 80px;"></div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1 class="page-title">LORE</h1>
+            <p class="page-subtitle">Delve into the foundational concepts, magical systems, and artifacts that define the Crios multiverse</p>
+        </header>
+
+        <!-- Magic Systems Section -->
+        <div class="accordion-section">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div>
+                    <span class="accordion-title">Magical Systems</span>
+                    <span class="accordion-count">(3)</span>
+                </div>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="content-grid">
+                    <a href="magic/magic-lumenai.html" class="content-card">
+                        <div class="content-card-title">Lúmenai</div>
+                        <div class="content-card-desc">
+                            Harmonic resonance system where magic manifests through emotional, intentional, and spiritual consonance. Power arises when intent, emotion, and will synchronize into a cohesive metaphysical "voice."
+                        </div>
+                        <div class="content-card-tag">Beeston • Sung Magic</div>
+                    </a>
+
+                    <a href="magic/magic-element-core.html" class="content-card">
+                        <div class="content-card-title">Element Core System</div>
+                        <div class="content-card-desc">
+                            Tiered elemental framework ranging from foundational elements (Fire, Water, Earth, Wind) through advanced conjoinments (Ice, Lightning, Metal) to transcendent tiers (Light, Dark, Neon Ultra).
+                        </div>
+                        <div class="content-card-tag">Royastella • Tiered Elements</div>
+                    </a>
+
+                    <a href="magic/magic-cymora.html" class="content-card">
+                        <div class="content-card-title">Cymora</div>
+                        <div class="content-card-desc">
+                            Linguistic magic system where reality responds to structured harmonic language. Practitioners manipulate existence through precise phonetic patterns and resonant frequencies embedded in speech.
+                        </div>
+                        <div class="content-card-tag">Nexsicon • Language Magic</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Concepts Section -->
+        <div class="accordion-section">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div>
+                    <span class="accordion-title">Key Concepts</span>
+                    <span class="accordion-count">(7)</span>
+                </div>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="content-grid">
+                    <a href="lore/lore-akashic-record.html" class="content-card">
+                        <div class="content-card-title">Akashic Record</div>
+                        <div class="content-card-desc">
+                            The metaphysical archive of all events, possibilities, and convergence pathways across the multiverse. A cosmic library containing every choice made and unmade.
+                        </div>
+                        <div class="content-card-tag">Metaphysical • Archive</div>
+                    </a>
+
+                    <a href="lore/lore-cascade-resonance.html" class="content-card">
+                        <div class="content-card-title">Cascade Resonance</div>
+                        <div class="content-card-desc">
+                            Catastrophic event where harmonic instability propagates across multiple realms simultaneously, threatening structural integrity of dimensional boundaries.
+                        </div>
+                        <div class="content-card-tag">Event • Crisis</div>
+                    </a>
+
+                    <a href="lore/lore-lodesoul-theorem.html" class="content-card">
+                        <div class="content-card-title">Lodesoul Theorem</div>
+                        <div class="content-card-desc">
+                            The principle that each realm possesses a central metaphysical anchor (lodesoul) which maintains its existential coherence and prevents dissolution into the void.
+                        </div>
+                        <div class="content-card-tag">Theory • Cosmology</div>
+                    </a>
+
+                    <a href="lore/lore-realm-convergence.html" class="content-card">
+                        <div class="content-card-title">Realm Convergence</div>
+                        <div class="content-card-desc">
+                            The prophesied collapse of dimensional barriers leading to the fusion of all parallel realities into a singular unified existence—Ultimatera.
+                        </div>
+                        <div class="content-card-tag">Prophecy • Convergence</div>
+                    </a>
+
+                    <a href="lore/lore-tianshang-legacy.html" class="content-card">
+                        <div class="content-card-title">Tiānshàng Legacy</div>
+                        <div class="content-card-desc">
+                            Ancient magical lineage tied to transformation and identity fragmentation. Central to the mystery surrounding Xīwàng's disappearance and Fú cì's current state.
+                        </div>
+                        <div class="content-card-tag">Lineage • Transformation</div>
+                    </a>
+
+                    <a href="lore/lore-light-blade-revolver.html" class="content-card">
+                        <div class="content-card-title">Light Blade Revolver</div>
+                        <div class="content-card-desc">
+                            Signature weapon system of Destiny's Penance. Manifests tier-scaled energy blades through rotating harmonic resonance chambers.
+                        </div>
+                        <div class="content-card-tag">Weapon • Technology</div>
+                    </a>
+
+                    <a href="lore/lore-paradox-bracers.html" class="content-card">
+                        <div class="content-card-title">Paradox Bracers</div>
+                        <div class="content-card-desc">
+                            Artifacts that allow limited manipulation of temporal causality. Dangerous to use due to their tendency to create cascading reality fractures.
+                        </div>
+                        <div class="content-card-tag">Artifact • Temporal</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Arsenal Section -->
+        <div class="accordion-section">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div>
+                    <span class="accordion-title">Arsenal</span>
+                    <span class="accordion-count">(39 Weapons)</span>
+                </div>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="content-grid">
+                    <a href="arsenal.html#heart-melody" class="content-card">
+                        <div class="content-card-title">Heart Melody Arsenal</div>
+                        <div class="content-card-desc">
+                            Harmonic weapons channeling specific Essentia alignments: Cadence Bastion, Cantabile Cleaver, Mirror Fugue, Rotary Forte, Serrata Glissando, Tearing Etude, Tempo Sever.
+                        </div>
+                        <div class="content-card-tag">7 Weapons • Lúmenai</div>
+                    </a>
+
+                    <a href="arsenal.html#starlite-7th" class="content-card">
+                        <div class="content-card-title">Starlite 7th Arsenal</div>
+                        <div class="content-card-desc">
+                            Royal elemental armaments: Auroral Throneblade, Autarch Judicators, Celestial Regnant, Diadem Refrains, Lionheart Radience, Lotus Dominion, Sanctum Majestra.
+                        </div>
+                        <div class="content-card-tag">8 Weapons • Element Core</div>
+                    </a>
+
+                    <a href="arsenal.html#destinys-penance" class="content-card">
+                        <div class="content-card-title">Destiny's Penance Arsenal</div>
+                        <div class="content-card-desc">
+                            Convergence-aligned weaponry: Light Blade Revolver system, Fallire Fanale, Tenebris Operiet, plus specialized variants (Lucem Atra, Mors Lux, Wúxiàn Sǐwáng).
+                        </div>
+                        <div class="content-card-tag">6 Weapons • Convergence</div>
+                    </a>
+
+                    <a href="arsenal.html#reason-theory" class="content-card">
+                        <div class="content-card-title">Reason Theory Arsenal</div>
+                        <div class="content-card-desc">
+                            Sabotage-oriented armaments: Fate (Ami's weapon), Secret (Windi's weapon), plus appropriated gear from collapsed factions.
+                        </div>
+                        <div class="content-card-tag">2+ Weapons • Tactical</div>
+                    </a>
+
+                    <a href="arsenal.html#special" class="content-card">
+                        <div class="content-card-title">Special Armaments</div>
+                        <div class="content-card-desc">
+                            Unique weapons: Le Couteau (BLADE GUILLOTINE), Atonality (dissonant discord), Zhòu-chún's seven transformation weapons (ānjìng, ciúnas, cupa, kimya, senyap, shiru, tăcere).
+                        </div>
+                        <div class="content-card-tag">9+ Weapons • Unique</div>
+                    </a>
+
+                    <a href="arsenal.html" class="content-card">
+                        <div class="content-card-title">View Complete Arsenal</div>
+                        <div class="content-card-desc">
+                            Browse the full weapon gallery with detailed specifications, wielders, and faction affiliations. Filter by type, element, or character.
+                        </div>
+                        <div class="content-card-tag">Gallery • All Weapons</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Short Stories Section -->
+        <div class="accordion-section">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div>
+                    <span class="accordion-title">Short Stories</span>
+                    <span class="accordion-count">(Coming Soon)</span>
+                </div>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="coming-soon">
+                    <p class="coming-soon-text">Stories will be added as they are written</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(header) {
+            const isActive = header.classList.contains('active');
+            
+            // Close all accordions
+            document.querySelectorAll('.accordion-header').forEach(h => {
+                h.classList.remove('active');
+                h.nextElementSibling.classList.remove('active');
+            });
+
+            // Open clicked accordion if it wasn't already active
+            if (!isActive) {
+                header.classList.add('active');
+                header.nextElementSibling.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

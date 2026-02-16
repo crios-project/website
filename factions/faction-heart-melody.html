@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Melody // CRIOS Faction Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .faction-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95) translateY(-20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .faction-logo {
+            max-width: 500px;
+            height: auto;
+            margin: 0 auto 40px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .faction-tagline {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 24px;
+            border-left: 4px solid var(--secondary-pink);
+            background: rgba(233, 30, 99, 0.05);
+            border-radius: 4px;
+        }
+
+        .faction-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stat-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        .section-content strong {
+            color: var(--text-primary);
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            padding: 24px 28px;
+            margin: 24px 0;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .member-card {
+            background: rgba(20, 20, 25, 0.8);
+            border: 2px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .member-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.3);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .member-info {
+            padding: 16px;
+        }
+
+        .member-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .member-role {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .member-philosophy {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .tier-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        .tier-table th,
+        .tier-table td {
+            padding: 14px;
+            text-align: left;
+            border: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .tier-table th {
+            background: rgba(233, 30, 99, 0.1);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tier-table td {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 768px) {
+            .faction-logo {
+                max-width: 350px;
+            }
+
+            .faction-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../factions.html" class="back-link">← All Factions</a>
+    </nav>
+
+    <div class="container">
+        <header class="faction-header">
+            <img src="../assets/icons/Lovely Hearts Logo.png" alt="Heart Melody" class="faction-logo">
+            <div class="faction-tagline">
+                "Where harmony protects the realm, and each voice resonates with purpose."
+            </div>
+        </header>
+
+        <div class="faction-stats">
+            <div class="stat-card">
+                <div class="stat-label">Member Title</div>
+                <div class="stat-value">Lovely Hearts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Active Members</div>
+                <div class="stat-value">6 at once</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Realm</div>
+                <div class="stat-value">Beeston</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Magic System</div>
+                <div class="stat-value">Lúmenai</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Primary Adversary</div>
+                <div class="stat-value">dissonant discord</div>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p><strong>Heart Melody</strong> is a collective of magically empowered heroines whose abilities derive from harmonic resonance, emotional synchronization, and musical metaphysical structures. Each member manifests a unique <strong>Heart Form</strong>, representing a distinct emotional philosophy and magical specialization.</p>
+
+                <p>Unlike traditional magical systems that rely on raw power or technical incantation, Heart Melody functions through <strong>harmonic compatibility</strong>, where strength emerges from emotional cohesion and relational bonds between members.</p>
+
+                <p>The team is sustained by a shared metaphysical structure known as the <strong>Harmonic Lattice</strong>, a living magical network that allows their Essentia, casting stability, and power scaling to function cooperatively.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Magical Framework</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Harmonic Casting</h3>
+                <p>Heart Melody magic operates through layered vocalization, emotional resonance, and synchronized will. Spells manifest as structured musical expressions rather than isolated incantations.</p>
+
+                <h3 class="section-subtitle">Essentia</h3>
+                <p>Each Heart channels a unique magical spectrum known as <strong>Essentia</strong>, representing both elemental affinity and philosophical alignment.</p>
+
+                <h3 class="section-subtitle">Tier Structure</h3>
+                <table class="tier-table">
+                    <thead>
+                        <tr>
+                            <th>Tier</th>
+                            <th>Name</th>
+                            <th>Function</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tier 1</td>
+                            <td>Essentia</td>
+                            <td>Individual elemental casting</td>
+                        </tr>
+                        <tr>
+                            <td>Tier 2</td>
+                            <td>Entwinement</td>
+                            <td>Multi-Heart cooperative magic</td>
+                        </tr>
+                        <tr>
+                            <td>Tier 3</td>
+                            <td>Lúmira</td>
+                            <td>Harmonic transcendence</td>
+                        </tr>
+                        <tr>
+                            <td>Tier 4</td>
+                            <td>Ómura</td>
+                            <td>Reality-distorting harmonic collapse</td>
+                        </tr>
+                        <tr>
+                            <td>Tier 5</td>
+                            <td>Æónel</td>
+                            <td>Absolute metaphysical override</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">The Harmonic Lattice</h2>
+            <div class="section-content">
+                <p>The Harmonic Lattice binds all Hearts into a shared magical ecosystem. It enables:</p>
+                <ul>
+                    <li>Spell stabilization</li>
+                    <li>Emotional energy distribution</li>
+                    <li>Cooperative amplification</li>
+                    <li>Harmonic recovery after magical strain</li>
+                </ul>
+                <p><strong>Critical Vulnerability:</strong> Damage to one Heart affects the structural integrity of the entire lattice.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Core Members</h2>
+
+            <div class="members-grid">
+                <a href="../characters/character-pyara-dana.html" class="member-card">
+                    <img src="../assets/characters/Pyara Dana.png" alt="Pyara Dana" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Pyara Dana</div>
+                        <div class="member-role">Heart Aria • Original Leader</div>
+                        <div class="member-philosophy">Perseverance through joy and unity</div>
+                    </div>
+                </a>
+
+                <a href="../characters/character-kali-dana.html" class="member-card">
+                    <img src="../assets/characters/Kali Dana.png" alt="Kali Dana" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Kali Dana</div>
+                        <div class="member-role">Heart Seria • Harmonic Anchor</div>
+                        <div class="member-philosophy">Protection through loyalty</div>
+                    </div>
+                </a>
+
+                <a href="../characters/character-oktusha-miko.html" class="member-card">
+                    <img src="../assets/characters/Oktusha Miko.png" alt="Oktusha Miko" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Oktusha Miko</div>
+                        <div class="member-role">Heart Rhythm • Vanguard Combatant</div>
+                        <div class="member-philosophy">Honor through struggle and exhilaration</div>
+                    </div>
+                </a>
+
+                <a href="../characters/character-omba-miko.html" class="member-card">
+                    <img src="../assets/characters/Omba Miko.png" alt="Omba Miko" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Omba Miko</div>
+                        <div class="member-role">Heart Verismo • Tactical Analyst</div>
+                        <div class="member-philosophy">Truth through restraint and memory</div>
+                    </div>
+                </a>
+
+                <a href="../characters/character-zafara-quedar.html" class="member-card">
+                    <img src="../assets/characters/Zafara Quedar.png" alt="Zafara Quedar" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Zafara Quedar</div>
+                        <div class="member-role">Heart Adagio • Disruption Specialist</div>
+                        <div class="member-philosophy">Growth through persistence and improvisation</div>
+                    </div>
+                </a>
+
+                <a href="../characters/character-aran-letale.html" class="member-card">
+                    <img src="../assets/characters/Aran Letale.png" alt="Aran Letale" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Aran Letale</div>
+                        <div class="member-role">Heart Sonata • Precision Operative</div>
+                        <div class="member-philosophy">Strength through calculated execution</div>
+                    </div>
+                </a>
+
+                <a href="../characters/character-mahana-sahi.html" class="member-card">
+                    <img src="../assets/characters/Mahana Sahi.png" alt="Mahana Sahi" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Mahana Sahi</div>
+                        <div class="member-role">Heart Symphony • Successor Leader</div>
+                        <div class="member-philosophy">Remembrance and inherited responsibility</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Primary Antagonist</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">dissonant discord</h3>
+                <p><strong>Classification:</strong> Harmonic Antithesis</p>
+
+                <p>discord represents the inverse of harmonic unity. She weaponizes desynchronization, collapsing cooperative casting structures and forcibly severing metaphysical identity continuity.</p>
+
+                <h3 class="section-subtitle">Capabilities</h3>
+                <ul>
+                    <li>Instant casting beyond established harmonic rules</li>
+                    <li>Direct access to Tier 5 phenomena</li>
+                    <li>Reality-scale desynchronization strikes</li>
+                </ul>
+
+                <p>discord alternates between adversarial engagement and catastrophic intervention, acting according to unknown long-term objectives.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">The Loss of Heart Aria</h2>
+            <div class="section-content">
+                <p>The destruction of Heart Aria causes permanent damage to the Harmonic Lattice. This event results in:</p>
+                <ul>
+                    <li>Loss of full casting synchronization</li>
+                    <li>Increased strain on cooperative magic</li>
+                    <li>Creation of an unresolved harmonic absence</li>
+                </ul>
+
+                <p>The lattice continues functioning but remains incomplete.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Musical Symbolism</h2>
+            <div class="section-content">
+                <p>Each Heart represents a musical role:</p>
+                <ul>
+                    <li><strong>Aria</strong> — Conductor and melody anchor</li>
+                    <li><strong>Seria</strong> — Supporting harmony</li>
+                    <li><strong>Rhythm</strong> — Percussive drive</li>
+                    <li><strong>Verismo</strong> — Structural control</li>
+                    <li><strong>Adagio</strong> — Tempo modulation</li>
+                    <li><strong>Sonata</strong> — Precision composition</li>
+                    <li><strong>Symphony</strong> — Total orchestral culmination</li>
+                </ul>
+
+                <p>Together they form a living magical composition constantly rewriting itself through conflict and emotional transformation.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Core Themes</h2>
+            <div class="section-content">
+                <ul>
+                    <li>The cost of leadership</li>
+                    <li>Identity persistence across reality fracture</li>
+                    <li>The difference between harmony and control</li>
+                    <li>Whether a song can continue after losing its melody</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

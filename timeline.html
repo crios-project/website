@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRIOS Timeline // Harmonic Convergence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow: 0 0 20px rgba(233, 30, 99, 0.6);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridScroll 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gridScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Gradient orb effects */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -200px;
+            animation: orbFloat1 15s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: orbFloat2 20s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-100px, 100px); }
+        }
+
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(100px, -80px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: var(--glow);
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 8px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        /* Toggle Switch */
+        .timeline-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .toggle-btn {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 16px 40px;
+            background: var(--dark-panel);
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .toggle-btn:first-child {
+            border-radius: 50px 0 0 50px;
+            border-right: 1px solid rgba(233, 30, 99, 0.3);
+        }
+
+        .toggle-btn:last-child {
+            border-radius: 0 50px 50px 0;
+            border-left: 1px solid rgba(233, 30, 99, 0.3);
+        }
+
+        .toggle-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(233, 30, 99, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .toggle-btn:hover::before {
+            left: 100%;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--secondary-pink);
+            color: var(--text-primary);
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            border-color: var(--secondary-pink);
+            color: white;
+            box-shadow: var(--glow);
+        }
+
+        /* Timeline Container */
+        .timeline-view {
+            display: none;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .timeline-view.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Era Section */
+        .era-section {
+            margin-bottom: 80px;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .era-section::before {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary-burgundy), var(--secondary-pink));
+            opacity: 0.4;
+        }
+
+        .era-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Event Card */
+        .event {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .event::before {
+            content: '';
+            position: absolute;
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--secondary-pink);
+            border-radius: 50%;
+            border: 3px solid var(--dark-bg);
+            box-shadow: 0 0 12px var(--secondary-pink);
+        }
+
+        .event:hover {
+            border-color: var(--secondary-pink);
+            box-shadow: 0 4px 20px rgba(233, 30, 99, 0.3);
+            transform: translateX(4px);
+        }
+
+        .event-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .event-content {
+            color: var(--text-dim);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .event-content ul {
+            margin-top: 12px;
+            padding-left: 20px;
+        }
+
+        .event-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Wiki Links */
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            padding-bottom: 1px;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        /* Special Note Boxes */
+        .note-box {
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: var(--text-dim);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            .subtitle {
+                font-size: 0.7rem;
+                letter-spacing: 4px;
+            }
+
+            .toggle-btn {
+                padding: 12px 24px;
+                font-size: 0.75rem;
+            }
+
+            .era-section {
+                padding-left: 40px;
+            }
+
+            .era-section::before {
+                left: 10px;
+            }
+
+            .event::before {
+                left: -40px;
+            }
+
+            .era-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Call to Action */
+        .cta-section {
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+
+        .cta-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-text {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dim);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 14px 32px;
+            background: transparent;
+            border: 2px solid var(--secondary-pink);
+            color: var(--secondary-pink);
+            border-radius: 6px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* Loading animation */
+        .loading {
+            text-align: center;
+            padding: 100px;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-dim);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+        <header>
+            <h1>Timeline</h1>
+            <p class="subtitle">Harmonic Convergence Archive</p>
+        </header>
+
+        <!-- Toggle -->
+        <div class="timeline-toggle">
+            <button class="toggle-btn active" data-view="chronological">Chronological</button>
+            <button class="toggle-btn" data-view="narrative">Narrative</button>
+        </div>
+
+        <!-- CHRONOLOGICAL VIEW -->
+        <div class="timeline-view active" id="chronological-view">
+            
+            <!-- Era I -->
+            <div class="era-section">
+                <h2 class="era-title">I. Pre-History</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Primordial Era — Foundations of Reality</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>Establishment of baseline cosmological laws</li>
+                            <li>Formation of harmonic resonance as the structural underpinning of existence</li>
+                            <li>Emergence of metaphysical strata separating realms</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">The Harmonic Genesis</h3>
+                    <div class="event-content">
+                        <p>Creation of reality through harmonic frequency alignment. Establishment of resonance as the governing force behind magic, identity, narrative continuity, and realm stability.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Early Magic Divergence</h3>
+                    <div class="event-content">
+                        <p>Separation of magic into localized interpretive systems:</p>
+                        <ul>
+                            <li>Nexsican <a href="#" class="wiki-link">Cymoran</a> harmonic structuring</li>
+                            <li>Royastellal <a href="#" class="wiki-link">Element Core</a> manifestation</li>
+                            <li>Beestonic <a href="#" class="wiki-link" >Lúmenai</a> Essentia-based casting systems</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Emergence of Lodesouls</h3>
+                    <div class="event-content">
+                        <p>Identification of singular beings whose existence anchors reality. Recognition that Lodesouls influence narrative gravity, and their removal or displacement destabilizes realms.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Era II -->
+            <div class="era-section">
+                <h2 class="era-title">II. Mythic Civilization Era</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Rise of Lost Realms</h3>
+                    <div class="event-content">
+                        <p>Rise of advanced magical civilizations across multiple realms. Development of guardian-protected relic systems.</p>
+                        <p style="margin-top: 12px;">Emergence of mythic territories including Atlantis, Lemuria, Mu, Agartha, Avalon, Shangri-La, Shambhala, and the Seven Cities of Cíbola.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Formation of the Akashic Record</h3>
+                    <div class="event-content">
+                        <p>Manifestation of universal informational archive. Guardians established across mythic convergence realms. <a href="#" class="wiki-link">Akashic</a> access restricted to harmonic resonance pathways.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Era III -->
+            <div class="era-section">
+                <h2 class="era-title">III. Nexsicon Arc 1</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Nexsican Scientific Awakening</h3>
+                    <div class="event-content">
+                        <p><a href="#" class="wiki-link">Nexsicon</a> becomes the primary hub of inter-realm magical science. Establishment of harmonic quantification research.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Development of Cymora Magic</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>Creation of structured harmonic language for magic casting</li>
+                            <li>Standardization of Lúmenail Harmonic measurement</li>
+                            <li>Codification of spell architecture</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">The Lodesoul Theorem Proposed</h3>
+                    <div class="event-content">
+                        <p>Scholars conclude that <a href="#" class="wiki-link">Lodesouls</a> anchor reality, and their removal destabilizes universes.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Nexsican Counter-Theory Discovery</h3>
+                    <div class="event-content">
+                        <p>A Nexsican scientist proposes Lodesouls are conduits instead of anchors:</p>
+                        <ul>
+                            <li>Lodesoul removal does not immediately destroy realms</li>
+                            <li>Lodesouls draw realms toward convergence when displaced</li>
+                            <li>Lodesouls regenerate or transfer upon destruction</li>
+                        </ul>
+                        <div class="note-box">
+                            Experimental Proof: Scientist's daughter summons a Lodesoul from a non-magical realm. Realm merging occurs. Mythical civilizations re-materialize.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Formation of Praxis Verax Affinas</h3>
+                    <div class="event-content">
+                        <p><a href="/factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> forms as a multiversal research and stabilization organization.</p>
+                        <p style="margin-top: 12px;"><strong>Primary Objectives:</strong> Study Lodesouls, control realm convergence, prevent universal collapse, monitor cross-realm anomalies.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Recruitment of Key Members</h3>
+                    <div class="event-content">
+                        <p>PVA major players include:</p>
+                        <ul>
+                            <li><a href="#" class="wiki-link">Tiala Hartlight</a></li>
+                            <li><a href="#" class="wiki-link">Ami Hartbreak</a></li>
+                            <li><a href="#" class="wiki-link">Claris Quies</a></li>
+                            <li><a href="#" class="wiki-link">Jí Lián Xiá</a></li>
+                            <li><a href="#" class="wiki-link">Xīwàng Tiānshàng</a></li>
+                            <li><a href="#" class="wiki-link">Amare, velitrice dragon</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Era IV -->
+            <div class="era-section">
+                <h2 class="era-title">IV. Beeston Arc 1 — Lovely Hearts Era</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Formation of Heart Melody Collective</h3>
+                    <div class="event-content">
+                        <p>Magical harmonic defenders emerge to maintain emotional and existential balance throughout <a href="/realms/realm-beeston.html" class="wiki-link">Beeston</a>.</p>
+                        <p style="margin-top: 12px;"><strong>Core Members:</strong></p>
+                        <ul>
+                            <li><a href="characters/character-pyara-dana.html" class="wiki-link">Pyara Dana</a> — Heart Aria (Leader)</li>
+                            <li><a href="characters/character-kali-dana.html" class="wiki-link">Kali Dana</a> — Heart Seria</li>
+                            <li><a href="characters/character-oktusha-miko.html" class="wiki-link">Oktusha Miko</a> — Heart Rhythm</li>
+                            <li><a href="characters/character-omba-miko.html" class="wiki-link">Omba Miko</a> — Heart Verismo</li>
+                            <li><a href="characters/character-zafara-quedar.html" class="wiki-link">Zafara Quedar</a> — Heart Adagio</li>
+                            <li><a href="characters/character-aran-letale.html" class="wiki-link">Aran Letale</a> — Heart Sonata</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Aria Caesura</h3>
+                    <div class="event-content">
+                        <p><a href="/characters/character-dissonant-discord.html" class="wiki-link">dissonant discord</a> begins interference operations and executes a Tier 4 Ómura Desynchronization Strike.</p>
+                        <ul>
+                            <li>Death of Pyara Dana (Heart Aria)</li>
+                            <li>Fragmentation of harmonic lattice of the Lovely Hearts</li>
+                            <li>Core melodic pattern displacement leading to <a href="/characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Era V -->
+            <div class="era-section">
+                <h2 class="era-title">V. Royastella Arc 1 — Starlite 7th Era</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Formation of Starlite 7th</h3>
+                    <div class="event-content">
+                        <p>Covert assembly of System-selected champions tasked with defending <a href="#" class="wiki-link">Royastella</a>.</p>
+                        <p style="margin-top: 12px;"><strong>Core Members:</strong></p>
+                        <ul>
+                            <li><a href="/characters/character-itami-serafino.html" class="wiki-link">Itami Serafino</a> — Starlit Empress</li>
+                            <li><a href="/characters/character-shini-thana.html" class="wiki-link">Shini Thana</a> — Starlit Sultana</li>
+                            <li><a href="#" class="wiki-link">Wentea Liso</a> — Starlit Dynast</li>
+                            <li><a href="#" class="wiki-link">Takino Retsu</a> — Starlit Mikado</li>
+                            <li><a href="#" class="wiki-link">Riasa Sungbae</a> — Starlit Pasha</li>
+                            <li><a href="#" class="wiki-link">Kayre</a> — Starlit Rex</li>
+                            <li><a href="#" class="wiki-link">Daeon Liàng</a> — Starlit Czar</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">BLADE GUILLOTINE Infiltration</h3>
+                    <div class="event-content">
+                        <p>dissonant discord appears in Royastella under the identity <strong>BLADE GUILLOTINE</strong>. BLADE GUILLOTINE begins both antagonizing and assisting Starlite 7th.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Betrayal Event</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>BLADE GUILLOTINE betrays the Starlite 7th</li>
+                            <li>Opens sky rift destabilizing Royastellan dimensional barrier</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Symphonic Overture</h3>
+                    <div class="event-content">
+                        <p>Major combat and harmonic destabilization event. Establishes existential threat to Royastella. <a href="/characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a> arrives in Royastella without memories.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Mahana Protection Mission</h3>
+                    <div class="event-content">
+                        <p>Starlite 7th protects Mahana Sahi. Mahana eventually returned to Beeston. Reinforces cross-realm harmonic instability.</p>
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    <strong>Simultaneity Canon:</strong> The following events occur in overlapping sequence: BLADE GUILLOTINE betrayal, Aria Caesura, and Symphonic Overture.
+                </div>
+            </div>
+
+            <!-- Era VI -->
+            <div class="era-section">
+                <h2 class="era-title">VI. Beeston Arc 2</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Mahana Assumes Leadership</h3>
+                    <div class="event-content">
+                        <p>Mahana becomes leader of the Lovely Hearts.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Mahana Kidnapping Event</h3>
+                    <div class="event-content">
+                        <p>dissonant discord abducts Mahana and opens a rift to Nexsicon.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Nexsicon Displacement</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>Lovely Hearts pursue rescue attempt</li>
+                            <li>Entire team becomes trapped in Nexsicon</li>
+                            <li>Kali attempts to kill discord and discord throws her into a gravity well</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Realm Seal — Beeston</h3>
+                    <div class="event-content">
+                        <p>Beeston becomes dimensionally isolated in preparation for merge into Nexsicon.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Era VII -->
+            <div class="era-section">
+                <h2 class="era-title">VII. Royastella Arc 2</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">discord Returns as Mentor</h3>
+                    <div class="event-content">
+                        <p>Warns Starlite 7th of impending existential threat. Claims destruction of Beeston has already occurred.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Aura Manifestation Training</h3>
+                    <div class="event-content">
+                        <p>discord trains Starlite 7th in Aura Manifestation, Element Core evolution, and Harmonic restructuring combat.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Revelation Encounter</h3>
+                    <div class="event-content">
+                        <p>discord guides team to confront threat. Threat revealed to be discord herself, transforming into BLADE GUILLOTINE.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Daughter Revelation Event</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>BLADE reveals familial connection to <a href="#" class="wiki-link">Starlit Alpha</a></li>
+                            <li>Emotional hesitation leads to capture</li>
+                            <li>BLADE teleports Alpha through sky rift</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Realm Seal — Royastella</h3>
+                    <div class="event-content">
+                        <p>Royastella becomes dimensionally isolated in preparation for merge into Nexsicon.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Era VIII -->
+            <div class="era-section">
+                <h2 class="era-title">VIII. Nexsicon Arc 2</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">The Grand Magic Catastrophe</h3>
+                    <div class="event-content">
+                        <p>Tiala realizes that the Beeston and Royastella integration will take approximately ten years. Tiala initiates forced universal convergence spell to hasten merge. Spell partially succeeds but destabilizes reality.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Cascade Resonance Event</h3>
+                    <div class="event-content">
+                        <p>Catastrophic consequences:</p>
+                        <ul>
+                            <li>Narrative probability collapse</li>
+                            <li>Cross-realm entity displacement</li>
+                            <li>Causal continuity fractures</li>
+                            <li>Accelerated metaphysical entropy</li>
+                            <li>Spontaneous mythic manifestation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Tiānshàng Massacre</h3>
+                    <div class="event-content">
+                        <p>Major emotional and narrative destabilization trigger.</p>
+                        <ul>
+                            <li><a href="#" class="wiki-link">Fú cì Ánguāng</a> loses the ability to become Zhòu-chún Shìfàng</li>
+                            <li>Xīwàng Tiānshàng disappears</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Collapse of Praxis Verax Affinas</h3>
+                    <div class="event-content">
+                        <p>Organizational failure, loss of unified leadership, escalation of ideological conflict.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">The Great Schism</h3>
+                    <div class="event-content">
+                        <p>Ami leaves PVA. Public justification: Tiala is reckless. True motivation: boredom, amusement, emotional complexity.</p>
+                        <p style="margin-top: 16px;"><strong>Factional Division:</strong></p>
+                        <p style="margin-top: 8px;"><a href="/factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a> — Led by Tiala Hartlight</p>
+                        <ul>
+                            <li>Pursues Akashic Record acquisition</li>
+                            <li>Accepts moral and metaphysical sacrifice</li>
+                        </ul>
+                        <p style="margin-top: 8px;"><a href="/factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a> — Founded by Ami Hartbreak and Windi Lightfall</p>
+                        <ul>
+                            <li>Opposes Destiny's Penance</li>
+                            <li>Destabilizes destiny-driven power structures</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Expansion of Reason Theory</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>Kali Dana returns from gravity well having aged an extra year</li>
+                            <li>She assumes the new identity of <a href="#" class="wiki-link">Odisse Nocere</a></li>
+                            <li>Odisse meets Ami who reveals that dissonant discord is actually Tiala</li>
+                            <li>Anti-Tiala operational alignment</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Rescue and Adoption of Fú cì Ánguāng</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>Windi phasewalks into an alley and kills a group of assassins targeting Fú cì</li>
+                            <li>Windi informally adopts Fú cì</li>
+                            <li>Restoration of Tiānshàng legacy</li>
+                            <li>Emergence of fractured Zhòu-chún transformation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Realm Integration Phase</h3>
+                    <div class="event-content">
+                        <p>Beeston and Royastella begin convergence into Nexsicon. Estimated integration timeline: Two Years.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Era IX -->
+            <div class="era-section">
+                <h2 class="era-title">IX. Two-Year Time Skip</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Training and Faction Consolidation</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>Training and faction consolidation period</li>
+                            <li>Emergence of new personas and magical evolutions</li>
+                            <li>Destiny's Penance and Reason Theory members change identities and refine techniques</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Emergence of Mythic Realms</h3>
+                    <div class="event-content">
+                        <p>Manifestation of previously lost civilizations: Atlantis, Lemuria, Mu, Avalon, Shangri-La, and additional mythic territories.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Era X -->
+            <div class="era-section">
+                <h2 class="era-title">X. Ultimatera Era</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Final Convergence Begins</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>Beginning of final convergence cycle</li>
+                            <li>Multi-realm existential conflict escalation</li>
+                            <li>Preparation for Akashic access and extra-dimensional war</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- NARRATIVE VIEW -->
+        <div class="timeline-view" id="narrative-view">
+            
+            <div class="note-box" style="margin-bottom: 60px;">
+                The Narrative Timeline reflects the order in which events are revealed to the audience, not the chronological order in which they occurred.
+            </div>
+
+            <!-- Arc I -->
+            <div class="era-section">
+                <h2 class="era-title">I. Beeston Arc 1 — Lovely Hearts Genesis</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Formation of Heart Melody Collective</h3>
+                    <div class="event-content">
+                        <p>Magical harmonic defenders emerge to preserve emotional and existential equilibrium within <a href="/realms/realm-beeston.html" class="wiki-link">Beeston</a>.</p>
+                        <p style="margin-top: 12px;"><strong>Core Team Formation:</strong></p>
+                        <ul>
+                            <li><a href="/characters/character-pyara-dana.html" class="wiki-link">Pyara Dana</a> — Heart Aria (Leader)</li>
+                            <li><a href="/characters/character-kali-dana.html" class="wiki-link">Kali Dana</a> — Heart Seria</li>
+                            <li><a href="/characters/character-oktusha-miko.html" class="wiki-link">Oktusha Miko</a> — Heart Rhythm</li>
+                            <li><a href="/characters/character-omba-miko.html" class="wiki-link">Omba Miko</a> — Heart Verismo</li>
+                            <li><a href="/characters/character-zafara-quedar.html" class="wiki-link">Zafara Quedar</a> — Heart Adagio</li>
+                            <li><a href="/characters/character-aran-letale.html" class="wiki-link">Aran Letale</a> — Heart Sonata</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Aria Caesura Event</h3>
+                    <div class="event-content">
+                        <p><a href="/characters/character-dissonant-discord.html" class="wiki-link">dissonant discord</a> executes a Tier 4 Ómura Desynchronization Strike.</p>
+                        <ul>
+                            <li>Death of Pyara Dana</li>
+                            <li>Collapse of Lovely Hearts harmonic lattice</li>
+                            <li>Displacement of core melodic continuity</li>
+                            <li>Foreshadowing emergence of <a href="/characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arc II -->
+            <div class="era-section">
+                <h2 class="era-title">II. Royastella Arc 1 — Starlite 7th Emergence</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Formation of Starlite 7th</h3>
+                    <div class="event-content">
+                        <p>System-selected champions are assembled to defend <a href="#" class="wiki-link">Royastella</a>.</p>
+                        <p style="margin-top: 12px;"><strong>Core Team:</strong></p>
+                        <ul>
+                            <li><a href="/characters/character-itami-serafino.html" class="wiki-link">Itami Serafino</a> — Starlit Empress</li>
+                            <li><a href="/characters/character-shini-thana.html" class="wiki-link">Shini Thana</a> — Starlit Sultana</li>
+                            <li><a href="#" class="wiki-link">Wentea Liso</a> — Starlit Dynast</li>
+                            <li><a href="#" class="wiki-link">Takino Retsu</a> — Starlit Mikado</li>
+                            <li><a href="#" class="wiki-link">Riasa Sungbae</a> — Starlit Pasha</li>
+                            <li><a href="#" class="wiki-link">Kayre</a> — Starlit Rex</li>
+                            <li><a href="#" class="wiki-link">Daeon Liàng</a> — Starlit Czar</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">BLADE GUILLOTINE Infiltration</h3>
+                    <div class="event-content">
+                        <p>Starlite 7th encounters Runic Knight BLADE GUILLOTINE. Alternates between ally and antagonist behavior.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Betrayal & Skyrift Opening</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>BLADE betrays Starlite 7th</li>
+                            <li>Dimensional barrier rupture destabilizes Royastella</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Symphonic Overture</h3>
+                    <div class="event-content">
+                        <p>Major harmonic conflict event. First appearance of Mahana Sahi in Royastella. Establishes cross-realm instability narrative.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Mahana Protection Mission</h3>
+                    <div class="event-content">
+                        <p>Starlite 7th protects Mahana. Mahana is successfully returned to Beeston.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arc III -->
+            <div class="era-section">
+                <h2 class="era-title">III. Beeston Arc 2 — Harmonic Succession</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Mahana Leadership Transition</h3>
+                    <div class="event-content">
+                        <p>Mahana Sahi assumes leadership of the Lovely Hearts.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Kidnapping Event</h3>
+                    <div class="event-content">
+                        <p>dissonant discord abducts Mahana. Rift opened to <a href="#" class="wiki-link">Nexsicon</a>.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Rescue Attempt & Team Displacement</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>Lovely Hearts pursue rescue</li>
+                            <li>Entire team becomes trapped in Nexsicon</li>
+                            <li>Kali attacks discord</li>
+                            <li>Kali is cast into a gravity well and experiences temporal displacement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Realm Seal — Beeston</h3>
+                    <div class="event-content">
+                        <p>Beeston becomes dimensionally isolated. Preparatory stage for future convergence.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arc IV -->
+            <div class="era-section">
+                <h2 class="era-title">IV. Royastella Arc 2 — Revelation and Collapse</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">discord Returns as Mentor</h3>
+                    <div class="event-content">
+                        <p>Warns Starlite 7th of an existential threat. Claims Beeston has already been destroyed.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Aura Manifestation Training</h3>
+                    <div class="event-content">
+                        <p>discord trains Starlite 7th in Aura Manifestation, Element Core Evolution, and Harmonic Combat Restructuring.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Revelation Confrontation</h3>
+                    <div class="event-content">
+                        <p>discord reveals herself as the threat. Transforms into <strong>BLADE GUILLOTINE</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Starlit Alpha Intervention</h3>
+                    <div class="event-content">
+                        <p><a href="#" class="wiki-link">Starlit Alpha</a> enters battle. Temporarily overwhelms BLADE.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Daughter Revelation Event</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>BLADE reveals familial connection to Alpha</li>
+                            <li>Emotional hesitation leads to Alpha's capture</li>
+                            <li>Alpha is taken through dimensional skyrift to Nexsicon</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Realm Seal — Royastella</h3>
+                    <div class="event-content">
+                        <p>Royastella becomes dimensionally isolated. Preparatory stage for convergence.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arc V -->
+            <div class="era-section">
+                <h2 class="era-title">V. Nexsicon Arc — Cosmological Revelation</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Prehistoric & Metaphysical Backstory Reveals</h3>
+                    <div class="event-content">
+                        <p>Audience learns about:</p>
+                        <ul>
+                            <li>Primordial Cosmology</li>
+                            <li>Harmonic Genesis</li>
+                            <li><a href="#" class="wiki-link">Lodesoul Theory</a></li>
+                            <li>Mythic Realms</li>
+                            <li>Relic Systems</li>
+                            <li><a href="#" class="wiki-link">Akashic Record</a> Infrastructure</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Revelation of True Identities</h3>
+                    <div class="event-content">
+                        <p><a href="#" class="wiki-link">Tiala Hartlight</a> revealed as both <strong>dissonant discord</strong> and <strong>BLADE GUILLOTINE</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Praxis Verax Affinas Exposure</h3>
+                    <div class="event-content">
+                        <p>Structure and goals of <a href="/factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> revealed. Internal ideological tensions surface.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Tiala's Grand Convergence Spell</h3>
+                    <div class="event-content">
+                        <p>Attempt to forcibly accelerate realm integration. Leads to catastrophic instability.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Cascade Resonance Event</h3>
+                    <div class="event-content">
+                        <p>Consequences:</p>
+                        <ul>
+                            <li>Narrative probability collapse</li>
+                            <li>Cross-realm displacement</li>
+                            <li>Causal fragmentation</li>
+                            <li>Mythic civilization rematerialization</li>
+                            <li>Accelerated entropy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Collapse of Praxis Verax Affinas</h3>
+                    <div class="event-content">
+                        <p>Organizational disintegration. Ideological fragmentation.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Formation of New Factions</h3>
+                    <div class="event-content">
+                        <p style="margin-bottom: 12px;"><strong><a href="/factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a></strong> — Leader: Tiala Hartlight</p>
+                        <ul>
+                            <li>Members: <a href="#" class="wiki-link">Claris Quies</a>, <a href="#" class="wiki-link">Jí Lián Xiá</a>, <a href="#" class="wiki-link">Velia Traicerem</a></li>
+                            <li>Goals: Acquire Akashic Record, pursue Ultimatera convergence</li>
+                        </ul>
+                        <p style="margin: 16px 0 12px;"><strong><a href="/factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a></strong> — Founders: Ami Hartbreak & Windi Lightfall</p>
+                        <ul>
+                            <li>Goals: Oppose deterministic cosmology, resist Tiala's convergence doctrine</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Kali's Return</h3>
+                    <div class="event-content">
+                        <p>Re-emerges as <a href="#" class="wiki-link">Odisse Nocere</a>. Aligns with Reason Theory.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Fú cì Ánguāng Rescue & Adoption</h3>
+                    <div class="event-content">
+                        <p>Windi rescues <a href="#" class="wiki-link">Fú cì Ánguāng</a>. Begins fractured restoration of Tiānshàng lineage.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Realm Integration Begins</h3>
+                    <div class="event-content">
+                        <p>Beeston and Royastella begin merging into Nexsicon. Estimated integration: Two Years.</p>
+                    </div>
+                </div>
+
+                <div class="event">
+                    <h3 class="event-title">Two-Year Time Skip</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>Factional consolidation</li>
+                            <li>Magical evolution</li>
+                            <li>Identity transformation</li>
+                            <li>Preparation for final convergence conflict</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arc VI -->
+            <div class="era-section">
+                <h2 class="era-title">VI. Ultimatera Arc — Final Convergence Era</h2>
+                
+                <div class="event">
+                    <h3 class="event-title">Final Existential War</h3>
+                    <div class="event-content">
+                        <ul>
+                            <li>Multi-realm existential war escalation</li>
+                            <li>Final Akashic access attempts</li>
+                            <li>Emergence of unified reality candidate: <strong>Ultimatera</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Call to Action -->
+        <section class="cta-section">
+            <h2 class="cta-title">Explore the Multiverse</h2>
+            <p class="cta-text">
+                Dive deeper into the characters, realms, and conflicts that define the Crios universe. 
+                Each faction represents a unique philosophical stance on destiny, power, and convergence.
+            </p>
+            <div class="cta-buttons">
+                <a href="factions.html" class="cta-button">See Factions</a>
+                <a href="realms.html" class="cta-button secondary">Explore Realms</a>
+                <a href="characters.html" class="cta-button secondary">View All Characters</a>
+            </div>
+        </section>
+    
+    <script>
+        // Toggle between Chronological and Narrative views
+        const toggleButtons = document.querySelectorAll('.toggle-btn');
+        const timelineViews = document.querySelectorAll('.timeline-view');
+
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetView = button.getAttribute('data-view');
+                
+                // Update active button
+                toggleButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Update active view
+                timelineViews.forEach(view => {
+                    view.classList.remove('active');
+                    if (view.id === `${targetView}-view`) {
+                        view.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Add smooth scroll behavior to all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

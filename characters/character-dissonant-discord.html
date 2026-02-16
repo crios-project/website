@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dissonant discord // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+            text-transform: lowercase;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../characters.html" class="back-link">← All Characters</a>
+    </nav>
+
+    <div class="container">
+        <section class="character-header">
+            <div class="character-visual">
+                <img src="../assets/characters/dissonant discord.png" alt="dissonant discord" class="character-image">
+            </div>
+
+            <div class="character-info">
+                <h1 class="character-name">dissonant discord</h1>
+                <p class="character-title">Harmonic Antithesis</p>
+
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">True Name</span>
+                        <span class="stat-value">Unrevealed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Age</span>
+                        <span class="stat-value">Unknown</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Realm</span>
+                        <span class="stat-value"><a href="../realms/realm-beeston.html" class="wiki-link">Beeston</a></span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Classification</span>
+                        <span class="stat-value">Catastrophic Variable</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Power Level</span>
+                        <span class="stat-value">Tier 4+ (Dark Magic)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Weapon</span>
+                        <span class="stat-value">Atonality (Slashing Épée)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Combat Style</span>
+                        <span class="stat-value">Desynchronization</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Allegiance</span>
+                        <span class="stat-value">Self-directed</span>
+                    </div>
+                </div>
+
+                <div class="character-quote">
+                    "Your song ascends in fragile measured grace,<br>
+                    Allow me now to break its perfect time."
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p>dissonant discord is an enigma—at once antagonist, ally, and existential threat. Cloaked in mystery and operating solely for her own ends, discord intervenes in the affairs of the <a href="../factions/faction-heart-melody.html" class="wiki-link">Lovely Hearts</a> whenever it suits her goals.</p>
+
+                <p>She is overwhelmingly powerful, capable of holding off the entire team alone, and has annihilated threats the Lovely Hearts could not hope to overcome. Her presence on the battlefield is absolute; a single lapse in attention can mean death.</p>
+
+                <p>Despite her hostility, discord has saved the team on multiple occasions, preventing catastrophes with cold efficiency. Her motivations remain unclear, her allegiance nonexistent.</p>
+
+                <p>dissonant discord fights for herself—and whatever future she believes must come to pass.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Appearance</h2>
+            <div class="section-content">
+                <p>discord's visual design incorporates teal and black color motifs, creating a tech-forward aesthetic that stands distinct from traditional magical girl coding. Her attire features high collars and angular armor-like panels, emphasizing a non-frilled, precise silhouette.</p>
+
+                <p>Her presence alone often produces psychological destabilization among both allies and enemies. There is something fundamentally <em>wrong</em> about her—an uncanny quality that defies explanation.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Personality</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Core Traits</h3>
+                <ul>
+                    <li><strong>Hyper-intelligent:</strong> Exceptional battlefield analysis and strategic planning</li>
+                    <li><strong>Disciplined:</strong> Absolute control over magical casting and timing</li>
+                    <li><strong>Theatrical:</strong> Treats combat as performance and experimentation</li>
+                    <li><strong>Self-directed:</strong> Operates under purely personal logic</li>
+                </ul>
+
+                <h3 class="section-subtitle">Core Beliefs</h3>
+                <ul>
+                    <li>Appears to be guiding reality toward an unspecified future state</li>
+                    <li>Seeks harmonic collapse events</li>
+                    <li>Believes harmony is inherently unstable</li>
+                    <li>Views collapse as a natural corrective force</li>
+                    <li>Operates under self-preservation of an unknown timeline or outcome</li>
+                </ul>
+
+                <h3 class="section-subtitle">Behavioral Patterns</h3>
+                <ul>
+                    <li>Unpredictable engagement patterns</li>
+                    <li>Proficiency in psychological warfare</li>
+                    <li>Strategic patience—willing to wait for optimal moments</li>
+                    <li>Complete detachment from moral consequence</li>
+                    <li>Demonstrates curiosity rather than malice</li>
+                </ul>
+
+                <p><strong>Core Motivation:</strong> Unknown—possibly guiding events toward a specific outcome only she understands</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Combat Profile</h2>
+            <div class="section-content">
+                <p>dissonant discord employs a predatory, tempo-dominant combat style that blends elegant swordsmanship with unnaturally rapid Tier 4 dark magic execution. Her methodology is built around rhythmic precision, overwhelming magical superiority, and psychological destabilization of opponents through deliberate control of battlefield pacing.</p>
+
+                <h3 class="section-subtitle">Combat Philosophy</h3>
+                <p>discord does not overpower opponents—she <strong>desynchronizes</strong> them. She destabilizes coordinated magical resonance, forcing collapse through timing interference and gravitational distortion.</p>
+
+                <h3 class="section-subtitle">Atonality - Slashing Épée</h3>
+                <p>At the center of her combat identity is her slashing épée, <strong>Atonality</strong>, a weapon that mirrors her philosophy of breaking structure and rewriting harmonic order. Unlike traditional épée combat, which emphasizes thrusting and linear precision, discord uses wide, flowing slashing arcs that blur the line between fencing technique and ritual casting.</p>
+
+                <p>Each blade motion serves as both a physical strike and a conduit for dark spell manifestation, allowing her attacks to operate on simultaneous martial and metaphysical layers.</p>
+
+                <h3 class="section-subtitle">Rhythmic Dominance</h3>
+                <p>discord's movement pattern is unmistakably rhythmic. She advances, retreats, pivots, and strikes with metronomic consistency, maintaining an eerie and unbroken tempo throughout battle. This rhythmic motion functions as an internal casting cadence that allows her to channel Tier 4 dark magic at speeds that defy conventional casting limitations.</p>
+
+                <h3 class="section-subtitle">Dark Magic Arsenal</h3>
+                <ul>
+                    <li>Gravitational pressure manipulation</li>
+                    <li>Void distortions</li>
+                    <li>Suppression fields</li>
+                    <li>Destructive collapse phenomena</li>
+                    <li>Layered magical interference</li>
+                    <li>Delayed magical detonations</li>
+                    <li>Spatial distortions</li>
+                </ul>
+
+                <h3 class="section-subtitle">Theatrical Combat</h3>
+                <p>A defining characteristic of discord's combat behavior is her theatrical dominance. She frequently engages opponents with a composed smile and visible amusement, often prolonging encounters instead of concluding them efficiently. She has been known to deliberately empower or allow opponents to escalate their abilities, treating combat as a form of performance or experimentation.</p>
+
+                <p>This tendency is not rooted in mercy, but in intellectual and emotional stimulation; she seeks opponents capable of disrupting her rhythm or forcing her to adapt.</p>
+
+                <h3 class="section-subtitle">Multi-Target Engagement</h3>
+                <p>When facing multiple adversaries, discord demonstrates exceptional battlefield partitioning. She manipulates positioning and gravitational pressure to isolate individual targets while maintaining defensive awareness across the entire engagement space. Her ability to control tempo allows her to simultaneously suppress group coordination, effectively enabling her to hold off entire teams without surrendering strategic control.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationship with Heart Melody</h2>
+            <div class="section-content">
+                <p>dissonant discord serves as a recurring catastrophic variable within the operational and emotional history of <a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a>.</p>
+
+                <p>She has repeatedly disrupted Heart Melody's harmonic synchronization abilities, demonstrated targeted fascination with their emotional resonance stability, and appeared during critical emotional and narrative turning points tied to their growth. She withdraws only after forcing them into states of harmonic instability or forced evolution.</p>
+
+                <p>Heart Melody initially does not view discord as a conventional enemy, but as a potential future ally. This perspective lasts until <strong>Aria Caesura</strong>, where she kills <a href="character-pyara-dana.html" class="wiki-link">Heart Aria</a> and shatters the Heart Melody team, wholly destabilizing Beeston and cementing herself as their enemy.</p>
+
+                <h3 class="section-subtitle">Behavioral Patterns</h3>
+                <ul>
+                    <li>Appears without warning during pivotal combat turning points</li>
+                    <li>Defeats foes the Hearts have no chance of winning against</li>
+                    <li>Saves the Hearts when they are in danger, even helping them learn new techniques</li>
+                    <li>Demonstrates complete disinterest in post-conflict consequences</li>
+                </ul>
+
+                <p>Her presence is widely interpreted as an omen of catastrophic escalation or salvation.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            
+            <div class="relationships-grid">
+                <a href="character-pyara-dana.html" class="relationship-card">
+                    <div class="relationship-name">Pyara Dana</div>
+                    <div class="relationship-type">Victim / Heart Aria</div>
+                </a>
+
+                <a href="character-kali-dana.html" class="relationship-card">
+                    <div class="relationship-name">Kali Dana</div>
+                    <div class="relationship-type">Enemy / Pursuer</div>
+                </a>
+
+                <a href="character-mahana-sahi.html" class="relationship-card">
+                    <div class="relationship-name">Mahana Sahi</div>
+                    <div class="relationship-type">Successor / Target</div>
+                </a>
+
+                <a href="character-celesin.html" class="relationship-card">
+                    <div class="relationship-name">Celesin the Philharmonious</div>
+                    <div class="relationship-type">Complicated</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> The Antithesis</p>
+                <p><strong>Story Function:</strong> Catastrophic Variable / Destabilizing Force</p>
+                <p><strong>Character Role:</strong> Antagonist / Ambiguous Ally</p>
+                
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>The fragility of unity</li>
+                    <li>The danger of over-reliance on synchronization</li>
+                    <li>Emotional excess becoming self-destructive</li>
+                    <li>Art created through collapse rather than composition</li>
+                    <li>The inevitability of entropy within structured systems</li>
+                </ul>
+
+                <p><strong>Narrative Function:</strong> discord exists to challenge the permanence of emotional and magical stability. She represents the concept of unavoidable narrative entropy—the understanding that even the most perfect harmony must eventually face disruption.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Convention:</strong> Her name is ALWAYS written entirely in lowercase—"dissonant discord"—never capitalized</li>
+                    <li><strong>Speech Pattern:</strong> discord speaks exclusively in iambic pentameter as an affectation. During Aria Caesura, when she breaks character and simply says "Gotcha," the moment is significant but never explicitly called out</li>
+                    <li><strong>Design Notes:</strong> Teal/black color palette; tech-forward, non-magical-girl-coded aesthetic</li>
+                    <li><strong>Symbolism:</strong> Musical dissonance theory; gravitational inevitability; controlled chaos versus structured harmony</li>
+                    <li><strong>Inspiration:</strong> Musical dissonance theory and gravitational inevitability metaphors</li>
+                    <li><strong>Combat Philosophy:</strong> Controlled dissonance—deliberate disruption of harmony to assert dominance over both physical combat and magical structure</li>
+                    <li><strong>Author Notes:</strong> One of the most dangerous and unpredictable adversaries within any engagement; her presence alone can redefine battlefield tempo</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

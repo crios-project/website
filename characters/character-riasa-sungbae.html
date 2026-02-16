@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riasa Sungbae // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff; --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8; --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5); }
+        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
+        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
+        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
+        .back-link:hover { color: var(--accent-cyan); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
+        .form-toggle { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; padding: 20px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; }
+        .form-button { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 12px 24px; background: transparent; border: 2px solid rgba(233, 30, 99, 0.3); color: var(--text-dim); border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
+        .form-button:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+        .form-button.active { background: var(--secondary-pink); border-color: var(--secondary-pink); color: var(--dark-bg); box-shadow: var(--glow-pink); }
+        .character-form { display: none; }
+        .character-form.active { display: block; animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .character-header { display: grid; grid-template-columns: 400px 1fr; gap: 60px; margin-bottom: 60px; }
+        .character-visual { position: relative; }
+        .character-image { width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(233, 30, 99, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
+        .faction-logo { position: absolute; top: 16px; right: 16px; width: 80px; height: auto; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7)); }
+        .character-info { display: flex; flex-direction: column; justify-content: center; }
+        .character-name { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; line-height: 1.1; }
+        .character-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 32px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 24px; }
+        .stat-item { display: flex; flex-direction: column; }
+        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .stat-value { font-family: 'Archivo', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
+        .character-quote { margin-top: 32px; padding: 20px 24px; background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05)); border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif; font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
+        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 12px; padding: 32px; margin-bottom: 32px; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--accent-cyan); margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1rem; }
+        .section-content p { margin-bottom: 16px; }
+        .section-content ul { list-style: none; padding-left: 0; margin: 16px 0; }
+        .section-content li { padding-left: 24px; margin-bottom: 8px; position: relative; }
+        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); }
+        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3); transition: all 0.2s ease; }
+        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
+        .relationships-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
+        .relationship-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 16px; transition: all 0.3s ease; text-decoration: none; display: block; }
+        .relationship-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2); }
+        .relationship-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; margin-bottom: 4px; }
+        .relationship-type { font-size: 0.85rem; color: var(--text-dim); }
+        @media (max-width: 1024px) { .character-header { grid-template-columns: 1fr; gap: 40px; } .character-visual { max-width: 400px; margin: 0 auto; } .character-name { font-size: 2.5rem; } }
+        @media (max-width: 768px) { .form-toggle { flex-wrap: wrap; } .form-button { flex: 1; min-width: 120px; } .stats-grid { grid-template-columns: 1fr; } .content-section { padding: 24px; } }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
+    <div class="container">
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Civilian</button>
+            <button class="form-button" onclick="switchForm('pasha')">Starlit Pasha</button>
+        </div>
+
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Riasa Sungbae.png" alt="Riasa Sungbae" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+                <div class="character-info">
+                    <h1 class="character-name">Riasa Sungbae</h1>
+                    <p class="character-title">Thrill-Seeker • Debutante</p>
+                    <div class="stats-grid">
+                        <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">15</span></div>
+                        <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">6'0" (183 cm)</span></div>
+                        <div class="stat-item"><span class="stat-label">Birth Date</span><span class="stat-value">September 27</span></div>
+                        <div class="stat-item"><span class="stat-label">Ethnicity</span><span class="stat-value">Korean</span></div>
+                        <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Gold</span></div>
+                        <div class="stat-item"><span class="stat-label">Social Status</span><span class="stat-value">Wealthy Debutante</span></div>
+                        <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> (Secret)</span></div>
+                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span class="stat-value">Passionate</span></div>
+                    </div>
+                    <div class="character-quote">"Pain is weakness leaving the body."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Riasa Sungbae is a thrill-seeking prodigy whose civilian recklessness contrasts sharply with the disciplined ferocity of her Runic manifestation. She is a high-profile social figure known for her extreme hobbies, prodigious vehicle mastery, and frequent legal complications resulting from both.</p>
+                    <p>Despite her extremely public civilian life, her connection to Starlit Pasha remains undiscovered, largely due to the overwhelming difference in demeanor between identities.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Impulsive:</strong> Acts on immediate excitement</li>
+                        <li><strong>Excitable:</strong> Constant pursuit of new thrills</li>
+                        <li><strong>Experience-Driven:</strong> Values sensation over caution</li>
+                        <li><strong>Energetically Social:</strong> High-profile public presence</li>
+                    </ul>
+                    <h3 class="section-subtitle">Behavioral Traits</h3>
+                    <ul>
+                        <li>Extreme adrenaline dependency</li>
+                        <li>Constant pursuit of new high-risk experiences</li>
+                        <li>Obsessive collector of martial arts disciplines</li>
+                        <li>Exceptionally skilled multi-vehicle operator</li>
+                    </ul>
+                    <p>Riasa demonstrates unnatural aptitude in controlling nearly any transportation system, including airborne, aquatic, hovering, and terrestrial vehicles. However, her mechanical mastery is offset by consistent disregard for operational law and regulation. As a result, she maintains a legal defense team more robust than personal security.</p>
+                    <p>Her impulsive nature is frequently mistaken for carelessness, though her successes suggest an intuitive grasp of kinetic systems and spatial motion.</p>
+                    <p><strong>Identity Protection:</strong> Ironically, Riasa's well-known inability to maintain secrets becomes one of her strongest safeguards; few believe she could conceal such a monumental double life.</p>
+                </div>
+            </section>
+        </div>
+
+        <div id="pasha-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Starlit Pasha.png" alt="Starlit Pasha" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+                <div class="character-info">
+                    <h1 class="character-name">Starlit Pasha</h1>
+                    <p class="character-title">Aerial Crusader</p>
+                    <div class="stats-grid">
+                        <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Aerial Combatant</span></div>
+                        <div class="stat-item"><span class="stat-label">Elemental Core</span><span class="stat-value">Wind</span></div>
+                        <div class="stat-item"><span class="stat-label">Casting Language</span><span class="stat-value">Korean</span></div>
+                        <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Diadem Refrains (Dual Chakrams)</span></div>
+                        <div class="stat-item"><span class="stat-label">Starlight Blessing</span><span class="stat-value">Gravity Manipulation</span></div>
+                        <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Momentum Warfare</span></div>
+                    </div>
+                    <div class="character-quote">"Justice demands action. I am that action."</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Profile</h2>
+                <div class="section-content">
+                    <p>As the <strong>Starlit Pasha</strong>, Riasa undergoes a drastic psychological shift. The reckless thrill-seeker gives way to a crusader who frames combat as a moral obligation.</p>
+                    <h3 class="section-subtitle">Diadem Refrains</h3>
+                    <p>A matched set of high-velocity throwing chakrams engineered for aerial dominance and mid-range suppression.</p>
+                    <ul>
+                        <li>Precision-guided boomerang return function</li>
+                        <li>Capable of multi-angle ricochet trajectories</li>
+                        <li>Balanced for both ranged slicing and close-quarters rotational attacks</li>
+                    </ul>
+                    <p>Pasha frequently employs complex aerial throwing patterns, using gravity manipulation to alter weapon arcs mid-flight, creating unpredictable attack vectors.</p>
+                    <h3 class="section-subtitle">Starlight Blessing: Gravity Manipulation</h3>
+                    <p><strong>Function:</strong> Allows Pasha to manipulate localized gravitational forces affecting herself and objects she can physically lift.</p>
+                    <ul>
+                        <li>Sustained personal flight</li>
+                        <li>Mass-assisted aerial maneuvering</li>
+                        <li>Ability to transport allies, weapons, or environmental objects during flight</li>
+                    </ul>
+                    <p>Unlike telekinetic manipulation, Pasha's lifting threshold remains tied to her physical strength baseline. However, her exceptional athleticism allows her to move surprisingly large masses while airborne.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Tactical Role</h2>
+                <div class="section-content">
+                    <p>Pasha specializes in vertical battlefield control and momentum warfare.</p>
+                    <ul>
+                        <li>Aggressive aerial engagement</li>
+                        <li>High-speed rotational assault patterns</li>
+                        <li>Momentum stacking through chained gravitational shifts</li>
+                        <li>Weapon orbiting and rebound strikes</li>
+                    </ul>
+                    <p>Her fighting style emphasizes overwhelming pressure, frequently maintaining constant offensive motion until opponents collapse under cumulative assault.</p>
+                    <p>Pasha fights with elevated tactical clarity, strong ideological commitment to justice, and extreme physical and emotional intensity. Her combat methods are widely regarded as overwhelming and brutally efficient.</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            <div class="relationships-grid">
+                <a href="character-itami-serafino.html" class="relationship-card">
+                    <div class="relationship-name">Itami Serafino</div>
+                    <div class="relationship-type">Leader / Starlit Empress</div>
+                </a>
+                <a href="character-marate-jalo.html" class="relationship-card">
+                    <div class="relationship-name">Marate Jalo</div>
+                    <div class="relationship-type">Mentor / Starlit Alpha</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> The Crusader</p>
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>Passion refined into purpose</li>
+                    <li>The thin boundary between thrill and conviction</li>
+                    <li>Momentum as both strength and vulnerability</li>
+                    <li>Heroism born from reckless courage</li>
+                    <li>Freedom, velocity, emotional intensity</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> 숭배 (Sungbae) — connotes reverence or worship, suggesting elevated status or public admiration; 리아사 (Riasa) — stylized phonetic identity emphasizing distinctiveness</li>
+                    <li><strong>Hair:</strong> Extremely long (past knee length), pale blonde-white base with vivid crimson outer layers and spikes creating flame-like cloak movement</li>
+                    <li><strong>Appearance:</strong> Exceptionally tall frame; long-limbed athletic build; golden irises conveying intensity</li>
+                    <li><strong>Design Notes:</strong> Brown bodysuit base with red vest and white belt buckles; streamlined construction to minimize aerial drag</li>
+                    <li><strong>Vehicle Mastery:</strong> Unnatural aptitude for any transportation system despite consistent legal violations</li>
+                    <li><strong>Personality Shift:</strong> One of the most dramatic inversions in Starlite 7th between civilian and Runic identity</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => form.classList.remove('active'));
+            document.querySelectorAll('.form-button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(formName + '-form').classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

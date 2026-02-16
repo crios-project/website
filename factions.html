@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factions // CRIOS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
+            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Background effects */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -150px;
+            animation: orbFloat1 20s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -100px;
+            animation: orbFloat2 25s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-80px, 80px); }
+        }
+
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(80px, -60px); }
+        }
+
+        /* Header */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .page-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Faction Grid */
+        .faction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .faction-card {
+            background: var(--dark-panel);
+            border: 2px solid rgba(233, 30, 99, 0.2);
+            border-radius: 16px;
+            padding: 50px 40px;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .faction-card:nth-child(1) { animation-delay: 0.1s; }
+        .faction-card:nth-child(2) { animation-delay: 0.2s; }
+        .faction-card:nth-child(3) { animation-delay: 0.3s; }
+        .faction-card:nth-child(4) { animation-delay: 0.4s; }
+        .faction-card:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .faction-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.08), rgba(0, 217, 255, 0.03));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .faction-card:hover::before {
+            opacity: 1;
+        }
+
+        .faction-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(233, 30, 99, 0.2), transparent);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .faction-card:hover::after {
+            width: 600px;
+            height: 600px;
+        }
+
+        .faction-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 12px 48px rgba(0, 217, 255, 0.4);
+            transform: translateY(-12px);
+        }
+
+        .faction-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 32px;
+            min-height: 200px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .faction-logo {
+            max-width: 100%;
+            max-height: 180px;
+            height: auto;
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
+            transition: all 0.5s ease;
+        }
+
+        .faction-card:hover .faction-logo {
+            filter: drop-shadow(var(--glow-pink));
+            transform: scale(1.05);
+        }
+
+        .faction-info {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .faction-tagline {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .faction-card:hover .faction-tagline {
+            opacity: 1;
+            color: var(--text-primary);
+        }
+
+        .faction-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+
+        .cta-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-text {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dim);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 14px 32px;
+            background: transparent;
+            border: 2px solid var(--secondary-pink);
+            color: var(--secondary-pink);
+            border-radius: 6px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .faction-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .faction-card {
+                padding: 40px 32px;
+            }
+
+            .faction-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="index.html" class="back-link">← Home</a>
+        <div class="header-title">Faction Index</div>
+        <div style="width: 80px;"></div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1 class="page-title">FACTIONS</h1>
+            <p class="page-subtitle">Five major organizations shaping the fate of the multiverse</p>
+        </header>
+
+        <!-- Faction Grid -->
+        <div class="faction-grid">
+            <!-- Heart Melody / Lovely Hearts -->
+            <a href="factions/faction-heart-melody.html" class="faction-card">
+                <div class="faction-logo-container">
+                    <img src="assets/icons/Lovely Hearts Logo.png" alt="Heart Melody" class="faction-logo">
+                </div>
+                <div class="faction-info">
+                    <p class="faction-tagline">"Where harmony protects the realm, and each voice resonates with purpose."</p>
+                    <div class="faction-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">7</span>
+                            <span class="stat-label">Members</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Beeston</span>
+                            <span class="stat-label">Realm</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Lúmenai</span>
+                            <span class="stat-label">Magic</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Starlite 7th -->
+            <a href="factions/faction-starlite-7th.html" class="faction-card">
+                <div class="faction-logo-container">
+                    <img src="assets/icons/Starlite 7th Logo.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+                <div class="faction-info">
+                    <p class="faction-tagline">"Sovereign sentinels bound by royal duty and elemental mastery."</p>
+                    <div class="faction-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">8</span>
+                            <span class="stat-label">Members</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Royastella</span>
+                            <span class="stat-label">Realm</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Element Core</span>
+                            <span class="stat-label">Magic</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Destiny's Penance -->
+            <a href="factions/faction-destinys-penance.html" class="faction-card">
+                <div class="faction-logo-container">
+                    <img src="assets/icons/Destiny's Penance Logo.png" alt="Destiny's Penance" class="faction-logo">
+                </div>
+                <div class="faction-info">
+                    <p class="faction-tagline">"Burden carried through sacrifice, destiny fulfilled through penance."</p>
+                    <div class="faction-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">2</span>
+                            <span class="stat-label">Core Members</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Nexsicon</span>
+                            <span class="stat-label">Base</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Pro-Destiny</span>
+                            <span class="stat-label">Ideology</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Reason Theory -->
+            <a href="factions/faction-reason-theory.html" class="faction-card">
+                <div class="faction-logo-container">
+                    <img src="assets/icons/Reason Theory Logo.png" alt="Reason Theory" class="faction-logo">
+                </div>
+                <div class="faction-info">
+                    <p class="faction-tagline">"Destiny is either a lie — or something worth sabotaging."</p>
+                    <div class="faction-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">Members</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Nexsicon</span>
+                            <span class="stat-label">Base</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Anti-Destiny</span>
+                            <span class="stat-label">Ideology</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Praxis Verax Affinas -->
+            <a href="factions/faction-praxis-verax-affinas.html" class="faction-card">
+                <div class="faction-logo-container">
+                    <img src="assets/icons/Praxis Verax Affinis Logo.png" alt="Praxis Verax Affinas" class="faction-logo">
+                </div>
+                <div class="faction-info">
+                    <p class="faction-tagline">"Truth through action, kinship through shared purpose."</p>
+                    <div class="faction-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">Collapsed</span>
+                            <span class="stat-label">Status</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Nexsicon</span>
+                            <span class="stat-label">Origin</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Historical</span>
+                            <span class="stat-label">Era</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <h2 class="cta-title">Explore the Multiverse</h2>
+            <p class="cta-text">
+                Dive deeper into the characters, realms, and conflicts that define the Crios universe. 
+                Each faction represents a unique philosophical stance on destiny, power, and convergence.
+            </p>
+            <div class="cta-buttons">
+                <a href="characters.html" class="cta-button">View All Characters</a>
+                <a href="realms.html" class="cta-button secondary">Explore Realms</a>
+                <a href="timeline.html" class="cta-button secondary">View Timeline</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shini Thana // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
+
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
+
+        .character-form {
+            display: none;
+        }
+
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../characters.html" class="back-link">← All Characters</a>
+    </nav>
+
+    <div class="container">
+        <!-- Form Toggle -->
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Civilian</button>
+            <button class="form-button" onclick="switchForm('sultana')">Starlit Sultana</button>
+        </div>
+
+        <!-- CIVILIAN FORM -->
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Shini Thana.png" alt="Shini Thana" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Shini Thana</h1>
+                    <p class="character-title">Idol • Rainbow Star • Vampire</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Age</span>
+                            <span class="stat-value">17 (Biologically Static)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Height</span>
+                            <span class="stat-value">6'0" (183 cm)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Birth Date</span>
+                            <span class="stat-value">November 13</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Ethnicity</span>
+                            <span class="stat-value">Black and Japanese</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Eyes</span>
+                            <span class="stat-value">Gold</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Species</span>
+                            <span class="stat-value">Vampire</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Occupation</span>
+                            <span class="stat-value">Pop Idol (Rainbow Star)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Faction</span>
+                            <span class="stat-value"><a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> (Secret)</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "You have forgotten your guilt. I shall remind you in blood and fire."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Shini Thana exists as both mirror and counterbalance to <a href="character-itami-serafino.html" class="wiki-link">Itami Serafino</a>. Where the Starlit Empress is openly expressive, the Starlit Sultana is internally volatile yet externally immaculate. Her presence is characterized by immaculate composure, aristocratic self-assurance, and calculated detachment.</p>
+
+                    <p>She performs publicly as one half of the globally renowned idol group <strong>Rainbow Star</strong>, alongside her elder sister Itami. Unknown to the public, Shini is a vampire, second-in-command of <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>, and one of its most dangerous operatives.</p>
+
+                    <p>Her vampiric nature introduces additional layers of permanence and predation, transforming her from a conventional Runic Knight into something older, sharper, and far more patient.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Appearance</h2>
+                <div class="section-content">
+                    <p>Shini's visual design communicates speed, dominance, and disciplined athleticism while retaining subtle ornamental symbolism.</p>
+
+                    <h3 class="section-subtitle">Physical Characteristics</h3>
+                    <ul>
+                        <li>Tall, athletic physique emphasizing core strength and leg mobility</li>
+                        <li>Warm skin tone</li>
+                        <li>Gold irises that mirror Itami's, reinforcing familial and thematic symmetry</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Hair</h3>
+                    <ul>
+                        <li>Dark purple-brown hair styled into a high-volume ponytail</li>
+                        <li>Loose framing strands soften facial severity</li>
+                        <li>Red headband tied into trailing ribbon elements</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Outfit Composition</h3>
+                    <ul>
+                        <li>Black combat crop top with angular V-shaped hem</li>
+                        <li>Harness-style red strap overlays across chest and shoulders</li>
+                        <li>Fitted black mobility shorts</li>
+                        <li>Twin red belt loops that extend outward, creating motion emphasis</li>
+                        <li>Fingerless tactical gloves</li>
+                        <li>Asymmetrical legwear: one leg reinforced by mid-thigh armored boot, opposite leg wrapped in red ribbon lattice ending in black combat shoe</li>
+                        <li>Silver heart-shaped buckle accent integrated into thigh strap</li>
+                    </ul>
+
+                    <p>The repeated red harness motifs reinforce her identity as restrained aggression, while the heart symbol subtly reflects concealed emotional vulnerability.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <p>Shini is defined by emotional absolutism masked beneath aristocratic composure.</p>
+
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Intensely Prideful:</strong> Carefully curated self-image</li>
+                        <li><strong>Absolutely Loyal:</strong> Toward chosen bonds (especially Itami)</li>
+                        <li><strong>Calculated Cruelty:</strong> Toward perceived enemies</li>
+                        <li><strong>Perfectionist:</strong> Self-discipline in all things</li>
+                        <li><strong>Concealed Depth:</strong> Emotional extremity hidden behind superiority performance</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Public Persona</h3>
+                    <p>Shini cultivates an aura of flawless superiority. She is:</p>
+                    <ul>
+                        <li>Highly self-assured</li>
+                        <li>Elegantly composed</li>
+                        <li>Socially distant yet captivating</li>
+                        <li>Consistently immaculate in presentation</li>
+                    </ul>
+
+                    <p>Her vanity is not shallow narcissism but a carefully curated identity standard. She believes in perfection because she has spent countless hours refining herself toward it.</p>
+
+                    <h3 class="section-subtitle">Emotional Reality</h3>
+                    <p>Unlike Itami's visible emotional transparency, Shini experiences emotion with overwhelming intensity while maintaining an almost impenetrable exterior. Love, loyalty, resentment, and fury exist within her in absolute extremes.</p>
+
+                    <p>The sole consistent exception to her emotional restraint is Itami, toward whom Shini displays visible softness and protective devotion.</p>
+
+                    <p>Her vanity manifests as a survival philosophy. She believes weakness invites destruction and therefore refuses to present it, even when experiencing profound internal conflict.</p>
+
+                    <p><strong>Core Value:</strong> Perfection as armor; emotional concealment as survival strategy</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Vampiric Physiology</h2>
+                <div class="section-content">
+                    <p>Shini has existed as a vampire for an unspecified duration, resulting in biological age stasis at seventeen.</p>
+
+                    <h3 class="section-subtitle">Adaptations</h3>
+                    <ul>
+                        <li>Enhanced speed, perception, and regenerative capacity</li>
+                        <li>Dependence on blood consumption for sustained vitality</li>
+                        <li>Heightened resilience compared to standard Runic Knights</li>
+                    </ul>
+
+                    <p>Her vampirism introduces subtle thematic irony, particularly in her involvement in acts of preservation and salvation.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Visual Presence & Body Language</h2>
+                <div class="section-content">
+                    <p>Shini's posture conveys confrontation readiness and controlled dominance.</p>
+
+                    <h3 class="section-subtitle">Common Indicators</h3>
+                    <ul>
+                        <li>Feet planted in wide, assertive stance</li>
+                        <li>Hands positioned on hips or near defensive posture</li>
+                        <li>Straight spinal alignment projecting authority</li>
+                        <li>Focused, narrowed gaze signaling analytical threat assessment</li>
+                    </ul>
+
+                    <p>She projects the impression of someone who expects compliance rather than requests it.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- STARLIT SULTANA FORM -->
+        <div id="sultana-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Starlit Sultana.png" alt="Starlit Sultana" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Starlit Sultana</h1>
+                    <p class="character-title">Second-in-Command • Intelligence Operative</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Role</span>
+                            <span class="stat-value">Second-in-Command</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Elemental Core</span>
+                            <span class="stat-value">Wind</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Key Attribute</span>
+                            <span class="stat-value">Vain</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Casting Language</span>
+                            <span class="stat-value">Latin</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Weapon</span>
+                            <span class="stat-value">Sanctum Majestra (Shield)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Starlight Blessing</span>
+                            <span class="stat-value">Teleportation</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Combat Style</span>
+                            <span class="stat-value">Defensive / Counteroffensive</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Specialization</span>
+                            <span class="stat-value">Infiltration / Intelligence</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "Your mistake was believing you had any chance at all."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Profile</h2>
+                <div class="section-content">
+                    <p>As the <strong>Starlit Sultana</strong>, Shini serves as Starlite 7th's infiltration specialist, intelligence gatherer, and operational contingency executor.</p>
+
+                    <p>Within Starlite 7th, she functions as second-in-command, intelligence operative, and strategic executioner. While Itami commands the battlefield's future, Shini governs its unseen corridors, ensuring enemies collapse before engagements formally begin.</p>
+
+                    <h3 class="section-subtitle">Operational Roles</h3>
+                    <ul>
+                        <li>Silent reconnaissance</li>
+                        <li>Enemy destabilization</li>
+                        <li>Psychological warfare</li>
+                        <li>Strategic elimination</li>
+                    </ul>
+
+                    <p>Shini is known to uncover critical enemy vulnerabilities, though she selectively determines which findings are shared with the team. This selective disclosure reinforces her role as both protector and independent operator.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Sanctum Majestra</h2>
+                <div class="section-content">
+                    <p>A Runic shield engineered as an absolute defensive authority.</p>
+
+                    <h3 class="section-subtitle">Capabilities</h3>
+                    <ul>
+                        <li>Reflects or negates incoming offensive vectors regardless of scale</li>
+                        <li>Converts defensive positioning into offensive redirection</li>
+                        <li>Functions as both physical barrier and spatial stabilizer</li>
+                    </ul>
+
+                    <p>Sanctum Majestra allows Shini to dominate battlefield positioning by denying opponents any reliable offensive progression. While she is not traditionally viewed as a striker, her counteroffensive applications frequently determine battle outcomes.</p>
+
+                    <h3 class="section-subtitle">Vampiric Modifications</h3>
+                    <p>Her Runic uniform incorporates specialized modifications:</p>
+                    <ul>
+                        <li>Sunlight-resistant material layering</li>
+                        <li>Fire-dampening defensive runes</li>
+                        <li>Integrated blood collection reservoirs designed for battlefield harvesting and later consumption</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Starlight Blessing: Teleportation</h2>
+                <div class="section-content">
+                    <p><strong>Function:</strong> Allows Shini to relocate instantly between two spatial coordinates.</p>
+
+                    <h3 class="section-subtitle">Properties</h3>
+                    <ul>
+                        <li>No visible charge-up period</li>
+                        <li>No casting signal or detectable activation pattern</li>
+                        <li>Maintains full combat readiness upon arrival</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Tactical Applications</h3>
+                    <p>Teleportation grants Shini unparalleled control over battlefield geography. She uses it to:</p>
+                    <ul>
+                        <li>Infiltrate secure enemy formations</li>
+                        <li>Evade lethal attacks with zero latency</li>
+                        <li>Reposition allies into advantageous formations</li>
+                        <li>Execute rapid, unpredictable defensive interceptions</li>
+                    </ul>
+
+                    <p>Like all Starlight Blessings, Teleportation is a System-granted skill rather than a magical phenomenon. The Royastellan System is recognized as a stabilizing and benevolent progression framework.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Shared Sections -->
+        <section class="content-section">
+            <h2 class="section-title">Relationship with Itami</h2>
+            <div class="section-content">
+                <p>Shini's loyalty to Itami transcends familial affection and operates as existential devotion.</p>
+
+                <h3 class="section-subtitle">Protective Dynamics</h3>
+                <ul>
+                    <li>Serves as Itami's operational safeguard</li>
+                    <li>Filters threats before they reach her sister</li>
+                    <li>Accepts moral burden for decisions Itami would struggle to make</li>
+                    <li>Displays emotional openness exclusively in Itami's presence</li>
+                </ul>
+
+                <p>Their partnership forms a dual monarchy of emotional openness and emotional concealment. Where Itami leads through vulnerability, Shini protects through perfection.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            
+            <div class="relationships-grid">
+                <a href="character-itami-serafino.html" class="relationship-card">
+                    <div class="relationship-name">Itami Serafino</div>
+                    <div class="relationship-type">Sister / Starlit Empress</div>
+                </a>
+
+                <a href="character-marate-jalo.html" class="relationship-card">
+                    <div class="relationship-name">Marate Jalo</div>
+                    <div class="relationship-type">Mentor / Starlit Alpha</div>
+                </a>
+
+                <a href="character-mahana-sahi.html" class="relationship-card">
+                    <div class="relationship-name">Mahana Sahi</div>
+                    <div class="relationship-type">Ward / Protected</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> The Perfect Predator / Guardian</p>
+                <p><strong>Story Function:</strong> Second-in-Command / Intelligence Operative</p>
+                <p><strong>Character Arc:</strong> Perfection as prison versus vulnerability as connection</p>
+                
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>Beauty weaponized into authority</li>
+                    <li>Emotional extremity hidden beneath aristocratic restraint</li>
+                    <li>Immortality contrasted with loyalty to transient bonds</li>
+                    <li>Protection through secrecy and control</li>
+                    <li>The predator who chooses guardianship over dominance</li>
+                </ul>
+
+                <p><strong>Narrative Function:</strong> Introduces tension between perfection and humanity, questioning whether emotional concealment is strength or self-imprisonment.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> Shini (死ぬ) — Japanese verb meaning "to die," reflecting her vampiric transformation and association with mortality; Thana — Evokes death-related linguistic roots across multiple cultures, reinforcing thematic alignment with endings and inevitability</li>
+                    <li><strong>Design Notes:</strong> Red harness motifs as restrained aggression; heart symbol as concealed emotional vulnerability; asymmetrical legwear emphasizes speed and mobility</li>
+                    <li><strong>Symbolism:</strong> Gold eyes as mirror to Itami; vampire as immortal guardian; shield as protective authority; teleportation as untethered freedom</li>
+                    <li><strong>Inspiration:</strong> Aristocratic vampires; defensive specialists who control through denial; perfect exteriors concealing volatile interiors</li>
+                    <li><strong>Author Notes:</strong> Vanity as survival strategy, not weakness. Shini's emotional extremity is as intense as Itami's—she just refuses to show it</li>
+                    <li><strong>Biological Status:</strong> Age locked at 17 due to vampirism; duration unknown</li>
+                    <li><strong>Reputation:</strong> Second-in-command; intelligence specialist; selective information sharer; Itami's operational safeguard</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            document.querySelectorAll('.form-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const selectedForm = document.getElementById(formName + '-form');
+            selectedForm.classList.add('active');
+
+            event.target.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

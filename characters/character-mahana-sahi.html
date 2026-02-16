@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahana Sahi // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
+
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
+
+        .character-form {
+            display: none;
+        }
+
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-container {
+            position: relative;
+        }
+
+        .heart-symbol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: auto;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../characters.html" class="back-link">← All Characters</a>
+    </nav>
+
+    <div class="container">
+        <!-- Form Toggle - 4 BUTTONS -->
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Civilian</button>
+            <button class="form-button" onclick="switchForm('symphony')">Heart Symphony</button>
+            <button class="form-button" onclick="switchForm('crescendo')">Heart Crescendo</button>
+            <button class="form-button" onclick="switchForm('finalis')">Finalis Grande</button>
+        </div>
+
+        <!-- CIVILIAN FORM -->
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Mahana Sahi.png" alt="Mahana Sahi" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Mahana Sahi</h1>
+                    <p class="character-title">Civilian Identity</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Mahana heart.png" alt="Mahana's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Age</span>
+                                <span class="stat-value">14</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Height</span>
+                                <span class="stat-value">5'2" (158 cm)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Birth Date</span>
+                                <span class="stat-value">Unknown</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Ethnicity</span>
+                                <span class="stat-value">Indian</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Hair</span>
+                                <span class="stat-value">Dark gray/vivid purple</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Eyes</span>
+                                <span class="stat-value">Bright green</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Faction</span>
+                                <span class="stat-value"><a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a></span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Status</span>
+                                <span class="stat-value">Successor Leader</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "Threats only work on people with something to lose."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Mahana Sahi is gentle, cheerful, and profoundly powerful, despite having little confidence in herself. She is easily deceived and painfully naive, yet her kindness is unwavering. Despite her uncertainty, Mahana never gives up. She stumbles, fails, and gets back up smiling every time.</p>
+
+                    <p>Mahana bears a striking resemblance to <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a> and suffers from severe memory loss—a coincidence that deeply unsettles <a href="character-kali-dana.html" class="wiki-link">Kali</a>. Little is known about Mahana's early life prior to joining <a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a>.</p>
+
+                    <p>Mahana presents with an open, energetic physicality. Her long, voluminous hair—upper layer dark gray, lower layer vivid purple that fades toward the tips—is swept to one side with a few loose front strands. Her bright green eyes are prominent and expressive, radiating optimism even in dire circumstances.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Optimistic:</strong> Maintains hope even when facing overwhelming odds</li>
+                        <li><strong>Driven:</strong> Pushes forward despite self-doubt</li>
+                        <li><strong>Emotionally Resilient:</strong> Recovers from setbacks quickly</li>
+                        <li><strong>Naive:</strong> Easily deceived, trusts too readily</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Strengths</h3>
+                    <ul>
+                        <li>Exceptional adaptability under pressure</li>
+                        <li>Natural leadership presence</li>
+                        <li>Harmonic intuition that exceeds her understanding</li>
+                        <li>Unwavering kindness and determination</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Flaws & Internal Conflicts</h3>
+                    <ul>
+                        <li>Chronic overextension—takes on too much</li>
+                        <li>Self-sacrificial tendencies</li>
+                        <li>Severe memory loss creates identity uncertainty</li>
+                        <li>Bears power that exceeds her understanding</li>
+                    </ul>
+
+                    <p><strong>Core Fear:</strong> Failing to live up to Pyara's legacy</p>
+                    <p><strong>Core Motivation:</strong> Preservation of harmony through action—keep Heart Melody together and prevent further loss</p>
+                    <p><strong>Core Value:</strong> Cooperation, forward momentum, shared responsibility</p>
+                    <p><strong>Moral Alignment:</strong> Neutral Good</p>
+                    <p><strong>Emotional Triggers:</strong> Perceived abandonment; unresolved grief</p>
+                    <p><strong>Habits:</strong> Forward-leaning stance; expressive hand gestures</p>
+                    <p><strong>Internal Question:</strong> Who am I beyond what I've inherited?</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">The Mahana Paradox</h2>
+                <div class="section-content">
+                    <p>Mahana's origin is deliberately ambiguous and represents one of the core mysteries of the Crios narrative. Her striking resemblance to Pyara, combined with severe memory loss and unexplained harmonic capacity, raises questions that have no clear answers:</p>
+
+                    <ul>
+                        <li>Is she Pyara's reincarnation following the Desynchronization Event?</li>
+                        <li>A harmonically displaced echo attempting to stabilize a melody that was never meant to continue?</li>
+                        <li>An entirely new entity born from fractured lodesoul essence?</li>
+                        <li>Something else entirely?</li>
+                    </ul>
+
+                    <p>The narrative deliberately leaves this unresolved. Mahana exists as a reconstructed harmonic echo—whether that makes her Pyara, a continuation of Pyara, or something new is a question the story refuses to answer definitively.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Formative Events</h2>
+                <div class="section-content">
+                    <ul>
+                        <li>The death of Heart Aria (Pyara Dana)—the event that created the void Mahana fills</li>
+                        <li>Protection in Royastella by the Starlite 7th team</li>
+                        <li>Return to Beeston and assumption of leadership in Heart Melody</li>
+                        <li>Discovery that her apparent elemental limitation was incomplete</li>
+                        <li>Discovery of Ambrasis and ascension to Heart Crescendo and Finalis Grande</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- HEART SYMPHONY FORM -->
+        <div id="symphony-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Heart Symphony.png" alt="Heart Symphony" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Heart Symphony</h1>
+                    <p class="character-title">Successor Leader</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Mahana heart.png" alt="Mahana's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Role</span>
+                                <span class="stat-value">Successor Leader</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Power Level</span>
+                                <span class="stat-value">Tier 1-2 Access</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Combat Style</span>
+                                <span class="stat-value">Escalatory / Overwhelming</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Special Ability</span>
+                                <span class="stat-value">Broad Elemental Access</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Weapon</span>
+                                <span class="stat-value">Tearing Etude</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Artifact</span>
+                                <span class="stat-value">Ambrasis</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "I'll keep everyone together. I promise."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Heart Symphony Powers</h2>
+                <div class="section-content">
+                    <p>As <strong>Heart Symphony</strong>, Mahana inherits leadership after Pyara's death. Her fighting style is direct and overwhelming, fueled by raw magical output rather than finesse. She fights to honor what was lost, striving to prove herself worthy of the role she never asked for.</p>
+
+                    <p>Her transformed attire emphasizes motion and upward flow, with angular gold tracery over deep violet fabric. The design suggests amplification and expansion rather than containment.</p>
+
+                    <h3 class="section-subtitle">Abilities</h3>
+                    <ul>
+                        <li><strong>Broad Elemental Access:</strong> Can access all Tier 1 and Tier 2 Essentia types</li>
+                        <li><strong>Harmonic Escalation:</strong> Power increases under pressure</li>
+                        <li><strong>Leadership Coordination:</strong> Synchronizes team magic like Aria before her</li>
+                        <li><strong>Raw Output:</strong> Overwhelming magical force compensating for lack of finesse</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Limitations</h3>
+                    <ul>
+                        <li>Lacks the refined control of Pyara's original conductor role</li>
+                        <li>Physical strain from sustained high-output casting</li>
+                        <li>Relies on escalation rather than precision</li>
+                    </ul>
+
+                    <p><strong>Philosophy:</strong> Remembrance and inherited responsibility—carrying forward what Pyara started</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- HEART CRESCENDO FORM -->
+        <div id="crescendo-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Heart Crescendo.png" alt="Heart Crescendo" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Heart Crescendo</h1>
+                    <p class="character-title">First Ascension</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Mahana heart.png" alt="Mahana's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Ascension Method</span>
+                                <span class="stat-value">Via Ambrasis</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Power Level</span>
+                                <span class="stat-value">Tier 3 (Lúmira)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Combat Role</span>
+                                <span class="stat-value">Reality Stabilization</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Status</span>
+                                <span class="stat-value">Unstable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "I can go higher. I have to."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Heart Crescendo Ascension</h2>
+                <div class="section-content">
+                    <p><strong>Heart Crescendo</strong> represents Mahana's first ascension through the Ambrasis artifact, granting access to Tier 3 (Lúmira) harmonic resonance. Like Pyara's ascension before her, this amplifies power dramatically but introduces dangerous instability.</p>
+
+                    <p>The ascension visually manifests as increasing elaboration of form and escalating harmonic output. Purple tones deepen, gold tracery becomes more complex, and the upward flow of her design intensifies.</p>
+
+                    <p><strong>Ambrasis Artifact:</strong> An Ascension Artifact in the form of a sword. Becomes more elaborate as the wielder gains power, enabling transformation from Symphony to Crescendo and eventually to Finalis Grande.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- FINALIS GRANDE FORM -->
+        <div id="finalis-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Finalis Grande.png" alt="Finalis Grande" class="character-image">
+                    <img src="../assets/icons/Lovely Hearts Icon.png" alt="Heart Melody" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Finalis Grande</h1>
+                    <p class="character-title">Ultimate Manifestation</p>
+
+                    <div class="stats-container">
+                        <img src="../assets/hearts/Mahana heart.png" alt="Mahana's Heart" class="heart-symbol">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Classification</span>
+                                <span class="stat-value">Beyond Lodesoul</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Power Level</span>
+                                <span class="stat-value">Tier 4 (Ómura)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Ultimate Expression</span>
+                                <span class="stat-value">Singular Tier 5 (Æónel)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Cost</span>
+                                <span class="stat-value">Catastrophic Strain</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "Even if I break... I'll hold it together long enough."
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">The Final Escalation</h2>
+                <div class="section-content">
+                    <p><strong>Finalis Grande</strong> is Mahana's ultimate manifestation—reaching Tier 4 (Ómura) with the capacity for a singular, non-repeatable Tier 5 (Æónel) expression. This level of power exceeds safe harmonic limits and risks complete metaphysical collapse.</p>
+
+                    <h3 class="section-subtitle">Power Tiers</h3>
+                    <ul>
+                        <li><strong>Tier 4 (Ómura):</strong> Reality-distorting harmonic output</li>
+                        <li><strong>Tier 5 (Æónel):</strong> Absolute override—singular, unrepeatable expression that rewrites fundamental harmonic laws</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Critical Limitations</h3>
+                    <ul>
+                        <li>Severe physical and metaphysical strain at Tier 4</li>
+                        <li>Prolonged usage risks complete collapse</li>
+                        <li>Tier 5 expression is singular and non-repeatable</li>
+                        <li>Ultimate power exceeds Mahana's understanding or control</li>
+                    </ul>
+
+                    <p><strong>Philosophy:</strong> Orchestral culmination—bearing the full weight of a harmony meant for many, compressed into one</p>
+
+                    <p>Mahana embodies escalation, endurance, and the burden of carrying a harmony that was never meant to be singular. Her ultimate power exceeds safe harmonic limits—she can reach heights Pyara couldn't, but at catastrophic cost.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Shared Sections -->
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            
+            <div class="relationships-grid">
+                <a href="character-pyara-dana.html" class="relationship-card">
+                    <div class="relationship-name">Pyara Dana</div>
+                    <div class="relationship-type">Predecessor / ???</div>
+                </a>
+
+                <a href="character-kali-dana.html" class="relationship-card">
+                    <div class="relationship-name">Kali Dana</div>
+                    <div class="relationship-type">Complicated / Unsettled</div>
+                </a>
+
+                <a href="character-omba-miko.html" class="relationship-card">
+                    <div class="relationship-name">Omba Miko</div>
+                    <div class="relationship-type">Teammate / Ally</div>
+                </a>
+
+                <a href="character-dissonant-discord.html" class="relationship-card">
+                    <div class="relationship-name">dissonant discord</div>
+                    <div class="relationship-type">Enemy</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> Successor / Escalating Hero</p>
+                <p><strong>Story Function:</strong> Deuteragonist → Leader</p>
+                <p><strong>Character Arc:</strong> Growth through overload</p>
+                <p><strong>Arc Status:</strong> Evolving</p>
+                
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>Inheritance without certainty</li>
+                    <li>Escalation as compensation for absence</li>
+                    <li>The cost of power beyond understanding</li>
+                    <li>Identity constructed from fragments</li>
+                    <li>Whether a song can continue after losing its melody</li>
+                </ul>
+
+                <p><strong>Foil to:</strong> <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a> — Conductor versus solo performer; collective harmony versus overwhelming force</p>
+
+                <p><strong>Narrative Function:</strong> Embodies the question of continuation—can what was lost truly be replaced, or only echoed?</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> Mahana — from Sanskrit "mahāna" meaning "great"; Sahi — meaning "right" or "correct"</li>
+                    <li><strong>Design Notes:</strong> Emphasis on upward lines and open posture to suggest amplification and expansion</li>
+                    <li><strong>Symbolism:</strong> Purple tones reflect transformation through strain; Symphony as orchestral culmination; Crescendo as escalating intensity; Finalis Grande as ultimate resolution</li>
+                    <li><strong>Inspiration:</strong> Musical crescendo structures; the burden of conducting alone</li>
+                    <li><strong>Author Notes:</strong> Mahana's ultimate power exceeds safe harmonic limits—she can reach heights Pyara couldn't, but at catastrophic cost</li>
+                    <li><strong>Continuity:</strong> Tier 5 expression is singular and non-repeatable; relationship to Pyara deliberately ambiguous</li>
+                    <li><strong>Musical Note:</strong> "Symphony" is a full orchestral work; "Crescendo" is a gradual increase in volume; "Finalis Grande" suggests grand finale</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            document.querySelectorAll('.form-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const selectedForm = document.getElementById(formName + '-form');
+            selectedForm.classList.add('active');
+
+            event.target.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

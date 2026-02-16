@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reason Theory // CRIOS Faction Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Background effects */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        /* Header Navigation */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Faction Header */
+        .faction-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .faction-logo {
+            max-width: 500px;
+            height: auto;
+            margin: 0 auto 40px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .faction-tagline {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 24px;
+            border-left: 4px solid var(--secondary-pink);
+            background: rgba(233, 30, 99, 0.05);
+            border-radius: 4px;
+        }
+
+        /* Stats Bar */
+        .faction-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stat-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        .section-content strong {
+            color: var(--text-primary);
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            padding: 24px 28px;
+            margin: 24px 0;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        /* Wiki Links */
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        /* Member Grid */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .member-card {
+            background: rgba(20, 20, 25, 0.8);
+            border: 2px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .member-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.3);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .member-info {
+            padding: 20px;
+        }
+
+        .member-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .member-role {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .member-drive {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px;
+            text-align: left;
+            border: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .comparison-table th {
+            background: rgba(233, 30, 99, 0.1);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .comparison-table td {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+
+        /* Spoiler Section */
+        .spoiler-section {
+            border: 2px dashed rgba(233, 30, 99, 0.4);
+            background: rgba(233, 30, 99, 0.05);
+            padding: 32px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+
+        .spoiler-warning {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .faction-logo {
+                max-width: 350px;
+            }
+
+            .faction-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="../factions.html" class="back-link">← All Factions</a>
+    </nav>
+
+    <div class="container">
+        <!-- Faction Header -->
+        <header class="faction-header">
+            <img src="../assets/icons/Reason Theory Logo.png" alt="Reason Theory" class="faction-logo">
+            <div class="faction-tagline">
+                "Destiny is either a lie — or something worth sabotaging."
+            </div>
+        </header>
+
+        <!-- Quick Stats -->
+        <div class="faction-stats">
+            <div class="stat-card">
+                <div class="stat-label">Founded</div>
+                <div class="stat-value">Nexsicon Arc</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Members</div>
+                <div class="stat-value">4</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Ideology</div>
+                <div class="stat-value">Anti-Destiny</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Primary Rival</div>
+                <div class="stat-value">Destiny's Penance</div>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p><strong>Reason Theory</strong> is a rogue counter-faction formed in direct opposition to <a href="faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a>. Unlike its rival organization, which seeks to manipulate or fulfill convergent destiny structures, Reason Theory exists to undermine, destabilize, and ridicule the very concept of inevitability itself.</p>
+
+                <p>The faction was founded through a sequence of accidental revelations, interpersonal betrayals, and opportunistic alliances following the collapse of <a href="#" class="wiki-link">Praxis Verax Affinas</a>. While its members possess wildly different motivations, they share a common operational axis:</p>
+
+                <div class="quote-box">
+                    Destiny is either a lie — or something worth sabotaging.
+                </div>
+
+                <p>Reason Theory operates through asymmetrical tactics, ideological disruption, and selective interference with convergence events and prophetic orchestration.</p>
+            </div>
+        </section>
+
+        <!-- Founding Context -->
+        <section class="content-section">
+            <h2 class="section-title">Founding Context</h2>
+            <div class="section-content">
+                <p>Reason Theory emerged from the aftermath of Praxis Verax Affinas' collapse and the continued fallout of the <a href="#" class="wiki-link">Cascade Resonance Event</a>.</p>
+
+                <p>The faction's creation began when <a href="character-ami-hartbreak.html" class="wiki-link">Ami Hartbreak</a> abandoned PVA, outwardly framing her departure as moral outrage toward <a href="character-tiala-hartlight.html" class="wiki-link">Tiala Hartlight</a>'s recklessness. In reality, Ami's departure was driven by existential boredom and a desire for more entertaining conflict.</p>
+
+                <p>Fortuitous convergence events resulted in Ami encountering <a href="character-windi-lightfall.html" class="wiki-link">Windi Lightfall</a>, leading to the discovery of multiple concealed identities:</p>
+
+                <ul>
+                    <li>Windi Lightfall was revealed to be <strong>Wentea</strong>, the Starlit Dynast.</li>
+                    <li>Ami Hartbreak was revealed to be <strong>Heart Sonata</strong>.</li>
+                </ul>
+
+                <p>Their shared discovery that their siblings — Tiala and <a href="character-claris-quies.html" class="wiki-link">Claris Quies</a> — had allied to form Destiny's Penance prompted the immediate formation of a counter-organization.</p>
+            </div>
+        </section>
+
+        <!-- Name Origin -->
+        <section class="content-section">
+            <h2 class="section-title">Name Origin</h2>
+            <div class="section-content">
+                <p>The faction's name is intentionally ironic and partially improvised.</p>
+
+                <div class="quote-box">
+                    "Well Destiny isn't a real thing. But Reason is."<br>
+                    "Uh huh. And what about the Theory part, Ami?"<br>
+                    "It sounds cool?"
+                </div>
+
+                <p>Despite the flippant origin, the name encapsulates the faction's philosophical stance:</p>
+
+                <ul>
+                    <li><strong>Destiny</strong> represents imposed inevitability.</li>
+                    <li><strong>Reason</strong> represents personal agency and rejection of prophetic determinism.</li>
+                    <li><strong>Theory</strong> acknowledges the faction's willingness to operate through experimentation rather than structured doctrine.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Philosophy -->
+        <section class="content-section">
+            <h2 class="section-title">Organizational Philosophy</h2>
+            <div class="section-content">
+                <p>Reason Theory operates under a loose ideological structure centered on:</p>
+
+                <ul>
+                    <li>Rejection of predetermined destiny</li>
+                    <li>Tactical sabotage of convergence systems</li>
+                    <li>Personal autonomy over prophetic obligation</li>
+                    <li>Destabilization of hierarchical succession structures</li>
+                    <li>Emotional and philosophical irreverence toward cosmic authority</li>
+                </ul>
+
+                <p>Unlike Destiny's Penance, Reason Theory has no interest in saving or ending the world. Its members act based on personal motivations that incidentally align in opposition to Tiala's ambitions.</p>
+            </div>
+        </section>
+
+        <!-- Members Section -->
+        <section class="content-section">
+            <h2 class="section-title">Known Membership</h2>
+
+            <div class="members-grid">
+                <a href="character-ami-hartbreak.html" class="member-card">
+                    <img src="../assets/characters/Ami Breaklight.png" alt="Ami Hartbreak" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Ami Hartbreak</div>
+                        <div class="member-role">Founder / Sabotage Architect</div>
+                        <div class="member-drive">Primary Drive: Amusement Through Sabotage</div>
+                    </div>
+                </a>
+
+                <a href="character-windi-lightfall.html" class="member-card">
+                    <img src="../assets/characters/Windi Lightfall.png" alt="Windi Lightfall" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Windi Lightfall</div>
+                        <div class="member-role">Co-Founder / Strategic Escape Variable</div>
+                        <div class="member-drive">Primary Drive: Flight From Sovereignty</div>
+                    </div>
+                </a>
+
+                <a href="character-odisse-nocere.html" class="member-card">
+                    <img src="../assets/characters/Odisse Nocere.png" alt="Odisse Nocere" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Odisse Nocere</div>
+                        <div class="member-role">Offensive Specialist / Vengeance Vector</div>
+                        <div class="member-drive">Primary Drive: Singular Retaliation</div>
+                    </div>
+                </a>
+
+                <a href="character-zhou-chun.html" class="member-card">
+                    <img src="../assets/characters/Zhòu-chún Tǎoyàn w7.png" alt="Zhòu-chún Tǎoyàn" class="member-image">
+                    <div class="member-info">
+                        <div class="member-name">Zhòu-chún Tǎoyàn</div>
+                        <div class="member-role">Legacy Manifestation / Emotional Fracture</div>
+                        <div class="member-drive">Primary Drive: Shattered Continuity</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Operational Methods -->
+        <section class="content-section">
+            <h2 class="section-title">Operational Methods</h2>
+            <div class="section-content">
+                <p>Reason Theory favors asymmetrical engagement strategies including:</p>
+
+                <ul>
+                    <li>Sabotage of convergence rituals</li>
+                    <li>Intelligence manipulation through identity exposure</li>
+                    <li>Artifact theft and relocation</li>
+                    <li>Tactical misdirection and theatrical interference</li>
+                    <li>Exploitation of emotional and ideological vulnerabilities</li>
+                </ul>
+
+                <p>The faction intentionally avoids structured warfare or large-scale engagement.</p>
+            </div>
+        </section>
+
+        <!-- Rivalry with Destiny's Penance -->
+        <section class="content-section">
+            <h2 class="section-title">Relationship with Destiny's Penance</h2>
+            <div class="section-content">
+                <p>Reason Theory operates as the primary ideological and operational counterweight to Destiny's Penance.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Destiny's Penance</th>
+                            <th>Reason Theory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Destiny as burden</td>
+                            <td>Destiny as joke</td>
+                        </tr>
+                        <tr>
+                            <td>Sacrifice as duty</td>
+                            <td>Sabotage as liberation</td>
+                        </tr>
+                        <tr>
+                            <td>Controlled convergence</td>
+                            <td>Chaotic interference</td>
+                        </tr>
+                        <tr>
+                            <td>Moral accountability</td>
+                            <td>Moral irreverence</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>The conflict between both factions represents a philosophical war between inevitability and defiance.</p>
+            </div>
+        </section>
+
+        <!-- Recruitment -->
+        <section class="content-section">
+            <h2 class="section-title">Recruitment Methodology</h2>
+            <div class="section-content">
+                <p>Reason Theory does not actively recruit members. Instead, it accumulates individuals who:</p>
+
+                <ul>
+                    <li>Possess personal grievances against destiny manipulation</li>
+                    <li>Reject inherited obligations</li>
+                    <li>Seek revenge or liberation from convergence structures</li>
+                    <li>Exist as anomalies produced by realm instability</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Spoiler Section -->
+        <div class="spoiler-section">
+            <div class="spoiler-warning">⚠ Nexsicon Arc Reveal</div>
+            <div class="section-content">
+                <p><strong>Secret Identity Revelations:</strong> The formation of Reason Theory was catalyzed by the revelation that Ami Hartbreak was secretly <strong>Aran Letale (Heart Sonata)</strong> and Windi Lightfall was secretly <strong>Wentea Liso (Starlit Dynast)</strong>. These discoveries occurred following the <a href="#" class="wiki-link">Cascade Resonance Event</a>.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

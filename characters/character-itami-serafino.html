@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itami Serafino // CRIOS Character Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
+
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
+
+        .character-form {
+            display: none;
+        }
+
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <nav class="header-nav">
+        <a href="../characters.html" class="back-link">← All Characters</a>
+    </nav>
+
+    <div class="container">
+        <!-- Form Toggle -->
+        <div class="form-toggle">
+            <button class="form-button active" onclick="switchForm('civilian')">Civilian</button>
+            <button class="form-button" onclick="switchForm('empress')">Starlit Empress</button>
+        </div>
+
+        <!-- CIVILIAN FORM -->
+        <div id="civilian-form" class="character-form active">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Itami Serafino.png" alt="Itami Serafino" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Itami Serafino</h1>
+                    <p class="character-title">Idol • Rainbow Star</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Age</span>
+                            <span class="stat-value">18</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Height</span>
+                            <span class="stat-value">6'0" (183 cm)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Birth Date</span>
+                            <span class="stat-value">November 13</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Ethnicity</span>
+                            <span class="stat-value">Black and Japanese</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Eyes</span>
+                            <span class="stat-value">Gold</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Hair</span>
+                            <span class="stat-value">Golden-blonde twin-tails</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Occupation</span>
+                            <span class="stat-value">Pop Idol (Rainbow Star)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Faction</span>
+                            <span class="stat-value"><a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> (Secret)</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "That's not what I— But I didn't— Please don't— !" <em>*sniffles and begins crying*</em>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>Itami Serafino stands at the intersection of public adoration and concealed authority. To the world, she is one half of the internationally celebrated idol duo <strong>Rainbow Star</strong>, beloved for her emotional openness and theatrical sincerity.</p>
+
+                    <p>Her dual identity reflects a contrast between perceived vulnerability and overwhelming battlefield dominance. Where public perception frames her as delicate and easily overwhelmed, her operational reality reveals a tactician and frontline commander capable of directing engagements with near-precognitive precision.</p>
+
+                    <p>Unknown to the public, Itami is the commanding leader of <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> and one of the highest-ranking Runic Knights operating within <a href="../realms/realm-royastella.html" class="wiki-link">Royastella</a>.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Appearance</h2>
+                <div class="section-content">
+                    <p>Itami presents an immediately commanding visual profile, combining regal ornamentation with idol-stage theatricality.</p>
+
+                    <h3 class="section-subtitle">Physical Characteristics</h3>
+                    <ul>
+                        <li>Tall, statuesque frame at 6'0"</li>
+                        <li>Warm skin tone</li>
+                        <li>Gold irises that create an intense, luminous gaze</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Hair</h3>
+                    <ul>
+                        <li>Vivid golden-blonde twin-tails</li>
+                        <li>High-set placement enhances silhouette width</li>
+                        <li>Voluminous and slightly wavy with decorative floral attachments</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Outfit Composition</h3>
+                    <ul>
+                        <li>Off-shoulder corset-style top with layered ruffles</li>
+                        <li>Vertical pink pinstriping emphasizing waist taper</li>
+                        <li>Large central bow with cascading ribbons</li>
+                        <li>Puffy bloomers with fitted thigh cuffs</li>
+                        <li>Decorative rose clusters positioned at the hips</li>
+                        <li>Pink choker with gem-like motifs</li>
+                        <li>Coordinated wrist and ankle ornamentation</li>
+                    </ul>
+
+                    <p>The repeated visual motifs of roses, gemstones, and layered ruffles reinforce her thematic identity as both ceremonial royalty and performance icon.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Personality</h2>
+                <div class="section-content">
+                    <p>Itami is defined by emotional immediacy and empathetic saturation.</p>
+
+                    <h3 class="section-subtitle">Core Traits</h3>
+                    <ul>
+                        <li><strong>Emotionally Expressive:</strong> Highly visible emotional register</li>
+                        <li><strong>Deeply Empathetic:</strong> Toward allies and civilians</li>
+                        <li><strong>Responsible:</strong> Strong internal sense of duty</li>
+                        <li><strong>Fear of Disappointing:</strong> Those who rely on her</li>
+                        <li><strong>Instinctively Protective:</strong> Natural guardian impulses</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Public Perception</h3>
+                    <ul>
+                        <li>Overly sensitive</li>
+                        <li>Emotionally fragile</li>
+                        <li>Prone to tears</li>
+                    </ul>
+
+                    <p>While these impressions are partially accurate, they are often misunderstood. Itami's emotional expression is not instability but <strong>transparency</strong>. Her feelings manifest visibly and immediately, allowing audiences to interpret her reactions as genuine and deeply human.</p>
+
+                    <p>This sincerity forms the cornerstone of her popularity. Fans and critics alike cite her as one of the most emotionally authentic performers in contemporary entertainment culture.</p>
+
+                    <h3 class="section-subtitle">The Reality</h3>
+                    <p>Her emotional reactions occur quickly and visibly, but they do not impair decision-making. Instead, they function as a secondary perception layer, allowing her to intuitively assess morale, danger escalation, and interpersonal strain within her team.</p>
+
+                    <p><strong>Core Value:</strong> Emotional honesty as strength; vulnerability as leadership tool</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Visual Presence & Body Language</h2>
+                <div class="section-content">
+                    <p>Itami's default posture often communicates heightened emotional intensity.</p>
+
+                    <h3 class="section-subtitle">Common Indicators</h3>
+                    <ul>
+                        <li>Balanced, upright stance suggesting readiness</li>
+                        <li>Slightly clenched fists revealing internal tension</li>
+                        <li>Wide, expressive eyes reflecting rapid emotional processing</li>
+                        <li>Subtle blush or stress shading beneath the eyes</li>
+                    </ul>
+
+                    <p>She frequently appears startled or overwhelmed even while maintaining full situational control. This contradiction reinforces her public persona while masking her tactical composure.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Rainbow Star</h2>
+                <div class="section-content">
+                    <p>Itami is widely recognized as a pop idol alongside her sister through their group <strong>Rainbow Star</strong>, a critically acclaimed and globally successful musical act.</p>
+
+                    <p>The duo's success stems from Itami's emotional authenticity combined with her sister's complementary performance style. Their popularity provides perfect cover for their Runic Knight activities—after all, who would suspect internationally famous idols of being elite magical combatants?</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- STARLIT EMPRESS FORM -->
+        <div id="empress-form" class="character-form">
+            <section class="character-header">
+                <div class="character-visual">
+                    <img src="../assets/characters/Starlit Empress.png" alt="Starlit Empress" class="character-image">
+                    <img src="../assets/icons/Starlite 7th Icon.png" alt="Starlite 7th" class="faction-logo">
+                </div>
+
+                <div class="character-info">
+                    <h1 class="character-name">Starlit Empress</h1>
+                    <p class="character-title">Leader • Runic Knight</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Role</span>
+                            <span class="stat-value">Leader / Frontline Commander</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Elemental Core</span>
+                            <span class="stat-value">Fire</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Key Attribute</span>
+                            <span class="stat-value">Emotional</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Casting Language</span>
+                            <span class="stat-value">Japanese</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Weapon</span>
+                            <span class="stat-value">Auroral Throneblade</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Starlight Blessing</span>
+                            <span class="stat-value">Future Sight</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Combat Style</span>
+                            <span class="stat-value">Predictive / Overwhelming</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Reputation</span>
+                            <span class="stat-value">Most Formidable Combatant</span>
+                        </div>
+                    </div>
+
+                    <div class="character-quote">
+                        "Stars! Light my crown and strike down my foes! Starlit Empress, shining justice!"
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Combat Profile</h2>
+                <div class="section-content">
+                    <p>As <strong>Starlit Empress</strong>, Itami is widely regarded within Runic Knight circles as <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>'s most formidable combatant and serves as the team's commanding leader.</p>
+
+                    <p>Her combat methodology prioritizes overwhelming precision and predictive positioning, allowing her to dominate engagements before opponents fully understand the threat vector.</p>
+
+                    <h3 class="section-subtitle">Auroral Throneblade</h3>
+                    <p>Itami wields the <strong>Auroral Throneblade</strong>, the most powerful weapon within the Runic Knight arsenal.</p>
+
+                    <ul>
+                        <li>Massive two-handed greatblade optimized for sweeping battlefield control</li>
+                        <li>Generates <strong>Blade Beam</strong>—a crescent-shaped energy projection</li>
+                        <li>Blade Beam exhibits homing properties, tracking targets after release</li>
+                        <li>Designed for both destructive output and suppression of multiple adversaries simultaneously</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Combat Philosophy</h3>
+                    <p>Dominance through precision and foresight—overwhelming opponents before they recognize the danger.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Starlight Blessing: Future Sight</h2>
+                <div class="section-content">
+                    <p><strong>Function:</strong> Allows Itami to perceive ten seconds into the future.</p>
+
+                    <h3 class="section-subtitle">Limitations</h3>
+                    <ul>
+                        <li>Fixed ten-second foresight window</li>
+                        <li>Ten-second cooldown following each activation</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Tactical Implications</h3>
+                    <p>Future Sight provides Itami with unparalleled micro-temporal battlefield awareness. Rather than functioning as magic, Starlight Blessings operate as System-granted skill protocols within Royastella's universal progression framework.</p>
+
+                    <p>In combat, Future Sight enables:</p>
+                    <ul>
+                        <li>Instant counter-response to surprise attacks</li>
+                        <li>Preemptive targeting and positioning</li>
+                        <li>Near-perfect defensive timing</li>
+                        <li>Predictive team coordination</li>
+                    </ul>
+
+                    <p>Itami often appears to react <em>before</em> events occur, reinforcing her reputation as a battlefield sovereign.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">Leadership Style</h2>
+                <div class="section-content">
+                    <p>Itami leads through emotional resonance rather than authoritarian command.</p>
+
+                    <h3 class="section-subtitle">Leadership Principles</h3>
+                    <ul>
+                        <li>Maintains strong personal bonds with team members</li>
+                        <li>Prioritizes collective survival over tactical prestige</li>
+                        <li>Uses predictive foresight to shield teammates from catastrophic outcomes</li>
+                        <li>Accepts personal burden as a natural extension of authority</li>
+                    </ul>
+
+                    <p>Her leadership often appears gentle or uncertain externally, yet operational data consistently shows her strategies result in extremely high mission survival rates.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Shared Sections -->
+        <section class="content-section">
+            <h2 class="section-title">Relationships</h2>
+            
+            <div class="relationships-grid">
+                <a href="character-shini-thana.html" class="relationship-card">
+                    <div class="relationship-name">Shini Thana</div>
+                    <div class="relationship-type">Sister / Starlit Sultana</div>
+                </a>
+
+                <a href="character-marate-jalo.html" class="relationship-card">
+                    <div class="relationship-name">Marate Jalo</div>
+                    <div class="relationship-type">Mentor / Starlit Alpha</div>
+                </a>
+
+                <a href="character-mahana-sahi.html" class="relationship-card">
+                    <div class="relationship-name">Mahana Sahi</div>
+                    <div class="relationship-type">Ward / Protected</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Thematic Significance</h2>
+            <div class="section-content">
+                <p><strong>Archetype:</strong> The Emotional Sovereign</p>
+                <p><strong>Story Function:</strong> Leader / Protector</p>
+                <p><strong>Character Arc:</strong> Embracing vulnerability as strength</p>
+                
+                <p><strong>Themes Represented:</strong></p>
+                <ul>
+                    <li>The coexistence of emotional vulnerability and supreme authority</li>
+                    <li>Royal imagery expressed through empathy rather than dominance</li>
+                    <li>The paradox of foresight paired with fear of failure</li>
+                    <li>Performance identity as both shield and truth</li>
+                    <li>Power emerging through sincerity rather than detachment</li>
+                </ul>
+
+                <p><strong>Narrative Function:</strong> Challenges the assumption that composure is required for leadership strength. Demonstrates that emotional transparency can be a tactical advantage rather than weakness.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Name Etymology:</strong> Itami (痛み) — Japanese for "pain," reflecting her emotional permeability and capacity to internalize the suffering of others; Serafino — Derived from "Seraph," referencing celestial hierarchy and divine guardianship</li>
+                    <li><strong>Design Notes:</strong> Roses, gemstones, and layered ruffles reinforce ceremonial royalty meets performance icon aesthetic</li>
+                    <li><strong>Symbolism:</strong> Gold eyes as luminous authority; twin-tails as idol iconography; greatblade as sovereignty</li>
+                    <li><strong>Inspiration:</strong> Emotional idol archetypes; future-seeing tactical leaders; empathetic monarchs</li>
+                    <li><strong>Author Notes:</strong> Her emotional transparency is not weakness—it's her superpower. Future Sight plus emotional intelligence creates unmatched battlefield awareness</li>
+                    <li><strong>Weapon Significance:</strong> Auroral Throneblade is the most powerful Runic Knight weapon, befitting her status as leader</li>
+                    <li><strong>Reputation:</strong> Most formidable combatant in Starlite 7th; extremely high mission survival rates under her command</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function switchForm(formName) {
+            document.querySelectorAll('.character-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            document.querySelectorAll('.form-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const selectedForm = document.getElementById(formName + '-form');
+            selectedForm.classList.add('active');
+
+            event.target.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

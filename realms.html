@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realms // CRIOS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
+            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Background effects */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -150px;
+            animation: orbFloat1 20s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -100px;
+            animation: orbFloat2 25s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-80px, 80px); }
+        }
+
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(80px, -60px); }
+        }
+
+        /* Header */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .page-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section Header */
+        .section-header {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        /* Realm Grid */
+        .realm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 80px;
+        }
+
+        .realm-card {
+            background: var(--dark-panel);
+            border: 2px solid rgba(233, 30, 99, 0.2);
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .realm-card:nth-child(1) { animation-delay: 0.1s; }
+        .realm-card:nth-child(2) { animation-delay: 0.2s; }
+        .realm-card:nth-child(3) { animation-delay: 0.3s; }
+        .realm-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .realm-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.08), rgba(0, 217, 255, 0.03));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .realm-card:hover::before {
+            opacity: 1;
+        }
+
+        .realm-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(233, 30, 99, 0.2), transparent);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .realm-card:hover::after {
+            width: 600px;
+            height: 600px;
+        }
+
+        .realm-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 12px 48px rgba(0, 217, 255, 0.4);
+            transform: translateY(-12px);
+        }
+
+        .realm-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 28px;
+            min-height: 120px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .realm-logo {
+            max-width: 180px;
+            max-height: 100px;
+            height: auto;
+            filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.5));
+            transition: all 0.5s ease;
+        }
+
+        .realm-card:hover .realm-logo {
+            filter: drop-shadow(var(--glow-pink));
+            transform: scale(1.08);
+        }
+
+        .realm-info {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .realm-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .realm-tagline {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            text-align: center;
+            flex: 1;
+        }
+
+        .realm-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .stat-value.highlight {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        /* Other Realms Section */
+        .other-realms {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 16px;
+            padding: 48px 40px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+
+        .other-realms-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .other-realms-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .other-realms-text {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.05rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .realm-mention {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 24px;
+            padding: 16px 24px;
+            background: rgba(233, 30, 99, 0.05);
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .realm-mention-desc {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            animation: fadeIn 0.8s ease-out 0.8s both;
+        }
+
+        .cta-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-text {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dim);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 14px 32px;
+            background: transparent;
+            border: 2px solid var(--secondary-pink);
+            color: var(--secondary-pink);
+            border-radius: 6px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .realm-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .realm-card {
+                padding: 32px 24px;
+            }
+
+            .other-realms,
+            .cta-section {
+                padding: 40px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="index.html" class="back-link">← Home</a>
+        <div class="header-title">Realm Index</div>
+        <div style="width: 80px;"></div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1 class="page-title">REALMS</h1>
+            <p class="page-subtitle">Parallel dimensions bound by convergence and resonance</p>
+        </header>
+
+        <!-- Primary Realms Section -->
+        <section class="section-header">
+            <h2 class="section-title">Primary Realms</h2>
+            <p class="section-subtitle">The four major realms central to the convergence narrative</p>
+        </section>
+
+        <!-- Realm Grid -->
+        <div class="realm-grid">
+            <!-- Beeston -->
+            <a href="realms/realm-beeston.html" class="realm-card">
+                <div class="realm-logo-container">
+                    <img src="assets/icons/Beeston Logo.png" alt="Beeston" class="realm-logo">
+                </div>
+                <div class="realm-info">
+                    <h3 class="realm-name">BEESTON</h3>
+                    <p class="realm-tagline">"Where voice becomes world, and harmony defines reality."</p>
+                    <div class="realm-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Magic System</span>
+                            <span class="stat-value">Lúmenai</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Status</span>
+                            <span class="stat-value highlight">Sealed</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Defenders</span>
+                            <span class="stat-value">Heart Melody</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Reality Type</span>
+                            <span class="stat-value">Resonant</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Royastella -->
+            <a href="realms/realm-royastella.html" class="realm-card">
+                <div class="realm-logo-container">
+                    <img src="assets/icons/Royastella Logo.png" alt="Royastella" class="realm-logo">
+                </div>
+                <div class="realm-info">
+                    <h3 class="realm-name">ROYASTELLA</h3>
+                    <p class="realm-tagline">"Where sovereignty meets elemental mastery, and crowns bear cosmic weight."</p>
+                    <div class="realm-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Magic System</span>
+                            <span class="stat-value">Element Core</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Status</span>
+                            <span class="stat-value highlight">Sealed</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Defenders</span>
+                            <span class="stat-value">Starlite 7th</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Reality Type</span>
+                            <span class="stat-value">Monarchical</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Nexsicon -->
+            <a href="realms/realm-nexsicon.html" class="realm-card">
+                <div class="realm-logo-container">
+                    <img src="assets/icons/Nexsicon Logo.png" alt="Nexsicon" class="realm-logo">
+                </div>
+                <div class="realm-info">
+                    <h3 class="realm-name">NEXSICON</h3>
+                    <p class="realm-tagline">"Where language shapes reality, and convergence accelerates toward inevitability."</p>
+                    <div class="realm-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Magic System</span>
+                            <span class="stat-value">Cymora</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Status</span>
+                            <span class="stat-value highlight">Active</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Factions</span>
+                            <span class="stat-value">Multiple</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Reality Type</span>
+                            <span class="stat-value">Convergent Hub</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Ultimatera -->
+            <a href="realms/realm-ultimatera.html" class="realm-card">
+                <div class="realm-logo-container">
+                    <img src="assets/icons/Ultimatera Logo.png" alt="Ultimatera" class="realm-logo">
+                </div>
+                <div class="realm-info">
+                    <h3 class="realm-name">ULTIMATERA</h3>
+                    <p class="realm-tagline">"The final convergence — where all realms collapse into unified existence."</p>
+                    <div class="realm-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Magic System</span>
+                            <span class="stat-value">Hybrid</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Status</span>
+                            <span class="stat-value highlight">Future State</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Origin</span>
+                            <span class="stat-value">Post-Convergence</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Reality Type</span>
+                            <span class="stat-value">Synthesized</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Other Realms Section -->
+        <section class="other-realms">
+            <h2 class="other-realms-title">Other Realms</h2>
+            <img src="assets/icons/Antiquity Logo.png" alt="Other Realms" class="realm-logo" style="width: 500px;">
+            <div class="other-realms-content">
+                <p class="other-realms-text">
+                    Beyond the four primary realms, the Crios multiverse contains countless parallel dimensions, pocket realities, and fragmented planes of existence. Most remain unexplored, existing as background resonance within the greater cosmological structure. Only a select few have direct narrative relevance.
+                </p>
+                <div class="realm-mention">
+                    <div>The Fourth Realm</div>
+                    <div class="realm-mention-desc">
+                        An enigmatic dimension referenced in prophecy and convergence theory. Its nature, inhabitants, and role in the greater narrative remain deliberately obscured. Access restricted. Information classified.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <h2 class="cta-title">Explore the Multiverse</h2>
+            <p class="cta-text">
+                Each realm operates under unique magical laws, cultural structures, and existential principles. 
+                Dive deeper into the worlds that define the Crios convergence narrative.
+            </p>
+            <div class="cta-buttons">
+                <a href="magic.html" class="cta-button">Magic Systems</a>
+                <a href="factions.html" class="cta-button secondary">View Factions</a>
+                <a href="timeline.html" class="cta-button secondary">Explore Timeline</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRIOS PROJECT // A Transmedia Universe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
+            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated background grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(233, 30, 99, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridScroll 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gridScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -300px;
+            right: -200px;
+            animation: orbFloat1 20s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -200px;
+            left: -150px;
+            animation: orbFloat2 25s ease-in-out infinite;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-cyan), transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orbPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-100px, 100px); }
+        }
+
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(100px, -80px); }
+        }
+
+        @keyframes orbPulse {
+            0%, 100% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.25; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* Logo section */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1.2s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+            position: relative;
+        }
+
+        .logo-text::after {
+            content: 'CRIOS';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(233, 30, 99, 0.3), rgba(0, 217, 255, 0.3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(20px);
+            z-index: -1;
+        }
+
+        .tagline {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 6px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .subtagline {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation cards */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 60px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-card {
+            background: var(--dark-panel);
+            border: 2px solid rgba(233, 30, 99, 0.2);
+            border-radius: 16px;
+            padding: 40px 32px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .nav-card:hover::before {
+            opacity: 1;
+        }
+
+        .nav-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(233, 30, 99, 0.3), transparent);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .nav-card:hover::after {
+            width: 500px;
+            height: 500px;
+        }
+
+        .nav-card:hover {
+            border-color: var(--secondary-pink);
+            box-shadow: var(--glow-pink);
+            transform: translateY(-8px);
+        }
+
+        .nav-card-icon {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-card-desc {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Info panel */
+        .info-panel {
+            max-width: 800px;
+            background: rgba(20, 20, 25, 0.8);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-out 0.6s both;
+            margin-bottom: 40px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .info-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .info-text {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+
+        .info-signature {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            font-style: italic;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        /* Footer links */
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeIn 1s ease-out 0.9s both;
+        }
+
+        .footer-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 12px 24px;
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 3rem;
+                letter-spacing: 6px;
+            }
+
+            .tagline {
+                font-size: 0.75rem;
+                letter-spacing: 4px;
+            }
+
+            .subtagline {
+                font-size: 0.9rem;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .nav-card {
+                padding: 32px 24px;
+            }
+
+            .nav-card-icon {
+                font-size: 2.5rem;
+            }
+
+            .nav-card-title {
+                font-size: 1.3rem;
+            }
+
+            .info-panel {
+                padding: 24px;
+            }
+        }
+
+        /* Press Start effect */
+        .press-start {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            margin-top: 40px;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <img src="assets/icons/Crios2020.png" alt="CRIOS Logo" class="logo-image" style="width: 500px; margin-bottom: 20px;">
+            <p class="tagline">Harmonic Convergence</p>
+            <p class="subtagline">A Transmedia Storytelling Universe</p>
+        </div>
+
+        <!-- Main Navigation -->
+        <div class="nav-grid">
+            <a href="timeline.html" class="nav-card">
+                <div class="nav-card-icon">⟡</div>
+                <h2 class="nav-card-title">Enter the World</h2>
+                <p class="nav-card-desc">Explore the narrative and chronological timelines. Witness the convergence of realms and the clash of destinies across multiple arcs.</p>
+            </a>
+
+            <a href="factions.html" class="nav-card">
+                <div class="nav-card-icon">◈</div>
+                <h2 class="nav-card-title">Explore Factions</h2>
+                <p class="nav-card-desc">Discover the five major factions: Heart Melody, Starlite 7th, Destiny's Penance, Reason Theory, and Praxis Verax Affinas.</p>
+            </a>
+
+            <a href="overview.html" class="nav-card">
+                <div class="nav-card-icon">✦</div>
+                <h2 class="nav-card-title">About the Project</h2>
+                <p class="nav-card-desc">Learn about the 16-year transmedia universe, the Versa card game, and the vision behind Crios.</p>
+            </a>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="info-panel">
+            <h3 class="info-title">What is Crios?</h3>
+            <p class="info-text">
+                A <strong>crios</strong> is a multicolored woven woolen belt. In a similar sense, the Crios project is a story woven with diverse characters and told through multiple mediums—video games, tabletop games, comics, audio dramas, novels, animation, and more.
+            </p>
+            <p class="info-text">
+                The goal is not only to entertain but to craft something that uses storytelling in every medium to tell a story that can only be told through that medium. A universe where harmonic resonance governs reality, where realms converge, and where the line between hero and antagonist blurs.
+            </p>
+            <p class="info-signature">— Davisem, Creator of the Crios Project</p>
+        </div>
+
+        <!-- Footer Links -->
+        <div class="footer-links">
+            <a href="characters.html" class="footer-link">Characters</a>
+            <a href="realms.html" class="footer-link">Realms</a>
+            <a href="lore.html" class="footer-link">Lore</a>
+            <a href="magic.html" class="footer-link">Magic</a>
+            <a href="glossary.html" class="footer-link">Glossary</a>
+        </div>
+
+        <p class="press-start">[ Select to Continue ]</p>
+    </div>
+</body>
+</html>
