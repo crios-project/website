@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRIOS // Project Roadmap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+            --green: #00e676; --yellow: #ffd740; --red: #ff5252; --purple: #ce93d8;
+        }
+        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
+
+        /* Header */
+        .page-header { text-align: center; margin-bottom: 60px; animation: fadeIn 0.8s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .page-title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 12px; }
+        .page-subtitle { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; letter-spacing: 4px;
+            color: var(--text-dim); text-transform: uppercase; }
+
+        /* Progress Summary */
+        .progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 60px; }
+        .progress-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px; padding: 20px; text-align: center; }
+        .progress-label { font-family: 'Orbitron', sans-serif; font-size: 0.7rem; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+        .progress-value { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .progress-sub { font-size: 0.8rem; color: var(--text-dim); margin-top: 4px; }
+
+        /* Progress Bar */
+        .progress-bar-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px; padding: 28px 32px; margin-bottom: 40px; }
+        .bar-label { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: flex; justify-content: space-between; }
+        .bar-track { background: rgba(255,255,255,0.05); border-radius: 100px; height: 12px; overflow: hidden; margin-bottom: 20px; }
+        .bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
+            transition: width 1s ease; }
+
+        /* Section */
+        .section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px; padding: 32px; margin-bottom: 32px; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 700;
+            color: var(--secondary-pink); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 2px;
+            display: flex; align-items: center; gap: 12px; }
+        .section-title .count { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
+
+        /* Status Legend */
+        .legend { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-dim); }
+        .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+        .dot-done { background: var(--green); box-shadow: 0 0 8px var(--green); }
+        .dot-partial { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
+        .dot-missing { background: var(--red); box-shadow: 0 0 8px var(--red); }
+        .dot-note { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+
+        /* Character Grid */
+        .char-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+        .char-card { border-radius: 8px; padding: 14px 16px; border: 1px solid; display: flex; flex-direction: column; gap: 4px; }
+        .char-card.done { background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.25); }
+        .char-card.partial { background: rgba(255, 215, 64, 0.05); border-color: rgba(255, 215, 64, 0.25); }
+        .char-card.missing { background: rgba(255, 82, 82, 0.05); border-color: rgba(255, 82, 82, 0.25); }
+        .char-card.note { background: rgba(206, 147, 216, 0.05); border-color: rgba(206, 147, 216, 0.25); }
+        .char-name { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
+        .char-status { font-size: 0.78rem; }
+        .char-card.done .char-status { color: var(--green); }
+        .char-card.partial .char-status { color: var(--yellow); }
+        .char-card.missing .char-status { color: var(--red); }
+        .char-card.note .char-status { color: var(--purple); }
+        .char-note { font-size: 0.75rem; color: var(--text-dim); }
+
+        /* Realm Grid */
+        .realm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+        .realm-card { border-radius: 8px; padding: 14px 16px; border: 1px solid; }
+        .realm-card.done { background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.25); }
+        .realm-card.missing { background: rgba(255, 82, 82, 0.05); border-color: rgba(255, 82, 82, 0.25); }
+        .realm-name { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+        .realm-status { font-size: 0.78rem; }
+        .realm-card.done .realm-status { color: var(--green); }
+        .realm-card.missing .realm-status { color: var(--red); }
+
+        /* Other pages */
+        .page-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+        .page-card { border-radius: 8px; padding: 14px 16px; border: 1px solid; }
+        .page-card.done { background: rgba(0, 230, 118, 0.05); border-color: rgba(0, 230, 118, 0.25); }
+        .page-card.missing { background: rgba(255, 82, 82, 0.05); border-color: rgba(255, 82, 82, 0.25); }
+        .page-name { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+        .page-status { font-size: 0.78rem; }
+        .page-card.done .page-status { color: var(--green); }
+        .page-card.missing .page-status { color: var(--red); }
+
+        /* Faction subheading */
+        .faction-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--accent-cyan);
+            text-transform: uppercase; letter-spacing: 2px; margin: 20px 0 10px; }
+        .faction-label:first-child { margin-top: 0; }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 2.2rem; }
+            .char-grid, .realm-grid, .page-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="bg-grid"></div>
+    <div class="container">
+
+        <header class="page-header">
+            <h1 class="page-title">CRIOS ROADMAP</h1>
+            <p class="page-subtitle">Project Status — All Pages & Content</p>
+        </header>
+
+        <!-- Summary Stats -->
+        <div class="progress-grid">
+            <div class="progress-card">
+                <div class="progress-label">Characters Built</div>
+                <div class="progress-value">41</div>
+                <div class="progress-sub">of 41 character pages complete</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-label">Realms</div>
+                <div class="progress-value">4</div>
+                <div class="progress-sub">of 4 realm pages complete</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-label">Factions</div>
+                <div class="progress-value">5</div>
+                <div class="progress-sub">of 5 faction pages complete</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-label">Magic Elements</div>
+                <div class="progress-value">0</div>
+                <div class="progress-sub">of 14 element pages</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-label">Lore</div>
+                <div class="progress-value">0</div>
+                <div class="progress-sub">of 8 lore pages</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-label">Magic Systems</div>
+                <div class="progress-value">0</div>
+                <div class="progress-sub">of 3 magic system pages</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-label">Short Stories</div>
+                <div class="progress-value">2</div>
+                <div class="progress-sub">of 15 short story pages</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-label">Main Hub</div>
+                <div class="progress-value">8</div>
+                <div class="progress-sub">of 12 main hub pages</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-label">Headshot Art</div>
+                <div class="progress-value">19</div>
+                <div class="progress-sub">of 41 headshot commissions</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-label">Full Body Art</div>
+                <div class="progress-value">36</div>
+                <div class="progress-sub">of 41 full body commissions</div>
+            </div>
+        </div>
+
+        <!-- Overall Progress Bar -->
+        <div class="progress-bar-section">
+            <div class="bar-label"><span>Character Profile Completion</span><span>41 / 41</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div>
+            
+            <div class="bar-label"><span>Realms Completion</span><span>4 / 4</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div>
+            
+            <div class="bar-label"><span>Factions Completion</span><span>5 / 5</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div>
+            
+            <div class="bar-label"><span>Magic Elements Completion</span><span>0 / 14</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%"></div></div>
+            
+            <div class="bar-label"><span>Lore Completion</span><span>0 / 8</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%"></div></div>
+            
+            <div class="bar-label"><span>Magic Systems Completion</span><span>0 / 3</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%"></div></div>
+            
+            <div class="bar-label"><span>Short Stories Completion</span><span>2 / 15</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 13.33%"></div></div>
+            
+            <div class="bar-label"><span>Main Hub Completion</span><span>8 / 12</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 66.67%"></div></div>
+            
+            <div class="bar-label"><span>Character Profile Completion</span><span>41 / 41</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div>
+
+            <div class="bar-label"><span>Headshot Art Completion</span><span>19 / 41</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 46.34%"></div></div>
+            
+            <div class="bar-label"><span>Full Body Art Completion</span><span>36 / 41</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width: 87.80%"></div></div>
+
+        </div>
+
+        <!-- Legend -->
+        <div class="section" style="padding: 20px 32px;">
+            <div class="legend">
+                <div class="legend-item"><div class="dot dot-done"></div> Complete</div>
+                <div class="legend-item"><div class="dot dot-partial"></div> Partial / Needs Revisit</div>
+                <div class="legend-item"><div class="dot dot-missing"></div> Not Yet Built</div>
+                <div class="legend-item"><div class="dot dot-note"></div> Special Note</div>
+            </div>
+        </div>
+
+        <!-- REALM PAGES -->
+        <div class="section">
+            <h2 class="section-title">Realm Pages <span class="count">4 / 4</span></h2>
+            <div class="realm-grid">
+                <div class="realm-card done"><div class="realm-name">Beeston</div><div class="realm-status">✓ Complete</div></div>
+                <div class="realm-card done"><div class="realm-name">Royastella</div><div class="realm-status">✓ Complete</div></div>
+                <div class="realm-card done"><div class="realm-name">Nexsicon</div><div class="realm-status">✓ Complete</div></div>
+                <div class="realm-card done"><div class="realm-name">Ultimatera</div><div class="realm-status">✓ Complete (short)</div></div>
+            </div>
+        </div>
+
+        <!-- CHARACTER PROFILES -->
+        <div class="section">
+            <h2 class="section-title">Character Profiles <span class="count">41 / 41</span></h2>
+
+            <div class="faction-label">Heart Melody (Beeston)</div>
+            <div class="char-grid">
+                <div class="char-card done"><div class="char-name">Pyara Dana</div><div class="char-status">✓ Complete</div><div class="char-note">4-form w/ Heart Aria / Heart Beat / Concerto Pulse</div></div>
+                <div class="char-card done"><div class="char-name">Kali Dana</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Heart Seria</div></div>
+                <div class="char-card done"><div class="char-name">Oktusha Miko</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Heart Rhythm</div></div>
+                <div class="char-card done"><div class="char-name">Omba Miko</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Heart Verismo</div></div>
+                <div class="char-card done"><div class="char-name">Zafara Quedar</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Heart Adagio</div></div>
+                <div class="char-card done"><div class="char-name">Aran Letale</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Heart Sonata</div></div>
+                <div class="char-card done"><div class="char-name">Mahana Sahi</div><div class="char-status">✓ Complete</div><div class="char-note">4-form w/ Heart Symphony / Heart Crescendo / Finalis Grande</div></div>
+            </div>
+
+            <div class="faction-label">Beeston Standalones</div>
+            <div class="char-grid">
+                <div class="char-card done"><div class="char-name">dissonant discord</div><div class="char-status">✓ Complete</div></div>
+                <div class="char-card done"><div class="char-name">Celestin the Philharmonious</div><div class="char-status">✓ Complete</div></div>
+
+            </div>
+
+            <div class="faction-label">Starlite 7th (Royastella)</div>
+            <div class="char-grid">
+                <div class="char-card done"><div class="char-name">Itami Serafino</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Starlit Empress</div></div>
+                <div class="char-card done"><div class="char-name">Shini Thana / Starlit Sultana</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Starlit Sultana</div></div>
+                <div class="char-card done"><div class="char-name">Wentea Liso / Starlit Dynast</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Starlit Dynast</div></div>
+                <div class="char-card done"><div class="char-name">Takino Retsu / Starlit Mikado</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Starlit Mikado</div></div>
+                <div class="char-card done"><div class="char-name">Riasa Sungbae / Starlit Pasha</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Starlit Pasha</div></div>
+                <div class="char-card done"><div class="char-name">Kayre / Starlit Rex</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Starlit Rex</div></div>
+                <div class="char-card done"><div class="char-name">Daeon Liàng / Starlit Czar</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Starlit Czar</div></div>
+                <div class="char-card done"><div class="char-name">BLADE GUILLOTINE</div><div class="char-status">✓ Complete</div></div>
+                <div class="char-card done"><div class="char-name">Marate Jalo </div><div class="char-status">✓ Complete</div><div class="char-note">3-form w/ Starlit Alpha / The Gold Imperator</div></div>
+            </div>
+
+            <div class="faction-label">Praxis Verax Affinas (Nexsicon)</div>
+            <div class="char-grid">
+                <div class="char-card done"><div class="char-name">Tiala Corsolis</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Alulu Caelum</div></div>
+                <div class="char-card done"><div class="char-name">Kesshō Kawa</div><div class="char-status">✓ Complete</div></div>
+                <div class="char-card done"><div class="char-name">Tessera Iustum</div><div class="char-status">✓ Complete</div></div>
+                <div class="char-card done"><div class="char-name">Amaranthine Breaklight</div><div class="char-status">✓ Complete</div></div>
+                <div class="char-card done"><div class="char-name">Xīwàng Tiānshàng</div><div class="char-status">✓ Complete</div></div>
+                <div class="char-card done"><div class="char-name">Fú cì Ánguāng</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Zhòu-chún Shìfàng</div></div>
+            </div>
+
+            <div class="faction-label">Destiny's Penance</div>
+            <div class="char-grid">
+                <div class="char-card done"><div class="char-name">Tiala Hartlight</div><div class="char-status">✓ Complete</div><div class="char-note">4-form w/ Alulu Dayk / Alulu Akụkụ / Alulu Ọnwụ</div></div>
+                <div class="char-card done"><div class="char-name">Jí Lián Xiá</div><div class="char-status">✓ Complete</div><div class="char-note">4-form w/ Kesshō Yīng / Kesshō Tǐ / Kesshō Zhàn</div></div>
+                <div class="char-card done"><div class="char-name">Claris Quies</div><div class="char-status">✓ Complete</div><div class="char-note">4-form w/ Tessera Vis / Tessera Ratio / Vastatio Tessera</div></div>
+                <div class="char-card done"><div class="char-name">Velia Traicerem</div><div class="char-status">✓ Complete</div><div class="char-note">Human manifestation of Amare</div></div>
+            </div>
+
+            <div class="faction-label">Reason Theory</div>
+            <div class="char-grid">
+                <div class="char-card done"><div class="char-name">Ami Hartbreak</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Amaranthine Hartfall</div></div>
+                <div class="char-card done"><div class="char-name">Windi Lightfall</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ Kweliana Winderial la Pax</div></div>
+                <div class="char-card done"><div class="char-name">Odisse Nocere</div><div class="char-status">✓ Complete</div><div class="char-note">References Kali Dana</div></div>
+                <div class="char-card done"><div class="char-name">Fú cì Tiānshàng</div><div class="char-status">✓ Complete</div><div class="char-note">2-form w/ 7-form Zhòu-chún toggle</div></div>
+            </div>
+
+            <div class="faction-label">People of Antiquity</div>
+            <div class="char-grid">
+                <div class="char-card done"><div class="char-name">Caie Ascala</div><div class="char-status">✓ Complete</div><div class="char-note">Short profile</div></div>
+                <div class="char-card done"><div class="char-name">Princess Clarisieandra</div><div class="char-status">✓ Complete</div><div class="char-note">Short profile</div></div>
+                <div class="char-card done"><div class="char-name">Queen Windelateami</div><div class="char-status">✓ Complete</div><div class="char-note">Short profile</div></div>
+                <div class="char-card done"><div class="char-name">Rafé Lliama</div><div class="char-status">✓ Complete</div><div class="char-note">Short profile</div></div>
+            </div>
+
+            <div class="faction-label">Unaffiliated / Novus</div>
+            <div class="char-grid">
+                <div class="char-card done"><div class="char-name">Astarri the Dreampup</div><div class="char-status">✓ Complete</div></div>
+                <div class="char-card done"><div class="char-name">Amare / Velitrice Dragon</div><div class="char-status">✓ Complete</div><div class="char-note">True form of Velia Traicerem</div></div>
+                <div class="char-card done"><div class="char-name">Solamor</div><div class="char-status">✓ Complete</div><div class="char-note">Paradox Bracer: Alulu + Tessera</div></div>
+                <div class="char-card done"><div class="char-name">Pluere</div><div class="char-status">✓ Complete</div><div class="char-note">Paradox Bracer: Tessera + Kesshō</div></div>
+                <div class="char-card done"><div class="char-name">Corstilla</div><div class="char-status">✓ Complete</div><div class="char-note">Paradox Bracer: Alulu + Kesshō</div></div>
+            </div>
+        </div>
+
+        <!-- OTHER SITE PAGES -->
+        <div class="section">
+            <h2 class="section-title">Other Site Pages</h2>
+
+            <div class="faction-label">Navigation & Index Pages</div>
+            <div class="page-grid">
+                <div class="page-card done"><div class="page-name">characters.html</div><div class="page-status">✓ Built — index of all characters</div></div>
+                <div class="page-card done"><div class="page-name">realms.html</div><div class="page-status">✓ Built — index of all realms</div></div>
+                <div class="page-card done"><div class="page-name">factions.html</div><div class="page-status">✓ Built — index of all factions</div></div>
+                <div class="page-card done"><div class="page-name">index.html</div><div class="page-status">✓ Built — site homepage</div></div>
+                <div class="page-card done"><div class="page-name">icons-carosel.html</div><div class="page-status">✓ Built — logo carousel</div></div>
+                <div class="page-card done"><div class="page-name">stories.html</div><div class="page-status">✓ Built — site homepage</div></div>
+                <div class="page-card done"><div class="page-name">timeline.html</div><div class="page-status">✓ Complete</div></div>
+                <div class="page-card done"><div class="page-name">lore.html</div><div class="page-status">✓ Complete</div></div>
+                <div class="page-card missing"><div class="page-name">magic.html</div><div class="page-status">✗ Not built - index of all magic</div></div>
+                <div class="page-card missing"><div class="page-name">arsenal.html</div><div class="page-status">✗ Not built - index of all weapons</div></div>
+                <div class="page-card missing"><div class="page-name">glossary.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">overview.html</div><div class="page-status">✗ Not built</div></div>
+            </div>
+
+            <div class="faction-label">Realm Pages</div>
+            <div class="page-grid">
+                <div class="page-card done"><div class="page-name">realm-beeston.html</div><div class="page-status">✓ Complete</div></div>
+                <div class="page-card done"><div class="page-name">realm-royastella.html</div><div class="page-status">✓ Complete</div></div>
+                <div class="page-card done"><div class="page-name">realm-nexsicon.html</div><div class="page-status">✓ Complete</div></div>
+                <div class="page-card done"><div class="page-name">realm-ultimatera.html</div><div class="page-status">✓ Complete (short)</div></div>
+            </div>
+
+            <div class="faction-label">Faction Pages</div>
+            <div class="page-grid">
+                <div class="page-card done"><div class="page-name">faction-heart-melody.html</div><div class="page-status">✓ Built</div></div>
+                <div class="page-card done"><div class="page-name">faction-starlite-7th.html</div><div class="page-status">✓ Built</div></div>
+                <div class="page-card done"><div class="page-name">faction-praxis-verax-affinas.html</div><div class="page-status">✓ Built</div></div>
+                <div class="page-card done"><div class="page-name">faction-destinys-penance.html</div><div class="page-status">✓ Built</div></div>
+                <div class="page-card done"><div class="page-name">faction-reason-theory.html</div><div class="page-status">✓ Built</div></div>
+            </div>
+
+            <div class="faction-label">Magic System Pages</div>
+            <div class="page-grid">
+                <div class="page-card missing"><div class="page-name">magic-lumenai.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">magic-cymora.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">magic-element-core.html</div><div class="page-status">✗ Not built</div></div>
+            </div>
+
+            <div class="faction-label">Lore Pages</div>
+            <div class="page-grid">
+                <div class="page-card missing"><div class="page-name">lore-lodesoul-theorem.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">lore-akashic-record.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">lore-cascade-resonance.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">lore-paradox-bracers.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">lore-tianshang-legacy.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">lore-aspects-of-infinity.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">lore-light-blade-revolver.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">lore-realm-convergence.html</div><div class="page-status">✗ Not built</div></div>
+            </div>
+
+            <div class="faction-label">Story Pages</div>
+            <div class="page-grid">
+                <div class="page-card missing"><div class="page-name">story-aria-caesura.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">story-symphonic-overture.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">story-avant-garde-composition.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">story-falling-stars.html</div><div class="page-status">✗ Not built</div></div>
+                <div class="page-card missing"><div class="page-name">story-grand-convergence.html</div><div class="page-status">✗ Not built</div></div>
+            </div>
+
+            
+        </div>
+    </div>
+</body>
+</html>

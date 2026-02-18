@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aria Caesura // CRIOS Short Story</title>
+    <title>[STORY TITLE] // CRIOS Short Story</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -62,14 +62,14 @@
         .story-content p:first-of-type::first-letter { font-size: 4rem; line-height: 1; float: left;
             font-family: 'Orbitron', sans-serif; color: var(--secondary-pink); margin: 4px 12px 0 0; }
 
-        /* Dialogue */
+        /* Dialogue - use <p><em> for italicized thoughts/internal dialogue */
         .story-content p:has(em) { font-style: italic; color: #d4d4f0; }
 
         /* Emphasis text */
         .story-content strong { color: var(--accent-cyan); font-weight: 700; }
         .story-content em { color: var(--secondary-pink); font-style: italic; }
 
-        /* Special moments - dramatic reveals */
+        /* Special moments - dramatic reveals (use .dramatic div for major reveals) */
         .dramatic { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700;
             text-transform: uppercase; letter-spacing: 3px; text-align: center;
             background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
@@ -77,11 +77,11 @@
             margin: 48px 0; padding: 24px; border-top: 2px solid rgba(233, 30, 99, 0.3);
             border-bottom: 2px solid rgba(233, 30, 99, 0.3); }
 
-        /* Section breaks */
+        /* Section breaks (use .break div for "* * *" style breaks) */
         .break { text-align: center; margin: 60px 0; font-size: 1.5rem; color: var(--secondary-pink); 
             letter-spacing: 8px; }
 
-        /* Character tags */
+        /* Character links */
         .character-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3);
             transition: all 0.2s ease; font-weight: 600; }
         .character-link:hover { color: white; border-bottom-color: var(--accent-cyan); 
@@ -119,140 +119,82 @@
     <div class="container">
         <!-- Story Header -->
         <header class="story-header">
-            <h1 class="story-title">Aria Caesura</h1>
+            <h1 class="story-title">[STORY TITLE]</h1>
             <div class="story-meta">
-                <div class="meta-item"><span class="label">Era:</span> Beeston Arc 1</div>
-                <div class="meta-item"><span class="label">Featured:</span> Heart Melody</div>
-                <div class="meta-item"><span class="label">Type:</span> Major Event</div>
+                <div class="meta-item"><span class="label">Era:</span> [Era Name - e.g., "Beeston Arc 1", "Royastella Arc 2", "Nexsicon Arc"]</div>
+                <div class="meta-item"><span class="label">Featured:</span> [Main Characters/Faction - e.g., "Heart Melody", "Starlite 7th", "Destiny's Penance"]</div>
+                <div class="meta-item"><span class="label">Type:</span> [Story Type - e.g., "Major Event", "Character Moment", "Flashback"]</div>
             </div>
         </header>
 
         <!-- Story Content -->
         <article class="story-content">
-            <p>"IT'S OVER!!"</p>
+            <!-- 
+            CONTENT GUIDELINES:
+            
+            1. Regular paragraphs: Just use <p>Your text here</p>
+            
+            2. First paragraph gets automatic drop cap (large first letter)
+            
+            3. Character links: <a href="../characters/character-name.html" class="character-link">Character Name</a>
+            
+            4. Dialogue: Regular <p> tags with quotes
+            
+            5. Internal thoughts/italics: <p><em>Thought text here</em></p>
+            
+            6. Emphasis (cyan): <strong>important text</strong>
+            
+            7. Dramatic reveals (all caps, centered, bordered):
+               <div class="dramatic">
+                   Ascension Sequence: Heart Aria to Heart Beat
+               </div>
+            
+            8. Section breaks (centered * * *):
+               <div class="break">* * *</div>
+            
+            EXAMPLE STRUCTURE:
+            -->
 
-            <p><a href="../characters/character-pyara-dana.html" class="character-link">Heart Aria</a>'s sword Coralas sings through the air, a streak of pink light slicing clean through the Demon General's chest. He laughs as he fades, because demons never die quietly.</p>
+            <p>"Opening dialogue or hook line!"</p>
 
-            <p>"So this is your answer. No place for us in your world of plenty?"</p>
+            <p><a href="../characters/character-name.html" class="character-link">Character Name</a> does something action-packed. Description continues with vivid imagery.</p>
 
-            <p>Aria's mouth opens in reply, but the words die with him. He dissolves into stardust and regret.</p>
+            <p>"More dialogue from a character."</p>
 
-            <p>And just like that, she's standing alone in victory. Which is code for: standing in the middle of a disaster about to happen.</p>
+            <p>Narrative continues. More action. More description.</p>
 
-            <p>The Demon General's final trick: his life was the failsafe. His death was the key. And now, the several miles of floating apocalypse that is the Demonic Citadel is plummeting toward downtown. With antimatter engine cores. Because why settle for bad when you can go extinction-level?</p>
+            <p><em>Internal thought from character.</em></p>
 
-            <p>Aria exhales.</p>
-
-            <p>"Right. No pressure."</p>
-
-            <p>But she's not alone: not for long. A snap of fingers, a flash of pink, and the stasis pods around her shatter. The <a href="../factions/faction-heart-melody.html" class="character-link">Lovely Hearts</a> tumble free.</p>
-
-            <p>Her team. Her family. Her disaster buddies.</p>
-
-            <p>"Rise and shine, girls. No time for beauty sleep, world's about to explode."</p>
-
-            <p>Mana floods from her into them, hot and reckless. It's stupid. Dangerous. Very on brand. The surge yanks them awake instantly; a trick they discovered during a prank war, because of course that's how magical girls learn self-resuscitation.</p>
-
-            <p>Then she casts again, overclocking her mind and body to godspeed. The world slows to a crawl. She can see the shimmer of time itself.</p>
-
-            <p>"Okay… I'm officially out of calories for the next decade."</p>
-
-            <p>She feels her sister's fury across their mental link, the kind that sounds like a smile but promises a lecture later.</p>
-
-            <p><em>You idiot,</em> she hears in her mind.</p>
-
-            <p>She thinks back, <em>Love you too, big sis</em>.*</p>
-
-            <p>And then they're moving. Six blurs of color tearing through the falling fortress, neutralizing antimatter cores like fireflies made of hope. Each detonation blossoms into stardust instead of oblivion.</p>
-
-            <p>Minutes later: crisis fully averted. The Citadel gone. The world still world-ing.</p>
-
-            <p>Cue sparkles. Cue Teleport back to Earth. Cue hugs. Cue—</p>
-
-            <p><strong><a href="../characters/character-dissonant-discord.html" class="character-link">dissonant discord.</a></strong> The sometimes friend, most times rival Aria has been trying to coax into permanently joining the team. To be quite honest, the day would not have been saved without discord teaching them Teleport earlier. Talk about coming in clutch.</p>
-
-            <p>She's waiting for them. Smiling like the cat with canary already in hand.</p>
-
-            <p>"Oh. Hey, dd. Didn't see you there."</p>
-
-            <p>The first punch lands before the sentence ends. <a href="../characters/character-kali-dana.html" class="character-link">Heart Seria</a> drops first. Then Heart Verismo. Then Heart Adagio, Heart Rhythm, Heart Sonata — all the other Lovely Hearts down in a heartbeat, knocked from magical girl to civilian in a single blow.</p>
-
-            <p>discord dusts her gloves, smirks. She levels her sword at Aria.</p>
-
-            <p>"The time has come to settle this, my Heart."</p>
-
-            <p>Aria's breath catches. She honestly didn't think discord was serious about having a death battle but the barely conscious forms of her friends shows her mistaken.</p>
-
-            <p>One tear rolls down.</p>
-
-            <p>One look at her friends and family.</p>
-
-            <p>Kali's face falls. She knows her sister.</p>
-
-            <p>"Aria. Don't you d-"</p>
-
-            <p>Too late.</p>
-
-            <p>Aria smiles softly. The kind of smile you give right before the world ends again.</p>
-
-            <p>She doesn't say it aloud, but the words ring clear through the bond:</p>
-
-            <p><em>I love you.</em></p>
-
-            <p>Light bursts from her chest as the Philharmonius fairy dives into her heart.</p>
+            <p>More narrative progression.</p>
 
             <div class="dramatic">
-                Ascension Sequence: Heart Aria to Heart Beat
+                Major Reveal Text Here
             </div>
 
-            <p>Waves of raw power ripple across the ruins, pushing the others back. discord's grin widens.</p>
+            <p>Final paragraphs wrapping up the scene.</p>
 
-            <p>"I have long waited for this very day."</p>
+            <p>Ending line with impact.</p>
 
-            <p>She draws her weapon — a shining blade with a heart on the hilt, because villains have aesthetic standards.</p>
+            <!-- Continue with your story content... -->
 
-            <p>What follows is not a fight so much as a duet: slash and counter-slash, sword and song, two lights colliding in a blur of pink and teal.</p>
-
-            <p>Coralas dances in Beat's hands, then dances without them, orbiting like a comet on invisible strings. discord laughs in sheer delight.</p>
-
-            <p>"I knew you would not fail to meet my hopes."</p>
-
-            <p>They clash, again and again, until—</p>
-
-            <p>A pause.</p>
-
-            <p>A feint.</p>
-
-            <p>A flash of light.</p>
-
-            <p>discord's hand drives through Beat's chest: no blood, just brilliance. The same starlight that marked her ascension now being ripped out.</p>
-
-            <p>"Gotcha."</p>
-
-            <p>She lifts the glowing fragment or radiance in triumph — Aria's soul, her fairy, her music — and vanishes.</p>
-
-            <p>What's left of Aria falls, shining brilliantly.</p>
-
-            <p>"PYARA!"</p>
-
-            <p><a href="../characters/character-kali-dana.html" class="character-link">Kali</a>'s scream breaks the air itself. And when the light fades… there's only stardust. And regret.</p>
         </article>
 
         <!-- Related Stories Section -->
         <section class="related-section">
             <h2 class="related-title">Related Stories</h2>
             <div class="related-grid">
-                <a href="story-symphonic-overture.html" class="related-card">
-                    <div class="related-card-title">Symphonic Overture</div>
-                    <div class="related-card-desc">Mahana Sahi's first appearance in Royastella marks the beginning of cross-realm instability.</div>
+                <!-- Add 2-4 related story cards -->
+                <a href="story-name.html" class="related-card">
+                    <div class="related-card-title">Story Title</div>
+                    <div class="related-card-desc">Brief description of what happens in this related story.</div>
                 </a>
-                <a href="story-avant-garde-composition.html" class="related-card">
-                    <div class="related-card-title">Avant-Garde Composition</div>
-                    <div class="related-card-desc">discord kidnaps Mahana, opening a rift to Nexsicon and trapping the Lovely Hearts.</div>
+                <a href="story-name.html" class="related-card">
+                    <div class="related-card-title">Story Title</div>
+                    <div class="related-card-desc">Brief description of what happens in this related story.</div>
                 </a>
-                <a href="story-falling-stars.html" class="related-card">
-                    <div class="related-card-title">Falling Stars</div>
-                    <div class="related-card-desc">BLADE GUILLOTINE's betrayal of the Starlite 7th and the sealing of Royastella.</div>
+                <a href="story-name.html" class="related-card">
+                    <div class="related-card-title">Story Title</div>
+                    <div class="related-card-desc">Brief description of what happens in this related story.</div>
                 </a>
             </div>
         </section>
