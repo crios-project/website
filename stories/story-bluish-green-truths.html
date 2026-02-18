@@ -1,112 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
-        body {
-  background: #00091B;
-  color: #fff;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluish-Green Truths // CRIOS Short Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); 
+            line-height: 1.9; overflow-x: hidden; }
+        
+        /* Animated background */
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5;
+            animation: gridFloat 20s linear infinite; }
+        @keyframes gridFloat { 0% { transform: translateY(0); } 100% { transform: translateY(40px); } }
+
+        /* Gradient orbs */
+        .orb { position: fixed; border-radius: 50%; filter: blur(100px); opacity: 0.15; pointer-events: none; z-index: 0; }
+        .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px; right: -200px; animation: orbFloat1 20s ease-in-out infinite; }
+        .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px; left: -150px; animation: orbFloat2 25s ease-in-out infinite; }
+        @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-100px, 100px); } }
+        @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(100px, -80px); } }
+
+        /* Header nav */
+        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
+        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
+            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
+        .back-link:hover { color: var(--accent-cyan); }
+
+        /* Container */
+        .container { max-width: 900px; margin: 0 auto; padding: 80px 24px 100px; position: relative; z-index: 1; }
+
+        /* Story header */
+        .story-header { text-align: center; margin-bottom: 80px; animation: fadeInDown 1s ease-out; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        .story-title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 16px; letter-spacing: 3px; line-height: 1.2; }
+        .story-meta { display: flex; justify-content: center; gap: 32px; margin-top: 24px; }
+        .meta-item { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 2px; }
+        .meta-item .label { color: var(--accent-cyan); }
+
+        /* Story content */
+        .story-content { animation: fadeIn 1s ease-out 0.3s both; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .story-content p { font-size: 1.15rem; line-height: 2; margin-bottom: 28px; color: var(--text-primary); }
+        .story-content p:first-of-type::first-letter { font-size: 4rem; line-height: 1; float: left;
+            font-family: 'Orbitron', sans-serif; color: var(--secondary-pink); margin: 4px 12px 0 0; }
+
+        /* Dialogue */
+.story-content em { 
+    font-style: italic; 
+    color: #d4d4f0; 
 }
 
+        /* Emphasis text */
+        .story-content strong { color: var(--accent-cyan); font-weight: 700; }
+        .story-content em { color: var(--secondary-pink); font-style: italic; }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        /* Special moments - dramatic reveals */
+        .dramatic { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 3px; text-align: center;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin: 48px 0; padding: 24px; border-top: 2px solid rgba(233, 30, 99, 0.3);
+            border-bottom: 2px solid rgba(233, 30, 99, 0.3); }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        /* Section breaks */
+        .break { text-align: center; margin: 60px 0; font-size: 1.5rem; color: var(--secondary-pink); 
+            letter-spacing: 8px; }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        /* Character links */
+        .character-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease; font-weight: 600; }
+        .character-link:hover { color: white; border-bottom-color: var(--accent-cyan); 
+            text-shadow: 0 0 8px var(--accent-cyan); }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        /* Related stories footer */
+        .related-section { margin-top: 120px; padding: 48px 0; border-top: 1px solid rgba(233, 30, 99, 0.2); }
+        .related-title { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700;
+            color: var(--secondary-pink); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 32px; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .related-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px; padding: 24px; text-decoration: none; display: block; transition: all 0.3s ease; }
+        .related-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2); }
+        .related-card-title { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 600;
+            color: var(--text-primary); margin-bottom: 8px; }
+        .related-card-desc { font-size: 0.9rem; color: var(--text-dim); line-height: 1.6; }
 
-.dot {
-  color: #4FEBFE;
-}
+        @media (max-width: 768px) {
+            .story-title { font-size: 2.2rem; }
+            .story-content p { font-size: 1.05rem; }
+            .story-meta { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+    <nav class="header-nav">
+        <a href="../stories.html" class="back-link">← All Stories</a>
+    </nav>
 
-.icons {
-  text-align: center;
-  
-}
+    <div class="container">
+        <!-- Story Header -->
+        <header class="story-header">
+            <h1 class="story-title">Bluish-Green Truths</h1>
+            <div class="story-meta">
+                <div class="meta-item"><span class="label">Era:</span> Nexsicon Arc</div>
+                <div class="meta-item"><span class="label">Featured:</span> Alulu Dayk, Claris Quies</div>
+                <div class="meta-item"><span class="label">Type:</span> Character Moment</div>
+            </div>
+        </header>
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        <!-- Story Content -->
+        <article class="story-content">
+            <p><strong>MISSION: FAILED SUCCESSFULLY.</strong></p>
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+            <p><a href="../characters/character-ji-lian-xia.html" class="character-link">Alulu</a> slips out of the rooftop access hatch of Day Enterprises International HQ and exhales one long, quiet breath. No alarms, no lasers, no guards shouting "Hey, you there!" in that super professional guard voice. Textbook success.</p>
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+            <p>Except… the data she broke in to find was the wrong data. Totally useless. So, y'know. Textbook failure.</p>
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+            <p><em>Mission failed successfully.</em></p>
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Short story <span class="dot">"Bluish-Green Truths"</span> coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+            <p>She'll think about that later. For now—escape. Because while the night is dark and quiet, it's also full of security drones who don't sleep or appreciate irony.</p>
+
+            <p>Alulu pads across the roof and peeks over the edge. Ten stories down. Definitely "ouch" territory. Her eyes glow a faint pale pink. Magic pings back the analysis: "Highly inadvisable to swan dive."</p>
+
+            <p><em>Yeah, no kidding</em>.</p>
+
+            <p>But she's never been one for timidity. Or good decisions.</p>
+
+            <p>She takes a running leap off the corner, because of course she does. Smart architectural choices Day Enterprises—minimal corner offices means minimal windows means minimal witnesses. Plus she'd timed her exit to happen at the shift change.</p>
+
+            <p>Perfect window for breaking, entering, and plummeting.</p>
+
+            <p>Ground's coming fast. Physics is rude like that. Her eyes flare pink again—twice, rapid-fire. Two magic circles with the Transformation spell. That universal magical girl cheat code. First one: poof, she's her civilian self. Second: poof, back to magical mode. The combo platter.</p>
+
+            <p>Why? Because someone paid attention in Magical Girl 101: "Always assume the universe is watching." And bonus: magical circles reset pesky things like terminal velocity when you pass through them.</p>
+
+            <p>Result: zero splat. She lands like a feather that's mildly annoyed with gravity.</p>
+
+            <p>Success. Finally.</p>
+
+            <p>Superhero landing. Cue applause.</p>
+
+            <p>Wait—<em>literal applause?</em></p>
+
+            <p>"That was impressive!" says a voice that's way too perky for 3 a.m.</p>
+
+            <p>Alulu whirls. A girl steps out of the shadows, clapping like she's watching the world's most adorable action movie. Small. Freckled. Smiley. Not a threat. Maybe a threat. Probably not a threat. Definitely a vibe.</p>
+
+            <p>Alulu's spine tingles. Magic. Manipulation magic. <em>Friend-making magic.</em></p>
+
+            <p>Rude. She snaps it like a twig.</p>
+
+            <p>"Oh, you broke it!" the girl beams. "I like you. I've got to have you for myself."</p>
+
+            <p>Okay, so <em>threat</em> it is. Capital T. Bold font.</p>
+
+            <p>Her TranQ hand cannon manifests in Alulu's hand, sleek and deadly. She fires point-blank, Lethe rounds chambered—instant forget-you-ever-saw-me mix. Perfect aim. Zero hit. The girl blinks out of existence like she's allergic to bullets.</p>
+
+            <p>"Yeesh! Harsh, much?"</p>
+
+            <p>Now she's behind her. Because of course she is.</p>
+
+            <p>Alulu pivots, fires again. Misses again. Same girl, same grin, now slightly less Disney, slightly more "I'm not okay I promise."</p>
+
+            <p>"Wait! I honestly just want to talk to you!"</p>
+
+            <p>Yeah, sure, and Alulu just wants a beach vacation and health insurance.</p>
+
+            <p>Spell. Ten-foot Lethe sphere. Instant mind wipe, guaranteed satisfaction. Cast and—</p>
+
+            <p>She's somehow exactly eleven feet away. Of course she is. Just out of range.</p>
+
+            <p>Then the girl says it. The kind of thing <em>no one</em> should ever say unless they've got a death wish and a backup universe.</p>
+
+            <p>"Caie asca—"</p>
+
+            <p>Reaction. Pure instinct. Out comes the Executionist blade. Swing. Cut the word off before the world unravels. She teleports. Again. Gun. Blade. Shot. Slash. The air becomes a strobe of violence and neon light. A ballet choreographed by panic.</p>
+
+            <p>Then—stumble. The girl's down. Blade thrusting at her heart. One more breath and it's done.</p>
+
+            <p>"Sorry!" the girl blurts, breathless, smiling, still somehow adorable. "Let's try this again. My name's <a href="../characters/character-claris-quies.html" class="character-link">Clary</a>. Your brat of a sister set me up, and I know where a loadsoul is."</p>
+
+            <p>Beat.</p>
+
+            <p>Alulu blinks, blade still hovering over Clary's heart.</p>
+
+            <p>"Well," she mutters. "That's… annoying."</p>
+
+            <p>Clary's grin grows wider still.</p>
+        </article>
+
+        <!-- Related Stories Section -->
+        <section class="related-section">
+            <h2 class="related-title">Related Stories</h2>
+            <div class="related-grid">
+                <a href="story-aria-caesura.html" class="related-card">
+                    <div class="related-card-title">Aria Caesura</div>
+                    <div class="related-card-desc">The death of Pyara Dana and discord's first betrayal of the Lovely Hearts.</div>
+                </a>
+                <a href="story-symphonic-overture.html" class="related-card">
+                    <div class="related-card-title">Symphonic Overture</div>
+                    <div class="related-card-desc">Mahana Sahi arrives in Royastella as an Untethered entity and meets Shini Thana.</div>
+                </a>
+            </div>
+        </section>
+    </div>
+</body>
 </html>
