@@ -1,113 +1,566 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EARTH // CRIOS Element</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            padding-bottom: 1px;
+        }
+
+        .wiki-link:hover {
+            border-bottom: 1px solid var(--accent-cyan);
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-box {
+            background: rgba(20, 20, 25, 0.5);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .info-box-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .element-visual {
+            position: relative;
+        }
+
+        .element-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .element-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../magic.html" class="back-link">← Magic Systems</a></nav>
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">EARTH</h1>
+        </header>
+
+        <section class="content-section element-header">
+            <div class="element-visual">
+                <img src="../assets/magic/Tier 1 Earth.svg" alt="EARTH"
+                    style="width: 100%; display: block; margin: 0 auto;" class="element-image">
+            </div>
+            <div class="element-info">
+                <h2 class="section-title">Introduction</h2>
+                <div class="section-content">
+                    <p><strong>Earth</strong> is one of the foundational elemental forces present across multiple
+                        magical systems within the Crios cosmology. Universally associated with stability, structure,
+                        endurance, and material manifestation, Earth embodies permanence and resistance to change. In
+                        Lúmenai, Earth represents harmonic solidity and foundational resonance. In Cymora, it manifests
+                        as grounding phonetic weight that anchors reality. Within the System of Royastella, Earth
+                        functions as a defensive and reinforcement-oriented mana channel emphasizing durability,
+                        resilience, and structural manipulation. Earth is weight, form, and endurance. </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Magic System</th>
+                            <th>Element Name</th>
+                            <th>Classification</th>
+                            <th>Core Expression</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Téroma</td>
+                            <td>Tier 1 — Open Voice</td>
+                            <td>Weight, form, endurance</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Dâr</td>
+                            <td>Primary Element</td>
+                            <td>Grounding resonance and structural anchoring</td>
+                        </tr>
+                        <tr>
+                            <td>System Mana</td>
+                            <td>Earth Core</td>
+                            <td>Elemental Core</td>
+                            <td>Defensive reinforcement and material mana structuring</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Lúmenai — Téroma</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                <p>Tier 1 — Basic Element</p>
+                <p>One of the Five Open Voices</p>
+                <h3 class="section-subtitle">Essentia Profile</h3>
+                <p><strong>Téroma</strong> represents solidity, resistance, and sustained presence. Within Lúmenai
+                    harmonic theory, Earth governs durability, protection, and the ability to give lasting shape to
+                    magical constructs. Téroma practitioners often demonstrate exceptional control over barriers,
+                    terrain shaping, and long-duration magical formations.</p>
+                <p>Téroma is frequently associated with defensive mastery, but it also supports offensive manifestations
+                    through mass and structural force.</p>
+                <h3 class="section-subtitle">Magical Expression</h3>
+                <p>Common manifestations include:</p>
+                <ul>
+                    <li>Barrier and shield construction</li>
+                    <li>Terrain shaping and geological manipulation</li>
+                    <li>Density amplification</li>
+                    <li>Impact reinforcement</li>
+                    <li>Construct stabilization and structural preservation</li>
+                </ul>
+                <h3 class="section-subtitle">Conjoined Essentia</h3>
+                <h4 class="section-subtitle">Férroma — Metal</h4>
+                <p>(Pýrua + Téroma)</p>
+                <p>Essence: forged will and sharpened solidity</p>
+                <p>Used for weapon forging, armor reinforcement, and magnetic manipulation.</p>
+                <h4 class="section-subtitle">Víratha — Plant</h4>
+                <p>(Áquora + Téroma)</p>
+                <p>Essence: living structure and regenerative growth</p>
+                <p>Used for biomancy, vegetation control, and environmental restoration.</p>
+                <h4 class="section-subtitle">Kórelis — Martial Enhancement</h4>
+                <p>(Téroma + Vaélia)</p>
+                <p>Essence: disciplined momentum</p>
+                <p>Used for physical reinforcement, kinetic control, and martial augmentation.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Cymora — Dâr</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Compound</th>
+                            <th>Meaning</th>
+                            <th>Composition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tândâr</td>
+                            <td>Metal</td>
+                            <td>Fire + Earth</td>
+                        </tr>
+                        <tr>
+                            <td>Nahdâr</td>
+                            <td>Plant</td>
+                            <td>Water + Earth</td>
+                        </tr>
+                        <tr>
+                            <td>Gwyndâr</td>
+                            <td>Martial Arts</td>
+                            <td>Wind + Earth</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">System Mana — Earth Core</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                    <p>Elemental Core Channel</p>
+                    <h3 class="section-subtitle">Functional Nature</h3>
+                        <p>Within Royastella, Earth manifests as a defensive and structural mana discipline governed by
+                            the
+                            System. Earth-aligned users specialize in durability, protective reinforcement, and
+                            sustained
+                            magical endurance.</p>
+                        <p>Earth cores frequently produce practitioners capable of maintaining prolonged defensive
+                            formations
+                            and absorbing high-impact magical or physical attacks.</p>
+                        <h3 class="section-subtitle">Mechanical Properties</h3>
+                            <ul>
+                                <li>Defensive mana reinforcement</li>
+                                <li>Density manipulation</li>
+                                <li>Structural mana shaping</li>
+                                <li>Endurance-based spellcasting</li>
+                            </ul>
+                            <h3 class="section-subtitle">Aura Manifestation</h3>
+                                <p>Through Runic Knight training, Earth cores may be externally manifested as physical
+                                    auras that
+                                    enhance:</p>
+                                <ul>
+                                    <li>Physical durability</li>
+                                    <li>Defensive barrier integrity</li>
+                                    <li>Impact resistance</li>
+                                    <li>Structural stabilization of allied constructs</li>
+                                </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Comparative Analysis</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Earth Philosophy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Earth is harmonic stability and sustained existence</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Earth is grounding resonance that anchors reality</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Earth is defensive mana engineering and endurance optimization</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Casting Mechanism</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Harmonic reinforcement and structural resonance</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Sustained tonal incantation and grounding phonetics</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>Mana density manipulation and reinforcement algorithms</td>
+                    </tr>
+                </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Limitations</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Requires strong internal stability and sustained focus</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Requires vocal endurance and tonal consistency</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>Limited by stamina, mana storage capacity, and load thresholds</td>
+                    </tr>
+                </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Notable Users</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Lúmenai Practitioners</h3>
+                    <ul>
+                        <li><em>Pyara Dana</em> — Accesses Téroma through Tier 1 harmonic mastery</li>
+                        <li><em>Mahana Sahi</em> — Utilizes Téroma through expanded multi-voice Essentia</li>
+                        <li><em>Aran Letale</em> — Specialized Férroma (Metal Entwinement) practitioner derived from
+                            Téroma
+                        </li>
+                    </ul>
+                    <h3 class="section-subtitle">Cymora Practitioners</h3>
+                        <ul>
+                            <li><em>Tiala Corsolis</em> — Uses Dâr resonance to reinforce large-scale constructs and
+                                barriers
+                            </li>
+                            <li><em>Alulu Caelum</em> — Known to incorporate stabilizing grounding tones into ritual
+                                casting
+                            </li>
+                        </ul>
+                        <h3 class="section-subtitle">System Mana Users</h3>
+                            <ul>
+                                <li><em>Daeon Liàng</em> — Native Earth Core user specializing in defensive and
+                                    structural
+                                    reinforcement</li>
+                                <li><em>Takino Retsu</em> — Earth-aligned practitioner known for endurance-based combat
+                                    and terrain
+                                    manipulation</li>
+                            </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Symbolism and Thematic Role</h2>
+            <div class="section-content">
+                <p>Across Crios cosmology, Earth consistently represents:</p>
+                <ul>
+                    <li>Stability and permanence</li>
+                    <li>Endurance through adversity</li>
+                    <li>Structural integrity and protection</li>
+                    <li>The grounding force that supports narrative and emotional resilience</li>
+                </ul>
+                <p>Earth is frequently associated with characters who provide defensive strength, preserve continuity,
+                    and sustain others during periods of instability.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Related Elements</h2>
+            <div class="section-content">
+                <ul>
+                    <li><em><a href="element-fire.html" class="wiki-link">Fire</a></em></li>
+                    <li><em><a href="element-water.html" class="wiki-link">Water</a></em></li>
+                    <li><em><a href="element-wind.html" class="wiki-link">Wind</a></em></li>
+                    <li><em><a href="element-metal.html" class="wiki-link">Metal</a></em></li>
+                    <li><em><a href="element-plant.html" class="wiki-link">Plant</a></em></li>
+                    <li><em><a href="element-martial.html" class="wiki-link">Martial Arts</a></em></li>
+                </ul>
+            </div>
+        </section>
 
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+    </div>
+</body>
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
-
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
-
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
-
-.dot {
-  color: #4FEBFE;
-}
-
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
-
-.icons {
-  text-align: center;
-  
-}
-
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
-
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
-
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
-
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
-
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Element <span style="color: #b57204;">Earth</span> magic coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
 </html>
-

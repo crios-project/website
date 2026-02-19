@@ -1,112 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiānshàng Legacy // CRIOS Lore</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
 
-.icons {
-  text-align: center;
-  
-}
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .page-quote {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--accent-cyan);
+            margin-bottom: 40px;
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .page-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Lore page <span class="dot">Tiānshàng Legacy</span> coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../lore.html" class="back-link">← Lore Index</a></nav>
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">TIĀNSHÀNG LEGACY</h1>
+            <p class="page-quote">"No one is born Tiānshàng. You must earn that right."</p>
+        </header>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p>The Tiānshàng Legacy is a hereditary yet non-automatic honor system practiced by
+                the Tiānshàng Clan. Unlike traditional bloodline inheritance structures, the Tiānshàng name is
+                considered a title of existential merit rather than a familial guarantee.</p>
+                <p>Children born into Tiānshàng lineage are intentionally denied the clan surname at birth. Instead,
+                    they are assigned <strong>provisional surnames</strong> chosen based on the circumstances, omens, or
+                    philosophical interpretations surrounding their arrival into the world. Only after proving themselves as individuals of exceptional value to the clan, to reality, or to
+                    continuity itself are they granted the Tiānshàng name.</p>
+                <p>The moment of ascension manifests physically through a supernatural ocular phenomenon known as the
+                    <strong>Six-Star Installation</strong>.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Philosophical Foundation</h2>
+            <div class="section-content">
+                <p>The Tiānshàng believe identity must be forged through lived impact rather than inherited authority.
+                    Their doctrine emphasizes three core tenets:</p>
+
+                <h3 class="section-subtitle">Merit Over Blood</h3>
+                <p>Lineage creates potential, not entitlement.</p>
+
+                <h3 class="section-subtitle">Contribution Over Survival</h3>
+                <p>A Tiānshàng must alter the trajectory of existence, not merely exist within it.</p>
+
+                <h3 class="section-subtitle">Continuity Over Individuality</h3>
+                <p>Members are judged by how they preserve, redirect, or evolve collective legacy rather than personal
+                    ambition alone.</p>
+
+                <p>Within clan theology, the Tiānshàng name is described as a <em>cosmic contract</em>, binding the
+                    bearer to roles that extend beyond personal life.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">The Provisional Naming System</h2>
+            <div class="section-content">
+                <p>Upon birth, Tiānshàng-descended children receive a temporary surname known as a <strong>Circumstance
+                        Name</strong>.</p>
+                <p>These names typically reflect:</p>
+                <ul>
+                    <li>Environmental anomalies present during birth</li>
+                    <li>Emotional or political state of the clan</li>
+                    <li>Astrological or resonance interpretations</li>
+                    <li>Anticipated symbolic destiny patterns</li>
+                </ul>
+                <p>Circumstance Names are intentionally chosen to represent possibility rather than identity.</p>
+
+                <h3 class="section-subtitle">Examples</h3>
+                <ul>
+                    <li><strong>Ánguāng</strong> — "Hidden Radiance" or "Light in Concealment"</li>
+                    <li><strong>Xiǎolín</strong> — "Young Grove" (growth in uncertain soil)</li>
+                    <li><strong>Yúnshēng</strong> — "Cloud-Born" (uncertain but expansive potential)</li>
+                </ul>
+                <p>Children retain these names until ascension or permanent disqualification.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">The Six-Star Installation</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Visual Manifestation</h3>
+                <p>Upon successful recognition as Tiānshàng, six faint luminous star marks appear within each iris.</p>
+                <p><strong>Configuration:</strong></p>
+                <ul>
+                    <li>Three stars along the upper right arc</li>
+                    <li>Three stars along the lower left arc</li>
+                    <li>Diagonal bilateral symmetry</li>
+                    <li>Luminosity varies based on emotional resonance and power expression</li>
+                </ul>
+                <p>The arrangement forms a visual flow that naturally draws attention toward the pupil, symbolizing
+                    focus through balance.</p>
+
+                <h3 class="section-subtitle">Metaphysical Function</h3>
+                <p>The Six-Star Installation is not purely cosmetic. It represents a synchronization between the bearer
+                    and the Tiānshàng Continuity Field — a clan-specific metaphysical resonance network.</p>
+                <p>Confirmed effects include:</p>
+                <ul>
+                    <li>Increased perceptual awareness of resonance fluctuations</li>
+                    <li>Enhanced compatibility with legacy-based transformation systems</li>
+                    <li>Subconscious access to ancestral memory fragments</li>
+                    <li>Stabilization during identity-fracture phenomena</li>
+                    <li>Amplification of existential presence</li>
+                </ul>
+                <p>The stars function as both recognition and binding seal.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">The Ascension Criteria</h2>
+            <div class="section-content">
+                <p>There is no standardized trial or ceremony. Ascension is determined through <strong>Convergence
+                        Recognition</strong>, a phenomenon in which the clan's ancestral resonance collectively
+                    acknowledges a candidate's worth.</p>
+                <p>Documented triggers include:</p>
+                <ul>
+                    <li>Preventing catastrophic reality divergence</li>
+                    <li>Preserving clan lineage during existential collapse</li>
+                    <li>Demonstrating philosophical alignment with Tiānshàng doctrine</li>
+                    <li>Surviving resonance events that erase or redefine identity</li>
+                    <li>Manifesting new continuity pathways previously unknown to the clan</li>
+                </ul>
+                <p>Ascension frequently occurs during moments of extreme narrative or metaphysical pressure.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Installation Event Characteristics</h2>
+            <div class="section-content">
+                <p>Witnesses consistently report:</p>
+                <ul>
+                    <li>Sudden pupil dilation followed by starlight crystallization</li>
+                    <li>Temporary environmental resonance distortion</li>
+                    <li>Emotional memory flashes experienced by nearby Tiānshàng members</li>
+                    <li>A brief sensation described as "gravity reversing inside the eyes"</li>
+                </ul>
+                <p>The recipient often experiences temporary disorientation as ancestral echoes integrate.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Disqualification and Failure</h2>
+            <div class="section-content">
+                <p>Children who never demonstrate sufficient impact:</p>
+                <ul>
+                    <li>Retain their Circumstance Names permanently</li>
+                    <li>Remain culturally respected but excluded from continuity authority</li>
+                    <li>Are barred from certain Tiānshàng legacy rituals</li>
+                    <li>Cannot inherit transformation systems linked to the clan</li>
+                </ul>
+                <p>This is not considered punishment, but natural selection of existential responsibility.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Known Legacy Bearers</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Xīwàng Tiānshàng</h3>
+                <p>One of the youngest individuals ever recognized by the clan. Her ascension occurred at an abnormally
+                    early age, suggesting either:</p>
+                <ul>
+                    <li>Extraordinary innate resonance compatibility</li>
+                    <li>Predetermined continuity significance</li>
+                    <li>Lodesoul-adjacent existential importance</li>
+                </ul>
+                <p>Xīwàng's early installation is frequently referenced in clan philosophical debates regarding whether
+                    destiny can exist within merit-based systems.</p>
+                    <img src="../assets/icons/xiwang eyes.png" width="25%" alt="Xīwàng Tiānshàng Eyes">
+                <h3 class="section-subtitle">Fú cì Ánguāng → Fú cì Tiānshàng</h3>
+                <p>Fú cì's ascension occurred following the Cascade Resonance, after surviving the Tiānshàng massacre,
+                    targeted assassination attempts, and subsequent rescue by Windi Lightfall.</p>
+                <p>Her ascension is notable for:</p>
+                <ul>
+                    <li>Occurring after prolonged trauma and identity destabilization</li>
+                    <li>Reactivating suppressed Tiānshàng lineage transformation potential</li>
+                    <li>Correlating with the restoration of her Zhòu-chún manifestation, though in a fractured state
+                    </li>
+                </ul>
+                <p>Scholars frequently cite her case as evidence that Tiānshàng recognition can occur through survival
+                    of existential collapse rather than proactive achievement.</p>
+                    <img src="../assets/icons/fu eyes.png" width="25%" alt="Fú cì Tiānshàng Eyes">
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Symbolism of the Six Stars</h2>
+            <div class="section-content">
+                <p>Each star represents a philosophical axis rather than a power classification:</p>
+                <ul>
+                    <li>Continuity</li>
+                    <li>Sacrifice</li>
+                    <li>Memory</li>
+                    <li>Transformation</li>
+                    <li>Balance</li>
+                    <li>Witness</li>
+                </ul>
+                <p>Together they symbolize existence not as linear progression, but as cyclical preservation through
+                    change.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Modern Status</h2>
+            <div class="section-content">
+                <p>The Tiānshàng Legacy is presumed to still exist as Fú cì was able to ascend and access it, but
+                    there's notably few members of clan left to access it. Whether the clan will ever rebuild to its
+                    previous height remains to be seen.</p>
+            </div>
+        </section>
+
+    </div>
+</body>
+
 </html>

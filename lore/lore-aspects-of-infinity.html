@@ -1,112 +1,454 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspects of Infinity // CRIOS Lore</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
 
-.icons {
-  text-align: center;
-  
-}
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .page-quote {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--accent-cyan);
+            margin-bottom: 40px;
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Lore page <span class="dot">Aspects of Infinity</span> coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        .level-card {
+            background: rgba(20, 20, 25, 0.5);
+            border-left: 4px solid var(--secondary-pink);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .level-card h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--secondary-pink);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bearer-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.15);
+            padding: 20px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        .bearer-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .bearer-aspect {
+            font-size: 0.9rem;
+            color: var(--secondary-pink);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        
+        .ascends {
+            color:hotpink;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../lore.html" class="back-link">← Lore Index</a></nav>
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">ASPECTS OF INFINITY</h1>
+            <p class="page-quote">"There is nothing that does not exist somewhere as itself."</p>
+        </header>
+
+        <section class="content-section">
+            <h2 class="section-title">Ontological Principle</h2>
+            <div class="section-content">
+                <p>All things possess manifestation.</p>
+                <p>Not merely matter.<br> Not merely energy.<br> Not merely spirit.</p>
+                <p><strong>Even abstraction has body.</strong></p>
+                <p>There is:</p>
+                <ul>
+                    <li>A physical <strong>Truth</strong></li>
+                    <li>A physical <strong>Chaos</strong></li>
+                    <li>A physical <strong>War</strong></li>
+                    <li>A physical <strong>Hate</strong></li>
+                    <li>A physical <strong>Death</strong></li>
+                </ul>
+                <p>Even concepts that already possess metaphysical presence also possess manifested presence.</p>
+                <p>There is:</p>
+                <ul>
+                    <li>A physical <strong>Red</strong></li>
+                    <li>A physical <strong>Blue</strong></li>
+                    <li>A physical <strong>Silence</strong></li>
+                    <li>A physical <strong>Fate</strong></li>
+                </ul>
+                <p>These manifestations are known collectively as <strong>Aspects of Infinity</strong>.</p>
+                <p>They are tangible instantiations of conceptual constants — ephemeral yet real. They flicker in and
+                    out of accessible reality, rarely encountered, almost never understood.</p>
+                <p>But they can be found.</p>
+                <p>And they can be joined.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Manifestation and Channeling</h2>
+            <div class="section-content">
+                <p>If one is:</p>
+                <ul>
+                    <li>Diligent in research</li>
+                    <li>Reckless in ambition</li>
+                    <li>Or intimately connected to those who are</li>
+                </ul>
+                <p>It becomes possible not merely to find an Aspect — <br>but to <strong>integrate</strong> with it.</p>
+                <p>This is what makes Nexsican magical transformations unique.</p>
+                <p>The magical girls of Nexsicon do not merely cast spells.</p>
+                <p><strong>They channel Infinity.</strong></p>
+                <p>That is why they are powerful.</p>
+                <p>That is why they are dangerous.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Levels of Integration</h2>
+            <div class="section-content">
+                <p>Aspect integration progresses through three escalating states:</p>
+
+                <div class="level-card">
+                    <h4>I. Augeo — The Joining</h4>
+                    <p><em>The foundational state.</em></p>
+                    <ul>
+                        <li>Establishes connection between individual and Aspect</li>
+                        <li>Grants access to minor manifestation abilities</li>
+                        <li>Personality remains largely intact</li>
+                        <li>No intrinsic backlash for disengagement</li>
+                    </ul>
+                    <p>The user remains themselves — but amplified.</p>
+                </div>
+<hr>
+                <div class="level-card">
+                    <h4>II. Exsequi — The Yielding</h4>
+                    <p><em>The intermediate state.</em></p>
+                    <ul>
+                        <li>Dramatically increased Aspect output</li>
+                        <li>Partial erosion of baseline humanity</li>
+                        <li>The user must <em>act in accordance with the Aspect</em></li>
+                    </ul>
+                    <p>Failure to satisfy the Aspect's nature during channeling results in backlash upon release.</p>
+                    <p><strong>Example:</strong> An Exsequi aligned with Fire must burn something during manifestation.
+                        If they do not, the Aspect will reclaim equilibrium violently.</p>
+                    <p>An Exsequi does not merely wield power. They must feed it.</p>
+                </div>
+<hr>
+                <div class="level-card">
+                    <h4>III. Vitio — Sublimation</h4>
+                    <p><em>The terminal state.</em></p>
+                    <ul>
+                        <li>Complete subsumption of original personality</li>
+                        <li>The individual becomes an incarnation of the Aspect</li>
+                        <li>No backlash upon disengagement</li>
+                        <li>Actions are fully guided by Aspect logic</li>
+                    </ul>
+                    <p>There is no resistance at Vitio. Because there is no separation.</p>
+                    <p>The danger lies not in release — but in permanence.</p>
+                    <p>Repeated Vitio access rewrites cognition. A Vitio of Fire will increasingly view combustion as
+                        the most rational solution to conflict. A Vitio of War will interpret peace as stagnation. A
+                        Vitio of Entropy will see collapse as mercy.</p>
+                    <p><strong>The corruption is not emotional. It is logical.</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Known Aspect Bearers</h2>
+            <div class="section-content">
+
+                <div class="bearer-card">
+                    <div class="bearer-name">Tiala Hartlight</div>
+                    <div class="bearer-aspect">Aspect: Death</div>
+                    <p>Death is inevitability, severance, finality. It is not malice. It is conclusion.</p>
+                    <div class="ascends">Ascendant Form: Alulu Dayk <br> Aspected Form: Alulu Akụkụ <br> Incarnate Form: Alulu Ọnwụ</div>
+                </div>
+
+                <div class="bearer-card">
+                    <div class="bearer-name">Jí Lián Xiá</div>
+                    <div class="bearer-aspect">Aspect: War</div>
+                    <p>War is not rage. It is escalation. It is conflict as natural law.</p>
+                    <p>Her detachment masks a deeper alignment with structured violence and inevitability of opposition.
+                    </p>
+                    <div class="ascends">Ascendant Form: Kesshō Yīng <br> Aspected Form: Kesshō Tǐ <br> Incarnate Form: Kesshō Zhàn</div>
+                </div>
+
+                <div class="bearer-card">
+                    <div class="bearer-name">Claris Quies</div>
+                    <div class="bearer-aspect">Aspect: Chaos</div>
+                    <p>Chaos is divergence, instability, and non-linear outcome.</p>
+                    <p>Evidence suggests possible secondary Aspect integration. If true, she represents a rare and
+                        unstable configuration.</p>
+                    <div class="ascends">Ascendant Form: Tessera Vis <br> Aspected Form: Tessera Ratio <br> Incarnate Form: Vastatio Tessera</div>
+                </div>
+
+                <div class="bearer-card">
+                    <div class="bearer-name">Ami Hartbreak</div>
+                    <div class="bearer-aspect">Aspect: Fate</div>
+                    <p>Ironic alignment. Her artifact blade is named <strong>Fate</strong> and possesses the ability to
+                        sever causality.</p>
+                    <p>Fate, as an Aspect, is not destiny. It is inevitability under observation.</p>
+                    <p>Ami's rejection of destiny while channeling Fate makes her uniquely volatile.</p>
+                    <div class="ascends">Ascendant Form: Amaranthine Hartfall</div>
+                </div>
+
+                <div class="bearer-card">
+                    <div class="bearer-name">Windi Lightfall</div>
+                    <div class="bearer-aspect">Aspect: Entropy</div>
+                    <p>Entropy is decline, dissolution, return to equilibrium. It does not destroy. It simplifies.</p>
+                    <p>Her philosophical detachment aligns seamlessly with the slow unmaking of structure.</p>
+                    <div class="ascends">Ascendant Form: Kweliana Winderial la Pax</div>
+                </div>
+
+                <div class="bearer-card">
+                    <div class="bearer-name">Fú cì Ánguāng</div>
+                    <div class="bearer-aspect">Aspect: Hope</div>
+                    <p>Hope is forward projection. It is belief in unrealized potential.</p>
+                    <p>The disappearance of Xīwàng Tiānshàng destabilized Fú cì's transformation because Hope without
+                        anchor fractures into desperation.</p>
+                    <div class="ascends">Ascendant Form: Zhòu-chún Shìfàng</div>
+                </div>
+
+                <div class="bearer-card">
+                    <div class="bearer-name">Odisse Nocere</div>
+                    <div class="bearer-aspect">Aspect: Assassination</div>
+                    <p>Discovered within the void. More specialized than Death.</p>
+                    <p>Where Death is universal and inevitable — Assassination is intentional and precise.</p>
+                    <p>It is superior to Death in focused lethality. Death ends. Assassination chooses.</p>
+                </div>
+
+                <div class="bearer-card">
+                    <div class="bearer-name">Xīwàng Tiānshàng</div>
+                    <div class="bearer-aspect">Aspect: Unknown</div>
+                    <p>No identifiable Aspect signature.</p>
+                    <p>If one exists, it does not manifest conventionally or may exist outside standard Infinity
+                        taxonomy.</p>
+                    <p>Her absence complicates classification.</p>
+                </div>
+
+                <div class="bearer-card">
+                    <div class="bearer-name">Velia Traicerem</div>
+                    <div class="bearer-aspect">Status: Aspect Incarnate</div>
+                    <p>Velia is not joined to an Aspect. She <strong>is</strong> one.</p>
+                    <p>She is the physical manifestation of the concept of Dragons.</p>
+                    <p>Not a wielder. An embodiment.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Strategic Implications</h2>
+            <div class="section-content">
+                <p>Aspect integration creates exponential combat potential.</p>
+                <p>However:</p>
+                <ul>
+                    <li>Vitio overuse produces permanent cognitive distortion</li>
+                    <li>Multiple Aspects interacting creates resonance instability</li>
+                    <li>Aspect conflicts can trigger metaphysical feedback events</li>
+                </ul>
+                <p>In a realm approaching convergence, <br>Aspect bearers are not merely combatants.</p>
+                <p><strong>They are fault lines.</strong></p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Philosophical Consideration</h2>
+            <div class="section-content">
+                <p>If every concept has a body —</p>
+                <p>Then somewhere:</p>
+                <p>There is a physical <strong>Infinity</strong>.</p>
+                <p>And if that is true —</p>
+                <p><strong>It may already be watching.</strong></p>
+            </div>
+        </section>
+
+    </div>
+</body>
+
 </html>

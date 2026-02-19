@@ -1,113 +1,663 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire // CRIOS Element</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
 
-.icons {
-  text-align: center;
-  
-}
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            padding-bottom: 1px;
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .wiki-link:hover {
+            border-bottom: 1px solid var(--accent-cyan);
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        .page-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 900px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Element <span style="color: #d0021b;">Fire</span> magic coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-box {
+            background: rgba(20, 20, 25, 0.5);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .info-box-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .element-visual {
+            position: relative;
+        }
+
+        .element-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .element-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../magic.html" class="back-link">← Magic Systems</a></nav>
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">FIRE</h1>
+        </header>
+
+        <section class="content-section element-header">
+            <div class="element-visual">
+                <img src="../assets/magic/Tier 1 Fire.svg" alt="Fire"
+                    style="width: 100%; display: block; margin: 0 auto;" class="element-image">
+            </div>
+            <div class="element-info">
+                <h2 class="section-title">Introduction</h2>
+                <div class="section-content">
+                    <p>Fire is a primary elemental force appearing across all three major magical frameworks within the
+                        Crios cosmology: <strong>Lúmenai (Beeston)</strong>, <strong>Cymora (Nexsicon)</strong>, and
+                        <strong>System Mana (Royastella)</strong>. While each system recognizes Fire as a foundational
+                        energetic principle, its metaphysical interpretation, method of invocation, and functional
+                        expression vary significantly between realms. Fire is consuming heat, passion, and ignition.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Magic System</th>
+                            <th>Element Name</th>
+                            <th>Nature of Expression</th>
+                            <th>Governing Principle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td><strong>Pýrua</strong></td>
+                            <td>Emotional harmonic resonance</td>
+                            <td>Passion as ignition</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td><strong>Tânor</strong></td>
+                            <td>Sonic incantational command</td>
+                            <td>Spoken resonance</td>
+                        </tr>
+                        <tr>
+                            <td>System Mana</td>
+                            <td><strong>Fire Core</strong></td>
+                            <td>Internalized energy engineering</td>
+                            <td>Stored energetic output</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Lúmenai Interpretation</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Pýrua</h3>
+
+                <div class="info-box">
+                    <div class="info-box-title">Tier: Tier 1 — Basic Elements</div>
+                    <div class="info-box-title">System: Lúmenai</div>
+                    <div class="info-box-title">Realm: Beeston</div>
+                </div>
+
+                <h3 class="section-subtitle">Essence</h3>
+                <p>Pýrua represents ignition through emotional intensity. Unlike physical combustion, Pýrua manifests
+                    when will, intent, and passion align into harmonic stability.</p>
+                <p>Fire in Lúmenai is considered one of the most volatile Essentia, as emotional imbalance directly
+                    destabilizes its resonance.</p>
+
+                <h3 class="section-subtitle">Functional Characteristics</h3>
+                <ul>
+                    <li>Emotional amplification</li>
+                    <li>Catalytic transformation</li>
+                    <li>Rapid energetic escalation</li>
+                    <li>Harmonic destabilization potential</li>
+                </ul>
+                <p>Pýrua frequently acts as a catalyst Essentia, serving as a required component for multiple Vaelóri
+                    entwinements.</p>
+
+                <h3 class="section-subtitle">Vaelóri Entwinements Derived from Pýrua</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Entwinement</th>
+                            <th>Essentia Name</th>
+                            <th>Additional Element</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Poison</td>
+                            <td>Nóxira</td>
+                            <td>Water (Áquora)</td>
+                        </tr>
+                        <tr>
+                            <td>Metal</td>
+                            <td>Férroma</td>
+                            <td>Earth (Téroma)</td>
+                        </tr>
+                        <tr>
+                            <td>Lightning</td>
+                            <td>Sýlphae</td>
+                            <td>Wind (Vaélia)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="section-subtitle">Harmonic Behavior</h3>
+                <p>Pýrua responds strongly to emotional sincerity. Artificial emotional projection weakens resonance
+                    output and increases harmonic fracture risk.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Cymora Interpretation</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Tânor</h3>
+
+                <div class="info-box">
+                    <div class="info-box-title">Pronunciation: TÂ-nor</div>
+                    <div class="info-box-title">System: Cymora</div>
+                    <div class="info-box-title">Realm: Nexsicon</div>
+                </div>
+
+                <h3 class="section-subtitle">Magical Nature</h3>
+                <p>Tânor is not generated internally but invoked through precise sonic resonance. Cymora treats Fire as
+                    a performative word, where phonetic structure directly reshapes reality.</p>
+                <p>The effectiveness of Tânor depends on:</p>
+                <ul>
+                    <li>Rhythm</li>
+                    <li>Cadence</li>
+                    <li>Vowel elongation</li>
+                    <li>Incantational stability</li>
+                </ul>
+
+                <h3 class="section-subtitle">Elemental Compositions Involving Tânor</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Compound Element</th>
+                            <th>Cymoran Name</th>
+                            <th>Combination</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Poison</td>
+                            <td>Tânahr</td>
+                            <td>Fire + Water</td>
+                        </tr>
+                        <tr>
+                            <td>Lightning</td>
+                            <td>Tângwynt</td>
+                            <td>Fire + Wind</td>
+                        </tr>
+                        <tr>
+                            <td>Metal</td>
+                            <td>Tândâr</td>
+                            <td>Fire + Earth</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="section-subtitle">Ritual Behavior</h3>
+                <p>Tânor often appears within four-line incantational structures. Unlike Lúmenai, emotional alignment
+                    enhances resonance but is not required for activation.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">System Mana Interpretation</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Fire Elemental Core</h3>
+
+                <div class="info-box">
+                    <div class="info-box-title">System: SYSTEM Mana</div>
+                    <div class="info-box-title">Realm: Royastella</div>
+                </div>
+
+                <h3 class="section-subtitle">Magical Nature</h3>
+                <p>Fire within the System is treated as measurable energetic output stored internally as mana. Fire
+                    abilities are engineered through trained spell techniques rather than expressive harmonic or sonic
+                    processes.</p>
+
+                <h3 class="section-subtitle">Core Characteristics</h3>
+                <ul>
+                    <li>Stored energetic reserves</li>
+                    <li>Technique-based activation</li>
+                    <li>Efficiency optimization</li>
+                    <li>Capacity-based limitations</li>
+                </ul>
+                <p>System Fire is typically stable and predictable, with performance governed by training, refinement,
+                    and mana volume.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">External Core Manifestation</h2>
+            <div class="section-content">
+                <p>Certain Royastellan practitioners can manifest their elemental core as a physical aura. This
+                    phenomenon was formalized among the <strong>Runic Knights of Starlite 7th</strong> after instruction
+                    by dissonant discord.</p>
+                <p>Manifested Fire auras can produce:</p>
+                <ul>
+                    <li>Enhanced physical acceleration</li>
+                    <li>Increased strike force</li>
+                    <li>Heightened combat endurance</li>
+                    <li>Cognitive sharpening</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Comparative Analysis</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Fire Represents</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Emotional ignition and catalytic transformation</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Sonic command and performative resonance</td>
+                        </tr>
+                        <tr>
+                            <td>System Mana</td>
+                            <td>Quantifiable energetic output</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Activation Requirement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Emotional-harmonic synchronization</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Spoken incantational resonance</td>
+                        </tr>
+                        <tr>
+                            <td>System Mana</td>
+                            <td>Mana conversion and technique execution</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="section-subtitle">Stability and Risk</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Stability</th>
+                            <th>Risk Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Emotionally volatile</td>
+                            <td>Harmonic collapse</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Phonetically volatile</td>
+                            <td>Incantational misfire</td>
+                        </tr>
+                        <tr>
+                            <td>System Mana</td>
+                            <td>Structurally stable</td>
+                            <td>Mana exhaustion</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Cross-System Interactions</h2>
+            <div class="section-content">
+                <p>When Fire manifestations from different systems interact, outcomes vary depending on dominance
+                    hierarchy:</p>
+                <ul>
+                    <li>Lúmenai Fire tends to override System Fire when emotional resonance exceeds engineered output.
+                    </li>
+                    <li>Cymora Fire can disrupt both systems if incantational cadence destabilizes harmonic or
+                        mana-based structures.</li>
+                    <li>System Fire can outlast both systems in sustained engagements due to resource quantification.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Notable Users</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Lúmenai Users</h3>
+                <ul>
+                    <li><strong>Pyara Dana / Heart Aria</strong></li>
+                    <li><strong>Heart Beat</strong></li>
+                    <li><strong>Heart Symphony</strong></li>
+                    <li><strong>Concerto Pulse</strong> <em>(multi-tier access)</em></li>
+                </ul>
+
+                <h3 class="section-subtitle">Cymora Users</h3>
+                <p>Nexsicon spellcasters utilizing Tânor incantations<br><em>(Individual users vary and are often
+                        ritual-dependent.)</em></p>
+
+                <h3 class="section-subtitle">System Mana Users</h3>
+                <ul>
+                    <li><strong>Itami Serafino</strong> — Native Fire Elemental Core wielder</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Higher Tier Fire Access</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Tier Expansion via Harmonic Ascension</h3>
+                <p>Certain Lúmenai casters can extend Fire resonance into higher tiers:</p>
+                <ul>
+                    <li><strong>Heart Beat</strong> — Gains access to Tier 2 Fire entwinements</li>
+                    <li><strong>Heart Symphony</strong> — Multi-tier Fire integration</li>
+                    <li><strong>Concerto Pulse</strong> — Temporary Tier 3 harmonic elevation</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Symbolism</h2>
+            <div class="section-content">
+                <p>Across realms, Fire frequently symbolizes:</p>
+                <ul>
+                    <li>Transformation</li>
+                    <li>Emotional extremity</li>
+                    <li>Destructive renewal</li>
+                    <li>Catalytic rebirth</li>
+                </ul>
+                <p>Despite symbolic overlap, each magical system interprets Fire through its governing metaphysical
+                    philosophy.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia</h2>
+            <div class="section-content">
+                <ul>
+                    <li>Pýrua is considered the most emotionally reactive Tier 1 Essentia.</li>
+                    <li>Cymoran Tânor incantations frequently emphasize elongated vowels to stabilize combustion.</li>
+                    <li>System Fire is historically the most militarily standardized elemental discipline in Royastella.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Related Elements</h2>
+            <div class="section-content">
+                <ul>
+                    <li><em><a href="element-earth.html" class="wiki-link">Earth</a></em></li>
+                    <li><em><a href="element-water.html" class="wiki-link">Water</a></em></li>
+                    <li><em><a href="element-wind.html" class="wiki-link">Wind</a></em></li>
+                    <li><em><a href="element-metal.html" class="wiki-link">Metal</a></em></li>
+                    <li><em><a href="element-lightning.html" class="wiki-link">Lightning</a></em></li>
+                    <li><em><a href="element-poison.html" class="wiki-link">Poison</a></em></li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+</body>
+
 </html>
-

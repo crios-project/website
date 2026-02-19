@@ -1,112 +1,436 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cascade Resonance // CRIOS Lore</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
 
-.icons {
-  text-align: center;
-  
-}
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .page-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 900px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Lore page <span class="dot">Cascade Resonance</span> coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content ol {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../lore.html" class="back-link">← Lore Archive</a></nav>
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">CASCADE RESONANCE</h1>
+        </header>
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p>Cascade Resonance is the largest recorded multiversal destabilization event in known cosmological history. It was triggered by Tiala Hartlight during an experimental Grand Magic designed to forcibly accelerate universal convergence and entropy collapse across multiple realities.</p>
+
+<p>While the spell partially succeeded in weakening dimensional barriers and accelerated the merge, it resulted in catastrophic resonance feedback that fractured narrative causality, destabilized inter-realm continuity, and permanently altered the metaphysical structure of several worlds.</p>
+
+<p>Cascade Resonance is widely regarded as the single most consequential magical disaster linked to modern convergence politics.</p>
+            </div></section>
+
+        <section class="content-section">
+            <h2 class="section-title">The Grand Magic Catastrophe</h2>
+            <div class="section-content">
+                <p>Following the successful identification of <strong>Lodesoul presence</strong> across multiple realms,
+                    <strong>Tiala Hartlight</strong> attempted an unprecedented Grand Magic ritual.</p>
+                <h3 class="section-subtitle">Intended Objective</h3>
+                <p>The ritual aimed to:</p>
+                <ul>
+                    <li>Force all known realities to merge into a singular dominant realm</li>
+                    <li>Anchor existence around the realm possessing the highest <strong>Ontological Depth</strong></li>
+                    <li>Eliminate fragmented timeline divergence</li>
+                    <li>Stabilize destiny through forced narrative consolidation</li>
+                    <li>Accelerate the convergence timeline from approximately ten years to less than two.</li>
+                </ul>
+                <p>Tiala theorized that unifying realities would prevent eventual multiversal entropy and collapse. She
+                    also sought to protect all the realms by merging said realms into one singular realm.</p>
+ <hr>
+<h3 class="section-subtitle">Outcome</h3> 
+                <p>The ritual succeeded only partially.</p>
+                <p>Instead of controlled convergence, it triggered an uncontrolled resonance chain reaction across
+                    dimensional boundaries.</p>
+                <p>The resulting phenomenon became known as <strong>Cascade Resonance</strong>. While the timeline of
+                    the merge was shortened significantly, there were numerous detrimental results.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Primary Effects</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Narrative Probability Failure</h3>
+                <p>Reality began rejecting established causality rules. Events that were statistically or logically
+                    impossible began manifesting across multiple realms.</p>
+                <p>Examples include:</p>
+                <ul>
+                    <li>Temporal inconsistencies</li>
+                    <li>Retroactive historical contradictions</li>
+                    <li>Individuals experiencing overlapping life memories from alternate timelines</li>
+                </ul>
+<br><hr>
+<h3 class="section-subtitle">Cross-Realm Entity Displacement</h3>
+                <p>Individuals and entities were forcibly relocated across realms without transitional stabilization.
+                </p>
+                <p>Displacement side effects included:</p>
+                <ul>
+                    <li>Identity desynchronization</li>
+                    <li>Magic incompatibility stress</li>
+                    <li>Partial existence fragmentation</li>
+                    <li>Cultural and historical dislocation</li>
+                </ul>
+<br><hr> 
+<h3 class="section-subtitle">Emergence of Impossible Phenomena</h3>
+                <p>Lost civilizations, extinct magical disciplines, and suppressed mythic entities began manifesting
+                    spontaneously.</p>
+                <p>These included:</p>
+                <ul>
+                    <li>Realm overlays resembling lost mythic domains</li>
+                    <li>Sudden reactivation of ancient artifacts</li>
+                    <li>Awakening of dormant cosmological constructs</li>
+                </ul>
+<br><hr>
+                <h3 class="section-subtitle">Accelerated Metaphysical Entropy</h3>
+                <p>The boundary between existence and nonexistence weakened in several convergence zones, increasing the
+                    rate of reality decay.</p>
+                <p>Observable symptoms included:</p>
+                <ul>
+                    <li>Mana field collapse</li>
+                    <li>Dimensional erosion</li>
+                    <li>Temporal looping fractures</li>
+                    <li>Increased Void incursion probability</li>
+                </ul>
+<br><hr>
+<h3 class="section-subtitle">Breakdown of Causal Continuity</h3>
+                <p>Certain events lost linear cause-and-effect relationships. This resulted in paradox instability,
+                    including:</p>
+                <ul>
+                    <li>Events occurring before their causes</li>
+                    <li>Individuals retaining memory of futures that never occur</li>
+                    <li>Narrative recursion loops</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Organizational Collapse</h2>
+            <div class="section-content">
+                <p>Cascade Resonance directly triggered the downfall of <strong>Praxis Verax Affinas</strong>.</p>
+                <p>The crisis generated internal ideological fractures, operational instability, and emotional trauma
+                    among its members.</p>
+<br><hr>
+<h3 class="section-subtitle">Disappearance of Xīwàng Tiānshàng</h3>
+                <p>One of the most devastating consequences was the unexplained disappearance of Xīwàng during peak
+                    resonance instability. Her disappearance remains unresolved and is considered a primary emotional
+                    catalyst for subsequent faction fragmentation.</p>
+<br><hr>
+                <h3 class="section-subtitle">Emergence of New Factions</h3>
+                <h4 class="subsection-title"></h4><strong>Destiny's Penance</strong></h4>
+                <p>Formed by Tiala as both continuation and atonement for the damage caused by Cascade Resonance. The
+                    organization seeks to complete convergence under controlled conditions while accepting moral burden
+                    for past actions.
+                </p>
+                <h4 class="subsection-title"></h4><strong>Reason Theory</strong></h4>
+                <p>Established by <strong>Ami Hartbreak</strong> and <strong>Windi Lightfall</strong> as an ideological counterforce
+                    opposing deterministic convergence and prophecy-based governance structures.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Cosmological Consequences</h2>
+            <div class="section-content">
+                <p>Cascade Resonance permanently altered multiversal mechanics:</p>
+                <ul>
+                    <li>Increased permeability between Royastella and Beeston</li>
+                    <li>Heightened Lodesoul sensitivity across realms</li>
+                    <li>Instability in large-scale synchronization magic systems</li>
+                </ul>
+                <p>Several realms remain in partial convergence limbo, awaiting full integration or total collapse.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Theoretical Interpretations</h2>
+            <div class="section-content">
+                <p>Scholars and convergence theorists disagree on the true nature of Cascade Resonance.</p>
+                <h3>Deterministic Failure Theory</h3>
+                    <p>Cascade Resonance represents the inevitable result of artificially forcing narrative consolidation.
+                </p>
+                <h3>Partial Success Theory</h3>
+                    <p>Some believe the ritual did succeed, but in a distributed rather than centralized convergence model.
+                </p>
+                <h3>Lodesoul Interference Theory</h3>
+                    <p>Suggests that the presence or movement of Lodesouls altered the intended spell trajectory.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Psychological and Cultural Impact</h2>
+            <div class="section-content">
+                <p>Cascade Resonance shifted multiversal attitudes toward Grand Magic experimentation. Many societies
+                    now treat large-scale convergence rituals as existential threats rather than heroic endeavors.</p>
+                <p>The event also created enduring trauma among surviving participants and contributed heavily to the
+                    moral complexity surrounding Tiala's legacy.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Known Survivors Directly Affected</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Tiala Hartlight</strong></li>
+                    <li><strong>Ami Hartbreak</strong></li>
+                    <li><strong>Windi Lightfall</strong></li>
+                    <li><strong>Claris Quies</strong></li>
+                    <li><strong>Jí Lián Xía</strong></li>
+                    <li><strong>Fú cì Tiānshàng née Ánguāng</strong></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Current Status</h2>
+            <div class="section-content">
+                <p>Cascade Resonance remains active at low-level fluctuations across several realms. Periodic resonance
+                    surges continue to produce minor displacement anomalies and narrative distortions.</p>
+                <p>Complete stabilization has never been achieved.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Trivia (Out-of-Universe)</h2>
+            <div class="section-content">
+                <ul>
+                    <li>Cascade Resonance serves as the central inciting disaster event connecting multiple narrative
+                        arcs.</li>
+                    <li>The event represents themes of ambition exceeding moral foresight.</li>
+                    <li>Ontological Depth functions as a metaphysical measurement of a realm's narrative density and
+                        stability.</li>
+                    <li>The phenomenon acts as the narrative justification for cross-realm character interactions and
+                        timeline variance.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-content">
+                <h2 class="section-title">Archival Status</h2>
+<ol>
+                <li>⚠ Event Classification: Multiversal Catastrophe</li>
+                <li>⚠ Stability Status: Ongoing Residual Instability</li>
+                <li>⚠ Risk Assessment: Existential-Level</li>
+</ol>
+            </div>
+        </section>
+
+    </div>
+</body>
+
 </html>

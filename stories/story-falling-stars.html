@@ -1,112 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
-        body {
-  background: #00091B;
-  color: #fff;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling Stars // CRIOS Short Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); 
+            line-height: 1.9; overflow-x: hidden; }
+        
+        /* Animated background */
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5;
+            animation: gridFloat 20s linear infinite; }
+        @keyframes gridFloat { 0% { transform: translateY(0); } 100% { transform: translateY(40px); } }
 
+        /* Gradient orbs */
+        .orb { position: fixed; border-radius: 50%; filter: blur(100px); opacity: 0.15; pointer-events: none; z-index: 0; }
+        .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px; right: -200px; animation: orbFloat1 20s ease-in-out infinite; }
+        .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px; left: -150px; animation: orbFloat2 25s ease-in-out infinite; }
+        @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-100px, 100px); } }
+        @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(100px, -80px); } }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        /* Header nav */
+        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
+        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
+            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
+        .back-link:hover { color: var(--accent-cyan); }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        /* Container */
+        .container { max-width: 900px; margin: 0 auto; padding: 80px 24px 100px; position: relative; z-index: 1; }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        /* Story header */
+        .story-header { text-align: center; margin-bottom: 80px; animation: fadeInDown 1s ease-out; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        .story-title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 16px; letter-spacing: 3px; line-height: 1.2; }
+        .story-meta { display: flex; justify-content: center; gap: 32px; margin-top: 24px; }
+        .meta-item { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 2px; }
+        .meta-item .label { color: var(--accent-cyan); }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        /* Story content */
+        .story-content { animation: fadeIn 1s ease-out 0.3s both; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .story-content p { font-size: 1.15rem; line-height: 2; margin-bottom: 28px; color: var(--text-primary); }
+        .story-content p:first-of-type::first-letter { font-size: 4rem; line-height: 1; float: left;
+            font-family: 'Orbitron', sans-serif; color: var(--secondary-pink); margin: 4px 12px 0 0; }
 
-.dot {
-  color: #4FEBFE;
-}
+        /* Dialogue */
+        .story-content  em { font-style: italic; color: #d4d4f0; }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        /* Emphasis text */
+        .story-content strong { color: var(--accent-cyan); font-weight: 700; }
+        .story-content em { color: var(--secondary-pink); font-style: italic; }
 
-.icons {
-  text-align: center;
-  
-}
+        /* Special moments - dramatic reveals */
+        .dramatic { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 3px; text-align: center;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin: 48px 0; padding: 24px; border-top: 2px solid rgba(233, 30, 99, 0.3);
+            border-bottom: 2px solid rgba(233, 30, 99, 0.3); }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        /* Section breaks */
+        .break { text-align: center; margin: 60px 0; font-size: 1.5rem; color: var(--secondary-pink); 
+            letter-spacing: 8px; }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        /* Character links */
+        .character-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease; font-weight: 600; }
+        .character-link:hover { color: white; border-bottom-color: var(--accent-cyan); 
+            text-shadow: 0 0 8px var(--accent-cyan); }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        /* Related stories footer */
+        .related-section { margin-top: 120px; padding: 48px 0; border-top: 1px solid rgba(233, 30, 99, 0.2); }
+        .related-title { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700;
+            color: var(--secondary-pink); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 32px; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .related-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px; padding: 24px; text-decoration: none; display: block; transition: all 0.3s ease; }
+        .related-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2); }
+        .related-card-title { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 600;
+            color: var(--text-primary); margin-bottom: 8px; }
+        .related-card-desc { font-size: 0.9rem; color: var(--text-dim); line-height: 1.6; }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        @media (max-width: 768px) {
+            .story-title { font-size: 2.2rem; }
+            .story-content p { font-size: 1.05rem; }
+            .story-meta { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Short story <span class="dot">"Falling Stars"</span> coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+    <nav class="header-nav">
+        <a href="../stories.html" class="back-link">← All Stories</a>
+    </nav>
+
+    <div class="container">
+        <!-- Story Header -->
+        <header class="story-header">
+            <h1 class="story-title">Falling Stars</h1>
+            <div class="story-meta">
+                <div class="meta-item"><span class="label">Era:</span> Royastella Arc 2</div>
+                <div class="meta-item"><span class="label">Featured:</span> Starlite 7th, BLADE GUILLOTINE</div>
+                <div class="meta-item"><span class="label">Type:</span> Major Event</div>
+            </div>
+        </header>
+
+        <!-- Story Content -->
+        <article class="story-content">
+            <p>"I'm gonna go ask her."</p>
+
+            <p>The Starlit Empress breaks from the group and catches up with discord.</p>
+
+            <p>"Hey so, first off thanks for all the training. We're loads stronger and stuff. Really appreciate it. But umm, we all have stuff we need to get back too, so I was wondering like how much further until we get to the threat?"</p>
+
+            <p>discord pauses in the ruined courtyard, her back to the Starlite 7th. She begins to speak.</p>
+
+            <p>"At last the hour arrives for you to see,<br>The looming threat you face"</p>
+
+            <p><a href="../characters/character-discord.html" class="character-link">dissonant discord</a> disappears right in front of their eyes.</p>
+
+            <p>"Is none but <strong>ME</strong>."</p>
+
+            <p>And in her place stands <em>BLADE GUILLOTINE</em>.</p>
+
+            <p>"Let's see what stayed, my little stars;<br>Show me your shine, or show your scars."</p>
+
+            <p>Empress is obviously caught off guard but recovers quickly. This is the first time the Starlite 7th have encountered BLADE since she opened that rift in the sky and made all the Crystallines stronger. Except, if BLADE is discord, then that's not true. They've been with BLADE for weeks now.</p>
+
+            <p>BLADE stands amidst the ruins of the courtyard, the air shimmering with the heat of her arrival. With a flick of her wrist, she unleashes a wave of absolute darkness—not just a shadow, but a physical concussive force that tears up the flagstones and sends the team sprawling.</p>
+
+            <p>As the dust settles, BLADE's silhouette lengthens, her epee, Le Couteau, humming with a low, predatory vibration. She doesn't wait for a witty retort. She moves.</p>
+
+            <p>Her first target is Starlit Pasha. The aerialist tries to find her wings, but BLADE is already in her personal space, the tip of her epee sketching a cold line across Pasha's throat before the girl can even bank a turn.</p>
+
+            <p>"Pain is just weakness leaving the frame, you say," BLADE's voice filters through the modulator, rhythmic and haunting. "So I'll strip every ounce of your weakness away."</p>
+
+            <p>Pasha launches her Diadem Refrains, the chakrams humming in a desperate defensive loop. BLADE doesn't dodge; she parries with such surgical force that the kinetic feedback shatters Pasha's momentum. A series of high-speed thrusts follow—not deep enough to kill, but precise enough to sever the flow of mana to Pasha's limbs. The "Sovereign of Momentum" hits the ground like a bird with clipped wings, gasping as her vision frays at the edges.</p>
+
+            <p>Next is Starlit Rex. The "Lionheart" raises the arm cannon, Lionheart Radiance, charging a high-output blast. In the time it takes the capacitors to whine, BLADE has closed fifty yards. Rex fires a suppressive barrage, but BLADE moves through the projectiles like they are static art, her silhouette blurring with magical acceleration.</p>
+
+            <p>"A tiny spark within the dark, so bright and bold," BLADE taunts, slipping past a beam that melts the stone behind her. "But lions fear the winter's bite and endless cold."</p>
+
+            <p>She strikes the cannon's cooling vent with a single, concentrated thrust. The backfire sends Rex tumbling backward, their armor scorched and systems seizing.</p>
+
+            <p>In the heartbeat that follows, Dynast and Mikado fall. Dynast tries to issue a decree of gravitational pressure, but BLADE simply isn't where the gravity lands. A quick hiltslam to the temple ends the tactician's night. Mikado, the feckless child, swings her hook blades with a ferocity that deserves better than the casual sidestep BLADE affords her. A swift kick to the midsection sends the girl into the wreckage of the fountain.</p>
+
+            <p>Over half the team is down in less than a minute. Efficiency is usually a virtue, but BLADE is savoring the drama. She turns toward the remaining three, her head tilting with a terrifying, doll-like grace.</p>
+
+            <p>"Allow me to show your place in all reality:<br>You have <em>none</em> in its vast totality."</p>
+
+            <p>The taunt hits home. Czar, Sultana, and Empress erupt. Their auras don't just flare; they cycle through elemental states with a violent, strobing intensity that borders on a transition into Tier 2.</p>
+
+            <p><em>Dangerous that. Only monsters have Tier 2 auras.</em></p>
+
+            <p>The air begins to ionize.</p>
+
+            <p>Czar and Empress move in a pincer maneuver, their movements a blur of desperate speed. Sultana plays the wild card, her shield, Sanctum Majestra, glowing as she begins to randomly teleport around the periphery. It is a masterclass in discord's training. Czar uses a teleported punch—not to hit BLADE, but to redirect Sultana's shield into a trajectory BLADE has just moved into. Simultaneously, Empress unleashes the Bladelight Beam.</p>
+
+            <p>BLADE catches the shield.</p>
+
+            <p>She doesn't block it. She catches the enchanted metal, spins with its momentum, and whips it directly into the heart of the Empress's beam. The collision dissipates the energy in a blinding flash, sending the shield ricocheting back at Itami. Sultana has to abandon her offensive to teleport and intercept her own weapon, leaving the Czar exposed.</p>
+
+            <p>"A clever dance, a frantic play," BLADE whispers. "But stars are destined to decay."</p>
+
+            <p>The three survivors scramble, quickly gathering the rest of the Starlight Arsenal to assemble the "Imperial Astral Judicator"—a desperate, final-ditch attempt with their last remaining trump card. They lock into formation, Sultana anchoring, Czar stabilizing, and Empress taking the trigger.</p>
+
+            <p>"IMPERIAL JUDGMENT, GUILTY! SENTENCE. EXECUTION!!"</p>
+
+            <p>The cannon roars. A pillar of pure, celestial authority levels the courtyard, a "sure-kill" strike that should vaporize anything in its path.</p>
+
+            <p>Nothing stirs in the smoke.<br><em>It is finally over.</em></p>
+
+            <div class="break">* * *</div>
+
+            <p>The smoke clears.<br>It is <em>not</em> over.</p>
+
+            <p>BLADE GUILLOTINE stands in the center of a glassed crater, Le Couteau extended, the tip of her blade still pointing at them. She isn't even breathing hard.</p>
+
+            <p>Despair is a heavy thing. It breaks Czar first. He lunges, his movements ragged, stripped of his usual acrobatic grace. BLADE steps inside his guard and drops him with a single, contemptuous strike to the solar plexus.</p>
+
+            <p>"Come now, Rainbow Star—step into the fray;<br>Take your last bow before you fade away."</p>
+
+            <p>Itami and Shini freeze. Rainbow Star? Their civilian identities are a secret discord shouldn't know. Couldn't know. But there is no time for questions, only the dance.</p>
+
+            <p>Sultana and Empress move as one. Sultana throws the shield not at BLADE, but into the path of Empress's greatsword. Empress strikes the shield with the Auroral Throneblade, using the impact to create a directional shockwave of kinetic and stellar energy. It is a perfect synergy—protection turned into a hammer. BLADE parries the wave, but Sultana is already there, teleporting behind her for a shield-bash while Empress swings a horizontal cleave to catch the dodge.</p>
+
+            <p>They are good. They are the best they have ever been.</p>
+
+            <p><em>And it doesn't matter.</em></p>
+
+            <p>BLADE moves like a glitch in reality, appearing behind Sultana and redirecting her shield-arm into Empress's path. She dismantles them with a cold, rhythmic precision, landing blows that feel less like attacks and more like corrections. Within moments, they are on the ground, the Empress's greatsword humming a mournful tone in the dirt.</p>
+
+            <p>Then, the sky <strong>breaks</strong>.</p>
+
+            <p>Starlit Alpha hits the earth like a falling star. No rescue mission today. No retrieval of weapons. Just raw, unadulterated fury. He doesn't speak. He doesn't quip. He moves with a speed that finally forces BLADE to stop her rhyming.</p>
+
+            <p>He catches her blade between two fingers and shatters the rhythm of her movement with a headbutt that cracks the stone beneath them. He is a force of nature, a god of restoration turned into a demon of vengeance. He catches her by both arms, his grip like industrial presses, lifting her off her feet to end the betrayal once and for all.</p>
+
+            <p>BLADE doesn't struggle. She reaches up, clicking a switch on the side of her helmet.</p>
+
+            <div class="dramatic">
+                Vocal Modulator Off
+            </div>
+
+            <p>"Hi, Dad."</p>
+
+            <p>The world <em>stops</em>.</p>
+
+            <p>Alpha's grip doesn't loosen, but his entire body locked. That voice—soft, familiar, impossible—cuts through his rage like a blade through silk.</p>
+
+            <p>"I-Is that really you, Te—"<br>"Aht aht. No spoilers, Dad."</p>
+
+            <p>While he is paralyzed by the impossible truth, she grips his wrists. A flash of dark light, and they are gone—a shooting star trailing into the rift above.</p>
+
+            <p>The Starlite 7th watch from the dirt, broken and bleeding, as the rift blips out of existence.</p>
+
+            <p>The explosions start then. Distant, then closer.</p>
+
+            <p>Then, the light goes out.<br>Their costumes fade into civilian clothes.<br>Their weapons vanish into mist.</p>
+
+            <p>The System, the very heartbeat of their world, collapses into a silent, digital death.</p>
+
+            <p>And so ends the realm of Royastella.</p>
+
+            <p>BLADE GUILLOTINE stands triumphant.</p>
+        </article>
+
+        <!-- Related Stories Section -->
+        <section class="related-section">
+            <h2 class="related-title">Related Stories</h2>
+            <div class="related-grid">
+                <a href="story-symphonic-overture.html" class="related-card">
+                    <div class="related-card-title">Symphonic Overture</div>
+                    <div class="related-card-desc">Mahana Sahi arrives in Royastella as an Untethered entity and meets Shini Thana.</div>
+                </a>
+                <a href="story-aria-caesura.html" class="related-card">
+                    <div class="related-card-title">Aria Caesura</div>
+                    <div class="related-card-desc">The death of Pyara Dana and discord's first betrayal of the Lovely Hearts.</div>
+                </a>
+            </div>
+        </section>
+    </div>
+</body>
 </html>

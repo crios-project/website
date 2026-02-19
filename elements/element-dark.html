@@ -1,113 +1,568 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKNESS // CRIOS Element</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            padding-bottom: 1px;
+        }
+
+        .wiki-link:hover {
+            border-bottom: 1px solid var(--accent-cyan);
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-box {
+            background: rgba(20, 20, 25, 0.5);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .info-box-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .element-visual {
+            position: relative;
+        }
+
+        .element-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .element-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../magic.html" class="back-link">← Magic Systems</a></nav>
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">DARKNESS</h1>
+        </header>
+
+        <section class="content-section element-header">
+            <div class="element-visual">
+                <img src="../assets/magic/Tier 4 Dark.svg" alt="DARKNESS"
+                    style="width: 100%; display: block; margin: 0 auto;" class="element-image">
+            </div>
+            <div class="element-info">
+                <h2 class="section-title">Introduction</h2>
+                <div class="section-content">
+                    <p><strong>Darkness</strong> is a supremal elemental domain representing gravitational
+                        inevitability, collapse, suppression, and existential erasure. Rather than functioning as moral
+                        opposition to Light, Darkness governs the forces of absence, weight, and terminal convergence.
+                        Within the Crios cosmology, Darkness operates as a High Harmonic Domain and supersedes both Tier
+                        1 and Tier 2 elemental systems, while maintaining natural superiority over Light-based magic.
+                        Darkness is inevitability and weight of absence. Dark is not evil: it is collapse, pull, and
+                        silence.</p>
+                    <p>WARNING: Darkness is among the most dangerous magical domains across all realms.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Elemental Core Availability</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Core Type</th>
+                            <th>Natural Occurrence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Light Elemental Core</td>
+                            <td>Extremely rare</td>
+                        </tr>
+                        <tr>
+                            <td>Dark Elemental Core</td>
+                            <td>Nearly singular-level rarity</td>
+                        </tr>
+                        <tr>
+                            <td>Aether Elemental Core</td>
+                            <td>Impossible</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Power Hierarchy</h2>
+            <div class="section-content">
+                <p>Dark spells inherently override:</p>
+                <ul>
+                    <li>All Tier 1 Elements</li>
+                    <li>All Tier 2 Entwinements</li>
+                    <li>All Light Supremacy Magic</li>
+                </ul>
+                <p>Darkness is subordinate only to:</p>
+                <ul>
+                    <li>Aether Supremacy</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Lúmenai — Ómura</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                <p>Tier 4 — Supremacy Essentia</p>
+                <h3 class="section-subtitle">Essentia Profile</h3>
+                <p><strong>Ómura</strong> represents inevitability, gravitational convergence, and the harmonic
+                    authority of absence. It does not destroy through force but through existential compression and
+                    removal of resonance stability.</p>
+                <p>Ómura manifestations often appear as void distortions, gravitational wells, or silence fields that
+                    dampen magical resonance entirely.</p>
+                <h3 class="section-subtitle">Magical Expression</h3>
+                <p>Common manifestations include:</p>
+                <ul>
+                    <li>Gravity well creation</li>
+                    <li>Void shaping and spatial compression</li>
+                    <li>Magical suppression and silence fields</li>
+                    <li>Memory dissolution or historical destabilization</li>
+                    <li>Resonance severing between casters and their power sources</li>
+                    <li>Existential compression or erasure</li>
+                </ul>
+                <h3 class="section-subtitle">Harmonic Behavior</h3>
+                <p>Ómura demands:</p>
+                <ul>
+                    <li>Absolute mental discipline</li>
+                    <li>Singular, unwavering casting intent</li>
+                    <li>Long harmonic invocation structures</li>
+                </ul>
+                <p>Emotional instability or hesitation can cause total resonance collapse and caster annihilation.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Cymora — Cythr / Nos / Du</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                <p>Primary Supremal Elemental Roots</p>
+                <h3 class="section-subtitle">Linguistic Role</h3>
+                <p>Darkness in Cymora manifests through several harmonic roots:</p>
+                <ul>
+                    <li><strong>Cythr</strong> — Deep collapse resonance and void articulation</li>
+                    <li><strong>Nos</strong> — Night-state suppression and concealment resonance</li>
+                    <li><strong>Du</strong> — Absolute darkness and harmonic termination</li>
+                </ul>
+                <h3 class="section-subtitle">Sonic Properties</h3>
+                <ul>
+                    <li>Low-register, weighted tonal emphasis</li>
+                    <li>Dense consonant articulation reinforcing gravitational resonance</li>
+                    <li>Reduced vowel elongation compared to Light incantations</li>
+                    <li>Irregular cadence used to destabilize opposing harmonic structures</li>
+                </ul>
+                <h3 class="section-subtitle">Cymoran Dark Behavior</h3>
+                <p>Dark Cymora incantations are commonly used for:</p>
+                <ul>
+                    <li>Suppressing magical output</li>
+                    <li>Erasing or concealing magical signatures</li>
+                    <li>Collapsing protective wards or resonance constructs</li>
+                    <li>Rewriting or erasing memory structures</li>
+                    <li>Opening void-channel constructs</li>
+                </ul>
+                <p>Minor phonetic failure can destabilize the caster's own resonance field.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">System Mana — Dark Manifestation</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Canon Classification</h3>
+                <p>Ultra-Anomalous Core-Type Manifestation</p>
+                <h3 class="section-subtitle">Functional Nature</h3>
+                <p>Within Royastella, Dark elemental output exists only in extremely rare elemental cores or through
+                    external corruption or augmentation. The System is inherently resistant to Dark conversion, making
+                    Dark manifestation unstable and frequently destructive to internal mana channels.</p>
+                <h3 class="section-subtitle">Mechanical Properties</h3>
+                <ul>
+                    <li>Gravity-field projection</li>
+                    <li>Aura-based suppression of enemy mana systems</li>
+                    <li>Probability distortion and entropy acceleration</li>
+                    <li>Existential severance effects</li>
+                    <li>Nullification of defensive constructs</li>
+                </ul>
+                <h3 class="section-subtitle">Operational Limitations</h3>
+                <ul>
+                    <li>Extreme System resource drain</li>
+                    <li>High risk of internal mana channel collapse</li>
+                    <li>Long-term degradation of elemental core integrity</li>
+                    <li>Increased psychological instability in prolonged usage</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Comparative Analysis</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Darkness Philosophy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Collapse as natural harmonic inevitability</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Sonic compression and resonance silencing</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Entropic mana override and gravitational energy weaponization</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Casting Mechanism</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Long-form harmonic void chant requiring mental singularity</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Dense, low-frequency vocal incantation with irregular cadence</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>Core-driven gravitational mana conversion with high instability</td>
+                    </tr>
+                </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Limitations</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Emotional fracture leads to self-erasure</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Phonetic instability collapses caster resonance</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>Severe System channel degradation and core destabilization</td>
+                    </tr>
+                </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Power Supremacy Doctrine</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Absolute Hierarchy</h3>
+                <p>1. Tier 1 and Tier 2 Elements<br>
+                2. Light Supremacy (Lúmira / Alor)<br>
+                3. Dark Supremacy (Ómura / Cythr)<br>
+                4. Aether Supremacy (Æónel / Aelwyr)</p>
+                <p>Darkness represents terminal authority over harmonic systems, acting as a final corrective or annihilative force.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Notable Users</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Natural Core Bearers</h3>
+                <ul>
+                    <li><em>BLADE GUILLOTINE</em> — Verified Dark Elemental Core manifestation</li>
+                    <li><em>Starlit Alpha</em> — Documented Dark Core expression</li>
+                </ul>
+
+                <h3 class="section-subtitle">Lúmenai Practitioners</h3>
+                <ul>
+                    <li><em>dissonant discord</em> — Demonstrates advanced fast-cast Tier 4 Ómura with limited Tier 5 escalation capacity</li>
+                </ul>
+
+                <h3 class="section-subtitle">Cymora Practitioners</h3>
+                <ul>
+                    <li>High-order Nexsicon collapse chanters specializing in void rites and suppression rituals</li>
+                </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Symbolism and Thematic Role</h2>
+            <div class="section-content">
+                <p>Across Crios cosmology, Darkness represents:</p>
+                <ul>
+                    <li>The inevitability of endings</li>
+                    <li>Structural collapse as transformation</li>
+                    <li>Memory erosion and forgotten histories</li>
+                    <li>Power obtained through sacrifice and control</li>
+                    <li>The danger of absolute authority</li>
+                </ul>
+                <p>Dark-aligned figures frequently embody isolation, burdened sovereignty, fatalism, and existential detachment.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Historical and Mythic Context</h2>
+            <div class="section-content">
+                <p>Darkness manifestations are frequently recorded during:</p>
+                <ul>
+                    <li>Realm collapse or forced conquest events</li>
+                    <li>Lodesoul destabilization incidents</li>
+                    <li>System corruption or external invasion attempts</li>
+                    <li>Precursor phenomena to Aether-level instability</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Related Elements</h2>
+            <div class="section-content">
+                <ul>
+                    <li><em><a href="element-light.html" class="wiki-link">Light</a></em></li>
+                    <li><em><a href="element-neon-aether.html" class="wiki-link">Aether</a></em></li>
+                </ul>
+            </div>
+        </section>
 
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+    </div>
+</body>
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
-
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
-
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
-
-.dot {
-  color: #4FEBFE;
-}
-
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
-
-.icons {
-  text-align: center;
-  
-}
-
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
-
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
-
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
-
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
-
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Element <span style="color: #171717;">Darkness</span> magic coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
 </html>
-

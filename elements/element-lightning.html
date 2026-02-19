@@ -1,113 +1,546 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIGHTNING // CRIOS Element</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            padding-bottom: 1px;
+        }
+
+        .wiki-link:hover {
+            border-bottom: 1px solid var(--accent-cyan);
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-box {
+            background: rgba(20, 20, 25, 0.5);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .info-box-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .element-visual {
+            position: relative;
+        }
+
+        .element-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .element-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../magic.html" class="back-link">← Magic Systems</a></nav>
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">LIGHTNING</h1>
+        </header>
+
+        <section class="content-section element-header">
+            <div class="element-visual">
+                <img src="../assets/magic/Tier 2 Lightning - FiWi.svg" alt="LIGHTNING"
+                    style="width: 100%; display: block; margin: 0 auto;" class="element-image">
+            </div>
+            <div class="element-info">
+                <h2 class="section-title">Introduction</h2>
+                <div class="section-content">
+                    <p><strong>Lightning</strong> is a conjoined elemental force representing violent acceleration,
+                        sudden clarity, and instantaneous transmission of force and thought. Lightning governs speed,
+                        nervous-system disruption, energy discharge, and momentary transcendence of physical limitation.
+                        Within Lúmenai, Lightning manifests as harmonic acceleration and explosive precision. In Cymora,
+                        Lightning appears through sharp, rapid resonance and abrupt phonetic discharge. Within the
+                        System of Royastella, Lightning-aligned manifestations are primarily associated with external
+                        invaders, as conjoined elemental disciplines are canonically restricted to hostile external
+                        forces. Lightning is violent acceleration and sudden clarity. </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Magic System</th>
+                            <th>Element Name</th>
+                            <th>Classification</th>
+                            <th>Core Expression</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Sýlphae</td>
+                            <td>Tier 2 — Vaelóri Entwinement</td>
+                            <td>Acceleration, energy discharge, neural disruption</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Tângwynt</td>
+                            <td>Compound Element</td>
+                            <td>Resonant electrical release and kinetic amplification</td>
+                        </tr>
+                        <tr>
+                            <td>System Mana</td>
+                            <td>Conjoined Elemental Manifestation (Enemy Exclusive)</td>
+                            <td>External Threat Discipline</td>
+                            <td>Speed warfare and high-voltage combat techniques</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Lúmenai — Sýlphae</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                    <p>Tier 2 — Conjoined Element</p>
+                    <p>Vaelóri Entwinement</p>
+                    <p>(Pýrua + Vaélia)</p>
+                    <h3 class="section-subtitle">Essentia Profile</h3>
+                        <p><strong>Sýlphae</strong> represents the simultaneous voicing of ignition and motion,
+                            producing explosive bursts of speed and energy. Rather than merely electricity, Sýlphae
+                            embodies the moment where thought, motion, and force become indistinguishable.</p>
+                        <p>Sýlphae is closely associated with instinct, clarity under pressure, and decisive action.</p>
+                        <h3 class="section-subtitle">Magical Expression</h3>
+                            <p>Common manifestations include:</p>
+                            <ul>
+                                <li>Electrical discharge attacks</li>
+                                <li>Speed and reflex augmentation</li>
+                                <li>Neural stimulation or paralysis</li>
+                                <li>Short-distance teleportative burst movement</li>
+                                <li>Precision strike techniques</li>
+                                <li>Atmospheric ionization and storm generation</li>
+                            </ul>
+                            <h3 class="section-subtitle">Harmonic Behavior</h3>
+                                <p>Sýlphae demands aggressive harmonic alignment. Excess Pýrua results in uncontrolled
+                                    destructive discharge, while excessive Vaélia causes unstable speed bursts or
+                                    incomplete spell manifestation. Stable Sýlphae casters are characterized by
+                                    exceptional mental clarity and rapid decision-making capability.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Cymora — Tângwynt</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                    <p>Compound Elemental Root</p>
+                    <p>(Fire + Wind)</p>
+                    <h3 class="section-subtitle">Linguistic Role</h3>
+                        <p><strong>Tângwynt</strong> produces sharp, clipped vocal patterns designed to emulate
+                            electrical discharge. Cymoran Lightning incantations often rely on abrupt consonant strikes
+                            and rapidly shortened syllables to replicate sudden acceleration and discharge phenomena.
+                        </p>
+                        <h3 class="section-subtitle">Sonic Properties</h3>
+                            <ul>
+                                <li>Fast, percussive syllable timing</li>
+                                <li>Sudden vowel compression mimicking voltage spikes</li>
+                                <li>Repetitive consonant strikes to sustain electrical flow</li>
+                                <li>Breath interruption patterns representing discharge cycles</li>
+                            </ul>
+                            <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
+                                <p>Tângwynt is commonly used in spells that:</p>
+                                <ul>
+                                    <li>Deliver high-speed projectile strikes</li>
+                                    <li>Amplify physical speed or reflexes</li>
+                                    <li>Disrupt magical or neurological stability</li>
+                                    <li>Generate atmospheric storm or ionization fields</li>
+                                    <li>Enable rapid movement or short-range displacement</li>
+                                </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">System Mana — Lightning Manifestation</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Canon Classification</h3>
+                    <p>Enemy-Exclusive Conjoined Elemental Discipline</p>
+                    <h3 class="section-subtitle">Canon Note</h3>
+                        <p>In Royastella, native elemental cores only correspond to foundational elements. Lightning
+                            manifestations therefore appear primarily among invading forces or external entities seeking
+                            to overwhelm defensive infrastructure through overwhelming speed and energy projection.</p>
+                        <p>The <strong>Runic Knights of Starlite 7th</strong> frequently engage Lightning-aligned
+                            invaders specializing in rapid strike warfare and coordinated shock assaults.</p>
+                        <h3 class="section-subtitle">Functional Nature</h3>
+                            <p>System Lightning manifestations emphasize kinetic dominance, battlefield speed control,
+                                and instantaneous strike capacity rather than sustained engagement.</p>
+                            <h3 class="section-subtitle">Mechanical Properties</h3>
+                                <ul>
+                                    <li>Reflex and speed enhancement techniques</li>
+                                    <li>Electrical weapon augmentation</li>
+                                    <li>Mobility-based combat maneuvering</li>
+                                    <li>Shock-based crowd suppression</li>
+                                    <li>Mana surge amplification for burst combat output</li>
+                                </ul>
+                                <h3 class="section-subtitle">Tactical Doctrine</h3>
+                                    <p>Lightning specialists within invasion forces typically function as:</p>
+                                    <ul>
+                                        <li>Shock troopers</li>
+                                        <li>Rapid assault commanders</li>
+                                        <li>Disruption operatives</li>
+                                        <li>High-speed reconnaissance and elimination units</li>
+                                    </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Comparative Analysis</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Lightning Philosophy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Lightning is the harmony of instinct, motion, and decisive ignition</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Lightning is discharge through rapid sonic force and cadence disruption</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Lightning is speed dominance and tactical shock warfare</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Casting Mechanism</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Harmonic fusion of ignition impulse and directional motion</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Percussive incantation emphasizing rapid discharge resonance</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>Mana routing focused on neural stimulation and kinetic burst output</td>
+                    </tr>
+                </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Limitations</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Harmonic overload risks nervous system collapse or uncontrolled discharge</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Mis-timed cadence causes spell misfire or uncontrolled arc spread</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>Extremely high mana drain during sustained acceleration or multi-strike chaining</td>
+                    </tr>
+                </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Notable Users</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Lúmenai Practitioners</h3>
+                    <ul>
+                        <li><em>Pyara Dana</em> — Gains Sýlphae access during Heart Beat harmonic expansion</li>
+                        <li><em>Mahana Sahi</em> — Initially believed to be solely Sýlphae-aligned before multi-tier
+                            harmonic awakening</li>
+                        <li><em>Mahana Sahi</em> (Heart Symphony / Heart Crescendo) — Demonstrates advanced
+                            Lightning-tier harmonic dominance</li>
+                    </ul>
+                    <h3 class="section-subtitle">Cymora Practitioners</h3>
+                        <ul>
+                            <li>Nexsicon storm-channel casters specializing in rapid discharge incantation structures
+                            </li>
+                        </ul>
+                        <h3 class="section-subtitle">System Manifestation Users</h3>
+                            <ul>
+                                <li>External invasion forces employing shock assault disciplines</li>
+                                <li>Lightning-aligned combatants encountered by the Runic Knights of Starlite 7th</li>
+                            </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Symbolism and Thematic Role</h2>
+            <div class="section-content">
+                <p>Across Crios cosmology, Lightning commonly symbolizes:</p>
+                <ul>
+                    <li>Sudden revelation and decisive action</li>
+                    <li>Instinct over deliberation</li>
+                    <li>Power achieved through momentum</li>
+                    <li>The danger of uncontrolled brilliance</li>
+                    <li>Transformation through instantaneous change</li>
+                </ul>
+                <p>Lightning-aligned figures frequently embody themes of speed, leadership through action, emotional
+                    volatility, and the burden of rapid evolution.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Related Elements</h2>
+            <div class="section-content">
+                <ul>
+                    <li><em><a href="element-fire.html" class="wiki-link">Fire</a></em></li>
+                    <li><em><a href="element-wind.html" class="wiki-link">Wind</a></em></li>
+                    <li><em><a href="element-plant.html" class="wiki-link">Plant</a></em></li>
+                </ul>
+            </div>
+        </section>
 
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+    </div>
+</body>
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
-
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
-
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
-
-.dot {
-  color: #4FEBFE;
-}
-
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
-
-.icons {
-  text-align: center;
-  
-}
-
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
-
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
-
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
-
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
-
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Element <span style="color: #fff581;">Lightning</span> magic coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
 </html>
-

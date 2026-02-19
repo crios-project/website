@@ -1,113 +1,545 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>METAL // CRIOS Element</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            padding-bottom: 1px;
+        }
+
+        .wiki-link:hover {
+            border-bottom: 1px solid var(--accent-cyan);
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-box {
+            background: rgba(20, 20, 25, 0.5);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .info-box-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .element-visual {
+            position: relative;
+        }
+
+        .element-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .element-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../magic.html" class="back-link">← Magic Systems</a></nav>
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">METAL</h1>
+        </header>
+
+        <section class="content-section element-header">
+            <div class="element-visual">
+                <img src="../assets/magic/Tier 2 Metal - FiEa.png" alt="METAL"
+                    style="width: 100%; display: block; margin: 0 auto;" class="element-image">
+            </div>
+            <div class="element-info">
+                <h2 class="section-title">Introduction</h2>
+                <div class="section-content">
+                    <p><strong>Metal</strong> is a conjoined elemental force representing forged will, structural
+                        permanence, and weaponized stability. It is associated with craftsmanship, reinforcement,
+                        magnetic force, and technological expression. Within Lúmenai, Metal is an Entwinement expressing
+                        the transformation of raw material into intentional structure. In Cymora, Metal manifests
+                        through resonance that shapes density and sharpened solidity. Within the System of Royastella,
+                        Metal-aligned abilities exist primarily among external invaders, as conjoined elemental
+                        manifestations are canonically exclusive to hostile forces opposing the realm. Metal is forged
+                        will and sharpened solidity. </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Magic System</th>
+                            <th>Element Name</th>
+                            <th>Classification</th>
+                            <th>Core Expression</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Férroma</td>
+                            <td>Tier 2 — Vaelóri Entwinement</td>
+                            <td>Forged will and sharpened structure</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Tândâr</td>
+                            <td>Compound Element</td>
+                            <td>Resonant density and weaponized solidity</td>
+                        </tr>
+                        <tr>
+                            <td>System Mana</td>
+                            <td>Conjoined Elemental Manifestation (Enemy Exclusive)</td>
+                            <td>External Threat Discipline</td>
+                            <td>Weaponized structural control and reinforced conquest tools</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Lúmenai — Férroma</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                    <p>Tier 2 — Conjoined Element</p>
+                    <p>Vaelóri Entwinement</p>
+                    <p>(Pýrua + Téroma)</p>
+                    <h3 class="section-subtitle">Essentia Profile</h3>
+                        <p><strong>Férroma</strong> represents the harmonization of ignition and permanence. It embodies
+                            transformation through forging, where raw mass is shaped into deliberate form through force
+                            and heat. Unlike Earth, which emphasizes endurance and weight, Férroma focuses on
+                            refinement, edge creation, and intentional structural design.</p>
+                        <p>Férroma practitioners frequently excel in defensive reinforcement and weapon manifestation.
+                        </p>
+                        <h3 class="section-subtitle">Magical Expression</h3>
+                            <p>Common manifestations include:</p>
+                            <ul>
+                                <li>Forged weapon and armor constructs</li>
+                                <li>Reinforced barriers and structural stabilization</li>
+                                <li>Magnetic field manipulation</li>
+                                <li>Metallic terrain shaping</li>
+                                <li>Precision reinforcement of allied constructs</li>
+                            </ul>
+                            <h3 class="section-subtitle">Harmonic Behavior</h3>
+                                <p>Férroma requires careful balancing between Pýrua's aggressive drive and Téroma's
+                                    stabilizing resistance. Excess ignition results in structural brittleness, while
+                                    excessive stability suppresses shaping potential.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Cymora — Tândâr</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                    <p>Compound Elemental Root</p>
+                    <p>(Fire + Earth)</p>
+                    <h3 class="section-subtitle">Linguistic Role</h3>
+                        <p><strong>Tândâr</strong> expresses Cymoran resonance through dense phonetic grounding combined
+                            with sharp ignition consonants. The incantation structure emphasizes stability followed by
+                            directed shaping bursts, mirroring the forging process.</p>
+                        <h3 class="section-subtitle">Sonic Properties</h3>
+                            <ul>
+                                <li>Heavy, grounded vowel sustain</li>
+                                <li>Forceful plosive consonants to represent structural shaping</li>
+                                <li>Rhythmic hammer-like repetition patterns</li>
+                                <li>Low-register resonance emphasizing density and permanence</li>
+                            </ul>
+                            <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
+                                <p>Tândâr is typically used in spells that:</p>
+                                <ul>
+                                    <li>Generate weaponized constructs</li>
+                                    <li>Reinforce armor and fortifications</li>
+                                    <li>Manipulate magnetic or metallic structures</li>
+                                    <li>Bind or immobilize opponents through density amplification</li>
+                                </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">System Mana — Metal Manifestation</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Canon Classification</h3>
+                    <p>Enemy-Exclusive Conjoined Elemental Discipline</p>
+                    <h3 class="section-subtitle">Canon Note</h3>
+                        <p>Within Royastella, conjoined (Tier 2 equivalent) elemental expressions <strong>do not
+                                naturally occur among native elemental cores</strong>. These manifestations are
+                            associated exclusively with hostile external forces attempting territorial expansion into
+                            Royastella.</p>
+                        <p>The <strong>Runic Knights of Starlite 7th</strong> are specifically tasked with defending the
+                            realm from these invaders, who frequently deploy advanced conjoined-element combat
+                            doctrines. These external aggressors are known to pursue expansion regardless of civilian or
+                            ecological destruction.</p>
+                        <h3 class="section-subtitle">Functional Nature</h3>
+                            <p>Metal manifestations in System combat are treated as advanced siege and warfare tools
+                                designed for conquest and environmental domination.</p>
+                            <h3 class="section-subtitle">Mechanical Properties</h3>
+                                <ul>
+                                    <li>Heavy weapon generation and reinforcement</li>
+                                    <li>Magnetic field combat manipulation</li>
+                                    <li>Adaptive armor growth</li>
+                                    <li>Terrain restructuring for battlefield control</li>
+                                    <li>Structural suppression of enemy defenses</li>
+                                </ul>
+                                <h3 class="section-subtitle">Tactical Doctrine</h3>
+                                    <p>Enemy Metal specialists often serve as:</p>
+                                    <ul>
+                                        <li>Frontline siege units</li>
+                                        <li>Defensive breachers</li>
+                                        <li>Battlefield architects</li>
+                                        <li>High-durability shock troops</li>
+                                    </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Comparative Analysis</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Metal Philosophy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Metal is intention made permanent through forging harmony</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Metal is density shaped by rhythmic resonance</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Metal is conquest infrastructure and siege warfare</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Casting Mechanism</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Dual harmonic forging through ignition and stabilization</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Dense phonetic resonance combined with rhythmic structural pulses</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>High-density mana conversion into structural weapon constructs</td>
+                    </tr>
+                </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Limitations</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Requires harmonic equilibrium between aggression and stability</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Incantations require sustained vocal density and rhythmic precision</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>Metal constructs consume large quantities of mana and reduce mobility efficiency</td>
+                    </tr>
+                </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Notable Users</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Lúmenai Practitioners</h3>
+                    <ul>
+                        <li><em>Aran Letale</em> — Primary Férroma specialist among the Lovely Hearts</li>
+                        <li><em>Pyara Dana</em> — Gains Férroma access during Heart Beat harmonic expansion</li>
+                        <li><em>Mahana Sahi</em> — Demonstrates advanced multi-tier Férroma integration during Crescendo
+                            and Finalis Grande states</li>
+                    </ul>
+                    <h3 class="section-subtitle">Cymora Practitioners</h3>
+                        <ul>
+                            <li>Nexsicon metal-resonance casters frequently serve as construct engineers and dimensional
+                                fortification specialists.</li>
+                        </ul>
+                        <h3 class="section-subtitle">System Manifestation Users</h3>
+                            <ul>
+                                <li>External conquest forces opposing Royastella</li>
+                                <li>Elite siege-class invaders encountered by the Runic Knights of Starlite 7th</li>
+                            </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Symbolism and Thematic Role</h2>
+            <div class="section-content">
+                <p>Across Crios cosmology, Metal commonly symbolizes:</p>
+                <ul>
+                    <li>Discipline and refinement</li>
+                    <li>Constructed identity and deliberate shaping</li>
+                    <li>Industrialization and warfare infrastructure</li>
+                    <li>Permanence versus adaptability</li>
+                </ul>
+                <p>Metal-aligned figures often represent themes of duty, endurance, and transformation through pressure
+                    or conflict.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Related Elements</h2>
+            <div class="section-content">
+                <ul>
+                    <li><em><a href="element-fire.html" class="wiki-link">Fire</a></em></li>
+                    <li><em><a href="element-earth.html" class="wiki-link">Earth</a></em></li>
+                    <li><em><a href="element-ice.html" class="wiki-link">Ice</a></em></li>
+                </ul>
+            </div>
+        </section>
 
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+    </div>
+</body>
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
-
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
-
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
-
-.dot {
-  color: #4FEBFE;
-}
-
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
-
-.icons {
-  text-align: center;
-  
-}
-
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
-
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
-
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
-
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
-
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Element <span style="color: #828282;">Metal</span> magic coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
 </html>
-

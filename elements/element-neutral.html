@@ -1,113 +1,552 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEUTRAL // CRIOS Element</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            padding-bottom: 1px;
+        }
+
+        .wiki-link:hover {
+            border-bottom: 1px solid var(--accent-cyan);
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-box {
+            background: rgba(20, 20, 25, 0.5);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .info-box-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .element-visual {
+            position: relative;
+        }
+
+        .element-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .element-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../magic.html" class="back-link">← Magic Systems</a></nav>
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">NEUTRAL</h1>
+        </header>
+
+        <section class="content-section element-header">
+            <div class="element-visual">
+                <img src="../assets/magic/Tier 0 Balance.svg" alt="NEUTRAL"
+                    style="width: 100%; display: block; margin: 0 auto;" class="element-image">
+            </div>
+            <div class="element-info">
+                <h2 class="section-title">Introduction</h2>
+                <div class="section-content">
+                    <p>The <strong>Neutral</strong>, or <strong>Unaspected</strong>, element represents magic in its
+                        unaligned, foundational state. Unlike elemental forces that express through environmental or
+                        conceptual domains, Neutral magic governs structure, control, and raw magical authority. It is
+                        often described as magic in its purest functional form — magic before it chooses a voice.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Canon Function</h2>
+            <div class="section-content">
+                <p>Neutral magic governs:</p>
+                <ul>
+                    <li>Spell structure and stabilization</li>
+                    <li>Barriers and force manipulation</li>
+                    <li>Magical suppression and dispelling</li>
+                    <li>Power distribution and amplification</li>
+                    <li>Magical scaffolding and reinforcement</li>
+                    <li>Control over resonance or mana flow</li>
+                </ul>
+                <p>Neutral magic is rarely destructive on its own but is indispensable for enabling and sustaining
+                    higher-tier or multi-element casting.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Lúmenai — Éthera</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                    <p>Tier 1 — Basic Element</p>
+                    <p>(The Five Open Voices)</p>
+                    <h3 class="section-subtitle">Essentia Profile</h3>
+                        <p><strong>Éthera</strong> represents raw will, unshaped intent, and magical breath. It is the
+                            most fundamental expression of harmonic resonance and is considered the foundation upon
+                            which all other Essentia are sung.</p>
+                        <p>Éthera defines <strong>control</strong>, not destructive power.</p>
+
+                        <h3 class="section-subtitle">Magical Expression</h3>
+                            <p>Common Éthera manifestations include:</p>
+                            <ul>
+                                <li>Harmonic barriers and shielding</li>
+                                <li>Force projection and repulsion fields</li>
+                                <li>Spell stabilization and amplification</li>
+                                <li>Dispel and counter-resonance techniques</li>
+                                <li>Structural reinforcement of allied casting</li>
+                                <li>Magical channeling and resonance redirection</li>
+                            </ul>
+
+                            <h3 class="section-subtitle">Harmonic Behavior</h3>
+                                <p>Éthera requires:</p>
+                                <ul>
+                                    <li>Strong emotional clarity</li>
+                                    <li>Exceptional resonance control</li>
+                                    <li>Stable vocal authority</li>
+                                </ul>
+                                <p>Because it lacks elemental direction, Éthera is often considered difficult to master
+                                    despite its Tier 1 classification.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Cymora — Nerth</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                    <p>Primary Sonic Root</p>
+                    <h3 class="section-subtitle">Linguistic Role</h3>
+                        <p><strong>Nerth</strong> serves as Cymora's neutral resonance anchor. It governs spell
+                            architecture rather than elemental output.</p>
+                        <p>Nerth incantations are commonly used to:</p>
+                        <ul>
+                            <li>Initiate spellcasting frameworks</li>
+                            <li>Stabilize volatile incantations</li>
+                            <li>Suppress or disrupt hostile resonance</li>
+                            <li>Construct defensive harmonic lattices</li>
+                            <li>Maintain sustained ritual structures</li>
+                        </ul>
+
+                        <h3 class="section-subtitle">Sonic Properties</h3>
+                            <p>Nerth casting emphasizes:</p>
+                            <ul>
+                                <li>Strong consonant grounding</li>
+                                <li>Balanced rhythmic pacing</li>
+                                <li>Resonance symmetry</li>
+                            </ul>
+                            <p>Nerth is frequently layered into complex Cymora incantations to ensure structural
+                                stability.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">System Mana — Neutral Output</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Canon Classification</h3>
+                    <p>Baseline Mana Expression</p>
+                    <h3 class="section-subtitle">Functional Nature</h3>
+                        <p>Within Royastella, Neutral mana represents raw System energy before elemental conversion. It
+                            is the default form of mana storage, circulation, and technical spell execution.</p>
+                        <p>Neutral System magic is highly versatile and heavily relied upon in structured combat and
+                            technical spell engineering.</p>
+
+                        <h3 class="section-subtitle">Mechanical Properties</h3>
+                            <p>Neutral mana techniques include:</p>
+                            <ul>
+                                <li>Barrier projection</li>
+                                <li>Energy force constructs</li>
+                                <li>Mana reinforcement and amplification</li>
+                                <li>Spell conversion scaffolding</li>
+                                <li>Anti-magic suppression techniques</li>
+                                <li>Aura stabilization</li>
+                            </ul>
+                            <p>Unlike elemental cores, Neutral output can be accessed by nearly all trained System
+                                users.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Comparative Analysis</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Neutral Philosophy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Pure harmonic control and foundational resonance</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Structural sonic anchoring and incantation stabilization</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Raw mana infrastructure and technical energy manipulation</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Casting Mechanism</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Emotional and harmonic voice alignment</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Resonance-key incantations structuring spell architecture</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>Energy shaping through internal mana control and System techniques</td>
+                    </tr>
+                </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Primary Function</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Enables stable multi-voice casting</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Supports incantation integrity</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>Provides universal spell engineering framework</td>
+                    </tr>
+                </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Notable Users</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Confirmed Users</h3>
+                    <ul>
+                        <li><em>Kali Dana</em> — Master of unaspected resonance and team-wide magical amplification</li>
+                        <li><em>Heart Beat</em> — Gains broad Neutral spell scaffolding capability</li>
+                        <li><em>Heart Symphony</em> — Demonstrates large-scale multi-element stabilization</li>
+                    </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Tactical and Narrative Role</h2>
+            <div class="section-content">
+                <p>Neutral magic frequently appears in support, control, and strategic roles rather than direct offense.
+                    It allows casters to:</p>
+                <ul>
+                    <li>Empower allies</li>
+                    <li>Disrupt enemy casting</li>
+                    <li>Maintain magical infrastructure</li>
+                    <li>Sustain complex or high-tier magic</li>
+                </ul>
+                <p>Neutral-aligned practitioners are often depicted as conductors, stabilizers, or battlefield
+                    controllers rather than elemental specialists.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Symbolism and Thematic Role</h2>
+            <div class="section-content">
+                <p>Neutral / Unaspected magic represents:</p>
+                <ul>
+                    <li>Potential without direction</li>
+                    <li>Control over raw power</li>
+                    <li>Balance between emotional and technical authority</li>
+                    <li>Foundational magical literacy</li>
+                    <li>The invisible architecture of magical systems</li>
+                </ul>
+                <p>Characters aligned with Neutral magic often embody:</p>
+                <ul>
+                    <li>Strategic leadership</li>
+                    <li>Emotional or tactical clarity</li>
+                    <li>Support and coordination roles</li>
+                    <li>Control over chaos and instability</li>
+                </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Cultural and Realm Interpretations</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Beeston</h3>
+                    <p>Éthera is considered the first voice taught to Lúmenai casters. Mastery is treated as proof of
+                        harmonic maturity.</p>
+
+                    <h3 class="section-subtitle">Nexsicon</h3>
+                        <p>Nerth is regarded as the architectural language of Cymora, forming the backbone of ritual
+                            spellcraft.</p>
+
+                        <h3 class="section-subtitle">Royastella</h3>
+                            <p>Neutral mana represents professional competency. Many advanced System techniques rely
+                                heavily on neutral energy conversion and stabilization.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Related Elements</h2>
+            <div class="section-content">
+                <ul>
+                    <li><em><a href="element-fire.html" class="wiki-link">Fire</a></em></li>
+                    <li><em><a href="element-water.html" class="wiki-link">Water</a></em></li>
+                    <li><em><a href="element-wind.html" class="wiki-link">Wind</a></em></li>
+                    <li><em><a href="element-earth.html" class="wiki-link">Earth</a></em></li>
+                    <li><em><a href="element-light.html" class="wiki-link">Light</a></em></li>
+                    <li><em><a href="element-dark.html" class="wiki-link">Darkness</a></em></li>
+                    <li><em><a href="element-neon-aether.html" class="wiki-link">Neon Ultra - Aether</a></em></li>
+                </ul>
+            </div>
+        </section>
 
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+    </div>
+</body>
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
-
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
-
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
-
-.dot {
-  color: #4FEBFE;
-}
-
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
-
-.icons {
-  text-align: center;
-  
-}
-
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
-
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
-
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
-
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
-
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Element <span style="color: #888888;">Neutral</span> magic coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
 </html>
-

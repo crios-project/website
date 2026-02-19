@@ -1,113 +1,544 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICE // CRIOS Element</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            padding-bottom: 1px;
+        }
+
+        .wiki-link:hover {
+            border-bottom: 1px solid var(--accent-cyan);
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-box {
+            background: rgba(20, 20, 25, 0.5);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .info-box-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .element-visual {
+            position: relative;
+        }
+
+        .element-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .element-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../magic.html" class="back-link">← Magic Systems</a></nav>
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">ICE</h1>
+        </header>
+
+        <section class="content-section element-header">
+            <div class="element-visual">
+                <img src="../assets/magic/Tier 2 Ice - WaWi.svg" alt="ICE" style="width: 100%; display: block; margin: 0 auto;"
+                    class="element-image">
+            </div>
+            <div class="element-info">
+                <h2 class="section-title">Introduction</h2>
+                <div class="section-content">
+                    <p><strong>Ice</strong> is a conjoined elemental force representing arrested motion, preservation,
+                        crystalline silence, and temporal stabilization. Ice magic governs stillness, containment,
+                        structural suspension, and controlled entropy. Within Lúmenai, Ice manifests as harmonic stasis
+                        and preservation. In Cymora, Ice emerges through resonant stillness and freezing cadence. Within
+                        the System of Royastella, Ice-aligned abilities exist primarily among external invaders, as
+                        conjoined elemental manifestations are canonically exclusive to hostile forces targeting the
+                        realm. Ice is arrested motion and crystalline silence. </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Magic System</th>
+                            <th>Element Name</th>
+                            <th>Classification</th>
+                            <th>Core Expression</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Crýalune</td>
+                            <td>Tier 2 — Vaelóri Entwinement</td>
+                            <td>Stasis, preservation, crystalline suspension</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Gwynahr</td>
+                            <td>Compound Element</td>
+                            <td>Resonant freezing and containment</td>
+                        </tr>
+                        <tr>
+                            <td>System Mana</td>
+                            <td>Conjoined Elemental Manifestation (Enemy Exclusive)</td>
+                            <td>External Threat Discipline</td>
+                            <td>Environmental control and immobilization warfare</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Lúmenai — Crýalune</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                    <p>Tier 2 — Conjoined Element</p>
+                    <p>Vaelóri Entwinement</p>
+                    <p>(Áquora + Vaélia)</p>
+                    <h3 class="section-subtitle">Essentia Profile</h3>
+                        <p><strong>Crýalune</strong> represents the simultaneous voicing of flow and motion brought into
+                            suspended equilibrium. Rather than simple cold, Crýalune creates magical states where
+                            movement, decay, and transformation are halted or slowed to near permanence.</p>
+                        <p>Crýalune is strongly associated with preservation, containment, memory stabilization, and
+                            temporal suspension.</p>
+                        <h3 class="section-subtitle">Magical Expression</h3>
+                            <p>Common manifestations include:</p>
+                            <ul>
+                                <li>Ice construct formation and crystalline barriers</li>
+                                <li>Temporal slowing fields</li>
+                                <li>Stasis binding and immobilization magic</li>
+                                <li>Preservation of biological or magical states</li>
+                                <li>Terrain restructuring through crystalline growth</li>
+                            </ul>
+                            <h3 class="section-subtitle">Harmonic Behavior</h3>
+                                <p>Crýalune demands careful resonance balance between Áquora's adaptive memory and
+                                    Vaélia's directional force. Excess fluidity produces fragile or melting constructs,
+                                    while excessive motion collapses the stasis field into brittle instability.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Cymora — Gwynahr</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                    <p>Compound Elemental Root</p>
+                    <p>(Wind + Water)</p>
+                    <h3 class="section-subtitle">Linguistic Role</h3>
+                        <p><strong>Gwynahr</strong> produces smooth, flowing vocalization interrupted by crisp consonant
+                            stops, imitating the natural crystallization process. The resonance pattern emphasizes
+                            containment, layering, and harmonic stillness.</p>
+                        <h3 class="section-subtitle">Sonic Properties</h3>
+                            <ul>
+                                <li>Extended vowels to simulate slowing temporal flow</li>
+                                <li>Soft consonant transitions to represent freezing propagation</li>
+                                <li>Repetitive cadence reinforcing structural layering</li>
+                                <li>Controlled breath spacing to sustain containment harmonics</li>
+                            </ul>
+                            <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
+                                <p>Gwynahr is typically used in spells that:</p>
+                                <ul>
+                                    <li>Create crystalline or frozen barriers</li>
+                                    <li>Suspend movement or spellcasting</li>
+                                    <li>Preserve magical constructs or living forms</li>
+                                    <li>Restrain or immobilize targets</li>
+                                    <li>Establish environmental control zones</li>
+                                </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">System Mana — Ice Manifestation</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Canon Classification</h3>
+                    <p>Enemy-Exclusive Conjoined Elemental Discipline</p>
+                    <h3 class="section-subtitle">Canon Note</h3>
+                        <p>Within Royastella, conjoined (Tier 2 equivalent) elemental expressions <strong>do not
+                                naturally occur among native elemental cores</strong>. Ice-based manifestations are
+                            therefore associated exclusively with external invasion forces attempting to destabilize
+                            Royastella's ecosystems and infrastructure.</p>
+                        <p>The <strong>Runic Knights of Starlite 7th</strong> actively defend against such incursions,
+                            frequently encountering battlefield control specialists utilizing large-scale freezing or
+                            containment tactics.</p>
+                        <h3 class="section-subtitle">Functional Nature</h3>
+                            <p>System Ice manifestations focus on battlefield denial, immobilization, and strategic
+                                environmental manipulation rather than raw destructive output.</p>
+                            <h3 class="section-subtitle">Mechanical Properties</h3>
+                                <ul>
+                                    <li>Area immobilization fields</li>
+                                    <li>Structural reinforcement and defensive constructs</li>
+                                    <li>Movement suppression techniques</li>
+                                    <li>Environmental freezing and terrain control</li>
+                                    <li>Mana flow dampening through containment matrices</li>
+                                </ul>
+                                <h3 class="section-subtitle">Tactical Doctrine</h3>
+                                    <p>Enemy Ice specialists typically function as:</p>
+                                    <ul>
+                                        <li>Battlefield controllers</li>
+                                        <li>Defensive bulwark units</li>
+                                        <li>Territory stabilization agents for invading forces</li>
+                                        <li>Crowd and army immobilization specialists</li>
+                                    </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Comparative Analysis</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Ice Philosophy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Ice is the harmony of motion and memory brought into perfect stillness</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Ice is containment through resonant crystallization</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Ice is strategic immobilization and environmental warfare</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Casting Mechanism</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Harmonic balance between flow preservation and directional stillness</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Sonic cadence emphasizing layered resonance and controlled breath suspension</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>Mana structuring focused on containment geometry and immobilization engineering</td>
+                    </tr>
+                </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Limitations</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Loss of harmonic balance causes fracture or melt instability</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Incantation rhythm must remain uninterrupted to maintain containment</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>High mana cost for sustaining large-scale immobilization zones</td>
+                    </tr>
+                </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Notable Users</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Lúmenai Practitioners</h3>
+                    <ul>
+                        <li><em>Omba Miko</em> — Primary Crýalune-aligned combatant</li>
+                        <li><em>Pyara Dana</em> — Gains Crýalune access during Heart Beat harmonic expansion</li>
+                        <li><em>Mahana Sahi</em> — Demonstrates Crýalune integration through multi-tier harmonic
+                            authority</li>
+                    </ul>
+                    <h3 class="section-subtitle">Cymora Practitioners</h3>
+                        <ul>
+                            <li>Nexsicon containment casters specializing in preservation rituals and temporal
+                                stabilization constructs</li>
+                        </ul>
+                        <h3 class="section-subtitle">System Manifestation Users</h3>
+                            <ul>
+                                <li>External conquest forces utilizing environmental immobilization disciplines</li>
+                                <li>Containment-class invaders engaged by the Runic Knights of Starlite 7th</li>
+                            </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Symbolism and Thematic Role</h2>
+            <div class="section-content">
+                <p>Across Crios cosmology, Ice commonly symbolizes:</p>
+                <ul>
+                    <li>Preservation through stillness</li>
+                    <li>Emotional restraint and clarity</li>
+                    <li>Memory crystallization</li>
+                    <li>The suspension of inevitability</li>
+                    <li>Beauty and danger within fragile perfection</li>
+                </ul>
+                <p>Ice-aligned figures frequently embody themes of emotional control, protective isolation, and the cost
+                    of maintaining stability.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Related Elements</h2>
+            <div class="section-content">
+                <ul>
+                    <li><em><a href="element-water.html" class="wiki-link">Water</a></em></li>
+                    <li><em><a href="element-wind.html" class="wiki-link">Wind</a></em></li>
+                    <li><em><a href="element-metal.html" class="wiki-link">Metal</a></em></li>
+                </ul>
+            </div>
+        </section>
 
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+    </div>
+</body>
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
-
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
-
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
-
-.dot {
-  color: #4FEBFE;
-}
-
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
-
-.icons {
-  text-align: center;
-  
-}
-
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
-
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
-
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
-
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
-
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Element <span style="color: #7bfff0;">Ice</span> magic coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
 </html>
-

@@ -1,113 +1,597 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON ULTRA // CRIOS Element</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            padding-bottom: 1px;
+        }
+
+        .wiki-link:hover {
+            border-bottom: 1px solid var(--accent-cyan);
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-box {
+            background: rgba(20, 20, 25, 0.5);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .info-box-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .element-visual {
+            position: relative;
+        }
+
+        .element-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .element-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="../magic.html" class="back-link">← Magic Systems</a></nav>
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">NEON ULTRA</h1>
+        </header>
+
+        <section class="content-section element-header">
+            <div class="element-visual">
+                <img src="../assets/magic/Tier 5 Neon Ultra.png" alt="NEON ULTRA"
+                    style="width: 100%; display: block; margin: 0 auto;" class="element-image">
+            </div>
+            <div class="element-info">
+                <h2 class="section-title">Introduction</h2>
+                <div class="section-content">
+                    <p><strong>Aether</strong>, also known interchangeably as <strong>Neon Ultra</strong>, is the apex
+                        metaphysical domain of elemental authority across all known Crios realms. It represents infinite
+                        continuation, conceptual recursion, and reality-authoring resonance. Unlike other elements,
+                        Aether does not govern a natural force; it governs the structural rules that allow forces to
+                        exist at all. Aether is the impossible color and an endless continuation. This magic cannot be
+                        sustained for long.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Canon Absolutes</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Core Type</th>
+                            <th>Natural Occurrence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aether Elemental Core</td>
+                            <td>Impossible</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Power Hierarchy</h2>
+            <div class="section-content">
+                <p>Aether supersedes all known elemental structures.</p>
+                <h3 class="section-subtitle">Absolute Supremacy</h3>
+                    <ul>
+                        <li>Overrides Tier 1 Elements</li>
+                        <li>Overrides Tier 2 Entwinements</li>
+                        <li>Overrides Light Supremacy</li>
+                        <li>Overrides Dark Supremacy</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Aether Clash Instability</h3>
+                        <p>Canon theoretical doctrine warns:</p>
+                        <ul>
+                            <li>Aether vs Aether interaction may trigger reality recursion collapse</li>
+                            <li>Realm-level annihilation is considered plausible</li>
+                        </ul>
+                        <h4 class="section-subtitle">Errata Doctrine</h4>
+                            <p>Research attributed to <em>Tiala Corsolis</em> theorizes that an Aether clash may have
+                                caused the permanent loss of magic within the Fourth Realm.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Lúmenai — Æónel</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                    <p>Tier 5 — Final Supremacy</p>
+                    <h3 class="section-subtitle">Essentia Profile</h3>
+                        <p><strong>Æónel</strong> represents infinite continuation, harmonic recursion, and conceptual
+                            rewriting. Rather than manipulating elements, Æónel modifies the rules governing harmonic
+                            existence itself.</p>
+                        <h3 class="section-subtitle">Magical Expression</h3>
+                            <p>Common manifestations include:</p>
+                            <ul>
+                                <li>Reality recursion loops</li>
+                                <li>Infinite or self-regenerating constructs</li>
+                                <li>Conceptual editing of magical law</li>
+                                <li>Temporal rewriting or loop creation</li>
+                                <li>Existential restoration or deletion</li>
+                                <li>Multiversal harmonic bridging</li>
+                            </ul>
+                            <h3 class="section-subtitle">Harmonic Behavior</h3>
+                                <p>Æónel cannot be sustained by a single stable voice. Casting requires:</p>
+                                <ul>
+                                    <li>Multi-voice resonance</li>
+                                    <li>External amplification artifacts</li>
+                                    <li>Lodesoul anchoring or equivalent metaphysical stabilization</li>
+                                </ul>
+                                <p>Most attempts result in caster fragmentation or ascension beyond mortal existence.
+                                </p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Cymora — Aelwyr</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Classification</h3>
+                    <p>Supreme Sonic Root</p>
+                    <h3 class="section-subtitle">Linguistic Role</h3>
+                        <p><strong>Aelwyr</strong> functions as Cymora's highest resonance key. Unlike elemental
+                            incantations, Aelwyr alters the phonetic structure of spells themselves.</p>
+                        <h3 class="section-subtitle">Sonic Properties</h3>
+                            <ul>
+                                <li>Multi-tonal harmonic layering</li>
+                                <li>Extended vowel continuums</li>
+                                <li>Rhythmic recursion patterns</li>
+                                <li>Self-referential incantation loops</li>
+                            </ul>
+                            <h3 class="section-subtitle">Cymoran Aether Behavior</h3>
+                                <p>Aelwyr incantations may:</p>
+                                <ul>
+                                    <li>Rewrite spell frameworks mid-cast</li>
+                                    <li>Create recursive spell engines</li>
+                                    <li>Establish infinite or self-correcting constructs</li>
+                                    <li>Alter timeline resonance pathways</li>
+                                    <li>Generate paradox-stable magical structures</li>
+                                </ul>
+                                <p>Improper tonal alignment risks immediate resonance disappearance.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">System Mana — Aether / Neon Ultra Manifestation</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Canon Classification</h3>
+                    <p>Mythic External Manifestation Domain</p>
+                    <h3 class="section-subtitle">Functional Nature</h3>
+                        <p>Royastella's System cannot generate Aether internally. All known manifestations occur through
+                            external aura phenomena or trans-System anomalies.</p>
+                        <p>Neon Ultra output appears as reality-authoring energy fields rather than elemental
+                            projection.</p>
+                        <h3 class="section-subtitle">Mechanical Properties</h3>
+                            <ul>
+                                <li>Infinite energy recursion constructs</li>
+                                <li>Probability law rewriting</li>
+                                <li>Conceptual weaponization</li>
+                                <li>Aura-based dimensional reinforcement</li>
+                                <li>Multiversal boundary manipulation</li>
+                            </ul>
+                            <h3 class="section-subtitle">Operational Limitations</h3>
+                                <ul>
+                                    <li>Cannot be stored within mana reserves</li>
+                                    <li>Requires external manifestation medium</li>
+                                    <li>High likelihood of System collapse or override</li>
+                                    <li>Often associated with non-mortal or trans-realm entities</li>
+                                </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Comparative Analysis</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Aether / Neon Ultra Philosophy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Infinite harmonic continuation and conceptual authorship</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Sonic rewriting of reality grammar</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Externalized infinite energy recursion and law override</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Casting Mechanism</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Multi-voice harmonic convergence or metaphysical amplification</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Recursive incantation loops with layered phonetic harmonics</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>External aura manifestation beyond standard mana infrastructure</td>
+                    </tr>
+                </tbody>
+                </table>
+                <tr>
+                    <td>System</td>
+                    <td>Limitations</td>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lúmenai</td>
+                        <td>Requires collective or transcendent resonance stability</td>
+                    </tr>
+                    <tr>
+                        <td>Cymora</td>
+                        <td>Requires perfect phonetic recursion continuity</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>Cannot be internally generated or safely contained</td>
+                    </tr>
+                </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Notable Users</h2>
+            <div class="section-content">
+                <h3 class="section-subtitle">Confirmed Manifesters</h3>
+                    <ul>
+                        <li><em>The Golden Imperator</em> — Demonstrates externally manifested Aether aura</li>
+                    </ul>
+
+                    <h3 class="section-subtitle">Theoretical or Mythic Practitioners</h3>
+                        <ul>
+                            <li>High-order Ultimateran trans-architect entities</li>
+                            <li>Unknown Nexsicon recursion chanters</li>
+                            <li>Possible lost Fourth Realm resonance' architects</li>
+                        </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Symbolism and Thematic Role</h2>
+            <div class="section-content">
+                <p>Aether / Neon Ultra represents:</p>
+                <ul>
+                    <li>Infinite continuation</li>
+                    <li>Creative and destructive omnipotence</li>
+                    <li>The boundary between existence and narrative structure</li>
+                    <li>Ultimate transcendence beyond elemental categorization</li>
+                    <li>The cost of absolute authorship</li>
+                </ul>
+                <p>Characters or forces aligned with Aether often embody:</p>
+                <ul>
+                    <li>Sovereign authority</li>
+                    <li>Existential detachment</li>
+                    <li>Creator or destroyer archetypes</li>
+                    <li>Narrative recursion and rebirth motifs</li>
+                </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Historical and Mythic Context</h2>
+            <div class="section-content">
+                <p>Aether manifestations are associated with:</p>
+                <ul>
+                    <li>Realm genesis or extinction events</li>
+                    <li>Lodesoul convergence phenomena</li>
+                    <li>Multirealm synchronization anomalies</li>
+                    <li>System transcendence incidents</li>
+                    <li>The unexplained absence of the Fourth Realm's magic</li>
+                </ul>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Naming Conventions Across Realms</h2>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Realm</th>
+                            <th>Common Term</th>
+                            <th>Ritual Term</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Beeston</td>
+                            <td>Aether</td>
+                            <td>Æónel</td>
+                        </tr>
+                        <tr>
+                            <td>Royastella</td>
+                            <td>Aether</td>
+                            <td>N/A</td>
+                        </tr>
+                        <tr>
+                            <td>Nexsicon</td>
+                            <td>Neon Ultra</td>
+                            <td>Aelwyr</td>
+                        </tr>
+                        <tr>
+                            <td>Ultimatera</td>
+                            <td>Neon Ultra</td>
+                            <td>Unknown</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Related Elements</h2>
+            <div class="section-content">
+                <ul>
+                    <li><em><a href="element-light.html" class="wiki-link">Light</a></em></li>
+                    <li><em><a href="element-dark.html" class="wiki-link">Darkness</a></em></li>
+                </ul>
+            </div>
+        </section>
 
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+    </div>
+</body>
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
-
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
-
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
-
-.dot {
-  color: #4FEBFE;
-}
-
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
-
-.icons {
-  text-align: center;
-  
-}
-
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
-
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
-
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
-
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
-
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Element <span style="color: #ff2175; -webkit-text-stroke: 1px #008080;">Neon/Aether</span> magic coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
 </html>
-
