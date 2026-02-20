@@ -1,12 +1,15 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Icons + Logos</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
   <style>
-    :root{
+    :root {
       --primary-burgundy: #6b0f1a;
       --secondary-pink: #e91e63;
       --accent-cyan: #00d9ff;
@@ -14,66 +17,273 @@
       --dark-panel: #141419;
       --text-primary: #e8e8f0;
       --text-dim: #8888a8;
-      --glass: rgba(20,20,25,0.6);
+      --glass: rgba(20, 20, 25, 0.6);
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
       font-family: 'Archivo', sans-serif;
       background: var(--dark-bg);
-      color:var(--text-primary);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* subtle site background to match other pages */
-    .bg-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(233,30,99,0.02) 1px, transparent 1px),linear-gradient(90deg, rgba(0,217,255,0.02) 1px, transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
-    .orb{position:fixed;border-radius:50%;filter:blur(100px);opacity:0.18;pointer-events:none;z-index:0}
-    .orb-1{width:520px;height:520px;right:-200px;top:-160px;background:radial-gradient(circle,#6b0f1a,transparent)}
-    .orb-2{width:420px;height:420px;left:-150px;bottom:-120px;background:radial-gradient(circle,#00d9ff,transparent)}
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 217, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0
+    }
 
-    /* header */
-    .header-nav{position:sticky;top:0;background:rgba(10,10,15,0.9);backdrop-filter:blur(6px);border-bottom:1px solid rgba(233,30,99,0.08);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;z-index:5}
-    .back-link{font-family:'Orbitron',sans-serif;color:var(--text-dim);text-decoration:none;letter-spacing:2px;font-size:0.85rem}
-    .page-title{font-family:'Orbitron',sans-serif;font-weight:800;background:linear-gradient(135deg,var(--secondary-pink),var(--accent-cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-size:1.6rem}
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0
+    }
+
+    .orb-1 {
+      width: 520px;
+      height: 520px;
+      right: -200px;
+      top: -160px;
+      background: radial-gradient(circle, #6b0f1a, transparent)
+    }
+
+    .orb-2 {
+      width: 420px;
+      height: 420px;
+      left: -150px;
+      bottom: -120px;
+      background: radial-gradient(circle, #00d9ff, transparent)
+    }
+
+        /* Header */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+    .page-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.6rem
+    }
 
     /* container */
-    .container{max-width:1200px;margin:48px auto;padding:24px;position:relative;z-index:2}
-    .intro{margin-bottom:28px;color:var(--text-dim)}
+    .container {
+      max-width: 1200px;
+      margin: 48px auto;
+      padding: 24px;
+      position: relative;
+      z-index: 2
+    }
+
+    .intro {
+      margin-bottom: 28px;
+      color: var(--text-dim)
+    }
 
     /* Carousel */
-    .carousel-wrap{position:relative;display:flex;align-items:center;gap:12px;max-width:860px;margin:0 auto}
-    .nav{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text-dim);width:48px;height:64px;border-radius:10px;cursor:pointer;font-size:28px;display:flex;align-items:center;justify-content:center;transition:all .18s;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
-    .nav:hover{transform:translateY(-4px);border-color:rgba(0,217,255,0.12);color:var(--accent-cyan)}
+    .carousel-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 860px;
+      margin: 0 auto
+    }
 
-    .carousel{flex:1;height:360px;position:relative;display:flex;align-items:center;justify-content:center;overflow:visible;padding:40px 20px;perspective:1200px;perspective-origin:50% 40%}
-    .carousel-item{position:absolute;top:50%;left:50%;transform-origin:center center;transition:transform .55s cubic-bezier(.2,.9,.3,1),opacity .35s; border:0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));padding:10px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6);cursor:pointer;transform-style:preserve-3d;backface-visibility:hidden}
-    .carousel-item img{display:block;width:110px;height:110px;object-fit:contain}
-    .carousel-item.is-center{box-shadow:0 28px 80px rgba(0,217,255,0.12);}
-    .carousel-item[aria-hidden="true"]{pointer-events:none;opacity:0}
-    
+    .nav {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-dim);
+      width: 48px;
+      height: 64px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .18s;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6)
+    }
+
+    .nav:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 217, 255, 0.12);
+      color: var(--accent-cyan)
+    }
+
+    .carousel {
+      flex: 1;
+      height: 360px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+      padding: 40px 20px;
+      perspective: 1200px;
+      perspective-origin: 50% 40%
+    }
+
+    .carousel-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transition: transform .55s cubic-bezier(.2, .9, .3, 1), opacity .35s;
+      border: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.18));
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+      transform-style: preserve-3d;
+      backface-visibility: hidden
+    }
+
+    .carousel-item img {
+      display: block;
+      width: 110px;
+      height: 110px;
+      object-fit: contain
+    }
+
+    .carousel-item.is-center {
+      box-shadow: 0 28px 80px rgba(0, 217, 255, 0.12);
+    }
+
+    .carousel-item[aria-hidden="true"] {
+      pointer-events: none;
+      opacity: 0
+    }
+
 
     /* caption */
-    .caption{margin-top:18px;text-align:center;color:var(--text-dim);font-size:0.95rem}
+    .caption {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.95rem
+    }
 
     /* Lightbox */
-    #lightbox{position:fixed;top:-100%;left:0;width:100%;height:100%;background:linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85));display:grid;place-items:center;padding:2rem;transition:top .28s ease-in-out;z-index:40}
-    #lightbox.active{top:0}
-    #lightbox__container{max-width:1100px;max-height:85vh;display:flex;align-items:center;justify-content:center}
-    #lightbox__container img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,0.6);border-radius:8px}
+    #lightbox {
+      position: fixed;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85));
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      transition: top .28s ease-in-out;
+      z-index: 40
+    }
+
+    #lightbox.active {
+      top: 0
+    }
+
+    #lightbox__container {
+      max-width: 1100px;
+      max-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    #lightbox__container img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      border-radius: 8px
+    }
 
     /* responsive */
-    @media (max-width:900px){
-      .carousel{height:320px}
-      .carousel-item img{width:88px;height:88px}
+    @media (max-width:900px) {
+      .carousel {
+        height: 320px
+      }
+
+      .carousel-item img {
+        width: 88px;
+        height: 88px
+      }
     }
-    @media (max-width:640px){
-      .nav{display:none}
-      .carousel{height:260px;padding:20px}
-      .carousel-item img{width:72px;height:72px}
+
+    @media (max-width:640px) {
+      .nav {
+        display: none
+      }
+
+      .carousel {
+        height: 260px;
+        padding: 20px
+      }
+
+      .carousel-item img {
+        width: 72px;
+        height: 72px
+      }
     }
   </style>
 </head>
+
 <body style="overflow: hidden;">
   <div class="bg-grid" aria-hidden="true"></div>
   <div class="orb orb-1" aria-hidden="true"></div>
@@ -87,59 +297,108 @@
   <main class="container">
     <section class="page-header">
       <h1 class="page-title">Icons + Logos</h1>
-      <p class="intro">A variety of icons and logos I've created. Some are for the Crios Project, some are for clients, some are for video game projects, and some are just from inspiration.</p>
+      <p class="intro">A variety of icons and logos I've created. Some are for the Crios Project, some are for clients,
+        some are for video game projects, and some are just from inspiration.</p>
     </section>
 
     <div class="carousel-wrap">
       <button class="nav" id="prev" aria-label="Previous">‹</button>
       <div class="carousel" id="carousel">
         <!-- items: icon image in assets/icons/ — data-logo points to the paired logo (if exists) -->
-        <button class="carousel-item" data-logo="assets/icons/Antiquity Logo.png" aria-hidden="false"><img src="assets/icons/Antiquity Icon.png" alt="Antiquity"></button>
-        <button class="carousel-item" data-logo="assets/icons/Beeston Logo.png" aria-hidden="false"><img src="assets/icons/Beeston Icon.png" alt="Beeston"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/BG logo.png" aria-hidden="false"><img src="assets/logos-added/BG Icon.png" alt="Blade Guillotine"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/ConcreteRose.png" aria-hidden="false"><img src="assets/logos-added/ConcreteRose.png" alt="Concrete Rose"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Crios logo.png" aria-hidden="false"><img src="assets/logos-added/Crios Logo.png" alt="CRIOS"></button>
-        <button class="carousel-item" data-logo="assets/icons/Crios2020.png" aria-hidden="false"><img src="assets/icons/Crios2020.png" alt="CRIOS 2020"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Cross logo.png" aria-hidden="false"><img src="assets/logos-added/Cross Icon.png" alt="Cross"></button>
-        <button class="carousel-item" data-logo="assets/icons/Destiny's Penance Logo.png" aria-hidden="false"><img src="assets/icons/Destiny's Penance Icon.png" alt="Destiny's Penance"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Digital Passion logo.png" aria-hidden="false"><img src="assets/logos-added/Digital Passion logo.png" alt="Digital Passion"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Dissensio logo.png" aria-hidden="false"><img src="assets/logos-added/Dissensio Logo.png" alt="Dissensio"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Dissonant Discord logo.png" aria-hidden="false"><img src="assets/logos-added/Dissonant Discord Logo.png" alt="Dissonant Discord"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Draconic Devotion logo.png" aria-hidden="false"><img src="assets/logos-added/Draconic Devotion Logo.png" alt="Draconic Devotion"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/end of line logo.png" aria-hidden="false"><img src="assets/logos-added/end of line logo.png" alt="End of Line"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/end of lion logo.png" aria-hidden="false"><img src="assets/logos-added/end of lion logo.png" alt="End of Lion"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/end of lying logo.png" aria-hidden="false"><img src="assets/logos-added/end of lying logo.png" alt="End of Lying"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Fall logo.gif" aria-hidden="false"><img src="assets/logos-added/Fall Icon.png" alt="Fall"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Fire and Blood logo.png" aria-hidden="false"><img src="assets/logos-added/Fire and Blood logo.png" alt="Fire and Blood"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Glosuco logo.png" aria-hidden="false"><img src="assets/logos-added/Glosuco logo.png" alt="Glosuco"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Graceful Arts logo.png" aria-hidden="false"><img src="assets/logos-added/Graceful Arts logo.png" alt="Graceful Arts"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Heart logo.png" aria-hidden="false"><img src="assets/logos-added/Heart logo.png" alt="Heart"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Honor logo.png" aria-hidden="false"><img src="assets/logos-added/Honor logo.png" alt="Honor"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Hope logo.png" aria-hidden="false"><img src="assets/logos-added/Hope logo.png" alt="Hope"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Ice of Sky logo.png" aria-hidden="false"><img src="assets/logos-added/Ice of Sky logo.png" alt="Ice of Sky"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Into the Break logo.png" aria-hidden="false"><img src="assets/logos-added/Into the Break logo.png" alt="Into the Break"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/KF logo.png" aria-hidden="false"><img src="assets/logos-added/KF icon.png" alt="Knivefall"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Loss and Pain logo.png" aria-hidden="false"><img src="assets/logos-added/Loss and Pain logo.png" alt="Loss and Pain"></button>
-        <button class="carousel-item" data-logo="assets/icons/Lovely Hearts Logo.png" aria-hidden="false"><img src="assets/icons/Lovely Hearts Icon.png" alt="Lovely Hearts"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/LC 2013 logo.png" aria-hidden="false"><img src="assets/logos-added/LC 2013 logo.png" alt="Lumetapa Chronicles 2013 version"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/LC Final logo.png" aria-hidden="false"><img src="assets/logos-added/LC Final logo.png" alt="Lumetapa Chronicles Final version"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Malevolence logo.png" aria-hidden="false"><img src="assets/logos-added/Malevolence logo.png" alt="Malevolence"></button>
-        <button class="carousel-item" data-logo="assets/icons/Nexsicon Logo.png" aria-hidden="false"><img src="assets/icons/Nexsicon Icon.png" alt="Nexsicon"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Origin of all logo.png" aria-hidden="false"><img src="assets/logos-added/Origin of all logo.png" alt="Origin of All"></button>
-        <button class="carousel-item" data-logo="assets/icons/Praxis Verax Affinas Logo.png" aria-hidden="false"><img src="assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Raconteur Productions logo.png" aria-hidden="false"><img src="assets/logos-added/Raconteur Productions logo.png" alt="Raconteur Productions"></button>
-        <button class="carousel-item" data-logo="assets/icons/Reason Theory Logo.png" aria-hidden="false"><img src="assets/icons/Reason Theory Icon.png" alt="Reason Theory"></button>
-        <button class="carousel-item" data-logo="assets/icons/Royastella Logo.png" aria-hidden="false"><img src="assets/icons/Royastella Icon.png" alt="Royastella"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Sinner's Lament logo.png" aria-hidden="false"><img src="assets/logos-added/Sinner's Lament logo.png" alt="Sinner's Lament"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Soul Dominions Aperture logo.png" aria-hidden="false"><img src="assets/logos-added/Soul Dominions Aperture logo.png" alt="Soul Dominions Aperture"></button>
-        <button class="carousel-item" data-logo="assets/icons/Starlite 7th Logo.png" aria-hidden="false"><img src="assets/icons/Starlite 7th Icon.png" alt="Starlite 7th"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Studio Reverse logo.png" aria-hidden="false"><img src="assets/logos-added/Studio Reverse logo.png" alt="Studio Reverse"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Take logo.png" aria-hidden="false"><img src="assets/logos-added/Take Icon.png" alt="Take"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/TurntableGames.png" aria-hidden="false"><img src="assets/logos-added/TurntableGames.png" alt="Turntable Games"></button>
-        <button class="carousel-item" data-logo="assets/icons/Ultimatera Logo.png" aria-hidden="false"><img src="assets/icons/Ultimatera Icon.png" alt="Ultimatera"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Venom logo.png" aria-hidden="false"><img src="assets/logos-added/Venom logo.png" alt="Venom"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Viral logo.png" aria-hidden="false"><img src="assets/logos-added/Viral logo.png" alt="Viral"></button>
-        <button class="carousel-item" data-logo="assets/logos-added/Vitriol logo.png" aria-hidden="false"><img src="assets/logos-added/Vitriol logo.png" alt="Vitriol"></button>
+        <button class="carousel-item" data-logo="assets/icons/Antiquity Logo.png" aria-hidden="false"><img
+            src="assets/icons/Antiquity Icon.png" alt="Antiquity"></button>
+        <button class="carousel-item" data-logo="assets/icons/Beeston Logo.png" aria-hidden="false"><img
+            src="assets/icons/Beeston Icon.png" alt="Beeston"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/BG logo.png" aria-hidden="false"><img
+            src="assets/logos-added/BG Icon.png" alt="Blade Guillotine"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/ConcreteRose.png" aria-hidden="false"><img
+            src="assets/logos-added/ConcreteRose.png" alt="Concrete Rose"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Crios logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Crios Logo.png" alt="CRIOS"></button>
+        <button class="carousel-item" data-logo="assets/icons/Crios2020.png" aria-hidden="false"><img
+            src="assets/icons/Crios2020.png" alt="CRIOS 2020"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Cross logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Cross Icon.png" alt="Cross"></button>
+        <button class="carousel-item" data-logo="assets/icons/Destiny's Penance Logo.png" aria-hidden="false"><img
+            src="assets/icons/Destiny's Penance Icon.png" alt="Destiny's Penance"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Digital Passion logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Digital Passion logo.png" alt="Digital Passion"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Dissensio logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Dissensio Logo.png" alt="Dissensio"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Dissonant Discord logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Dissonant Discord Logo.png" alt="Dissonant Discord"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Draconic Devotion logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Draconic Devotion Logo.png" alt="Draconic Devotion"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/end of line logo.png" aria-hidden="false"><img
+            src="assets/logos-added/end of line logo.png" alt="End of Line"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/end of lion logo.png" aria-hidden="false"><img
+            src="assets/logos-added/end of lion logo.png" alt="End of Lion"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/end of lying logo.png" aria-hidden="false"><img
+            src="assets/logos-added/end of lying logo.png" alt="End of Lying"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Fall logo.gif" aria-hidden="false"><img
+            src="assets/logos-added/Fall Icon.png" alt="Fall"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Fire and Blood logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Fire and Blood logo.png" alt="Fire and Blood"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Glosuco logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Glosuco logo.png" alt="Glosuco"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Graceful Arts logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Graceful Arts logo.png" alt="Graceful Arts"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Heart logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Heart logo.png" alt="Heart"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Honor logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Honor logo.png" alt="Honor"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Hope logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Hope logo.png" alt="Hope"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Ice of Sky logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Ice of Sky logo.png" alt="Ice of Sky"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Into the Break logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Into the Break logo.png" alt="Into the Break"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/KF logo.png" aria-hidden="false"><img
+            src="assets/logos-added/KF icon.png" alt="Knivefall"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Loss and Pain logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Loss and Pain logo.png" alt="Loss and Pain"></button>
+        <button class="carousel-item" data-logo="assets/icons/Lovely Hearts Logo.png" aria-hidden="false"><img
+            src="assets/icons/Lovely Hearts Icon.png" alt="Lovely Hearts"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/LC 2013 logo.png" aria-hidden="false"><img
+            src="assets/logos-added/LC 2013 logo.png" alt="Lumetapa Chronicles 2013 version"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/LC Final logo.png" aria-hidden="false"><img
+            src="assets/logos-added/LC Final logo.png" alt="Lumetapa Chronicles Final version"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Malevolence logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Malevolence logo.png" alt="Malevolence"></button>
+        <button class="carousel-item" data-logo="assets/icons/Nexsicon Logo.png" aria-hidden="false"><img
+            src="assets/icons/Nexsicon Icon.png" alt="Nexsicon"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Origin of all logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Origin of all logo.png" alt="Origin of All"></button>
+        <button class="carousel-item" data-logo="assets/icons/Praxis Verax Affinas Logo.png" aria-hidden="false"><img
+            src="assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Raconteur Productions logo.png"
+          aria-hidden="false"><img src="assets/logos-added/Raconteur Productions logo.png"
+            alt="Raconteur Productions"></button>
+        <button class="carousel-item" data-logo="assets/icons/Reason Theory Logo.png" aria-hidden="false"><img
+            src="assets/icons/Reason Theory Icon.png" alt="Reason Theory"></button>
+        <button class="carousel-item" data-logo="assets/icons/Royastella Logo.png" aria-hidden="false"><img
+            src="assets/icons/Royastella Icon.png" alt="Royastella"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Sinner's Lament logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Sinner's Lament logo.png" alt="Sinner's Lament"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Soul Dominions Aperture logo.png"
+          aria-hidden="false"><img src="assets/logos-added/Soul Dominions Aperture logo.png"
+            alt="Soul Dominions Aperture"></button>
+        <button class="carousel-item" data-logo="assets/icons/Starlite 7th Logo.png" aria-hidden="false"><img
+            src="assets/icons/Starlite 7th Icon.png" alt="Starlite 7th"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Studio Reverse logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Studio Reverse logo.png" alt="Studio Reverse"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Take logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Take Icon.png" alt="Take"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/TurntableGames.png" aria-hidden="false"><img
+            src="assets/logos-added/TurntableGames.png" alt="Turntable Games"></button>
+        <button class="carousel-item" data-logo="assets/icons/Ultimatera Logo.png" aria-hidden="false"><img
+            src="assets/icons/Ultimatera Icon.png" alt="Ultimatera"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Venom logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Venom logo.png" alt="Venom"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Viral logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Viral logo.png" alt="Viral"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Vitriol logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Vitriol logo.png" alt="Vitriol"></button>
       </div>
       <button class="nav" id="next" aria-label="Next">›</button>
     </div>
@@ -156,7 +415,7 @@
 
   <script>
     // waterwheel-style carousel (infinite wrap-around, touch/wheel support)
-    (function(){
+    (function () {
       const track = document.getElementById('carousel');
       const items = Array.from(track.querySelectorAll('.carousel-item'));
       const prev = document.getElementById('prev');
@@ -166,16 +425,16 @@
       const SPACING = 120;        // horizontal spacing between slots (reduced for narrower layout)
       const VISIBLE_RANGE = 3;   // show 7 visible slots total (3 on each side + center)
 
-      const mod = (a,m) => ((a % m) + m) % m;
+      const mod = (a, m) => ((a % m) + m) % m;
 
       // shortest offset around the circular wheel
-      function shortestOffset(i, centerIndex){
+      function shortestOffset(i, centerIndex) {
         let raw = mod(i - centerIndex, n);
-        if(raw > n/2) raw -= n;
+        if (raw > n / 2) raw -= n;
         return raw;
       }
 
-      function render(){
+      function render() {
         items.forEach((el, i) => {
           const offset = shortestOffset(i, center);
           const abs = Math.abs(offset);
@@ -205,7 +464,7 @@
         el.addEventListener('click', (e) => {
           e.preventDefault();
           const offset = shortestOffset(idx, center);
-          if(offset === 0){
+          if (offset === 0) {
             const logo = el.dataset.logo || el.querySelector('img').src;
             lightbox.open(logo);
           } else {
@@ -216,10 +475,10 @@
         });
 
         el.addEventListener('keydown', (ev) => {
-          if(ev.key === 'Enter'){
+          if (ev.key === 'Enter') {
             ev.preventDefault();
             const offset = shortestOffset(idx, center);
-            if(offset === 0){
+            if (offset === 0) {
               const logo = el.dataset.logo || el.querySelector('img').src;
               lightbox.open(logo);
             } else {
@@ -236,54 +495,55 @@
 
       // keyboard nav and Esc
       document.addEventListener('keydown', (e) => {
-        if(e.key === 'ArrowLeft'){ center = mod(center - 1, n); render(); }
-        if(e.key === 'ArrowRight'){ center = mod(center + 1, n); render(); }
-        if(e.key === 'Escape'){ document.getElementById('lightbox').classList.remove('active'); }
+        if (e.key === 'ArrowLeft') { center = mod(center - 1, n); render(); }
+        if (e.key === 'ArrowRight') { center = mod(center + 1, n); render(); }
+        if (e.key === 'Escape') { document.getElementById('lightbox').classList.remove('active'); }
       });
 
       // touch / swipe support (simple)
       let startX = 0, touching = false;
-      track.addEventListener('touchstart', (ev) => { startX = ev.touches[0].clientX; touching = true; }, {passive:true});
+      track.addEventListener('touchstart', (ev) => { startX = ev.touches[0].clientX; touching = true; }, { passive: true });
       track.addEventListener('touchmove', (ev) => {
-        if(!touching) return;
+        if (!touching) return;
         const dx = ev.touches[0].clientX - startX;
-        if(Math.abs(dx) > 40){
+        if (Math.abs(dx) > 40) {
           center = dx > 0 ? mod(center - 1, n) : mod(center + 1, n);
           startX = ev.touches[0].clientX;
           render();
         }
-      }, {passive:true});
+      }, { passive: true });
       track.addEventListener('touchend', () => { touching = false; });
 
       // wheel support (debounced)
       let lastWheel = 0;
       track.addEventListener('wheel', (ev) => {
         const now = Date.now();
-        if(now - lastWheel < 120) return;
+        if (now - lastWheel < 120) return;
         lastWheel = now;
         center = ev.deltaY > 0 ? mod(center + 1, n) : mod(center - 1, n);
         render();
-      }, {passive:true});
+      }, { passive: true });
 
       window.addEventListener('resize', render);
     })();
 
     // lightweight lightbox (re-uses pattern from your standalone example)
     const lightbox = {
-      open(src){
+      open(src) {
         const el = document.getElementById('lightbox');
         const img = el.querySelector('img');
         img.src = encodeURI(src);
         el.classList.add('active');
-        el.setAttribute('aria-hidden','false');
+        el.setAttribute('aria-hidden', 'false');
       },
-      close(el){
+      close(el) {
         el.classList.remove('active');
-        el.setAttribute('aria-hidden','true');
+        el.setAttribute('aria-hidden', 'true');
         const img = el.querySelector('img');
         img.src = '';
       }
     };
   </script>
 </body>
+
 </html>

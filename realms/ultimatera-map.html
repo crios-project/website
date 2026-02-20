@@ -1,205 +1,324 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Ultimatera — Layered Map Engine</title>
+    <meta charset="UTF-8">
+    <title>Ultimatera — Layered Map Engine</title>
 
-<style>
-body {
-    margin: 0;
-    overflow: hidden;
-    font-family: system-ui;
-    background: #111;
-    color: white;
-}
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: system-ui;
+            background: #111;
+            color: white;
+        }
 
-#ui {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background: rgba(20,20,20,0.95);
-    padding: 15px;
-    border-radius: 10px;
-    z-index: 10;
-    font-size: 14px;
-}
+        #ui {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(20, 20, 20, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 10;
+            font-size: 14px;
+        }
 
-#infoCard {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(15,15,15,0.95);
-    padding: 15px;
-    border-radius: 12px;
-    width: 320px;
-    display: none;
-}
+        #infoCard {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(15, 15, 15, 0.95);
+            padding: 15px;
+            border-radius: 12px;
+            width: 320px;
+            display: none;
+        }
 
-svg {
-    width: 100vw;
-    height: 100vh;
-    cursor: grab;
-}
+        svg {
+            width: 100vw;
+            height: 100vh;
+            cursor: grab;
+        }
 
-.marker:hover { transform: scale(1.3); cursor: pointer; }
-</style>
+        .marker:hover {
+            transform: scale(1.3);
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
 
-<div id="ui">
-<b>Realm Filters</b><br>
-<label><input type="checkbox" checked onchange="toggleRealm('Beeston')"> Beeston</label><br>
-<label><input type="checkbox" checked onchange="toggleRealm('Royastella')"> Royastella</label><br>
-<label><input type="checkbox" checked onchange="toggleRealm('Nexsicon')"> Nexsicon</label><br>
-<label><input type="checkbox" checked onchange="toggleRealm('Ultimatera')"> Ultimatera</label><br>
-<label><input type="checkbox" checked onchange="toggleRealm('Antiquity')"> Antiquity</label>
-<hr>
-<b>Layer Filters</b><br>
-<label><input type="checkbox" checked onchange="toggleLayer('skyLayer')"> Sky</label><br>
-<label><input type="checkbox" checked onchange="toggleLayer('surfaceLayer')"> Surface</label><br>
-<label><input type="checkbox" checked onchange="toggleLayer('subLayer')"> Subsurface</label><br>
-<label><input type="checkbox" checked onchange="toggleLayer('abyssLayer')"> Abyss</label>
-</div>
+    <div id="ui">
+        <b>Realm Filters</b><br>
+        <label><input type="checkbox" checked onchange="toggleRealm('Beeston')"> Beeston</label><br>
+        <label><input type="checkbox" checked onchange="toggleRealm('Royastella')"> Royastella</label><br>
+        <label><input type="checkbox" checked onchange="toggleRealm('Nexsicon')"> Nexsicon</label><br>
+        <label><input type="checkbox" checked onchange="toggleRealm('Ultimatera')"> Ultimatera</label><br>
+        <label><input type="checkbox" checked onchange="toggleRealm('Antiquity')"> Antiquity</label>
+        <hr>
+        <b>Layer Filters</b><br>
+        <label><input type="checkbox" checked onchange="toggleLayer('skyLayer')"> Sky</label><br>
+        <label><input type="checkbox" checked onchange="toggleLayer('surfaceLayer')"> Surface</label><br>
+        <label><input type="checkbox" checked onchange="toggleLayer('subLayer')"> Subsurface</label><br>
+        <label><input type="checkbox" checked onchange="toggleLayer('abyssLayer')"> Abyss</label>
+    </div>
 
-<div id="infoCard"></div>
+    <div id="infoCard"></div>
 
-<svg id="map" viewBox="0 0 2000 1600">
-<g id="viewport">
+    <svg id="map" viewBox="0 0 2000 1600">
+        <g id="surfaceLayer">
 
-<!-- SKY -->
-<g id="skyLayer">
-    <rect x="0" y="0" width="2000" height="300" fill="#2b2d42"/>
-    <ellipse cx="1000" cy="150" rx="250" ry="100" fill="#8d99ae" opacity="0.6"/>
-</g>
+            <!-- Ocean Background -->
+            <rect x="0" y="0" width="2000" height="1600" fill="#0f172a" />
 
-<!-- SURFACE -->
-<g id="surfaceLayer">
-    <rect x="0" y="300" width="2000" height="500" fill="#588157"/>
-</g>
+            <!-- Ultimatera Continent -->
+            <path id="continent" d="
+M400,350
+L650,280
+L1000,300
+L1300,420
+L1500,650
+L1450,850
+L1250,1000
+L1100,1150
+L900,1250
+L750,1180
+L600,1050
+L500,900
+L450,750
+L380,600
+Z" fill="#1e293b" stroke="#334155" stroke-width="6" stroke-linejoin="round" />
 
-<!-- SUBSURFACE -->
-<g id="subLayer">
-    <rect x="0" y="800" width="2000" height="400" fill="#3a5a40"/>
-</g>
+            <!-- Biome Blocks (clean segmented overlays) -->
 
-<!-- ABYSS -->
-<g id="abyssLayer">
-    <rect x="0" y="1200" width="2000" height="400" fill="#0b090a"/>
-</g>
+            <!-- Northern Tundra -->
+            <path d="
+M520,360
+L950,330
+L1200,430
+L1100,520
+L700,500
+Z" fill="#334e68" opacity="0.9" />
 
-<g id="markers"></g>
+            <!-- Western Forest -->
+            <path d="
+M420,600
+L600,520
+L750,650
+L620,820
+L450,750
+Z" fill="#1b4332" opacity="0.95" />
 
-</g>
-</svg>
+            <!-- Central Plains -->
+            <path d="
+M650,600
+L1100,550
+L1200,750
+L900,900
+L700,820
+Z" fill="#2d6a4f" opacity="0.95" />
 
-<script>
+            <!-- Eastern Scarlands -->
+            <path d="
+M1100,550
+L1450,650
+L1400,820
+L1200,900
+Z" fill="#7f5539" opacity="0.9" />
 
-// DATA MODEL
-const locations = [
-{
-name: "Virelden",
-x: 600,
-y: 600,
-realm: "Beeston",
-layer: "surfaceLayer",
-color: "hotpink",
-biome: "Plains",
-description: "Emerald hills pulsing with Earth Aspect.\nBeeston Integration"
-},
-{
-name: "Blackfen",
-x: 1300,
-y: 950,
-realm: "Royastella",
-layer: "subLayer",
-color: "purple",
-biome: "Deep Marsh",
-description: "Shadow-flooded subterranean wetlands."
-},
-{
-name: "Aether Spire",
-x: 1000,
-y: 150,
-realm: "Antiquity",
-layer: "skyLayer",
-color: "gold",
-biome: "Anomaly",
-description: "Volcanic structure suspended in tundra sky.\n10% Logic Violation Event"
-}
-];
+            <!-- Southern Fracture Belt -->
+            <path d="
+M900,900
+L1200,900
+L1100,1150
+L900,1250
+L750,1180
+Z" fill="#3c096c" opacity="0.85" />
+            <!-- Continental Spine Shadow -->
+            <path d="
+M820,420
+L860,480
+L880,560
+L900,650
+L890,740
+L870,830
+L850,910
+L820,1000
+" stroke="#0b132b" stroke-width="26" stroke-linecap="round" opacity="0.35" fill="none" />
 
-// RENDER
-const markerLayer = document.getElementById("markers");
+            <!-- Continental Spine Core -->
+            <path d="
+M820,420
+L860,480
+L880,560
+L900,650
+L890,740
+L870,830
+L850,910
+L820,1000
+" stroke="#475569" stroke-width="18" stroke-linecap="round" opacity="0.95" fill="none" />
 
-locations.forEach(loc => {
-    const circle = document.createElementNS("http://www.w3.org/2000/svg","circle");
-    circle.setAttribute("cx", loc.x);
-    circle.setAttribute("cy", loc.y);
-    circle.setAttribute("r", 8);
-    circle.setAttribute("fill", loc.color);
-    circle.setAttribute("class","marker");
-    circle.dataset.realm = loc.realm;
-    circle.dataset.layer = loc.layer;
-    circle.addEventListener("click", () => showInfo(loc));
-    markerLayer.appendChild(circle);
-});
+            <!-- Highlight Edge -->
+            <path d="
+M812,420
+L852,480
+L872,560
+L892,650
+L882,740
+L862,830
+L842,910
+L812,1000
+" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" opacity="0.8" fill="none" />
 
-// INFO
-function showInfo(loc){
-    const card = document.getElementById("infoCard");
-    card.style.display = "block";
-    card.innerHTML = `
+            <!-- Fracture Scar Shadow -->
+            <path d="
+M500,760
+L650,720
+L800,690
+L950,670
+L1100,660
+L1250,680
+L1400,720
+" stroke="#000000" stroke-width="28" stroke-linecap="round" opacity="0.35" fill="none" />
+
+            <!-- Fracture Core -->
+            <path d="
+M500,760
+L650,720
+L800,690
+L950,670
+L1100,660
+L1250,680
+L1400,720
+" stroke="#5f0f40" stroke-width="16" stroke-linecap="round" opacity="0.95" fill="none" />
+
+            <!-- Fracture Highlight -->
+            <path d="
+M500,752
+L650,712
+L800,682
+L950,662
+L1100,652
+L1250,672
+L1400,712
+" stroke="#c77dff" stroke-width="4" stroke-linecap="round" opacity="0.75" fill="none" />
+
+        </g>
+
+    </svg>
+
+    <script>
+
+        // DATA MODEL
+        const locations = [
+            {
+                name: "Virelden",
+                x: 600,
+                y: 600,
+                realm: "Beeston",
+                layer: "surfaceLayer",
+                color: "hotpink",
+                biome: "Plains",
+                description: "Emerald hills pulsing with Earth Aspect.\nBeeston Integration"
+            },
+            {
+                name: "Blackfen",
+                x: 1300,
+                y: 950,
+                realm: "Royastella",
+                layer: "subLayer",
+                color: "purple",
+                biome: "Deep Marsh",
+                description: "Shadow-flooded subterranean wetlands."
+            },
+            {
+                name: "Aether Spire",
+                x: 1000,
+                y: 150,
+                realm: "Antiquity",
+                layer: "skyLayer",
+                color: "gold",
+                biome: "Anomaly",
+                description: "Volcanic structure suspended in tundra sky.\n10% Logic Violation Event"
+            }
+        ];
+
+        // RENDER
+        const markerLayer = document.getElementById("markers");
+
+        locations.forEach(loc => {
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("cx", loc.x);
+            circle.setAttribute("cy", loc.y);
+            circle.setAttribute("r", 8);
+            circle.setAttribute("fill", loc.color);
+            circle.setAttribute("class", "marker");
+            circle.dataset.realm = loc.realm;
+            circle.dataset.layer = loc.layer;
+            circle.addEventListener("click", () => showInfo(loc));
+            markerLayer.appendChild(circle);
+        });
+
+        // INFO
+        function showInfo(loc) {
+            const card = document.getElementById("infoCard");
+            card.style.display = "block";
+            card.innerHTML = `
         <h3>${loc.name}</h3>
         <p><b>Realm:</b> ${loc.realm}</p>
-        <p><b>Layer:</b> ${loc.layer.replace("Layer","")}</p>
+        <p><b>Layer:</b> ${loc.layer.replace("Layer", "")}</p>
         <p><b>Biome:</b> ${loc.biome}</p>
-        <p>${loc.description.replace(/\n/g,"<br>")}</p>
+        <p>${loc.description.replace(/\n/g, "<br>")}</p>
     `;
-}
-
-// TOGGLES
-function toggleRealm(realm){
-    document.querySelectorAll(".marker").forEach(dot=>{
-        if(dot.dataset.realm === realm){
-            dot.style.display = dot.style.display === "none" ? "block" : "none";
         }
-    });
-}
 
-function toggleLayer(layer){
-    const el = document.getElementById(layer);
-    el.style.display = el.style.display === "none" ? "block" : "block";
-    el.style.display = el.style.display === "none" ? "block" : "none";
-}
+        // TOGGLES
+        function toggleRealm(realm) {
+            document.querySelectorAll(".marker").forEach(dot => {
+                if (dot.dataset.realm === realm) {
+                    dot.style.display = dot.style.display === "none" ? "block" : "none";
+                }
+            });
+        }
 
-// ZOOM/PAN
-const svg = document.getElementById("map");
-const viewport = document.getElementById("viewport");
-let scale = 1, originX=0, originY=0, drag=false, startX, startY;
+        function toggleLayer(layer) {
+            const el = document.getElementById(layer);
+            el.style.display = el.style.display === "none" ? "block" : "block";
+            el.style.display = el.style.display === "none" ? "block" : "none";
+        }
 
-svg.addEventListener("wheel", e=>{
-    e.preventDefault();
-    scale += e.deltaY * -0.001;
-    scale = Math.min(Math.max(.5, scale), 3);
-    viewport.setAttribute("transform",`translate(${originX},${originY}) scale(${scale})`);
-});
+        // ZOOM/PAN
+        const svg = document.getElementById("map");
+        const viewport = document.getElementById("viewport");
+        let scale = 1, originX = 0, originY = 0, drag = false, startX, startY;
 
-svg.addEventListener("mousedown", e=>{
-    drag=true;
-    startX=e.clientX-originX;
-    startY=e.clientY-originY;
-    svg.style.cursor="grabbing";
-});
+        svg.addEventListener("wheel", e => {
+            e.preventDefault();
+            scale += e.deltaY * -0.001;
+            scale = Math.min(Math.max(.5, scale), 3);
+            viewport.setAttribute("transform", `translate(${originX},${originY}) scale(${scale})`);
+        });
 
-svg.addEventListener("mousemove", e=>{
-    if(!drag) return;
-    originX=e.clientX-startX;
-    originY=e.clientY-startY;
-    viewport.setAttribute("transform",`translate(${originX},${originY}) scale(${scale})`);
-});
+        svg.addEventListener("mousedown", e => {
+            drag = true;
+            startX = e.clientX - originX;
+            startY = e.clientY - originY;
+            svg.style.cursor = "grabbing";
+        });
 
-svg.addEventListener("mouseup", ()=>{drag=false;svg.style.cursor="grab";});
+        svg.addEventListener("mousemove", e => {
+            if (!drag) return;
+            originX = e.clientX - startX;
+            originY = e.clientY - startY;
+            viewport.setAttribute("transform", `translate(${originX},${originY}) scale(${scale})`);
+        });
 
-</script>
+        svg.addEventListener("mouseup", () => { drag = false; svg.style.cursor = "grab"; });
+
+    </script>
 </body>
+
 </html>

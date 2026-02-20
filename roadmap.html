@@ -65,7 +65,31 @@
             margin-bottom: 60px;
             animation: fadeIn 0.8s ease-out;
         }
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -131,7 +155,14 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
         .progress-sub {
             font-size: 0.8rem;
             color: var(--text-dim);
@@ -427,7 +458,12 @@
 </head>
 
 <body>
-
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="index.html" class="back-link">← Home</a>
+        <div class="header-title">ROADMAP</div>
+        <div style="width: 80px;"></div> <!-- Spacer for centering -->
+    </nav>
     <div class="bg-grid"></div>
     <div class="container">
 

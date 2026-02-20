@@ -1,88 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arsenal // CRIOS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow: 0 0 20px rgba(233, 30, 99, 0.6);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); 
-            overflow-x: hidden; position: relative; }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
 
         /* Animated background grid */
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: linear-gradient(rgba(233, 30, 99, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px; animation: gridScroll 20s linear infinite; pointer-events: none; z-index: 0; }
-        @keyframes gridScroll { 0% { transform: translateY(0); } 100% { transform: translateY(50px); } }
+                linear-gradient(90deg, rgba(233, 30, 99, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridScroll 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gridScroll {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(50px);
+            }
+        }
 
         /* Gradient orbs */
-        .orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.15; pointer-events: none; z-index: 0; }
-        .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, var(--primary-burgundy), transparent);
-            top: -200px; right: -200px; animation: orbFloat1 15s ease-in-out infinite; }
-        .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, var(--secondary-pink), transparent);
-            bottom: -150px; left: -150px; animation: orbFloat2 20s ease-in-out infinite; }
-        @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-100px, 100px); } }
-        @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(100px, -80px); } }
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 20px; position: relative; z-index: 1; }
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -200px;
+            animation: orbFloat1 15s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: orbFloat2 20s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-100px, 100px);
+            }
+        }
+
+        @keyframes orbFloat2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(100px, -80px);
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+        }
 
         /* Header */
-        .page-header { text-align: center; margin-bottom: 80px; animation: fadeIn 0.8s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        h1 { font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900;
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        /* Header */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
-        .subtitle { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 6px; }
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+        }
 
         /* Grid */
-        .arsenal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
-        .weapon-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.3s ease;
-            display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .weapon-card:hover { border-color: var(--accent-cyan); transform: translateY(-6px);
-            box-shadow: 0 12px 32px rgba(0, 217, 255, 0.25); }
-        .weapon-card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 16px;
-            border-radius: 8px; }
-        .weapon-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700;
-            color: var(--text-primary); letter-spacing: 1px; }
+        .arsenal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .weapon-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .weapon-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0, 217, 255, 0.25);
+        }
+
+        .weapon-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 16px;
+            border-radius: 8px;
+        }
+
+        .weapon-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
 
         /* Lightbox */
-        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0, 0, 0, 0.95); z-index: 1000; overflow-y: auto; padding: 40px 20px; }
-        .lightbox.active { display: flex; justify-content: center; align-items: center; }
-        .lightbox-content { background: var(--dark-panel); border: 2px solid rgba(233, 30, 99, 0.3);
-            border-radius: 16px; max-width: 900px; width: 100%; padding: 40px; position: relative;
-            animation: slideIn 0.3s ease-out; }
-        @keyframes slideIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .lightbox-close { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: var(--text-dim);
-            cursor: pointer; transition: color 0.2s; background: none; border: none; }
-        .lightbox-close:hover { color: var(--secondary-pink); }
-        .lightbox-image { width: 100%; max-height: 400px; object-fit: contain; margin-bottom: 32px;
-            border-radius: 12px; }
-        .lightbox-title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900;
-            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 12px; text-align: center; }
-        .lightbox-wielder { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: var(--accent-cyan);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; text-align: center; }
-        .lightbox-description { font-size: 1.05rem; line-height: 1.8; color: var(--text-dim); }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
 
-        @media (max-width: 768px) { h1 { font-size: 2.5rem; } .arsenal-grid { grid-template-columns: 1fr; } }
+        .lightbox.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content {
+            background: var(--dark-panel);
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            border-radius: 16px;
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: color 0.2s;
+            background: none;
+            border: none;
+        }
+
+        .lightbox-close:hover {
+            color: var(--secondary-pink);
+        }
+
+        .lightbox-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            margin-bottom: 32px;
+            border-radius: 12px;
+        }
+
+        .lightbox-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .lightbox-wielder {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .lightbox-description {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-dim);
+        }
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .arsenal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
-
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="index.html" class="back-link">← Home</a>
+        <div class="header-title">ARSENAL</div>
+        <div style="width: 80px;"></div> <!-- Spacer for centering -->
+    </nav>
     <div class="container">
         <header class="page-header">
             <h1>Arsenal</h1>
@@ -96,32 +363,32 @@
             </div>
 
             <div class="weapon-card" onclick="openLightbox('lightblade')">
-                <img src="assets/weapons/DP - Light Blade Revolver (glow).png" alt="Light Blade Revolver">
+                <img src="assets/weapons/DP-LightBladeRevolver(glow).png" alt="Light Blade Revolver">
                 <div class="weapon-name">Light Blade Revolver</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('tenebris')">
-                <img src="assets/weapons/DP - Tenebris Operiet.png" alt="Tenebris Operiet">
+                <img src="assets/weapons/DP-TenebrisOperiet.png" alt="Tenebris Operiet">
                 <div class="weapon-name">Tenebris Operiet</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('fallire-envious')">
-                <img src="assets/weapons/Fallire Finale envious.png" alt="Fallire Fanale (Envious)">
+                <img src="assets/weapons/FallireFinaleenvious.png" alt="Fallire Fanale (Envious)">
                 <div class="weapon-name">Fallire Fanale (Envious)</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('fallire')">
-                <img src="assets/weapons/DP - Fallire Fanale (glow).png" alt="Fallire Fanale">
+                <img src="assets/weapons/DP-FallireFanale(glow).png" alt="Fallire Fanale">
                 <div class="weapon-name">Fallire Fanale</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('fate')">
-                <img src="assets/weapons/RT - Fate.png" alt="Fate">
+                <img src="assets/weapons/RT-Fate.png" alt="Fate">
                 <div class="weapon-name">Fate</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('secret')">
-                <img src="assets/weapons/RT - Secret.png" alt="Secret">
+                <img src="assets/weapons/RT-Secret.png" alt="Secret">
                 <div class="weapon-name">Secret</div>
             </div>
 
@@ -131,142 +398,142 @@
             </div>
 
             <div class="weapon-card" onclick="openLightbox('anjing')">
-                <img src="assets/weapons/Z - Ānjìng.png" alt="Ānjìng">
+                <img src="assets/weapons/Z-Ānjìng.png" alt="Ānjìng">
                 <div class="weapon-name">ānjìng</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('ciunas')">
-                <img src="assets/weapons/Z - ciúnas.png" alt="ciúnas">
+                <img src="assets/weapons/Z-ciúnas.png" alt="ciúnas">
                 <div class="weapon-name">ciúnas</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('tacere')">
-                <img src="assets/weapons/Z - tăcere.png" alt="tăcere">
+                <img src="assets/weapons/Z-tăcere.png" alt="tăcere">
                 <div class="weapon-name">tăcere</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('senyap')">
-                <img src="assets/weapons/Z - senyap.png" alt="senyap">
+                <img src="assets/weapons/Z-senyap.png" alt="senyap">
                 <div class="weapon-name">senyap</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('kimya')">
-                <img src="assets/weapons/Z - kimya.png" alt="kimya">
+                <img src="assets/weapons/Z-kimya.png" alt="kimya">
                 <div class="weapon-name">kimya</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('cupa')">
-                <img src="assets/weapons/Z - cupa.png" alt="cupa">
+                <img src="assets/weapons/Z-cupa.png" alt="cupa">
                 <div class="weapon-name">cupa</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('shiru')">
-                <img src="assets/weapons/Z - shiru.png" alt="shiru">
+                <img src="assets/weapons/Z-shiru.png" alt="shiru">
                 <div class="weapon-name">shiru</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('lucem')">
-                <img src="assets/weapons/DPn - Lucem Atra.png" alt="Lucem Atra">
+                <img src="assets/weapons/DPn-LucemAtra.png" alt="Lucem Atra">
                 <div class="weapon-name">Lucem Atra</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('wuxian')">
-                <img src="assets/weapons/DPn - Wúxiàn Sǐwáng.png" alt="Wúxiàn Sǐwáng">
+                <img src="assets/weapons/DPn-WúxiànSǐwáng.png" alt="Wúxiàn Sǐwáng">
                 <div class="weapon-name">Wúxiàn Sǐwáng</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('mors')">
-                <img src="assets/weapons/DPn - Mors Lux.png" alt="Mors Lux">
+                <img src="assets/weapons/DPn-MorsLux.png" alt="Mors Lux">
                 <div class="weapon-name">Mors Lux</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('auroral')">
-                <img src="assets/weapons/S7 - Auroral Throneblade.png" alt="Auroral Throneblade">
+                <img src="assets/weapons/S7-AuroralThroneblade.png" alt="Auroral Throneblade">
                 <div class="weapon-name">Auroral Throneblade</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('sanctum')">
-                <img src="assets/weapons/S7 - Sanctum Majestra.png" alt="Sanctum Majestra">
+                <img src="assets/weapons/S7-SanctumMajestra.png" alt="Sanctum Majestra">
                 <div class="weapon-name">Sanctum Majestra</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('lionheart')">
-                <img src="assets/weapons/S7 - Lionheart Radience.png" alt="Lionheart Radience">
+                <img src="assets/weapons/S7-LionheartRadience.png" alt="Lionheart Radience">
                 <div class="weapon-name">Lionheart Radience</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('diadem')">
-                <img src="assets/weapons/S7 - Diadem Refrains.png" alt="Diadem Refrains">
+                <img src="assets/weapons/S7-DiademRefrains.png" alt="Diadem Refrains">
                 <div class="weapon-name">Diadem Refrains</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('autarch')">
-                <img src="assets/weapons/S7 - Autarch Judicators.png" alt="Autarch Judicators">
+                <img src="assets/weapons/S7-AutarchJudicators.png" alt="Autarch Judicators">
                 <div class="weapon-name">Autarch Judicators</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('lotus')">
-                <img src="assets/weapons/S7 - Lotus Dominion.png" alt="Lotus Dominion">
+                <img src="assets/weapons/S7-LotusDominion.png" alt="Lotus Dominion">
                 <div class="weapon-name">Lotus Dominion</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('celestial')">
-                <img src="assets/weapons/S7 - Celestial Regnant.png" alt="Celestial Regnant">
+                <img src="assets/weapons/S7-CelestialRegnant.png" alt="Celestial Regnant">
                 <div class="weapon-name">Celestial Regnant</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('serrata')">
-                <img src="assets/weapons/LH - Serrata Glissando.png" alt="Serrata Glissando">
+                <img src="assets/weapons/LH-SerrataGlissando.png" alt="Serrata Glissando">
                 <div class="weapon-name">Serrata Glissando</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('cadence')">
-                <img src="assets/weapons/LH - Cadence Bastion.png" alt="Cadence Bastion">
+                <img src="assets/weapons/LH-CadenceBastion.png" alt="Cadence Bastion">
                 <div class="weapon-name">Cadence Bastion</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('tempo')">
-                <img src="assets/weapons/LH - Tempo Sever.png" alt="Tempo Sever">
+                <img src="assets/weapons/LH-TempoSever.png" alt="Tempo Sever">
                 <div class="weapon-name">Tempo Sever</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('rotary')">
-                <img src="assets/weapons/LH - Rotary Forte.png" alt="Rotary Forte">
+                <img src="assets/weapons/LH-RotaryForte.png" alt="Rotary Forte">
                 <div class="weapon-name">Rotary Forte</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('cantabile')">
-                <img src="assets/weapons/LH - Cantabile Cleaver.png" alt="Cantabile Cleaver">
+                <img src="assets/weapons/LH-CantabileCleaver.png" alt="Cantabile Cleaver">
                 <div class="weapon-name">Cantabile Cleaver</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('mirror')">
-                <img src="assets/weapons/LH - Mirror Fugue.png" alt="Mirror Fugue">
+                <img src="assets/weapons/LH-MirrorFugue.png" alt="Mirror Fugue">
                 <div class="weapon-name">Mirror Fugue</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('tearing')">
-                <img src="assets/weapons/LH - Tearing Etude.png" alt="Tearing Etude">
+                <img src="assets/weapons/LH-TearingEtude.png" alt="Tearing Etude">
                 <div class="weapon-name">Tearing Etude</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('coralas')">
-                <img src="assets/weapons/LHa - Coralas.png" alt="Coralas">
+                <img src="assets/weapons/LHa-Coralas.png" alt="Coralas">
                 <div class="weapon-name">Coralas</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('ambrasis')">
-                <img src="assets/weapons/LHa - Ambrasis.png" alt="Ambrasis">
+                <img src="assets/weapons/LHa-Ambrasis.png" alt="Ambrasis">
                 <div class="weapon-name">Ambrasis</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('lecouteau')">
-                <img src="assets/weapons/BG - Le Couteau.png" alt="Le Couteau">
+                <img src="assets/weapons/BG-LeCouteau.png" alt="Le Couteau">
                 <div class="weapon-name">Le Couteau</div>
             </div>
 
             <div class="weapon-card" onclick="openLightbox('atonality')">
-                <img src="assets/weapons/dd - Atonality.png" alt="Atonality">
+                <img src="assets/weapons/dd-Atonality.png" alt="Atonality">
                 <div class="weapon-name">Atonality</div>
             </div>
         </div>
@@ -292,37 +559,37 @@
                 description: 'An épée designed for both slashing and piercing applications, Executionist served as Alulu Caelum\'s primary weapon during her formative years. The blade emphasizes technical precision over raw power, favoring controlled thrusts and calculated slashes that exploit structural vulnerabilities in both physical armor and magical defenses. Its balanced weight distribution allows for seamless transitions between offensive and defensive postures, making it an ideal instrument for surgical combat engagements. Alulu wielded Executionist with methodical efficiency until discovering the Light Blade Revolver, which offered the adaptive versatility her evolving tactical requirements demanded.'
             },
             lightblade: {
-                image: 'assets/weapons/DP - Light Blade Revolver (glow).png',
+                image: 'assets/weapons/DP-LightBladeRevolver(glow).png',
                 name: 'Light Blade Revolver',
                 wielder: 'Alulu Dayk',
                 description: 'A modular transforming weapon aligned with Neon Ultra energy, the Light Blade Revolver represents adaptive combat versatility perfected into a single system. The weapon cycles through seven distinct configurations with instantaneous transformation speed: a standard handgun providing ranged precision, a sawed-off shotgun integrated with blade attachment for close-quarters devastation, a kama-gun hybrid merging light-construct scythe blade with projectile discharge, a light-energy sword for conventional melee engagement, a light-construct broadsword delivering heavy striking power, a sniper rifle enabling extreme-range elimination, and a full scythe manifestation combining sweeping area control with extended lethal reach. Each form serves specific tactical requirements while the Neon Ultra alignment grants reality-distorting properties that bypass conventional defensive frameworks, making the weapon as much metaphysical threat as physical instrument.'
             },
             tenebris: {
-                image: 'assets/weapons/DP - Tenebris Operiet.png',
+                image: 'assets/weapons/DP-TenebrisOperiet.png',
                 name: 'Tenebris Operiet',
                 wielder: 'Kesshō Kawa / Kesshō Yīng',
                 description: 'A double-edged Chinese jian accompanied by a modular sheath system, Tenebris Operiet transforms based on tactical configuration requirements. When the sheath is held separately in the off-hand, it generates a duplicate blade enabling dual-wielding assault patterns with independent strike vectors. When the sheath attaches to the primary hilt, the weapon extends into a double-ended blade configuration allowing for rotational combat techniques and full-circle defensive coverage. When mounted at the blade\'s terminus, the sheath causes the sword to elongate dramatically, granting extraordinary reach for piercing strikes from extended range. Each configuration emphasizes different tactical philosophies: dual-wielding for overwhelming offensive pressure, double-ended for crowd suppression and circular defense, extended reach for surgical long-distance engagement. The weapon channels Darkness energy, disrupting light-based constructs and creating zones of visual obscurity that favor its wielder.'
             },
             'fallire-envious': {
-                image: 'assets/weapons/Fallire Finale envious.png',
+                image: 'assets/weapons/FallireFinaleenvious.png',
                 name: 'Fallire Fanale (Envious)',
                 wielder: 'Tessera Iustum',
                 description: 'An unstable manifestation of light-based blade technology, the Envious configuration of Fallire Fanale exhibits binary existence properties without transitional states. The blade either manifests in full form or disappears completely, with no gradual materialization or retraction phase between the two states. This creates unpredictable combat dynamics dangerous for both wielder and opponent, as the weapon\'s activation timing cannot be modulated or controlled with precision. The blade emits green luminescence rather than the golden light of its perfected form, a visual indicator of Tessera Iustum\'s incomplete mastery over the weapon\'s resonance requirements. The unstable nature forces reliance on calculated timing windows rather than fluid technique, creating a fighting style defined by abrupt activation moments and high-risk commitment to each strike. The weapon punishes hesitation while rewarding decisive action, mirroring Tessera\'s ongoing struggle with self-doubt and tactical conviction.'
             },
             fallire: {
-                image: 'assets/weapons/DP - Fallire Fanale (glow).png',
+                image: 'assets/weapons/DP-FallireFanale(glow).png',
                 name: 'Fallire Fanale',
                 wielder: 'Tessera Vis',
                 description: 'The mastered manifestation of Fallire Fanale emits golden light energy and aligns fully with Light elemental principles. Unlike its unstable Envious predecessor, this version demonstrates perfect resonance stability and instantaneous activation response. Tessera Vis wields the blade with complete authority, no longer constrained by uncertainty or activation delay. The weapon channels concentrated Light energy through each strike, producing cascading aftershocks that disrupt both physical matter and metaphysical constructs. The blade\'s perfected state reflects Tessera\'s evolution from self-doubt to absolute conviction, transforming the weapon from a liability into an extension of purified intent.'
             },
             fate: {
-                image: 'assets/weapons/RT - Fate.png',
+                image: 'assets/weapons/RT-Fate.png',
                 name: 'Fate',
                 wielder: 'Amaranthine Hartfall',
                 description: 'A broadsword imbued with causality-severing properties, Fate functions as both weapon and metaphysical scalpel. Each strike cuts not merely through matter but through the threads of destiny and predetermination that bind events to inevitable outcomes. Amaranthine wields Fate with philosophical precision, treating combat as an act of liberation rather than destruction. The blade allows her to sever binding oaths, break predetermined trajectories, and rewrite narrative inevitability. Opponents struck by Fate find their planned sequences disrupted, their defensive predictions invalidated, and their certainty shattered. The weapon embodies Amaranthine\'s rejection of cosmic predetermination, serving as both instrument of war and declaration of free will.'
             },
             secret: {
-                image: 'assets/weapons/RT - Secret.png',
+                image: 'assets/weapons/RT-Secret.png',
                 name: 'Secret',
                 wielder: 'Kweliana Winderial la Pax',
                 description: 'A single-edged blade shrouded in deliberate mystery, Secret defies conventional analysis. Little documented evidence exists regarding its true capabilities, as Kweliana guards its nature with obsessive discretion. What is known comes only from battlefield observation: the impossible frequently manifests in the weapon\'s wake. Probability distortions, spatial anomalies, and causality inversions occur with disturbing regularity during Secret\'s deployment. Enemies report effects ranging from temporal displacement to existential uncertainty. Kweliana\'s fighting style emphasizes misdirection and psychological disruption, using the blade\'s enigmatic reputation as much as its physical edge. Whether Secret possesses inherent reality-bending properties or merely serves as a conduit for Kweliana\'s own abilities remains deliberately ambiguous.'
@@ -334,169 +601,169 @@
                 description: 'A cyber-katana surrounded by dark folklore claiming the blade hungers for blood. Odisse remains indifferent to such superstitions, viewing Nameless purely as an optimized killing instrument. The weapon integrates cybernetic enhancements with traditional blade design, producing a hybrid system capable of interfacing with Odisse\'s neural augmentations for predictive strike optimization. Whether Nameless truly possesses sentient bloodlust or simply reflects efficient combat programming is irrelevant to Odisse, whose singular focus remains Tiala\'s elimination. The blade cuts through both organic tissue and synthetic armor with equal efficiency, its edge maintained through self-repair nanotechnology that feeds on residual kinetic energy from each successful strike.'
             },
             anjing: {
-                image: 'assets/weapons/Z - Ānjìng.png',
+                image: 'assets/weapons/Z-Ānjìng.png',
                 name: 'Ānjìng',
                 wielder: 'Zhòu-chún Tǎoyàn (骑士 - Qíshì)',
                 description: 'A massive pink crystal broadsword matching the wielder\'s height, ānjìng represents one of the seven silent blades. The weapon\'s crystalline construction channels resonance energy with devastating efficiency, amplifying Zhòu-chún\'s strength-based combat approach. Despite its imposing size, the blade demonstrates surprising maneuverability in practiced hands, enabling wide sweeping arcs that clear entire engagement zones. The crystal structure vibrates at frequencies that destabilize defensive barriers while maintaining perfect structural integrity under extreme kinetic stress. Wielding ānjìng requires both physical power and harmonic attunement, making it an ideal match for Zhòu-chún\'s knightly combat methodology.'
             },
             ciunas: {
-                image: 'assets/weapons/Z - ciúnas.png',
+                image: 'assets/weapons/Z-ciúnas.png',
                 name: 'ciúnas',
                 wielder: 'Zhòu-chún Tǎoyàn (忍者 - Rěnzhě)',
                 description: 'A paired set of katanas designed with interlocking capability, ciúnas comprises one blade forged from diamond and another from golden mythril, each channeling distinct resonance properties. The diamond blade cuts through physical matter with unmatched precision while the mythril blade disrupts magical constructs and energy-based defenses. When wielded independently, the paired blades enable rapid dual-strike patterns and comprehensive defensive coverage from multiple attack vectors simultaneously. When interlocked at their hilts, they form an extended staff-length double weapon allowing for rotational combat techniques, sweeping circular attacks, and defensive spinning patterns that create impassable barrier zones. This configuration versatility makes ciúnas one of the seven silent blades, reflecting Zhòu-chún\'s adaptability across stealth-oriented and direct confrontation scenarios.'
             },
             tacere: {
-                image: 'assets/weapons/Z - tăcere.png',
+                image: 'assets/weapons/Z-tăcere.png',
                 name: 'tăcere',
                 wielder: 'Zhòu-chún Tǎoyàn (刺客 - Cìkè)',
                 description: 'A gunblade that seamlessly integrates ranged firearm capability with edged melee weapon functionality, tăcere achieves true hybrid design where neither combat mode compromises the other. The blade channels kinetic force from discharged rounds directly into subsequent melee strikes, creating explosive impact multipliers on physical contact. Conversely, successful sword strikes generate charge accumulation that powers the weapon\'s projectile system, enabling sustained mixed-range combat without ammunition dependence or reload interruption. This reciprocal energy cycle creates exceptional efficiency during prolonged engagements where conventional weapons would require tactical withdrawal. Zhòu-chún wields tăcere with assassin precision, using ranged shots to create positional openings and destabilize defenses before transitioning into blade work for decisive target elimination. The weapon\'s hybrid nature produces unpredictable attack rhythm that defies conventional defensive prediction, as opponents cannot reliably anticipate whether the next action will be shot or slash. This makes tăcere a perfect instrument for Zhòu-chún\'s role within the seven silent blades, embodying the principle that combat versatility supersedes specialized mastery.'
             },
             senyap: {
-                image: 'assets/weapons/Z - senyap.png',
+                image: 'assets/weapons/Z-senyap.png',
                 name: 'senyap',
                 wielder: 'Zhòu-chún Tǎoyàn (符文剑 - Fúwénjiàn)',
                 description: 'Constructed entirely from crystallized magic and mana, senyap exists as a solidified spellcasting conduit rather than a traditional weapon. The blade\'s structure acts as a pre-charged focus, enabling instantaneous activation of high-tier spells without standard incantation delays. Each swing releases stored magical energy in devastating elemental cascades, while the weapon simultaneously absorbs ambient mana to maintain its power reserves. Zhòu-chún employs senyap as both sword and staff, treating close combat as an opportunity for point-blank spellcasting rather than conventional blade work. This makes senyap one of the most versatile among the seven silent blades, bridging the gap between martial and magical combat disciplines with seamless efficiency.'
             },
             kimya: {
-                image: 'assets/weapons/Z - kimya.png',
+                image: 'assets/weapons/Z-kimya.png',
                 name: 'kimya',
                 wielder: 'Zhòu-chún Tǎoyàn (刀舞 - Dāo wǔ)',
                 description: 'A flat jian designed for combat techniques so fluid they transcend mere efficiency and become performative art. kimya\'s perfectly balanced construction enables continuous motion without momentum loss, allowing Zhòu-chún to maintain offensive pressure through unbroken strike sequences. The blade\'s edge geometry favors glancing deflections and redirecting parries rather than direct blocks, encouraging a fighting style built on flow and adaptation. Each movement transitions seamlessly into the next, creating combat choreography that disorients opponents while maintaining lethal effectiveness. As one of the seven silent blades, kimya represents the philosophical principle that violence, when perfected, becomes indistinguishable from dance.'
             },
             cupa: {
-                image: 'assets/weapons/Z - cupa.png',
+                image: 'assets/weapons/Z-cupa.png',
                 name: 'cupa',
                 wielder: 'Zhòu-chún Tǎoyàn (蹂躏 - Róulìn)',
                 description: 'A katana with an impossibly keen edge, cupa possesses the fundamental property of cutting through any material regardless of density, hardness, or magical reinforcement. The blade does not rely on force or leverage; its edge simply divides matter at a molecular level upon contact. This absolute cutting capability makes defensive tactics largely irrelevant against cupa, as shields, armor, and barriers offer no protection. Zhòu-chún wields the blade with surgical precision, knowing that a single successful strike guarantees severance. This terrifying efficiency has earned cupa its place among the seven silent blades, representing the ultimate expression of sword as pure cutting implement divorced from all other considerations.'
             },
             shiru: {
-                image: 'assets/weapons/Z - shiru.png',
+                image: 'assets/weapons/Z-shiru.png',
                 name: 'shiru',
                 wielder: 'Zhòu-chún Tǎoyàn (艾斯波 - Àisībō)',
                 description: 'A summoned flying sword that operates autonomously in support of Zhòu-chún\'s aerial spellcasting barrages, shiru functions as an independent combatant rather than a handheld weapon. The blade responds to Zhòu-chún\'s mental commands, executing coordinated strikes that complement ongoing magical assaults. This allows Zhòu-chún to maintain constant offensive pressure from multiple vectors simultaneously, forcing opponents to divide attention between physical and magical threats. shiru\'s flight patterns demonstrate predictive intelligence, intercepting enemy movements and creating openings for follow-up attacks. As one of the seven silent blades, shiru represents the principle of combat as orchestrated coordination rather than individual prowess, turning warfare into conducted symphony.'
             },
             lucem: {
-                image: 'assets/weapons/DPn - Lucem Atra.png',
+                image: 'assets/weapons/DPn-LucemAtra.png',
                 name: 'Lucem Atra',
                 wielder: 'Corstilla',
                 description: 'A fusion weapon combining the Light Blade Revolver and Tenebris Operiet, Lucem Atra exists in permanent oscillation between radiant illumination and abyssal void energy. The weapon never settles into stability; instead, it cycles endlessly between Light and Darkness manifestations. This creates a combat experience where each strike carries unpredictable elemental properties, forcing both wielder and opponent to adapt in real-time. Corstilla has learned to read the oscillation patterns and exploit transition moments when both energies briefly coexist, producing strikes that simultaneously burn and freeze, illuminate and blind, create and annihilate. The weapon\'s unstable nature reflects Corstilla\'s own existence between opposing forces, turning duality into tactical advantage.'
             },
             wuxian: {
-                image: 'assets/weapons/DPn - Wúxiàn Sǐwáng.png',
+                image: 'assets/weapons/DPn-WúxiànSǐwáng.png',
                 name: 'Wúxiàn Sǐwáng',
                 wielder: 'Pluere',
                 description: 'A paired set of teleporting daggers formed by merging Tenebris Operiet and Fallire Fanale, Wúxiàn Sǐwáng transcends conventional projectile physics. The daggers do not travel through space but instead vanish and reappear along predetermined vectors calculated through Pluere\'s spatial awareness. This allows for strikes from impossible angles, bypassing cover and defensive positioning entirely. The blades respond to Pluere\'s intent with such precision that thought and manifestation become functionally instantaneous. Opponents find themselves unable to predict attack trajectories, as the daggers follow paths that ignore physical laws. Pluere wields Wúxiàn Sǐwáng as extensions of dimensional manipulation rather than thrown weapons, treating combat as an exercise in geometric impossibility.'
             },
             mors: {
-                image: 'assets/weapons/DPn - Mors Lux.png',
+                image: 'assets/weapons/DPn-MorsLux.png',
                 name: 'Mors Lux',
                 wielder: 'Solamor',
                 description: 'The merger of Light Blade Revolver and Fallire Fanale produces a single-edged magic blade functioning as both execution instrument and arcane conductor. Mors Lux channels concentrated magical resonance through each swing, releasing cutting waves that sever physical defenses and magical constructs with equal efficiency. The blade operates on principles of overwhelming lethality rather than versatility, focusing all power into catastrophic single-strike potential. Solamor wields Mors Lux with absolute commitment, treating each attack as a decisive moment rather than a sequence component. The weapon\'s design philosophy embraces finality: every swing carries enough destructive authority to end engagements conclusively, making prolonged combat unnecessary and undesirable.'
             },
             auroral: {
-                image: 'assets/weapons/S7 - Auroral Throneblade.png',
+                image: 'assets/weapons/S7-AuroralThroneblade.png',
                 name: 'Auroral Throneblade',
                 wielder: 'Starlit Empress',
                 description: 'The most powerful weapon within the Runic Knight arsenal, Auroral Throneblade manifests as a massive two-handed greatblade optimized for sweeping battlefield control and area suppression. The weapon generates crescent-shaped energy projections called Bladelight Beams which exhibit autonomous homing properties after release, allowing Starlit Empress to maintain offensive pressure on multiple targets simultaneously while repositioning for follow-up strikes. The blade\'s exceptional size and weight demand extraordinary strength and precise timing from its wielder, but reward proper execution with devastating coverage capable of suppressing entire engagement zones. Each swing forces opponents into defensive postures or tactical retreat, as the Throneblade\'s reach and power make direct confrontation exceptionally dangerous. The weapon represents raw authority translated into physical force, serving as both symbolic and practical pinnacle of Starlite 7th\'s combat doctrine and tactical philosophy.'
             },
             sanctum: {
-                image: 'assets/weapons/S7 - Sanctum Majestra.png',
+                image: 'assets/weapons/S7-SanctumMajestra.png',
                 name: 'Sanctum Majestra',
                 wielder: 'Starlit Sultana',
                 description: 'A Runic shield engineered as absolute defensive authority, Sanctum Majestra reflects or negates incoming offensive vectors regardless of power scale or attack trajectory. The shield converts defensive positioning into offensive redirection, turning enemy assaults back against their source with amplified force while simultaneously protecting allies. Beyond its protective capabilities, Sanctum Majestra functions as a spatial stabilizer that prevents dimensional manipulation and teleportation attempts within its influence radius, establishing zones of enforced conventional combat. Starlit Sultana wields the shield as both immovable barrier and mobile fortress, using its presence to dictate engagement terms and control battlefield flow through positional dominance. The shield\'s authority extends beyond mere blocking mechanics; it establishes tactical zones where Sultana\'s will supersedes opposing force application, rendering conventional offensive strategies functionally meaningless against properly positioned defense.'
             },
             lionheart: {
-                image: 'assets/weapons/S7 - Lionheart Radience.png',
+                image: 'assets/weapons/S7-LionheartRadience.png',
                 name: 'Lionheart Radience',
                 wielder: 'Starlit Rex',
                 description: 'A high-output charged arm cannon designed for long-range elimination and precision engagement across extended distances, Lionheart Radience discharges homing energy projectiles with variable charge intensity calibration. Rex modulates power output based on immediate tactical requirements, ranging from suppressive harassment fire to single-shot devastation capable of neutralizing hardened targets. The weapon\'s targeting systems interface directly with Rex\'s combat analysis capabilities, enabling strikes that actively track evasive targets and adjust trajectory mid-flight to compensate for defensive maneuvering. This transforms long-distance engagement from speculative suppression into surgical elimination, as Lionheart Radience removes the inherent uncertainty of extended-range combat through predictive adjustment. The cannon establishes Rex as mobile artillery platform capable of providing fire support while maintaining battlefield awareness and positional flexibility, making retreat or evasion functionally impossible for designated targets.'
             },
             diadem: {
-                image: 'assets/weapons/S7 - Diadem Refrains.png',
+                image: 'assets/weapons/S7-DiademRefrains.png',
                 name: 'Diadem Refrains',
                 wielder: 'Starlit Pasha',
                 description: 'A matched set of high-velocity throwing chakrams engineered for aerial dominance and mid-range combat suppression, Diadem Refrains feature precision-guided return functions enabling continuous assault patterns without weapon recovery delay. The chakrams exhibit multi-angle ricochet trajectory capability, allowing Pasha to establish aerial control zones that opponents cannot safely traverse without sustaining damage. The weapons balance equally between ranged slicing applications during flight and close-quarters rotational attacks when wielded directly, enabling seamless transition between engagement distances without tactical vulnerability. Each chakram deploys independently for distributed threat coverage or in coordinated strike patterns for concentrated offensive pressure, providing exceptional tactical flexibility. The weapon system transforms aerial combat from simple mobility contest into controlled execution theater, with Pasha dictating engagement terms from positions of superior elevation and momentum advantage that ground-based opponents cannot effectively counter.'
             },
             autarch: {
-                image: 'assets/weapons/S7 - Autarch Judicators.png',
+                image: 'assets/weapons/S7-AutarchJudicators.png',
                 name: 'Autarch Judicators',
                 wielder: 'Starlit Czar',
                 description: 'A paired set of reinforced katars designed for precision striking and close-quarters dominance through rapid strike sequence optimization, Autarch Judicators channel kinetic force with exceptional efficiency while maintaining structural integrity under extreme combat stress. The weapons integrate seamlessly with Czar\'s portal generation abilities, allowing strikes to originate from spatially impossible positions while maintaining perfect form and momentum transfer. This combination of close-range weapon specialization and dimensional positioning manipulation creates combat scenarios where Czar appears to attack simultaneously from multiple locations, overwhelming opponents through geometric impossibility rather than raw power application. The katars reward technical excellence and timing precision over brute force, making them ideal instruments for Czar\'s tactical philosophy of creating and exploiting fractional openings in enemy defense through superior positioning and strike accuracy.'
             },
             lotus: {
-                image: 'assets/weapons/S7 - Lotus Dominion.png',
+                image: 'assets/weapons/S7-LotusDominion.png',
                 name: 'Lotus Dominion',
                 wielder: 'Starlit Mikado',
                 description: 'A modular pair of short hook blades designed for adaptive engagement across multiple combat configurations, Lotus Dominion operates in two primary tactical modes. When wielded independently, the blades optimize close-range slashing and disarming maneuvers through curved edge exploitation, using hook geometry to control opponent weapons and create defensive openings. The hooks excel at catching incoming strikes, redirecting armed attacks, and neutralizing offensive weapons while maintaining simultaneous offensive threat capability. When interlocked through magnetic connection points, the blades form an extended butterfly sword-style configuration providing increased reach and enabling rotational attack patterns that blend offensive pressure with defensive coverage. This combined mode allows rapid transitions between aggressive assault and protective positioning without weapon exchange or repositioning delays. Mikado exploits both configurations fluidly, treating combat as tactical puzzle requiring correct tool application rather than overwhelming force, adapting weapon mode to match immediate engagement requirements.'
             },
             celestial: {
-                image: 'assets/weapons/S7 - Celestial Regnant.png',
+                image: 'assets/weapons/S7-CelestialRegnant.png',
                 name: 'Celestial Regnant',
                 wielder: 'Starlit Dynast',
                 description: 'A Runic vajra designed for overwhelming sustained offensive assault through momentum accumulation and cascading strike amplification, Celestial Regnant functions as both piercing instrument and crushing implement depending on attack angle and impact vector. The weapon channels rotational momentum into cascading multi-strike sequences that amplify velocity-based combat approaches into devastating kinetic cascades where each successful hit feeds increased force into subsequent attacks. This creates self-reinforcing offensive escalation that becomes progressively more difficult to counter or interrupt as combat duration extends. The vajra generates localized storm-like impact patterns during high-speed maneuvering, creating environmental disruption and atmospheric disturbance that compounds its direct offensive output through area effect pressure. Dynast wields Celestial Regnant with relentless aggression, treating defense as temporary necessity between offensive escalations rather than sustainable combat strategy. The weapon rewards absolute commitment and punishes hesitation, making it perfect embodiment of Dynast\'s philosophy emphasizing decisive overwhelming force application over tactical caution.'
             },
             serrata: {
-                image: 'assets/weapons/LH - Serrata Glissando.png',
+                image: 'assets/weapons/LH-SerrataGlissando.png',
                 name: 'Serrata Glissando',
                 wielder: 'Heart Aria',
                 description: 'A zhua weapon featuring claw-like configuration, Serrata Glissando complements Heart Aria\'s flowing and expressive fighting methodology. The weapon enables rapid slashing chains, grappling maneuvers, and sweeping interception arcs that maintain continuous offensive pressure without pause. Aria uses Serrata Glissando to redirect enemy momentum, disarm opponents mid-strike, and create openings for elemental follow-up techniques. Her combat approach treats each strike as part of extended motion sequences that seamlessly blend melee engagement with magical discharge. The weapon never operates in isolation; instead, it flows through combat like water, each movement preparing the next while maintaining constant threat presence. This fighting philosophy transforms battle into performance art where violence becomes rhythm and timing replaces brute force.'
             },
             cadence: {
-                image: 'assets/weapons/LH - Cadence Bastion.png',
+                image: 'assets/weapons/LH-CadenceBastion.png',
                 name: 'Cadence Bastion',
                 wielder: 'Heart Seria',
                 description: 'A madavu shield functioning as both physical bulwark and resonant conduit for Neutral Lúmenai manifestation, Cadence Bastion serves as anchoring focal point for defensive field generation and impact dispersion techniques. Unlike traditional shields designed solely for blocking, Cadence Bastion creates protective amplification zones that extend beyond its physical boundaries. Heart Seria wields the shield with exceptional spatial awareness, constantly positioning it between incoming threats and vulnerable allies while maintaining offensive opportunity recognition. The shield does not merely stop attacks; it absorbs, redirects, and converts hostile energy into protective resonance that strengthens defensive constructs. This allows Seria to transform defense into active team support, making Cadence Bastion as much a tactical instrument as a protective barrier.'
             },
             tempo: {
-                image: 'assets/weapons/LH - Tempo Sever.png',
+                image: 'assets/weapons/LH-TempoSever.png',
                 name: 'Tempo Sever',
                 wielder: 'Heart Rhythm',
                 description: 'Twin sais functioning as both offensive piercing instruments and defensive control tools, Tempo Sever enables Heart Rhythm to trap, redirect, and disarm opposing weapons mid-strike through pronged structure exploitation. She transitions seamlessly between slashing, thrusting, and weapon-locking maneuvers without interrupting attack rhythm, using Tempo Sever to maintain constant proximity to opponents. The weapons\' compact design allows her to fight within tight engagement ranges where exceptional reaction speed and accuracy become decisive factors. Rhythm treats combat as musical composition, with each strike representing a note in ongoing sequence rather than isolated action. The sais enable this philosophy by providing both offensive threat and defensive insurance, allowing her to commit to aggressive positioning without sacrificing protective capability.'
             },
             rotary: {
-                image: 'assets/weapons/LH - Rotary Forte.png',
+                image: 'assets/weapons/LH-RotaryForte.png',
                 name: 'Rotary Forte',
                 wielder: 'Heart Verismo',
                 description: 'A tonfa pair functioning as defensive anchors and close-range contingency instruments rather than primary offensive tools, Rotary Forte utilizes rotational leverage and reinforced guard structure to deflect incoming strikes and redirect enemy momentum. Heart Verismo employs the tonfas to maintain protective spacing while casting or directing battlefield-altering techniques, using them as insurance against forced melee engagement. When direct confrontation becomes unavoidable, she demonstrates precise and efficient striking patterns focused on rapid opponent disabling rather than sustained exchanges. The weapons reflect Verismo\'s combat philosophy of controlling engagement terms through positioning and timing rather than overwhelming force, treating physical combat as necessary interruption to preferred magical dominance rather than primary methodology.'
             },
             cantabile: {
-                image: 'assets/weapons/LH - Cantabile Cleaver.png',
+                image: 'assets/weapons/LH-CantabileCleaver.png',
                 name: 'Cantabile Cleaver',
                 wielder: 'Heart Sonata',
                 description: 'A khopesh emphasizing hooking, trapping, and tearing techniques rather than straightforward slashing exchanges, Cantabile Cleaver\'s forward-curved blade allows Heart Sonata to bypass conventional guards and seize shields or weapons mid-combat. She uses the weapon\'s inner curve to control enemy limbs and equipment, dragging opponents off balance before delivering precise follow-up strikes. The khopesh transforms defense into vulnerability, as blocking becomes an invitation for weapon capture and positional exploitation. Sonata fights with methodical aggression, using Cantabile Cleaver to dictate engagement flow through continuous pressure and opportunistic punishment. Each successful trap creates openings for lethal counters, making the weapon as much psychological threat as physical danger.'
             },
             mirror: {
-                image: 'assets/weapons/LH - Mirror Fugue.png',
+                image: 'assets/weapons/LH-MirrorFugue.png',
                 name: 'Mirror Fugue',
                 wielder: 'Heart Adagio',
                 description: 'A haladie designed for dual-directional cutting and rotational attack chains, Mirror Fugue\'s twin-curved blades enable Heart Adagio to maintain offensive pressure during both forward assaults and retreating motions. She utilizes wide sweeping arcs and spinning maneuvers that produce visually overwhelming attack patterns serving as space-denial techniques rather than precision strikes. These movements force opponents to react defensively or reposition unpredictably, disrupting their offensive planning while maintaining constant threat presence. Adagio treats combat as territorial control exercise, using Mirror Fugue to claim engagement zones and punish attempts at spatial intrusion. The weapon\'s design philosophy emphasizes continuous motion over committed strikes, transforming battlefield presence into tactical advantage.'
             },
             tearing: {
-                image: 'assets/weapons/LH - Tearing Etude.png',
+                image: 'assets/weapons/LH-TearingEtude.png',
                 name: 'Tearing Etude',
                 wielder: 'Heart Symphony',
                 description: 'A zhua weapon utilized as both precision striking instrument and conduit for electrical channeling, Tearing Etude enables Heart Symphony to employ tighter, more forceful attack chains than Heart Aria\'s flowing style. Symphony favors rapid forward lunges, cross-angle slashing patterns, and claw-hook grapples that anchor enemies in place before delivering concentrated lightning-infused damage bursts. Her combat approach emphasizes speed escalation and layered electrical discharge, using Tearing Etude to create sustained offensive pressure that overwhelms through accumulated shock rather than single devastating hits. The weapon channels Symphony\'s aggressive philosophy, treating combat as escalation exercise where momentum buildup becomes its own weapon, forcing opponents into increasingly untenable defensive positions until electrical overload becomes inevitable.'
             },
             coralas: {
-                image: 'assets/weapons/LHa - Coralas.png',
+                image: 'assets/weapons/LHa-Coralas.png',
                 name: 'Coralas',
                 wielder: 'Heart Beat / Concerto Pulse',
                 description: 'An Ascension Artifact manifesting as a sword that evolves in complexity and ornamentation as its wielder gains power, Coralas serves as transformation catalyst enabling Heart Aria\'s ascension into Heart Beat and eventually Concerto Pulse. The weapon grows more elaborate with each power threshold crossed, developing additional resonance channels and harmonic amplification structures. This evolution is not merely aesthetic; each new detail represents expanded capability and deeper resonance integration. The sword functions as both weapon and metamorphosis trigger, its changing form reflecting and enabling the wielder\'s own transformation. Coralas demonstrates that some weapons are not tools but partners in evolution, growing alongside those who master them.'
             },
             ambrasis: {
-                image: 'assets/weapons/LHa - Ambrasis.png',
+                image: 'assets/weapons/LHa-Ambrasis.png',
                 name: 'Ambrasis',
                 wielder: 'Heart Crescendo / Finalis Grande',
                 description: 'An Ascension Artifact in sword form that becomes increasingly elaborate as its wielder ascends through power thresholds, Ambrasis enables transformation from Heart Symphony to Heart Crescendo and eventually to Finalis Grande. Like Coralas, Ambrasis evolves structurally to reflect and facilitate its wielder\'s metamorphosis, developing enhanced resonance properties and harmonic integration capabilities with each transformation stage. The weapon serves as both combat instrument and ascension mechanism, its physical evolution mirroring the wielder\'s expanding power and refined control. Ambrasis embodies the principle that ultimate weapons grow with their masters rather than remaining static artifacts, creating symbiotic relationships between wielder and blade that transcend conventional weapon dynamics.'
             },
             lecouteau: {
-                image: 'assets/weapons/BG - Le Couteau.png',
+                image: 'assets/weapons/BG-LeCouteau.png',
                 name: 'Le Couteau',
                 wielder: 'BLADE GUILLOTINE',
                 description: 'A thrust-optimized épée designed for extreme penetration efficiency and precision targeting, Le Couteau functions as extension of BLADE GUILLOTINE\'s perceptual combat instincts rather than mere tool. The weapon delivers attacks with exceptional alignment control and hyper-precise targeting, consistently striking mana conduits and structural weak points. Void Resonance properties disrupt defensive enchantments on contact, while near-perfect integration with Moonlight Curse abilities creates suppression synergy that compounds offensive effectiveness. Le Couteau emphasizes surgical lethality over spectacular displays, treating combat as series of calculated deletions rather than extended engagements. Each thrust represents optimal force application to identified vulnerability, making the weapon\'s efficiency its most terrifying characteristic.'
             },
             atonality: {
-                image: 'assets/weapons/dd - Atonality.png',
+                image: 'assets/weapons/dd-Atonality.png',
                 name: 'Atonality',
                 wielder: 'dissonant discord',
                 description: 'A slashing épée representing discord\'s philosophy of breaking structure and rewriting harmonic order, Atonality defies traditional épée combat methodology by emphasizing wide flowing slashing arcs over linear precision thrusting. discord uses the weapon to blur boundaries between fencing technique and ritual casting, treating each strike as both physical attack and harmonic disruption. The blade cuts through both matter and resonance, severing magical constructs while delivering physical damage. This dual-function capability makes Atonality exceptionally effective against opponents relying on defensive enchantments or harmonic barriers. discord wields the weapon with artistic fluidity, transforming combat into performance that simultaneously destroys and deconstructs, leaving opponents unable to maintain coherent defensive structures against attacks that operate on multiple metaphysical levels simultaneously.'
@@ -520,9 +787,10 @@
             document.body.style.overflow = '';
         }
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeLightbox();
         });
     </script>
 </body>
+
 </html>

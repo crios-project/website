@@ -1,89 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stories // CRIOS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow: 0 0 20px rgba(233, 30, 99, 0.6);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); 
-            overflow-x: hidden; position: relative; }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
 
         /* Animated background grid */
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: linear-gradient(rgba(233, 30, 99, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px; animation: gridScroll 20s linear infinite; pointer-events: none; z-index: 0; }
-        @keyframes gridScroll { 0% { transform: translateY(0); } 100% { transform: translateY(50px); } }
+                linear-gradient(90deg, rgba(233, 30, 99, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridScroll 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gridScroll {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(50px);
+            }
+        }
 
         /* Gradient orbs */
-        .orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.15; pointer-events: none; z-index: 0; }
-        .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, var(--primary-burgundy), transparent);
-            top: -200px; right: -200px; animation: orbFloat1 15s ease-in-out infinite; }
-        .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, var(--secondary-pink), transparent);
-            bottom: -150px; left: -150px; animation: orbFloat2 20s ease-in-out infinite; }
-        @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-100px, 100px); } }
-        @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(100px, -80px); } }
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; position: relative; z-index: 1; }
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -200px;
+            animation: orbFloat1 15s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: orbFloat2 20s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-100px, 100px);
+            }
+        }
+
+        @keyframes orbFloat2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(100px, -80px);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+        }
 
         /* Header */
-        .page-header { text-align: center; margin-bottom: 80px; animation: fadeIn 0.8s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        h1 { font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900;
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+        /* Header */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
-        .subtitle { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 6px; }
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+        }
 
         /* Arc sections */
-        .arc-section { margin-bottom: 80px; }
-        .arc-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700;
-            color: var(--secondary-pink); margin-bottom: 32px; text-transform: uppercase; letter-spacing: 2px;
-            padding-bottom: 16px; border-bottom: 2px solid rgba(233, 30, 99, 0.3); }
+        .arc-section {
+            margin-bottom: 80px;
+        }
+
+        .arc-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 32px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(233, 30, 99, 0.3);
+        }
 
         /* Story grid */
-        .story-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
-        .story-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px; padding: 28px; text-decoration: none; display: block;
-            transition: all 0.3s ease; position: relative; overflow: hidden; }
-        .story-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
-            transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
-        .story-card:hover::before { transform: scaleX(1); }
-        .story-card:hover { border-color: var(--accent-cyan); transform: translateY(-6px);
-            box-shadow: 0 12px 32px rgba(0, 217, 255, 0.25); }
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
 
-        .story-type { font-family: 'Orbitron', sans-serif; font-size: 0.7rem; color: var(--accent-cyan);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
-        .story-title { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 700;
-            color: var(--text-primary); margin-bottom: 12px; line-height: 1.3; }
-        .story-desc { font-size: 0.95rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 20px; }
-        .story-meta { display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-dim); }
-        .story-meta span { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
-        .story-meta .label { color: var(--secondary-pink); }
+        .story-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 28px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .story-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .story-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0, 217, 255, 0.25);
+        }
+
+        .story-type {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .story-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .story-desc {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .story-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .story-meta span {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .story-meta .label {
+            color: var(--secondary-pink);
+        }
 
         /* Coming soon */
-        .coming-soon { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
-        .coming-soon .story-type { color: var(--text-dim); }
+        .coming-soon {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .coming-soon .story-type {
+            color: var(--text-dim);
+        }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .story-grid { grid-template-columns: 1fr; }
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
-
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="index.html" class="back-link">← Home</a>
+        <div class="header-title">Character Index</div>
+        <div style="width: 80px;"></div> <!-- Spacer for centering -->
+    </nav>
     <div class="container">
         <!-- Header -->
         <header class="page-header">
@@ -98,7 +332,8 @@
                 <a href="stories/story-aria-caesura.html" class="story-card">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Aria Caesura</div>
-                    <div class="story-desc">dissonant discord executes a Tier 4 Ómura Desynchronization Strike, killing Pyara Dana and collapsing the Lovely Hearts' harmonic lattice.</div>
+                    <div class="story-desc">dissonant discord executes a Tier 4 Ómura Desynchronization Strike, killing
+                        Pyara Dana and collapsing the Lovely Hearts' harmonic lattice.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> Heart Melody</span>
                     </div>
@@ -122,7 +357,8 @@
                 <a href="stories/story-symphonic-overture.html" class="story-card">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Symphonic Overture</div>
-                    <div class="story-desc">Mahana Sahi arrives in Royastella as an Untethered entity with no memory. Shini Thana rescues her, establishing the first cross-realm harmonic instability event.</div>
+                    <div class="story-desc">Mahana Sahi arrives in Royastella as an Untethered entity with no memory.
+                        Shini Thana rescues her, establishing the first cross-realm harmonic instability event.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> Mahana Sahi, Starlite 7th</span>
                     </div>
@@ -131,7 +367,8 @@
                 <div class="story-card coming-soon">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Crowned</div>
-                    <div class="story-desc">System-selected champions are assembled to form the Starlite 7th, Royastella's premier defensive task force.</div>
+                    <div class="story-desc">System-selected champions are assembled to form the Starlite 7th,
+                        Royastella's premier defensive task force.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> Itami Serafino, Starlite 7th</span>
                     </div>
@@ -140,7 +377,8 @@
                 <div class="story-card coming-soon">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Regicide</div>
-                    <div class="story-desc">After defeating the leader of the incursive forces, BLADE GUILLOTINE takes the leader's power for herself fully betrays the Starlite 7th team.</div>
+                    <div class="story-desc">After defeating the leader of the incursive forces, BLADE GUILLOTINE takes
+                        the leader's power for herself fully betrays the Starlite 7th team.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> Starlite 7th, BLADE GUILLOTINE</span>
                     </div>
@@ -155,7 +393,8 @@
                 <div class="story-card coming-soon">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Attacca Subito</div>
-                    <div class="story-desc">Freshly returned to the realm of Beeston, Mahana Sahi tries to connect with Heart Melody.</div>
+                    <div class="story-desc">Freshly returned to the realm of Beeston, Mahana Sahi tries to connect with
+                        Heart Melody.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> Mahana Sahi, Heart Melody</span>
                     </div>
@@ -163,7 +402,8 @@
                 <div class="story-card coming-soon">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Avant-Garde Composition</div>
-                    <div class="story-desc">dissonant discord abducts Mahana Sahi and opens a rift to Nexsicon. The Lovely Hearts pursue rescue and become trapped in the convergence realm.</div>
+                    <div class="story-desc">dissonant discord abducts Mahana Sahi and opens a rift to Nexsicon. The
+                        Lovely Hearts pursue rescue and become trapped in the convergence realm.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> Heart Melody, dissonant discord</span>
                     </div>
@@ -178,16 +418,19 @@
                 <a href="stories/story-bluish-green-truths.html" class="story-card">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Bluish-Green Truths</div>
-                    <div class="story-desc">After a failed infiltration of Day Enterprises, Alulu Caelum meets Claris Quies who reveals crucial information for her future plans.</div>
+                    <div class="story-desc">After a failed infiltration of Day Enterprises, Alulu Caelum meets Claris
+                        Quies who reveals crucial information for her future plans.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> Praxis Verax Affinas, All Factions</span>
                     </div>
                 </a>
-                
+
                 <a href="stories/story-falling-stars.html" class="story-card">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Falling Stars</div>
-                    <div class="story-desc">discord returns as mentor and trains the Starlite 7th in forbidden techniques, then reveals herself as BLADE GUILLOTINE. Starlit Alpha is captured and taken to Nexsicon.</div>
+                    <div class="story-desc">discord returns as mentor and trains the Starlite 7th in forbidden
+                        techniques, then reveals herself as BLADE GUILLOTINE. Starlit Alpha is captured and taken to
+                        Nexsicon.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> Starlite 7th, BLADE GUILLOTINE</span>
                     </div>
@@ -202,7 +445,8 @@
                 <div class="story-card coming-soon">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Grand Convergence</div>
-                    <div class="story-desc">Tiala Corsolis attempts to forcibly accelerate realm integration through a catastrophic convergence spell, triggering the Cascade Resonance event.</div>
+                    <div class="story-desc">Tiala Corsolis attempts to forcibly accelerate realm integration through a
+                        catastrophic convergence spell, triggering the Cascade Resonance event.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> Praxis Verax Affinas, All Factions</span>
                     </div>
@@ -211,7 +455,8 @@
                 <div class="story-card coming-soon">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Reason Theory Origins</div>
-                    <div class="story-desc">A chance meeting between Ami and Windi with some unexpected revelations lead to the formation of a new faction.</div>
+                    <div class="story-desc">A chance meeting between Ami and Windi with some unexpected revelations lead
+                        to the formation of a new faction.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> Ami, Windi</span>
                     </div>
@@ -220,7 +465,8 @@
                 <div class="story-card coming-soon">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Astride the Dark</div>
-                    <div class="story-desc">Having been lost in the Void for a year, Kali Dana fights her way to Nexsicon and discovers new power to help her attain her vengeance.</div>
+                    <div class="story-desc">Having been lost in the Void for a year, Kali Dana fights her way to
+                        Nexsicon and discovers new power to help her attain her vengeance.</div>
                     <span class="story-meta">
                         <span><span class="label">Featured:</span> Kali Dana</span>
                     </span>
@@ -229,7 +475,8 @@
                 <div class="story-card coming-soon">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Fú cì's Absolutely No Good Very Bad Worst Day Ever</div>
-                    <div class="story-desc">Fú cì faces a series of misfortunes that challenge her resilience and determination and finds a new friend.</div>
+                    <div class="story-desc">Fú cì faces a series of misfortunes that challenge her resilience and
+                        determination and finds a new friend.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> Fú cì, Windi, Astarri</span>
                     </div>
@@ -238,9 +485,10 @@
                 <div class="story-card coming-soon">
                     <div class="story-type">Major Event</div>
                     <div class="story-title">Upgraded Executions</div>
-                    <div class="story-desc">Alulu chases the rumor of a powerful weapon to the Seven Cities of Cibola, where she faces numerous overwhelming foes in hopes of gaining power.</div>
+                    <div class="story-desc">Alulu chases the rumor of a powerful weapon to the Seven Cities of Cibola,
+                        where she faces numerous overwhelming foes in hopes of gaining power.</div>
                     <div class="story-meta">
-                        <span><span class="label">Featured:</span> Alulu Caelum</span> 
+                        <span><span class="label">Featured:</span> Alulu Caelum</span>
                     </div>
                 </div>
             </div>
@@ -253,7 +501,9 @@
                 <div class="story-card coming-soon">
                     <div class="story-type">Coming Soon</div>
                     <div class="story-title">A War On All Fronts</div>
-                    <div class="story-desc">Multi-realm existential conflict escalates as Destiny's Penance and Reason Theory clash over the fate of Ultimatera and access to the Akashic Record, while Starlite 7th and Heart Melody come to grips with the strange new world they've entered.</div>
+                    <div class="story-desc">Multi-realm existential conflict escalates as Destiny's Penance and Reason
+                        Theory clash over the fate of Ultimatera and access to the Akashic Record, while Starlite 7th
+                        and Heart Melody come to grips with the strange new world they've entered.</div>
                     <div class="story-meta">
                         <span><span class="label">Featured:</span> All Factions</span>
                     </div>
@@ -263,4 +513,5 @@
 
     </div>
 </body>
+
 </html>

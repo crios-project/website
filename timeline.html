@@ -30,7 +30,19 @@
             overflow-x: hidden;
             position: relative;
         }
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
         /* Animated background grid */
         body::before {
             content: '';
@@ -105,7 +117,27 @@
             margin-bottom: 80px;
             animation: fadeInDown 1s ease-out;
         }
-
+        /* Header */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -458,7 +490,12 @@
 <body>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
-
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="index.html" class="back-link">← Home</a>
+        <div class="header-title">Timeline</div>
+        <div style="width: 80px;"></div> <!-- Spacer for centering -->
+    </nav>
     <div class="container">
         <header>
             <h1>Timeline</h1>

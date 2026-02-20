@@ -1,112 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magic Systems // CRIOS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow: 0 0 20px rgba(233, 30, 99, 0.6);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); 
-            overflow-x: hidden; position: relative; }
 
-        /* Animated background grid */
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(233, 30, 99, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px; animation: gridScroll 20s linear infinite; pointer-events: none; z-index: 0; }
-        @keyframes gridScroll { 0% { transform: translateY(0); } 100% { transform: translateY(50px); } }
-
-        img { display: block; max-width: 45%; height: 45%; }
-
-        /* Gradient orbs */
-        .orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.15; pointer-events: none; z-index: 0; }
-        .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, var(--primary-burgundy), transparent);
-            top: -200px; right: -200px; animation: orbFloat1 15s ease-in-out infinite; }
-        .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, var(--secondary-pink), transparent);
-            bottom: -150px; left: -150px; animation: orbFloat2 20s ease-in-out infinite; }
-        @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-100px, 100px); } }
-        @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(100px, -80px); } }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; position: relative; z-index: 1; }
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
 
         /* Header */
-        .page-header { text-align: center; margin-bottom: 80px; animation: fadeIn 0.8s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        h1 { font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900;
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        /* Header */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridScroll 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gridScroll {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(50px);
+            }
+        }
+
+        img {
+            display: block;
+            max-width: 45%;
+            height: 45%;
+        }
+
+        /* Gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -200px;
+            animation: orbFloat1 15s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: orbFloat2 20s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-100px, 100px);
+            }
+        }
+
+        @keyframes orbFloat2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(100px, -80px);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
-        .subtitle { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 6px; margin-bottom: 40px; }
-        .intro { max-width: 800px; margin: 0 auto 60px; font-size: 1.05rem; line-height: 1.8; color: var(--text-dim); }
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 40px;
+        }
+
+        .intro {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-dim);
+        }
 
         /* System cards */
-        .systems-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 32px; margin-bottom: 100px; }
-        .system-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px; padding: 36px; text-decoration: none; display: block;
-            transition: all 0.3s ease; position: relative; overflow: hidden; }
-        .system-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+            margin-bottom: 100px;
+        }
+
+        .system-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 36px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .system-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
-            transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
-        .system-card:hover::before { transform: scaleX(1); }
-        .system-card:hover { border-color: var(--accent-cyan); transform: translateY(-8px);
-            box-shadow: 0 16px 40px rgba(0, 217, 255, 0.3); }
-        .system-realm { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--accent-cyan);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
-        .system-name { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700;
-            color: var(--text-primary); margin-bottom: 20px; }
-        .system-desc { font-size: 1rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 24px; }
-        .system-traits { display: flex; flex-direction: column; gap: 12px; }
-        .trait { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; }
-        .trait-label { font-family: 'Orbitron', sans-serif; color: var(--secondary-pink); min-width: 80px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
-        .trait-value { color: var(--text-dim); }
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .system-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .system-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(0, 217, 255, 0.3);
+        }
+
+        .system-realm {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .system-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .system-desc {
+            font-size: 1rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .system-traits {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .trait {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.9rem;
+        }
+
+        .trait-label {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--secondary-pink);
+            min-width: 80px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .trait-value {
+            color: var(--text-dim);
+        }
 
         /* Elements section */
-        .elements-section { margin-top: 100px; padding: 60px 0; border-top: 2px solid rgba(233, 30, 99, 0.2); }
-        .elements-title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 700;
-            text-align: center; color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        .elements-subtitle { text-align: center; color: var(--text-dim); font-size: 1rem; margin-bottom: 60px; }
+        .elements-section {
+            margin-top: 100px;
+            padding: 60px 0;
+            border-top: 2px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .elements-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .elements-subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 1rem;
+            margin-bottom: 60px;
+        }
 
         /* Element grid */
-        .elements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 20px; }
-        .element-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 8px; padding: 20px; text-decoration: none; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center; aspect-ratio: 1; transition: all 0.3s ease; }
-        .element-card:hover { border-color: var(--accent-cyan); transform: translateY(-6px); background: rgba(20, 20, 25, 0.8);
-            box-shadow: 0 12px 32px rgba(0, 217, 255, 0.25); }
-        .element-icon { font-size: 2.5rem; margin-bottom: 12px; }
-        .element-name { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 600;
-            color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; }
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 20px;
+        }
+
+        .element-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            aspect-ratio: 1;
+            transition: all 0.3s ease;
+        }
+
+        .element-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-6px);
+            background: rgba(20, 20, 25, 0.8);
+            box-shadow: 0 12px 32px rgba(0, 217, 255, 0.25);
+        }
+
+        .element-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .element-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
         /* Tier labels */
-        .tier-label { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600;
-            color: var(--secondary-pink); margin: 60px 0 24px; text-transform: uppercase; letter-spacing: 2px; }
-        .tier-label:first-of-type { margin-top: 0; }
+        .tier-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-pink);
+            margin: 60px 0 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tier-label:first-of-type {
+            margin-top: 0;
+        }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .systems-grid { grid-template-columns: 1fr; }
-            .elements-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .systems-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .elements-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
-
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="index.html" class="back-link">← Home</a>
+        <div class="header-title">MAGIC</div>
+        <div style="width: 80px;"></div> <!-- Spacer for centering -->
+    </nav>
     <div class="container">
         <!-- Header -->
         <header class="page-header">
             <h1>Magic Systems</h1>
             <p class="subtitle">Arcane Frameworks of the Crios Multireality</p>
             <div class="intro">
-                Three distinct magic systems operate within the Crios cosmology. Each system obeys different metaphysical rules and cannot be freely substituted for another. When forced to interact, they create reality shear events that permanently alter the fabric of existence.
+                Three distinct magic systems operate within the Crios cosmology. Each system obeys different
+                metaphysical rules and cannot be freely substituted for another. When forced to interact, they create
+                reality shear events that permanently alter the fabric of existence.
             </div>
         </header>
 
@@ -115,33 +433,45 @@
             <a href="magic/magic-lumenai.html" class="system-card">
                 <div class="system-realm">Beeston</div>
                 <h2 class="system-name">Lúmenai</h2>
-                <p class="system-desc">Harmonic resonance magic powered by emotional truth and ensemble synchronization. Magic is sung, not spoken.</p>
+                <p class="system-desc">Harmonic resonance magic powered by emotional truth and ensemble synchronization.
+                    Magic is sung, not spoken.</p>
                 <div class="system-traits">
-                    <div class="trait"><span class="trait-label">Fuel:</span><span class="trait-value">Sound Resonance</span></div>
-                    <div class="trait"><span class="trait-label">Access:</span><span class="trait-value">Voice & Harmony</span></div>
-                    <div class="trait"><span class="trait-label">Risk:</span><span class="trait-value">Emotional / Existential</span></div>
+                    <div class="trait"><span class="trait-label">Fuel:</span><span class="trait-value">Sound
+                            Resonance</span></div>
+                    <div class="trait"><span class="trait-label">Access:</span><span class="trait-value">Voice &
+                            Harmony</span></div>
+                    <div class="trait"><span class="trait-label">Risk:</span><span class="trait-value">Emotional /
+                            Existential</span></div>
                 </div>
             </a>
 
             <a href="magic/magic-element-core.html" class="system-card">
                 <div class="system-realm">Royastella</div>
                 <h2 class="system-name">Element Core</h2>
-                <p class="system-desc">System-regulated mana magic bound to identity-based elemental cores. Reliable, rigid, quantifiable, regulated,and combat-optimized.</p>
+                <p class="system-desc">System-regulated mana magic bound to identity-based elemental cores. Reliable,
+                    rigid, quantifiable, regulated,and combat-optimized.</p>
                 <div class="system-traits">
-                    <div class="trait"><span class="trait-label">Fuel:</span><span class="trait-value">Mana from System</span></div>
-                    <div class="trait"><span class="trait-label">Access:</span><span class="trait-value">System Authorization</span></div>
-                    <div class="trait"><span class="trait-label">Risk:</span><span class="trait-value">Mechanical / Identity</span></div>
+                    <div class="trait"><span class="trait-label">Fuel:</span><span class="trait-value">Mana from
+                            System</span></div>
+                    <div class="trait"><span class="trait-label">Access:</span><span class="trait-value">System
+                            Authorization</span></div>
+                    <div class="trait"><span class="trait-label">Risk:</span><span class="trait-value">Mechanical /
+                            Identity</span></div>
                 </div>
             </a>
 
             <a href="magic/magic-cymora.html" class="system-card">
                 <div class="system-realm">Nexsicon</div>
                 <h2 class="system-name">Cymora</h2>
-                <p class="system-desc">Linguistic reality-shaping through spoken incantations. Words perform magic rather than describe it. Structured by semantic coherence and grammatical syntax.</p>
+                <p class="system-desc">Linguistic reality-shaping through spoken incantations. Words perform magic
+                    rather than describe it. Structured by semantic coherence and grammatical syntax.</p>
                 <div class="system-traits">
-                    <div class="trait"><span class="trait-label">Fuel:</span><span class="trait-value">Semantic Coherence</span></div>
-                    <div class="trait"><span class="trait-label">Access:</span><span class="trait-value">Spoken Cymora</span></div>
-                    <div class="trait"><span class="trait-label">Risk:</span><span class="trait-value">Conceptual / Reality</span></div>
+                    <div class="trait"><span class="trait-label">Fuel:</span><span class="trait-value">Semantic
+                            Coherence</span></div>
+                    <div class="trait"><span class="trait-label">Access:</span><span class="trait-value">Spoken
+                            Cymora</span></div>
+                    <div class="trait"><span class="trait-label">Risk:</span><span class="trait-value">Conceptual /
+                            Reality</span></div>
                 </div>
             </a>
         </div>
@@ -186,7 +516,8 @@
                     <div class="element-name">Poison</div>
                 </a>
                 <a href="elements/element-lightning.html" class="element-card">
-                    <img src="assets/magic/Tier 2 Lightning - FiWi.svg" alt="Lightning Element Icon" class="element-icon">
+                    <img src="assets/magic/Tier 2 Lightning - FiWi.svg" alt="Lightning Element Icon"
+                        class="element-icon">
                     <div class="element-name">Lightning</div>
                 </a>
                 <a href="elements/element-metal.html" class="element-card">
@@ -222,4 +553,5 @@
 
     </div>
 </body>
+
 </html>
