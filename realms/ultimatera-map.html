@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ultimatera — Layered Map Engine</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: system-ui;
+    background: #111;
+    color: white;
+}
+
+#ui {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(20,20,20,0.95);
+    padding: 15px;
+    border-radius: 10px;
+    z-index: 10;
+    font-size: 14px;
+}
+
+#infoCard {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(15,15,15,0.95);
+    padding: 15px;
+    border-radius: 12px;
+    width: 320px;
+    display: none;
+}
+
+svg {
+    width: 100vw;
+    height: 100vh;
+    cursor: grab;
+}
+
+.marker:hover { transform: scale(1.3); cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div id="ui">
+<b>Realm Filters</b><br>
+<label><input type="checkbox" checked onchange="toggleRealm('Beeston')"> Beeston</label><br>
+<label><input type="checkbox" checked onchange="toggleRealm('Royastella')"> Royastella</label><br>
+<label><input type="checkbox" checked onchange="toggleRealm('Nexsicon')"> Nexsicon</label><br>
+<label><input type="checkbox" checked onchange="toggleRealm('Ultimatera')"> Ultimatera</label><br>
+<label><input type="checkbox" checked onchange="toggleRealm('Antiquity')"> Antiquity</label>
+<hr>
+<b>Layer Filters</b><br>
+<label><input type="checkbox" checked onchange="toggleLayer('skyLayer')"> Sky</label><br>
+<label><input type="checkbox" checked onchange="toggleLayer('surfaceLayer')"> Surface</label><br>
+<label><input type="checkbox" checked onchange="toggleLayer('subLayer')"> Subsurface</label><br>
+<label><input type="checkbox" checked onchange="toggleLayer('abyssLayer')"> Abyss</label>
+</div>
+
+<div id="infoCard"></div>
+
+<svg id="map" viewBox="0 0 2000 1600">
+<g id="viewport">
+
+<!-- SKY -->
+<g id="skyLayer">
+    <rect x="0" y="0" width="2000" height="300" fill="#2b2d42"/>
+    <ellipse cx="1000" cy="150" rx="250" ry="100" fill="#8d99ae" opacity="0.6"/>
+</g>
+
+<!-- SURFACE -->
+<g id="surfaceLayer">
+    <rect x="0" y="300" width="2000" height="500" fill="#588157"/>
+</g>
+
+<!-- SUBSURFACE -->
+<g id="subLayer">
+    <rect x="0" y="800" width="2000" height="400" fill="#3a5a40"/>
+</g>
+
+<!-- ABYSS -->
+<g id="abyssLayer">
+    <rect x="0" y="1200" width="2000" height="400" fill="#0b090a"/>
+</g>
+
+<g id="markers"></g>
+
+</g>
+</svg>
+
+<script>
+
+// DATA MODEL
+const locations = [
+{
+name: "Virelden",
+x: 600,
+y: 600,
+realm: "Beeston",
+layer: "surfaceLayer",
+color: "hotpink",
+biome: "Plains",
+description: "Emerald hills pulsing with Earth Aspect.\nBeeston Integration"
+},
+{
+name: "Blackfen",
+x: 1300,
+y: 950,
+realm: "Royastella",
+layer: "subLayer",
+color: "purple",
+biome: "Deep Marsh",
+description: "Shadow-flooded subterranean wetlands."
+},
+{
+name: "Aether Spire",
+x: 1000,
+y: 150,
+realm: "Antiquity",
+layer: "skyLayer",
+color: "gold",
+biome: "Anomaly",
+description: "Volcanic structure suspended in tundra sky.\n10% Logic Violation Event"
+}
+];
+
+// RENDER
+const markerLayer = document.getElementById("markers");
+
+locations.forEach(loc => {
+    const circle = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    circle.setAttribute("cx", loc.x);
+    circle.setAttribute("cy", loc.y);
+    circle.setAttribute("r", 8);
+    circle.setAttribute("fill", loc.color);
+    circle.setAttribute("class","marker");
+    circle.dataset.realm = loc.realm;
+    circle.dataset.layer = loc.layer;
+    circle.addEventListener("click", () => showInfo(loc));
+    markerLayer.appendChild(circle);
+});
+
+// INFO
+function showInfo(loc){
+    const card = document.getElementById("infoCard");
+    card.style.display = "block";
+    card.innerHTML = `
+        <h3>${loc.name}</h3>
+        <p><b>Realm:</b> ${loc.realm}</p>
+        <p><b>Layer:</b> ${loc.layer.replace("Layer","")}</p>
+        <p><b>Biome:</b> ${loc.biome}</p>
+        <p>${loc.description.replace(/\n/g,"<br>")}</p>
+    `;
+}
+
+// TOGGLES
+function toggleRealm(realm){
+    document.querySelectorAll(".marker").forEach(dot=>{
+        if(dot.dataset.realm === realm){
+            dot.style.display = dot.style.display === "none" ? "block" : "none";
+        }
+    });
+}
+
+function toggleLayer(layer){
+    const el = document.getElementById(layer);
+    el.style.display = el.style.display === "none" ? "block" : "block";
+    el.style.display = el.style.display === "none" ? "block" : "none";
+}
+
+// ZOOM/PAN
+const svg = document.getElementById("map");
+const viewport = document.getElementById("viewport");
+let scale = 1, originX=0, originY=0, drag=false, startX, startY;
+
+svg.addEventListener("wheel", e=>{
+    e.preventDefault();
+    scale += e.deltaY * -0.001;
+    scale = Math.min(Math.max(.5, scale), 3);
+    viewport.setAttribute("transform",`translate(${originX},${originY}) scale(${scale})`);
+});
+
+svg.addEventListener("mousedown", e=>{
+    drag=true;
+    startX=e.clientX-originX;
+    startY=e.clientY-originY;
+    svg.style.cursor="grabbing";
+});
+
+svg.addEventListener("mousemove", e=>{
+    if(!drag) return;
+    originX=e.clientX-startX;
+    originY=e.clientY-startY;
+    viewport.setAttribute("transform",`translate(${originX},${originY}) scale(${scale})`);
+});
+
+svg.addEventListener("mouseup", ()=>{drag=false;svg.style.cursor="grab";});
+
+</script>
+</body>
+</html>
