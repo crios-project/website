@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .content-section {
@@ -242,9 +243,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -261,7 +296,6 @@
         <header class="page-header">
             <h1 class="page-title">EARTH</h1>
         </header>
-
         <section class="content-section element-header">
             <div class="element-visual">
                 <img src="../assets/magic/Tier 1 Earth.svg" alt="EARTH"
@@ -280,10 +314,9 @@
                 </div>
             </div>
         </section>
-
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -314,10 +347,8 @@
                         </tr>
                     </tbody>
                 </table>
-
             </div>
         </section>
-
         <section class="content-section">
             <h2 class="section-title">Lúmenai — Téroma</h2>
             <div class="section-content">
@@ -353,13 +384,11 @@
                 <p>(Téroma + Vaélia)</p>
                 <p>Essence: disciplined momentum</p>
                 <p>Used for physical reinforcement, kinetic control, and martial augmentation.</p>
-
             </div>
         </section>
-
         <section class="content-section">
             <h2 class="section-title">Cymora — Dâr</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -386,48 +415,45 @@
                         </tr>
                     </tbody>
                 </table>
-
             </div>
         </section>
-
         <section class="content-section">
             <h2 class="section-title">System Mana — Earth Core</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Elemental Core Channel</p>
-                    <h3 class="section-subtitle">Functional Nature</h3>
-                        <p>Within Royastella, Earth manifests as a defensive and structural mana discipline governed by
-                            the
-                            System. Earth-aligned users specialize in durability, protective reinforcement, and
-                            sustained
-                            magical endurance.</p>
-                        <p>Earth cores frequently produce practitioners capable of maintaining prolonged defensive
-                            formations
-                            and absorbing high-impact magical or physical attacks.</p>
-                        <h3 class="section-subtitle">Mechanical Properties</h3>
-                            <ul>
-                                <li>Defensive mana reinforcement</li>
-                                <li>Density manipulation</li>
-                                <li>Structural mana shaping</li>
-                                <li>Endurance-based spellcasting</li>
-                            </ul>
-                            <h3 class="section-subtitle">Aura Manifestation</h3>
-                                <p>Through Runic Knight training, Earth cores may be externally manifested as physical
-                                    auras that
-                                    enhance:</p>
-                                <ul>
-                                    <li>Physical durability</li>
-                                    <li>Defensive barrier integrity</li>
-                                    <li>Impact resistance</li>
-                                    <li>Structural stabilization of allied constructs</li>
-                                </ul>
-
+                <p>Elemental Core Channel</p>
+                <h3 class="section-subtitle">Functional Nature</h3>
+                <p>Within Royastella, Earth manifests as a defensive and structural mana discipline governed by
+                    the
+                    System. Earth-aligned users specialize in durability, protective reinforcement, and
+                    sustained
+                    magical endurance.</p>
+                <p>Earth cores frequently produce practitioners capable of maintaining prolonged defensive
+                    formations
+                    and absorbing high-impact magical or physical attacks.</p>
+                <h3 class="section-subtitle">Mechanical Properties</h3>
+                <ul>
+                    <li>Defensive mana reinforcement</li>
+                    <li>Density manipulation</li>
+                    <li>Structural mana shaping</li>
+                    <li>Endurance-based spellcasting</li>
+                </ul>
+                <h3 class="section-subtitle">Aura Manifestation</h3>
+                <p>Through Runic Knight training, Earth cores may be externally manifested as physical
+                    auras that
+                    enhance:</p>
+                <ul>
+                    <li>Physical durability</li>
+                    <li>Defensive barrier integrity</li>
+                    <li>Impact resistance</li>
+                    <li>Structural stabilization of allied constructs</li>
+                </ul>
             </div>
         </section>
-
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>
                         <tr>
@@ -450,85 +476,85 @@
                         </tr>
                     </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Casting Mechanism</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Harmonic reinforcement and structural resonance</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Sustained tonal incantation and grounding phonetics</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Mana density manipulation and reinforcement algorithms</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Casting Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Harmonic reinforcement and structural resonance</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Sustained tonal incantation and grounding phonetics</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Mana density manipulation and reinforcement algorithms</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Limitations</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Requires strong internal stability and sustained focus</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Requires vocal endurance and tonal consistency</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Limited by stamina, mana storage capacity, and load thresholds</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Stability and Limits</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Limitations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Requires strong internal stability and sustained focus</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Requires vocal endurance and tonal consistency</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Limited by stamina, mana storage capacity, and load thresholds</td>
+                        </tr>
+                    </tbody>
                 </table>
-
             </div>
         </section>
-
         <section class="content-section">
             <h2 class="section-title">Notable Users</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Lúmenai Practitioners</h3>
-                    <ul>
-                        <li><em>Pyara Dana</em> — Accesses Téroma through Tier 1 harmonic mastery</li>
-                        <li><em>Mahana Sahi</em> — Utilizes Téroma through expanded multi-voice Essentia</li>
-                        <li><em>Aran Letale</em> — Specialized Férroma (Metal Entwinement) practitioner derived from
-                            Téroma
-                        </li>
-                    </ul>
-                    <h3 class="section-subtitle">Cymora Practitioners</h3>
-                        <ul>
-                            <li><em>Tiala Corsolis</em> — Uses Dâr resonance to reinforce large-scale constructs and
-                                barriers
-                            </li>
-                            <li><em>Alulu Caelum</em> — Known to incorporate stabilizing grounding tones into ritual
-                                casting
-                            </li>
-                        </ul>
-                        <h3 class="section-subtitle">System Mana Users</h3>
-                            <ul>
-                                <li><em>Daeon Liàng</em> — Native Earth Core user specializing in defensive and
-                                    structural
-                                    reinforcement</li>
-                                <li><em>Takino Retsu</em> — Earth-aligned practitioner known for endurance-based combat
-                                    and terrain
-                                    manipulation</li>
-                            </ul>
-
+                <ul>
+                    <li><em>Pyara Dana</em> — Accesses Téroma through Tier 1 harmonic mastery</li>
+                    <li><em>Mahana Sahi</em> — Utilizes Téroma through expanded multi-voice Essentia</li>
+                    <li><em>Aran Letale</em> — Specialized Férroma (Metal Entwinement) practitioner derived from
+                        Téroma
+                    </li>
+                </ul>
+                <h3 class="section-subtitle">Cymora Practitioners</h3>
+                <ul>
+                    <li><em>Tiala Corsolis</em> — Uses Dâr resonance to reinforce large-scale constructs and
+                        barriers
+                    </li>
+                    <li><em>Alulu Caelum</em> — Known to incorporate stabilizing grounding tones into ritual
+                        casting
+                    </li>
+                </ul>
+                <h3 class="section-subtitle">System Mana Users</h3>
+                <ul>
+                    <li><em>Daeon Liàng</em> — Native Earth Core user specializing in defensive and
+                        structural
+                        reinforcement</li>
+                    <li><em>Takino Retsu</em> — Earth-aligned practitioner known for endurance-based combat
+                        and terrain
+                        manipulation</li>
+                </ul>
             </div>
         </section>
-
         <section class="content-section">
             <h2 class="section-title">Symbolism and Thematic Role</h2>
             <div class="section-content">
@@ -541,10 +567,8 @@
                 </ul>
                 <p>Earth is frequently associated with characters who provide defensive strength, preserve continuity,
                     and sustain others during periods of instability.</p>
-
             </div>
         </section>
-
         <section class="content-section">
             <h2 class="section-title">Related Elements</h2>
             <div class="section-content">
@@ -558,8 +582,6 @@
                 </ul>
             </div>
         </section>
-
-
     </div>
 </body>
 

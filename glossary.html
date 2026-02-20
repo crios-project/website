@@ -1,112 +1,830 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossary // CRIOS</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
 
+        /* Background grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        /* Header nav */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        /* Page header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+        }
 
-.icons {
-  text-align: center;
-  
-}
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        /* Search */
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+        .search-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        .search-input::placeholder {
+            color: var(--text-dim);
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1><span class="dot">Glossary</span> page coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        /* Letter navigation */
+        .letter-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 60px;
+        }
+
+        .letter-nav a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .letter-nav a:hover,
+        .letter-nav a.active {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
+
+        /* Glossary sections */
+        .letter-section {
+            margin-bottom: 60px;
+        }
+
+        .letter-header {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--secondary-pink);
+            margin-bottom: 30px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(233, 30, 99, 0.3);
+        }
+
+        /* Term entries */
+        .term-entry {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .term-entry:hover {
+            border-color: var(--accent-cyan);
+            transform: translateX(4px);
+        }
+
+        .term-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+        }
+
+        .term-category {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .term-definition {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-dim);
+        }
+
+        /* No results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .letter-header {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <nav class="header-nav"><a href="index.html" class="back-link">← Home</a></nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">GLOSSARY</h1>
+            <p class="subtitle">A comprehensive guide to the terminology, concepts, and phenomena of the CRIOS
+                multireality</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search terms...">
+        </div>
+
+        <nav class="letter-nav" id="letterNav">
+            <a href="#A">A</a><a href="#B">B</a><a href="#C">C</a><a href="#D">D</a><a href="#E">E</a>
+            <a href="#F">F</a><a href="#G">G</a><a href="#H">H</a><a href="#I">I</a><a href="#L">L</a>
+            <a href="#M">M</a><a href="#N">N</a><a href="#O">O</a><a href="#P">P</a><a href="#R">R</a>
+            <a href="#S">S</a><a href="#T">T</a><a href="#U">U</a><a href="#V">V</a><a href="#Z">Z</a>
+        </nav>
+
+        <div id="glossaryContent">
+            <!-- A -->
+            <section class="letter-section" id="A" data-letter="A">
+                <h2 class="letter-header">A</h2>
+
+                <div class="term-entry" data-term="akashic record">
+                    <div class="term-name">Akashic Record</div>
+                    <div class="term-category">Cosmic Archive</div>
+                    <div class="term-definition">The primordial archive containing the total memory, structure, and
+                        probability pathways of existence across all realities. A non-linear informational lattice where
+                        every event, thought, entity, and potential future exists as preserved resonance data. Access is
+                        widely considered impossible without catastrophic cosmological consequences. Tiala Hartlight's
+                        ultimate convergence objective.</div>
+                </div>
+
+                <div class="term-entry" data-term="antiquity">
+                    <div class="term-name">Antiquity, Realms of</div>
+                    <div class="term-category">Realms</div>
+                    <div class="term-definition">Countless realms of low Ontological density that exist in the
+                        background of the multiverse. These realms are liminal in nature, existing in specific scope.
+                        Some of these realms are stable and accessible, while others are unstable and prone to collapse
+                        or transformation.</div>
+                </div>
+
+                <div class="term-entry" data-term="ascension artifact">
+                    <div class="term-name">Ascension Artifact</div>
+                    <div class="term-category">Transformation Catalyst</div>
+                    <div class="term-definition">Rare and powerful items that facilitate transformation evolution for
+                        Lúmenai casters. Examples include Coralas, a crystalline harp that channels higher-tier
+                        Essentia, and Ambrasis, a golden lyre that amplifies emotional resonance to unlock advanced
+                        abilities. These artifacts grow more elaborate as the wielder's power increases.</div>
+                </div>
+
+                <div class="term-entry" data-term="aspects of infinity">
+                    <div class="term-name">Aspects of Infinity</div>
+                    <div class="term-category">Metaphysical Concept</div>
+                    <div class="term-definition">Tangible instantiations of conceptual constants. Every abstraction
+                        possesses physical manifestation somewhere in existence—there is a physical Truth, a physical
+                        Chaos, a physical War. These manifestations flicker in and out of accessible reality and can be
+                        integrated with through three levels: Augeo (joining), Exsequi (yielding), and Vitio
+                        (sublimation). Nexsicon magical transformations uniquely channel these Aspects.</div>
+                </div>
+
+                <div class="term-entry" data-term="augeo">
+                    <div class="term-name">Augeo</div>
+                    <div class="term-category">Aspect Integration Level</div>
+                    <div class="term-definition">The foundational state of Aspect integration. Establishes connection
+                        between individual and Aspect, granting access to minor manifestation abilities while
+                        personality remains largely intact. No intrinsic backlash for disengagement. The user remains
+                        themselves—but amplified.</div>
+                </div>
+
+                <div class="term-entry" data-term="aura manifestation">
+                    <div class="term-name">Aura Manifestation</div>
+                    <div class="term-category">Elemental Core Advance Technique</div>
+                    <div class="term-definition">An advanced element core technique where the user's aura becomes
+                        visible and tangible. The individual's essence becomes perceptible to others, manifesting as a
+                        physical glow or shimmer around their form. This level is often associated with increased
+                        magical sensitivity and the ability to perceive otherworldly phenomena.</div>
+                </div>
+            </section>
+
+            <!-- B -->
+            <section class="letter-section" id="B" data-letter="B">
+                <h2 class="letter-header">B</h2>
+
+                <div class="term-entry" data-term="beeston">
+                    <div class="term-name">Beeston</div>
+                    <div class="term-category">Realm</div>
+                    <div class="term-definition">The realm governed by Lúmenai magic, where power manifests through
+                        emotional harmonic resonance sung rather than spoken. Home to the Lovely Hearts faction and
+                        characterized by musical magical girl aesthetics. Magic users channel Essentia through voice and
+                        emotional sincerity, with transformations reflecting internal harmonic states.</div>
+                </div>
+
+                <div class="term-entry" data-term="blade guillotine">
+                    <div class="term-name">BLADE GUILLOTINE</div>
+                    <div class="term-category">Transformation Identity</div>
+                    <div class="term-definition">The alternate identity of dissonant discord, revealed during the
+                        Falling Stars incident. Wields Le Couteau and speaks in haunting rhyming couplets. Responsible
+                        for opening the rift that strengthened Crystallines and ultimately collapsed the Royastellan
+                        System. Her vocal modulator concealed her identity until the devastating betrayal of Starlite
+                        7th.</div>
+                </div>
+            </section>
+
+            <!-- C -->
+            <section class="letter-section" id="C" data-letter="C">
+                <h2 class="letter-header">C</h2>
+
+                <div class="term-entry" data-term="cascade resonance">
+                    <div class="term-name">Cascade Resonance</div>
+                    <div class="term-category">Catastrophic Event</div>
+                    <div class="term-definition">A reality-shattering event that fragmented dimensional boundaries and
+                        triggered widespread convergence phenomena. Resulted in the massacre of the Tiānshàng clan,
+                        identity fractures across multiple individuals, and accelerated realm merging. The event's full
+                        scope and cause remain subjects of intense investigation, though its effects continue to
+                        destabilize multiversal stability.</div>
+                </div>
+
+                <div class="term-entry" data-term="convergence">
+                    <div class="term-name">Convergence</div>
+                    <div class="term-category">Metaphysical Phenomenon</div>
+                    <div class="term-definition">The process by which separate realities merge and overlap, triggered by
+                        Lodesoul relocation or massive resonance disturbances. Causes mythic realms to rematerialize,
+                        dimensional boundaries to weaken, and distinct magical systems to interact. Tiala's deliberate
+                        convergence strategy seeks to access the Akashic Record through controlled realm merger.</div>
+                </div>
+
+                <div class="term-entry" data-term="crystallines">
+                    <div class="term-name">Crystallines</div>
+                    <div class="term-category">Enemy Classification</div>
+                    <div class="term-definition">Hostile entities in Royastella that became dramatically stronger after
+                        BLADE GUILLOTINE opened a rift in the sky. Their sudden power escalation forced Starlite 7th to
+                        accept training from dissonant discord, unknowingly walking into her long-term manipulation.
+                    </div>
+                </div>
+
+                <div class="term-entry" data-term="cymora">
+                    <div class="term-name">Cymora</div>
+                    <div class="term-category">Magic System</div>
+                    <div class="term-definition">A verbal-only magical language native to Nexsicon where words perform
+                        magic rather than describe it. Operates on sonic resonance principles with phonetics drawn from
+                        Welsh, Gaelic, and Arabic influences. Spells typically follow four-line incantational structures
+                        with emphasis on rhythm, cadence, and vowel elongation. The language makes no distinction
+                        between description and execution—speaking is casting.</div>
+                </div>
+            </section>
+
+            <!-- D -->
+            <section class="letter-section" id="D" data-letter="D">
+                <h2 class="letter-header">D</h2>
+
+                <div class="term-entry" data-term="destiny's penance">
+                    <div class="term-name">Destiny's Penance</div>
+                    <div class="term-category">Faction</div>
+                    <div class="term-definition">Nexsicon faction consisting of those who wield transformations aligned
+                        with Aspects of Infinity. Members channel conceptual forces like Death, War, Chaos, and Fate
+                        through progressive integration stages. Known for wielding some of the most powerful and
+                        philosophically complex magic in the multireality.</div>
+                </div>
+
+                <div class="term-entry" data-term="dissonant discord">
+                    <div class="term-name">dissonant discord</div>
+                    <div class="term-category">Identity / Transformation</div>
+                    <div class="term-definition">Rival and eventual enemy to Heart Melody, later revealed as an
+                        alternate identity of BLADE GUILLOTINE. Speaks in iambic pentamer. Wields Atonality and employs
+                        wide flowing slashing arcs that blur fencing technique with ritual casting. The name's lowercase
+                        styling reflects her nature as a corrupted harmonic opposite to the Lovely Hearts.</div>
+                </div>
+            </section>
+
+            <!-- E -->
+            <section class="letter-section" id="E" data-letter="E">
+                <h2 class="letter-header">E</h2>
+
+                <div class="term-entry" data-term="element core">
+                    <div class="term-name">Element Core</div>
+                    <div class="term-category">Magic System</div>
+                    <div class="term-definition">Royastella's identity-bound mana system where elemental cores
+                        crystallize within soul architecture. Users store elemental mana in a metaphysical Magic Core
+                        organ, with output governed by System authorization. Native cores (Fire, Water, Wind, Earth)
+                        provide stability, while non-native cores from invaders prove more volatile. The Core
+                        Immutability Doctrine was shattered when discord revealed cores could undergo Resonant
+                        Recomposition.</div>
+                </div>
+
+                <div class="term-entry" data-term="essentia">
+                    <div class="term-name">Essentia</div>
+                    <div class="term-category">Lúmenai Term</div>
+                    <div class="term-definition">The harmonic elements channeled through Lúmenai magic. Tier 1 Essentia
+                        include Éthera (Neutral), Pýrua (Fire), Áquora (Water), Vaélia (Wind), and Téroma (Earth).
+                        Higher tiers and Vaelóri entwinements combine these base forms into more complex manifestations.
+                        Each Essentia responds to emotional sincerity and requires harmonic stability to manifest
+                        safely.</div>
+                </div>
+
+                <div class="term-entry" data-term="exsequi">
+                    <div class="term-name">Exsequi</div>
+                    <div class="term-category">Aspect Integration Level</div>
+                    <div class="term-definition">The intermediate state of Aspect integration featuring dramatically
+                        increased output and partial erosion of baseline humanity. The user must act in accordance with
+                        the Aspect during manifestation or suffer backlash upon release. An Exsequi does not merely
+                        wield power—they must feed it.</div>
+                </div>
+            </section>
+
+            <!-- F -->
+            <section class="letter-section" id="F" data-letter="F">
+                <h2 class="letter-header">F</h2>
+
+                <div class="term-entry" data-term="falling stars">
+                    <div class="term-name">Falling Stars</div>
+                    <div class="term-category">Event</div>
+                    <div class="term-definition">The catastrophic event where dissonant discord revealed herself as
+                        BLADE GUILLOTINE and systematically dismantled Starlite 7th before kidnapping Starlit Alpha
+                        through a dimensional rift. The battle concluded with the collapse of Royastella's System,
+                        ending magical girl transformation capability and leaving the realm defenseless.</div>
+                </div>
+            </section>
+
+            <!-- H -->
+            <section class="letter-section" id="H" data-letter="H">
+                <h2 class="letter-header">H</h2>
+
+                <div class="term-entry" data-term="heart melody">
+                    <div class="term-name">Heart Melody</div>
+                    <div class="term-category">Faction</div>
+                    <div class="term-definition">The primary Lovely Hearts faction from Beeston, also known as the
+                        Lovely Hearts. Members transform through emotional-harmonic synchronization and wield weapons
+                        aligned with musical terminology. The group functions as harmonic ensemble where individual
+                        voices strengthen collective resonance. Notable for their confrontation with discord that
+                        resulted in Heart Aria's death.</div>
+                </div>
+
+                <div class="term-entry" data-term="harmonic ascension">
+                    <div class="term-name">Harmonic Ascension</div>
+                    <div class="term-category">Transformation Evolution</div>
+                    <div class="term-definition">The process by which Lúmenai casters evolve their transformations to
+                        access higher tier abilities. Examples include Heart Aria ascending to Heart Beat and eventually
+                        Concerto Pulse, or Heart Symphony ascending to Heart Crescendo and Finalis Grande. Facilitated
+                        by Ascension Artifacts like Coralas and Ambrasis that grow more elaborate as wielder power
+                        increases.</div>
+                </div>
+            </section>
+
+            <!-- L -->
+            <section class="letter-section" id="L" data-letter="L">
+                <h2 class="letter-header">L</h2>
+
+                <div class="term-entry" data-term="light blade revolver">
+                    <div class="term-name">Light Blade Revolver</div>
+                    <div class="term-category">Legendary Artifact</div>
+                    <div class="term-definition">Alulu Dayk's modular transforming weapon aligned with Neon Ultra
+                        energy. Cycles through seven configurations: handgun, shotgun-blade hybrid, kama-gun, light
+                        sword, light broadsword, sniper rifle, and scythe. Each transformation is instantaneous and the
+                        weapon's Neon Ultra alignment grants reality-distorting properties that bypass conventional
+                        defenses.</div>
+                </div>
+
+                <div class="term-entry" data-term="lodesoul">
+                    <div class="term-name">Lodesoul</div>
+                    <div class="term-category">Metaphysical Anchor</div>
+                    <div class="term-definition">A metaphysical convergence anchor tied to specific individuals.
+                        According to the Lodesoul Theorem, moving a Lodesoul forces associated realities to
+                        gravitationally merge toward the host realm. Tiala's convergence strategy involves relocating
+                        multiple Lodesouls to Nexsicon to trigger controlled realm merger and access mythic domains
+                        protecting Akashic resonance keys.</div>
+                </div>
+
+                <div class="term-entry" data-term="lovely hearts">
+                    <div class="term-name">Lovely Hearts</div>
+                    <div class="term-category">Faction Collective</div>
+                    <div class="term-definition">The collective term for Beeston's musical magical girl factions,
+                        primarily Heart Melody. Members channel Lúmenai through emotional harmonic resonance, with
+                        transformations reflecting their musical and emotional states. Their combat style emphasizes
+                        ensemble coordination and resonant amplification.</div>
+                </div>
+
+                <div class="term-entry" data-term="lumenai">
+                    <div class="term-name">Lúmenai</div>
+                    <div class="term-category">Magic System</div>
+                    <div class="term-definition">Beeston's harmonic resonance magic system where power is sung rather
+                        than spoken. Operates through emotional truth and voice harmony, with artificial emotional
+                        projection weakening output. Organized into tiers from basic Essentia to supremacies like Æónel
+                        (Neon Ultra). Vaelóri represent entwinements of multiple base elements. Risk increases with
+                        tier, from emotional fatigue to existential failure.</div>
+                </div>
+            </section>
+
+            <!-- M -->
+            <section class="letter-section" id="M" data-letter="M">
+                <h2 class="letter-header">M</h2>
+
+                <div class="term-entry" data-term="moonlight curse">
+                    <div class="term-name">Moonlight Curse</div>
+                    <div class="term-category">Ability</div>
+                    <div class="term-definition">BLADE GUILLOTINE's suppression technique that integrates with Le
+                        Couteau for enhanced combat effectiveness. Creates zones of darkness that function as both
+                        physical force and perceptual disruption.</div>
+                </div>
+            </section>
+
+            <!-- N -->
+            <section class="letter-section" id="N" data-letter="N">
+                <h2 class="letter-header">N</h2>
+
+                <div class="term-entry" data-term="neon ultra">
+                    <div class="term-name">Neon Ultra</div>
+                    <div class="term-category">Supreme Element</div>
+                    <div class="term-definition">The fifth tier supreme element representing reality recursion and
+                        infinite construct manifestation. Known as Æónel in Lúmenai, it carries extreme risk of
+                        existential failure. The Light Blade Revolver's Neon Ultra alignment grants it
+                        reality-distorting properties that bypass conventional defensive paradigms.</div>
+                </div>
+
+                <div class="term-entry" data-term="nexsicon">
+                    <div class="term-name">Nexsicon</div>
+                    <div class="term-category">Realm</div>
+                    <div class="term-definition">The realm governed by Cymora verbal magic and home to Aspects of
+                        Infinity integration. Tiala has designated it as the convergence nucleus for her Akashic Record
+                        access strategy. Magical girls here channel conceptual forces through three integration levels,
+                        creating some of the most philosophically complex magic in the multireality.</div>
+                </div>
+            </section>
+
+            <!-- P -->
+            <section class="letter-section" id="P" data-letter="P">
+                <h2 class="letter-header">P</h2>
+
+                <div class="term-entry" data-term="paradox bracers">
+                    <div class="term-name">Paradox Bracers</div>
+                    <div class="term-category">Artifact</div>
+                    <div class="term-definition">Transformation artifacts that enable two magical girls to share a
+                        single magical girl form. The bracers are linked by a thin connecting tether, which if broken
+                        results in the immediate reversion of both girls to their original forms.</div>
+                </div>
+            </section>
+
+            <!-- R -->
+            <section class="letter-section" id="R" data-letter="R">
+                <h2 class="letter-header">R</h2>
+
+                <div class="term-entry" data-term="reason theory">
+                    <div class="term-name">Reason Theory</div>
+                    <div class="term-category">Faction</div>
+                    <div class="term-definition">Faction characterized by philosophical approach to combat and magic.
+                        Members include Amaranthine Hartfall (wielder of Fate) and Kweliana Winderial la Pax (wielder of
+                        Secret), both employing weapons with reality-altering properties tied to metaphysical concepts.
+                    </div>
+                </div>
+
+                <div class="term-entry" data-term="resonant recomposition">
+                    <div class="term-name">Resonant Recomposition</div>
+                    <div class="term-category">Phenomenon</div>
+                    <div class="term-definition">The process by which Element Cores can be altered through extreme
+                        harmonic exposure, shattering the Core Immutability Doctrine. dissonant discord revealed this
+                        capability exists, demonstrating that core signatures are rewritable and magical identity is not
+                        permanently fixed.</div>
+                </div>
+
+                <div class="term-entry" data-term="royastella">
+                    <div class="term-name">Royastella</div>
+                    <div class="term-category">Realm</div>
+                    <div class="term-definition">The realm governed by the Element Core System and home to Starlite 7th.
+                        Features identity-bound mana storage in metaphysical Magic Cores with System authorization
+                        governing output. The realm's System catastrophically collapsed during Falling Stars, ending
+                        magical transformation capability and leaving the population defenseless.</div>
+                </div>
+
+                <div class="term-entry" data-term="runic knights">
+                    <div class="term-name">Runic Knights</div>
+                    <div class="term-category">Combat Classification</div>
+                    <div class="term-definition">Starlite 7th's formal designation as System-authorized magical
+                        warriors. After discord's training, they learned to manifest their elemental cores as physical
+                        auras, dramatically enhancing combat capabilities through External Core Manifestation.</div>
+                </div>
+            </section>
+
+            <!-- S -->
+            <section class="letter-section" id="S" data-letter="S">
+                <h2 class="letter-header">S</h2>
+
+                <div class="term-entry" data-term="seven silent blades">
+                    <div class="term-name">seven silent blades</div>
+                    <div class="term-category">Weapon Set</div>
+                    <div class="term-definition">A set of seven weapons wielded by Zhòu-chún Tǎoyàn across different
+                        combat roles: Ānjìng (knight's broadsword), ciúnas (ninja's interlocking katanas), tăcere
+                        (assassin's gunblade), senyap (runic sword for spellcasting), kimya (dancer's fluid jian), cupa
+                        (absolute-cutting katana), and shiru (flying sword). Each blade reflects a different combat
+                        philosophy while maintaining the silent blade designation through lowercase styling.</div>
+                </div>
+
+                <div class="term-entry" data-term="six-star installation">
+                    <div class="term-name">Six-Star Installation</div>
+                    <div class="term-category">Tiānshàng Phenomenon</div>
+                    <div class="term-definition">The ocular manifestation that appears when someone earns the Tiānshàng
+                        surname. Six luminous star marks appear in each iris (three upper right, three lower left)
+                        creating diagonal bilateral symmetry. Represents synchronization with the Tiānshàng Continuity
+                        Field and grants enhanced perceptual awareness, legacy transformation compatibility, and
+                        ancestral memory access.</div>
+                </div>
+
+                <div class="term-entry" data-term="starlite 7th">
+                    <div class="term-name">Starlite 7th</div>
+                    <div class="term-category">Faction</div>
+                    <div class="term-definition">Royastella's premier Runic Knight team consisting of seven members:
+                        Starlit Empress, Sultana, Rex, Pasha, Czar, Mikado, and Dynast, led by Starlit Alpha. After
+                        BLADE strengthened the Crystallines, they sought training from discord, unknowingly being
+                        manipulated toward their systematic destruction during Falling Stars.</div>
+                </div>
+
+                <div class="term-entry" data-term="starlight arsenal">
+                    <div class="term-name">Starlight Arsenal</div>
+                    <div class="term-category">Weapon Set</div>
+                    <div class="term-definition">A collection of seven weapons wielded by the Starlite 7th, each
+                        designed for specific combat roles. The arsenal is a symbol of their collective power and unity.
+                    </div>
+                </div>
+
+                <div class="term-entry" data-term="starlight blessing">
+                    <div class="term-name">Starlight Blessing</div>
+                    <div class="term-category">Skill</div>
+                    <div class="term-definition">A powerful skill granted to Starlite 7th by the Royastellan System that
+                        grants them incredible and unique abilities and enhanced combat performance. Starlight Blessings
+                        are discinctly different than spells in other magic systems, as they are derived from the
+                        System's own internal energy and are not subject to the same limitations or constraints.</div>
+
+                    <div class="term-entry" data-term="system">
+                        <div class="term-name">System (The)</div>
+                        <div class="term-category">Metaphysical Infrastructure</div>
+                        <div class="term-definition">Royastella's governing magical framework that authorizes
+                            transformations, manages mana distribution, and maintains combat capability. Collapsed
+                            catastrophically after BLADE's rift manipulation and subsequent kidnapping of Starlit Alpha,
+                            leaving magical girls powerless as their costumes faded and weapons vanished.</div>
+                    </div>
+            </section>
+
+            <!-- T -->
+            <section class="letter-section" id="T" data-letter="T">
+                <h2 class="letter-header">T</h2>
+
+                <div class="term-entry" data-term="tianshang legacy">
+                    <div class="term-name">Tiānshàng Legacy</div>
+                    <div class="term-category">Clan Tradition</div>
+                    <div class="term-definition">A hereditary yet non-automatic honor system where children born into
+                        the lineage receive provisional Circumstance Names until proving themselves worthy through
+                        existential merit. Only then do they receive the Tiānshàng surname and undergo Six-Star
+                        Installation. Based on principles of merit over blood, contribution over survival, and
+                        continuity over individuality.</div>
+                </div>
+            </section>
+
+            <!-- U -->
+            <section class="letter-section" id="U" data-letter="U">
+                <h2 class="letter-header">U</h2>
+
+                <div class="term-entry" data-term="ultimatera">
+                    <div class="term-name">Ultimatera</div>
+                    <div class="term-category">Realm</div>
+                    <div class="term-definition">The final realm in the convergence cycle where ultimate existential
+                        conflicts manifest. Details remain deliberately obscured, representing endgame scenarios and
+                        final confrontations in the multireality's evolution.</div>
+                </div>
+
+                <div class="term-entry" data-term="untethered">
+                    <div class="term-name">Untethered</div>
+                    <div class="term-category">Entity Classification</div>
+                    <div class="term-definition">Beings existing without standard reality anchors or origin realm
+                        connections. Mahana Sahi arrived in Royastella as an Untethered entity with amnesia, displaying
+                        exceptional stats that suggested extraordinary potential once properly integrated with the
+                        System.</div>
+                </div>
+            </section>
+
+            <!-- V -->
+            <section class="letter-section" id="V" data-letter="V">
+                <h2 class="letter-header">V</h2>
+
+                <div class="term-entry" data-term="vaelori">
+                    <div class="term-name">Vaelóri</div>
+                    <div class="term-category">Lúmenai Term</div>
+                    <div class="term-definition">Tier 2 conjoined elements in Lúmenai formed by entwining two base
+                        Essentia. Examples include Nóxira (Poison from Fire+Water), Férroma (Metal from Fire+Earth),
+                        Sýlphae (Lightning from Fire+Wind), Crýalune (Ice from Water+Wind), Víratha (Plant from
+                        Water+Earth), and Kórelis (Martial from Earth+Wind). Require mastery of component elements and
+                        increased harmonic control.</div>
+                </div>
+
+                <div class="term-entry" data-term="vitio">
+                    <div class="term-name">Vitio</div>
+                    <div class="term-category">Aspect Integration Level</div>
+                    <div class="term-definition">The terminal state of Aspect integration featuring complete subsumption
+                        of original personality. The individual becomes an incarnation of the Aspect with no backlash
+                        upon disengagement because there is no separation. Repeated Vitio access rewrites cognition—the
+                        corruption is not emotional but logical, making adherence to Aspect principles seem increasingly
+                        rational.</div>
+                </div>
+            </section>
+
+            <!-- Z -->
+            <section class="letter-section" id="Z" data-letter="Z">
+                <h2 class="letter-header">Z</h2>
+
+                <div class="term-entry" data-term="zhou-chun taoyuan">
+                    <div class="term-name">Zhòu-chún Tǎoyàn</div>
+                    <div class="term-category">Character</div>
+                    <div class="term-definition">Wielder of the seven silent blades, manifesting different combat
+                        personas through distinct weapons. Each blade—Ānjìng, ciúnas, tăcere, senyap, kimya, cupa, and
+                        shiru—represents a different fighting philosophy and role designation (knight, ninja, assassin,
+                        runic swordmaster, blade dancer, ruthless striker, aerial support).</div>
+                </div>
+            </section>
+        </div>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            No matching terms found. Try a different search.
+        </div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const glossaryContent = document.getElementById('glossaryContent');
+        const noResults = document.getElementById('noResults');
+        const allEntries = document.querySelectorAll('.term-entry');
+        const allSections = document.querySelectorAll('.letter-section');
+
+        // Search functionality
+        searchInput.addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
+
+            if (searchTerm === '') {
+                // Show all
+                allSections.forEach(section => section.style.display = 'block');
+                allEntries.forEach(entry => entry.style.display = 'block');
+                glossaryContent.style.display = 'block';
+                noResults.style.display = 'none';
+                return;
+            }
+
+            let hasResults = false;
+
+            allSections.forEach(section => {
+                const entries = section.querySelectorAll('.term-entry');
+                let sectionHasResults = false;
+
+                entries.forEach(entry => {
+                    const term = entry.getAttribute('data-term');
+                    const name = entry.querySelector('.term-name').textContent.toLowerCase();
+                    const definition = entry.querySelector('.term-definition').textContent.toLowerCase();
+
+                    if (name.includes(searchTerm) || definition.includes(searchTerm) || term.includes(searchTerm)) {
+                        entry.style.display = 'block';
+                        sectionHasResults = true;
+                        hasResults = true;
+                    } else {
+                        entry.style.display = 'none';
+                    }
+                });
+
+                section.style.display = sectionHasResults ? 'block' : 'none';
+            });
+
+            if (hasResults) {
+                glossaryContent.style.display = 'block';
+                noResults.style.display = 'none';
+            } else {
+                glossaryContent.style.display = 'none';
+                noResults.style.display = 'block';
+            }
+        });
+
+        // Letter navigation highlighting
+        const letterLinks = document.querySelectorAll('.letter-nav a');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const letter = entry.target.getAttribute('data-letter');
+                    letterLinks.forEach(link => {
+                        if (link.textContent === letter) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        allSections.forEach(section => observer.observe(section));
+    </script>
+</body>
+
 </html>

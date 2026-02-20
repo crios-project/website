@@ -1,0 +1,7 @@
+name = "crios-interweave"
+type = "javascript"
+workers_dev = true
+
+[site]
+bucket = "./" # This tells Cloudflare to upload the whole folder as a static site
+entry-point = "workers-site"

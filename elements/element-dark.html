@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .content-section {
@@ -242,9 +243,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -284,7 +319,7 @@
 
         <section class="content-section">
             <h2 class="section-title">Elemental Core Availability</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -420,7 +455,8 @@
 
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>
                         <tr>
@@ -443,49 +479,52 @@
                         </tr>
                     </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Casting Mechanism</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Long-form harmonic void chant requiring mental singularity</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Dense, low-frequency vocal incantation with irregular cadence</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Core-driven gravitational mana conversion with high instability</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Casting Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Long-form harmonic void chant requiring mental singularity</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Dense, low-frequency vocal incantation with irregular cadence</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Core-driven gravitational mana conversion with high instability</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Limitations</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Emotional fracture leads to self-erasure</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Phonetic instability collapses caster resonance</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Severe System channel degradation and core destabilization</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Stability and Limits</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Limitations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Emotional fracture leads to self-erasure</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Phonetic instability collapses caster resonance</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Severe System channel degradation and core destabilization</td>
+                        </tr>
+                    </tbody>
                 </table>
-
             </div>
         </section>
 
@@ -494,10 +533,11 @@
             <div class="section-content">
                 <h3 class="section-subtitle">Absolute Hierarchy</h3>
                 <p>1. Tier 1 and Tier 2 Elements<br>
-                2. Light Supremacy (Lúmira / Alor)<br>
-                3. Dark Supremacy (Ómura / Cythr)<br>
-                4. Aether Supremacy (Æónel / Aelwyr)</p>
-                <p>Darkness represents terminal authority over harmonic systems, acting as a final corrective or annihilative force.</p>
+                    2. Light Supremacy (Lúmira / Alor)<br>
+                    3. Dark Supremacy (Ómura / Cythr)<br>
+                    4. Aether Supremacy (Æónel / Aelwyr)</p>
+                <p>Darkness represents terminal authority over harmonic systems, acting as a final corrective or
+                    annihilative force.</p>
             </div>
         </section>
 
@@ -512,7 +552,8 @@
 
                 <h3 class="section-subtitle">Lúmenai Practitioners</h3>
                 <ul>
-                    <li><em>dissonant discord</em> — Demonstrates advanced fast-cast Tier 4 Ómura with limited Tier 5 escalation capacity</li>
+                    <li><em>dissonant discord</em> — Demonstrates advanced fast-cast Tier 4 Ómura with limited Tier 5
+                        escalation capacity</li>
                 </ul>
 
                 <h3 class="section-subtitle">Cymora Practitioners</h3>
@@ -534,7 +575,8 @@
                     <li>Power obtained through sacrifice and control</li>
                     <li>The danger of absolute authority</li>
                 </ul>
-                <p>Dark-aligned figures frequently embody isolation, burdened sovereignty, fatalism, and existential detachment.</p>
+                <p>Dark-aligned figures frequently embody isolation, burdened sovereignty, fatalism, and existential
+                    detachment.</p>
             </div>
         </section>
 

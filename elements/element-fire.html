@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .page-subtitle {
@@ -251,9 +252,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -283,14 +318,15 @@
                         Crios cosmology: <strong>Lúmenai (Beeston)</strong>, <strong>Cymora (Nexsicon)</strong>, and
                         <strong>System Mana (Royastella)</strong>. While each system recognizes Fire as a foundational
                         energetic principle, its metaphysical interpretation, method of invocation, and functional
-                        expression vary significantly between realms. Fire is consuming heat, passion, and ignition.</p>
+                        expression vary significantly between realms. Fire is consuming heat, passion, and ignition.
+                    </p>
                 </div>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -486,7 +522,7 @@
 
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>

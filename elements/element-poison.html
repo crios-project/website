@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .content-section {
@@ -242,9 +243,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -285,7 +320,7 @@
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -324,28 +359,28 @@
             <h2 class="section-title">Lúmenai — Nóxira</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Tier 2 — Conjoined Element</p>
-                    <p>Vaelóri Entwinement</p>
-                    <p>(Pýrua + Áquora)</p>
-                    <h3 class="section-subtitle">Essentia Profile</h3>
-                        <p><strong>Nóxira</strong> represents the simultaneous expression of ignition and adaptation.
-                            Rather than producing simple damage, Nóxira introduces living corruption that spreads,
-                            evolves, and alters the environment or target over time.</p>
-                        <p>Nóxira is often associated with alchemical transformation, biological manipulation, and slow
-                            destabilization rather than immediate destructive force.</p>
-                        <h3 class="section-subtitle">Magical Expression</h3>
-                            <p>Common manifestations include:</p>
-                            <ul>
-                                <li>Toxic flame and corrosive liquid constructs</li>
-                                <li>Progressive affliction and debilitation effects</li>
-                                <li>Alchemical mutation and biological destabilization</li>
-                                <li>Environmental rot and terrain contamination</li>
-                                <li>Venomous enhancement of physical or magical attacks</li>
-                            </ul>
-                            <h3 class="section-subtitle">Harmonic Behavior</h3>
-                                <p>Nóxira demands balance between Pýrua's aggressive transformation and Áquora's
-                                    adaptive continuity. Excess ignition results in unstable, self-destructive
-                                    corruption, while excessive fluidity reduces offensive lethality.</p>
+                <p>Tier 2 — Conjoined Element</p>
+                <p>Vaelóri Entwinement</p>
+                <p>(Pýrua + Áquora)</p>
+                <h3 class="section-subtitle">Essentia Profile</h3>
+                <p><strong>Nóxira</strong> represents the simultaneous expression of ignition and adaptation.
+                    Rather than producing simple damage, Nóxira introduces living corruption that spreads,
+                    evolves, and alters the environment or target over time.</p>
+                <p>Nóxira is often associated with alchemical transformation, biological manipulation, and slow
+                    destabilization rather than immediate destructive force.</p>
+                <h3 class="section-subtitle">Magical Expression</h3>
+                <p>Common manifestations include:</p>
+                <ul>
+                    <li>Toxic flame and corrosive liquid constructs</li>
+                    <li>Progressive affliction and debilitation effects</li>
+                    <li>Alchemical mutation and biological destabilization</li>
+                    <li>Environmental rot and terrain contamination</li>
+                    <li>Venomous enhancement of physical or magical attacks</li>
+                </ul>
+                <h3 class="section-subtitle">Harmonic Behavior</h3>
+                <p>Nóxira demands balance between Pýrua's aggressive transformation and Áquora's
+                    adaptive continuity. Excess ignition results in unstable, self-destructive
+                    corruption, while excessive fluidity reduces offensive lethality.</p>
 
             </div>
         </section>
@@ -354,29 +389,29 @@
             <h2 class="section-title">Cymora — Tânahr</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Compound Elemental Root</p>
-                    <p>(Fire + Water)</p>
-                    <h3 class="section-subtitle">Linguistic Role</h3>
-                        <p><strong>Tânahr</strong> produces resonance patterns that oscillate between flowing vowels and
-                            sharp ignition consonants, reflecting the unstable and invasive nature of poison magic.</p>
-                        <p>The incantation rhythm often mimics spreading contamination through cascading syllabic
-                            progression.</p>
-                        <h3 class="section-subtitle">Sonic Properties</h3>
-                            <ul>
-                                <li>Alternating smooth and harsh vocal transitions</li>
-                                <li>Sustained vowels representing propagation and spread</li>
-                                <li>Sudden consonant bursts representing ignition or infection triggers</li>
-                                <li>Repetitive cadence reinforcing continuous degradation</li>
-                            </ul>
-                            <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
-                                <p>Tânahr is typically used in spells that:</p>
-                                <ul>
-                                    <li>Generate corrosive or venomous constructs</li>
-                                    <li>Spread progressive magical contamination</li>
-                                    <li>Disrupt healing or restoration harmonics</li>
-                                    <li>Induce mutation or structural instability</li>
-                                    <li>Bind targets through internal corrosion rather than external restraint</li>
-                                </ul>
+                <p>Compound Elemental Root</p>
+                <p>(Fire + Water)</p>
+                <h3 class="section-subtitle">Linguistic Role</h3>
+                <p><strong>Tânahr</strong> produces resonance patterns that oscillate between flowing vowels and
+                    sharp ignition consonants, reflecting the unstable and invasive nature of poison magic.</p>
+                <p>The incantation rhythm often mimics spreading contamination through cascading syllabic
+                    progression.</p>
+                <h3 class="section-subtitle">Sonic Properties</h3>
+                <ul>
+                    <li>Alternating smooth and harsh vocal transitions</li>
+                    <li>Sustained vowels representing propagation and spread</li>
+                    <li>Sudden consonant bursts representing ignition or infection triggers</li>
+                    <li>Repetitive cadence reinforcing continuous degradation</li>
+                </ul>
+                <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
+                <p>Tânahr is typically used in spells that:</p>
+                <ul>
+                    <li>Generate corrosive or venomous constructs</li>
+                    <li>Spread progressive magical contamination</li>
+                    <li>Disrupt healing or restoration harmonics</li>
+                    <li>Induce mutation or structural instability</li>
+                    <li>Bind targets through internal corrosion rather than external restraint</li>
+                </ul>
 
             </div>
         </section>
@@ -385,41 +420,42 @@
             <h2 class="section-title">System Mana — Poison Manifestation</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Canon Classification</h3>
-                    <p>Enemy-Exclusive Conjoined Elemental Discipline</p>
-                    <h3 class="section-subtitle">Canon Note</h3>
-                        <p>Within Royastella, conjoined (Tier 2 equivalent) elemental expressions <strong>do not
-                                naturally occur among native elemental cores</strong>. Poison-based manifestations are
-                            therefore associated exclusively with hostile external forces attempting territorial
-                            expansion into Royastella.</p>
-                        <p>The <strong>Runic Knights of Starlite 7th</strong> actively combat invading forces known to
-                            deploy biochemical and magical contamination strategies, often intended to weaken entire
-                            ecosystems or populations prior to conquest.</p>
-                        <h3 class="section-subtitle">Functional Nature</h3>
-                            <p>Poison manifestations in System combat function as biological warfare disciplines
-                                designed to destabilize enemies through attrition rather than direct confrontation.</p>
-                            <h3 class="section-subtitle">Mechanical Properties</h3>
-                                <ul>
-                                    <li>Damage-over-time affliction techniques</li>
-                                    <li>Mana-corrupting toxins that disrupt spellcasting</li>
-                                    <li>Area contamination fields</li>
-                                    <li>Biological mutation and infection abilities</li>
-                                    <li>Environmental degradation and ecosystem collapse techniques</li>
-                                </ul>
-                                <h3 class="section-subtitle">Tactical Doctrine</h3>
-                                    <p>Enemy Poison specialists often serve as:</p>
-                                    <ul>
-                                        <li>Battlefield destabilizers</li>
-                                        <li>Attrition warfare operatives</li>
-                                        <li>Anti-healer and anti-support combatants</li>
-                                        <li>Contamination scouts preparing territories for invasion</li>
-                                    </ul>
+                <p>Enemy-Exclusive Conjoined Elemental Discipline</p>
+                <h3 class="section-subtitle">Canon Note</h3>
+                <p>Within Royastella, conjoined (Tier 2 equivalent) elemental expressions <strong>do not
+                        naturally occur among native elemental cores</strong>. Poison-based manifestations are
+                    therefore associated exclusively with hostile external forces attempting territorial
+                    expansion into Royastella.</p>
+                <p>The <strong>Runic Knights of Starlite 7th</strong> actively combat invading forces known to
+                    deploy biochemical and magical contamination strategies, often intended to weaken entire
+                    ecosystems or populations prior to conquest.</p>
+                <h3 class="section-subtitle">Functional Nature</h3>
+                <p>Poison manifestations in System combat function as biological warfare disciplines
+                    designed to destabilize enemies through attrition rather than direct confrontation.</p>
+                <h3 class="section-subtitle">Mechanical Properties</h3>
+                <ul>
+                    <li>Damage-over-time affliction techniques</li>
+                    <li>Mana-corrupting toxins that disrupt spellcasting</li>
+                    <li>Area contamination fields</li>
+                    <li>Biological mutation and infection abilities</li>
+                    <li>Environmental degradation and ecosystem collapse techniques</li>
+                </ul>
+                <h3 class="section-subtitle">Tactical Doctrine</h3>
+                <p>Enemy Poison specialists often serve as:</p>
+                <ul>
+                    <li>Battlefield destabilizers</li>
+                    <li>Attrition warfare operatives</li>
+                    <li>Anti-healer and anti-support combatants</li>
+                    <li>Contamination scouts preparing territories for invasion</li>
+                </ul>
 
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>
                         <tr>
@@ -442,49 +478,52 @@
                         </tr>
                     </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Casting Mechanism</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Harmonic blending of transformation and adaptive continuity</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Oscillating phonetic resonance mimicking infectious spread</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Mana engineering focused on progressive destabilization effects</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Casting Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Harmonic blending of transformation and adaptive continuity</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Oscillating phonetic resonance mimicking infectious spread</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Mana engineering focused on progressive destabilization effects</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Limitations</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Requires sustained harmonic control to prevent self-contamination</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Incantations must maintain rhythm continuity to sustain propagation</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Poison techniques require prolonged engagement to reach maximum effectiveness</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Stability and Risk</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Limitations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Requires sustained harmonic control to prevent self-contamination</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Incantations must maintain rhythm continuity to sustain propagation</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Poison techniques require prolonged engagement to reach maximum effectiveness</td>
+                        </tr>
+                    </tbody>
                 </table>
-
             </div>
         </section>
 
@@ -492,23 +531,23 @@
             <h2 class="section-title">Notable Users</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Lúmenai Practitioners</h3>
-                    <ul>
-                        <li><em>Odisse</em> — Primary Nóxira-aligned combatant</li>
-                        <li><em>Pyara Dana</em> — Gains Nóxira access during Heart Beat harmonic expansion</li>
-                        <li><em>Mahana Sahi</em> — Demonstrates multi-tier Nóxira integration during Crescendo and
-                            Finalis Grande states</li>
-                    </ul>
-                    <h3 class="section-subtitle">Cymora Practitioners</h3>
-                        <ul>
-                            <li>Nexsicon toxic-resonance casters often specialize in alchemical incantations and
-                                destabilization rituals.</li>
-                        </ul>
-                        <h3 class="section-subtitle">System Manifestation Users</h3>
-                            <ul>
-                                <li>External conquest forces opposing Royastella</li>
-                                <li>Specialized contamination-class invaders targeted by the Runic Knights of Starlite
-                                    7th</li>
-                            </ul>
+                <ul>
+                    <li><em>Odisse</em> — Primary Nóxira-aligned combatant</li>
+                    <li><em>Pyara Dana</em> — Gains Nóxira access during Heart Beat harmonic expansion</li>
+                    <li><em>Mahana Sahi</em> — Demonstrates multi-tier Nóxira integration during Crescendo and
+                        Finalis Grande states</li>
+                </ul>
+                <h3 class="section-subtitle">Cymora Practitioners</h3>
+                <ul>
+                    <li>Nexsicon toxic-resonance casters often specialize in alchemical incantations and
+                        destabilization rituals.</li>
+                </ul>
+                <h3 class="section-subtitle">System Manifestation Users</h3>
+                <ul>
+                    <li>External conquest forces opposing Royastella</li>
+                    <li>Specialized contamination-class invaders targeted by the Runic Knights of Starlite
+                        7th</li>
+                </ul>
 
             </div>
         </section>

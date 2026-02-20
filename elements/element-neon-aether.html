@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .content-section {
@@ -242,9 +243,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -282,7 +317,7 @@
 
         <section class="content-section">
             <h2 class="section-title">Canon Absolutes</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -306,22 +341,22 @@
             <div class="section-content">
                 <p>Aether supersedes all known elemental structures.</p>
                 <h3 class="section-subtitle">Absolute Supremacy</h3>
-                    <ul>
-                        <li>Overrides Tier 1 Elements</li>
-                        <li>Overrides Tier 2 Entwinements</li>
-                        <li>Overrides Light Supremacy</li>
-                        <li>Overrides Dark Supremacy</li>
-                    </ul>
+                <ul>
+                    <li>Overrides Tier 1 Elements</li>
+                    <li>Overrides Tier 2 Entwinements</li>
+                    <li>Overrides Light Supremacy</li>
+                    <li>Overrides Dark Supremacy</li>
+                </ul>
 
-                    <h3 class="section-subtitle">Aether Clash Instability</h3>
-                        <p>Canon theoretical doctrine warns:</p>
-                        <ul>
-                            <li>Aether vs Aether interaction may trigger reality recursion collapse</li>
-                            <li>Realm-level annihilation is considered plausible</li>
-                        </ul>
-                        <h4 class="section-subtitle">Errata Doctrine</h4>
-                            <p>Research attributed to <em>Tiala Corsolis</em> theorizes that an Aether clash may have
-                                caused the permanent loss of magic within the Fourth Realm.</p>
+                <h3 class="section-subtitle">Aether Clash Instability</h3>
+                <p>Canon theoretical doctrine warns:</p>
+                <ul>
+                    <li>Aether vs Aether interaction may trigger reality recursion collapse</li>
+                    <li>Realm-level annihilation is considered plausible</li>
+                </ul>
+                <h4 class="section-subtitle">Errata Doctrine</h4>
+                <p>Research attributed to <em>Tiala Corsolis</em> theorizes that an Aether clash may have
+                    caused the permanent loss of magic within the Fourth Realm.</p>
 
             </div>
         </section>
@@ -330,30 +365,30 @@
             <h2 class="section-title">Lúmenai — Æónel</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Tier 5 — Final Supremacy</p>
-                    <h3 class="section-subtitle">Essentia Profile</h3>
-                        <p><strong>Æónel</strong> represents infinite continuation, harmonic recursion, and conceptual
-                            rewriting. Rather than manipulating elements, Æónel modifies the rules governing harmonic
-                            existence itself.</p>
-                        <h3 class="section-subtitle">Magical Expression</h3>
-                            <p>Common manifestations include:</p>
-                            <ul>
-                                <li>Reality recursion loops</li>
-                                <li>Infinite or self-regenerating constructs</li>
-                                <li>Conceptual editing of magical law</li>
-                                <li>Temporal rewriting or loop creation</li>
-                                <li>Existential restoration or deletion</li>
-                                <li>Multiversal harmonic bridging</li>
-                            </ul>
-                            <h3 class="section-subtitle">Harmonic Behavior</h3>
-                                <p>Æónel cannot be sustained by a single stable voice. Casting requires:</p>
-                                <ul>
-                                    <li>Multi-voice resonance</li>
-                                    <li>External amplification artifacts</li>
-                                    <li>Lodesoul anchoring or equivalent metaphysical stabilization</li>
-                                </ul>
-                                <p>Most attempts result in caster fragmentation or ascension beyond mortal existence.
-                                </p>
+                <p>Tier 5 — Final Supremacy</p>
+                <h3 class="section-subtitle">Essentia Profile</h3>
+                <p><strong>Æónel</strong> represents infinite continuation, harmonic recursion, and conceptual
+                    rewriting. Rather than manipulating elements, Æónel modifies the rules governing harmonic
+                    existence itself.</p>
+                <h3 class="section-subtitle">Magical Expression</h3>
+                <p>Common manifestations include:</p>
+                <ul>
+                    <li>Reality recursion loops</li>
+                    <li>Infinite or self-regenerating constructs</li>
+                    <li>Conceptual editing of magical law</li>
+                    <li>Temporal rewriting or loop creation</li>
+                    <li>Existential restoration or deletion</li>
+                    <li>Multiversal harmonic bridging</li>
+                </ul>
+                <h3 class="section-subtitle">Harmonic Behavior</h3>
+                <p>Æónel cannot be sustained by a single stable voice. Casting requires:</p>
+                <ul>
+                    <li>Multi-voice resonance</li>
+                    <li>External amplification artifacts</li>
+                    <li>Lodesoul anchoring or equivalent metaphysical stabilization</li>
+                </ul>
+                <p>Most attempts result in caster fragmentation or ascension beyond mortal existence.
+                </p>
 
             </div>
         </section>
@@ -362,27 +397,27 @@
             <h2 class="section-title">Cymora — Aelwyr</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Supreme Sonic Root</p>
-                    <h3 class="section-subtitle">Linguistic Role</h3>
-                        <p><strong>Aelwyr</strong> functions as Cymora's highest resonance key. Unlike elemental
-                            incantations, Aelwyr alters the phonetic structure of spells themselves.</p>
-                        <h3 class="section-subtitle">Sonic Properties</h3>
-                            <ul>
-                                <li>Multi-tonal harmonic layering</li>
-                                <li>Extended vowel continuums</li>
-                                <li>Rhythmic recursion patterns</li>
-                                <li>Self-referential incantation loops</li>
-                            </ul>
-                            <h3 class="section-subtitle">Cymoran Aether Behavior</h3>
-                                <p>Aelwyr incantations may:</p>
-                                <ul>
-                                    <li>Rewrite spell frameworks mid-cast</li>
-                                    <li>Create recursive spell engines</li>
-                                    <li>Establish infinite or self-correcting constructs</li>
-                                    <li>Alter timeline resonance pathways</li>
-                                    <li>Generate paradox-stable magical structures</li>
-                                </ul>
-                                <p>Improper tonal alignment risks immediate resonance disappearance.</p>
+                <p>Supreme Sonic Root</p>
+                <h3 class="section-subtitle">Linguistic Role</h3>
+                <p><strong>Aelwyr</strong> functions as Cymora's highest resonance key. Unlike elemental
+                    incantations, Aelwyr alters the phonetic structure of spells themselves.</p>
+                <h3 class="section-subtitle">Sonic Properties</h3>
+                <ul>
+                    <li>Multi-tonal harmonic layering</li>
+                    <li>Extended vowel continuums</li>
+                    <li>Rhythmic recursion patterns</li>
+                    <li>Self-referential incantation loops</li>
+                </ul>
+                <h3 class="section-subtitle">Cymoran Aether Behavior</h3>
+                <p>Aelwyr incantations may:</p>
+                <ul>
+                    <li>Rewrite spell frameworks mid-cast</li>
+                    <li>Create recursive spell engines</li>
+                    <li>Establish infinite or self-correcting constructs</li>
+                    <li>Alter timeline resonance pathways</li>
+                    <li>Generate paradox-stable magical structures</li>
+                </ul>
+                <p>Improper tonal alignment risks immediate resonance disappearance.</p>
 
             </div>
         </section>
@@ -391,34 +426,35 @@
             <h2 class="section-title">System Mana — Aether / Neon Ultra Manifestation</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Canon Classification</h3>
-                    <p>Mythic External Manifestation Domain</p>
-                    <h3 class="section-subtitle">Functional Nature</h3>
-                        <p>Royastella's System cannot generate Aether internally. All known manifestations occur through
-                            external aura phenomena or trans-System anomalies.</p>
-                        <p>Neon Ultra output appears as reality-authoring energy fields rather than elemental
-                            projection.</p>
-                        <h3 class="section-subtitle">Mechanical Properties</h3>
-                            <ul>
-                                <li>Infinite energy recursion constructs</li>
-                                <li>Probability law rewriting</li>
-                                <li>Conceptual weaponization</li>
-                                <li>Aura-based dimensional reinforcement</li>
-                                <li>Multiversal boundary manipulation</li>
-                            </ul>
-                            <h3 class="section-subtitle">Operational Limitations</h3>
-                                <ul>
-                                    <li>Cannot be stored within mana reserves</li>
-                                    <li>Requires external manifestation medium</li>
-                                    <li>High likelihood of System collapse or override</li>
-                                    <li>Often associated with non-mortal or trans-realm entities</li>
-                                </ul>
+                <p>Mythic External Manifestation Domain</p>
+                <h3 class="section-subtitle">Functional Nature</h3>
+                <p>Royastella's System cannot generate Aether internally. All known manifestations occur through
+                    external aura phenomena or trans-System anomalies.</p>
+                <p>Neon Ultra output appears as reality-authoring energy fields rather than elemental
+                    projection.</p>
+                <h3 class="section-subtitle">Mechanical Properties</h3>
+                <ul>
+                    <li>Infinite energy recursion constructs</li>
+                    <li>Probability law rewriting</li>
+                    <li>Conceptual weaponization</li>
+                    <li>Aura-based dimensional reinforcement</li>
+                    <li>Multiversal boundary manipulation</li>
+                </ul>
+                <h3 class="section-subtitle">Operational Limitations</h3>
+                <ul>
+                    <li>Cannot be stored within mana reserves</li>
+                    <li>Requires external manifestation medium</li>
+                    <li>High likelihood of System collapse or override</li>
+                    <li>Often associated with non-mortal or trans-realm entities</li>
+                </ul>
 
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>
                         <tr>
@@ -441,47 +477,51 @@
                         </tr>
                     </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Casting Mechanism</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Multi-voice harmonic convergence or metaphysical amplification</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Recursive incantation loops with layered phonetic harmonics</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>External aura manifestation beyond standard mana infrastructure</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Casting Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Multi-voice harmonic convergence or metaphysical amplification</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Recursive incantation loops with layered phonetic harmonics</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>External aura manifestation beyond standard mana infrastructure</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Limitations</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Requires collective or transcendent resonance stability</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Requires perfect phonetic recursion continuity</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Cannot be internally generated or safely contained</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Stability and Limits</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Limitations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Requires collective or transcendent resonance stability</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Requires perfect phonetic recursion continuity</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Cannot be internally generated or safely contained</td>
+                        </tr>
+                    </tbody>
                 </table>
 
             </div>
@@ -491,16 +531,16 @@
             <h2 class="section-title">Notable Users</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Confirmed Manifesters</h3>
-                    <ul>
-                        <li><em>The Golden Imperator</em> — Demonstrates externally manifested Aether aura</li>
-                    </ul>
+                <ul>
+                    <li><em>The Golden Imperator</em> — Demonstrates externally manifested Aether aura</li>
+                </ul>
 
-                    <h3 class="section-subtitle">Theoretical or Mythic Practitioners</h3>
-                        <ul>
-                            <li>High-order Ultimateran trans-architect entities</li>
-                            <li>Unknown Nexsicon recursion chanters</li>
-                            <li>Possible lost Fourth Realm resonance' architects</li>
-                        </ul>
+                <h3 class="section-subtitle">Theoretical or Mythic Practitioners</h3>
+                <ul>
+                    <li>High-order Ultimateran trans-architect entities</li>
+                    <li>Unknown Nexsicon recursion chanters</li>
+                    <li>Possible lost Fourth Realm resonance' architects</li>
+                </ul>
 
             </div>
         </section>

@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .content-section {
@@ -242,9 +243,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -283,7 +318,7 @@
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -322,45 +357,45 @@
             <h2 class="section-title">Lúmenai — Vaélia</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Tier 1 — Basic Element</p>
-                    <p>One of the Five Open Voices</p>
-                    <h3 class="section-subtitle">Essentia Profile</h3>
-                        <p><strong>Vaélia</strong> represents movement, directional authority, and pressure-based force.
-                            Within the Lúmenai harmonic structure, Wind governs acceleration, positioning, and the
-                            ability to shift momentum both physically and metaphysically. Vaélia practitioners often
-                            demonstrate exceptional spatial awareness and rapid response capability.</p>
-                        <p>Vaélia is frequently associated with tactical control rather than raw destructive output. It
-                            excels in battlefield manipulation, evasive maneuvering, and speed-enhanced casting.</p>
-                        <h3 class="section-subtitle">Magical Expression</h3>
-                            <p>Common manifestations include:</p>
-                            <ul>
-                                <li>Aerokinetic propulsion</li>
-                                <li>Pressure wave projection</li>
-                                <li>Tactical repositioning and levitation</li>
-                                <li>Acceleration and deceleration fields</li>
-                                <li>Airflow-based detection and perception</li>
-                            </ul>
-                            <h3 class="section-subtitle">Conjoined Essentia</h3>
-                            <h4 class="section-subtitle">Sýlphae — Lightning</h4>
-                            <p>(Pýrua + Vaélia)</p>
-                            <p>Essence: violent acceleration and neural ignition</p>
-                            <p>Used for lightning discharge, reflex amplification, and speed bursts.</p>
-                            <h4 class="section-subtitle">Crýalune — Ice</h4>
-                                <p>(Áquora + Vaélia)</p>
-                                <p>Essence: arrested motion and crystalline suspension</p>
-                                <p>Used for freezing constructs and temporal slowing.</p>
-                                <h4 class="section-subtitle">Kórelis — Martial Enhancement</h4>
-                                    <p>(Téroma + Vaélia)</p>
-                                    <p>Essence: disciplined momentum</p>
-                                    <p>Used for kinetic reinforcement, physical combat augmentation, and controlled
-                                        force redirection.</p>
+                <p>Tier 1 — Basic Element</p>
+                <p>One of the Five Open Voices</p>
+                <h3 class="section-subtitle">Essentia Profile</h3>
+                <p><strong>Vaélia</strong> represents movement, directional authority, and pressure-based force.
+                    Within the Lúmenai harmonic structure, Wind governs acceleration, positioning, and the
+                    ability to shift momentum both physically and metaphysically. Vaélia practitioners often
+                    demonstrate exceptional spatial awareness and rapid response capability.</p>
+                <p>Vaélia is frequently associated with tactical control rather than raw destructive output. It
+                    excels in battlefield manipulation, evasive maneuvering, and speed-enhanced casting.</p>
+                <h3 class="section-subtitle">Magical Expression</h3>
+                <p>Common manifestations include:</p>
+                <ul>
+                    <li>Aerokinetic propulsion</li>
+                    <li>Pressure wave projection</li>
+                    <li>Tactical repositioning and levitation</li>
+                    <li>Acceleration and deceleration fields</li>
+                    <li>Airflow-based detection and perception</li>
+                </ul>
+                <h3 class="section-subtitle">Conjoined Essentia</h3>
+                <h4 class="section-subtitle">Sýlphae — Lightning</h4>
+                <p>(Pýrua + Vaélia)</p>
+                <p>Essence: violent acceleration and neural ignition</p>
+                <p>Used for lightning discharge, reflex amplification, and speed bursts.</p>
+                <h4 class="section-subtitle">Crýalune — Ice</h4>
+                <p>(Áquora + Vaélia)</p>
+                <p>Essence: arrested motion and crystalline suspension</p>
+                <p>Used for freezing constructs and temporal slowing.</p>
+                <h4 class="section-subtitle">Kórelis — Martial Enhancement</h4>
+                <p>(Téroma + Vaélia)</p>
+                <p>Essence: disciplined momentum</p>
+                <p>Used for kinetic reinforcement, physical combat augmentation, and controlled
+                    force redirection.</p>
 
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Cymora — Gwynt</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -395,36 +430,37 @@
             <h2 class="section-title">System Mana — Wind Core</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Elemental Core Channel</p>
-                    <h3 class="section-subtitle">Functional Nature</h3>
-                        <p>Within Royastella, Wind exists as a high-mobility mana attribute governed by the System.
-                            Wind-aligned users specialize in rapid mana routing, evasive maneuverability, and
-                            accelerated casting sequences.</p>
-                        <p>Wind cores frequently produce practitioners capable of high-frequency spell deployment and
-                            dynamic battlefield mobility.</p>
-                        <h3 class="section-subtitle">Mechanical Properties</h3>
-                            <ul>
-                                <li>Speed-based mana circulation</li>
-                                <li>Reflex enhancement</li>
-                                <li>Momentum conversion into offensive or defensive output</li>
-                                <li>High-velocity environmental manipulation</li>
-                            </ul>
-                            <h3 class="section-subtitle">Aura Manifestation</h3>
-                                <p>Through Runic Knight training, Wind cores may be externally manifested as physical
-                                    auras that enhance:</p>
-                                <ul>
-                                    <li>Movement speed</li>
-                                    <li>Reaction time</li>
-                                    <li>Spatial processing</li>
-                                    <li>Combat maneuverability</li>
-                                </ul>
+                <p>Elemental Core Channel</p>
+                <h3 class="section-subtitle">Functional Nature</h3>
+                <p>Within Royastella, Wind exists as a high-mobility mana attribute governed by the System.
+                    Wind-aligned users specialize in rapid mana routing, evasive maneuverability, and
+                    accelerated casting sequences.</p>
+                <p>Wind cores frequently produce practitioners capable of high-frequency spell deployment and
+                    dynamic battlefield mobility.</p>
+                <h3 class="section-subtitle">Mechanical Properties</h3>
+                <ul>
+                    <li>Speed-based mana circulation</li>
+                    <li>Reflex enhancement</li>
+                    <li>Momentum conversion into offensive or defensive output</li>
+                    <li>High-velocity environmental manipulation</li>
+                </ul>
+                <h3 class="section-subtitle">Aura Manifestation</h3>
+                <p>Through Runic Knight training, Wind cores may be externally manifested as physical
+                    auras that enhance:</p>
+                <ul>
+                    <li>Movement speed</li>
+                    <li>Reaction time</li>
+                    <li>Spatial processing</li>
+                    <li>Combat maneuverability</li>
+                </ul>
 
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>
                         <tr>
@@ -447,49 +483,52 @@
                         </tr>
                     </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Casting Mechanism</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Harmonic alignment and kinetic resonance</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Spoken incantation and breath-driven phonetics</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Mana acceleration and controlled routing</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Casting Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Harmonic alignment and kinetic resonance</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Spoken incantation and breath-driven phonetics</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Mana acceleration and controlled routing</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Limitations</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Requires directional clarity and emotional momentum</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Requires breath precision and rhythmic articulation</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Limited by stamina, mana throughput, and reaction limits</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Stability and Risk</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Limitations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Requires directional clarity and emotional momentum</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Requires breath precision and rhythmic articulation</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Limited by stamina, mana throughput, and reaction limits</td>
+                        </tr>
+                    </tbody>
                 </table>
-
             </div>
         </section>
 
@@ -497,23 +536,23 @@
             <h2 class="section-title">Notable Users</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Lúmenai Practitioners</h3>
-                    <ul>
-                        <li><em>Pyara Dana</em> — Accesses Vaélia as part of full Tier 1 mastery</li>
-                        <li><em>Mahana Sahi</em> — Gains Vaélia through expanded multi-voice Essentia</li>
-                        <li><em>Oktusha Miko</em> — Specialized Kórelis (Martial Enhancement) practitioner derived from
-                            Vaélia</li>
-                    </ul>
-                    <h3 class="section-subtitle">Cymora Practitioners</h3>
-                        <ul>
-                            <li><em>Tiala Corsolis</em> — Utilizes Gwynt resonance for directional incantations</li>
-                            <li><em>Alulu Caelum</em> — Known to incorporate stabilizing airflow resonance patterns</li>
-                        </ul>
-                        <h3 class="section-subtitle">System Mana Users</h3>
-                            <ul>
-                                <li><em>Shini Thana</em> — Native Wind Core user emphasizing rapid strike mobility</li>
-                                <li><em>Riasa Sungbae</em> — Wind-aligned System practitioner with aerial combat
-                                    specialization</li>
-                            </ul>
+                <ul>
+                    <li><em>Pyara Dana</em> — Accesses Vaélia as part of full Tier 1 mastery</li>
+                    <li><em>Mahana Sahi</em> — Gains Vaélia through expanded multi-voice Essentia</li>
+                    <li><em>Oktusha Miko</em> — Specialized Kórelis (Martial Enhancement) practitioner derived from
+                        Vaélia</li>
+                </ul>
+                <h3 class="section-subtitle">Cymora Practitioners</h3>
+                <ul>
+                    <li><em>Tiala Corsolis</em> — Utilizes Gwynt resonance for directional incantations</li>
+                    <li><em>Alulu Caelum</em> — Known to incorporate stabilizing airflow resonance patterns</li>
+                </ul>
+                <h3 class="section-subtitle">System Mana Users</h3>
+                <ul>
+                    <li><em>Shini Thana</em> — Native Wind Core user emphasizing rapid strike mobility</li>
+                    <li><em>Riasa Sungbae</em> — Wind-aligned System practitioner with aerial combat
+                        specialization</li>
+                </ul>
 
             </div>
         </section>

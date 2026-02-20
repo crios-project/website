@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .content-section {
@@ -242,9 +243,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -284,7 +319,7 @@
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -323,29 +358,29 @@
             <h2 class="section-title">Lúmenai — Férroma</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Tier 2 — Conjoined Element</p>
-                    <p>Vaelóri Entwinement</p>
-                    <p>(Pýrua + Téroma)</p>
-                    <h3 class="section-subtitle">Essentia Profile</h3>
-                        <p><strong>Férroma</strong> represents the harmonization of ignition and permanence. It embodies
-                            transformation through forging, where raw mass is shaped into deliberate form through force
-                            and heat. Unlike Earth, which emphasizes endurance and weight, Férroma focuses on
-                            refinement, edge creation, and intentional structural design.</p>
-                        <p>Férroma practitioners frequently excel in defensive reinforcement and weapon manifestation.
-                        </p>
-                        <h3 class="section-subtitle">Magical Expression</h3>
-                            <p>Common manifestations include:</p>
-                            <ul>
-                                <li>Forged weapon and armor constructs</li>
-                                <li>Reinforced barriers and structural stabilization</li>
-                                <li>Magnetic field manipulation</li>
-                                <li>Metallic terrain shaping</li>
-                                <li>Precision reinforcement of allied constructs</li>
-                            </ul>
-                            <h3 class="section-subtitle">Harmonic Behavior</h3>
-                                <p>Férroma requires careful balancing between Pýrua's aggressive drive and Téroma's
-                                    stabilizing resistance. Excess ignition results in structural brittleness, while
-                                    excessive stability suppresses shaping potential.</p>
+                <p>Tier 2 — Conjoined Element</p>
+                <p>Vaelóri Entwinement</p>
+                <p>(Pýrua + Téroma)</p>
+                <h3 class="section-subtitle">Essentia Profile</h3>
+                <p><strong>Férroma</strong> represents the harmonization of ignition and permanence. It embodies
+                    transformation through forging, where raw mass is shaped into deliberate form through force
+                    and heat. Unlike Earth, which emphasizes endurance and weight, Férroma focuses on
+                    refinement, edge creation, and intentional structural design.</p>
+                <p>Férroma practitioners frequently excel in defensive reinforcement and weapon manifestation.
+                </p>
+                <h3 class="section-subtitle">Magical Expression</h3>
+                <p>Common manifestations include:</p>
+                <ul>
+                    <li>Forged weapon and armor constructs</li>
+                    <li>Reinforced barriers and structural stabilization</li>
+                    <li>Magnetic field manipulation</li>
+                    <li>Metallic terrain shaping</li>
+                    <li>Precision reinforcement of allied constructs</li>
+                </ul>
+                <h3 class="section-subtitle">Harmonic Behavior</h3>
+                <p>Férroma requires careful balancing between Pýrua's aggressive drive and Téroma's
+                    stabilizing resistance. Excess ignition results in structural brittleness, while
+                    excessive stability suppresses shaping potential.</p>
 
             </div>
         </section>
@@ -354,27 +389,27 @@
             <h2 class="section-title">Cymora — Tândâr</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Compound Elemental Root</p>
-                    <p>(Fire + Earth)</p>
-                    <h3 class="section-subtitle">Linguistic Role</h3>
-                        <p><strong>Tândâr</strong> expresses Cymoran resonance through dense phonetic grounding combined
-                            with sharp ignition consonants. The incantation structure emphasizes stability followed by
-                            directed shaping bursts, mirroring the forging process.</p>
-                        <h3 class="section-subtitle">Sonic Properties</h3>
-                            <ul>
-                                <li>Heavy, grounded vowel sustain</li>
-                                <li>Forceful plosive consonants to represent structural shaping</li>
-                                <li>Rhythmic hammer-like repetition patterns</li>
-                                <li>Low-register resonance emphasizing density and permanence</li>
-                            </ul>
-                            <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
-                                <p>Tândâr is typically used in spells that:</p>
-                                <ul>
-                                    <li>Generate weaponized constructs</li>
-                                    <li>Reinforce armor and fortifications</li>
-                                    <li>Manipulate magnetic or metallic structures</li>
-                                    <li>Bind or immobilize opponents through density amplification</li>
-                                </ul>
+                <p>Compound Elemental Root</p>
+                <p>(Fire + Earth)</p>
+                <h3 class="section-subtitle">Linguistic Role</h3>
+                <p><strong>Tândâr</strong> expresses Cymoran resonance through dense phonetic grounding combined
+                    with sharp ignition consonants. The incantation structure emphasizes stability followed by
+                    directed shaping bursts, mirroring the forging process.</p>
+                <h3 class="section-subtitle">Sonic Properties</h3>
+                <ul>
+                    <li>Heavy, grounded vowel sustain</li>
+                    <li>Forceful plosive consonants to represent structural shaping</li>
+                    <li>Rhythmic hammer-like repetition patterns</li>
+                    <li>Low-register resonance emphasizing density and permanence</li>
+                </ul>
+                <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
+                <p>Tândâr is typically used in spells that:</p>
+                <ul>
+                    <li>Generate weaponized constructs</li>
+                    <li>Reinforce armor and fortifications</li>
+                    <li>Manipulate magnetic or metallic structures</li>
+                    <li>Bind or immobilize opponents through density amplification</li>
+                </ul>
 
             </div>
         </section>
@@ -383,42 +418,43 @@
             <h2 class="section-title">System Mana — Metal Manifestation</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Canon Classification</h3>
-                    <p>Enemy-Exclusive Conjoined Elemental Discipline</p>
-                    <h3 class="section-subtitle">Canon Note</h3>
-                        <p>Within Royastella, conjoined (Tier 2 equivalent) elemental expressions <strong>do not
-                                naturally occur among native elemental cores</strong>. These manifestations are
-                            associated exclusively with hostile external forces attempting territorial expansion into
-                            Royastella.</p>
-                        <p>The <strong>Runic Knights of Starlite 7th</strong> are specifically tasked with defending the
-                            realm from these invaders, who frequently deploy advanced conjoined-element combat
-                            doctrines. These external aggressors are known to pursue expansion regardless of civilian or
-                            ecological destruction.</p>
-                        <h3 class="section-subtitle">Functional Nature</h3>
-                            <p>Metal manifestations in System combat are treated as advanced siege and warfare tools
-                                designed for conquest and environmental domination.</p>
-                            <h3 class="section-subtitle">Mechanical Properties</h3>
-                                <ul>
-                                    <li>Heavy weapon generation and reinforcement</li>
-                                    <li>Magnetic field combat manipulation</li>
-                                    <li>Adaptive armor growth</li>
-                                    <li>Terrain restructuring for battlefield control</li>
-                                    <li>Structural suppression of enemy defenses</li>
-                                </ul>
-                                <h3 class="section-subtitle">Tactical Doctrine</h3>
-                                    <p>Enemy Metal specialists often serve as:</p>
-                                    <ul>
-                                        <li>Frontline siege units</li>
-                                        <li>Defensive breachers</li>
-                                        <li>Battlefield architects</li>
-                                        <li>High-durability shock troops</li>
-                                    </ul>
+                <p>Enemy-Exclusive Conjoined Elemental Discipline</p>
+                <h3 class="section-subtitle">Canon Note</h3>
+                <p>Within Royastella, conjoined (Tier 2 equivalent) elemental expressions <strong>do not
+                        naturally occur among native elemental cores</strong>. These manifestations are
+                    associated exclusively with hostile external forces attempting territorial expansion into
+                    Royastella.</p>
+                <p>The <strong>Runic Knights of Starlite 7th</strong> are specifically tasked with defending the
+                    realm from these invaders, who frequently deploy advanced conjoined-element combat
+                    doctrines. These external aggressors are known to pursue expansion regardless of civilian or
+                    ecological destruction.</p>
+                <h3 class="section-subtitle">Functional Nature</h3>
+                <p>Metal manifestations in System combat are treated as advanced siege and warfare tools
+                    designed for conquest and environmental domination.</p>
+                <h3 class="section-subtitle">Mechanical Properties</h3>
+                <ul>
+                    <li>Heavy weapon generation and reinforcement</li>
+                    <li>Magnetic field combat manipulation</li>
+                    <li>Adaptive armor growth</li>
+                    <li>Terrain restructuring for battlefield control</li>
+                    <li>Structural suppression of enemy defenses</li>
+                </ul>
+                <h3 class="section-subtitle">Tactical Doctrine</h3>
+                <p>Enemy Metal specialists often serve as:</p>
+                <ul>
+                    <li>Frontline siege units</li>
+                    <li>Defensive breachers</li>
+                    <li>Battlefield architects</li>
+                    <li>High-durability shock troops</li>
+                </ul>
 
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>
                         <tr>
@@ -441,47 +477,51 @@
                         </tr>
                     </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Casting Mechanism</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Dual harmonic forging through ignition and stabilization</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Dense phonetic resonance combined with rhythmic structural pulses</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>High-density mana conversion into structural weapon constructs</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Casting Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Dual harmonic forging through ignition and stabilization</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Dense phonetic resonance combined with rhythmic structural pulses</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>High-density mana conversion into structural weapon constructs</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Limitations</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Requires harmonic equilibrium between aggression and stability</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Incantations require sustained vocal density and rhythmic precision</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Metal constructs consume large quantities of mana and reduce mobility efficiency</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Stability and Limits</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Limitations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Requires harmonic equilibrium between aggression and stability</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Incantations require sustained vocal density and rhythmic precision</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Metal constructs consume large quantities of mana and reduce mobility efficiency</td>
+                        </tr>
+                    </tbody>
                 </table>
 
             </div>
@@ -491,22 +531,22 @@
             <h2 class="section-title">Notable Users</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Lúmenai Practitioners</h3>
-                    <ul>
-                        <li><em>Aran Letale</em> — Primary Férroma specialist among the Lovely Hearts</li>
-                        <li><em>Pyara Dana</em> — Gains Férroma access during Heart Beat harmonic expansion</li>
-                        <li><em>Mahana Sahi</em> — Demonstrates advanced multi-tier Férroma integration during Crescendo
-                            and Finalis Grande states</li>
-                    </ul>
-                    <h3 class="section-subtitle">Cymora Practitioners</h3>
-                        <ul>
-                            <li>Nexsicon metal-resonance casters frequently serve as construct engineers and dimensional
-                                fortification specialists.</li>
-                        </ul>
-                        <h3 class="section-subtitle">System Manifestation Users</h3>
-                            <ul>
-                                <li>External conquest forces opposing Royastella</li>
-                                <li>Elite siege-class invaders encountered by the Runic Knights of Starlite 7th</li>
-                            </ul>
+                <ul>
+                    <li><em>Aran Letale</em> — Primary Férroma specialist among the Lovely Hearts</li>
+                    <li><em>Pyara Dana</em> — Gains Férroma access during Heart Beat harmonic expansion</li>
+                    <li><em>Mahana Sahi</em> — Demonstrates advanced multi-tier Férroma integration during Crescendo
+                        and Finalis Grande states</li>
+                </ul>
+                <h3 class="section-subtitle">Cymora Practitioners</h3>
+                <ul>
+                    <li>Nexsicon metal-resonance casters frequently serve as construct engineers and dimensional
+                        fortification specialists.</li>
+                </ul>
+                <h3 class="section-subtitle">System Manifestation Users</h3>
+                <ul>
+                    <li>External conquest forces opposing Royastella</li>
+                    <li>Elite siege-class invaders encountered by the Runic Knights of Starlite 7th</li>
+                </ul>
 
             </div>
         </section>

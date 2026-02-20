@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .content-section {
@@ -242,9 +243,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -284,7 +319,7 @@
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -323,30 +358,30 @@
             <h2 class="section-title">Lúmenai — Víratha</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Tier 2 — Conjoined Element</p>
-                    <p>Vaelóri Entwinement</p>
-                    <p>(Áquora + Téroma)</p>
-                    <h3 class="section-subtitle">Essentia Profile</h3>
-                        <p><strong>Víratha</strong> represents life structured through memory. It is the Essentia of
-                            growth that remembers its origins, allowing magic to shape living matter with continuity and
-                            preservation. Víratha practitioners often display strong emotional ties to environment,
-                            community, and long-term stability.</p>
-                        <p>Víratha does not create life from nothing; it accelerates, reshapes, or harmonizes existing
-                            organic systems.</p>
-                        <h3 class="section-subtitle">Magical Expression</h3>
-                            <p>Common manifestations include:</p>
-                            <ul>
-                                <li>Plant growth acceleration</li>
-                                <li>Biological regeneration and healing support</li>
-                                <li>Terrain manipulation through root and vine control</li>
-                                <li>Organic barrier formation</li>
-                                <li>Seed memory activation and life restoration</li>
-                                <li>Symbiotic plant constructs</li>
-                            </ul>
-                            <h3 class="section-subtitle">Harmonic Behavior</h3>
-                                <p>Víratha requires emotional continuity and environmental awareness. Practitioners who
-                                    lose focus or emotional grounding may cause uncontrolled growth, parasitic
-                                    expansion, or unstable organic constructs.</p>
+                <p>Tier 2 — Conjoined Element</p>
+                <p>Vaelóri Entwinement</p>
+                <p>(Áquora + Téroma)</p>
+                <h3 class="section-subtitle">Essentia Profile</h3>
+                <p><strong>Víratha</strong> represents life structured through memory. It is the Essentia of
+                    growth that remembers its origins, allowing magic to shape living matter with continuity and
+                    preservation. Víratha practitioners often display strong emotional ties to environment,
+                    community, and long-term stability.</p>
+                <p>Víratha does not create life from nothing; it accelerates, reshapes, or harmonizes existing
+                    organic systems.</p>
+                <h3 class="section-subtitle">Magical Expression</h3>
+                <p>Common manifestations include:</p>
+                <ul>
+                    <li>Plant growth acceleration</li>
+                    <li>Biological regeneration and healing support</li>
+                    <li>Terrain manipulation through root and vine control</li>
+                    <li>Organic barrier formation</li>
+                    <li>Seed memory activation and life restoration</li>
+                    <li>Symbiotic plant constructs</li>
+                </ul>
+                <h3 class="section-subtitle">Harmonic Behavior</h3>
+                <p>Víratha requires emotional continuity and environmental awareness. Practitioners who
+                    lose focus or emotional grounding may cause uncontrolled growth, parasitic
+                    expansion, or unstable organic constructs.</p>
 
             </div>
         </section>
@@ -355,29 +390,29 @@
             <h2 class="section-title">Cymora — Nahdâr</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Compound Elemental Root</p>
-                    <p>(Water + Earth)</p>
-                    <h3 class="section-subtitle">Linguistic Role</h3>
-                        <p><strong>Nahdâr</strong> uses layered tonal repetition designed to mimic natural growth
-                            cycles. Cymoran Plant incantations frequently rely on slow cadence, vowel elongation, and
-                            rhythm patterns mirroring root spread or vine expansion.</p>
-                        <h3 class="section-subtitle">Sonic Properties</h3>
-                            <ul>
-                                <li>Sustained vowel resonance reflecting gradual growth</li>
-                                <li>Layered incantation phrasing representing organic branching</li>
-                                <li>Stable consonant anchoring reinforcing environmental binding</li>
-                                <li>Multi-line rhythmic repetition simulating natural life cycles</li>
-                            </ul>
-                            <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
-                                <p>Nahdâr is commonly used in spells that:</p>
-                                <ul>
-                                    <li>Accelerate plant growth and environmental restoration</li>
-                                    <li>Summon or shape living vegetation constructs</li>
-                                    <li>Enhance regenerative biological processes</li>
-                                    <li>Bind or immobilize targets using organic matter</li>
-                                    <li>Manipulate ecosystems or natural terrain</li>
-                                    <li>Establish protective living barriers</li>
-                                </ul>
+                <p>Compound Elemental Root</p>
+                <p>(Water + Earth)</p>
+                <h3 class="section-subtitle">Linguistic Role</h3>
+                <p><strong>Nahdâr</strong> uses layered tonal repetition designed to mimic natural growth
+                    cycles. Cymoran Plant incantations frequently rely on slow cadence, vowel elongation, and
+                    rhythm patterns mirroring root spread or vine expansion.</p>
+                <h3 class="section-subtitle">Sonic Properties</h3>
+                <ul>
+                    <li>Sustained vowel resonance reflecting gradual growth</li>
+                    <li>Layered incantation phrasing representing organic branching</li>
+                    <li>Stable consonant anchoring reinforcing environmental binding</li>
+                    <li>Multi-line rhythmic repetition simulating natural life cycles</li>
+                </ul>
+                <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
+                <p>Nahdâr is commonly used in spells that:</p>
+                <ul>
+                    <li>Accelerate plant growth and environmental restoration</li>
+                    <li>Summon or shape living vegetation constructs</li>
+                    <li>Enhance regenerative biological processes</li>
+                    <li>Bind or immobilize targets using organic matter</li>
+                    <li>Manipulate ecosystems or natural terrain</li>
+                    <li>Establish protective living barriers</li>
+                </ul>
 
             </div>
         </section>
@@ -386,40 +421,41 @@
             <h2 class="section-title">System Mana — External Plant Entwinement</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Canon Classification</h3>
-                    <p>External Hostile Element</p>
-                    <p>Enemy Expansion-Class Manifestation</p>
-                    <h3 class="section-subtitle">Functional Nature</h3>
-                        <p>In Royastella, Plant entwinements are not naturally compatible with native elemental cores.
-                            Canon doctrine classifies all Tier 2 entwinements, including Plant, as invasive forces
-                            primarily wielded by foreign entities or interrealm aggressors.</p>
-                        <p>Plant-based threats often weaponize ecological takeover, biological assimilation, or
-                            environmental domination.</p>
-                        <h3 class="section-subtitle">Mechanical Properties</h3>
-                            <ul>
-                                <li>Rapid terrain conversion through invasive growth</li>
-                                <li>Biological absorption or parasitic assimilation</li>
-                                <li>Regenerative enemy fortification</li>
-                                <li>Living siege constructs</li>
-                                <li>Battlefield obstruction through organic expansion</li>
-                                <li>Environmental corruption or ecosystem hijacking</li>
-                            </ul>
-                            <h3 class="section-subtitle">Tactical Doctrine</h3>
-                                <p>Plant-based invaders frequently operate as:</p>
-                                <ul>
-                                    <li>Territory denial forces</li>
-                                    <li>Long-duration siege or occupation specialists</li>
-                                    <li>Environmental destabilization agents</li>
-                                    <li>Regenerative frontline or defensive reinforcement entities</li>
-                                </ul>
-                                <p>Starlite 7th doctrine identifies Plant entwinement outbreaks as high-risk expansion
-                                    scenarios requiring containment or eradication.</p>
+                <p>External Hostile Element</p>
+                <p>Enemy Expansion-Class Manifestation</p>
+                <h3 class="section-subtitle">Functional Nature</h3>
+                <p>In Royastella, Plant entwinements are not naturally compatible with native elemental cores.
+                    Canon doctrine classifies all Tier 2 entwinements, including Plant, as invasive forces
+                    primarily wielded by foreign entities or interrealm aggressors.</p>
+                <p>Plant-based threats often weaponize ecological takeover, biological assimilation, or
+                    environmental domination.</p>
+                <h3 class="section-subtitle">Mechanical Properties</h3>
+                <ul>
+                    <li>Rapid terrain conversion through invasive growth</li>
+                    <li>Biological absorption or parasitic assimilation</li>
+                    <li>Regenerative enemy fortification</li>
+                    <li>Living siege constructs</li>
+                    <li>Battlefield obstruction through organic expansion</li>
+                    <li>Environmental corruption or ecosystem hijacking</li>
+                </ul>
+                <h3 class="section-subtitle">Tactical Doctrine</h3>
+                <p>Plant-based invaders frequently operate as:</p>
+                <ul>
+                    <li>Territory denial forces</li>
+                    <li>Long-duration siege or occupation specialists</li>
+                    <li>Environmental destabilization agents</li>
+                    <li>Regenerative frontline or defensive reinforcement entities</li>
+                </ul>
+                <p>Starlite 7th doctrine identifies Plant entwinement outbreaks as high-risk expansion
+                    scenarios requiring containment or eradication.</p>
 
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>
                         <tr>
@@ -443,48 +479,74 @@
                         </tr>
                     </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Casting Mechanism</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Harmonic synchronization of life memory and structural stability</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Layered chant cycles simulating organic growth rhythm</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Mana-driven biological conversion and environmental restructuring</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Casting Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Harmonic resonance and emotional synchronization</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Layered vocalization and rhythmic pattern matching</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Mana-driven biological conversion and environmental restructuring</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Limitations</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Emotional or environmental dissonance may cause uncontrolled organic expansion</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Improper cadence destabilizes growth control and may produce chaotic plant manifestation
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Biological overload risks ecosystem collapse or uncontrollable expansion zones</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Stability and Risk</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Stability and Risk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Harmonic synchronization of life memory and structural stability</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Layered chant cycles simulating organic growth rhythm</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Mana-driven biological conversion and environmental restructuring</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3 class="section-subtitle">Limitations</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Limitations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Emotional or environmental dissonance may cause uncontrolled organic expansion</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Improper cadence destabilizes growth control and may produce chaotic plant manifestation
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Biological overload risks ecosystem collapse or uncontrollable expansion zones</td>
+                        </tr>
                 </table>
 
             </div>
@@ -494,24 +556,24 @@
             <h2 class="section-title">Notable Users</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Lúmenai Practitioners</h3>
-                    <ul>
-                        <li><em>Zafara Quedar</em> — Primary Víratha specialist focusing on biomancy, regeneration, and
-                            living terrain manipulation</li>
-                        <li><em>Pyara Dana</em> — Gains Víratha access during Heart Beat harmonic expansion</li>
-                        <li><em>Mahana Sahi</em> — Gains Plant-tier harmonic capability after Heart Symphony awakening
-                        </li>
-                    </ul>
-                    <h3 class="section-subtitle">Cymora Practitioners</h3>
-                        <ul>
-                            <li>Nexsicon life-chanters and ecosystem ritualists specializing in environmental
-                                harmonization and growth invocation</li>
-                        </ul>
-                        <h3 class="section-subtitle">System Manifestation Users</h3>
-                            <ul>
-                                <li>External interrealm biological invasion forces</li>
-                                <li>Expansionist enemy factions seeking territorial assimilation</li>
-                                <li>Hostile organic siege constructs and parasitic ecosystem manipulators</li>
-                            </ul>
+                <ul>
+                    <li><em>Zafara Quedar</em> — Primary Víratha specialist focusing on biomancy, regeneration, and
+                        living terrain manipulation</li>
+                    <li><em>Pyara Dana</em> — Gains Víratha access during Heart Beat harmonic expansion</li>
+                    <li><em>Mahana Sahi</em> — Gains Plant-tier harmonic capability after Heart Symphony awakening
+                    </li>
+                </ul>
+                <h3 class="section-subtitle">Cymora Practitioners</h3>
+                <ul>
+                    <li>Nexsicon life-chanters and ecosystem ritualists specializing in environmental
+                        harmonization and growth invocation</li>
+                </ul>
+                <h3 class="section-subtitle">System Manifestation Users</h3>
+                <ul>
+                    <li>External interrealm biological invasion forces</li>
+                    <li>Expansionist enemy factions seeking territorial assimilation</li>
+                    <li>Hostile organic siege constructs and parasitic ecosystem manipulators</li>
+                </ul>
 
             </div>
         </section>

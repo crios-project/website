@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .content-section {
@@ -242,9 +243,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -284,7 +319,7 @@
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -323,29 +358,29 @@
             <h2 class="section-title">Lúmenai — Sýlphae</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Tier 2 — Conjoined Element</p>
-                    <p>Vaelóri Entwinement</p>
-                    <p>(Pýrua + Vaélia)</p>
-                    <h3 class="section-subtitle">Essentia Profile</h3>
-                        <p><strong>Sýlphae</strong> represents the simultaneous voicing of ignition and motion,
-                            producing explosive bursts of speed and energy. Rather than merely electricity, Sýlphae
-                            embodies the moment where thought, motion, and force become indistinguishable.</p>
-                        <p>Sýlphae is closely associated with instinct, clarity under pressure, and decisive action.</p>
-                        <h3 class="section-subtitle">Magical Expression</h3>
-                            <p>Common manifestations include:</p>
-                            <ul>
-                                <li>Electrical discharge attacks</li>
-                                <li>Speed and reflex augmentation</li>
-                                <li>Neural stimulation or paralysis</li>
-                                <li>Short-distance teleportative burst movement</li>
-                                <li>Precision strike techniques</li>
-                                <li>Atmospheric ionization and storm generation</li>
-                            </ul>
-                            <h3 class="section-subtitle">Harmonic Behavior</h3>
-                                <p>Sýlphae demands aggressive harmonic alignment. Excess Pýrua results in uncontrolled
-                                    destructive discharge, while excessive Vaélia causes unstable speed bursts or
-                                    incomplete spell manifestation. Stable Sýlphae casters are characterized by
-                                    exceptional mental clarity and rapid decision-making capability.</p>
+                <p>Tier 2 — Conjoined Element</p>
+                <p>Vaelóri Entwinement</p>
+                <p>(Pýrua + Vaélia)</p>
+                <h3 class="section-subtitle">Essentia Profile</h3>
+                <p><strong>Sýlphae</strong> represents the simultaneous voicing of ignition and motion,
+                    producing explosive bursts of speed and energy. Rather than merely electricity, Sýlphae
+                    embodies the moment where thought, motion, and force become indistinguishable.</p>
+                <p>Sýlphae is closely associated with instinct, clarity under pressure, and decisive action.</p>
+                <h3 class="section-subtitle">Magical Expression</h3>
+                <p>Common manifestations include:</p>
+                <ul>
+                    <li>Electrical discharge attacks</li>
+                    <li>Speed and reflex augmentation</li>
+                    <li>Neural stimulation or paralysis</li>
+                    <li>Short-distance teleportative burst movement</li>
+                    <li>Precision strike techniques</li>
+                    <li>Atmospheric ionization and storm generation</li>
+                </ul>
+                <h3 class="section-subtitle">Harmonic Behavior</h3>
+                <p>Sýlphae demands aggressive harmonic alignment. Excess Pýrua results in uncontrolled
+                    destructive discharge, while excessive Vaélia causes unstable speed bursts or
+                    incomplete spell manifestation. Stable Sýlphae casters are characterized by
+                    exceptional mental clarity and rapid decision-making capability.</p>
 
             </div>
         </section>
@@ -354,29 +389,29 @@
             <h2 class="section-title">Cymora — Tângwynt</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Compound Elemental Root</p>
-                    <p>(Fire + Wind)</p>
-                    <h3 class="section-subtitle">Linguistic Role</h3>
-                        <p><strong>Tângwynt</strong> produces sharp, clipped vocal patterns designed to emulate
-                            electrical discharge. Cymoran Lightning incantations often rely on abrupt consonant strikes
-                            and rapidly shortened syllables to replicate sudden acceleration and discharge phenomena.
-                        </p>
-                        <h3 class="section-subtitle">Sonic Properties</h3>
-                            <ul>
-                                <li>Fast, percussive syllable timing</li>
-                                <li>Sudden vowel compression mimicking voltage spikes</li>
-                                <li>Repetitive consonant strikes to sustain electrical flow</li>
-                                <li>Breath interruption patterns representing discharge cycles</li>
-                            </ul>
-                            <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
-                                <p>Tângwynt is commonly used in spells that:</p>
-                                <ul>
-                                    <li>Deliver high-speed projectile strikes</li>
-                                    <li>Amplify physical speed or reflexes</li>
-                                    <li>Disrupt magical or neurological stability</li>
-                                    <li>Generate atmospheric storm or ionization fields</li>
-                                    <li>Enable rapid movement or short-range displacement</li>
-                                </ul>
+                <p>Compound Elemental Root</p>
+                <p>(Fire + Wind)</p>
+                <h3 class="section-subtitle">Linguistic Role</h3>
+                <p><strong>Tângwynt</strong> produces sharp, clipped vocal patterns designed to emulate
+                    electrical discharge. Cymoran Lightning incantations often rely on abrupt consonant strikes
+                    and rapidly shortened syllables to replicate sudden acceleration and discharge phenomena.
+                </p>
+                <h3 class="section-subtitle">Sonic Properties</h3>
+                <ul>
+                    <li>Fast, percussive syllable timing</li>
+                    <li>Sudden vowel compression mimicking voltage spikes</li>
+                    <li>Repetitive consonant strikes to sustain electrical flow</li>
+                    <li>Breath interruption patterns representing discharge cycles</li>
+                </ul>
+                <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
+                <p>Tângwynt is commonly used in spells that:</p>
+                <ul>
+                    <li>Deliver high-speed projectile strikes</li>
+                    <li>Amplify physical speed or reflexes</li>
+                    <li>Disrupt magical or neurological stability</li>
+                    <li>Generate atmospheric storm or ionization fields</li>
+                    <li>Enable rapid movement or short-range displacement</li>
+                </ul>
 
             </div>
         </section>
@@ -385,39 +420,40 @@
             <h2 class="section-title">System Mana — Lightning Manifestation</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Canon Classification</h3>
-                    <p>Enemy-Exclusive Conjoined Elemental Discipline</p>
-                    <h3 class="section-subtitle">Canon Note</h3>
-                        <p>In Royastella, native elemental cores only correspond to foundational elements. Lightning
-                            manifestations therefore appear primarily among invading forces or external entities seeking
-                            to overwhelm defensive infrastructure through overwhelming speed and energy projection.</p>
-                        <p>The <strong>Runic Knights of Starlite 7th</strong> frequently engage Lightning-aligned
-                            invaders specializing in rapid strike warfare and coordinated shock assaults.</p>
-                        <h3 class="section-subtitle">Functional Nature</h3>
-                            <p>System Lightning manifestations emphasize kinetic dominance, battlefield speed control,
-                                and instantaneous strike capacity rather than sustained engagement.</p>
-                            <h3 class="section-subtitle">Mechanical Properties</h3>
-                                <ul>
-                                    <li>Reflex and speed enhancement techniques</li>
-                                    <li>Electrical weapon augmentation</li>
-                                    <li>Mobility-based combat maneuvering</li>
-                                    <li>Shock-based crowd suppression</li>
-                                    <li>Mana surge amplification for burst combat output</li>
-                                </ul>
-                                <h3 class="section-subtitle">Tactical Doctrine</h3>
-                                    <p>Lightning specialists within invasion forces typically function as:</p>
-                                    <ul>
-                                        <li>Shock troopers</li>
-                                        <li>Rapid assault commanders</li>
-                                        <li>Disruption operatives</li>
-                                        <li>High-speed reconnaissance and elimination units</li>
-                                    </ul>
+                <p>Enemy-Exclusive Conjoined Elemental Discipline</p>
+                <h3 class="section-subtitle">Canon Note</h3>
+                <p>In Royastella, native elemental cores only correspond to foundational elements. Lightning
+                    manifestations therefore appear primarily among invading forces or external entities seeking
+                    to overwhelm defensive infrastructure through overwhelming speed and energy projection.</p>
+                <p>The <strong>Runic Knights of Starlite 7th</strong> frequently engage Lightning-aligned
+                    invaders specializing in rapid strike warfare and coordinated shock assaults.</p>
+                <h3 class="section-subtitle">Functional Nature</h3>
+                <p>System Lightning manifestations emphasize kinetic dominance, battlefield speed control,
+                    and instantaneous strike capacity rather than sustained engagement.</p>
+                <h3 class="section-subtitle">Mechanical Properties</h3>
+                <ul>
+                    <li>Reflex and speed enhancement techniques</li>
+                    <li>Electrical weapon augmentation</li>
+                    <li>Mobility-based combat maneuvering</li>
+                    <li>Shock-based crowd suppression</li>
+                    <li>Mana surge amplification for burst combat output</li>
+                </ul>
+                <h3 class="section-subtitle">Tactical Doctrine</h3>
+                <p>Lightning specialists within invasion forces typically function as:</p>
+                <ul>
+                    <li>Shock troopers</li>
+                    <li>Rapid assault commanders</li>
+                    <li>Disruption operatives</li>
+                    <li>High-speed reconnaissance and elimination units</li>
+                </ul>
 
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>
                         <tr>
@@ -440,47 +476,51 @@
                         </tr>
                     </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Casting Mechanism</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Harmonic fusion of ignition impulse and directional motion</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Percussive incantation emphasizing rapid discharge resonance</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Mana routing focused on neural stimulation and kinetic burst output</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Casting Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Harmonic fusion of ignition impulse and directional motion</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Percussive incantation emphasizing rapid discharge resonance</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Mana routing focused on neural stimulation and kinetic burst output</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Limitations</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Harmonic overload risks nervous system collapse or uncontrolled discharge</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Mis-timed cadence causes spell misfire or uncontrolled arc spread</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Extremely high mana drain during sustained acceleration or multi-strike chaining</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Stability and Limits</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Limitations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Harmonic overload risks nervous system collapse or uncontrolled discharge</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Mis-timed cadence causes spell misfire or uncontrolled arc spread</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Extremely high mana drain during sustained acceleration or multi-strike chaining</td>
+                        </tr>
+                    </tbody>
                 </table>
 
             </div>
@@ -490,23 +530,23 @@
             <h2 class="section-title">Notable Users</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Lúmenai Practitioners</h3>
-                    <ul>
-                        <li><em>Pyara Dana</em> — Gains Sýlphae access during Heart Beat harmonic expansion</li>
-                        <li><em>Mahana Sahi</em> — Initially believed to be solely Sýlphae-aligned before multi-tier
-                            harmonic awakening</li>
-                        <li><em>Mahana Sahi</em> (Heart Symphony / Heart Crescendo) — Demonstrates advanced
-                            Lightning-tier harmonic dominance</li>
-                    </ul>
-                    <h3 class="section-subtitle">Cymora Practitioners</h3>
-                        <ul>
-                            <li>Nexsicon storm-channel casters specializing in rapid discharge incantation structures
-                            </li>
-                        </ul>
-                        <h3 class="section-subtitle">System Manifestation Users</h3>
-                            <ul>
-                                <li>External invasion forces employing shock assault disciplines</li>
-                                <li>Lightning-aligned combatants encountered by the Runic Knights of Starlite 7th</li>
-                            </ul>
+                <ul>
+                    <li><em>Pyara Dana</em> — Gains Sýlphae access during Heart Beat harmonic expansion</li>
+                    <li><em>Mahana Sahi</em> — Initially believed to be solely Sýlphae-aligned before multi-tier
+                        harmonic awakening</li>
+                    <li><em>Mahana Sahi</em> (Heart Symphony / Heart Crescendo) — Demonstrates advanced
+                        Lightning-tier harmonic dominance</li>
+                </ul>
+                <h3 class="section-subtitle">Cymora Practitioners</h3>
+                <ul>
+                    <li>Nexsicon storm-channel casters specializing in rapid discharge incantation structures
+                    </li>
+                </ul>
+                <h3 class="section-subtitle">System Manifestation Users</h3>
+                <ul>
+                    <li>External invasion forces employing shock assault disciplines</li>
+                    <li>Lightning-aligned combatants encountered by the Runic Knights of Starlite 7th</li>
+                </ul>
 
             </div>
         </section>

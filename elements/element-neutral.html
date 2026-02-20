@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .content-section {
@@ -242,9 +243,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -300,34 +335,34 @@
             <h2 class="section-title">Lúmenai — Éthera</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Tier 1 — Basic Element</p>
-                    <p>(The Five Open Voices)</p>
-                    <h3 class="section-subtitle">Essentia Profile</h3>
-                        <p><strong>Éthera</strong> represents raw will, unshaped intent, and magical breath. It is the
-                            most fundamental expression of harmonic resonance and is considered the foundation upon
-                            which all other Essentia are sung.</p>
-                        <p>Éthera defines <strong>control</strong>, not destructive power.</p>
+                <p>Tier 1 — Basic Element</p>
+                <p>(The Five Open Voices)</p>
+                <h3 class="section-subtitle">Essentia Profile</h3>
+                <p><strong>Éthera</strong> represents raw will, unshaped intent, and magical breath. It is the
+                    most fundamental expression of harmonic resonance and is considered the foundation upon
+                    which all other Essentia are sung.</p>
+                <p>Éthera defines <strong>control</strong>, not destructive power.</p>
 
-                        <h3 class="section-subtitle">Magical Expression</h3>
-                            <p>Common Éthera manifestations include:</p>
-                            <ul>
-                                <li>Harmonic barriers and shielding</li>
-                                <li>Force projection and repulsion fields</li>
-                                <li>Spell stabilization and amplification</li>
-                                <li>Dispel and counter-resonance techniques</li>
-                                <li>Structural reinforcement of allied casting</li>
-                                <li>Magical channeling and resonance redirection</li>
-                            </ul>
+                <h3 class="section-subtitle">Magical Expression</h3>
+                <p>Common Éthera manifestations include:</p>
+                <ul>
+                    <li>Harmonic barriers and shielding</li>
+                    <li>Force projection and repulsion fields</li>
+                    <li>Spell stabilization and amplification</li>
+                    <li>Dispel and counter-resonance techniques</li>
+                    <li>Structural reinforcement of allied casting</li>
+                    <li>Magical channeling and resonance redirection</li>
+                </ul>
 
-                            <h3 class="section-subtitle">Harmonic Behavior</h3>
-                                <p>Éthera requires:</p>
-                                <ul>
-                                    <li>Strong emotional clarity</li>
-                                    <li>Exceptional resonance control</li>
-                                    <li>Stable vocal authority</li>
-                                </ul>
-                                <p>Because it lacks elemental direction, Éthera is often considered difficult to master
-                                    despite its Tier 1 classification.</p>
+                <h3 class="section-subtitle">Harmonic Behavior</h3>
+                <p>Éthera requires:</p>
+                <ul>
+                    <li>Strong emotional clarity</li>
+                    <li>Exceptional resonance control</li>
+                    <li>Stable vocal authority</li>
+                </ul>
+                <p>Because it lacks elemental direction, Éthera is often considered difficult to master
+                    despite its Tier 1 classification.</p>
 
             </div>
         </section>
@@ -336,28 +371,28 @@
             <h2 class="section-title">Cymora — Nerth</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Primary Sonic Root</p>
-                    <h3 class="section-subtitle">Linguistic Role</h3>
-                        <p><strong>Nerth</strong> serves as Cymora's neutral resonance anchor. It governs spell
-                            architecture rather than elemental output.</p>
-                        <p>Nerth incantations are commonly used to:</p>
-                        <ul>
-                            <li>Initiate spellcasting frameworks</li>
-                            <li>Stabilize volatile incantations</li>
-                            <li>Suppress or disrupt hostile resonance</li>
-                            <li>Construct defensive harmonic lattices</li>
-                            <li>Maintain sustained ritual structures</li>
-                        </ul>
+                <p>Primary Sonic Root</p>
+                <h3 class="section-subtitle">Linguistic Role</h3>
+                <p><strong>Nerth</strong> serves as Cymora's neutral resonance anchor. It governs spell
+                    architecture rather than elemental output.</p>
+                <p>Nerth incantations are commonly used to:</p>
+                <ul>
+                    <li>Initiate spellcasting frameworks</li>
+                    <li>Stabilize volatile incantations</li>
+                    <li>Suppress or disrupt hostile resonance</li>
+                    <li>Construct defensive harmonic lattices</li>
+                    <li>Maintain sustained ritual structures</li>
+                </ul>
 
-                        <h3 class="section-subtitle">Sonic Properties</h3>
-                            <p>Nerth casting emphasizes:</p>
-                            <ul>
-                                <li>Strong consonant grounding</li>
-                                <li>Balanced rhythmic pacing</li>
-                                <li>Resonance symmetry</li>
-                            </ul>
-                            <p>Nerth is frequently layered into complex Cymora incantations to ensure structural
-                                stability.</p>
+                <h3 class="section-subtitle">Sonic Properties</h3>
+                <p>Nerth casting emphasizes:</p>
+                <ul>
+                    <li>Strong consonant grounding</li>
+                    <li>Balanced rhythmic pacing</li>
+                    <li>Resonance symmetry</li>
+                </ul>
+                <p>Nerth is frequently layered into complex Cymora incantations to ensure structural
+                    stability.</p>
 
             </div>
         </section>
@@ -366,32 +401,33 @@
             <h2 class="section-title">System Mana — Neutral Output</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Canon Classification</h3>
-                    <p>Baseline Mana Expression</p>
-                    <h3 class="section-subtitle">Functional Nature</h3>
-                        <p>Within Royastella, Neutral mana represents raw System energy before elemental conversion. It
-                            is the default form of mana storage, circulation, and technical spell execution.</p>
-                        <p>Neutral System magic is highly versatile and heavily relied upon in structured combat and
-                            technical spell engineering.</p>
+                <p>Baseline Mana Expression</p>
+                <h3 class="section-subtitle">Functional Nature</h3>
+                <p>Within Royastella, Neutral mana represents raw System energy before elemental conversion. It
+                    is the default form of mana storage, circulation, and technical spell execution.</p>
+                <p>Neutral System magic is highly versatile and heavily relied upon in structured combat and
+                    technical spell engineering.</p>
 
-                        <h3 class="section-subtitle">Mechanical Properties</h3>
-                            <p>Neutral mana techniques include:</p>
-                            <ul>
-                                <li>Barrier projection</li>
-                                <li>Energy force constructs</li>
-                                <li>Mana reinforcement and amplification</li>
-                                <li>Spell conversion scaffolding</li>
-                                <li>Anti-magic suppression techniques</li>
-                                <li>Aura stabilization</li>
-                            </ul>
-                            <p>Unlike elemental cores, Neutral output can be accessed by nearly all trained System
-                                users.</p>
+                <h3 class="section-subtitle">Mechanical Properties</h3>
+                <p>Neutral mana techniques include:</p>
+                <ul>
+                    <li>Barrier projection</li>
+                    <li>Energy force constructs</li>
+                    <li>Mana reinforcement and amplification</li>
+                    <li>Spell conversion scaffolding</li>
+                    <li>Anti-magic suppression techniques</li>
+                    <li>Aura stabilization</li>
+                </ul>
+                <p>Unlike elemental cores, Neutral output can be accessed by nearly all trained System
+                    users.</p>
 
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>
                         <tr>
@@ -414,47 +450,51 @@
                         </tr>
                     </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Casting Mechanism</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Emotional and harmonic voice alignment</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Resonance-key incantations structuring spell architecture</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Energy shaping through internal mana control and System techniques</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Casting Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Emotional and harmonic voice alignment</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Resonance-key incantations structuring spell architecture</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Energy shaping through internal mana control and System techniques</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Primary Function</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Enables stable multi-voice casting</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Supports incantation integrity</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Provides universal spell engineering framework</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Stability and Risk</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Primary Function</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Enables stable multi-voice casting</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Supports incantation integrity</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Provides universal spell engineering framework</td>
+                        </tr>
+                    </tbody>
                 </table>
 
             </div>
@@ -464,11 +504,11 @@
             <h2 class="section-title">Notable Users</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Confirmed Users</h3>
-                    <ul>
-                        <li><em>Kali Dana</em> — Master of unaspected resonance and team-wide magical amplification</li>
-                        <li><em>Heart Beat</em> — Gains broad Neutral spell scaffolding capability</li>
-                        <li><em>Heart Symphony</em> — Demonstrates large-scale multi-element stabilization</li>
-                    </ul>
+                <ul>
+                    <li><em>Kali Dana</em> — Master of unaspected resonance and team-wide magical amplification</li>
+                    <li><em>Heart Beat</em> — Gains broad Neutral spell scaffolding capability</li>
+                    <li><em>Heart Symphony</em> — Demonstrates large-scale multi-element stabilization</li>
+                </ul>
 
             </div>
         </section>
@@ -516,16 +556,16 @@
             <h2 class="section-title">Cultural and Realm Interpretations</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Beeston</h3>
-                    <p>Éthera is considered the first voice taught to Lúmenai casters. Mastery is treated as proof of
-                        harmonic maturity.</p>
+                <p>Éthera is considered the first voice taught to Lúmenai casters. Mastery is treated as proof of
+                    harmonic maturity.</p>
 
-                    <h3 class="section-subtitle">Nexsicon</h3>
-                        <p>Nerth is regarded as the architectural language of Cymora, forming the backbone of ritual
-                            spellcraft.</p>
+                <h3 class="section-subtitle">Nexsicon</h3>
+                <p>Nerth is regarded as the architectural language of Cymora, forming the backbone of ritual
+                    spellcraft.</p>
 
-                        <h3 class="section-subtitle">Royastella</h3>
-                            <p>Neutral mana represents professional competency. Many advanced System techniques rely
-                                heavily on neutral energy conversion and stabilization.</p>
+                <h3 class="section-subtitle">Royastella</h3>
+                <p>Neutral mana represents professional competency. Many advanced System techniques rely
+                    heavily on neutral energy conversion and stabilization.</p>
 
             </div>
         </section>

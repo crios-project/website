@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .content-section {
@@ -242,9 +243,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -284,7 +319,7 @@
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -323,31 +358,31 @@
             <h2 class="section-title">Lúmenai — Kórelis</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Tier 2 — Conjoined Element</p>
-                    <p>Vaelóri Entwinement</p>
-                    <p>(Téroma + Vaélia)</p>
-                    <h3 class="section-subtitle">Essentia Profile</h3>
-                        <p><strong>Kórelis</strong> represents the harmonic union of structure and movement. It is the
-                            Essentia of perfected action, where stability and velocity become inseparable. Kórelis magic
-                            is not merely strength or speed; it is the orchestration of every movement toward maximum
-                            efficiency and intent.</p>
-                        <p>Kórelis practitioners often treat combat as performance, emphasizing precision, rhythm, and
-                            timing over brute force.</p>
-                        <h3 class="section-subtitle">Magical Expression</h3>
-                            <p>Common manifestations include:</p>
-                            <ul>
-                                <li>Strength and durability amplification</li>
-                                <li>Speed and agility enhancement</li>
-                                <li>Kinetic redirection and momentum preservation</li>
-                                <li>Combat stance harmonization</li>
-                                <li>Reaction-time acceleration</li>
-                                <li>Impact reinforcement and shock absorption</li>
-                            </ul>
-                            <h3 class="section-subtitle">Harmonic Behavior</h3>
-                                <p>Kórelis requires perfect balance between Téroma stability and Vaélia motion.
-                                    Overemphasis on Téroma results in rigid, slow combat forms, while excessive Vaélia
-                                    creates unstable or reckless movement. Expert practitioners demonstrate fluid combat
-                                    rhythm and efficient energy expenditure.</p>
+                <p>Tier 2 — Conjoined Element</p>
+                <p>Vaelóri Entwinement</p>
+                <p>(Téroma + Vaélia)</p>
+                <h3 class="section-subtitle">Essentia Profile</h3>
+                <p><strong>Kórelis</strong> represents the harmonic union of structure and movement. It is the
+                    Essentia of perfected action, where stability and velocity become inseparable. Kórelis magic
+                    is not merely strength or speed; it is the orchestration of every movement toward maximum
+                    efficiency and intent.</p>
+                <p>Kórelis practitioners often treat combat as performance, emphasizing precision, rhythm, and
+                    timing over brute force.</p>
+                <h3 class="section-subtitle">Magical Expression</h3>
+                <p>Common manifestations include:</p>
+                <ul>
+                    <li>Strength and durability amplification</li>
+                    <li>Speed and agility enhancement</li>
+                    <li>Kinetic redirection and momentum preservation</li>
+                    <li>Combat stance harmonization</li>
+                    <li>Reaction-time acceleration</li>
+                    <li>Impact reinforcement and shock absorption</li>
+                </ul>
+                <h3 class="section-subtitle">Harmonic Behavior</h3>
+                <p>Kórelis requires perfect balance between Téroma stability and Vaélia motion.
+                    Overemphasis on Téroma results in rigid, slow combat forms, while excessive Vaélia
+                    creates unstable or reckless movement. Expert practitioners demonstrate fluid combat
+                    rhythm and efficient energy expenditure.</p>
 
             </div>
         </section>
@@ -356,30 +391,30 @@
             <h2 class="section-title">Cymora — Gwyndâr</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Compound Elemental Root</p>
-                    <p>(Wind + Earth)</p>
-                    <h3 class="section-subtitle">Linguistic Role</h3>
-                        <p><strong>Gwyndâr</strong> utilizes balanced phonetic pacing designed to reinforce both
-                            stability and movement. Cymoran Martial incantations often feature grounded rhythmic
-                            repetition paired with directional breath control, reinforcing muscle memory and physical
-                            synchronization.</p>
-                        <h3 class="section-subtitle">Sonic Properties</h3>
-                            <ul>
-                                <li>Even, rhythmic syllable pacing</li>
-                                <li>Strong consonant anchoring reinforcing structural stability</li>
-                                <li>Controlled breath cycles enhancing endurance</li>
-                                <li>Repetitive chant patterns reinforcing muscle synchronization</li>
-                            </ul>
-                            <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
-                                <p>Gwyndâr is frequently used in spells that:</p>
-                                <ul>
-                                    <li>Reinforce physical strength and endurance</li>
-                                    <li>Enhance martial arts precision</li>
-                                    <li>Improve reflexive movement patterns</li>
-                                    <li>Stabilize combat posture</li>
-                                    <li>Reinforce weapon handling or combat stance flow</li>
-                                    <li>Strengthen body resilience against impact or fatigue</li>
-                                </ul>
+                <p>Compound Elemental Root</p>
+                <p>(Wind + Earth)</p>
+                <h3 class="section-subtitle">Linguistic Role</h3>
+                <p><strong>Gwyndâr</strong> utilizes balanced phonetic pacing designed to reinforce both
+                    stability and movement. Cymoran Martial incantations often feature grounded rhythmic
+                    repetition paired with directional breath control, reinforcing muscle memory and physical
+                    synchronization.</p>
+                <h3 class="section-subtitle">Sonic Properties</h3>
+                <ul>
+                    <li>Even, rhythmic syllable pacing</li>
+                    <li>Strong consonant anchoring reinforcing structural stability</li>
+                    <li>Controlled breath cycles enhancing endurance</li>
+                    <li>Repetitive chant patterns reinforcing muscle synchronization</li>
+                </ul>
+                <h3 class="section-subtitle">Compound Cymoran Behavior</h3>
+                <p>Gwyndâr is frequently used in spells that:</p>
+                <ul>
+                    <li>Reinforce physical strength and endurance</li>
+                    <li>Enhance martial arts precision</li>
+                    <li>Improve reflexive movement patterns</li>
+                    <li>Stabilize combat posture</li>
+                    <li>Reinforce weapon handling or combat stance flow</li>
+                    <li>Strengthen body resilience against impact or fatigue</li>
+                </ul>
 
             </div>
         </section>
@@ -388,38 +423,39 @@
             <h2 class="section-title">System Mana — Martial Enhancement Discipline</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Canon Classification</h3>
-                    <p>Internal Enhancement Combat Discipline</p>
-                    <h3 class="section-subtitle">Functional Nature</h3>
-                        <p>Unlike other conjoined elemental manifestations in Royastella, Martial reinforcement is
-                            compatible with native System training because it enhances rather than replaces foundational
-                            elemental capabilities.</p>
-                        <p>System Martial enhancement is widely integrated into military training, defensive combat
-                            doctrine, and Runic Knight physical augmentation.</p>
-                        <h3 class="section-subtitle">Mechanical Properties</h3>
-                            <ul>
-                                <li>Strength amplification protocols</li>
-                                <li>Defensive reinforcement layering</li>
-                                <li>Reflex optimization algorithms</li>
-                                <li>Kinetic force redistribution</li>
-                                <li>Combat endurance enhancement</li>
-                                <li>Impact dampening and recoil compensation</li>
-                            </ul>
-                            <h3 class="section-subtitle">Tactical Doctrine</h3>
-                                <p>Martial specialists within Royastella typically function as:</p>
-                                <ul>
-                                    <li>Frontline defenders</li>
-                                    <li>Close-quarters combat specialists</li>
-                                    <li>Defensive formation anchors</li>
-                                    <li>Tactical bodyguards and elite guardians</li>
-                                    <li>Mobility-based melee strike operatives</li>
-                                </ul>
+                <p>Internal Enhancement Combat Discipline</p>
+                <h3 class="section-subtitle">Functional Nature</h3>
+                <p>Unlike other conjoined elemental manifestations in Royastella, Martial reinforcement is
+                    compatible with native System training because it enhances rather than replaces foundational
+                    elemental capabilities.</p>
+                <p>System Martial enhancement is widely integrated into training, defensive combat
+                    doctrine, and physical augmentation.</p>
+                <h3 class="section-subtitle">Mechanical Properties</h3>
+                <ul>
+                    <li>Strength amplification protocols</li>
+                    <li>Defensive reinforcement layering</li>
+                    <li>Reflex optimization algorithms</li>
+                    <li>Kinetic force redistribution</li>
+                    <li>Combat endurance enhancement</li>
+                    <li>Impact dampening and recoil compensation</li>
+                </ul>
+                <h3 class="section-subtitle">Tactical Doctrine</h3>
+                <p>Martial specialists within Royastella typically function as:</p>
+                <ul>
+                    <li>Frontline defenders</li>
+                    <li>Close-quarters combat specialists</li>
+                    <li>Defensive formation anchors</li>
+                    <li>Tactical bodyguards and elite guardians</li>
+                    <li>Mobility-based melee strike operatives</li>
+                </ul>
 
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>
                         <tr>
@@ -443,47 +479,53 @@
                         </tr>
                     </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Casting Mechanism</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Harmonic synchronization of stability and momentum</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Balanced chant rhythm reinforcing muscle and motion alignment</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Mana circulation routed through muscular, skeletal, and neural reinforcement channels</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Casting Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Harmonic synchronization of stability and momentum</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Balanced chant rhythm reinforcing muscle and motion alignment</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Mana circulation routed through muscular, skeletal, and neural reinforcement channels
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Limitations</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Harmonic imbalance may produce unstable movement or bodily stress</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Incorrect breathing rhythm reduces spell stability and endurance</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Over-amplification risks muscle tearing, skeletal stress, or mana exhaustion</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Stability and Limits</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Limitations</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Harmonic imbalance may produce unstable movement or bodily stress</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Incorrect breathing rhythm reduces spell stability and endurance</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Over-amplification risks muscle tearing, skeletal stress, or mana exhaustion</td>
+                        </tr>
+                    </tbody>
                 </table>
 
             </div>
@@ -493,23 +535,23 @@
             <h2 class="section-title">Notable Users</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Lúmenai Practitioners</h3>
-                    <ul>
-                        <li><em>Oktusha Miko</em> — Primary Kórelis specialist and martial magic combat virtuoso</li>
-                        <li><em>Pyara Dana</em> — Gains Kórelis access during Heart Beat harmonic expansion</li>
-                        <li><em>Mahana Sahi</em> — Gains Martial-tier harmonic capability after Heart Symphony awakening
-                        </li>
-                    </ul>
-                    <h3 class="section-subtitle">Cymora Practitioners</h3>
-                        <ul>
-                            <li>Nexsicon combat chanters specializing in reinforcement cadence and ritual combat rhythm
-                            </li>
-                        </ul>
-                        <h3 class="section-subtitle">System Manifestation Users</h3>
-                            <ul>
-                                <li>Royastella military enhancement specialists</li>
-                                <li>Runic Knights of Starlite 7th physical augmentation operatives</li>
-                                <li>Elite defensive and close-combat instructors within System training academies</li>
-                            </ul>
+                <ul>
+                    <li><em>Oktusha Miko</em> — Primary Kórelis specialist and martial magic combat virtuoso</li>
+                    <li><em>Pyara Dana</em> — Gains Kórelis access during Heart Beat harmonic expansion</li>
+                    <li><em>Mahana Sahi</em> — Gains Martial-tier harmonic capability after Heart Symphony awakening
+                    </li>
+                </ul>
+                <h3 class="section-subtitle">Cymora Practitioners</h3>
+                <ul>
+                    <li>Nexsicon combat chanters specializing in reinforcement cadence and ritual combat rhythm
+                    </li>
+                </ul>
+                <h3 class="section-subtitle">System Manifestation Users</h3>
+                <ul>
+                    <li>Royastella military enhancement specialists</li>
+                    <li>Runic Knights of Starlite 7th physical augmentation operatives</li>
+                    <li>Elite defensive and close-combat instructors within System training academies</li>
+                </ul>
 
             </div>
         </section>

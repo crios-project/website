@@ -119,6 +119,7 @@
             background-clip: text;
             margin-bottom: 16px;
             filter: drop-shadow(var(--glow-pink));
+            text-wrap: balance;
         }
 
         .content-section {
@@ -242,9 +243,43 @@
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* Responsive Table Container */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 24px 0;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Ensure tables don't collapse too much */
+        table {
+            min-width: 500px;
+            /* Forces scroll on very narrow screens */
+            margin: 0;
+            /* Let the wrapper handle margins */
+        }
+
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.5rem;
+            }
+
+            .element-header {
+                grid-template-columns: 1fr;
+                /* Changes from 200px 1fr to a single column */
+                gap: 30px;
+                /* Reduces the gap for a tighter mobile look */
+                text-align: center;
+                /* Optional: centers text for a better mobile hero feel */
+            }
+
+            .element-visual {
+                max-width: 200px;
+                /* Keeps the icon from becoming too massive on mobile */
+                margin: 0 auto;
+                /* Centers the image container */
             }
 
             .content-section {
@@ -283,7 +318,7 @@
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -322,45 +357,45 @@
             <h2 class="section-title">Lúmenai — Áquora</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Tier 1 — Basic Element</p>
-                    <p>One of the Five Open Voices</p>
-                    <h3 class="section-subtitle">Essentia Profile</h3>
-                        <p><strong>Áquora</strong> represents memory, adaptation, and continuity. Within the Lúmenai
-                            harmonic framework, Water is associated with emotional persistence and the preservation of
-                            experiential resonance. Áquora users often demonstrate fluid magical structures capable of
-                            redirecting hostile energies or stabilizing unstable harmonic states.</p>
-                        <p>Unlike rigid or destructive Essentia, Áquora emphasizes redirection and absorption rather
-                            than confrontation. Practitioners frequently excel in defensive, restorative, and
-                            environmental manipulation techniques.</p>
-                        <h3 class="section-subtitle">Magical Expression</h3>
-                            <p>Common manifestations include:</p>
-                            <ul>
-                                <li>Resonant healing through memory restoration</li>
-                                <li>Fluid terrain manipulation</li>
-                                <li>Emotional synchronization and calming fields</li>
-                                <li>Adaptive spell restructuring</li>
-                                <li>Magical buffering and deflection</li>
-                            </ul>
-                            <h3 class="section-subtitle">Conjoined Essentia</h3>
-                                <h4 class="section-subtitle">Crýalune — Ice</h4>
-                                    <p>(Áquora + Vaélia)</p>
-                                    <p>Essence: arrested motion and crystalline suspension</p>
-                                    <p>Used for stasis fields, temporal slowing, and preservation.</p>
-                                    <h4 class="section-subtitle">Nóxira — Poison</h4>
-                                        <p>(Áquora + Pýrua)</p>
-                                        <p>Essence: corrosive vitality</p>
-                                        <p>Used for alchemical corruption and living toxin constructs.</p>
-                                        <h4 class="section-subtitle">Víratha — Plant</h4>
-                                            <p>(Áquora + Téroma)</p>
-                                            <p>Essence: growth encoded with memory</p>
-                                            <p>Used for regeneration, biomancy, and living terrain shaping.</p>
+                <p>Tier 1 — Basic Element</p>
+                <p>One of the Five Open Voices</p>
+                <h3 class="section-subtitle">Essentia Profile</h3>
+                <p><strong>Áquora</strong> represents memory, adaptation, and continuity. Within the Lúmenai
+                    harmonic framework, Water is associated with emotional persistence and the preservation of
+                    experiential resonance. Áquora users often demonstrate fluid magical structures capable of
+                    redirecting hostile energies or stabilizing unstable harmonic states.</p>
+                <p>Unlike rigid or destructive Essentia, Áquora emphasizes redirection and absorption rather
+                    than confrontation. Practitioners frequently excel in defensive, restorative, and
+                    environmental manipulation techniques.</p>
+                <h3 class="section-subtitle">Magical Expression</h3>
+                <p>Common manifestations include:</p>
+                <ul>
+                    <li>Resonant healing through memory restoration</li>
+                    <li>Fluid terrain manipulation</li>
+                    <li>Emotional synchronization and calming fields</li>
+                    <li>Adaptive spell restructuring</li>
+                    <li>Magical buffering and deflection</li>
+                </ul>
+                <h3 class="section-subtitle">Conjoined Essentia</h3>
+                <h4 class="section-subtitle">Crýalune — Ice</h4>
+                <p>(Áquora + Vaélia)</p>
+                <p>Essence: arrested motion and crystalline suspension</p>
+                <p>Used for stasis fields, temporal slowing, and preservation.</p>
+                <h4 class="section-subtitle">Nóxira — Poison</h4>
+                <p>(Áquora + Pýrua)</p>
+                <p>Essence: corrosive vitality</p>
+                <p>Used for alchemical corruption and living toxin constructs.</p>
+                <h4 class="section-subtitle">Víratha — Plant</h4>
+                <p>(Áquora + Téroma)</p>
+                <p>Essence: growth encoded with memory</p>
+                <p>Used for regeneration, biomancy, and living terrain shaping.</p>
 
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Cymora — Nahr</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -395,37 +430,38 @@
             <h2 class="section-title">System Mana — Water Core</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Classification</h3>
-                    <p>Elemental Core Channel</p>
-                    <h3 class="section-subtitle">Functional Nature</h3>
-                        <p>Within Royastella, Water exists as a measurable internal mana attribute governed by the
-                            System. Unlike Lúmenai and Cymora, Water is not performed through expression or incantation.
-                            Instead, it is converted into programmable magical output through trained mana routing and
-                            optimization protocols.</p>
-                        <p>Water-aligned System users often demonstrate high efficiency in sustained spellcasting and
-                            mana conservation strategies.</p>
-                        <h3 class="section-subtitle">Mechanical Properties</h3>
-                            <ul>
-                                <li>Mana cooling and stabilization</li>
-                                <li>Sustained output efficiency</li>
-                                <li>Adaptive energy redistribution</li>
-                                <li>Environmental water control through mana projection</li>
-                            </ul>
-                            <h3 class="section-subtitle">Aura Manifestation</h3>
-                                <p>Through specialized Runic Knight training, Water cores may be externally manifested
-                                    as physical auras. These manifestations can enhance:</p>
-                                <ul>
-                                    <li>Reaction speed</li>
-                                    <li>Cognitive clarity</li>
-                                    <li>Mana flow regulation</li>
-                                    <li>Defensive reflex enhancement</li>
-                                </ul>
+                <p>Elemental Core Channel</p>
+                <h3 class="section-subtitle">Functional Nature</h3>
+                <p>Within Royastella, Water exists as a measurable internal mana attribute governed by the
+                    System. Unlike Lúmenai and Cymora, Water is not performed through expression or incantation.
+                    Instead, it is converted into programmable magical output through trained mana routing and
+                    optimization protocols.</p>
+                <p>Water-aligned System users often demonstrate high efficiency in sustained spellcasting and
+                    mana conservation strategies.</p>
+                <h3 class="section-subtitle">Mechanical Properties</h3>
+                <ul>
+                    <li>Mana cooling and stabilization</li>
+                    <li>Sustained output efficiency</li>
+                    <li>Adaptive energy redistribution</li>
+                    <li>Environmental water control through mana projection</li>
+                </ul>
+                <h3 class="section-subtitle">Aura Manifestation</h3>
+                <p>Through specialized Runic Knight training, Water cores may be externally manifested
+                    as physical auras. These manifestations can enhance:</p>
+                <ul>
+                    <li>Reaction speed</li>
+                    <li>Cognitive clarity</li>
+                    <li>Mana flow regulation</li>
+                    <li>Defensive reflex enhancement</li>
+                </ul>
 
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Comparative Analysis</h2>
-            <div class="section-content">
+            <div class="section-content table-wrapper">
+                <h3 class="section-subtitle">Philosophical Differences</h3>
                 <table>
                     <thead>
                         <tr>
@@ -448,49 +484,52 @@
                         </tr>
                     </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Casting Mechanism</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Emotional and harmonic alignment</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Spoken incantation and phonetic resonance</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Mana routing and technical execution</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Activation Method Differences</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Casting Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Emotional and harmonic alignment</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Spoken incantation and phonetic resonance</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Mana routing and technical execution</td>
+                        </tr>
+                    </tbody>
                 </table>
-                <tr>
-                    <td>System</td>
-                    <td>Limitations</td>
-                </tr>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lúmenai</td>
-                        <td>Requires emotional coherence and resonance stability</td>
-                    </tr>
-                    <tr>
-                        <td>Cymora</td>
-                        <td>Requires vocal precision and rhythmic continuity</td>
-                    </tr>
-                    <tr>
-                        <td>System</td>
-                        <td>Limited by mana capacity and energy efficiency</td>
-                    </tr>
-                </tbody>
+                <h3 class="section-subtitle">Stability and Risk</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Limitations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lúmenai</td>
+                            <td>Requires emotional coherence and resonance stability</td>
+                        </tr>
+                        <tr>
+                            <td>Cymora</td>
+                            <td>Requires vocal precision and rhythmic continuity</td>
+                        </tr>
+                        <tr>
+                            <td>System</td>
+                            <td>Limited by mana capacity and energy efficiency</td>
+                        </tr>
+                    </tbody>
                 </table>
-
             </div>
         </section>
 
@@ -498,23 +537,23 @@
             <h2 class="section-title">Notable Users</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Lúmenai Practitioners</h3>
-                    <ul>
-                        <li><em>Pyara Dana</em> — Demonstrates Áquora as part of multi-voice Tier 1 mastery</li>
-                        <li><em>Mahana Sahi</em> — Later gains access to Tier 1 and Tier 2 Essentia, including Áquora
-                        </li>
-                        <li><em>Omba Miko</em> — Specialized Crýalune (Ice) practitioner derived from Áquora</li>
-                    </ul>
-                    <h3 class="section-subtitle">Cymora Practitioners</h3>
-                        <ul>
-                            <li><em>Tiala Corsolis</em> — Known to utilize Nahr-based resonance incantations</li>
-                            <li><em>Alulu Caelum</em> — Stabilization-oriented Cymoran resonance applications</li>
-                        </ul>
-                        <h3 class="section-subtitle">System Mana Users</h3>
-                            <ul>
-                                <li><em>Kayre</em> — Native Water Core user with Runic Knight aura potential</li>
-                                <li><em>Wentea Liso</em> — Water-aligned System channeler specializing in sustained mana
-                                    flow</li>
-                            </ul>
+                <ul>
+                    <li><em>Pyara Dana</em> — Demonstrates Áquora as part of multi-voice Tier 1 mastery</li>
+                    <li><em>Mahana Sahi</em> — Later gains access to Tier 1 and Tier 2 Essentia, including Áquora
+                    </li>
+                    <li><em>Omba Miko</em> — Specialized Crýalune (Ice) practitioner derived from Áquora</li>
+                </ul>
+                <h3 class="section-subtitle">Cymora Practitioners</h3>
+                <ul>
+                    <li><em>Tiala Corsolis</em> — Known to utilize Nahr-based resonance incantations</li>
+                    <li><em>Alulu Caelum</em> — Stabilization-oriented Cymoran resonance applications</li>
+                </ul>
+                <h3 class="section-subtitle">System Mana Users</h3>
+                <ul>
+                    <li><em>Kayre</em> — Native Water Core user with Runic Knight aura potential</li>
+                    <li><em>Wentea Liso</em> — Water-aligned System channeler specializing in sustained mana
+                        flow</li>
+                </ul>
 
             </div>
         </section>
