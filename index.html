@@ -532,6 +532,7 @@
             from {
                 opacity: 1;
             }
+
             to {
                 opacity: 0;
             }
@@ -604,6 +605,7 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -626,6 +628,7 @@
                 opacity: 0;
                 transform: scale(0.8) translateY(-50px);
             }
+
             to {
                 opacity: 1;
                 transform: scale(1) translateY(0);
@@ -704,7 +707,6 @@
                 padding: 12px 32px;
             }
         }
-
     </style>
 </head>
 
@@ -798,6 +800,12 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var video = document.getElementById("prologueVideo");
+            // Set the volume to 0.1 (10% volume)
+            video.volume = 0.1;
+        });
+
         function openVideo() {
             const lightbox = document.getElementById('videoLightbox');
             const video = document.getElementById('prologueVideo');
@@ -820,7 +828,7 @@
         }
 
         // Close on ESC key
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 closeVideo();
             }
