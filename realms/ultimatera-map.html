@@ -1,324 +1,271 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Ultimatera — Layered Map Engine</title>
 
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            font-family: system-ui;
-            background: #111;
-            color: white;
-        }
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Crios" />
+  <link rel="manifest" href="/site.webmanifest" />
 
-        #ui {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background: rgba(20, 20, 20, 0.95);
-            padding: 15px;
-            border-radius: 10px;
-            z-index: 10;
-            font-size: 14px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimatera Map</title>
 
-        #infoCard {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(15, 15, 15, 0.95);
-            padding: 15px;
-            border-radius: 12px;
-            width: 320px;
-            display: none;
-        }
+  <style>
+    body {
+      margin: 0;
+      background: #0b0f18;
+      color: #e2e8f0;
+      font-family: system-ui;
+    }
 
-        svg {
-            width: 100vw;
-            height: 100vh;
-            cursor: grab;
-        }
+    .map-wrapper {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+    }
 
-        .marker:hover {
-            transform: scale(1.3);
-            cursor: pointer;
-        }
-    </style>
+    #base-map {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* LEFT SIDE */
+
+    .map-container {
+      position: relative;
+      width: 900px;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    #map-inner {
+      position: relative;
+      transform-origin: top left;
+    }
+
+    #base-map {
+      width: 100%;
+      display: block;
+    }
+
+    #marker-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .marker {
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .marker:hover {
+      transform: scale(1.3);
+    }
+
+    /* TOOLTIP (hover) */
+
+    #tooltip {
+      position: fixed;
+      pointer-events: none;
+      background: rgba(15, 23, 42, 0.95);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: none;
+      white-space: nowrap;
+      z-index: 1000;
+    }
+
+    /* RIGHT INFO PANEL (click persistent) */
+
+    #info-panel {
+      width: 320px;
+      background: #111827;
+      padding: 20px;
+      border-radius: 14px;
+      display: none;
+    }
+
+    #info-panel h2 {
+      margin-top: 0;
+    }
+
+    .close-btn {
+      margin-top: 12px;
+      cursor: pointer;
+      background: #1f2937;
+      padding: 6px 10px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    /* CONTROLS */
+
+    .controls {
+      margin-bottom: 12px;
+    }
+
+    button {
+      margin-right: 6px;
+    }
+  </style>
 </head>
 
 <body>
 
-    <div id="ui">
-        <b>Realm Filters</b><br>
-        <label><input type="checkbox" checked onchange="toggleRealm('Beeston')"> Beeston</label><br>
-        <label><input type="checkbox" checked onchange="toggleRealm('Royastella')"> Royastella</label><br>
-        <label><input type="checkbox" checked onchange="toggleRealm('Nexsicon')"> Nexsicon</label><br>
-        <label><input type="checkbox" checked onchange="toggleRealm('Ultimatera')"> Ultimatera</label><br>
-        <label><input type="checkbox" checked onchange="toggleRealm('Antiquity')"> Antiquity</label>
-        <hr>
-        <b>Layer Filters</b><br>
-        <label><input type="checkbox" checked onchange="toggleLayer('skyLayer')"> Sky</label><br>
-        <label><input type="checkbox" checked onchange="toggleLayer('surfaceLayer')"> Surface</label><br>
-        <label><input type="checkbox" checked onchange="toggleLayer('subLayer')"> Subsurface</label><br>
-        <label><input type="checkbox" checked onchange="toggleLayer('abyssLayer')"> Abyss</label>
+  <div class="map-wrapper">
+
+    <div>
+      <div class="controls">
+        <button id="zoom-in">+</button>
+        <button id="zoom-out">−</button>
+      </div>
+
+      <div class="map-container">
+        <div id="map-inner">
+          <img src="../assets/images/ultimatera.webp" id="base-map" alt="Ultimatera world map">
+          <svg id="marker-layer" viewBox="0 0 5632 5632" preserveAspectRatio="xMidYMid meet">
+          </svg>
+        </div>
+      </div>
     </div>
 
-    <div id="infoCard"></div>
+    <div id="info-panel">
+      <h2 id="info-title"></h2>
+      <p id="info-desc"></p>
+      <div class="close-btn" id="close-info">Close</div>
+    </div>
 
-    <svg id="map" viewBox="0 0 2000 1600">
-        <g id="surfaceLayer">
+  </div>
 
-            <!-- Ocean Background -->
-            <rect x="0" y="0" width="2000" height="1600" fill="#0f172a" />
+  <div id="tooltip"></div>
 
-            <!-- Ultimatera Continent -->
-            <path id="continent" d="
-M400,350
-L650,280
-L1000,300
-L1300,420
-L1500,650
-L1450,850
-L1250,1000
-L1100,1150
-L900,1250
-L750,1180
-L600,1050
-L500,900
-L450,750
-L380,600
-Z" fill="#1e293b" stroke="#334155" stroke-width="6" stroke-linejoin="round" />
+  <script>
 
-            <!-- Biome Blocks (clean segmented overlays) -->
+    /* ============================
+       DATA MODEL
+    ============================ */
 
-            <!-- Northern Tundra -->
-            <path d="
-M520,360
-L950,330
-L1200,430
-L1100,520
-L700,500
-Z" fill="#334e68" opacity="0.9" />
+    const locations = [
+      {
+        name: "Crimson Spire",
+        x: 2100,
+        y: 1500,
+        realm: "Aether",
+        zone: "Northreach",
+        description: "A jagged arcane tower piercing the upper currents."
+      },
+      {
+        name: "Ashen Harbor",
+        x: 1300,
+        y: 2100,
+        realm: "Emberfall",
+        zone: "Coastal Verge",
+        description: "Trade port built on cooled volcanic glass."
+      }
+    ];
 
-            <!-- Western Forest -->
-            <path d="
-M420,600
-L600,520
-L750,650
-L620,820
-L450,750
-Z" fill="#1b4332" opacity="0.95" />
 
-            <!-- Central Plains -->
-            <path d="
-M650,600
-L1100,550
-L1200,750
-L900,900
-L700,820
-Z" fill="#2d6a4f" opacity="0.95" />
+    /* ============================
+       STATE
+    ============================ */
 
-            <!-- Eastern Scarlands -->
-            <path d="
-M1100,550
-L1450,650
-L1400,820
-L1200,900
-Z" fill="#7f5539" opacity="0.9" />
+    let scale = 1;
+    let pinnedLocation = null;
 
-            <!-- Southern Fracture Belt -->
-            <path d="
-M900,900
-L1200,900
-L1100,1150
-L900,1250
-L750,1180
-Z" fill="#3c096c" opacity="0.85" />
-            <!-- Continental Spine Shadow -->
-            <path d="
-M820,420
-L860,480
-L880,560
-L900,650
-L890,740
-L870,830
-L850,910
-L820,1000
-" stroke="#0b132b" stroke-width="26" stroke-linecap="round" opacity="0.35" fill="none" />
+    const mapInner = document.getElementById("map-inner");
+    const svg = document.getElementById("marker-layer");
+    const tooltip = document.getElementById("tooltip");
+    const infoPanel = document.getElementById("info-panel");
 
-            <!-- Continental Spine Core -->
-            <path d="
-M820,420
-L860,480
-L880,560
-L900,650
-L890,740
-L870,830
-L850,910
-L820,1000
-" stroke="#475569" stroke-width="18" stroke-linecap="round" opacity="0.95" fill="none" />
+    /* ============================
+       ZOOM
+    ============================ */
 
-            <!-- Highlight Edge -->
-            <path d="
-M812,420
-L852,480
-L872,560
-L892,650
-L882,740
-L862,830
-L842,910
-L812,1000
-" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" opacity="0.8" fill="none" />
+    function setZoom(newScale) {
+      scale = Math.min(Math.max(0.5, newScale), 3);
+      mapInner.style.transform = `scale(${scale})`;
+    }
 
-            <!-- Fracture Scar Shadow -->
-            <path d="
-M500,760
-L650,720
-L800,690
-L950,670
-L1100,660
-L1250,680
-L1400,720
-" stroke="#000000" stroke-width="28" stroke-linecap="round" opacity="0.35" fill="none" />
+    document.getElementById("zoom-in").onclick =
+      () => setZoom(scale + 0.2);
 
-            <!-- Fracture Core -->
-            <path d="
-M500,760
-L650,720
-L800,690
-L950,670
-L1100,660
-L1250,680
-L1400,720
-" stroke="#5f0f40" stroke-width="16" stroke-linecap="round" opacity="0.95" fill="none" />
+    document.getElementById("zoom-out").onclick =
+      () => setZoom(scale - 0.2);
 
-            <!-- Fracture Highlight -->
-            <path d="
-M500,752
-L650,712
-L800,682
-L950,662
-L1100,652
-L1250,672
-L1400,712
-" stroke="#c77dff" stroke-width="4" stroke-linecap="round" opacity="0.75" fill="none" />
+    mapInner.addEventListener("wheel", e => {
+      e.preventDefault();
+      setZoom(scale + (e.deltaY < 0 ? 0.1 : -0.1));
+    });
 
-        </g>
 
-    </svg>
+    /* ============================
+       MARKER CREATION
+    ============================ */
 
-    <script>
+    locations.forEach(loc => {
 
-        // DATA MODEL
-        const locations = [
-            {
-                name: "Virelden",
-                x: 600,
-                y: 600,
-                realm: "Beeston",
-                layer: "surfaceLayer",
-                color: "hotpink",
-                biome: "Plains",
-                description: "Emerald hills pulsing with Earth Aspect.\nBeeston Integration"
-            },
-            {
-                name: "Blackfen",
-                x: 1300,
-                y: 950,
-                realm: "Royastella",
-                layer: "subLayer",
-                color: "purple",
-                biome: "Deep Marsh",
-                description: "Shadow-flooded subterranean wetlands."
-            },
-            {
-                name: "Aether Spire",
-                x: 1000,
-                y: 150,
-                realm: "Antiquity",
-                layer: "skyLayer",
-                color: "gold",
-                biome: "Anomaly",
-                description: "Volcanic structure suspended in tundra sky.\n10% Logic Violation Event"
-            }
-        ];
+      const marker = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-        // RENDER
-        const markerLayer = document.getElementById("markers");
+      marker.setAttribute("cx", loc.x);
+      marker.setAttribute("cy", loc.y);
+      marker.setAttribute("r", 8);
+      marker.setAttribute("fill", "#f472b6");
+      marker.setAttribute("stroke", "#0f172a");
+      marker.setAttribute("stroke-width", "2");
+      marker.classList.add("marker");
 
-        locations.forEach(loc => {
-            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            circle.setAttribute("cx", loc.x);
-            circle.setAttribute("cy", loc.y);
-            circle.setAttribute("r", 8);
-            circle.setAttribute("fill", loc.color);
-            circle.setAttribute("class", "marker");
-            circle.dataset.realm = loc.realm;
-            circle.dataset.layer = loc.layer;
-            circle.addEventListener("click", () => showInfo(loc));
-            markerLayer.appendChild(circle);
-        });
+      /* HOVER */
+      marker.addEventListener("mouseenter", e => {
+        if (pinnedLocation) return;
+        tooltip.style.display = "block";
+        tooltip.textContent = loc.name;
+      });
 
-        // INFO
-        function showInfo(loc) {
-            const card = document.getElementById("infoCard");
-            card.style.display = "block";
-            card.innerHTML = `
-        <h3>${loc.name}</h3>
-        <p><b>Realm:</b> ${loc.realm}</p>
-        <p><b>Layer:</b> ${loc.layer.replace("Layer", "")}</p>
-        <p><b>Biome:</b> ${loc.biome}</p>
-        <p>${loc.description.replace(/\n/g, "<br>")}</p>
-    `;
-        }
+      marker.addEventListener("mousemove", e => {
+        if (pinnedLocation) return;
+        tooltip.style.left = e.clientX + 12 + "px";
+        tooltip.style.top = e.clientY + 12 + "px";
+      });
 
-        // TOGGLES
-        function toggleRealm(realm) {
-            document.querySelectorAll(".marker").forEach(dot => {
-                if (dot.dataset.realm === realm) {
-                    dot.style.display = dot.style.display === "none" ? "block" : "none";
-                }
-            });
-        }
+      marker.addEventListener("mouseleave", () => {
+        if (pinnedLocation) return;
+        tooltip.style.display = "none";
+      });
 
-        function toggleLayer(layer) {
-            const el = document.getElementById(layer);
-            el.style.display = el.style.display === "none" ? "block" : "block";
-            el.style.display = el.style.display === "none" ? "block" : "none";
-        }
+      /* CLICK (PIN) */
+      marker.addEventListener("click", () => {
+        pinnedLocation = loc;
+        tooltip.style.display = "none";
 
-        // ZOOM/PAN
-        const svg = document.getElementById("map");
-        const viewport = document.getElementById("viewport");
-        let scale = 1, originX = 0, originY = 0, drag = false, startX, startY;
+        document.getElementById("info-title").textContent = loc.name;
+        document.getElementById("info-desc").textContent = loc.description;
+        infoPanel.style.display = "block";
+      });
 
-        svg.addEventListener("wheel", e => {
-            e.preventDefault();
-            scale += e.deltaY * -0.001;
-            scale = Math.min(Math.max(.5, scale), 3);
-            viewport.setAttribute("transform", `translate(${originX},${originY}) scale(${scale})`);
-        });
+      svg.appendChild(marker);
+    });
 
-        svg.addEventListener("mousedown", e => {
-            drag = true;
-            startX = e.clientX - originX;
-            startY = e.clientY - originY;
-            svg.style.cursor = "grabbing";
-        });
 
-        svg.addEventListener("mousemove", e => {
-            if (!drag) return;
-            originX = e.clientX - startX;
-            originY = e.clientY - startY;
-            viewport.setAttribute("transform", `translate(${originX},${originY}) scale(${scale})`);
-        });
+    /* ============================
+       CLOSE PANEL
+    ============================ */
 
-        svg.addEventListener("mouseup", () => { drag = false; svg.style.cursor = "grab"; });
+    document.getElementById("close-info").onclick = () => {
+      pinnedLocation = null;
+      infoPanel.style.display = "none";
+    };
 
-    </script>
+  </script>
+
 </body>
 
 </html>
