@@ -1,118 +1,362 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Royastella // CRIOS Realm Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
-        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
-        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .back-link:hover { color: var(--accent-cyan); }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
-        .realm-header { text-align: center; margin-bottom: 80px; animation: fadeInScale 1s ease-out; }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95) translateY(-20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-        .realm-name { font-family: 'Orbitron', sans-serif; font-size: 4.5rem; font-weight: 900;
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .realm-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .realm-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 16px; filter: drop-shadow(var(--glow-pink)); }
-        .realm-tagline { font-family: 'Archivo', sans-serif; font-size: 1.4rem; font-style: italic;
-            color: var(--text-dim); max-width: 700px; margin: 0 auto; }
-        .realm-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 60px; }
-        .stat-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 20px; text-align: center; }
-        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
-        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .realm-tagline {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .realm-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 12px; padding: 40px; margin-bottom: 40px; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700;
-            color: var(--secondary-pink); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 2px; }
-        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 600;
-            color: var(--accent-cyan); margin-top: 32px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
-        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1.05rem; }
-        .section-content p { margin-bottom: 20px; }
-        .section-content ul { list-style: none; padding-left: 0; }
-        .section-content li { padding-left: 28px; margin-bottom: 12px; position: relative; }
-        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); font-size: 1.2rem; }
-        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3); transition: all 0.2s ease; }
-        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
-        .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
-        .tier-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 16px; text-align: center; }
-        .tier-number { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 8px; }
-        .tier-name { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--secondary-pink); margin-bottom: 4px; }
-        .tier-desc { font-size: 0.85rem; color: var(--text-dim); }
-        @media (max-width: 768px) { .realm-name { font-size: 2.5rem; } .content-section { padding: 24px; } }
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .tier-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .tier-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .tier-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 4px;
+        }
+
+        .tier-desc {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 768px) {
+            .realm-name {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../realms.html" class="back-link">← All Realms</a></nav>
     <div class="container">
 
         <header class="realm-header">
-            <img src="../assets/icons/Royastella Logo.png" alt="Royastella Logo" style="max-width: 100%; width: 500px; margin-bottom: 20px;">
+            <img src="../assets/icons/Royastella Logo.png" alt="Royastella Logo"
+                style="max-width: 100%; width: 500px; margin-bottom: 20px;">
             <h1 class="realm-name">ROYASTELLA</h1>
-            <p class="realm-tagline">"Where power is measured, discipline is perfected, and stars are forged through will."</p>
+            <p class="realm-tagline">"Where power is measured, discipline is perfected, and stars are forged through
+                will."</p>
         </header>
 
         <div class="realm-stats">
-            <div class="stat-card"><div class="stat-label">Reality Type</div><div class="stat-value">System-Regulated</div></div>
-            <div class="stat-card"><div class="stat-label">Magic System</div><div class="stat-value">System Mana</div></div>
-            <div class="stat-card"><div class="stat-label">Defenders</div><div class="stat-value">Starlite 7th</div></div>
-            <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value">Sealed</div></div>
+            <div class="stat-card">
+                <div class="stat-label">Reality Type</div>
+                <div class="stat-value">System-Regulated</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Magic System</div>
+                <div class="stat-value">System Mana</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Defenders</div>
+                <div class="stat-value">Starlite 7th</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Status</div>
+                <div class="stat-value">Sealed</div>
+            </div>
         </div>
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p><strong>Royastella</strong> is a technologically structured martial realm within the Crios Multireality. Unlike resonance-based realities such as <a href="realm-beeston.html" class="wiki-link">Beeston</a>, Royastella operates through quantifiable magical engineering governed by a metaphysical construct known simply as <strong>the System</strong>.</p>
-                <p>Magic in Royastella is not expressive or emotional in nature. It is treated as a measurable internal resource called <strong>Mana</strong>, which can be trained, optimized, and exhausted. The realm is characterized by militarized nobility, structured societal hierarchies, and a defensive culture built around protecting itself from interdimensional conquest.</p>
+                <p><strong>Royastella</strong> is a technologically structured martial realm within the Crios
+                    Multireality. Unlike resonance-based realities such as <a href="realm-beeston.html"
+                        class="wiki-link">Beeston</a>, Royastella operates through quantifiable magical engineering
+                    governed by a metaphysical construct known simply as <strong>the System</strong>.</p>
+                <p>Magic in Royastella is not expressive or emotional in nature. It is treated as a measurable internal
+                    resource called <strong>Mana</strong>, which can be trained, optimized, and exhausted. The realm is
+                    characterized by militarized nobility, structured societal hierarchies, and a defensive culture
+                    built around protecting itself from interdimensional conquest.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Cosmological Nature</h2>
             <div class="section-content">
-                <p>Royastella is classified as a <strong>System-Regulated Reality</strong>, where metaphysical law is standardized through quantification and governed progression mechanics.</p>
+                <p>Royastella is classified as a <strong>System-Regulated Reality</strong>, where metaphysical law is
+                    standardized through quantification and governed progression mechanics.</p>
                 <h3 class="section-subtitle">Reality Structure</h3>
                 <ul>
-                    <li><strong>The System:</strong> A universal construct that regulates magical capability, growth, and output across all inhabitants. Its true creator or origin remains unknown.</li>
-                    <li><strong>Mana Capacity:</strong> Determines spellcasting stamina and energy output. Trained and optimized rather than harmonically attuned.</li>
-                    <li><strong>Technique Architecture:</strong> Magic manifests as structured techniques rather than emotional projection or resonant expression.</li>
-                    <li><strong>Combat Optimization:</strong> Magical proficiency is enhanced through training metrics, efficiency protocols, and output refinement.</li>
+                    <li><strong>The System:</strong> A universal construct that regulates magical capability, growth,
+                        and output across all inhabitants. Its true creator or origin remains unknown.</li>
+                    <li><strong>Mana Capacity:</strong> Determines spellcasting stamina and energy output. Trained and
+                        optimized rather than harmonically attuned.</li>
+                    <li><strong>Technique Architecture:</strong> Magic manifests as structured techniques rather than
+                        emotional projection or resonant expression.</li>
+                    <li><strong>Combat Optimization:</strong> Magical proficiency is enhanced through training metrics,
+                        efficiency protocols, and output refinement.</li>
                 </ul>
-                <p>Overextension leads to exhaustion or System backlash. Royastella magic prioritizes discipline and execution precision over creative interpretation.</p>
+                <p>Overextension leads to exhaustion or System backlash. Royastella magic prioritizes discipline and
+                    execution precision over creative interpretation.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Magic System: System Mana</h2>
             <div class="section-content">
-                <p><strong>System Mana</strong> is an internally generated, energy-based magical resource requiring no emotional synchronization. Mana is stored, converted, and expended through the execution of structured spell techniques.</p>
+                <p><strong>System Mana</strong> is an internally generated, energy-based magical resource requiring no
+                    emotional synchronization. Mana is stored, converted, and expended through the execution of
+                    structured spell techniques.</p>
 
                 <h3 class="section-subtitle">Elemental Core Theory</h3>
-                <p>Native Royastellans possess internalized metaphysical constructs known as <strong>Elemental Cores</strong>, which determine their natural magical affinity. Standard cores are traditionally considered immutable and do not normally produce visible manifestations.</p>
+                <p>Native Royastellans possess internalized metaphysical constructs known as <strong>Elemental
+                        Cores</strong>, which determine their natural magical affinity. Standard cores are traditionally
+                    considered immutable and do not normally produce visible manifestations.</p>
 
                 <div class="tier-grid">
                     <div class="tier-card">
@@ -128,51 +372,79 @@
                     <div class="tier-card">
                         <div class="tier-number">Core</div>
                         <div class="tier-name">Wind</div>
-                        <div class="tier-desc">Motion, perception, acceleration<br><br>Known: Shini Thana, Riasa Sungbae</div>
+                        <div class="tier-desc">Motion, perception, acceleration<br><br>Known: Shini Thana, Riasa Sungbae
+                        </div>
                     </div>
                     <div class="tier-card">
                         <div class="tier-number">Core</div>
                         <div class="tier-name">Earth</div>
-                        <div class="tier-desc">Stability, endurance, structure<br><br>Known: Daeon Liàng, Takino Retsu</div>
+                        <div class="tier-desc">Stability, endurance, structure<br><br>Known: Daeon Liàng, Takino Retsu
+                        </div>
                     </div>
                 </div>
 
                 <h3 class="section-subtitle">External Core Manifestation</h3>
-                <p>The <a href="../factions/faction-starlite-7th.html" class="wiki-link">Runic Knights of Starlite 7th</a> were trained by <a href="../characters/character-dissonant-discord.html" class="wiki-link">dissonant discord</a> in advanced techniques allowing them to project their Elemental Cores externally. Manifested Core Auras grant enhanced physical strength, defensive resilience, movement speed, cognitive processing, and in rare cases, probability distortion and tactical foresight.</p>
+                <p>The <a href="../factions/faction-starlite-7th.html" class="wiki-link">Runic Knights of Starlite
+                        7th</a> were trained by <a href="../characters/character-dissonant-discord.html"
+                        class="wiki-link">dissonant discord</a> in advanced techniques allowing them to project their
+                    Elemental Cores externally. Manifested Core Auras grant enhanced physical strength, defensive
+                    resilience, movement speed, cognitive processing, and in rare cases, probability distortion and
+                    tactical foresight.</p>
 
                 <h3 class="section-subtitle">Core Variability</h3>
-                <p>The Runic Knights were further trained to alter their Elemental Cores entirely, allowing mid-combat switching of elemental affinities and the enhancements they manifest — a capability unheard of in standard Royastellan doctrine.</p>
+                <p>The Runic Knights were further trained to alter their Elemental Cores entirely, allowing mid-combat
+                    switching of elemental affinities and the enhancements they manifest — a capability unheard of in
+                    standard Royastellan doctrine.</p>
 
                 <h3 class="section-subtitle">Rare Core Phenomena</h3>
                 <ul>
-                    <li><strong>Light Core:</strong> Extremely rare. Spell failure can induce unconsciousness. Known user: <a href="../characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a>.</li>
-                    <li><strong>Dark Core:</strong> Exceptionally dangerous. Spell failure can permanently destroy magical capability or cause death. Known users: <a href="../characters/character-blade-guillotine.html" class="wiki-link">BLADE GUILLOTINE</a>, <a href="../characters/character-marate-jalo.html" class="wiki-link">Starlit Alpha</a>.</li>
-                    <li><strong>Aether Core:</strong> Considered metaphysically impossible. Any Aether Core formed is theorized to naturally unmake its host due to inherent instability.</li>
+                    <li><strong>Light Core:</strong> Extremely rare. Spell failure can induce unconsciousness. Known
+                        user: <a href="../characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a>.</li>
+                    <li><strong>Dark Core:</strong> Exceptionally dangerous. Spell failure can permanently destroy
+                        magical capability or cause death. Known users: <a
+                            href="../characters/character-blade-guillotine.html" class="wiki-link">BLADE GUILLOTINE</a>,
+                        <a href="../characters/character-marate-jalo.html" class="wiki-link">Starlit Alpha</a>.</li>
+                    <li><strong>Aether Core:</strong> Considered metaphysically impossible. Any Aether Core formed is
+                        theorized to naturally unmake its host due to inherent instability.</li>
                 </ul>
 
                 <h3 class="section-subtitle">Conjoined Element Doctrine</h3>
-                <p>Tier 2 or conjoined elemental manifestations do not occur within native Royastellan society. They have only ever appeared in external invaders. Royastella defense forces maintain strict vigilance against entities capable of conjoined elemental manipulation.</p>
+                <p>Tier 2 or conjoined elemental manifestations do not occur within native Royastellan society. They
+                    have only ever appeared in external invaders. Royastella defense forces maintain strict vigilance
+                    against entities capable of conjoined elemental manipulation.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">The Starlite 7th</h2>
             <div class="section-content">
-                <p>The <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> is Royastella's premier defensive Sentai-style task force, assembled from System-selected champions tasked with protecting the realm from extraplanar invasion and catastrophic internal threats. Each member holds both a royal title and combat specialization.</p>
+                <p>The <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> is
+                    Royastella's premier defensive Sentai-style task force, assembled from System-selected champions
+                    tasked with protecting the realm from extraplanar invasion and catastrophic internal threats. Each
+                    member holds both a royal title and combat specialization.</p>
 
                 <h3 class="section-subtitle">Core Members</h3>
                 <ul>
-                    <li><a href="../characters/character-itami-serafino.html" class="wiki-link">Itami Serafino</a> — Starlit Empress (Commander and tactical authority)</li>
-                    <li><a href="../characters/character-shini-thana.html" class="wiki-link">Shini Thana</a> — Starlit Sultana (Defensive operations specialist)</li>
-                    <li><a href="../characters/character-wentea-liso.html" class="wiki-link">Wentea Liso</a> — Starlit Dynast (Spiritual and metaphysical combat specialist)</li>
-                    <li><a href="../characters/character-takino-retsu.html" class="wiki-link">Takino Retsu</a> — Starlit Mikado (Dual-form adaptive weapon specialist)</li>
-                    <li><a href="../characters/character-riasa-sungbae.html" class="wiki-link">Riasa Sungbae</a> — Starlit Pasha (High-speed precision striker)</li>
-                    <li><a href="../characters/character-kayre.html" class="wiki-link">Kayre</a> — Starlit Rex (Heavy artillery and ranged assault specialist)</li>
-                    <li><a href="../characters/character-daeon-liang.html" class="wiki-link">Daeon Liàng</a> — Starlit Czar (Close-quarters combat enforcer)</li>
+                    <li><a href="../characters/character-itami-serafino.html" class="wiki-link">Itami Serafino</a> —
+                        Starlit Empress (Commander and tactical authority)</li>
+                    <li><a href="../characters/character-shini-thana.html" class="wiki-link">Shini Thana</a> — Starlit
+                        Sultana (Defensive operations specialist)</li>
+                    <li><a href="../characters/character-wentea-liso.html" class="wiki-link">Wentea Liso</a> — Starlit
+                        Dynast (Spiritual and metaphysical combat specialist)</li>
+                    <li><a href="../characters/character-takino-retsu.html" class="wiki-link">Takino Retsu</a> — Starlit
+                        Mikado (Dual-form adaptive weapon specialist)</li>
+                    <li><a href="../characters/character-riasa-sungbae.html" class="wiki-link">Riasa Sungbae</a> —
+                        Starlit Pasha (High-speed precision striker)</li>
+                    <li><a href="../characters/character-kayre.html" class="wiki-link">Kayre</a> — Starlit Rex (Heavy
+                        artillery and ranged assault specialist)</li>
+                    <li><a href="../characters/character-daeon-liang.html" class="wiki-link">Daeon Liàng</a> — Starlit
+                        Czar (Close-quarters combat enforcer)</li>
                 </ul>
 
                 <h3 class="section-subtitle">Starlit Alpha</h3>
-                <p><a href="../characters/character-marate-jalo.html" class="wiki-link">Starlit Alpha</a> serves as the mentor and last line of defense — a failsafe beyond the core team. When the Starlite 7th falls, he comes and rights the wrongs.</p>
+                <p><a href="../characters/character-marate-jalo.html" class="wiki-link">Starlit Alpha</a> serves as the
+                    mentor and last line of defense — a failsafe beyond the core team. When the Starlite 7th falls, he
+                    comes and rights the wrongs.</p>
             </div>
         </section>
 
@@ -180,28 +452,48 @@
             <h2 class="section-title">Major Historical Events</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Establishment of the System</h3>
-                <p>The origin event that integrated magical quantification into Royastellan civilization. The true creator or emergence point of the System remains unknown, though its influence permeates every aspect of Royastellan life.</p>
+                <p>The origin event that integrated magical quantification into Royastellan civilization. The true
+                    creator or emergence point of the System remains unknown, though its influence permeates every
+                    aspect of Royastellan life.</p>
 
                 <h3 class="section-subtitle">Formation of the Starlite 7th</h3>
-                <p>System-selected champions were covertly assembled into a coordinated elite defense unit capable of responding to multi-realm incursions, unifying royal combat traditions under a single doctrine.</p>
+                <p>System-selected champions were covertly assembled into a coordinated elite defense unit capable of
+                    responding to multi-realm incursions, unifying royal combat traditions under a single doctrine.</p>
 
                 <h3 class="section-subtitle">The Conjoined Element Incursions</h3>
-                <p>A series of off-realm invasions utilizing Tier 2 elemental magic forced Royastella to formalize defensive doctrine and expand interrealm threat monitoring infrastructure.</p>
+                <p>A series of off-realm invasions utilizing Tier 2 elemental magic forced Royastella to formalize
+                    defensive doctrine and expand interrealm threat monitoring infrastructure.</p>
 
                 <h3 class="section-subtitle">BLADE GUILLOTINE Infiltration & Betrayal</h3>
-                <p><a href="../characters/character-dissonant-discord.html" class="wiki-link">dissonant discord</a> infiltrated Royastella under the identity <strong>BLADE GUILLOTINE</strong>, alternating between adversary and reluctant ally before betraying the Starlite 7th. After the team defeated an incursive threat, BLADE seized the enemy's power, turned on the Runic Knights, defeated them, and opened a rift in the sky. <em>(See <a href="../stories/story-falling-stars.html" class="wiki-link">Falling Stars</a>)</em></p>
+                <p><a href="../characters/character-dissonant-discord.html" class="wiki-link">dissonant discord</a>
+                    infiltrated Royastella under the identity <strong>BLADE GUILLOTINE</strong>, alternating between
+                    adversary and reluctant ally before betraying the Starlite 7th. After the team defeated an incursive
+                    threat, BLADE seized the enemy's power, turned on the Runic Knights, defeated them, and opened a
+                    rift in the sky. <em>(See <a href="../stories/story-falling-stars.html" class="wiki-link">Falling
+                            Stars</a>)</em></p>
 
                 <h3 class="section-subtitle">Symphonic Overture</h3>
-                <p>A major cross-realm harmonic destabilization event during which <a href="../characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a> arrived in Royastella without her memories. The Starlite 7th protected her and ultimately returned her to Beeston, reinforcing the growing threat of cross-realm instability. <em>(See <a href="../stories/story-symphonic-overture.html" class="wiki-link">Symphonic Overture</a>)</em></p>
+                <p>A major cross-realm harmonic destabilization event during which <a
+                        href="../characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a> arrived in
+                    Royastella without her memories. The Starlite 7th protected her and ultimately returned her to
+                    Beeston, reinforcing the growing threat of cross-realm instability. <em>(See <a
+                            href="../stories/story-symphonic-overture.html" class="wiki-link">Symphonic
+                            Overture</a>)</em></p>
 
                 <h3 class="section-subtitle">discord Returns as Mentor</h3>
-                <p>Following Beeston's sealing, discord returned claiming Beeston had been destroyed and warning of a coming threat to Royastella. She trained the Starlite 7th in Aura Manifestation, Element Core evolution, and Harmonic Combat Restructuring — before revealing herself as the very threat she described and transforming into BLADE GUILLOTINE.</p>
+                <p>Following Beeston's sealing, discord returned claiming Beeston had been destroyed and warning of a
+                    coming threat to Royastella. She trained the Starlite 7th in Aura Manifestation, Element Core
+                    evolution, and Harmonic Combat Restructuring — before revealing herself as the very threat she
+                    described and transforming into BLADE GUILLOTINE.</p>
 
                 <h3 class="section-subtitle">Daughter Revelation Event</h3>
-                <p>Starlit Alpha arrived and initially overwhelmed BLADE. Discord then revealed a familial connection to Alpha — causing emotional hesitation that led to his capture. Alpha was taken through a dimensional skyrift into <a href="realm-nexsicon.html" class="wiki-link">Nexsicon</a>.</p>
+                <p>Starlit Alpha arrived and initially overwhelmed BLADE. Discord then revealed a familial connection to
+                    Alpha — causing emotional hesitation that led to his capture. Alpha was taken through a dimensional
+                    skyrift into <a href="realm-nexsicon.html" class="wiki-link">Nexsicon</a>.</p>
 
                 <h3 class="section-subtitle">Realm Seal — Royastella</h3>
-                <p>With BLADE GUILLOTINE triumphant, Royastella was sealed dimensionally and isolated in preparation for eventual convergence into Nexsicon.</p>
+                <p>With BLADE GUILLOTINE triumphant, Royastella was sealed dimensionally and isolated in preparation for
+                    eventual convergence into Nexsicon.</p>
             </div>
         </section>
 
@@ -217,23 +509,32 @@
                 </ul>
 
                 <h3 class="section-subtitle">Symbolism</h3>
-                <p>Stars are the central symbol of Royastellan culture, representing achievement through discipline, measurable greatness, and eternal vigilance. The star motif simultaneously evokes aristocracy and the aspiration to become a guiding light within structured destiny.</p>
+                <p>Stars are the central symbol of Royastellan culture, representing achievement through discipline,
+                    measurable greatness, and eternal vigilance. The star motif simultaneously evokes aristocracy and
+                    the aspiration to become a guiding light within structured destiny.</p>
 
                 <h3 class="section-subtitle">Technology and Arcane Engineering</h3>
-                <p>Royastella integrates magical energy into advanced weaponry and combat infrastructure, including mana-channeling arm cannons, runic reinforcement armor, multi-component combination weapon systems, and aura amplification technologies.</p>
+                <p>Royastella integrates magical energy into advanced weaponry and combat infrastructure, including
+                    mana-channeling arm cannons, runic reinforcement armor, multi-component combination weapon systems,
+                    and aura amplification technologies.</p>
 
                 <h3 class="section-subtitle">Inter-Realm Awareness</h3>
-                <p>Royastella maintains cautious awareness of alternate magical systems that do not follow System regulation. The Lúmenai harmonic resonance of Beeston and the Cymoran elemental synthesis of Nexsicon are both documented as potential threat vectors due to their unpredictability relative to System-governed magic.</p>
+                <p>Royastella maintains cautious awareness of alternate magical systems that do not follow System
+                    regulation. The Lúmenai harmonic resonance of Beeston and the Cymoran elemental synthesis of
+                    Nexsicon are both documented as potential threat vectors due to their unpredictability relative to
+                    System-governed magic.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Name Etymology</h2>
             <div class="section-content">
-                <p>The name <strong>Royastella</strong> derives from the phrase <strong>"Royal Stella,"</strong> meaning <em>Royal Star</em>.</p>
+                <p>The name <strong>Royastella</strong> derives from the phrase <strong>"Royal Stella,"</strong> meaning
+                    <em>Royal Star</em>.</p>
             </div>
         </section>
 
     </div>
 </body>
+
 </html>

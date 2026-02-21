@@ -1,60 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marate Jalo // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff; --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8; --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5); }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
-        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
-        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .back-link:hover { color: var(--accent-cyan); }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
-        .form-toggle { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; padding: 20px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; }
-        .form-button { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 12px 24px; background: transparent; border: 2px solid rgba(233, 30, 99, 0.3); color: var(--text-dim); border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
-        .form-button:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
-        .form-button.active { background: var(--secondary-pink); border-color: var(--secondary-pink); color: var(--dark-bg); box-shadow: var(--glow-pink); }
-        .character-form { display: none; }
-        .character-form.active { display: block; animation: fadeIn 0.5s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .character-header { display: grid; grid-template-columns: 400px 1fr; gap: 60px; margin-bottom: 60px; }
-        .character-visual { position: relative; }
-        .character-image { width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(233, 30, 99, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
-        .faction-logo { position: absolute; top: 16px; right: 16px; width: 80px; height: auto; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7)); }
-        .character-info { display: flex; flex-direction: column; justify-content: center; }
-        .character-name { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; line-height: 1.1; }
-        .character-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 32px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 24px; }
-        .stat-item { display: flex; flex-direction: column; }
-        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-        .stat-value { font-family: 'Archivo', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
-        .character-quote { margin-top: 32px; padding: 20px 24px; background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05)); border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif; font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
-        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 12px; padding: 32px; margin-bottom: 32px; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--accent-cyan); margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1rem; }
-        .section-content p { margin-bottom: 16px; }
-        .section-content ul { list-style: none; padding-left: 0; margin: 16px 0; }
-        .section-content li { padding-left: 24px; margin-bottom: 8px; position: relative; }
-        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); }
-        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3); transition: all 0.2s ease; }
-        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
-        @media (max-width: 1024px) { .character-header { grid-template-columns: 1fr; gap: 40px; } .character-visual { max-width: 400px; margin: 0 auto; } .character-name { font-size: 2.5rem; } }
-        @media (max-width: 768px) { .form-toggle { flex-wrap: wrap; } .form-button { flex: 1; min-width: 120px; } .stats-grid { grid-template-columns: 1fr; } .content-section { padding: 24px; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
+
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
+
+        .character-form {
+            display: none;
+        }
+
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
@@ -75,14 +371,23 @@
                     <h1 class="character-name">Marate Jalo</h1>
                     <p class="character-title">Mentor • Guardian</p>
                     <div class="stats-grid">
-                        <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">42</span></div>
-                        <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">6'4" (193 cm)</span></div>
-                        <div class="stat-item"><span class="stat-label">Birth Date</span><span class="stat-value">Unknown</span></div>
-                        <div class="stat-item"><span class="stat-label">Ethnicity</span><span class="stat-value">African</span></div>
-                        <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Blood Red</span></div>
-                        <div class="stat-item"><span class="stat-label">Status</span><span class="stat-value">Permanent Mana Surge</span></div>
-                        <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a></span></div>
-                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span class="stat-value">Charismatic</span></div>
+                        <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">42</span>
+                        </div>
+                        <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">6'4" (193
+                                cm)</span></div>
+                        <div class="stat-item"><span class="stat-label">Birth Date</span><span
+                                class="stat-value">Unknown</span></div>
+                        <div class="stat-item"><span class="stat-label">Ethnicity</span><span
+                                class="stat-value">African</span></div>
+                        <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Blood
+                                Red</span></div>
+                        <div class="stat-item"><span class="stat-label">Status</span><span class="stat-value">Permanent
+                                Mana Surge</span></div>
+                        <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a
+                                    href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite
+                                    7th</a></span></div>
+                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span
+                                class="stat-value">Charismatic</span></div>
                     </div>
                     <div class="character-quote">"Iacta alea est." (The die is cast.)</div>
                 </div>
@@ -91,9 +396,15 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Marate Jalo stands as the mentor, failsafe, and final safeguard of <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>. Known as the <strong>Gold Imperator</strong>, he embodies accumulated mastery, moral authority, and overwhelming combat supremacy.</p>
-                    <p>Unlike other Runic Knights, Marate exists in a permanent state of Mana Surge, granting him constant operational readiness and unparalleled power stability.</p>
-                    <p>Despite his immense strength, Marate almost never engages in combat. His role is preservation, guidance, and intervention only during catastrophic scenarios where the defeat of Starlite 7th is imminent.</p>
+                    <p>Marate Jalo stands as the mentor, failsafe, and final safeguard of <a
+                            href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>. Known as
+                        the <strong>Gold Imperator</strong>, he embodies accumulated mastery, moral authority, and
+                        overwhelming combat supremacy.</p>
+                    <p>Unlike other Runic Knights, Marate exists in a permanent state of Mana Surge, granting him
+                        constant operational readiness and unparalleled power stability.</p>
+                    <p>Despite his immense strength, Marate almost never engages in combat. His role is preservation,
+                        guidance, and intervention only during catastrophic scenarios where the defeat of Starlite 7th
+                        is imminent.</p>
                 </div>
             </section>
 
@@ -108,16 +419,23 @@
                         <li><strong>Philosophically Disciplined:</strong> Strong ethical framework</li>
                         <li><strong>Honorable to a Fault:</strong> Deliberately handicaps himself for fairness</li>
                     </ul>
-                    <p>Marate is widely beloved within his community for his warmth, accessibility, and magnetic personality. His charisma is effortless rather than cultivated, drawing trust from strangers and loyalty from allies.</p>
-                    <p>He personally oversees and raises a collective household of orphans, treating each child as family and investing heavily in their emotional and educational development.</p>
+                    <p>Marate is widely beloved within his community for his warmth, accessibility, and magnetic
+                        personality. His charisma is effortless rather than cultivated, drawing trust from strangers and
+                        loyalty from allies.</p>
+                    <p>He personally oversees and raises a collective household of orphans, treating each child as
+                        family and investing heavily in their emotional and educational development.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Personal Philosophy</h2>
                 <div class="section-content">
-                    <p>Marate believes conflict should be honest, balanced, and worthy of both participants. He routinely handicaps himself during combat to preserve fairness. Most of his scars are the result of deliberately limiting his own advantages.</p>
-                    <p>To Marate, victory gained through overwhelming imbalance is hollow. He maintains extensive awareness of global power movements and factional maneuvering—not from paranoia, but from a deeply rooted belief that stability must be quietly maintained.</p>
+                    <p>Marate believes conflict should be honest, balanced, and worthy of both participants. He
+                        routinely handicaps himself during combat to preserve fairness. Most of his scars are the result
+                        of deliberately limiting his own advantages.</p>
+                    <p>To Marate, victory gained through overwhelming imbalance is hollow. He maintains extensive
+                        awareness of global power movements and factional maneuvering—not from paranoia, but from a
+                        deeply rooted belief that stability must be quietly maintained.</p>
                 </div>
             </section>
         </div>
@@ -132,12 +450,18 @@
                     <h1 class="character-name">Starlit Alpha</h1>
                     <p class="character-title">Apex Authority</p>
                     <div class="stats-grid">
-                        <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Mentor / Failsafe</span></div>
-                        <div class="stat-item"><span class="stat-label">Elemental Core</span><span class="stat-value">Darkness</span></div>
-                        <div class="stat-item"><span class="stat-label">Mana Status</span><span class="stat-value">Always Active (Permanent Surge)</span></div>
-                        <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Royal Greaves</span></div>
-                        <div class="stat-item"><span class="stat-label">Starlight Blessing</span><span class="stat-value">Universal Blessing Access</span></div>
-                        <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Restrained Dominance</span></div>
+                        <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Mentor /
+                                Failsafe</span></div>
+                        <div class="stat-item"><span class="stat-label">Elemental Core</span><span
+                                class="stat-value">Darkness</span></div>
+                        <div class="stat-item"><span class="stat-label">Mana Status</span><span
+                                class="stat-value">Always Active (Permanent Surge)</span></div>
+                        <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Royal
+                                Greaves</span></div>
+                        <div class="stat-item"><span class="stat-label">Starlight Blessing</span><span
+                                class="stat-value">Universal Blessing Access</span></div>
+                        <div class="stat-item"><span class="stat-label">Combat Style</span><span
+                                class="stat-value">Restrained Dominance</span></div>
                     </div>
                     <div class="character-quote">"I won't let any of you fall."</div>
                 </div>
@@ -146,7 +470,8 @@
             <section class="content-section">
                 <h2 class="section-title">Combat Profile</h2>
                 <div class="section-content">
-                    <p><strong>Starlit Alpha</strong> functions as the apex authority among Runic Knights. His presence symbolizes the System's ultimate contingency against existential collapse.</p>
+                    <p><strong>Starlit Alpha</strong> functions as the apex authority among Runic Knights. His presence
+                        symbolizes the System's ultimate contingency against existential collapse.</p>
                     <h3 class="section-subtitle">Royal Greaves</h3>
                     <p>A pair of enhanced shin guards that serve as both weapon and mobility amplifier.</p>
                     <ul>
@@ -155,9 +480,11 @@
                         <li>Vertical and horizontal mobility expansion</li>
                         <li>Devastating close-range kick-based combat</li>
                     </ul>
-                    <p>Marate integrates Royal Greaves into a combat style centered around devastating lower-body striking techniques and aerial engagement.</p>
+                    <p>Marate integrates Royal Greaves into a combat style centered around devastating lower-body
+                        striking techniques and aerial engagement.</p>
                     <h3 class="section-subtitle">Starlight Blessing: Universal Blessing Access</h3>
-                    <p>Marate possesses unrestricted access to every Starlight Blessing utilized by other Runic Knights.</p>
+                    <p>Marate possesses unrestricted access to every Starlight Blessing utilized by other Runic Knights.
+                    </p>
                     <ul>
                         <li>Tactical adaptability across all engagement types</li>
                         <li>Ability to mirror or counter allied or enemy Blessing usage</li>
@@ -176,7 +503,8 @@
                         <li>Emergency battlefield equalizer</li>
                         <li>Keeper of institutional memory</li>
                     </ul>
-                    <p>He combines mastery across every weapon category with devastating hand-to-hand combat, often favoring brass knuckles, barehanded combat, and weapon improvisation.</p>
+                    <p>He combines mastery across every weapon category with devastating hand-to-hand combat, often
+                        favoring brass knuckles, barehanded combat, and weapon improvisation.</p>
                 </div>
             </section>
         </div>
@@ -191,12 +519,18 @@
                     <h1 class="character-name">The Gold Imperator</h1>
                     <p class="character-title">Final Safeguard</p>
                     <div class="stats-grid">
-                        <div class="stat-item"><span class="stat-label">Activation</span><span class="stat-value">Heaven's Mandate</span></div>
-                        <div class="stat-item"><span class="stat-label">Trigger Condition</span><span class="stat-value">All Knights Fallen</span></div>
-                        <div class="stat-item"><span class="stat-label">Arsenal</span><span class="stat-value">Full Starlit Weapons</span></div>
-                        <div class="stat-item"><span class="stat-label">Status</span><span class="stat-value">Absolute Dominance</span></div>
-                        <div class="stat-item"><span class="stat-label">Classification</span><span class="stat-value">Final Defense Protocol</span></div>
-                        <div class="stat-item"><span class="stat-label">Purpose</span><span class="stat-value">Last Resort Justice</span></div>
+                        <div class="stat-item"><span class="stat-label">Activation</span><span
+                                class="stat-value">Heaven's Mandate</span></div>
+                        <div class="stat-item"><span class="stat-label">Trigger Condition</span><span
+                                class="stat-value">All Knights Fallen</span></div>
+                        <div class="stat-item"><span class="stat-label">Arsenal</span><span class="stat-value">Full
+                                Starlit Weapons</span></div>
+                        <div class="stat-item"><span class="stat-label">Status</span><span class="stat-value">Absolute
+                                Dominance</span></div>
+                        <div class="stat-item"><span class="stat-label">Classification</span><span
+                                class="stat-value">Final Defense Protocol</span></div>
+                        <div class="stat-item"><span class="stat-label">Purpose</span><span class="stat-value">Last
+                                Resort Justice</span></div>
                     </div>
                     <div class="character-quote">"This ends now."</div>
                 </div>
@@ -205,8 +539,11 @@
             <section class="content-section">
                 <h2 class="section-title">Heaven's Mandate</h2>
                 <div class="section-content">
-                    <p><strong>Activation Condition:</strong> Unlocks when all other Runic Knights have fallen or been rendered combat ineffective. Activates when Starlit Alpha successfully teleports all the fallem Runic Knights back to the Starlight Citidel and collects their weapons</p>
-                    <p><strong>Effect:</strong> Royal Greaves transform into a full-body combat system incorporating all Starlit Weapons.</p>
+                    <p><strong>Activation Condition:</strong> Unlocks when all other Runic Knights have fallen or been
+                        rendered combat ineffective. Activates when Starlit Alpha successfully teleports all the fallem
+                        Runic Knights back to the Starlight Citidel and collects their weapons</p>
+                    <p><strong>Effect:</strong> Royal Greaves transform into a full-body combat system incorporating all
+                        Starlit Weapons.</p>
                     <h3 class="section-subtitle">Operational Enhancements</h3>
                     <ul>
                         <li>Multi-weapon integration</li>
@@ -214,15 +551,19 @@
                         <li>System-level combat synchronization</li>
                         <li>Absolute battlefield dominance</li>
                     </ul>
-                    <p>Heaven's Mandate is considered the final defensive protocol of the Runic System. This shift engenders the transition from Starlit Alpha into <strong>The Gold Imperator</strong>.</p>
+                    <p>Heaven's Mandate is considered the final defensive protocol of the Runic System. This shift
+                        engenders the transition from Starlit Alpha into <strong>The Gold Imperator</strong>.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">The Final Safeguard</h2>
                 <div class="section-content">
-                    <p>The Gold Imperator functions as the embodiment of last-resort justice and generational continuity. When all else has fallen, when Starlite 7th can no longer protect what must be protected, Marate Jalo becomes the final line between collapse and salvation.</p>
-                    <p>In this state, restraint gives way to absolute necessity. The man who handicaps himself for fairness becomes the unstoppable force that ensures survival.</p>
+                    <p>The Gold Imperator functions as the embodiment of last-resort justice and generational
+                        continuity. When all else has fallen, when Starlite 7th can no longer protect what must be
+                        protected, Marate Jalo becomes the final line between collapse and salvation.</p>
+                    <p>In this state, restraint gives way to absolute necessity. The man who handicaps himself for
+                        fairness becomes the unstoppable force that ensures survival.</p>
                 </div>
             </section>
         </div>
@@ -246,13 +587,20 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> Marate — Slovenian for "hate," symbolizing the adversities he absorbs and transforms; Jalo — Finnish for "noble," reflecting the moral and philosophical height he maintains</li>
-                    <li><strong>Appearance:</strong> Extremely muscular broad-shouldered build; prominent jawline; full goatee; blood-red eyes; slicked-back dark hair</li>
-                    <li><strong>Design Notes:</strong> White dress shirt with rolled sleeves, dark pinstripe vest with red striping, gold engraved belt buckle, gold bracelet</li>
+                    <li><strong>Name Etymology:</strong> Marate — Slovenian for "hate," symbolizing the adversities he
+                        absorbs and transforms; Jalo — Finnish for "noble," reflecting the moral and philosophical
+                        height he maintains</li>
+                    <li><strong>Appearance:</strong> Extremely muscular broad-shouldered build; prominent jawline; full
+                        goatee; blood-red eyes; slicked-back dark hair</li>
+                    <li><strong>Design Notes:</strong> White dress shirt with rolled sleeves, dark pinstripe vest with
+                        red striping, gold engraved belt buckle, gold bracelet</li>
                     <li><strong>Unique Status:</strong> Only Runic Knight in permanent Mana Surge state</li>
-                    <li><strong>Orphan Guardian:</strong> Personally raises and educates a collective household of orphans</li>
-                    <li><strong>Combat Philosophy:</strong> Deliberately handicaps himself for fairness; most scars from self-imposed limitations</li>
-                    <li><strong>Favorite Quote:</strong> "Iacta alea est" (The die is cast) — a reference to Julius Caesar crossing the Rubicon</li>
+                    <li><strong>Orphan Guardian:</strong> Personally raises and educates a collective household of
+                        orphans</li>
+                    <li><strong>Combat Philosophy:</strong> Deliberately handicaps himself for fairness; most scars from
+                        self-imposed limitations</li>
+                    <li><strong>Favorite Quote:</strong> "Iacta alea est" (The die is cast) — a reference to Julius
+                        Caesar crossing the Rubicon</li>
                 </ul>
             </div>
         </section>
@@ -267,4 +615,5 @@
         }
     </script>
 </body>
+
 </html>

@@ -1,113 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexsicon // CRIOS Realm Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
-        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
-        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .back-link:hover { color: var(--accent-cyan); }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
-        .realm-header { text-align: center; margin-bottom: 80px; animation: fadeInScale 1s ease-out; }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95) translateY(-20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-        .realm-name { font-family: 'Orbitron', sans-serif; font-size: 4.5rem; font-weight: 900;
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .realm-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .realm-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 16px; filter: drop-shadow(var(--glow-pink)); }
-        .realm-tagline { font-family: 'Archivo', sans-serif; font-size: 1.4rem; font-style: italic;
-            color: var(--text-dim); max-width: 700px; margin: 0 auto; }
-        .realm-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 60px; }
-        .stat-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 20px; text-align: center; }
-        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
-        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .realm-tagline {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .realm-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 12px; padding: 40px; margin-bottom: 40px; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700;
-            color: var(--secondary-pink); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 2px; }
-        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 600;
-            color: var(--accent-cyan); margin-top: 32px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
-        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1.05rem; }
-        .section-content p { margin-bottom: 20px; }
-        .section-content ul { list-style: none; padding-left: 0; }
-        .section-content li { padding-left: 28px; margin-bottom: 12px; position: relative; }
-        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); font-size: 1.2rem; }
-        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3); transition: all 0.2s ease; }
-        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
-        .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 24px 0; }
-        .tier-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 16px; text-align: center; }
-        .tier-number { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 8px; }
-        .tier-name { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--secondary-pink); margin-bottom: 4px; }
-        .tier-desc { font-size: 0.85rem; color: var(--text-dim); }
-        table { width: 100%; border-collapse: collapse; margin: 24px 0; }
-        th { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
-            color: var(--accent-cyan); border-bottom: 1px solid rgba(0, 217, 255, 0.3); padding: 12px 16px; text-align: left; }
-        td { padding: 12px 16px; color: var(--text-dim); border-bottom: 1px solid rgba(233, 30, 99, 0.1); font-size: 0.95rem; }
-        tr:last-child td { border-bottom: none; }
-        td strong { color: var(--text-primary); }
-        @media (max-width: 768px) { .realm-name { font-size: 2.5rem; } .content-section { padding: 24px; } }
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .tier-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .tier-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .tier-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 4px;
+        }
+
+        .tier-desc {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        td strong {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .realm-name {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../realms.html" class="back-link">← All Realms</a></nav>
     <div class="container">
 
         <header class="realm-header">
-            <img src="../assets/icons/Nexsicon Logo.png" alt="Nexsicon Logo" style="max-width: 100%; width: 500px; margin-bottom: 20px;">
+            <img src="../assets/icons/Nexsicon Logo.png" alt="Nexsicon Logo"
+                style="max-width: 100%; width: 500px; margin-bottom: 20px;">
             <h1 class="realm-name">NEXSICON</h1>
-            <p class="realm-tagline">"Where realms converge, truths intertwine, and existence is rewritten through unity and collision."</p>
+            <p class="realm-tagline">"Where realms converge, truths intertwine, and existence is rewritten through unity
+                and collision."</p>
         </header>
 
         <div class="realm-stats">
-            <div class="stat-card"><div class="stat-label">Reality Type</div><div class="stat-value">Convergence Node</div></div>
-            <div class="stat-card"><div class="stat-label">Magic System</div><div class="stat-value">Cymora</div></div>
-            <div class="stat-card"><div class="stat-label">Stability</div><div class="stat-value">Fluctuating</div></div>
-            <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value">Active</div></div>
+            <div class="stat-card">
+                <div class="stat-label">Reality Type</div>
+                <div class="stat-value">Convergence Node</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Magic System</div>
+                <div class="stat-value">Cymora</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Stability</div>
+                <div class="stat-value">Fluctuating</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Status</div>
+                <div class="stat-value">Active</div>
+            </div>
         </div>
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p><strong>Nexsicon</strong> is a trans-realm convergence world believed to exist at the intersection of multiple dimensional pathways. Often described as a "living junction," Nexsicon serves as both a natural crossroads for inter-realm travel and a metaphysical stabilizer for merging realities.</p>
-                <p>Unlike most realms, which develop in relative isolation, Nexsicon's existence is defined by connection, assimilation, and resonance exchange between external worlds. It is the birthplace of the elemental-mystic system known as <strong>Cymora</strong>, and historically served as the primary center for advanced multiversal theoretical research — including the now-forbidden study of <strong>Lodesouls</strong>.</p>
-                <p>Nexsicon is widely regarded as one of the most culturally and magically diverse realms in recorded cosmology, and is uniquely resilient to convergence strain — capable of surviving events that would typically destabilize lesser realms.</p>
+                <p><strong>Nexsicon</strong> is a trans-realm convergence world believed to exist at the intersection of
+                    multiple dimensional pathways. Often described as a "living junction," Nexsicon serves as both a
+                    natural crossroads for inter-realm travel and a metaphysical stabilizer for merging realities.</p>
+                <p>Unlike most realms, which develop in relative isolation, Nexsicon's existence is defined by
+                    connection, assimilation, and resonance exchange between external worlds. It is the birthplace of
+                    the elemental-mystic system known as <strong>Cymora</strong>, and historically served as the primary
+                    center for advanced multiversal theoretical research — including the now-forbidden study of
+                    <strong>Lodesouls</strong>.</p>
+                <p>Nexsicon is widely regarded as one of the most culturally and magically diverse realms in recorded
+                    cosmology, and is uniquely resilient to convergence strain — capable of surviving events that would
+                    typically destabilize lesser realms.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Cosmological Role</h2>
             <div class="section-content">
-                <p>Nexsicon functions at the intersection of multiversal forces, making it the most cosmologically significant realm in active play.</p>
+                <p>Nexsicon functions at the intersection of multiversal forces, making it the most cosmologically
+                    significant realm in active play.</p>
                 <ul>
-                    <li>A <strong>dimensional nexus</strong> where realm-boundary permeability is naturally elevated</li>
+                    <li>A <strong>dimensional nexus</strong> where realm-boundary permeability is naturally elevated
+                    </li>
                     <li>A <strong>research epicenter</strong> for convergence theory and multiversal resonance</li>
                     <li>The <strong>origin point</strong> of the Cymoran elemental synthesis system</li>
                     <li>A realm historically linked to the accidental merging of non-magical and mythic domains</li>
-                    <li>The current destination and holding ground for the displaced <a href="../characters/character-mahana-sahi.html" class="wiki-link">Lovely Hearts</a> and <a href="../characters/character-marate-jalo.html" class="wiki-link">Starlit Alpha</a></li>
+                    <li>The current destination and holding ground for the displaced <a
+                            href="../characters/character-mahana-sahi.html" class="wiki-link">Lovely Hearts</a> and <a
+                            href="../characters/character-marate-jalo.html" class="wiki-link">Starlit Alpha</a></li>
                 </ul>
             </div>
         </section>
@@ -115,8 +381,13 @@
         <section class="content-section">
             <h2 class="section-title">Magic System: Cymora</h2>
             <div class="section-content">
-                <p><strong>Cymora</strong> is Nexsicon's dominant magical discipline, built upon elemental resonance and harmonic synthesis. Unlike traditional elemental systems that treat elements as isolated forces, Cymora treats them as <em>interdependent frequencies</em> capable of recombination and modulation.</p>
-                <p>Cymoran magic emphasizes <strong>composition, not control</strong>. Practitioners do not command elements directly — instead, they synchronize with elemental frequency patterns, construct harmonic spell matrices, and maintain resonance stability throughout casting.</p>
+                <p><strong>Cymora</strong> is Nexsicon's dominant magical discipline, built upon elemental resonance and
+                    harmonic synthesis. Unlike traditional elemental systems that treat elements as isolated forces,
+                    Cymora treats them as <em>interdependent frequencies</em> capable of recombination and modulation.
+                </p>
+                <p>Cymoran magic emphasizes <strong>composition, not control</strong>. Practitioners do not command
+                    elements directly — instead, they synchronize with elemental frequency patterns, construct harmonic
+                    spell matrices, and maintain resonance stability throughout casting.</p>
 
                 <h3 class="section-subtitle">Base Elements</h3>
                 <div class="tier-grid">
@@ -143,39 +414,85 @@
                 </div>
 
                 <h3 class="section-subtitle">Combined Elemental Disciplines</h3>
-                <p>Cymora allows controlled harmonic blending of elemental frequencies into higher-order disciplines:</p>
+                <p>Cymora allows controlled harmonic blending of elemental frequencies into higher-order disciplines:
+                </p>
                 <table>
                     <thead>
-                        <tr><th>Name</th><th>Discipline</th><th>Composition</th><th>Cymoran Philosophy</th></tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Discipline</th>
+                            <th>Composition</th>
+                            <th>Cymoran Philosophy</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Gwynahr</strong></td><td>Ice</td><td>Gwynt + Nahr</td><td>Stillness through motion containment</td></tr>
-                        <tr><td><strong>Tânahr</strong></td><td>Poison</td><td>Tânor + Nahr</td><td>Corruption through transformative saturation</td></tr>
-                        <tr><td><strong>Tângwynt</strong></td><td>Lightning</td><td>Tânor + Gwynt</td><td>Sudden catalytic expression</td></tr>
-                        <tr><td><strong>Tândâr</strong></td><td>Metal</td><td>Tânor + Dâr</td><td>Strength forged through pressure and heat</td></tr>
-                        <tr><td><strong>Nahdâr</strong></td><td>Plant</td><td>Nahr + Dâr</td><td>Life cultivated through nourishment and structure</td></tr>
-                        <tr><td><strong>Gwyndâr</strong></td><td>Martial Flow</td><td>Gwynt + Dâr</td><td>Movement anchored through discipline</td></tr>
+                        <tr>
+                            <td><strong>Gwynahr</strong></td>
+                            <td>Ice</td>
+                            <td>Gwynt + Nahr</td>
+                            <td>Stillness through motion containment</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tânahr</strong></td>
+                            <td>Poison</td>
+                            <td>Tânor + Nahr</td>
+                            <td>Corruption through transformative saturation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tângwynt</strong></td>
+                            <td>Lightning</td>
+                            <td>Tânor + Gwynt</td>
+                            <td>Sudden catalytic expression</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tândâr</strong></td>
+                            <td>Metal</td>
+                            <td>Tânor + Dâr</td>
+                            <td>Strength forged through pressure and heat</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nahdâr</strong></td>
+                            <td>Plant</td>
+                            <td>Nahr + Dâr</td>
+                            <td>Life cultivated through nourishment and structure</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gwyndâr</strong></td>
+                            <td>Martial Flow</td>
+                            <td>Gwynt + Dâr</td>
+                            <td>Movement anchored through discipline</td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <h3 class="section-subtitle">Cymoran Casting Theory</h3>
-                <p>Advanced Cymora requires exceptional cognitive multitasking and emotional regulation. Elemental over-saturation can destabilize the caster's resonance identity, and mixed-element spells risk harmonic backlash if improperly synchronized. Cymora is also heavily dependent on environmental resonance density.</p>
+                <p>Advanced Cymora requires exceptional cognitive multitasking and emotional regulation. Elemental
+                    over-saturation can destabilize the caster's resonance identity, and mixed-element spells risk
+                    harmonic backlash if improperly synchronized. Cymora is also heavily dependent on environmental
+                    resonance density.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Lodesoul Research & the Nexsican Crisis</h2>
             <div class="section-content">
-                <p>Nexsicon is infamous for pioneering the theoretical and experimental study of <strong>Lodesouls</strong> — individuals whose existence anchors or redirects universal continuity. A Nexsican scientist successfully demonstrated three controversial principles:</p>
+                <p>Nexsicon is infamous for pioneering the theoretical and experimental study of
+                    <strong>Lodesouls</strong> — individuals whose existence anchors or redirects universal continuity.
+                    A Nexsican scientist successfully demonstrated three controversial principles:</p>
                 <ul>
                     <li>Removing a Lodesoul does not immediately destroy its home realm.</li>
                     <li>Transferring a Lodesoul causes realm gravitational convergence.</li>
                     <li>Destroyed Lodesouls reincarnate or reassign to new hosts.</li>
                 </ul>
-                <p>These findings were validated when the scientist's daughter unintentionally summoned a Lodesoul from a non-magical realm, triggering a permanent realm merger. In the aftermath, multiple mythic lost civilizations manifested physically within Nexsicon, global authorities outlawed further Lodesoul research, and the lead scientist disappeared shortly after surrendering his work.</p>
+                <p>These findings were validated when the scientist's daughter unintentionally summoned a Lodesoul from
+                    a non-magical realm, triggering a permanent realm merger. In the aftermath, multiple mythic lost
+                    civilizations manifested physically within Nexsicon, global authorities outlawed further Lodesoul
+                    research, and the lead scientist disappeared shortly after surrendering his work.</p>
 
                 <h3 class="section-subtitle">Mythic Civilizations</h3>
-                <p>Following the forced realm merger triggered by Lodesoul research, the following previously legendary territories manifested physically within Nexsicon's geography, permanently altering its magical topology:</p>
+                <p>Following the forced realm merger triggered by Lodesoul research, the following previously legendary
+                    territories manifested physically within Nexsicon's geography, permanently altering its magical
+                    topology:</p>
                 <ul>
                     <li>Atlantis</li>
                     <li>Lemuria</li>
@@ -192,13 +509,24 @@
             <h2 class="section-title">Connected Factions</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Praxis Verax Affinas</h3>
-                <p><a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> is an advanced research and intervention organization whose theoretical frameworks originated from forbidden Nexsican multiversal science. PVA operated in Nexsicon as the primary convergence research body before its collapse.</p>
+                <p><a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> is
+                    an advanced research and intervention organization whose theoretical frameworks originated from
+                    forbidden Nexsican multiversal science. PVA operated in Nexsicon as the primary convergence research
+                    body before its collapse.</p>
 
                 <h3 class="section-subtitle">Destiny's Penance</h3>
-                <p><a href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a>, led by <a href="../characters/character-tiala-corsolis.html" class="wiki-link">Tiala Hartlight</a>, continues convergence research under moral and philosophical conflict with Nexsicon's original cautionary principles. Their pursuit of the Akashic Record and Ultimatera formation is centered in Nexsicon.</p>
+                <p><a href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a>, led by
+                    <a href="../characters/character-tiala-corsolis.html" class="wiki-link">Tiala Hartlight</a>,
+                    continues convergence research under moral and philosophical conflict with Nexsicon's original
+                    cautionary principles. Their pursuit of the Akashic Record and Ultimatera formation is centered in
+                    Nexsicon.</p>
 
                 <h3 class="section-subtitle">Reason Theory</h3>
-                <p><a href="../factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a>, founded by <a href="../characters/character-ami-hartbreak.html" class="wiki-link">Ami Hartbreak</a> and <a href="../characters/character-windi-lightfall.html" class="wiki-link">Windi Lightfall</a>, operates in direct opposition to deterministic convergence doctrine, using Nexsicon as the battleground for their destabilization campaign against Destiny's Penance.</p>
+                <p><a href="../factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a>, founded by <a
+                        href="../characters/character-ami-hartbreak.html" class="wiki-link">Ami Hartbreak</a> and <a
+                        href="../characters/character-windi-lightfall.html" class="wiki-link">Windi Lightfall</a>,
+                    operates in direct opposition to deterministic convergence doctrine, using Nexsicon as the
+                    battleground for their destabilization campaign against Destiny's Penance.</p>
             </div>
         </section>
 
@@ -206,22 +534,38 @@
             <h2 class="section-title">Major Historical Events</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">The First Lodesoul Summoning</h3>
-                <p>The first confirmed inter-realm anchor transfer, triggered by a scientist's daughter. Caused Nexsicon's first documented forced realm merger and permanently altered the realm's geographic and magical topology.</p>
+                <p>The first confirmed inter-realm anchor transfer, triggered by a scientist's daughter. Caused
+                    Nexsicon's first documented forced realm merger and permanently altered the realm's geographic and
+                    magical topology.</p>
 
                 <h3 class="section-subtitle">The Lodesoul Research Ban</h3>
-                <p>International Nexsican governance declared Lodesoul experimentation illegal following the crisis. Enforcement resulted in the dissolution of multiple research institutions and the disappearance of the principal architect of Lodesoul theory.</p>
+                <p>International Nexsican governance declared Lodesoul experimentation illegal following the crisis.
+                    Enforcement resulted in the dissolution of multiple research institutions and the disappearance of
+                    the principal architect of Lodesoul theory.</p>
 
                 <h3 class="section-subtitle">Kidnapping of Mahana — Avant-Garde Composition</h3>
-                <p><a href="../characters/character-dissonant-discord.html" class="wiki-link">dissonant discord</a> abducted <a href="../characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a> and opened a dimensional rift into Nexsicon. The Lovely Hearts pursued rescue and became trapped in the realm. Kali Dana attacked discord, who cast her into a gravity well — causing temporal displacement. <em>(See <a href="../stories/story-avant-garde-composition.html" class="wiki-link">Avant-Garde Composition</a>)</em></p>
+                <p><a href="../characters/character-dissonant-discord.html" class="wiki-link">dissonant discord</a>
+                    abducted <a href="../characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a> and
+                    opened a dimensional rift into Nexsicon. The Lovely Hearts pursued rescue and became trapped in the
+                    realm. Kali Dana attacked discord, who cast her into a gravity well — causing temporal displacement.
+                    <em>(See <a href="../stories/story-avant-garde-composition.html" class="wiki-link">Avant-Garde
+                            Composition</a>)</em></p>
 
                 <h3 class="section-subtitle">Revelation of True Identities</h3>
-                <p>Within Nexsicon, <a href="../characters/character-tiala-corsolis.html" class="wiki-link">Tiala Corsolis</a> was revealed as both dissonant discord and BLADE GUILLOTINE — the singular force responsible for Beeston's sealing and Royastella's fall.</p>
+                <p>Within Nexsicon, <a href="../characters/character-tiala-corsolis.html" class="wiki-link">Tiala
+                        Corsolis</a> was revealed as both dissonant discord and BLADE GUILLOTINE — the singular force
+                    responsible for Beeston's sealing and Royastella's fall.</p>
 
                 <h3 class="section-subtitle">Praxis Verax Affinas Exposed & Collapsed</h3>
-                <p>The structure and goals of <a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> became public. Internal ideological tensions escalated into organizational disintegration.</p>
+                <p>The structure and goals of <a href="../factions/faction-praxis-verax-affinas.html"
+                        class="wiki-link">Praxis Verax Affinas</a> became public. Internal ideological tensions
+                    escalated into organizational disintegration.</p>
 
                 <h3 class="section-subtitle">The Grand Magic Catastrophe</h3>
-                <p>Tiala, recognizing that integrating Beeston and Royastella would take approximately ten years, initiated a forced universal convergence spell to hasten the merge. The spell partially succeeded but destabilized reality on a catastrophic scale. <em>(See <a href="../lore/lore-cascade-resonance.html" class="wiki-link">Cascade Resonance</a>)</em></p>
+                <p>Tiala, recognizing that integrating Beeston and Royastella would take approximately ten years,
+                    initiated a forced universal convergence spell to hasten the merge. The spell partially succeeded
+                    but destabilized reality on a catastrophic scale. <em>(See <a
+                            href="../lore/lore-cascade-resonance.html" class="wiki-link">Cascade Resonance</a>)</em></p>
 
                 <h3 class="section-subtitle">Cascade Resonance Event</h3>
                 <p>The catastrophic fallout of the Grand Magic Catastrophe:</p>
@@ -234,37 +578,57 @@
                 </ul>
 
                 <h3 class="section-subtitle">Tiānshàng Massacre</h3>
-                <p>A major emotional and narrative destabilization event triggered by Cascade Resonance fallout. <a href="../characters/character-fu-ci-tianshang.html" class="wiki-link">Fú cì Tiānshàng</a> lost the ability to become Zhòu-chún Shìfàng, and Xīwàng Tiānshàng disappeared.</p>
+                <p>A major emotional and narrative destabilization event triggered by Cascade Resonance fallout. <a
+                        href="../characters/character-fu-ci-tianshang.html" class="wiki-link">Fú cì Tiānshàng</a> lost
+                    the ability to become Zhòu-chún Shìfàng, and Xīwàng Tiānshàng disappeared.</p>
 
                 <h3 class="section-subtitle">The Great Schism</h3>
-                <p>Following PVA's collapse, Ami left the organization. The remaining ideological forces split into two factions: <a href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a> under Tiala, pursuing the Akashic Record and accepting moral sacrifice; and <a href="../factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a> under Ami and Windi, opposing deterministic convergence entirely.</p>
+                <p>Following PVA's collapse, Ami left the organization. The remaining ideological forces split into two
+                    factions: <a href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's
+                        Penance</a> under Tiala, pursuing the Akashic Record and accepting moral sacrifice; and <a
+                        href="../factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a> under Ami and
+                    Windi, opposing deterministic convergence entirely.</p>
 
                 <h3 class="section-subtitle">Kali's Return — The Rise of Odisse Nocere</h3>
-                <p>Kali Dana returned from the gravity well having aged an extra year. She assumed the identity of <a href="../characters/character-odisse-nocere.html" class="wiki-link">Odisse Nocere</a> and aligned with Reason Theory after Ami revealed that dissonant discord was in fact Tiala Hartlight.</p>
+                <p>Kali Dana returned from the gravity well having aged an extra year. She assumed the identity of <a
+                        href="../characters/character-odisse-nocere.html" class="wiki-link">Odisse Nocere</a> and
+                    aligned with Reason Theory after Ami revealed that dissonant discord was in fact Tiala Hartlight.
+                </p>
 
                 <h3 class="section-subtitle">Rescue and Adoption of Fú cì Tiānshàng</h3>
-                <p><a href="../characters/character-windi-lightfall.html" class="wiki-link">Windi Lightfall</a> phasewalked into an alley and eliminated a group of assassins targeting Fú cì, then informally adopted her. The encounter triggered the activation of the Tiānshàng ocular legacy and the emergence of Fú cì's fractured Zhòu-chún transformation.</p>
+                <p><a href="../characters/character-windi-lightfall.html" class="wiki-link">Windi Lightfall</a>
+                    phasewalked into an alley and eliminated a group of assassins targeting Fú cì, then informally
+                    adopted her. The encounter triggered the activation of the Tiānshàng ocular legacy and the emergence
+                    of Fú cì's fractured Zhòu-chún transformation.</p>
 
                 <h3 class="section-subtitle">Realm Integration Phase</h3>
-                <p>Beeston and Royastella began convergence into Nexsicon. Estimated integration timeline: two years, setting the stage for the two-year time skip and the emergence of Ultimatera.</p>
+                <p>Beeston and Royastella began convergence into Nexsicon. Estimated integration timeline: two years,
+                    setting the stage for the two-year time skip and the emergence of Ultimatera.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Cultural Identity</h2>
             <div class="section-content">
-                <p>Nexsicon culture is defined by intellectual curiosity, philosophical pluralism, and pragmatic acceptance of multiversal coexistence. Citizens often view identity as fluid and evolution as inevitable.</p>
-                <p>Cross-cultural assimilation is common, resulting in hybrid traditions, languages, and magical practices. Nexsicon's academic institutions maintain significant influence across multiple realms, despite strict oversight on convergence experimentation following the Lodesoul ban.</p>
+                <p>Nexsicon culture is defined by intellectual curiosity, philosophical pluralism, and pragmatic
+                    acceptance of multiversal coexistence. Citizens often view identity as fluid and evolution as
+                    inevitable.</p>
+                <p>Cross-cultural assimilation is common, resulting in hybrid traditions, languages, and magical
+                    practices. Nexsicon's academic institutions maintain significant influence across multiple realms,
+                    despite strict oversight on convergence experimentation following the Lodesoul ban.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Name Etymology</h2>
             <div class="section-content">
-                <p>The name <strong>Nexsicon</strong> derives from the words <strong>"Nexus"</strong> and <strong>"Connection,"</strong> reflecting its role as the multiversal intersection point of the Crios cosmology.</p>
+                <p>The name <strong>Nexsicon</strong> derives from the words <strong>"Nexus"</strong> and
+                    <strong>"Connection,"</strong> reflecting its role as the multiversal intersection point of the
+                    Crios cosmology.</p>
             </div>
         </section>
 
     </div>
 </body>
+
 </html>

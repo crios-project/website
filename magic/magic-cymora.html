@@ -1,73 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cymora // CRIOS Magic System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
-        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
-        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .back-link:hover { color: var(--accent-cyan); }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
-        .page-header { text-align: center; margin-bottom: 80px; animation: fadeInScale 1s ease-out; }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95) translateY(-20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-        .page-title { font-family: 'Orbitron', sans-serif; font-size: 4.5rem; font-weight: 900;
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 16px; filter: drop-shadow(var(--glow-pink)); }
-        .page-subtitle { font-family: 'Archivo', sans-serif; font-size: 1.4rem; font-style: italic;
-            color: var(--text-dim); max-width: 700px; margin: 0 auto; }
-        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 60px; }
-        .stat-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 8px; padding: 20px; text-align: center; }
-        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
-        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .page-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px; padding: 40px; margin-bottom: 40px; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700;
-            color: var(--secondary-pink); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 2px; }
-        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 600;
-            color: var(--accent-cyan); margin-top: 32px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
-        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1.05rem; }
-        .section-content p { margin-bottom: 20px; }
-        .section-content ul { list-style: none; padding-left: 0; }
-        .section-content li { padding-left: 28px; margin-bottom: 12px; position: relative; }
-        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); font-size: 1.2rem; }
-        table { width: 100%; border-collapse: collapse; margin: 24px 0; }
-        th { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
-            color: var(--accent-cyan); border-bottom: 1px solid rgba(0, 217, 255, 0.3); padding: 12px 16px; text-align: left; }
-        td { padding: 12px 16px; color: var(--text-dim); border-bottom: 1px solid rgba(233, 30, 99, 0.1); font-size: 0.95rem; }
-        tr:last-child td { border-bottom: none; }
-        .principle-box { background: rgba(20, 20, 25, 0.5); border-left: 4px solid var(--secondary-pink);
-            padding: 24px; margin: 24px 0; border-radius: 4px; font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
-        @media (max-width: 768px) { .page-title { font-size: 2.5rem; } .content-section { padding: 24px; } }
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .principle-box {
+            background: rgba(20, 20, 25, 0.5);
+            border-left: 4px solid var(--secondary-pink);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../magic.html" class="back-link">← Magic Systems</a></nav>
@@ -79,17 +281,33 @@
         </header>
 
         <div class="stat-grid">
-            <div class="stat-card"><div class="stat-label">Origin Realm</div><div class="stat-value">Nexsicon</div></div>
-            <div class="stat-card"><div class="stat-label">Fuel Source</div><div class="stat-value">Meaning</div></div>
-            <div class="stat-card"><div class="stat-label">Access Method</div><div class="stat-value">Spoken Word</div></div>
-            <div class="stat-card"><div class="stat-label">Risk Profile</div><div class="stat-value">Conceptual</div></div>
+            <div class="stat-card">
+                <div class="stat-label">Origin Realm</div>
+                <div class="stat-value">Nexsicon</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Fuel Source</div>
+                <div class="stat-value">Meaning</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Access Method</div>
+                <div class="stat-value">Spoken Word</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Risk Profile</div>
+                <div class="stat-value">Conceptual</div>
+            </div>
         </div>
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p><strong>Cymora</strong> is the verbal-only magical language of Nexsicon, a reality-shaping system within the Crios Project. It is not a conventional spoken language but a <strong>sonic interface</strong>: words spoken in Cymora <strong>perform magic rather than describe it</strong>.</p>
-                <p>Cymora exists primarily as sound, cadence, and resonance. Written forms are approximations used for study, archival, and instruction.</p>
+                <p><strong>Cymora</strong> is the verbal-only magical language of Nexsicon, a reality-shaping system
+                    within the Crios Project. It is not a conventional spoken language but a <strong>sonic
+                        interface</strong>: words spoken in Cymora <strong>perform magic rather than describe
+                        it</strong>.</p>
+                <p>Cymora exists primarily as sound, cadence, and resonance. Written forms are approximations used for
+                    study, archival, and instruction.</p>
             </div>
         </section>
 
@@ -123,13 +341,33 @@
             <div class="section-content">
                 <h3 class="section-subtitle">Vowels</h3>
                 <table>
-                    <thead><tr><th>Letter</th><th>Sound</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>Letter</th>
+                            <th>Sound</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td>a</td><td>ah</td></tr>
-                        <tr><td>e</td><td>eh</td></tr>
-                        <tr><td>i</td><td>ee</td></tr>
-                        <tr><td>o</td><td>oh</td></tr>
-                        <tr><td>u</td><td>oo</td></tr>
+                        <tr>
+                            <td>a</td>
+                            <td>ah</td>
+                        </tr>
+                        <tr>
+                            <td>e</td>
+                            <td>eh</td>
+                        </tr>
+                        <tr>
+                            <td>i</td>
+                            <td>ee</td>
+                        </tr>
+                        <tr>
+                            <td>o</td>
+                            <td>oh</td>
+                        </tr>
+                        <tr>
+                            <td>u</td>
+                            <td>oo</td>
+                        </tr>
                     </tbody>
                 </table>
                 <p>Vowels may be <strong>elongated</strong> during casting to sustain effects.</p>
@@ -162,7 +400,8 @@
                     <li>Modifiers usually precede nouns</li>
                     <li><strong>Compounding</strong> is the primary word-creation method</li>
                 </ul>
-                <p><strong>Example:</strong> <em>Calon</em> (heart) + <em>Gwen</em> (light) → <strong>Calonwen</strong></p>
+                <p><strong>Example:</strong> <em>Calon</em> (heart) + <em>Gwen</em> (light) → <strong>Calonwen</strong>
+                </p>
             </div>
         </section>
 
@@ -177,7 +416,8 @@
                     <li>Alliteration</li>
                     <li>Vowel elongation</li>
                 </ul>
-                <p>Some words act as <strong>harmonic keys</strong>, stabilizing or initializing magic rather than defining it.</p>
+                <p>Some words act as <strong>harmonic keys</strong>, stabilizing or initializing magic rather than
+                    defining it.</p>
             </div>
         </section>
 
@@ -186,35 +426,96 @@
             <div class="section-content">
                 <h3 class="section-subtitle">Primary Elements</h3>
                 <table>
-                    <thead><tr><th>Element</th><th>Cymora Root</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Cymora Root</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td>Fire</td><td><strong>Tânor</strong></td></tr>
-                        <tr><td>Water</td><td><strong>Nahr</strong></td></tr>
-                        <tr><td>Wind</td><td><strong>Gwynt</strong></td></tr>
-                        <tr><td>Earth</td><td><strong>Dâr</strong></td></tr>
+                        <tr>
+                            <td>Fire</td>
+                            <td><strong>Tânor</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Water</td>
+                            <td><strong>Nahr</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Wind</td>
+                            <td><strong>Gwynt</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Earth</td>
+                            <td><strong>Dâr</strong></td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <h3 class="section-subtitle">Compound Elements</h3>
                 <table>
-                    <thead><tr><th>Element</th><th>Cymora Root</th><th>Composition</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Cymora Root</th>
+                            <th>Composition</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td>Ice</td><td>Gwynahr</td><td>Wind + Water</td></tr>
-                        <tr><td>Poison</td><td>Tânahr</td><td>Fire + Water</td></tr>
-                        <tr><td>Lightning</td><td>Tângwynt</td><td>Fire + Wind</td></tr>
-                        <tr><td>Metal</td><td>Tândâr</td><td>Fire + Earth</td></tr>
-                        <tr><td>Plant</td><td>Nahdâr</td><td>Water + Earth</td></tr>
-                        <tr><td>Martial Arts</td><td>Gwyndâr</td><td>Wind + Earth</td></tr>
+                        <tr>
+                            <td>Ice</td>
+                            <td>Gwynahr</td>
+                            <td>Wind + Water</td>
+                        </tr>
+                        <tr>
+                            <td>Poison</td>
+                            <td>Tânahr</td>
+                            <td>Fire + Water</td>
+                        </tr>
+                        <tr>
+                            <td>Lightning</td>
+                            <td>Tângwynt</td>
+                            <td>Fire + Wind</td>
+                        </tr>
+                        <tr>
+                            <td>Metal</td>
+                            <td>Tândâr</td>
+                            <td>Fire + Earth</td>
+                        </tr>
+                        <tr>
+                            <td>Plant</td>
+                            <td>Nahdâr</td>
+                            <td>Water + Earth</td>
+                        </tr>
+                        <tr>
+                            <td>Martial Arts</td>
+                            <td>Gwyndâr</td>
+                            <td>Wind + Earth</td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <h3 class="section-subtitle">Supreme Elements</h3>
                 <table>
-                    <thead><tr><th>Element</th><th>Cymora Root</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Cymora Root</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td>Light</td><td><strong>Alor</strong></td></tr>
-                        <tr><td>Darkness</td><td><strong>Cythr</strong></td></tr>
-                        <tr><td>Aether</td><td><strong>Aelwyr</strong></td></tr>
+                        <tr>
+                            <td>Light</td>
+                            <td><strong>Alor</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Darkness</td>
+                            <td><strong>Cythr</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Aether</td>
+                            <td><strong>Aelwyr</strong></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -282,12 +583,15 @@
                     <li><strong>Semantic drift</strong> — meaning changes mid-spell</li>
                     <li><strong>Recursive clauses</strong> — self-referential logic loops</li>
                     <li><strong>Self-binding names</strong> — speaking your own name wrong can alter identity</li>
-                    <li><strong>Unintended metaphors becoming literal</strong> — poetic flourishes manifest as reality</li>
+                    <li><strong>Unintended metaphors becoming literal</strong> — poetic flourishes manifest as reality
+                    </li>
                 </ul>
-                <p>Cymora magic is the <strong>most precise</strong> system and the <strong>least forgiving</strong>.</p>
+                <p>Cymora magic is the <strong>most precise</strong> system and the <strong>least forgiving</strong>.
+                </p>
             </div>
         </section>
 
     </div>
 </body>
+
 </html>

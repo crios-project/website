@@ -1,71 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Element Core System // CRIOS Magic System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
-        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
-        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .back-link:hover { color: var(--accent-cyan); }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
-        .page-header { text-align: center; margin-bottom: 80px; animation: fadeInScale 1s ease-out; }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95) translateY(-20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-        .page-title { font-family: 'Orbitron', sans-serif; font-size: 4.5rem; font-weight: 900;
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 16px; filter: drop-shadow(var(--glow-pink)); }
-        .page-subtitle { font-family: 'Archivo', sans-serif; font-size: 1.4rem; font-style: italic;
-            color: var(--text-dim); max-width: 700px; margin: 0 auto; }
-        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 60px; }
-        .stat-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 8px; padding: 20px; text-align: center; }
-        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
-        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .page-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px; padding: 40px; margin-bottom: 40px; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700;
-            color: var(--secondary-pink); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 2px; }
-        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 600;
-            color: var(--accent-cyan); margin-top: 32px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
-        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1.05rem; }
-        .section-content p { margin-bottom: 20px; }
-        .section-content ul { list-style: none; padding-left: 0; }
-        .section-content li { padding-left: 28px; margin-bottom: 12px; position: relative; }
-        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); font-size: 1.2rem; }
-        .core-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
-        .core-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 8px; padding: 16px; text-align: center; }
-        .core-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700;
-            color: var(--secondary-pink); margin-bottom: 4px; }
-        @media (max-width: 768px) { .page-title { font-size: 2.5rem; } .content-section { padding: 24px; } }
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 32px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+            font-size: 1.2rem;
+        }
+
+        .core-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .core-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .core-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../magic.html" class="back-link">← Magic Systems</a></nav>
@@ -77,25 +265,45 @@
         </header>
 
         <div class="stat-grid">
-            <div class="stat-card"><div class="stat-label">Origin Realm</div><div class="stat-value">Royastella</div></div>
-            <div class="stat-card"><div class="stat-label">Fuel Source</div><div class="stat-value">Mana</div></div>
-            <div class="stat-card"><div class="stat-label">Access Method</div><div class="stat-value">System Interface</div></div>
-            <div class="stat-card"><div class="stat-label">Risk Profile</div><div class="stat-value">Mechanical</div></div>
+            <div class="stat-card">
+                <div class="stat-label">Origin Realm</div>
+                <div class="stat-value">Royastella</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Fuel Source</div>
+                <div class="stat-value">Mana</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Access Method</div>
+                <div class="stat-value">System Interface</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Risk Profile</div>
+                <div class="stat-value">Mechanical</div>
+            </div>
         </div>
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p>Within the metaphysical framework of Royastella, mana is neither ambient nor universally distributed. Instead, it is intrinsically bound to the <strong>Element Core System</strong>, a biological–spiritual organ construct that defines an individual's magical capacity, affinity, and metaphysical identity.</p>
-                <p>Royastellan mana functions as a <strong>core-generated resonance energy</strong>, not a free-flowing environmental resource.</p>
+                <p>Within the metaphysical framework of Royastella, mana is neither ambient nor universally distributed.
+                    Instead, it is intrinsically bound to the <strong>Element Core System</strong>, a
+                    biological–spiritual organ construct that defines an individual's magical capacity, affinity, and
+                    metaphysical identity.</p>
+                <p>Royastellan mana functions as a <strong>core-generated resonance energy</strong>, not a free-flowing
+                    environmental resource.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Fundamental Principles</h2>
             <div class="section-content">
-                <p>Royastellan mana originates from an <strong>Element Core</strong>, a crystallized metaphysical node located within the astral-physical overlap of a being's soul architecture. The core converts existential vitality into elemental resonance, which manifests as spellcasting, elemental manipulation, and enhanced physiological phenomena.</p>
-                <p>Unlike conventional mana models that treat magical energy as external or universally accessible, Royastellan theory asserts:</p>
+                <p>Royastellan mana originates from an <strong>Element Core</strong>, a crystallized metaphysical node
+                    located within the astral-physical overlap of a being's soul architecture. The core converts
+                    existential vitality into elemental resonance, which manifests as spellcasting, elemental
+                    manipulation, and enhanced physiological phenomena.</p>
+                <p>Unlike conventional mana models that treat magical energy as external or universally accessible,
+                    Royastellan theory asserts:</p>
                 <ul>
                     <li>Mana is identity-bound</li>
                     <li>Mana is elementally restricted</li>
@@ -108,15 +316,25 @@
         <section class="content-section">
             <h2 class="section-title">Element Core Classifications</h2>
             <div class="section-content">
-                
+
                 <h3 class="section-subtitle">Native Royastellan Cores</h3>
-                <p>Native cores represent the primordial elemental alignments believed to originate from Royastella's planetary formation mythos. These elements are stable, widely occurring, and form the baseline for Royastellan magical doctrine.</p>
-                
+                <p>Native cores represent the primordial elemental alignments believed to originate from Royastella's
+                    planetary formation mythos. These elements are stable, widely occurring, and form the baseline for
+                    Royastellan magical doctrine.</p>
+
                 <div class="core-grid">
-                    <div class="core-card"><div class="core-name">Fire</div></div>
-                    <div class="core-card"><div class="core-name">Water</div></div>
-                    <div class="core-card"><div class="core-name">Wind</div></div>
-                    <div class="core-card"><div class="core-name">Earth</div></div>
+                    <div class="core-card">
+                        <div class="core-name">Fire</div>
+                    </div>
+                    <div class="core-card">
+                        <div class="core-name">Water</div>
+                    </div>
+                    <div class="core-card">
+                        <div class="core-name">Wind</div>
+                    </div>
+                    <div class="core-card">
+                        <div class="core-name">Earth</div>
+                    </div>
                 </div>
 
                 <p>Individuals born with Native cores generally demonstrate:</p>
@@ -127,15 +345,28 @@
                 </ul>
 
                 <h3 class="section-subtitle">Non-Native Royastellan Cores</h3>
-                <p>Non-Native cores emerge from hybridization or inter-realm resonance contamination. Any hybrid cores that exist come from invaders.</p>
+                <p>Non-Native cores emerge from hybridization or inter-realm resonance contamination. Any hybrid cores
+                    that exist come from invaders.</p>
 
                 <div class="core-grid">
-                    <div class="core-card"><div class="core-name">Ice</div></div>
-                    <div class="core-card"><div class="core-name">Poison</div></div>
-                    <div class="core-card"><div class="core-name">Lightning</div></div>
-                    <div class="core-card"><div class="core-name">Metal</div></div>
-                    <div class="core-card"><div class="core-name">Plant</div></div>
-                    <div class="core-card"><div class="core-name">Martial</div></div>
+                    <div class="core-card">
+                        <div class="core-name">Ice</div>
+                    </div>
+                    <div class="core-card">
+                        <div class="core-name">Poison</div>
+                    </div>
+                    <div class="core-card">
+                        <div class="core-name">Lightning</div>
+                    </div>
+                    <div class="core-card">
+                        <div class="core-name">Metal</div>
+                    </div>
+                    <div class="core-card">
+                        <div class="core-name">Plant</div>
+                    </div>
+                    <div class="core-card">
+                        <div class="core-name">Martial</div>
+                    </div>
                 </div>
 
                 <p>Non-Native cores typically exhibit:</p>
@@ -147,12 +378,16 @@
                 </ul>
 
                 <h3 class="section-subtitle">High Tier Manifestations</h3>
-                
-                <p><strong>Light Core:</strong> Represents harmonic amplification, purification, and ontological reinforcement. Light cores possess strong defensive, restorative, and anti-entropy properties.</p>
-                
-                <p><strong>Dark Core:</strong> Associated with entropy manipulation, shadow resonance, and dimensional distortion. Dark cores are often stigmatized due to their capacity to destabilize narrative probability and existential continuity.</p>
-                
-                <p>High Tier cores manifest extremely rarely and often indicate individuals with cross-realm significance.</p>
+
+                <p><strong>Light Core:</strong> Represents harmonic amplification, purification, and ontological
+                    reinforcement. Light cores possess strong defensive, restorative, and anti-entropy properties.</p>
+
+                <p><strong>Dark Core:</strong> Associated with entropy manipulation, shadow resonance, and dimensional
+                    distortion. Dark cores are often stigmatized due to their capacity to destabilize narrative
+                    probability and existential continuity.</p>
+
+                <p>High Tier cores manifest extremely rarely and often indicate individuals with cross-realm
+                    significance.</p>
             </div>
         </section>
 
@@ -178,8 +413,11 @@
         <section class="content-section">
             <h2 class="section-title">Core Immutability Doctrine</h2>
             <div class="section-content">
-                <p>For most of Royastellan history, Element Cores were believed to be permanently fixed at manifestation. This belief formed the basis of Royastellan magical social hierarchy, educational structure, and combat doctrine.</p>
-                <p>The doctrine remained unchallenged until the intervention of <strong>dissonant discord</strong>, whose teachings revealed that:</p>
+                <p>For most of Royastellan history, Element Cores were believed to be permanently fixed at
+                    manifestation. This belief formed the basis of Royastellan magical social hierarchy, educational
+                    structure, and combat doctrine.</p>
+                <p>The doctrine remained unchallenged until the intervention of <strong>dissonant discord</strong>,
+                    whose teachings revealed that:</p>
                 <ul>
                     <li>Element Cores can undergo Resonant Recomposition</li>
                     <li>Core element signatures can be rewritten through extreme harmonic exposure</li>
@@ -191,21 +429,24 @@
         <section class="content-section">
             <h2 class="section-title">Physical Manifestation Phenomenon</h2>
             <div class="section-content">
-                <p>Under advanced resonance alignment, users may achieve <strong>Elemental Embodiment</strong>, a state in which:</p>
+                <p>Under advanced resonance alignment, users may achieve <strong>Elemental Embodiment</strong>, a state
+                    in which:</p>
                 <ul>
                     <li>The user's physiology partially transforms into their elemental nature</li>
                     <li>Mana efficiency increases exponentially</li>
                     <li>Spellcasting latency approaches zero</li>
                     <li>Core energy begins interacting directly with environmental metaphysics</li>
                 </ul>
-                <p>This technique was first successfully demonstrated to Starlite 7th through discord's instruction, marking a paradigm shift in Royastellan magical theory.</p>
+                <p>This technique was first successfully demonstrated to Starlite 7th through discord's instruction,
+                    marking a paradigm shift in Royastellan magical theory.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Role in Crios Cosmology</h2>
             <div class="section-content">
-                <p>Royastellan System-Based Mana functions as one of the few energy models capable of interacting with:</p>
+                <p>Royastellan System-Based Mana functions as one of the few energy models capable of interacting with:
+                </p>
                 <ul>
                     <li>Lodesoul frequency architecture</li>
                     <li>Nexsicon dimensional anchor fields</li>
@@ -213,21 +454,25 @@
                     <li>Akashic pathway calibration</li>
                     <li>Extra-dimensional invasion countermeasures</li>
                 </ul>
-                <p>Because Element Cores are identity-bound, they remain resistant to narrative collapse effects seen during Cascade Resonance, making Royastellan core users strategically invaluable during multi-realm crises.</p>
+                <p>Because Element Cores are identity-bound, they remain resistant to narrative collapse effects seen
+                    during Cascade Resonance, making Royastellan core users strategically invaluable during multi-realm
+                    crises.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Strategic Significance</h2>
             <div class="section-content">
-                <p>Tiala's long-term cosmological defense strategies rely heavily on Royastellan mana systems due to their:</p>
+                <p>Tiala's long-term cosmological defense strategies rely heavily on Royastellan mana systems due to
+                    their:</p>
                 <ul>
                     <li>Predictable harmonic output</li>
                     <li>Compatibility with Cymoran harmonic computation</li>
                     <li>Ability to interface with relic-based metaphysical technology</li>
                     <li>Resistance to extra-reality corruption vectors</li>
                 </ul>
-                <p>As Realm Convergence progresses, Royastellan Core bearers are expected to become primary stabilizers against cross-dimensional threats.</p>
+                <p>As Realm Convergence progresses, Royastellan Core bearers are expected to become primary stabilizers
+                    against cross-dimensional threats.</p>
             </div>
         </section>
 
@@ -260,4 +505,5 @@
 
     </div>
 </body>
+
 </html>

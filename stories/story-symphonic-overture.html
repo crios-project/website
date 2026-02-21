@@ -1,123 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+<meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
-
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symphonic Overture // CRIOS Short Story</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Symphonic Overture // a CRIOS Short Story</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); 
-            line-height: 1.9; overflow-x: hidden; }
-        
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.9;
+            overflow-x: hidden;
+        }
+
         /* Animated background */
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5;
-            animation: gridFloat 20s linear infinite; }
-        @keyframes gridFloat { 0% { transform: translateY(0); } 100% { transform: translateY(40px); } }
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+            animation: gridFloat 20s linear infinite;
+        }
+
+        @keyframes gridFloat {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(40px);
+            }
+        }
 
         /* Gradient orbs */
-        .orb { position: fixed; border-radius: 50%; filter: blur(100px); opacity: 0.15; pointer-events: none; z-index: 0; }
-        .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, var(--primary-burgundy), transparent);
-            top: -200px; right: -200px; animation: orbFloat1 20s ease-in-out infinite; }
-        .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, var(--secondary-pink), transparent);
-            bottom: -150px; left: -150px; animation: orbFloat2 25s ease-in-out infinite; }
-        @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-100px, 100px); } }
-        @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(100px, -80px); } }
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -200px;
+            animation: orbFloat1 20s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: orbFloat2 25s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-100px, 100px);
+            }
+        }
+
+        @keyframes orbFloat2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(100px, -80px);
+            }
+        }
 
         /* Header nav */
-        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
-        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .back-link:hover { color: var(--accent-cyan); }
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
 
         /* Container */
-        .container { max-width: 900px; margin: 0 auto; padding: 80px 24px 100px; position: relative; z-index: 1; }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 100px;
+            position: relative;
+            z-index: 1;
+        }
 
         /* Story header */
-        .story-header { text-align: center; margin-bottom: 80px; animation: fadeInDown 1s ease-out; }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        .story-title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900;
+        .story-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .story-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 16px; letter-spacing: 3px; line-height: 1.2; }
-        .story-meta { display: flex; justify-content: center; gap: 32px; margin-top: 24px; }
-        .meta-item { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 2px; }
-        .meta-item .label { color: var(--accent-cyan); }
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: 3px;
+            line-height: 1.2;
+        }
+
+        .story-meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
+        }
+
+        .meta-item {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .meta-item .label {
+            color: var(--accent-cyan);
+        }
 
         /* Story content */
-        .story-content { animation: fadeIn 1s ease-out 0.3s both; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        .story-content p { font-size: 1.15rem; line-height: 2; margin-bottom: 28px; color: var(--text-primary); }
-        .story-content p:first-of-type::first-letter { font-size: 4rem; line-height: 1; float: left;
-            font-family: 'Orbitron', sans-serif; color: var(--secondary-pink); margin: 4px 12px 0 0; }
+        .story-content {
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .story-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 28px;
+            color: var(--text-primary);
+        }
+
+        .story-content p:first-of-type::first-letter {
+            font-size: 4rem;
+            line-height: 1;
+            float: left;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--secondary-pink);
+            margin: 4px 12px 0 0;
+        }
 
         /* Dialogue */
-        .story-content em { 
-    font-style: italic; 
-    color: #d4d4f0; 
-}
+        .story-content em {
+            font-style: italic;
+            color: #d4d4f0;
+        }
 
         /* Emphasis text */
-        .story-content strong { color: var(--accent-cyan); font-weight: 700; }
-        .story-content em { color: var(--secondary-pink); font-style: italic; }
+        .story-content strong {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .story-content em {
+            color: var(--secondary-pink);
+            font-style: italic;
+        }
 
         /* Special moments - dramatic reveals */
-        .dramatic { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 3px; text-align: center;
+        .dramatic {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
             background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin: 48px 0; padding: 24px; border-top: 2px solid rgba(233, 30, 99, 0.3);
-            border-bottom: 2px solid rgba(233, 30, 99, 0.3); }
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 48px 0;
+            padding: 24px;
+            border-top: 2px solid rgba(233, 30, 99, 0.3);
+            border-bottom: 2px solid rgba(233, 30, 99, 0.3);
+        }
 
         /* Section breaks */
-        .break { text-align: center; margin: 60px 0; font-size: 1.5rem; color: var(--secondary-pink); 
-            letter-spacing: 8px; }
+        .break {
+            text-align: center;
+            margin: 60px 0;
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            letter-spacing: 8px;
+        }
 
         /* Character links */
-        .character-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3);
-            transition: all 0.2s ease; font-weight: 600; }
-        .character-link:hover { color: white; border-bottom-color: var(--accent-cyan); 
-            text-shadow: 0 0 8px var(--accent-cyan); }
+        .character-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+
+        .character-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
 
         /* Related stories footer */
-        .related-section { margin-top: 120px; padding: 48px 0; border-top: 1px solid rgba(233, 30, 99, 0.2); }
-        .related-title { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700;
-            color: var(--secondary-pink); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 32px; }
-        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .related-card { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 8px; padding: 24px; text-decoration: none; display: block; transition: all 0.3s ease; }
-        .related-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2); }
-        .related-card-title { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 600;
-            color: var(--text-primary); margin-bottom: 8px; }
-        .related-card-desc { font-size: 0.9rem; color: var(--text-dim); line-height: 1.6; }
+        .related-section {
+            margin-top: 120px;
+            padding: 48px 0;
+            border-top: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .related-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .related-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2);
+        }
+
+        .related-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .related-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
 
         @media (max-width: 768px) {
-            .story-title { font-size: 2.2rem; }
-            .story-content p { font-size: 1.05rem; }
-            .story-meta { flex-direction: column; gap: 12px; }
+            .story-title {
+                font-size: 2.2rem;
+            }
+
+            .story-content p {
+                font-size: 1.05rem;
+            }
+
+            .story-meta {
+                flex-direction: column;
+                gap: 12px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <div class="orb orb-1"></div>
@@ -140,11 +387,14 @@
 
         <!-- Story Content -->
         <article class="story-content">
-            <p>A teenage girl walks down a rain-slick alley. Alone. No memory, no direction, and though she doesn't know it yet, no chance of getting through the night without a little monster trouble.</p>
+            <p>A teenage girl walks down a rain-slick alley. Alone. No memory, no direction, and though she doesn't know
+                it yet, no chance of getting through the night without a little monster trouble.</p>
 
-            <p>Behind her, a vampire stalks, all hunger and confidence. He's had better nights, but hey, everyone's got to eat.</p>
+            <p>Behind her, a vampire stalks, all hunger and confidence. He's had better nights, but hey, everyone's got
+                to eat.</p>
 
-            <p>The girl pauses. Something's missing. Something important. It's not her wallet. It's not her phone. It's something deeper. Soul-deep. Her chest aches like it's trying to remember what her brain can't.</p>
+            <p>The girl pauses. Something's missing. Something important. It's not her wallet. It's not her phone. It's
+                something deeper. Soul-deep. Her chest aches like it's trying to remember what her brain can't.</p>
 
             <p>And then—</p>
 
@@ -152,25 +402,35 @@
 
             <p>Cue: big superhero entrance.</p>
 
-            <p>The girl spins, heart hammering in her chest, clocks the vampire approaching fangs out and immediately forgets about said vampire. Because wow, the woman between her and the bloodsucker looks like she stepped out of a very expensive music video about punching evil in the face. Yellow-and-black armor, giant sparkly X on her chest, fleur-de-lis centerpiece, motorcycle helmet with a <em>crown</em> on it. The boots? White. The kind of white that says, <em>I fear neither dirt nor budget constraints.</em></p>
+            <p>The girl spins, heart hammering in her chest, clocks the vampire approaching fangs out and immediately
+                forgets about said vampire. Because wow, the woman between her and the bloodsucker looks like she
+                stepped out of a very expensive music video about punching evil in the face. Yellow-and-black armor,
+                giant sparkly X on her chest, fleur-de-lis centerpiece, motorcycle helmet with a <em>crown</em> on it.
+                The boots? White. The kind of white that says, <em>I fear neither dirt nor budget constraints.</em></p>
 
             <p>She's mid—hand-to-hand ballet with the vampire, and it's not going well—for him.</p>
 
             <p>"Ssshe is my prey!" he hisses. "I found her firssst!"</p>
 
-            <p>Yellow just hits him harder. No words. Just righteous butt-kicking. If you could bottle her efficiency, you could clean the whole planet in an hour.</p>
+            <p>Yellow just hits him harder. No words. Just righteous butt-kicking. If you could bottle her efficiency,
+                you could clean the whole planet in an hour.</p>
 
-            <p>The girl should run. She doesn't. Because somehow, this fight feels like the only real thing in her life right now. And okay, maybe she <em>kinda</em> wants the vampire to get hit harder.</p>
+            <p>The girl should run. She doesn't. Because somehow, this fight feels like the only real thing in her life
+                right now. And okay, maybe she <em>kinda</em> wants the vampire to get hit harder.</p>
 
             <p>Bad luck. Or fate.</p>
 
-            <p>The vampire, smarter than he looks, plays possum long enough to inch closer to his snack. He's not planning to win, just to <em>bite</em>. Just one taste, one second of bliss before dust and nothing. A stupid, tragic kind of poetry.</p>
+            <p>The vampire, smarter than he looks, plays possum long enough to inch closer to his snack. He's not
+                planning to win, just to <em>bite</em>. Just one taste, one second of bliss before dust and nothing. A
+                stupid, tragic kind of poetry.</p>
 
             <p>Bad luck. Or fate.</p>
 
             <p>Everything happens all at once.</p>
 
-            <p>The girl turns at a noise behind her which is very the wrong move. Vampire lunges. Hero Yellow throws a something. And a glowing shield whips through the air, <em>decapitating him mid-leap</em>. Perfect form, perfect throw. The kind of shot that makes you wonder if she practices with frisbees on weekends.</p>
+            <p>The girl turns at a noise behind her which is very the wrong move. Vampire lunges. Hero Yellow throws a
+                something. And a glowing shield whips through the air, <em>decapitating him mid-leap</em>. Perfect form,
+                perfect throw. The kind of shot that makes you wonder if she practices with frisbees on weekends.</p>
 
             <p>The vampire disintegrates, dusting the alley.</p>
 
@@ -188,15 +448,18 @@
 
             <p>"Cool," the girl mutters. "Nothing like getting lasered."</p>
 
-            <p>"Ooh. You're Untethered," the hero says, scanning her wrist display. "Right. That explains the amnesia, the aura, the… general 'lost puppy in a horror movie' vibe."</p>
+            <p>"Ooh. You're Untethered," the hero says, scanning her wrist display. "Right. That explains the amnesia,
+                the aura, the… general 'lost puppy in a horror movie' vibe."</p>
 
             <p>"I'm <em>what</em>?"</p>
 
-            <p>Before she can protest, the hero grabs her wrist and suddenly reality flips itself inside out. The alley vanishes. The world <em>snaps</em>.</p>
+            <p>Before she can protest, the hero grabs her wrist and suddenly reality flips itself inside out. The alley
+                vanishes. The world <em>snaps</em>.</p>
 
             <p>They're somewhere else. Somewhere cleaner. Brighter. Safer-ish.</p>
 
-            <p>"Sorry," says the hero. "Didn't want to risk eavesdroppers. You'd be amazed how many things can hack alleyways."</p>
+            <p>"Sorry," says the hero. "Didn't want to risk eavesdroppers. You'd be amazed how many things can hack
+                alleyways."</p>
 
             <p>The helmet comes off.</p>
 
@@ -204,19 +467,26 @@
 
             <p>"Ha! Oh! Right, forgot about the masking."</p>
 
-            <p>She touches something on her wrist and the smooth metal face ripples and resolves into a stunningly human one—liquid gold eyes, dark hair in a ponytail, red ribbon, the whole "friendly apocalypse warrior" look.</p>
+            <p>She touches something on her wrist and the smooth metal face ripples and resolves into a stunningly human
+                one—liquid gold eyes, dark hair in a ponytail, red ribbon, the whole "friendly apocalypse warrior" look.
+            </p>
 
             <p>She smiles. It's blinding. The kind of smile that makes you forget your trauma for half a second.</p>
 
-            <p>"You with me now?" she asks. "Untethered reactions are my favorite. All shock and confusion and wait, do I have a face? Honestly, it's just adorable."</p>
+            <p>"You with me now?" she asks. "Untethered reactions are my favorite. All shock and confusion and wait, do
+                I have a face? Honestly, it's just adorable."</p>
 
             <p>The girl exhales. "To say the least."</p>
 
-            <p>"Good! So, let's do exposition: <em>you</em> are from another universe. You fell through the cosmic cracks. Now your memories are scrambled eggs, and you don't know who you are or what you can do. Fun times."</p>
+            <p>"Good! So, let's do exposition: <em>you</em> are from another universe. You fell through the cosmic
+                cracks. Now your memories are scrambled eggs, and you don't know who you are or what you can do. Fun
+                times."</p>
 
             <p>"That… sounds insane."</p>
 
-            <p>"Oh, honey," the woman grins, "I decapitated a vampire with a magic shield less than five minutes ago. We passed insane three exits back. Name's <a href="../characters/character-shini-thana.html" class="character-link">Shini Thana</a>, by the way."</p>
+            <p>"Oh, honey," the woman grins, "I decapitated a vampire with a magic shield less than five minutes ago. We
+                passed insane three exits back. Name's <a href="../characters/character-shini-thana.html"
+                    class="character-link">Shini Thana</a>, by the way."</p>
 
             <p>A blue holographic panel pops up in front of the girl's face:</p>
 
@@ -224,7 +494,8 @@
 
             <p>Shini gestures. "Just think 'yes.'"</p>
 
-            <p>The girl blinks, thinks <em>yes</em>, and the panel flickers away. A faint warmth hums in her chest. A connection.</p>
+            <p>The girl blinks, thinks <em>yes</em>, and the panel flickers away. A faint warmth hums in her chest. A
+                connection.</p>
 
             <p>"Welcome to the Royal Citadel," Shini says.</p>
 
@@ -242,11 +513,15 @@
 
             <p>"Just Shini, please."</p>
 
-            <p>"Okay, Shini. I'm <a href="../characters/character-mahana-sahi.html" class="character-link">Mahana Sahi</a>."</p>
+            <p>"Okay, Shini. I'm <a href="../characters/character-mahana-sahi.html" class="character-link">Mahana
+                    Sahi</a>."</p>
 
-            <p>"Perfect. So! This world runs on the System: it's basically your résumé but with cosmic flair. Tracks your skills, potential, occasionally makes people existential. And since we're now friends, I can take a peek at your stats—whoa!"</p>
+            <p>"Perfect. So! This world runs on the System: it's basically your résumé but with cosmic flair. Tracks
+                your skills, potential, occasionally makes people existential. And since we're now friends, I can take a
+                peek at your stats—whoa!"</p>
 
-            <p>The shock is visible on Shini's face. "Okay, that's... that's... Wow. Mahana, your numbers are ridiculous. Like, 'bend reality and still have time for brunch' ridiculous."</p>
+            <p>The shock is visible on Shini's face. "Okay, that's... that's... Wow. Mahana, your numbers are
+                ridiculous. Like, 'bend reality and still have time for brunch' ridiculous."</p>
 
             <p>Mahana frowns. "That's... good?"</p>
 
@@ -254,11 +529,14 @@
 
             <p>Mahana smirks, the first hint of real joy on her face. "Do I get a cool biker suit like yours?"</p>
 
-            <p>Shini freezes. Then laughs. "Oh stars, I <em>did</em> forget I was still wearing this thing." She taps the crystal on her chest, and in a shimmer of light the armor dissolves, revealing a sleeker, strappier red-and-black number. "Better?"</p>
+            <p>Shini freezes. Then laughs. "Oh stars, I <em>did</em> forget I was still wearing this thing." She taps
+                the crystal on her chest, and in a shimmer of light the armor dissolves, revealing a sleeker, strappier
+                red-and-black number. "Better?"</p>
 
             <p>"Marginally."</p>
 
-            <p>Shini scrolls through a holographic menu. "Let's see… You've got resonant bonds with six people, enmity with two. Hmm. That's enough to triangulate a home dimension. Maybe even send you back."</p>
+            <p>Shini scrolls through a holographic menu. "Let's see… You've got resonant bonds with six people, enmity
+                with two. Hmm. That's enough to triangulate a home dimension. Maybe even send you back."</p>
 
             <p>For the first time since the alley, Mahana smiles. A real, unguarded one.</p>
         </article>
@@ -269,18 +547,22 @@
             <div class="related-grid">
                 <a href="story-aria-caesura.html" class="related-card">
                     <div class="related-card-title">Aria Caesura</div>
-                    <div class="related-card-desc">The death of Pyara Dana and discord's first betrayal of the Lovely Hearts.</div>
+                    <div class="related-card-desc">The death of Pyara Dana and discord's first betrayal of the Lovely
+                        Hearts.</div>
                 </a>
                 <a href="story-avant-garde-composition.html" class="related-card">
                     <div class="related-card-title">Avant-Garde Composition</div>
-                    <div class="related-card-desc">discord kidnaps Mahana, opening a rift to Nexsicon and trapping the Lovely Hearts.</div>
+                    <div class="related-card-desc">discord kidnaps Mahana, opening a rift to Nexsicon and trapping the
+                        Lovely Hearts.</div>
                 </a>
                 <a href="story-falling-stars.html" class="related-card">
                     <div class="related-card-title">Falling Stars</div>
-                    <div class="related-card-desc">BLADE GUILLOTINE's betrayal of the Starlite 7th and the capture of Starlit Alpha.</div>
+                    <div class="related-card-desc">BLADE GUILLOTINE's betrayal of the Starlite 7th and the capture of
+                        Starlit Alpha.</div>
                 </a>
             </div>
         </section>
     </div>
 </body>
+
 </html>

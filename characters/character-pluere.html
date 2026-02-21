@@ -1,93 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pluere // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
-        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
-        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .back-link:hover { color: var(--accent-cyan); }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
-        .character-header { display: grid; grid-template-columns: 400px 1fr; gap: 60px; margin-bottom: 60px;
-            animation: fadeIn 0.8s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .character-visual { position: relative; }
-        .character-image { width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(233, 30, 99, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
-        .character-info { display: flex; flex-direction: column; justify-content: center; }
-        .character-name { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800;
-            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 12px; line-height: 1.1; }
-        .character-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 3px; margin-bottom: 32px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: var(--dark-panel);
-            border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 24px; }
-        .stat-item { display: flex; flex-direction: column; }
-        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-        .stat-value { font-family: 'Archivo', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
-        .character-quote { margin-top: 32px; padding: 20px 24px;
-            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
-            border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif;
-            font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
-        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px; padding: 32px; margin-bottom: 32px; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700;
-            color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600;
-            color: var(--accent-cyan); margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1rem; }
-        .section-content p { margin-bottom: 16px; }
-        .section-content ul { list-style: none; padding-left: 0; margin: 16px 0; }
-        .section-content li { padding-left: 24px; margin-bottom: 8px; position: relative; }
-        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); }
-        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3);
-            transition: all 0.2s ease; }
-        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
-        .relationships-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px; margin-top: 20px; }
-        .relationship-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 8px; padding: 16px; transition: all 0.3s ease; text-decoration: none; display: block; }
-        .relationship-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2); }
-        .relationship-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--text-primary);
-            font-weight: 600; margin-bottom: 4px; }
-        .relationship-type { font-size: 0.85rem; color: var(--text-dim); }
-        @media (max-width: 1024px) {
-            .character-header { grid-template-columns: 1fr; gap: 40px; }
-            .character-visual { max-width: 400px; margin: 0 auto; }
-            .character-name { font-size: 2.5rem; }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
         }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .stats-grid { grid-template-columns: 1fr; }
-            .content-section { padding: 24px; }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
@@ -100,32 +337,51 @@
                 <h1 class="character-name">Pluere</h1>
                 <p class="character-title">Storm of Blades</p>
                 <div class="stats-grid">
-                    <div class="stat-item"><span class="stat-label">Type</span><span class="stat-value">Paradox Bracer Fusion</span></div>
-                    <div class="stat-item"><span class="stat-label">Components</span><span class="stat-value"><a href="character-claris-quies.html" class="wiki-link">Tessera Vis</a> + <a href="character-ji-lian-xia.html" class="wiki-link">Kesshō Yīng</a></span></div>
-                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Wúxiàn Sǐwáng (Teleporting Daggers)</span></div>
-                    <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Hyper-Mobile Saturation</span></div>
-                    <div class="stat-item"><span class="stat-label">Philosophy</span><span class="stat-value">Inevitability Through Accumulation</span></div>
-                    <div class="stat-item"><span class="stat-label">Limitation</span><span class="stat-value">Spatial Strain & Energy Depletion</span></div>
+                    <div class="stat-item"><span class="stat-label">Type</span><span class="stat-value">Paradox Bracer
+                            Fusion</span></div>
+                    <div class="stat-item"><span class="stat-label">Components</span><span class="stat-value"><a
+                                href="character-claris-quies.html" class="wiki-link">Tessera Vis</a> + <a
+                                href="character-ji-lian-xia.html" class="wiki-link">Kesshō Yīng</a></span></div>
+                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Wúxiàn Sǐwáng
+                            (Teleporting Daggers)</span></div>
+                    <div class="stat-item"><span class="stat-label">Combat Style</span><span
+                            class="stat-value">Hyper-Mobile Saturation</span></div>
+                    <div class="stat-item"><span class="stat-label">Philosophy</span><span
+                            class="stat-value">Inevitability Through Accumulation</span></div>
+                    <div class="stat-item"><span class="stat-label">Limitation</span><span class="stat-value">Spatial
+                            Strain & Energy Depletion</span></div>
                 </div>
-                <div class="character-quote">"Battle does not end—it escalates until nothing remains standing beneath the storm."</div>
+                <div class="character-quote">"Battle does not end—it escalates until nothing remains standing beneath
+                    the storm."</div>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p>Pluere manifests as a Paradox Bracer fusion between <a href="character-claris-quies.html" class="wiki-link">Tessera Vis</a> and <a href="character-ji-lian-xia.html" class="wiki-link">Kesshō Yīng</a>, producing a combatant defined by unrelenting offensive momentum fused with hyper-mobile dual-wield lethality.</p>
-                
-                <p>Where Tessera thrives on environmental improvisation and sustained battlefield pressure, and Kesshō specializes in aerial fluidity and precision dual-blade execution, Pluere synthesizes both into a relentless, storm-like combat methodology that overwhelms opponents through velocity, saturation, and spatial unpredictability.</p>
+                <p>Pluere manifests as a Paradox Bracer fusion between <a href="character-claris-quies.html"
+                        class="wiki-link">Tessera Vis</a> and <a href="character-ji-lian-xia.html"
+                        class="wiki-link">Kesshō Yīng</a>, producing a combatant defined by unrelenting offensive
+                    momentum fused with hyper-mobile dual-wield lethality.</p>
+
+                <p>Where Tessera thrives on environmental improvisation and sustained battlefield pressure, and Kesshō
+                    specializes in aerial fluidity and precision dual-blade execution, Pluere synthesizes both into a
+                    relentless, storm-like combat methodology that overwhelms opponents through velocity, saturation,
+                    and spatial unpredictability.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Weapons: Wúxiàn Sǐwáng</h2>
             <div class="section-content">
-                <p>Her weapons, <strong>Wúxiàn Sǐwáng</strong> (Infinite Death), are a pair of teleporting daggers intrinsically bound to her will and spatial awareness. Unlike conventional thrown weapons, the daggers do not travel through physical space in a linear trajectory. Instead, they vanish and reappear along predetermined or instinctively calculated vectors.</p>
-                
-                <p>This teleportation capability enables her to create continuous attack cascades that resemble torrential rainfall, each strike emerging from seemingly impossible or tactically disadvantageous positions for her opponent.</p>
+                <p>Her weapons, <strong>Wúxiàn Sǐwáng</strong> (Infinite Death), are a pair of teleporting daggers
+                    intrinsically bound to her will and spatial awareness. Unlike conventional thrown weapons, the
+                    daggers do not travel through physical space in a linear trajectory. Instead, they vanish and
+                    reappear along predetermined or instinctively calculated vectors.</p>
+
+                <p>This teleportation capability enables her to create continuous attack cascades that resemble
+                    torrential rainfall, each strike emerging from seemingly impossible or tactically disadvantageous
+                    positions for her opponent.</p>
 
                 <h3 class="section-subtitle">Teleportation Mechanics</h3>
                 <ul>
@@ -141,8 +397,10 @@
         <section class="content-section">
             <h2 class="section-title">Combat Rhythm</h2>
             <div class="section-content">
-                <p>Pluere's combat rhythm is built upon uninterrupted offensive continuity. She rarely pauses between attack chains, using Tessera's doctrine of sustained pressure to deny enemies the opportunity to regain footing or reconstruct defensive posture.</p>
-                
+                <p>Pluere's combat rhythm is built upon uninterrupted offensive continuity. She rarely pauses between
+                    attack chains, using Tessera's doctrine of sustained pressure to deny enemies the opportunity to
+                    regain footing or reconstruct defensive posture.</p>
+
                 <p>Her movement is rapid and constantly evolving, featuring:</p>
                 <ul>
                     <li>Vaulting acrobatics</li>
@@ -150,8 +408,9 @@
                     <li>Sliding evasions</li>
                     <li>Abrupt midair directional shifts</li>
                 </ul>
-                
-                <p>Each movement is deliberately structured to create additional dagger attack vectors or reposition her for subsequent teleportation strikes.</p>
+
+                <p>Each movement is deliberately structured to create additional dagger attack vectors or reposition her
+                    for subsequent teleportation strikes.</p>
             </div>
         </section>
 
@@ -159,7 +418,8 @@
             <h2 class="section-title">Combat Techniques</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Dual-Wield Methodology</h3>
-                <p>Her dual-wield methodology reflects Kesshō's symmetrical blade coordination but expands it into multi-point assault architecture. Pluere frequently commands both daggers independently:</p>
+                <p>Her dual-wield methodology reflects Kesshō's symmetrical blade coordination but expands it into
+                    multi-point assault architecture. Pluere frequently commands both daggers independently:</p>
                 <ul>
                     <li>Launching one blade into teleportation assault sequences</li>
                     <li>Retaining the second for close-range execution, deflection, or counterattack</li>
@@ -170,9 +430,12 @@
                 </ul>
 
                 <h3 class="section-subtitle">Spatial Anchoring</h3>
-                <p>The teleportation mechanics of Wúxiàn Sǐwáng allow Pluere to weaponize battlefield geography with extreme efficiency. She can embed spatial anchors by striking surfaces, objects, or opponents themselves, enabling subsequent teleport strikes to originate from those marked positions.</p>
-                
-                <p>This results in rapidly escalating danger zones where opponents must defend against attacks emerging from:</p>
+                <p>The teleportation mechanics of Wúxiàn Sǐwáng allow Pluere to weaponize battlefield geography with
+                    extreme efficiency. She can embed spatial anchors by striking surfaces, objects, or opponents
+                    themselves, enabling subsequent teleport strikes to originate from those marked positions.</p>
+
+                <p>This results in rapidly escalating danger zones where opponents must defend against attacks emerging
+                    from:</p>
                 <ul>
                     <li>Terrain features</li>
                     <li>Debris and obstacles</li>
@@ -180,27 +443,40 @@
                     <li>Their own shadows</li>
                     <li>Previously marked locations</li>
                 </ul>
-                
-                <p>The longer an engagement persists, the more saturated the battlefield becomes with potential strike origins.</p>
+
+                <p>The longer an engagement persists, the more saturated the battlefield becomes with potential strike
+                    origins.</p>
 
                 <h3 class="section-subtitle">Defensive to Offensive Conversion</h3>
-                <p>Pluere demonstrates exceptional capability in converting defensive maneuvers into immediate counteroffensive expansion. She frequently evades attacks through narrow acrobatic slips or momentary teleport repositioning, only to retaliate with cascading dagger storms from newly established vectors.</p>
-                
-                <p>This constant retaliatory escalation reinforces her combat identity as an unstoppable advancing force rather than a reactive duelist.</p>
+                <p>Pluere demonstrates exceptional capability in converting defensive maneuvers into immediate
+                    counteroffensive expansion. She frequently evades attacks through narrow acrobatic slips or
+                    momentary teleport repositioning, only to retaliate with cascading dagger storms from newly
+                    established vectors.</p>
+
+                <p>This constant retaliatory escalation reinforces her combat identity as an unstoppable advancing force
+                    rather than a reactive duelist.</p>
 
                 <h3 class="section-subtitle">Psychological Presence</h3>
-                <p>Psychologically, Pluere projects predatory exhilaration tempered by focused lethality. She does not toy with opponents in theatrical fashion; instead, she pursues total overwhelm through endurance and inevitability.</p>
-                
-                <p>Her presence conveys the sensation of being caught in a storm that intensifies rather than dissipates over time. Each successful strike increases her attack tempo, reinforcing her reputation as a manifestation of compounding danger rather than singular lethal moments.</p>
+                <p>Psychologically, Pluere projects predatory exhilaration tempered by focused lethality. She does not
+                    toy with opponents in theatrical fashion; instead, she pursues total overwhelm through endurance and
+                    inevitability.</p>
+
+                <p>Her presence conveys the sensation of being caught in a storm that intensifies rather than dissipates
+                    over time. Each successful strike increases her attack tempo, reinforcing her reputation as a
+                    manifestation of compounding danger rather than singular lethal moments.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Limitations</h2>
             <div class="section-content">
-                <p>Despite her overwhelming offensive capability, maintaining synchronized teleportation networks across two independent weapons places immense strain on the Paradox Bracers sustaining the fusion.</p>
-                
-                <p>The constant manipulation of spatial displacement rapidly consumes magical reserves and places extreme cognitive demand on maintaining attack vector stability. As energy depletion progresses, teleportation intervals may become increasingly unstable, causing strike delays or forced reversion of fusion state.</p>
+                <p>Despite her overwhelming offensive capability, maintaining synchronized teleportation networks across
+                    two independent weapons places immense strain on the Paradox Bracers sustaining the fusion.</p>
+
+                <p>The constant manipulation of spatial displacement rapidly consumes magical reserves and places
+                    extreme cognitive demand on maintaining attack vector stability. As energy depletion progresses,
+                    teleportation intervals may become increasingly unstable, causing strike delays or forced reversion
+                    of fusion state.</p>
             </div>
         </section>
 
@@ -224,7 +500,8 @@
             <h2 class="section-title">Thematic Significance</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Archetype</h3>
-                <p>Pluere embodies the <strong>Infinite Assault</strong> archetype—where victory comes not through singular decisive strikes but through accumulation of overwhelming, unending pressure.</p>
+                <p>Pluere embodies the <strong>Infinite Assault</strong> archetype—where victory comes not through
+                    singular decisive strikes but through accumulation of overwhelming, unending pressure.</p>
 
                 <h3 class="section-subtitle">Core Themes</h3>
                 <ul>
@@ -237,9 +514,13 @@
                 </ul>
 
                 <h3 class="section-subtitle">Philosophy</h3>
-                <p>Pluere embodies the concept of infinite assault through convergence of improvisation and aerial dual-wield mastery. Her fighting philosophy centers on inevitability through accumulation: victory is not delivered through a single decisive strike, but through an unstoppable rain of blades that denies opponents the possibility of survival through endurance or defense.</p>
-                
-                <p>Within Pluere's domain, battle does not end—it escalates until nothing remains standing beneath the storm.</p>
+                <p>Pluere embodies the concept of infinite assault through convergence of improvisation and aerial
+                    dual-wield mastery. Her fighting philosophy centers on inevitability through accumulation: victory
+                    is not delivered through a single decisive strike, but through an unstoppable rain of blades that
+                    denies opponents the possibility of survival through endurance or defense.</p>
+
+                <p>Within Pluere's domain, battle does not end—it escalates until nothing remains standing beneath the
+                    storm.</p>
             </div>
         </section>
 
@@ -247,7 +528,8 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> "Pluere" — Latin for "to rain," reflecting her storm-like blade cascades</li>
+                    <li><strong>Name Etymology:</strong> "Pluere" — Latin for "to rain," reflecting her storm-like blade
+                        cascades</li>
                     <li>Paradox Bracer fusion of Tessera Vis (Claris Quies) and Kesshō Yīng (Jí Lián Xiá)</li>
                     <li>Wields Wúxiàn Sǐwáng (無限死亡), meaning "Infinite Death"</li>
                     <li>Daggers teleport rather than travel through physical space</li>
@@ -266,4 +548,5 @@
         </section>
     </div>
 </body>
+
 </html>

@@ -1,69 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daeon Liàng // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
-        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
-        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .back-link:hover { color: var(--accent-cyan); }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
-        .form-toggle { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; padding: 20px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; }
-        .form-button { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 12px 24px; background: transparent; border: 2px solid rgba(233, 30, 99, 0.3); color: var(--text-dim); border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
-        .form-button:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
-        .form-button.active { background: var(--secondary-pink); border-color: var(--secondary-pink); color: var(--dark-bg); box-shadow: var(--glow-pink); }
-        .character-form { display: none; }
-        .character-form.active { display: block; animation: fadeIn 0.5s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .character-header { display: grid; grid-template-columns: 400px 1fr; gap: 60px; margin-bottom: 60px; }
-        .character-visual { position: relative; }
-        .character-image { width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(233, 30, 99, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
-        .faction-logo { position: absolute; top: 16px; right: 16px; width: 80px; height: auto; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7)); }
-        .character-info { display: flex; flex-direction: column; justify-content: center; }
-        .character-name { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; line-height: 1.1; }
-        .character-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 32px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 24px; }
-        .stat-item { display: flex; flex-direction: column; }
-        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-        .stat-value { font-family: 'Archivo', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
-        .character-quote { margin-top: 32px; padding: 20px 24px; background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05)); border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif; font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
-        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 12px; padding: 32px; margin-bottom: 32px; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--accent-cyan); margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1rem; }
-        .section-content p { margin-bottom: 16px; }
-        .section-content ul { list-style: none; padding-left: 0; margin: 16px 0; }
-        .section-content li { padding-left: 24px; margin-bottom: 8px; position: relative; }
-        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); }
-        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3); transition: all 0.2s ease; }
-        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
-        .relationships-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
-        .relationship-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 16px; transition: all 0.3s ease; text-decoration: none; display: block; }
-        .relationship-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2); }
-        .relationship-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; margin-bottom: 4px; }
-        .relationship-type { font-size: 0.85rem; color: var(--text-dim); }
-        @media (max-width: 1024px) { .character-header { grid-template-columns: 1fr; gap: 40px; } .character-visual { max-width: 400px; margin: 0 auto; } .character-name { font-size: 2.5rem; } }
-        @media (max-width: 768px) { .form-toggle { flex-wrap: wrap; } .form-button { flex: 1; min-width: 120px; } .stats-grid { grid-template-columns: 1fr; } .content-section { padding: 24px; } }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
+
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
+
+        .character-form {
+            display: none;
+        }
+
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
@@ -83,14 +406,23 @@
                     <h1 class="character-name">Daeon Liàng</h1>
                     <p class="character-title">Financial Magnate • Prodigy</p>
                     <div class="stats-grid">
-                        <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">19</span></div>
-                        <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">6'0" (183 cm)</span></div>
-                        <div class="stat-item"><span class="stat-label">Birth Date</span><span class="stat-value">December 17</span></div>
-                        <div class="stat-item"><span class="stat-label">Ethnicity</span><span class="stat-value">Chinese</span></div>
-                        <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Gold (corrective lenses)</span></div>
-                        <div class="stat-item"><span class="stat-label">Occupation</span><span class="stat-value">Economic Prodigy</span></div>
-                        <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> (Secret)</span></div>
-                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span class="stat-value">Cold Brilliance</span></div>
+                        <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">19</span>
+                        </div>
+                        <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">6'0" (183
+                                cm)</span></div>
+                        <div class="stat-item"><span class="stat-label">Birth Date</span><span
+                                class="stat-value">December 17</span></div>
+                        <div class="stat-item"><span class="stat-label">Ethnicity</span><span
+                                class="stat-value">Chinese</span></div>
+                        <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Gold
+                                (corrective lenses)</span></div>
+                        <div class="stat-item"><span class="stat-label">Occupation</span><span
+                                class="stat-value">Economic Prodigy</span></div>
+                        <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a
+                                    href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>
+                                (Secret)</span></div>
+                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span
+                                class="stat-value">Cold Brilliance</span></div>
                     </div>
                     <div class="character-quote">"Not worth my time."</div>
                 </div>
@@ -99,8 +431,12 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Daeon Liàng is a prodigious financial magnate and tactical savant whose intellect manifests through relentless precision, pragmatic realism, and uncompromising professionalism.</p>
-                    <p>Through disciplined analysis and predictive modeling, he has accumulated immense wealth at a remarkably young age, positioning himself among the most financially powerful individuals in his nation. Unknown to the public, he operates as the primary strategic architect of <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>.</p>
+                    <p>Daeon Liàng is a prodigious financial magnate and tactical savant whose intellect manifests
+                        through relentless precision, pragmatic realism, and uncompromising professionalism.</p>
+                    <p>Through disciplined analysis and predictive modeling, he has accumulated immense wealth at a
+                        remarkably young age, positioning himself among the most financially powerful individuals in his
+                        nation. Unknown to the public, he operates as the primary strategic architect of <a
+                            href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>.</p>
                 </div>
             </section>
 
@@ -122,7 +458,9 @@
                         <li>Reflexively identifies worst-case outcomes</li>
                         <li>Chronic pessimistic forecasting</li>
                     </ul>
-                    <p>Daeon's academic career was marked by complete scholastic dominance, achieved through obsessive study habits that permanently damaged his eyesight. He now requires glasses for vision correction, though he treats them as purely functional rather than aesthetic.</p>
+                    <p>Daeon's academic career was marked by complete scholastic dominance, achieved through obsessive
+                        study habits that permanently damaged his eyesight. He now requires glasses for vision
+                        correction, though he treats them as purely functional rather than aesthetic.</p>
                     <p><strong>Core Value:</strong> Strategy as supremacy; order imposed on chaos through intellect</p>
                 </div>
             </section>
@@ -130,8 +468,11 @@
             <section class="content-section">
                 <h2 class="section-title">Business Operations</h2>
                 <div class="section-content">
-                    <p>Despite his emotional distance, Daeon maintains select professional relationships. He facilitates distribution operations for <a href="character-kayre.html" class="wiki-link">Kayre</a>'s fashion enterprise through corporate infrastructure and logistical oversight.</p>
-                    <p><strong>Trivia:</strong> Daeon's companies incorporate "Day" in their names from the phonetic pronunciation of "Dae."</p>
+                    <p>Despite his emotional distance, Daeon maintains select professional relationships. He facilitates
+                        distribution operations for <a href="character-kayre.html" class="wiki-link">Kayre</a>'s fashion
+                        enterprise through corporate infrastructure and logistical oversight.</p>
+                    <p><strong>Trivia:</strong> Daeon's companies incorporate "Day" in their names from the phonetic
+                        pronunciation of "Dae."</p>
                 </div>
             </section>
         </div>
@@ -146,12 +487,18 @@
                     <h1 class="character-name">Starlit Czar</h1>
                     <p class="character-title">Strategic Architect</p>
                     <div class="stats-grid">
-                        <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Strategic Architect</span></div>
-                        <div class="stat-item"><span class="stat-label">Elemental Core</span><span class="stat-value">Earth</span></div>
-                        <div class="stat-item"><span class="stat-label">Casting Language</span><span class="stat-value">Chinese</span></div>
-                        <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Autarch Judicators (Dual Katar)</span></div>
-                        <div class="stat-item"><span class="stat-label">Starlight Blessing</span><span class="stat-value">Portal Generation</span></div>
-                        <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Predictive / Precision Striker</span></div>
+                        <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Strategic
+                                Architect</span></div>
+                        <div class="stat-item"><span class="stat-label">Elemental Core</span><span
+                                class="stat-value">Earth</span></div>
+                        <div class="stat-item"><span class="stat-label">Casting Language</span><span
+                                class="stat-value">Chinese</span></div>
+                        <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Autarch
+                                Judicators (Dual Katar)</span></div>
+                        <div class="stat-item"><span class="stat-label">Starlight Blessing</span><span
+                                class="stat-value">Portal Generation</span></div>
+                        <div class="stat-item"><span class="stat-label">Combat Style</span><span
+                                class="stat-value">Predictive / Precision Striker</span></div>
                     </div>
                     <div class="character-quote">"Victory is mathematical inevitability."</div>
                 </div>
@@ -160,7 +507,9 @@
             <section class="content-section">
                 <h2 class="section-title">Combat Profile</h2>
                 <div class="section-content">
-                    <p>The <strong>Starlit Czar</strong> represents strategic supremacy within Starlite 7th. His battlefield planning consistently produces decisive victories, and the rare defeats suffered by the team are overwhelmingly linked to his absence or premature removal from engagement.</p>
+                    <p>The <strong>Starlit Czar</strong> represents strategic supremacy within Starlite 7th. His
+                        battlefield planning consistently produces decisive victories, and the rare defeats suffered by
+                        the team are overwhelmingly linked to his absence or premature removal from engagement.</p>
                     <h3 class="section-subtitle">Autarch Judicators</h3>
                     <p>A paired set of reinforced katars designed for precision striking and close-quarters combat.</p>
                     <ul>
@@ -168,16 +517,19 @@
                         <li>Built to channel kinetic force efficiently</li>
                         <li>Designed to pair with portal generation for extended reach</li>
                     </ul>
-                    <p>Daeon integrates his background in boxing into his fighting style, emphasizing centerline dominance, measured efficient movement, and devastating precision-based strikes.</p>
+                    <p>Daeon integrates his background in boxing into his fighting style, emphasizing centerline
+                        dominance, measured efficient movement, and devastating precision-based strikes.</p>
                     <h3 class="section-subtitle">Starlight Blessing: Portal Generation</h3>
-                    <p><strong>Function:</strong> Allows the creation of spatial portals directly from Czar's fists, extending strike range beyond physical proximity.</p>
+                    <p><strong>Function:</strong> Allows the creation of spatial portals directly from Czar's fists,
+                        extending strike range beyond physical proximity.</p>
                     <ul>
                         <li>Converts melee attacks into long-range impacts</li>
                         <li>Enables unpredictable attack vectors</li>
                         <li>Allows instantaneous repositioning of strike origin</li>
                         <li>Supports layered assault formations</li>
                     </ul>
-                    <p>The Blessing effectively transforms Czar into a spatial pressure fighter capable of delivering attacks from impossible angles.</p>
+                    <p>The Blessing effectively transforms Czar into a spatial pressure fighter capable of delivering
+                        attacks from impossible angles.</p>
                 </div>
             </section>
 
@@ -190,7 +542,9 @@
                         <li>Formation optimization</li>
                         <li>Coordinated assault sequencing</li>
                     </ul>
-                    <p>Daeon's plans often account for contingencies several layers deep, enabling the team to adapt dynamically to chaotic battlefield conditions. He views combat as a problem-solving exercise rather than a contest of strength.</p>
+                    <p>Daeon's plans often account for contingencies several layers deep, enabling the team to adapt
+                        dynamically to chaotic battlefield conditions. He views combat as a problem-solving exercise
+                        rather than a contest of strength.</p>
                 </div>
             </section>
         </div>
@@ -232,10 +586,15 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> Daeon — suggests grandeur and commanding presence; Liàng (良) — Chinese for "good," symbolizing the paradox of moral neutrality paired with uncompromising functionality</li>
-                    <li><strong>Design Notes:</strong> Long tailored coat with gold reinforcement; thin rectangular glasses; dark hair slicked back (hidden length extends past shoulders)</li>
-                    <li><strong>Business Names:</strong> Daeon's companies incorporate "Day" from the phonetic pronunciation of "Dae"</li>
-                    <li><strong>Eyesight:</strong> Permanently damaged through obsessive study habits; requires corrective lenses</li>
+                    <li><strong>Name Etymology:</strong> Daeon — suggests grandeur and commanding presence; Liàng (良) —
+                        Chinese for "good," symbolizing the paradox of moral neutrality paired with uncompromising
+                        functionality</li>
+                    <li><strong>Design Notes:</strong> Long tailored coat with gold reinforcement; thin rectangular
+                        glasses; dark hair slicked back (hidden length extends past shoulders)</li>
+                    <li><strong>Business Names:</strong> Daeon's companies incorporate "Day" from the phonetic
+                        pronunciation of "Dae"</li>
+                    <li><strong>Eyesight:</strong> Permanently damaged through obsessive study habits; requires
+                        corrective lenses</li>
                     <li><strong>Combat Background:</strong> Boxing training integrated into katar fighting style</li>
                 </ul>
             </div>
@@ -251,4 +610,5 @@
         }
     </script>
 </body>
+
 </html>

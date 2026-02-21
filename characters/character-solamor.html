@@ -1,93 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solamor // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
-        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
-        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .back-link:hover { color: var(--accent-cyan); }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
-        .character-header { display: grid; grid-template-columns: 400px 1fr; gap: 60px; margin-bottom: 60px;
-            animation: fadeIn 0.8s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .character-visual { position: relative; }
-        .character-image { width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(233, 30, 99, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
-        .character-info { display: flex; flex-direction: column; justify-content: center; }
-        .character-name { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800;
-            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 12px; line-height: 1.1; }
-        .character-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 3px; margin-bottom: 32px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: var(--dark-panel);
-            border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 24px; }
-        .stat-item { display: flex; flex-direction: column; }
-        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-        .stat-value { font-family: 'Archivo', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
-        .character-quote { margin-top: 32px; padding: 20px 24px;
-            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
-            border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif;
-            font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
-        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px; padding: 32px; margin-bottom: 32px; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700;
-            color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600;
-            color: var(--accent-cyan); margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1rem; }
-        .section-content p { margin-bottom: 16px; }
-        .section-content ul { list-style: none; padding-left: 0; margin: 16px 0; }
-        .section-content li { padding-left: 24px; margin-bottom: 8px; position: relative; }
-        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); }
-        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3);
-            transition: all 0.2s ease; }
-        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
-        .relationships-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px; margin-top: 20px; }
-        .relationship-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 8px; padding: 16px; transition: all 0.3s ease; text-decoration: none; display: block; }
-        .relationship-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2); }
-        .relationship-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--text-primary);
-            font-weight: 600; margin-bottom: 4px; }
-        .relationship-type { font-size: 0.85rem; color: var(--text-dim); }
-        @media (max-width: 1024px) {
-            .character-header { grid-template-columns: 1fr; gap: 40px; }
-            .character-visual { max-width: 400px; margin: 0 auto; }
-            .character-name { font-size: 2.5rem; }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
         }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .stats-grid { grid-template-columns: 1fr; }
-            .content-section { padding: 24px; }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
@@ -100,12 +337,19 @@
                 <h1 class="character-name">Solamor</h1>
                 <p class="character-title">Harmonious Destruction</p>
                 <div class="stats-grid">
-                    <div class="stat-item"><span class="stat-label">Type</span><span class="stat-value">Paradox Bracer Fusion</span></div>
-                    <div class="stat-item"><span class="stat-label">Components</span><span class="stat-value"><a href="character-tiala-hartlight.html" class="wiki-link">Alulu Dayk</a> + <a href="character-claris-quies.html" class="wiki-link">Tessera Vis</a></span></div>
-                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Mors Lux</span></div>
-                    <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Decisive Adaptability</span></div>
-                    <div class="stat-item"><span class="stat-label">Philosophy</span><span class="stat-value">Absolute Resolution</span></div>
-                    <div class="stat-item"><span class="stat-label">Limitation</span><span class="stat-value">High Magical Drain</span></div>
+                    <div class="stat-item"><span class="stat-label">Type</span><span class="stat-value">Paradox Bracer
+                            Fusion</span></div>
+                    <div class="stat-item"><span class="stat-label">Components</span><span class="stat-value"><a
+                                href="character-tiala-hartlight.html" class="wiki-link">Alulu Dayk</a> + <a
+                                href="character-claris-quies.html" class="wiki-link">Tessera Vis</a></span></div>
+                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Mors
+                            Lux</span></div>
+                    <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Decisive
+                            Adaptability</span></div>
+                    <div class="stat-item"><span class="stat-label">Philosophy</span><span class="stat-value">Absolute
+                            Resolution</span></div>
+                    <div class="stat-item"><span class="stat-label">Limitation</span><span class="stat-value">High
+                            Magical Drain</span></div>
                 </div>
                 <div class="character-quote">"Create the opening and end the battle within the same breath."</div>
             </div>
@@ -114,29 +358,46 @@
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p>Solamor embodies a perfectly synchronized fusion of <a href="character-tiala-hartlight.html" class="wiki-link">Alulu Dayk</a>'s decisive, high-impact combat philosophy and <a href="character-claris-quies.html" class="wiki-link">Tessera Vis</a>'s adaptive, improvisational battlefield control.</p>
-                
-                <p>The union is achieved through an ancient convergence artifact known as the <strong>Paradox Bracers</strong>, a paired set of wide ceremonial cuffs designed to harmonize two distinct combat spirits into a singular, elevated existence. The fusion is initiated when one participant secures a bracer at the wrist while the other anchors its counterpart along the upper arm, symbolizing unity between action and strength.</p>
-                
-                <p>The resulting manifestation is neither dominant personality nor compromise, but a seamless amplification of both warriors' instincts, techniques, and tactical identities.</p>
+                <p>Solamor embodies a perfectly synchronized fusion of <a href="character-tiala-hartlight.html"
+                        class="wiki-link">Alulu Dayk</a>'s decisive, high-impact combat philosophy and <a
+                        href="character-claris-quies.html" class="wiki-link">Tessera Vis</a>'s adaptive, improvisational
+                    battlefield control.</p>
+
+                <p>The union is achieved through an ancient convergence artifact known as the <strong>Paradox
+                        Bracers</strong>, a paired set of wide ceremonial cuffs designed to harmonize two distinct
+                    combat spirits into a singular, elevated existence. The fusion is initiated when one participant
+                    secures a bracer at the wrist while the other anchors its counterpart along the upper arm,
+                    symbolizing unity between action and strength.</p>
+
+                <p>The resulting manifestation is neither dominant personality nor compromise, but a seamless
+                    amplification of both warriors' instincts, techniques, and tactical identities.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Combat Presence</h2>
             <div class="section-content">
-                <p>Solamor's combat presence is immediate and overwhelming, defined by relentless forward momentum paired with constantly evolving engagement patterns. She enters battle with Alulu's unwavering commitment to decisive victory, striking with lethal clarity and minimal hesitation.</p>
-                
-                <p>However, unlike Alulu's traditionally direct execution chains, Solamor integrates Tessera's battlefield manipulation techniques, transforming straightforward assault into an unpredictable cascade of layered offensive sequences.</p>
+                <p>Solamor's combat presence is immediate and overwhelming, defined by relentless forward momentum
+                    paired with constantly evolving engagement patterns. She enters battle with Alulu's unwavering
+                    commitment to decisive victory, striking with lethal clarity and minimal hesitation.</p>
+
+                <p>However, unlike Alulu's traditionally direct execution chains, Solamor integrates Tessera's
+                    battlefield manipulation techniques, transforming straightforward assault into an unpredictable
+                    cascade of layered offensive sequences.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Weapon: Mors Lux</h2>
             <div class="section-content">
-                <p>Her weapon, <strong>Mors Lux</strong>, is a single-edged magic blade that functions as both execution instrument and arcane conductor. Each swing carries catastrophic lethality, channeling condensed magical resonance into cutting waves capable of severing both physical defenses and magical constructs.</p>
-                
-                <p>The blade responds to Solamor's fused will with near-sentient responsiveness, adjusting strike arcs and magical output in harmony with her movement tempo. Mors Lux thrives in continuous motion, rewarding aggressive flow states that maintain uninterrupted offensive pressure.</p>
+                <p>Her weapon, <strong>Mors Lux</strong>, is a single-edged magic blade that functions as both execution
+                    instrument and arcane conductor. Each swing carries catastrophic lethality, channeling condensed
+                    magical resonance into cutting waves capable of severing both physical defenses and magical
+                    constructs.</p>
+
+                <p>The blade responds to Solamor's fused will with near-sentient responsiveness, adjusting strike arcs
+                    and magical output in harmony with her movement tempo. Mors Lux thrives in continuous motion,
+                    rewarding aggressive flow states that maintain uninterrupted offensive pressure.</p>
             </div>
         </section>
 
@@ -144,13 +405,15 @@
             <h2 class="section-title">Combat Techniques</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Transition Efficiency</h3>
-                <p>Solamor demonstrates extraordinary transition efficiency between heavy finishing blows and fluid redirection maneuvers. She frequently begins engagements with Alulu's signature high-commitment strikes:</p>
+                <p>Solamor demonstrates extraordinary transition efficiency between heavy finishing blows and fluid
+                    redirection maneuvers. She frequently begins engagements with Alulu's signature high-commitment
+                    strikes:</p>
                 <ul>
                     <li>Devastating downward cleaves</li>
                     <li>Thrust-driven rupture attacks</li>
                     <li>Explosive power surges designed to overwhelm defensive posture</li>
                 </ul>
-                
+
                 <p>The moment resistance forms, Tessera's influence manifests through:</p>
                 <ul>
                     <li>Abrupt repositioning</li>
@@ -160,33 +423,47 @@
                 </ul>
 
                 <h3 class="section-subtitle">Battlefield Awareness</h3>
-                <p>Her battlefield awareness operates at an elevated fusion state. Solamor instinctively identifies terrain features, structural weaknesses, and kinetic rebound opportunities, using them to accelerate attack rhythm or redirect defensive recovery.</p>
-                
+                <p>Her battlefield awareness operates at an elevated fusion state. Solamor instinctively identifies
+                    terrain features, structural weaknesses, and kinetic rebound opportunities, using them to accelerate
+                    attack rhythm or redirect defensive recovery.</p>
+
                 <p>She may:</p>
                 <ul>
                     <li>Shatter ground surfaces to destabilize enemy footing</li>
                     <li>Redirect debris as mid-combat cover</li>
-                    <li>Exploit vertical architecture to launch descending execution strikes that carry amplified magical resonance</li>
+                    <li>Exploit vertical architecture to launch descending execution strikes that carry amplified
+                        magical resonance</li>
                 </ul>
 
                 <h3 class="section-subtitle">Uninterrupted Combat Cadence</h3>
-                <p>Unlike either original combatant individually, Solamor maintains an uninterrupted combat cadence that blends improvisation with absolute commitment. Where Tessera traditionally manipulated chaos and Alulu pursued decisive closure, Solamor merges both philosophies into a singular doctrine: create the opening and end the battle within the same breath.</p>
-                
-                <p>Her attack sequences rarely pause or reset. Instead, they escalate in intensity through cascading chains of magical and physical pressure that force opponents into continuous reactive defense.</p>
+                <p>Unlike either original combatant individually, Solamor maintains an uninterrupted combat cadence that
+                    blends improvisation with absolute commitment. Where Tessera traditionally manipulated chaos and
+                    Alulu pursued decisive closure, Solamor merges both philosophies into a singular doctrine: create
+                    the opening and end the battle within the same breath.</p>
+
+                <p>Her attack sequences rarely pause or reset. Instead, they escalate in intensity through cascading
+                    chains of magical and physical pressure that force opponents into continuous reactive defense.</p>
 
                 <h3 class="section-subtitle">Psychological Presence</h3>
-                <p>Psychologically, Solamor radiates composed inevitability. She does not taunt, posture, or theatrically engage. Her calm presence communicates a silent certainty that the engagement has already reached its conclusion, with only time separating the opponent from defeat.</p>
-                
-                <p>Her strikes carry symbolic duality—each motion simultaneously embodying creation through fusion and annihilation through execution.</p>
+                <p>Psychologically, Solamor radiates composed inevitability. She does not taunt, posture, or
+                    theatrically engage. Her calm presence communicates a silent certainty that the engagement has
+                    already reached its conclusion, with only time separating the opponent from defeat.</p>
+
+                <p>Her strikes carry symbolic duality—each motion simultaneously embodying creation through fusion and
+                    annihilation through execution.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Limitations</h2>
             <div class="section-content">
-                <p>However, the Paradox Bracers impose a volatile limitation. The fusion demands constant magical expenditure to maintain harmonic synchronization between the two souls. The longer Solamor remains manifested, the more aggressively the fusion drains arcane reserves from both source entities.</p>
-                
-                <p>As magical output diminishes, maintaining structural cohesion becomes increasingly unstable, often forcing premature separation. Because every recorded activation has occurred during high-intensity combat, the true maximum duration of the fusion remains unknown.</p>
+                <p>However, the Paradox Bracers impose a volatile limitation. The fusion demands constant magical
+                    expenditure to maintain harmonic synchronization between the two souls. The longer Solamor remains
+                    manifested, the more aggressively the fusion drains arcane reserves from both source entities.</p>
+
+                <p>As magical output diminishes, maintaining structural cohesion becomes increasingly unstable, often
+                    forcing premature separation. Because every recorded activation has occurred during high-intensity
+                    combat, the true maximum duration of the fusion remains unknown.</p>
             </div>
         </section>
 
@@ -210,12 +487,15 @@
             <h2 class="section-title">Thematic Significance</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Archetype</h3>
-                <p>Solamor represents the <strong>Perfect Union</strong> archetype—where opposing philosophies cease to conflict and instead amplify each other into something greater than either could achieve alone.</p>
+                <p>Solamor represents the <strong>Perfect Union</strong> archetype—where opposing philosophies cease to
+                    conflict and instead amplify each other into something greater than either could achieve alone.</p>
 
                 <h3 class="section-subtitle">Core Themes</h3>
                 <ul>
-                    <li><strong>Fusion Through Harmony:</strong> Two souls becoming one without losing either identity</li>
-                    <li><strong>Decisiveness Meets Adaptability:</strong> Commitment and flexibility no longer opposing forces</li>
+                    <li><strong>Fusion Through Harmony:</strong> Two souls becoming one without losing either identity
+                    </li>
+                    <li><strong>Decisiveness Meets Adaptability:</strong> Commitment and flexibility no longer opposing
+                        forces</li>
                     <li><strong>Creation Through Destruction:</strong> Every strike both builds and annihilates</li>
                     <li><strong>Temporary Transcendence:</strong> Peak power limited by unsustainable cost</li>
                     <li><strong>Unity as Weapon:</strong> Synchronized existence as tactical advantage</li>
@@ -223,7 +503,10 @@
                 </ul>
 
                 <h3 class="section-subtitle">Philosophy</h3>
-                <p>Solamor represents a combat apex where decisiveness and adaptability cease to conflict and instead become mutually reinforcing forces. Her fighting philosophy centers on absolute resolution through harmonious destruction: victory is achieved not merely by overpowering the opponent, but by overwhelming them through a perfectly unified expression of lethal will.</p>
+                <p>Solamor represents a combat apex where decisiveness and adaptability cease to conflict and instead
+                    become mutually reinforcing forces. Her fighting philosophy centers on absolute resolution through
+                    harmonious destruction: victory is achieved not merely by overpowering the opponent, but by
+                    overwhelming them through a perfectly unified expression of lethal will.</p>
             </div>
         </section>
 
@@ -231,7 +514,8 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> "Solamor" — Combination of Sol and Amor which is Latin for Sun and Love</li>
+                    <li><strong>Name Etymology:</strong> "Solamor" — Combination of Sol and Amor which is Latin for Sun
+                        and Love</li>
                     <li>Paradox Bracer fusion of Alulu Dayk (Tiala Hartlight) and Tessera Vis (Claris Quies)</li>
                     <li>Wields Mors Lux, a single-edged magic blade with near-sentient responsiveness</li>
                     <li>Blends decisive execution with improvisational battlefield control</li>
@@ -249,4 +533,5 @@
         </section>
     </div>
 </body>
+
 </html>

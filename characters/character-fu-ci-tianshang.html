@@ -1,119 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fú cì Tiānshàng // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
-        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
-        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .back-link:hover { color: var(--accent-cyan); }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
-        .form-toggle { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; padding: 20px;
-            background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; }
-        .form-button { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; padding: 12px 24px;
-            background: transparent; border: 2px solid rgba(233, 30, 99, 0.3); color: var(--text-dim);
-            border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
-        .form-button:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
-        .form-button.active { background: var(--secondary-pink); border-color: var(--secondary-pink);
-            color: var(--dark-bg); box-shadow: var(--glow-pink); }
-        
-        .transformation-toggle { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 30px 0;
-            padding: 16px; background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: 8px; }
-        .transformation-button { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; padding: 8px 16px;
-            background: transparent; border: 2px solid rgba(0, 217, 255, 0.3); color: var(--text-dim);
-            border-radius: 4px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
-        .transformation-button:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
-        .transformation-button.active { background: var(--accent-cyan); border-color: var(--accent-cyan);
-            color: var(--dark-bg); box-shadow: 0 0 20px rgba(0, 217, 255, 0.5); }
-        
-        .transformation-content { display: none; }
-        .transformation-content.active { display: block; animation: fadeIn 0.4s ease-out; }
-        
-        .character-form { display: none; }
-        .character-form.active { display: block; animation: fadeIn 0.5s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .character-header { display: grid; grid-template-columns: 400px 1fr; gap: 60px; margin-bottom: 60px; }
-        .character-visual { position: relative; }
-        .character-image { width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(233, 30, 99, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
-        .faction-logo { position: absolute; top: 16px; right: 16px; width: 80px; height: auto;
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7)); }
-        .character-info { display: flex; flex-direction: column; justify-content: center; }
-        .character-name { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800;
-            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 12px; line-height: 1.1; }
-        .character-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 3px; margin-bottom: 32px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: var(--dark-panel);
-            border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 24px; }
-        .stat-item { display: flex; flex-direction: column; }
-        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-        .stat-value { font-family: 'Archivo', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
-        .character-quote { margin-top: 32px; padding: 20px 24px;
-            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
-            border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif;
-            font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
-        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px; padding: 32px; margin-bottom: 32px; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700;
-            color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600;
-            color: var(--accent-cyan); margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1rem; }
-        .section-content p { margin-bottom: 16px; }
-        .section-content ul { list-style: none; padding-left: 0; margin: 16px 0; }
-        .section-content li { padding-left: 24px; margin-bottom: 8px; position: relative; }
-        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); }
-        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3);
-            transition: all 0.2s ease; }
-        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
-        .relationships-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px; margin-top: 20px; }
-        .relationship-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 8px; padding: 16px; transition: all 0.3s ease; text-decoration: none; display: block; }
-        .relationship-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2); }
-        .relationship-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--text-primary);
-            font-weight: 600; margin-bottom: 4px; }
-        .relationship-type { font-size: 0.85rem; color: var(--text-dim); }
-        @media (max-width: 1024px) {
-            .character-header { grid-template-columns: 1fr; gap: 40px; }
-            .character-visual { max-width: 400px; margin: 0 auto; }
-            .character-name { font-size: 2.5rem; }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
         }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-toggle {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+        }
+
+        .form-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: var(--text-dim);
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .form-button.active {
+            background: var(--secondary-pink);
+            border-color: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+        }
+
+        .transformation-toggle {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 16px;
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .transformation-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            padding: 8px 16px;
+            background: transparent;
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            color: var(--text-dim);
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .transformation-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .transformation-button.active {
+            background: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        .transformation-content {
+            display: none;
+        }
+
+        .transformation-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .character-form {
+            display: none;
+        }
+
+        .character-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .faction-logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .form-toggle { flex-wrap: wrap; }
-            .form-button { flex: 1; min-width: 120px; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .content-section { padding: 24px; }
+            .form-toggle {
+                flex-wrap: wrap;
+            }
+
+            .form-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
@@ -122,7 +443,7 @@
             <button class="form-button active" onclick="switchMainForm('civilian')">Fú cì Tiānshàng</button>
             <button class="form-button" onclick="switchMainForm('zhou')">Zhòu-chún Tǎoyàn</button>
         </div>
-        
+
         <!-- CIVILIAN FORM -->
         <div id="civilian-form" class="character-form active">
             <section class="character-header">
@@ -134,42 +455,65 @@
                     <h1 class="character-name">Fú cì Tiānshàng</h1>
                     <p class="character-title">Survivor of the Tiānshàng Massacre</p>
                     <div class="stats-grid">
-                        <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">10</span></div>
-                        <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">4'6" (137 cm)</span></div>
-                        <div class="stat-item"><span class="stat-label">Birth Date</span><span class="stat-value">December 25</span></div>
-                        <div class="stat-item"><span class="stat-label">Ethnicity</span><span class="stat-value">Chinese</span></div>
-                        <div class="stat-item"><span class="stat-label">Hair</span><span class="stat-value">Light Pink (Twin Buns)</span></div>
-                        <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Grey w/ Six-Star Pattern</span></div>
-                        <div class="stat-item"><span class="stat-label">Affiliation</span><span class="stat-value"><a href="../factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a></span></div>
-                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span class="stat-value">Trying Not to Despair</span></div>
+                        <div class="stat-item"><span class="stat-label">Age</span><span class="stat-value">10</span>
+                        </div>
+                        <div class="stat-item"><span class="stat-label">Height</span><span class="stat-value">4'6" (137
+                                cm)</span></div>
+                        <div class="stat-item"><span class="stat-label">Birth Date</span><span
+                                class="stat-value">December 25</span></div>
+                        <div class="stat-item"><span class="stat-label">Ethnicity</span><span
+                                class="stat-value">Chinese</span></div>
+                        <div class="stat-item"><span class="stat-label">Hair</span><span class="stat-value">Light Pink
+                                (Twin Buns)</span></div>
+                        <div class="stat-item"><span class="stat-label">Eyes</span><span class="stat-value">Grey w/
+                                Six-Star Pattern</span></div>
+                        <div class="stat-item"><span class="stat-label">Affiliation</span><span class="stat-value"><a
+                                    href="../factions/faction-reason-theory.html" class="wiki-link">Reason
+                                    Theory</a></span></div>
+                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span
+                                class="stat-value">Trying Not to Despair</span></div>
                     </div>
-                    <div class="character-quote">"If I stop moving… I might remember everything. So I'll just keep walking… until the stars tell me where to go."</div>
+                    <div class="character-quote">"If I stop moving… I might remember everything. So I'll just keep
+                        walking… until the stars tell me where to go."</div>
                 </div>
             </section>
-            
+
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Fú cì Tiānshàng is a survivor of catastrophic loss whose quiet resilience defines her presence. Though still a child, she carries the emotional weight of witnessing the destruction of her family and legacy. Her demeanor is gentle and melancholic, with a persistent undercurrent of determination that prevents her from fully succumbing to despair.</p>
+                    <p>Fú cì Tiānshàng is a survivor of catastrophic loss whose quiet resilience defines her presence.
+                        Though still a child, she carries the emotional weight of witnessing the destruction of her
+                        family and legacy. Her demeanor is gentle and melancholic, with a persistent undercurrent of
+                        determination that prevents her from fully succumbing to despair.</p>
                 </div>
             </section>
-            
+
             <section class="content-section">
                 <h2 class="section-title">Appearance</h2>
                 <div class="section-content">
-                    <p>At only 10 years old and 4'6", Fú cì presents as delicate and childlike. Her light pink hair is styled into twin buns, secured with two chopsticks, decorated with a gold bell and ribbon. Her most striking feature is her grey eyes containing a distinctive six-star pattern in the iris—the Tiānshàng ocular inheritance that marks her lineage.</p>
-                    
-                    <p>Despite her young age, her expressions often carry a weight that suggests experiences far beyond her years.</p>
+                    <p>At only 10 years old and 4'6", Fú cì presents as delicate and childlike. Her light pink hair is
+                        styled into twin buns, secured with two chopsticks, decorated with a gold bell and ribbon. Her
+                        most striking feature is her grey eyes containing a distinctive six-star pattern in the iris—the
+                        Tiānshàng ocular inheritance that marks her lineage.</p>
+
+                    <p>Despite her young age, her expressions often carry a weight that suggests experiences far beyond
+                        her years.</p>
                 </div>
             </section>
-            
+
             <section class="content-section">
                 <h2 class="section-title">Personality</h2>
                 <div class="section-content">
-                    <p>Fú cì is soft-spoken, cautious, and emotionally fragile but not weak. She constantly balances grief with the effort to remain hopeful and functional. While sadness lingers in nearly every expression, she actively resists allowing it to define her entirely. Her innocence remains intact in many ways, especially in her attachment to small comforts and companionship, but her worldview has been permanently shaped by trauma and survival.</p>
-                    
-                    <p>She demonstrates quiet bravery rather than outward heroism. Her decisions are often driven by emotional memory and loyalty, especially toward those she considers family—whether biological or chosen.</p>
-                    
+                    <p>Fú cì is soft-spoken, cautious, and emotionally fragile but not weak. She constantly balances
+                        grief with the effort to remain hopeful and functional. While sadness lingers in nearly every
+                        expression, she actively resists allowing it to define her entirely. Her innocence remains
+                        intact in many ways, especially in her attachment to small comforts and companionship, but her
+                        worldview has been permanently shaped by trauma and survival.</p>
+
+                    <p>She demonstrates quiet bravery rather than outward heroism. Her decisions are often driven by
+                        emotional memory and loyalty, especially toward those she considers family—whether biological or
+                        chosen.</p>
+
                     <h3 class="section-subtitle">Behavioral Traits</h3>
                     <ul>
                         <li>Exhibits persistent low-level melancholy and emotional heaviness</li>
@@ -178,53 +522,70 @@
                         <li>Maintains composure under pressure but carries internalized fear and grief</li>
                         <li>Displays moments of childlike wonder when feeling safe or comforted</li>
                     </ul>
-                    
+
                     <h3 class="section-subtitle">Interests & Hobbies</h3>
                     <ul>
-                        <li>Caring for and bonding with <a href="character-astarri.html" class="wiki-link">Astarri</a>, her dreampup companion</li>
+                        <li>Caring for and bonding with <a href="character-astarri.html" class="wiki-link">Astarri</a>,
+                            her dreampup companion</li>
                         <li>Listening to comforting stories or music</li>
                         <li>Collecting small sentimental objects that remind her of safety or home</li>
                         <li>Observing stars and celestial imagery, often subconsciously drawn to them</li>
                     </ul>
                 </div>
             </section>
-            
+
             <section class="content-section">
                 <h2 class="section-title">Lifestyle & Habits</h2>
                 <div class="section-content">
-                    <p>Fú cì remains highly vigilant, shaped by long periods spent evading assassins. She tends to remain physically close to trusted allies and avoids isolation whenever possible. She often clutches or adjusts the ribbon or bell in her hair when anxious, using the subtle sensation as grounding behavior.</p>
-                    
-                    <p>Her emotional state fluctuates quietly rather than explosively, typically manifesting as distant staring or subdued silence rather than overt breakdowns.</p>
-                    
+                    <p>Fú cì remains highly vigilant, shaped by long periods spent evading assassins. She tends to
+                        remain physically close to trusted allies and avoids isolation whenever possible. She often
+                        clutches or adjusts the ribbon or bell in her hair when anxious, using the subtle sensation as
+                        grounding behavior.</p>
+
+                    <p>Her emotional state fluctuates quietly rather than explosively, typically manifesting as distant
+                        staring or subdued silence rather than overt breakdowns.</p>
+
                     <h3 class="section-subtitle">Interpersonal Tendencies</h3>
                     <ul>
                         <li>Deeply loyal to those who show her kindness or protection</li>
                         <li>Reluctant to burden others with her emotions</li>
                         <li>Responds strongly to reassurance and gentle encouragement</li>
                         <li>Displays intense trust once emotional bonds are formed</li>
-                        <li>Looks to <a href="character-windi-lightfall.html" class="wiki-link">Windi Lightfall</a> as both guardian and guiding figure</li>
+                        <li>Looks to <a href="character-windi-lightfall.html" class="wiki-link">Windi Lightfall</a> as
+                            both guardian and guiding figure</li>
                     </ul>
                 </div>
             </section>
-            
+
             <section class="content-section">
                 <h2 class="section-title">Identity Evolution</h2>
                 <div class="section-content">
-                    <p>Fú cì's identity was irreversibly altered by the Tiānshàng Massacre and the subsequent Cascade Resonance. The trauma fractured her ability to fully access her transformation as Zhòu-chún Shìfàng, leaving her power fragmented and unstable.</p>
-                    
-                    <p>The activation of the Tiānshàng ocular legacy during her encounter with Windi symbolizes both inherited destiny and emotional awakening. Her decision to join <a href="../factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a> marks a transition from passive survival to purposeful confrontation of the forces that destroyed her past.</p>
+                    <p>Fú cì's identity was irreversibly altered by the Tiānshàng Massacre and the subsequent Cascade
+                        Resonance. The trauma fractured her ability to fully access her transformation as Zhòu-chún
+                        Shìfàng, leaving her power fragmented and unstable.</p>
+
+                    <p>The activation of the Tiānshàng ocular legacy during her encounter with Windi symbolizes both
+                        inherited destiny and emotional awakening. Her decision to join <a
+                            href="../factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a> marks a
+                        transition from passive survival to purposeful confrontation of the forces that destroyed her
+                        past.</p>
                 </div>
             </section>
-            
+
             <section class="content-section">
                 <h2 class="section-title">Social Dynamics</h2>
                 <div class="section-content">
-                    <p>Within Reason Theory, Fú cì represents emotional gravity and moral vulnerability. Her presence often reminds others of the real human cost of conflict. While she relies heavily on Windi and <a href="character-ami-hartbreak.html" class="wiki-link">Ami</a> for emotional and physical safety, her quiet determination provides subtle motivation to the group.</p>
-                    
-                    <p><a href="character-astarri.html" class="wiki-link">Astarri</a> functions as both emotional support and symbolic protector, representing her capacity to nurture and be nurtured simultaneously.</p>
+                    <p>Within Reason Theory, Fú cì represents emotional gravity and moral vulnerability. Her presence
+                        often reminds others of the real human cost of conflict. While she relies heavily on Windi and
+                        <a href="character-ami-hartbreak.html" class="wiki-link">Ami</a> for emotional and physical
+                        safety, her quiet determination provides subtle motivation to the group.</p>
+
+                    <p><a href="character-astarri.html" class="wiki-link">Astarri</a> functions as both emotional
+                        support and symbolic protector, representing her capacity to nurture and be nurtured
+                        simultaneously.</p>
                 </div>
             </section>
-            
+
             <section class="content-section">
                 <h2 class="section-title">Notable Characteristics</h2>
                 <div class="section-content">
@@ -238,29 +599,36 @@
                 </div>
             </section>
         </div>
-        
+
         <!-- ZHÒU-CHÚN TǍOYÀN FORM -->
         <div id="zhou-form" class="character-form">
             <section class="character-header">
                 <div class="character-visual">
-                    <img src="../assets/characters/Zhòu-chún Tǎoyàn w1.png" id="zhou-image" alt="Zhòu-chún Tǎoyàn" class="character-image">
+                    <img src="../assets/characters/Zhòu-chún Tǎoyàn w1.png" id="zhou-image" alt="Zhòu-chún Tǎoyàn"
+                        class="character-image">
                     <img src="../assets/icons/Reason Theory Icon.png" alt="Reason Theory" class="faction-logo">
                 </div>
                 <div class="character-info">
                     <h1 class="character-name">Zhòu-chún Tǎoyàn</h1>
                     <p class="character-title">Master of Transformation</p>
                     <div class="stats-grid">
-                        <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Magical Girl</span></div>
-                        <div class="stat-item"><span class="stat-label">Base Age</span><span class="stat-value">10</span></div>
-                        <div class="stat-item"><span class="stat-label">Transformations</span><span class="stat-value">7 Forms</span></div>
-                        <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Instantaneous Role Adaptation</span></div>
-                        <div class="stat-item"><span class="stat-label">Philosophy</span><span class="stat-value">Absolute Adaptability</span></div>
-                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span class="stat-value">Transformation</span></div>
+                        <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Magical
+                                Girl</span></div>
+                        <div class="stat-item"><span class="stat-label">Base Age</span><span
+                                class="stat-value">10</span></div>
+                        <div class="stat-item"><span class="stat-label">Transformations</span><span class="stat-value">7
+                                Forms</span></div>
+                        <div class="stat-item"><span class="stat-label">Combat Style</span><span
+                                class="stat-value">Instantaneous Role Adaptation</span></div>
+                        <div class="stat-item"><span class="stat-label">Philosophy</span><span
+                                class="stat-value">Absolute Adaptability</span></div>
+                        <div class="stat-item"><span class="stat-label">Key Attribute</span><span
+                                class="stat-value">Transformation</span></div>
                     </div>
                     <div class="character-quote">"If you don't wanna die, don't get close."</div>
                 </div>
             </section>
-            
+
             <!-- TRANSFORMATION SELECTOR -->
             <div class="transformation-toggle">
                 <button class="transformation-button active" onclick="switchTransformation('qishi')">Qíshì</button>
@@ -271,37 +639,56 @@
                 <button class="transformation-button" onclick="switchTransformation('fuwenjian')">Fúwénjiàn</button>
                 <button class="transformation-button" onclick="switchTransformation('aisibo')">Ài Sībō</button>
             </div>
-            
+
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Unlike most magical girl forms which represent the user's will being made manifest, Zhòu-chún Tǎoyàn is different. Unlike typical magical girls with a single transformation, Zhòu-chún possesses seven distinct transformation states, each with corresponding weapons and tactical philosophies.</p>
-                    
-                    <p>She is capable of swapping forms and weapons mid-battle to adapt to any given combat situation, making her one of the most versatile combatants in existence.</p>
+                    <p>Unlike most magical girl forms which represent the user's will being made manifest, Zhòu-chún
+                        Tǎoyàn is different. Unlike typical magical girls with a single transformation, Zhòu-chún
+                        possesses seven distinct transformation states, each with corresponding weapons and tactical
+                        philosophies.</p>
+
+                    <p>She is capable of swapping forms and weapons mid-battle to adapt to any given combat situation,
+                        making her one of the most versatile combatants in existence.</p>
                 </div>
             </section>
-            
+
             <section class="content-section">
                 <h2 class="section-title">Combat Philosophy</h2>
                 <div class="section-content">
-                    <p>Zhòu-chún utilizes an exceptionally fluid, multi-disciplinary combat doctrine centered around instantaneous role adaptation through her seven distinct transformation states. Rather than specializing in a singular martial identity, she treats each form as a dedicated tactical instrument, shifting between them seamlessly to exploit battlefield conditions, opponent weaknesses, or momentum shifts.</p>
-                    
-                    <p>Her fighting methodology prioritizes versatility, tempo control, and continuous combat evolution, allowing her to alter engagement parameters faster than most adversaries can adapt. Her transformations occur with near-zero delay, often mid-motion, enabling her to convert defensive retreats into offensive surges or transition from ranged pressure to close-quarters execution without breaking combat rhythm.</p>
-                    
-                    <p>Each form possesses its own movement cadence, weapon philosophy, and tactical focus, yet Zhòu-chún maintains a unified combat awareness that allows her to weave them together into a cohesive and highly unpredictable fighting pattern.</p>
+                    <p>Zhòu-chún utilizes an exceptionally fluid, multi-disciplinary combat doctrine centered around
+                        instantaneous role adaptation through her seven distinct transformation states. Rather than
+                        specializing in a singular martial identity, she treats each form as a dedicated tactical
+                        instrument, shifting between them seamlessly to exploit battlefield conditions, opponent
+                        weaknesses, or momentum shifts.</p>
+
+                    <p>Her fighting methodology prioritizes versatility, tempo control, and continuous combat evolution,
+                        allowing her to alter engagement parameters faster than most adversaries can adapt. Her
+                        transformations occur with near-zero delay, often mid-motion, enabling her to convert defensive
+                        retreats into offensive surges or transition from ranged pressure to close-quarters execution
+                        without breaking combat rhythm.</p>
+
+                    <p>Each form possesses its own movement cadence, weapon philosophy, and tactical focus, yet
+                        Zhòu-chún maintains a unified combat awareness that allows her to weave them together into a
+                        cohesive and highly unpredictable fighting pattern.</p>
                 </div>
             </section>
-            
+
             <!-- TRANSFORMATION FORM 1: QÍSHÌ -->
             <div id="qishi-content" class="transformation-content active">
                 <section class="content-section">
                     <h2 class="section-title">Qíshì Form</h2>
                     <div class="section-content">
                         <h3 class="section-subtitle">Weapon: Ānjìng (Massive Crystal Sword)</h3>
-                        <p><strong>Qíshì Form</strong> emphasizes raw defensive authority and overwhelming cleaving force. In this state, Zhòu-chún wields <strong>Ānjìng</strong>, a massive crystal sword nearly equal to her own height.</p>
-                        
-                        <p>Her movements become grounded and deliberate, prioritizing stance stability, guard dominance, and wide, armor-breaking strikes. She frequently uses Qíshì to anchor chaotic battlefields, absorb enemy offensives, or create devastating momentum swings through sheer striking power.</p>
-                        
+                        <p><strong>Qíshì Form</strong> emphasizes raw defensive authority and overwhelming cleaving
+                            force. In this state, Zhòu-chún wields <strong>Ānjìng</strong>, a massive crystal sword
+                            nearly equal to her own height.</p>
+
+                        <p>Her movements become grounded and deliberate, prioritizing stance stability, guard dominance,
+                            and wide, armor-breaking strikes. She frequently uses Qíshì to anchor chaotic battlefields,
+                            absorb enemy offensives, or create devastating momentum swings through sheer striking power.
+                        </p>
+
                         <h3 class="section-subtitle">Tactical Focus</h3>
                         <ul>
                             <li><strong>Defensive Authority:</strong> Grounded stance and guard dominance</li>
@@ -312,20 +699,26 @@
                     </div>
                 </section>
             </div>
-            
+
             <!-- TRANSFORMATION FORM 2: RĚNZHĚ -->
             <div id="renzhe-content" class="transformation-content">
                 <section class="content-section">
                     <h2 class="section-title">Rěnzhě Form</h2>
                     <div class="section-content">
                         <h3 class="section-subtitle">Weapon: Ciúnas (Interlocking Katanas)</h3>
-                        <p><strong>Rěnzhě Form</strong> transforms her into a high-speed dual-wielding specialist. Armed with the interlocking katanas <strong>Ciúnas</strong>, she employs rapid aerial mobility, spinning attack chains, and unpredictable vector shifts.</p>
-                        
-                        <p>The blades' ability to combine into a butterfly sword allows her to transition between dual-strike flurries and extended rotational cleaving arcs. Rěnzhě excels at evasive pressure, infiltration maneuvers, and destabilizing tightly coordinated enemy formations.</p>
-                        
+                        <p><strong>Rěnzhě Form</strong> transforms her into a high-speed dual-wielding specialist. Armed
+                            with the interlocking katanas <strong>Ciúnas</strong>, she employs rapid aerial mobility,
+                            spinning attack chains, and unpredictable vector shifts.</p>
+
+                        <p>The blades' ability to combine into a butterfly sword allows her to transition between
+                            dual-strike flurries and extended rotational cleaving arcs. Rěnzhě excels at evasive
+                            pressure, infiltration maneuvers, and destabilizing tightly coordinated enemy formations.
+                        </p>
+
                         <h3 class="section-subtitle">Tactical Focus</h3>
                         <ul>
-                            <li><strong>High-Speed Dual-Wielding:</strong> Rapid aerial mobility and spinning chains</li>
+                            <li><strong>High-Speed Dual-Wielding:</strong> Rapid aerial mobility and spinning chains
+                            </li>
                             <li><strong>Butterfly Sword Mode:</strong> Extended rotational cleaving arcs</li>
                             <li><strong>Evasive Pressure:</strong> Unpredictable vector shifts</li>
                             <li><strong>Formation Disruption:</strong> Destabilizing coordinated enemies</li>
@@ -333,38 +726,46 @@
                     </div>
                 </section>
             </div>
-            
+
             <!-- TRANSFORMATION FORM 3: CÌKÈ -->
             <div id="cike-content" class="transformation-content">
                 <section class="content-section">
                     <h2 class="section-title">Cìkè Form</h2>
                     <div class="section-content">
                         <h3 class="section-subtitle">Weapon: Tăcere (Gunblade)</h3>
-                        <p><strong>Cìkè Form</strong> focuses on surgical elimination and precision burst damage. Using the gunblade <strong>Tăcere</strong>, Zhòu-chún blends close-range slashing with sudden ballistic execution strikes.</p>
-                        
-                        <p>She frequently alternates between feigned disengagements and lightning-fast counterattacks, capitalizing on opponent overextension. Cìkè's combat tempo is calculated and lethal, favoring single decisive engagements over prolonged exchanges.</p>
-                        
+                        <p><strong>Cìkè Form</strong> focuses on surgical elimination and precision burst damage. Using
+                            the gunblade <strong>Tăcere</strong>, Zhòu-chún blends close-range slashing with sudden
+                            ballistic execution strikes.</p>
+
+                        <p>She frequently alternates between feigned disengagements and lightning-fast counterattacks,
+                            capitalizing on opponent overextension. Cìkè's combat tempo is calculated and lethal,
+                            favoring single decisive engagements over prolonged exchanges.</p>
+
                         <h3 class="section-subtitle">Tactical Focus</h3>
                         <ul>
                             <li><strong>Surgical Elimination:</strong> Precision burst damage</li>
                             <li><strong>Hybrid Combat:</strong> Close-range slashing with ballistic strikes</li>
                             <li><strong>Feigned Disengagement:</strong> Baiting overextension</li>
-                            <li><strong>Decisive Engagements:</strong> Single lethal strikes over prolonged exchanges</li>
+                            <li><strong>Decisive Engagements:</strong> Single lethal strikes over prolonged exchanges
+                            </li>
                         </ul>
                     </div>
                 </section>
             </div>
-            
+
             <!-- TRANSFORMATION FORM 4: RÓULÌN -->
             <div id="roulin-content" class="transformation-content">
                 <section class="content-section">
                     <h2 class="section-title">Róulìn Form</h2>
                     <div class="section-content">
                         <h3 class="section-subtitle">Weapon: Cupa (Katana)</h3>
-                        <p><strong>Róulìn Form</strong> is defined by relentless offensive aggression and high-tempo melee domination. Wielding the katana <strong>Cupa</strong>, Zhòu-chún abandons defensive restraint in favor of continuous pressure sequences and chaining strike rhythms.</p>
-                        
-                        <p>This form thrives in chaotic environments, where sustained momentum and psychological intimidation overwhelm opponents through sheer attack density.</p>
-                        
+                        <p><strong>Róulìn Form</strong> is defined by relentless offensive aggression and high-tempo
+                            melee domination. Wielding the katana <strong>Cupa</strong>, Zhòu-chún abandons defensive
+                            restraint in favor of continuous pressure sequences and chaining strike rhythms.</p>
+
+                        <p>This form thrives in chaotic environments, where sustained momentum and psychological
+                            intimidation overwhelm opponents through sheer attack density.</p>
+
                         <h3 class="section-subtitle">Tactical Focus</h3>
                         <ul>
                             <li><strong>Relentless Aggression:</strong> Abandoning defensive restraint</li>
@@ -375,17 +776,21 @@
                     </div>
                 </section>
             </div>
-            
+
             <!-- TRANSFORMATION FORM 5: DĀO WǓ -->
             <div id="daowu-content" class="transformation-content">
                 <section class="content-section">
                     <h2 class="section-title">Dāo Wǔ Form</h2>
                     <div class="section-content">
                         <h3 class="section-subtitle">Weapon: Kimya (Taijijian)</h3>
-                        <p><strong>Dāo Wǔ Form</strong> represents her most graceful and technically refined sword discipline. Using the taijijian <strong>Kimya</strong>, she adopts flowing circular footwork, redirectional parries, and energy-guided blade arcs.</p>
-                        
-                        <p>Dāo Wǔ emphasizes harmony between offense and defense, often allowing Zhòu-chún to redirect incoming attacks into counteroffensive spirals. This form excels in dueling scenarios and technical skill contests.</p>
-                        
+                        <p><strong>Dāo Wǔ Form</strong> represents her most graceful and technically refined sword
+                            discipline. Using the taijijian <strong>Kimya</strong>, she adopts flowing circular
+                            footwork, redirectional parries, and energy-guided blade arcs.</p>
+
+                        <p>Dāo Wǔ emphasizes harmony between offense and defense, often allowing Zhòu-chún to redirect
+                            incoming attacks into counteroffensive spirals. This form excels in dueling scenarios and
+                            technical skill contests.</p>
+
                         <h3 class="section-subtitle">Tactical Focus</h3>
                         <ul>
                             <li><strong>Graceful Technique:</strong> Flowing circular footwork</li>
@@ -396,38 +801,46 @@
                     </div>
                 </section>
             </div>
-            
+
             <!-- TRANSFORMATION FORM 6: FÚWÉNJIÀN -->
             <div id="fuwenjian-content" class="transformation-content">
                 <section class="content-section">
                     <h2 class="section-title">Fúwénjiàn Form</h2>
                     <div class="section-content">
                         <h3 class="section-subtitle">Weapon: Senyap (Arcane Sword)</h3>
-                        <p><strong>Fúwénjiàn Form</strong> integrates magical reinforcement and battlefield manipulation through the arcane sword <strong>Senyap</strong>. Zhòu-chún channels rune-based enchantments through her blade, enhancing both offensive potency and environmental control.</p>
-                        
-                        <p>She frequently uses this form to create magical constructs, destabilize terrain, or reinforce allied positioning while maintaining offensive capability.</p>
-                        
+                        <p><strong>Fúwénjiàn Form</strong> integrates magical reinforcement and battlefield manipulation
+                            through the arcane sword <strong>Senyap</strong>. Zhòu-chún channels rune-based enchantments
+                            through her blade, enhancing both offensive potency and environmental control.</p>
+
+                        <p>She frequently uses this form to create magical constructs, destabilize terrain, or reinforce
+                            allied positioning while maintaining offensive capability.</p>
+
                         <h3 class="section-subtitle">Tactical Focus</h3>
                         <ul>
                             <li><strong>Magical Reinforcement:</strong> Rune-based enchantments</li>
-                            <li><strong>Battlefield Manipulation:</strong> Creating constructs and destabilizing terrain</li>
+                            <li><strong>Battlefield Manipulation:</strong> Creating constructs and destabilizing terrain
+                            </li>
                             <li><strong>Environmental Control:</strong> Shaping engagement zones</li>
                             <li><strong>Allied Support:</strong> Reinforcing positioning while attacking</li>
                         </ul>
                     </div>
                 </section>
             </div>
-            
+
             <!-- TRANSFORMATION FORM 7: ÀI SĪBŌ -->
             <div id="aisibo-content" class="transformation-content">
                 <section class="content-section">
                     <h2 class="section-title">Ài Sībō Form</h2>
                     <div class="section-content">
                         <h3 class="section-subtitle">Weapon: Shiru (Summoned Blade)</h3>
-                        <p><strong>Ài Sībō Form</strong> abandons conventional grounded combat entirely, elevating Zhòu-chún into an aerial, ethereal battle state. Floating just above the ground, she commands the summoned blade <strong>Shiru</strong>, which moves independently under her telekinetic and magical direction.</p>
-                        
-                        <p>This form allows her to attack from multiple vectors simultaneously, maintain ranged dominance, and exert overwhelming spatial control over the battlefield.</p>
-                        
+                        <p><strong>Ài Sībō Form</strong> abandons conventional grounded combat entirely, elevating
+                            Zhòu-chún into an aerial, ethereal battle state. Floating just above the ground, she
+                            commands the summoned blade <strong>Shiru</strong>, which moves independently under her
+                            telekinetic and magical direction.</p>
+
+                        <p>This form allows her to attack from multiple vectors simultaneously, maintain ranged
+                            dominance, and exert overwhelming spatial control over the battlefield.</p>
+
                         <h3 class="section-subtitle">Tactical Focus</h3>
                         <ul>
                             <li><strong>Aerial Combat:</strong> Floating above ground level</li>
@@ -438,25 +851,33 @@
                     </div>
                 </section>
             </div>
-            
+
             <section class="content-section">
                 <h2 class="section-title">Transformation Mastery</h2>
                 <div class="section-content">
-                    <p>Zhòu-chún's greatest strength lies not in any single transformation but in her mastery of transition itself. She frequently chains forms mid-combination, allowing one discipline to initiate an engagement while another delivers the finishing strike.</p>
-                    
-                    <p>Opponents attempting to counter her often find themselves preparing for one combat methodology only to be confronted with an entirely different martial paradigm moments later.</p>
-                    
+                    <p>Zhòu-chún's greatest strength lies not in any single transformation but in her mastery of
+                        transition itself. She frequently chains forms mid-combination, allowing one discipline to
+                        initiate an engagement while another delivers the finishing strike.</p>
+
+                    <p>Opponents attempting to counter her often find themselves preparing for one combat methodology
+                        only to be confronted with an entirely different martial paradigm moments later.</p>
+
                     <h3 class="section-subtitle">Psychological Impact</h3>
-                    <p>Psychologically, Zhòu-chún projects an aura of raw unpredictability. Her combat demeanor shifts alongside her transformations, ranging from stoic knightly authority to silent predatory precision or graceful, almost theatrical blade choreography.</p>
-                    
-                    <p>This layered persona structure compounds the tactical confusion she creates, as opponents must constantly reassess not only her physical capabilities but also her combat temperament.</p>
-                    
+                    <p>Psychologically, Zhòu-chún projects an aura of raw unpredictability. Her combat demeanor shifts
+                        alongside her transformations, ranging from stoic knightly authority to silent predatory
+                        precision or graceful, almost theatrical blade choreography.</p>
+
+                    <p>This layered persona structure compounds the tactical confusion she creates, as opponents must
+                        constantly reassess not only her physical capabilities but also her combat temperament.</p>
+
                     <h3 class="section-subtitle">Philosophy</h3>
-                    <p>Her fighting philosophy is rooted in absolute adaptability—the belief that mastery is not achieved through perfection of a single path, but through the ability to become whatever the battlefield demands in the exact moment it demands it.</p>
+                    <p>Her fighting philosophy is rooted in absolute adaptability—the belief that mastery is not
+                        achieved through perfection of a single path, but through the ability to become whatever the
+                        battlefield demands in the exact moment it demands it.</p>
                 </div>
             </section>
         </div>
-        
+
         <!-- SHARED SECTIONS -->
         <section class="content-section">
             <h2 class="section-title">Relationships</h2>
@@ -481,13 +902,14 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="content-section">
             <h2 class="section-title">Thematic Significance</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Archetype</h3>
-                <p>Fú cì/Zhòu-chún embodies the <strong>Fragmented Inheritor</strong> archetype—someone carrying immense legacy power while struggling with trauma that prevents full manifestation.</p>
-                
+                <p>Fú cì/Zhòu-chún embodies the <strong>Fragmented Inheritor</strong> archetype—someone carrying immense
+                    legacy power while struggling with trauma that prevents full manifestation.</p>
+
                 <h3 class="section-subtitle">Core Themes</h3>
                 <ul>
                     <li><strong>Survival vs. Despair:</strong> Constant battle against overwhelming grief</li>
@@ -497,17 +919,20 @@
                     <li><strong>Adaptability as Survival:</strong> Seven forms representing response to any threat</li>
                     <li><strong>Found Family:</strong> Windi, Astarri, and Reason Theory as new support system</li>
                 </ul>
-                
+
                 <h3 class="section-subtitle">Transformation Symbolism</h3>
-                <p>The seven forms of Zhòu-chún represent not just tactical versatility but psychological fragmentation—a child who has had to become many different things to survive. Each transformation is a different facet of strength developed in response to specific threats.</p>
+                <p>The seven forms of Zhòu-chún represent not just tactical versatility but psychological
+                    fragmentation—a child who has had to become many different things to survive. Each transformation is
+                    a different facet of strength developed in response to specific threats.</p>
             </div>
         </section>
-        
+
         <section class="content-section">
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> "Fú cì Tiānshàng" (福赐天上) — Chinese for "blessings of heaven"; "Zhòu-chún Tǎoyàn" (咒純討厭) — Chinese for "curse of pure hate"</li>
+                    <li><strong>Name Etymology:</strong> "Fú cì Tiānshàng" (福赐天上) — Chinese for "blessings of heaven";
+                        "Zhòu-chún Tǎoyàn" (咒純討厭) — Chinese for "curse of pure hate"</li>
                     <li>Born on December 25, age 10</li>
                     <li>Possesses Tiānshàng six-star ocular inheritance in her grey eyes</li>
                     <li>Light pink hair styled in twin buns with chopsticks, gold bell, and ribbon</li>
@@ -525,7 +950,7 @@
             </div>
         </section>
     </div>
-    
+
     <script>
         function switchMainForm(formName) {
             document.querySelectorAll('.character-form').forEach(form => form.classList.remove('active'));
@@ -534,7 +959,7 @@
             event.target.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
+
         function switchTransformation(transformName) {
             // Update image
             const imagePath = '../assets/characters/Zhòu-chún Tǎoyàn w';
@@ -548,7 +973,7 @@
                 'aisibo': '7'
             };
             document.getElementById('zhou-image').src = imagePath + imageMap[transformName] + '.png';
-            
+
             // Update content
             document.querySelectorAll('.transformation-content').forEach(content => content.classList.remove('active'));
             document.querySelectorAll('.transformation-button').forEach(btn => btn.classList.remove('active'));
@@ -557,4 +982,5 @@
         }
     </script>
 </body>
+
 </html>

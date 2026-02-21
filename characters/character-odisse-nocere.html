@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+
+<head>
 
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -8,113 +9,138 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Crios" />
   <link rel="manifest" href="/site.webmanifest" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odisse Nocere // CRIOS Character Profile</title>
+  <style>
+    body {
+      background: #00091B;
+      color: #fff;
+    }
 
-        <style>
-        body {
-  background: #00091B;
-  color: #fff;
-}
 
+    @keyframes fadeIn {
+      from {
+        top: 20%;
+        opacity: 0;
+      }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+      to {
+        top: 100;
+        opacity: 1;
+      }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+    }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  animation: fadeIn 1000ms ease;
-  -webkit-animation: fadeIn 1000ms ease;
-  
-}
+    @-webkit-keyframes fadeIn {
+      from {
+        top: 20%;
+        opacity: 0;
+      }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+      to {
+        top: 100;
+        opacity: 1;
+      }
 
-.dot {
-  color: #4FEBFE;
-}
+    }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+    .wrapper {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      -webkit-animation: fadeIn 1000ms ease;
+      animation: fadeIn 1000ms ease;
+    }
 
-.icons {
-  text-align: center;
-  
-}
+    h1 {
+      font-size: 50px;
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 0;
+      line-height: 1;
+      font-weight: 700;
+      text-align: center;
+    }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+    .dot {
+      color: #4FEBFE;
+    }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  text-decoration: none;
-  
-}
+    p {
+      text-align: center;
+      margin: 18px;
+      font-family: 'Muli', sans-serif;
+      font-weight: normal;
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+    }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+    .icons {
+      text-align: center;
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Character Profile <span class="dot">Odisse Nocere</span> coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+    }
+
+    .icons i {
+      color: #00091B;
+      background: #fff;
+      height: 15px;
+      width: 15px;
+      padding: 13px;
+      margin: 0 10px;
+      border-radius: 50px;
+      border: 2px solid #fff;
+      transition: all 200ms ease;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .icons i:hover,
+    .icons i:active {
+      color: #fff;
+      background: none;
+      cursor: pointer !important;
+      -webkit-transform: scale(1.2);
+      transform: scale(1.2);
+      text-decoration: none;
+
+    }
+
+    .back-button {
+      background-color: #23406F;
+      /* A nice blue color */
+      border: none;
+      color: white;
+      /* White text */
+      padding: 10px 20px;
+      /* Spacing inside the button */
+      text-align: center;
+      text-decoration: none;
+      /* Remove underline from <a> tags if used */
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      /* Change cursor on hover */
+      border-radius: 8px;
+      /* Rounded corners */
+    }
+
+    .back-button:hover {
+      background-color: #FFFFFF;
+      /* Change background on hover */
+      color: #23406F;
+      /* Change text color on hover */
+      border: 1px solid #23406F;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1>Character Profile <span class="dot">Odisse Nocere</span> coming soon<span class="dot">.</span></h1>
+    <button class="back-button" onclick="history.back()">Go Back</button>
+  </div>
+</body>
+
 </html>

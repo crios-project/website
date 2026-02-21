@@ -1,93 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corstilla // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
-        body { font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.7; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5; }
-        .header-nav { position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100; }
-        .back-link { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .back-link:hover { color: var(--accent-cyan); }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; position: relative; z-index: 1; }
-        .character-header { display: grid; grid-template-columns: 400px 1fr; gap: 60px; margin-bottom: 60px;
-            animation: fadeIn 0.8s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .character-visual { position: relative; }
-        .character-image { width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(233, 30, 99, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
-        .character-info { display: flex; flex-direction: column; justify-content: center; }
-        .character-name { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800;
-            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 12px; line-height: 1.1; }
-        .character-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 3px; margin-bottom: 32px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; background: var(--dark-panel);
-            border: 1px solid rgba(233, 30, 99, 0.2); border-radius: 8px; padding: 24px; }
-        .stat-item { display: flex; flex-direction: column; }
-        .stat-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-        .stat-value { font-family: 'Archivo', sans-serif; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
-        .character-quote { margin-top: 32px; padding: 20px 24px;
-            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
-            border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif;
-            font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
-        .content-section { background: var(--dark-panel); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px; padding: 32px; margin-bottom: 32px; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700;
-            color: var(--secondary-pink); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        .section-subtitle { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 600;
-            color: var(--accent-cyan); margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .section-content { color: var(--text-dim); line-height: 1.8; font-size: 1rem; }
-        .section-content p { margin-bottom: 16px; }
-        .section-content ul { list-style: none; padding-left: 0; margin: 16px 0; }
-        .section-content li { padding-left: 24px; margin-bottom: 8px; position: relative; }
-        .section-content li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary-pink); }
-        .wiki-link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid rgba(0, 217, 255, 0.3);
-            transition: all 0.2s ease; }
-        .wiki-link:hover { color: white; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 8px var(--accent-cyan); }
-        .relationships-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px; margin-top: 20px; }
-        .relationship-card { background: rgba(20, 20, 25, 0.5); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 8px; padding: 16px; transition: all 0.3s ease; text-decoration: none; display: block; }
-        .relationship-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2); }
-        .relationship-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--text-primary);
-            font-weight: 600; margin-bottom: 4px; }
-        .relationship-type { font-size: 0.85rem; color: var(--text-dim); }
-        @media (max-width: 1024px) {
-            .character-header { grid-template-columns: 1fr; gap: 40px; }
-            .character-visual { max-width: 400px; margin: 0 auto; }
-            .character-name { font-size: 2.5rem; }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
         }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .character-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .character-visual {
+            position: relative;
+        }
+
+        .character-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .character-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .character-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .content-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 16px 0;
+        }
+
+        .section-content li {
+            padding-left: 24px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-pink);
+        }
+
+        .wiki-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .wiki-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .relationships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .relationship-card {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .relationship-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+        }
+
+        .relationship-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .relationship-type {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .character-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .character-visual {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .character-name {
+                font-size: 2.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .stats-grid { grid-template-columns: 1fr; }
-            .content-section { padding: 24px; }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 24px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
@@ -100,32 +337,52 @@
                 <h1 class="character-name">Corstilla</h1>
                 <p class="character-title">Living Contradiction</p>
                 <div class="stats-grid">
-                    <div class="stat-item"><span class="stat-label">Type</span><span class="stat-value">Paradox Bracer Fusion</span></div>
-                    <div class="stat-item"><span class="stat-label">Components</span><span class="stat-value"><a href="character-tiala-hartlight.html" class="wiki-link">Alulu Dayk</a> + <a href="character-ji-lian-xia.html" class="wiki-link">Kesshō Yīng</a></span></div>
-                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Lucem Atra (Light/Darkness Blade)</span></div>
-                    <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Catastrophic Oscillation</span></div>
-                    <div class="stat-item"><span class="stat-label">Philosophy</span><span class="stat-value">Dominance Through Opposition</span></div>
-                    <div class="stat-item"><span class="stat-label">Limitation</span><span class="stat-value">Light/Darkness Instability</span></div>
+                    <div class="stat-item"><span class="stat-label">Type</span><span class="stat-value">Paradox Bracer
+                            Fusion</span></div>
+                    <div class="stat-item"><span class="stat-label">Components</span><span class="stat-value"><a
+                                href="character-tiala-hartlight.html" class="wiki-link">Alulu Dayk</a> + <a
+                                href="character-ji-lian-xia.html" class="wiki-link">Kesshō Yīng</a></span></div>
+                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Lucem Atra
+                            (Light/Darkness Blade)</span></div>
+                    <div class="stat-item"><span class="stat-label">Combat Style</span><span
+                            class="stat-value">Catastrophic Oscillation</span></div>
+                    <div class="stat-item"><span class="stat-label">Philosophy</span><span class="stat-value">Dominance
+                            Through Opposition</span></div>
+                    <div class="stat-item"><span class="stat-label">Limitation</span><span
+                            class="stat-value">Light/Darkness Instability</span></div>
                 </div>
-                <div class="character-quote">"Light does not banish Darkness, and Darkness does not consume Light. Both exist solely to destroy anything caught between them."</div>
+                <div class="character-quote">"Light does not banish Darkness, and Darkness does not consume Light. Both
+                    exist solely to destroy anything caught between them."</div>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p>Corstilla manifests as a paradox bracer fusion between <a href="character-tiala-hartlight.html" class="wiki-link">Alulu Dayk</a> and <a href="character-ji-lian-xia.html" class="wiki-link">Kesshō Yīng</a>, forming a combatant defined by catastrophic striking power fused with aerial precision and acrobatic lethality.</p>
-                
-                <p>Where <a href="character-solamor.html" class="wiki-link">Solamor</a> embodies adaptability and battlefield manipulation, Corstilla represents violent contrast and relentless oscillation between opposing combat extremes. The fusion harmonizes Alulu's uncompromising execution doctrine with Kesshō's fluid, aerial, and theatrically lethal movement philosophy, producing a warrior whose fighting rhythm destabilizes opponents both physically and psychologically.</p>
+                <p>Corstilla manifests as a paradox bracer fusion between <a href="character-tiala-hartlight.html"
+                        class="wiki-link">Alulu Dayk</a> and <a href="character-ji-lian-xia.html"
+                        class="wiki-link">Kesshō Yīng</a>, forming a combatant defined by catastrophic striking power
+                    fused with aerial precision and acrobatic lethality.</p>
+
+                <p>Where <a href="character-solamor.html" class="wiki-link">Solamor</a> embodies adaptability and
+                    battlefield manipulation, Corstilla represents violent contrast and relentless oscillation between
+                    opposing combat extremes. The fusion harmonizes Alulu's uncompromising execution doctrine with
+                    Kesshō's fluid, aerial, and theatrically lethal movement philosophy, producing a warrior whose
+                    fighting rhythm destabilizes opponents both physically and psychologically.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Weapon: Lucem Atra</h2>
             <div class="section-content">
-                <p>Her weapon, <strong>Lucem Atra</strong> (Light Darkness), is a dual-aspected blade forged from converged Light and Darkness resonance. The weapon exists in a permanent state of oscillation, cycling between radiant illumination and abyssal void energy.</p>
-                
-                <p>Rather than maintaining simultaneous balance between the two aspects, Corstilla weaponizes the violent transition between them. Each phase shift alters the blade's magical properties, combat reach, strike tempo, and destructive profile, forcing opponents to continuously recalibrate defensive strategy while under overwhelming offensive pressure.</p>
+                <p>Her weapon, <strong>Lucem Atra</strong> (Light Darkness), is a dual-aspected blade forged from
+                    converged Light and Darkness resonance. The weapon exists in a permanent state of oscillation,
+                    cycling between radiant illumination and abyssal void energy.</p>
+
+                <p>Rather than maintaining simultaneous balance between the two aspects, Corstilla weaponizes the
+                    violent transition between them. Each phase shift alters the blade's magical properties, combat
+                    reach, strike tempo, and destructive profile, forcing opponents to continuously recalibrate
+                    defensive strategy while under overwhelming offensive pressure.</p>
             </div>
         </section>
 
@@ -133,8 +390,10 @@
             <h2 class="section-title">Combat Phases</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Light-Dominant State</h3>
-                <p>During Lucem Atra's Light-dominant state, Corstilla's attacks emphasize blinding speed, radiant dispersal, and piercing execution strikes. Movements become sharply accelerated and visually disorienting as refracted light trails distort perception of distance and timing.</p>
-                
+                <p>During Lucem Atra's Light-dominant state, Corstilla's attacks emphasize blinding speed, radiant
+                    dispersal, and piercing execution strikes. Movements become sharply accelerated and visually
+                    disorienting as refracted light trails distort perception of distance and timing.</p>
+
                 <p>She frequently employs:</p>
                 <ul>
                     <li>Aerial spin descents</li>
@@ -142,12 +401,15 @@
                     <li>Multi-vector lunges that fracture enemy formations</li>
                     <li>Penetration through magical shielding via concentrated luminous resonance</li>
                 </ul>
-                
-                <p>Light-state attacks favor precision over weight, targeting vital structural weaknesses in armor, magical barriers, or defensive posture.</p>
+
+                <p>Light-state attacks favor precision over weight, targeting vital structural weaknesses in armor,
+                    magical barriers, or defensive posture.</p>
 
                 <h3 class="section-subtitle">Darkness-Dominant State</h3>
-                <p>When Lucem Atra transitions into its Darkness-dominant state, Corstilla's combat presence shifts into oppressive gravitational lethality. Her strikes gain crushing weight, extending into elongated shadow arcs capable of devouring incoming attacks and suppressing magical countermeasures.</p>
-                
+                <p>When Lucem Atra transitions into its Darkness-dominant state, Corstilla's combat presence shifts into
+                    oppressive gravitational lethality. Her strikes gain crushing weight, extending into elongated
+                    shadow arcs capable of devouring incoming attacks and suppressing magical countermeasures.</p>
+
                 <p>Darkness manifestations frequently:</p>
                 <ul>
                     <li>Distort battlefield spatial awareness</li>
@@ -158,9 +420,14 @@
                 </ul>
 
                 <h3 class="section-subtitle">Phase Transition Lethality</h3>
-                <p>The transition between Light and Darkness is Corstilla's most lethal asset. She intentionally forces phase shifts mid-strike, converting rapid piercing lunges into heavy execution cleaves or transforming crushing blows into radiant follow-through penetrations.</p>
-                
-                <p>Opponents attempting to counter one aspect often find themselves catastrophically exposed when the blade's resonance shifts without warning. This oscillation generates a combat tempo that appears rhythmically inconsistent yet strategically deliberate, overwhelming defensive pattern recognition.</p>
+                <p>The transition between Light and Darkness is Corstilla's most lethal asset. She intentionally forces
+                    phase shifts mid-strike, converting rapid piercing lunges into heavy execution cleaves or
+                    transforming crushing blows into radiant follow-through penetrations.</p>
+
+                <p>Opponents attempting to counter one aspect often find themselves catastrophically exposed when the
+                    blade's resonance shifts without warning. This oscillation generates a combat tempo that appears
+                    rhythmically inconsistent yet strategically deliberate, overwhelming defensive pattern recognition.
+                </p>
             </div>
         </section>
 
@@ -168,18 +435,23 @@
             <h2 class="section-title">Movement & Combat Techniques</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Acrobatic Combat Doctrine</h3>
-                <p>Corstilla's movement methodology strongly reflects Kesshō's acrobatic combat doctrine. She maintains near-constant vertical engagement, using:</p>
+                <p>Corstilla's movement methodology strongly reflects Kesshō's acrobatic combat doctrine. She maintains
+                    near-constant vertical engagement, using:</p>
                 <ul>
                     <li>Rotational aerial flips</li>
                     <li>Inverted momentum strikes</li>
                     <li>Spiraling descent executions</li>
                 </ul>
-                
-                <p>However, each acrobatic maneuver is reinforced by Alulu's decisive commitment to lethality. Unlike Kesshō's occasional theatrical feints, Corstilla's acrobatics are optimized for positioning into immediate killing trajectories, ensuring that every maneuver carries terminal intent.</p>
+
+                <p>However, each acrobatic maneuver is reinforced by Alulu's decisive commitment to lethality. Unlike
+                    Kesshō's occasional theatrical feints, Corstilla's acrobatics are optimized for positioning into
+                    immediate killing trajectories, ensuring that every maneuver carries terminal intent.</p>
 
                 <h3 class="section-subtitle">Battlefield Awareness</h3>
-                <p>Her battlefield awareness functions through dual-perspective combat intuition. Corstilla instinctively identifies high-value elimination targets while simultaneously tracking environmental advantages for mobility or destructive amplification.</p>
-                
+                <p>Her battlefield awareness functions through dual-perspective combat intuition. Corstilla
+                    instinctively identifies high-value elimination targets while simultaneously tracking environmental
+                    advantages for mobility or destructive amplification.</p>
+
                 <p>She may:</p>
                 <ul>
                     <li>Use structural surfaces to rebound into light-speed lunges</li>
@@ -189,18 +461,26 @@
                 </ul>
 
                 <h3 class="section-subtitle">Psychological Presence</h3>
-                <p>Psychologically, Corstilla projects a volatile serenity. She displays a composed and almost reverent demeanor toward battle, treating each opponent as a necessary participant in her expression of duality.</p>
-                
-                <p>The alternating brilliance and void surrounding her blade create an aura of inevitability, reinforcing the sense that resistance merely determines which aspect of her power delivers the finishing blow.</p>
+                <p>Psychologically, Corstilla projects a volatile serenity. She displays a composed and almost reverent
+                    demeanor toward battle, treating each opponent as a necessary participant in her expression of
+                    duality.</p>
+
+                <p>The alternating brilliance and void surrounding her blade create an aura of inevitability,
+                    reinforcing the sense that resistance merely determines which aspect of her power delivers the
+                    finishing blow.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Limitations</h2>
             <div class="section-content">
-                <p>The Paradox Bracers sustaining Corstilla impose extreme arcane strain due to the inherent instability of Light and Darkness resonance coexisting within a single manifestation. Maintaining synchronized oscillation between opposing magical polarities rapidly accelerates energy depletion and increases the risk of destabilizing the fusion prematurely.</p>
-                
-                <p>As magical reserves diminish, phase transitions become increasingly violent and difficult to control, often forcing disengagement before catastrophic backlash occurs.</p>
+                <p>The Paradox Bracers sustaining Corstilla impose extreme arcane strain due to the inherent instability
+                    of Light and Darkness resonance coexisting within a single manifestation. Maintaining synchronized
+                    oscillation between opposing magical polarities rapidly accelerates energy depletion and increases
+                    the risk of destabilizing the fusion prematurely.</p>
+
+                <p>As magical reserves diminish, phase transitions become increasingly violent and difficult to control,
+                    often forcing disengagement before catastrophic backlash occurs.</p>
             </div>
         </section>
 
@@ -224,7 +504,9 @@
             <h2 class="section-title">Thematic Significance</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Archetype</h3>
-                <p>Corstilla represents the <strong>Living Contradiction</strong> archetype—where opposing forces exist not in balance but in perpetual violent oscillation, each transition more devastating than coexistence.</p>
+                <p>Corstilla represents the <strong>Living Contradiction</strong> archetype—where opposing forces exist
+                    not in balance but in perpetual violent oscillation, each transition more devastating than
+                    coexistence.</p>
 
                 <h3 class="section-subtitle">Core Themes</h3>
                 <ul>
@@ -237,9 +519,12 @@
                 </ul>
 
                 <h3 class="section-subtitle">Philosophy</h3>
-                <p>Corstilla represents a living contradiction weaponized into combat perfection. Her fighting philosophy centers on dominance through opposition: victory is achieved by overwhelming adversaries with forces so fundamentally incompatible that defense becomes mathematically impossible.</p>
-                
-                <p>Within Corstilla's presence, Light does not banish Darkness, and Darkness does not consume Light. Instead, both exist solely to destroy anything caught between them.</p>
+                <p>Corstilla represents a living contradiction weaponized into combat perfection. Her fighting
+                    philosophy centers on dominance through opposition: victory is achieved by overwhelming adversaries
+                    with forces so fundamentally incompatible that defense becomes mathematically impossible.</p>
+
+                <p>Within Corstilla's presence, Light does not banish Darkness, and Darkness does not consume Light.
+                    Instead, both exist solely to destroy anything caught between them.</p>
             </div>
         </section>
 
@@ -247,7 +532,8 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> "Corstilla" — combination of latin words Cor (Heart) and Stilla (Drop)</li>
+                    <li><strong>Name Etymology:</strong> "Corstilla" — combination of latin words Cor (Heart) and Stilla
+                        (Drop)</li>
                     <li>Paradox Bracer fusion of Alulu Dayk(Tiala HArtlight) and Kesshō Yīng (Jí Lián Xiá)</li>
                     <li>Wields Lucem Atra, meaning "Light Darkness" in Latin</li>
                     <li>Blade oscillates between radiant illumination and abyssal void</li>
@@ -266,4 +552,5 @@
         </section>
     </div>
 </body>
+
 </html>
