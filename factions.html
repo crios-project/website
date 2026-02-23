@@ -205,6 +205,7 @@
         .faction-card:nth-child(3) { animation-delay: 0.3s; }
         .faction-card:nth-child(4) { animation-delay: 0.4s; }
         .faction-card:nth-child(5) { animation-delay: 0.5s; }
+        .faction-card:nth-child(6) { animation-delay: 0.6s; }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
@@ -298,7 +299,7 @@
 
         .faction-stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 16px;
         }
 
@@ -458,6 +459,10 @@
                             <span class="stat-value">Lúmenai</span>
                             <span class="stat-label">Magic</span>
                         </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Reality Displaced</span>
+                            <span class="stat-label">Status</span>
+                        </div>
                     </div>
                 </div>
             </a>
@@ -481,6 +486,10 @@
                         <div class="stat-item">
                             <span class="stat-value">Element Core</span>
                             <span class="stat-label">Magic</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Reality Displaced</span>
+                            <span class="stat-label">Status</span>
                         </div>
                     </div>
                 </div>
@@ -506,6 +515,10 @@
                             <span class="stat-value">Pro-Destiny</span>
                             <span class="stat-label">Ideology</span>
                         </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Active</span>
+                            <span class="stat-label">Status</span>
+                        </div>
                     </div>
                 </div>
             </a>
@@ -530,6 +543,10 @@
                             <span class="stat-value">Anti-Destiny</span>
                             <span class="stat-label">Ideology</span>
                         </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Active</span>
+                            <span class="stat-label">Status</span>
+                        </div>
                     </div>
                 </div>
             </a>
@@ -543,17 +560,55 @@
                     <p class="faction-tagline">"Truth through action, kinship through shared purpose."</p>
                     <div class="faction-stats">
                         <div class="stat-item">
-                            <span class="stat-value">Collapsed</span>
-                            <span class="stat-label">Status</span>
+                            <span class="stat-value">6</span>
+                            <span class="stat-label">Members</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-value">Nexsicon</span>
                             <span class="stat-label">Origin</span>
                         </div>
+                            <div class="stat-item">
+                            <span class="stat-value">Cymora</span>
+                            <span class="stat-label">Magic</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Defunct</span>
+                            <span class="stat-label">Status</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Enemies -->
+            <a href="factions/enemy-factions.html" class="faction-card">
+                <div class="faction-logo-container">
+                    <img src="assets/icons/Enemy Faction Logo.png" alt="Enemy Forces" class="faction-logo">
+                </div>
+                <div class="faction-info">
+                    <p class="faction-tagline">"Silence for the voices, release from the duty; where the multiverse ends, the truth begins."</p>
+                    <div class="faction-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">∞</span>
+                            <span class="stat-label">Capacity</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Manifold Space</span>
+                            <span class="stat-label">Origin</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Existential</span>
+                            <span class="stat-label">Threat Level</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Active, Hostile</span>
+                            <span class="stat-label">Status</span>
+                        </div>
                     </div>
                 </div>
             </a>
         </div>
+        
+        
 
         <!-- Call to Action -->
         <section class="cta-section">

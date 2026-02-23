@@ -3,146 +3,620 @@
 
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Overview // CRIOS</title>
-  <meta charset="UTF-8">
-  <style>
-    body {
-      background: #00091B;
-      color: #fff;
-    }
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview // CRIOS</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    @keyframes fadeIn {
-      from {
-        top: 20%;
-        opacity: 0;
-      }
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
+            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
 
-      to {
-        top: 100;
-        opacity: 1;
-      }
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
 
-    }
+        /* Background effects */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
 
-    @-webkit-keyframes fadeIn {
-      from {
-        top: 20%;
-        opacity: 0;
-      }
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-      to {
-        top: 100;
-        opacity: 1;
-      }
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -150px;
+            animation: orbFloat1 20s ease-in-out infinite;
+        }
 
-    }
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -100px;
+            animation: orbFloat2 25s ease-in-out infinite;
+        }
 
-    .wrapper {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-      -webkit-animation: fadeIn 1000ms ease;
-      animation: fadeIn 1000ms ease;
-    }
+        @keyframes orbFloat1 {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(-80px, 80px);
+            }
+        }
 
-    h1 {
-      font-size: 50px;
-      font-family: 'Poppins', sans-serif;
-      margin-bottom: 0;
-      line-height: 1;
-      font-weight: 700;
-      text-align: center;
-    }
+        @keyframes orbFloat2 {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(80px, -60px);
+            }
+        }
 
-    .dot {
-      color: #4FEBFE;
-    }
+        /* Header */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    p {
-      text-align: center;
-      margin: 18px;
-      font-family: 'Muli', sans-serif;
-      font-weight: normal;
+        .header-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
 
-    }
+        .header-link:hover {
+            color: var(--accent-cyan);
+        }
 
-    .icons {
-      text-align: center;
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
 
-    }
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-    .icons i {
-      color: #00091B;
-      background: #fff;
-      height: 15px;
-      width: 15px;
-      padding: 13px;
-      margin: 0 10px;
-      border-radius: 50px;
-      border: 2px solid #fff;
-      transition: all 200ms ease;
-      text-decoration: none;
-      position: relative;
-    }
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
 
-    .icons i:hover,
-    .icons i:active {
-      color: #fff;
-      background: none;
-      cursor: pointer !important;
-      -webkit-transform: scale(1.2);
-      transform: scale(1.2);
-      text-decoration: none;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    }
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            filter: drop-shadow(var(--glow-pink));
+        }
 
-    .back-button {
-      background-color: #23406F;
-      /* A nice blue color */
-      border: none;
-      color: white;
-      /* White text */
-      padding: 10px 20px;
-      /* Spacing inside the button */
-      text-align: center;
-      text-decoration: none;
-      /* Remove underline from <a> tags if used */
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      /* Change cursor on hover */
-      border-radius: 8px;
-      /* Rounded corners */
-    }
+        .page-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
 
-    .back-button:hover {
-      background-color: #FFFFFF;
-      /* Change background on hover */
-      color: #23406F;
-      /* Change text color on hover */
-      border: 1px solid #23406F;
-    }
-  </style>
+        /* Content */
+        .content {
+            background: rgba(20, 20, 25, 0.6);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 48px;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content p {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .content em {
+            color: var(--accent-cyan);
+            font-style: italic;
+        }
+
+        .content strong {
+            color: var(--secondary-pink);
+            font-weight: 700;
+        }
+
+        /* Pull Quote / Highlight */
+        .highlight {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.5));
+            border-left: 4px solid var(--secondary-pink);
+            padding: 24px 32px;
+            margin: 32px 0;
+            border-radius: 4px;
+        }
+
+        .highlight p {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin: 0;
+        }
+
+        /* Portfolio CTA */
+        .portfolio-cta {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 48px;
+            border-top: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .portfolio-link {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 16px 48px;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            border: 2px solid var(--secondary-pink);
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .portfolio-link:hover::before {
+            left: 100%;
+        }
+
+        .portfolio-link:hover {
+            box-shadow: var(--glow-pink);
+            transform: scale(1.05);
+            border-color: var(--accent-cyan);
+        }
+
+        /* PDF Link */
+        .pdf-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .pdf-link:hover {
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px rgba(0, 217, 255, 0.5);
+        }
+
+        /* PDF Viewer Lightbox */
+        .pdf-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            animation: fadeInLightbox 0.3s ease-out;
+        }
+
+        .pdf-lightbox.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeInLightbox {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .pdf-container {
+            position: relative;
+            width: 95%;
+            height: 95vh;
+            background: var(--dark-panel);
+            border: 3px solid var(--accent-cyan);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(0, 217, 255, 0.5);
+            animation: slideInPDF 0.4s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideInPDF {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .pdf-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .pdf-close:hover {
+            background: var(--secondary-pink);
+            transform: rotate(90deg);
+            box-shadow: var(--glow-pink);
+        }
+
+        .pdf-header {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.8), rgba(20, 20, 25, 0.9));
+            padding: 20px 24px;
+            border-bottom: 2px solid var(--accent-cyan);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pdf-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .pdf-download {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 16px;
+            background: rgba(0, 217, 255, 0.2);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .pdf-download:hover {
+            background: rgba(0, 217, 255, 0.3);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .pdf-viewer {
+            flex: 1;
+            width: 100%;
+            background: #2a2a2f;
+            overflow: auto;
+        }
+
+        .pdf-viewer iframe,
+        .pdf-viewer embed {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .content {
+                padding: 32px 24px;
+            }
+
+            .content p {
+                font-size: 1rem;
+            }
+
+            .highlight {
+                padding: 20px 24px;
+                margin: 24px 0;
+            }
+
+            .highlight p {
+                font-size: 1.05rem;
+            }
+
+            .pdf-container {
+                width: 98%;
+                height: 98vh;
+            }
+
+            .pdf-header {
+                padding: 16px;
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .pdf-title {
+                font-size: 1.1rem;
+            }
+
+            .pdf-download {
+                font-size: 0.7rem;
+                padding: 6px 12px;
+            }
+
+            .pdf-link {
+                font-size: 0.85rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <div class="wrapper">
-    <h1><span class="dot">Overview</span> page coming soon<span class="dot">.</span></h1>
-    <button class="back-button" onclick="history.back()">Go Back</button>
-    <button style="float: right;" class="back-button" onclick="window.location.href = 'icons-carousel.html'">Go To
-      Logos</button>
-  </div>
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="index.html" class="header-link">← Home</a>
+        <div class="header-title">About the Project</div>
+        <a href="icons-carousel.html" class="header-link">Portfolio →</a>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1 class="page-title">OVERVIEW</h1>
+            <p class="page-subtitle">The journey from concept to convergence</p>
+        </header>
+
+        <!-- Content -->
+        <article class="content">
+            <div class="highlight">
+                <p>I love getting lost.</p>
+            </div>
+
+            <p>
+                I know, that's a pretty weird way to start off an overview page but stick with me because it matters. I've always loved the idea of going off into the untrodden path and discovering things I didn't know about. When I was a kid, I would often go biking through areas I had never been just so see what was down there. It was a different time. When I got my driver's license, me and my close friends would spend hours driving around the city, finding restaurants and new places just to hang out. And when I got a motorcycle? The open road wasn't calling. It was demanding. It probably even played a subconscious factor in which branch of the military I eventually ended up joining (see the world).
+            </p>
+
+            <p>
+                I love being lost.
+            </p>
+
+            <p>
+                But it's not just the physical sensation of being lost that I crave. I particularly love getting lost in nuances. That mobile game when you can increase every stat modularly? Day one download. That novel series with side books for all the lore they couldn't fit in the narrative? I've prolly already read it six times. The TV series where reddit is constantly debating the significance of the main character wearing a different color shirt? Not only did I start the reddit thread, I crossposted it to Tumblr and a few forums too. The most tantalizing bait for me is a well thought out world.
+            </p>
+
+            <p>
+                I love Star Wars, and Pokemon, and Kingdom Hearts, and Final Fantasy, and Dragon Ball, and Lord of the Rings, and Marvel, and DC and and and. What they all have in common are cohesive and meticulously built worlds with lots of rules about how things work. They are worlds/universes where you can get <em>lost</em>. And as stated right from the start, I love being lost.
+            </p>
+
+            <p>
+                The origins of the Crios Project date back to ye olden days of 2010. I had just gotten out of the military and I wanted to make something of my own. I can't say exactly what the impetus was but I do know that my main character was stuck inside my head and I needed to get her out. So I went to Deviantart and I found an artist. I gave a frankly terrifyingly long character description all the way down to actual color hex codes for skin tone and eye color and a short while later Teala Hart was realized. And then I changed her name because people were pronouncing it differently than I wanted, so she eventually became Tiala. Shortly after I had her friend designed and then another friend and then her little sister and eventually a whole motley crew of characters. I had no real plan on what I was gonna do with them either.
+            </p>
+
+            <p>
+                My first intention was to make a fighting game but sheer lack of time and prowess put that on ice. My core focus at the time was to finish getting my degree in Web Development and then get employment. I didn't really see what I was then called Lumetapa Chronicles as a viable way of sustaining myself. I did however want to make a website to help sort out my thoughts and the characters and what lore I had, so I built a website. It was pretty good for the time. Nothing worth truly bragging about but decent. I also made a few attempts to start a few video game projects that didn't make it off the ground. It was around this time a few things happened: first, I found a developer making a fan game with a truly terrible UI. Second, I was approached by a few people asking for logos for their personal brands (this was the time when everyone thought they were Twitch's Next Millionaire Streamer), Third, I discovered Exceed Fighting Game System. All three of these happenings made me want to start revisiting my own personal project and the third was what would trigger my most momentous step forward regarding Crios: the Versa Card Game.
+            </p>
+
+            <p>
+                Exceed is a turn based fighting game by Level 99 Games that is played with cards on a tabletop. In addition to their own characters, Level 99 was also able to collaborate with much more famous brands like BlazBlue, Shovel Knight, and even Street Fighter. The character card decks were fully cross compatible so yes you absolutely could have Ryu throwing hands with Shovel Knight. Unfortunately for me, I didn't have a friend group at the time that into board games so my collection of Exceed decks went mostly unused. Creatively oriented as I am, I decided that I would figure out a way to covert Exceed into a solo player game but before much headway was made with that, I discovered that Level 99 had released the official Exceed PSD files for players to add characters from IP not in the game. Or in my case, covert the characters I owned into an Exceed deck.
+            </p>
+
+            <p>
+                I made it about 75% of the way through building out a Crios Exceed season when the thought finally occurred: you know, you're doing an awful lot of work to try to bend Exceed's rules to fit your vision. Why not just make your own game? And thus was the first completed project of Crios borne. I dropped the whole idea of making my project fit the rigid structure of Exceed and started building out my own project. First thing I got rid of was the Idea of turns. Fighting video games were simultaneous action so this fighting card game would be too. Second change was tied directly to the previous change: since everyone was attacking all at once, it made sense to hit more than one time per exchange so my players would chain five attacks in a row. I also retained some Exceed concepts like your character card powering up but I converted it magical girls to fit my IP better. I'm not going to go exhaustively into every detail of how my game works, but you can read the <a class="pdf-link" onclick="openPDF()">Versa Instruction Manual</a> if you're interested. Oh and lest I forget, Versa also has a whole single player story mode. It no longer fits in Crios canon, but it exists.
+            </p>
+
+            <p>
+                Completing Versa took a number of years, particularly since I had aspirations of selling it as a product. That in turn made me try to keep costs as low as possible so I could actually turn a profit, but that ended up making the final product look cheap. Eventually I decided to just make the prototype for myself as a proof of concept and after a few hundred dollars and lots of graphic design, my board game Versa was complete. In the course of creating Versa, I had more ideas for story beats and character concepts and ended up designing a number of new characters including a team of magical girls as well as a team of sentai style superheroes. More influences from my favorite media also bled in including transformations, energy attacks and blades made of light. Multiple kinds of blades made of light. I also started prototyping a second board game built in the Teburu platform but that's currently very much in early stages of development.
+            </p>
+
+            <p>
+                Late in 2025, I decided that I wanted to really refresh my project and started redoing a lot of the work I had done. I had previously decided that I wanted to tell a Multiversal story and that I wanted to embrace the concept of "one man's terrorist is another man's freedom fighter". From there I built out the realm of Beeston and its musicality, the realm of Royastella and its lit-RPG sensibility, the realm of Nexsicon and its utopian ideals, and Ultimatera and its open ended endless conflict. There's still so much to do, art to be drawn, music to be composed, and stories to tell and I can't wait to tell them.
+            </p>
+
+            <div class="highlight">
+                <p>Honestly? I just want it to exist.</p>
+            </div>
+
+            <p>
+                Lastly, I should explain what my overall goal is for the Crios Project. Honestly? I just want it to exist. There's tons of ideas that I would love to iterate on and I've built a multiverse that can scale to any viable medium (except VR. Don't have a VR concept yet) as well as one that incredibly friendly to collaboration, but really so long as I have the whole thing out there and someone is entertained by it, I'm happy.
+            </p>
+
+            <p>
+                Since you're still here, why not take a look at my logo portfolio?
+            </p>
+            <div class="portfolio-cta">
+                <a href="icons-carousel.html" class="portfolio-link">View Logo Portfolio</a>
+            </div>
+        </article>
+    </div>
+
+    <!-- PDF Viewer Lightbox -->
+    <div id="pdfLightbox" class="pdf-lightbox" onclick="closePDFOnOutsideClick(event)">
+        <div class="pdf-container">
+            <button class="pdf-close" onclick="closePDF()">×</button>
+            <div class="pdf-header">
+                <h2 class="pdf-title">Versa Instruction Manual</h2>
+                <a href="assets/documents/versa-instructions.pdf" download class="pdf-download">↓ Download PDF</a>
+            </div>
+            <div class="pdf-viewer">
+                <embed id="pdfEmbed" src="assets/documents/versa-instructions.pdf" type="application/pdf" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPDF() {
+            const lightbox = document.getElementById('pdfLightbox');
+            lightbox.classList.add('active');
+        }
+
+        function closePDF() {
+            const lightbox = document.getElementById('pdfLightbox');
+            lightbox.classList.remove('active');
+        }
+
+        function closePDFOnOutsideClick(event) {
+            if (event.target.id === 'pdfLightbox') {
+                closePDF();
+            }
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePDF();
+            }
+        });
+    </script>
 </body>
 
 </html>

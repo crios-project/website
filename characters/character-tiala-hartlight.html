@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiala Hartlight // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -133,8 +136,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-header {
@@ -376,8 +386,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
@@ -433,14 +580,24 @@
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">Faction</span>
-                            <span class="stat-value"><a href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a></span>
+                            <span class="stat-value"><a href="../factions/faction-destinys-penance.html"
+                                    class="wiki-link">Destiny's Penance</a></span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">Key Attribute</span>
                             <span class="stat-value">Intense</span>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">"I don't have to prove myself to you."</div>
                 </div>
             </section>
@@ -448,32 +605,46 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Tiala Hartlight is a driven and enigmatic figure whose ambitions stretch far beyond conventional limits. Her presence is marked by an unwavering focus and emotional intensity that often unsettles even her closest companions. As a leader of <a href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a>, she pursues goals that require enormous personal and moral sacrifice.</p>
+                    <p>Tiala Hartlight is a driven and enigmatic figure whose ambitions stretch far beyond conventional
+                        limits. Her presence is marked by an unwavering focus and emotional intensity that often
+                        unsettles even her closest companions. As a leader of <a
+                            href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a>,
+                        she pursues goals that require enormous personal and moral sacrifice.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Appearance</h2>
                 <div class="section-content">
-                    <p>Tiala presents as an intense, focused individual. Her shoulder-length hair flows in slightly curled ringlets, colored charcoal with distinctive teal ends. Her purple eyes, often viewed through glasses, convey an unwavering determination that few can match.</p>
-                    
-                    <p>Standing at 5'6", she carries herself with purpose and resolve, her every movement suggesting calculated intent and fierce dedication to her objectives.</p>
+                    <p>Tiala presents as an intense, focused individual. Her shoulder-length hair flows in slightly
+                        curled ringlets, colored charcoal with distinctive teal ends. Her purple eyes, often viewed
+                        through glasses, convey an unwavering determination that few can match.</p>
+
+                    <p>Standing at 5'6", she carries herself with purpose and resolve, her every movement suggesting
+                        calculated intent and fierce dedication to her objectives.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Personality</h2>
                 <div class="section-content">
-                    <p>Tiala is fiercely determined and emotionally guarded. Her internal motivations are rarely expressed openly, creating an aura of mystery around her actions. She demonstrates exceptional resolve and a willingness to endure significant personal and moral cost in pursuit of her objectives.</p>
-                    
-                    <p>While she maintains connections with her friends, she keeps them at a deliberate emotional distance. This guardedness stems not from lack of care, but from a recognition that her path requires sacrifices that might cost her everything—including the bonds she values most.</p>
-                    
+                    <p>Tiala is fiercely determined and emotionally guarded. Her internal motivations are rarely
+                        expressed openly, creating an aura of mystery around her actions. She demonstrates exceptional
+                        resolve and a willingness to endure significant personal and moral cost in pursuit of her
+                        objectives.</p>
+
+                    <p>While she maintains connections with her friends, she keeps them at a deliberate emotional
+                        distance. This guardedness stems not from lack of care, but from a recognition that her path
+                        requires sacrifices that might cost her everything—including the bonds she values most.</p>
+
                     <h3 class="section-subtitle">Core Traits</h3>
                     <ul>
                         <li><strong>Unwavering Focus:</strong> Singularly dedicated to accessing the Akashic Record</li>
                         <li><strong>Emotionally Guarded:</strong> Keeps internal motivations carefully concealed</li>
-                        <li><strong>Exceptional Resolve:</strong> Willing to endure enormous personal cost for her goals</li>
-                        <li><strong>Strategic Distance:</strong> Maintains deliberate emotional separation from even close companions</li>
+                        <li><strong>Exceptional Resolve:</strong> Willing to endure enormous personal cost for her goals
+                        </li>
+                        <li><strong>Strategic Distance:</strong> Maintains deliberate emotional separation from even
+                            close companions</li>
                         <li><strong>Self-Aware:</strong> Recognizes the destructive potential of her choices</li>
                     </ul>
                 </div>
@@ -482,14 +653,17 @@
             <section class="content-section">
                 <h2 class="section-title">Motivations</h2>
                 <div class="section-content">
-                    <p>Tiala is singularly focused on accessing the Akashic Record. In pursuit of this goal, she has undertaken monumental feats, including merging the mythic domains of Atlantis, Mu, and Lemuria into a single convergent realm. Her intent is to defeat their ancient guardians and claim legendary artifacts such as:</p>
+                    <p>Tiala is singularly focused on accessing the Akashic Record. In pursuit of this goal, she has
+                        undertaken monumental feats, including merging the mythic domains of Atlantis, Mu, and Lemuria
+                        into a single convergent realm. Her intent is to defeat their ancient guardians and claim
+                        legendary artifacts such as:</p>
                     <ul>
                         <li>Ars Goetia</li>
                         <li>Tablet of Destinies</li>
                         <li>Book of Raziel</li>
                         <li>Additional unknown arcane relics</li>
                     </ul>
-                    
+
                     <h3 class="section-subtitle">Interpretations of Her Goals</h3>
                     <p>Her motivations remain heavily debated among those close to her. Interpretations include:</p>
                     <ul>
@@ -497,17 +671,22 @@
                         <li>Being the catalyst for that very catastrophe</li>
                         <li>Acting under the emotional trauma of losing her best friend, Xīwàng</li>
                     </ul>
-                    
-                    <p>The truth may be more complex than any single interpretation suggests, and Tiala herself may not fully understand whether her actions will save or doom everything she cares about.</p>
+
+                    <p>The truth may be more complex than any single interpretation suggests, and Tiala herself may not
+                        fully understand whether her actions will save or doom everything she cares about.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Moral Trajectory</h2>
                 <div class="section-content">
-                    <p>Tiala acknowledges that her path requires sacrifices and increasingly destructive actions. She continues forward despite recognizing the potential consequences, hoping that the cost of her ambition will not ultimately consume what remains of her humanity.</p>
-                    
-                    <p>This self-awareness makes her journey particularly tragic—she is not blind to the darkness of her path, but believes the alternative is worse. Whether she is right remains one of the central questions surrounding her character.</p>
+                    <p>Tiala acknowledges that her path requires sacrifices and increasingly destructive actions. She
+                        continues forward despite recognizing the potential consequences, hoping that the cost of her
+                        ambition will not ultimately consume what remains of her humanity.</p>
+
+                    <p>This self-awareness makes her journey particularly tragic—she is not blind to the darkness of her
+                        path, but believes the alternative is worse. Whether she is right remains one of the central
+                        questions surrounding her character.</p>
                 </div>
             </section>
         </div>
@@ -550,26 +729,53 @@
                             <span class="stat-value">Adaptability Through Abundance</span>
                         </div>
                     </div>
-
-                    <div class="character-quote">"Mastery lies not in perfecting a single weapon, but in wielding an entire arsenal."</div>
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
+                    <div class="character-quote">"Mastery lies not in perfecting a single weapon, but in wielding an
+                        entire arsenal."</div>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>After claiming the Light Blade Revolver and gaining the title of Dayk (a name for honored warriors), Alulu spent the next two years training with it to form a new fighting style. This form represents her initial mastery of the weapon's vast potential.</p>
-                    
-                    <p>Alulu Dayk employs a relentless, tempo-driven combat style centered around continuous weapon manifestation and kinetic strike chaining. Her methodology blends refined martial arts fundamentals with instantaneous summoning of the Light Blade Revolver's multiple configurations, allowing her to shift between ranged, mid-range, and close-quarters combat without disrupting her offensive rhythm.</p>
+                    <p>After claiming the Light Blade Revolver and gaining the title of Dayk (a name for honored
+                        warriors), Alulu spent the next two years training with it to form a new fighting style. This
+                        form represents her initial mastery of the weapon's vast potential.</p>
+
+                    <p>Alulu Dayk employs a relentless, tempo-driven combat style centered around continuous weapon
+                        manifestation and kinetic strike chaining. Her methodology blends refined martial arts
+                        fundamentals with instantaneous summoning of the Light Blade Revolver's multiple configurations,
+                        allowing her to shift between ranged, mid-range, and close-quarters combat without disrupting
+                        her offensive rhythm.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Combat Philosophy</h2>
                 <div class="section-content">
-                    <p>Unlike traditional weapon specialists who commit to a single armament or stance, Alulu treats her arsenal as a fluid extension of motion itself. The Light Blade Revolver is not simply wielded—it is invoked at the exact moment her physical momentum demands it, appearing only long enough to deliver maximum impact before dissolving back into dormant form. This creates an unpredictable combat cadence where each strike carries the potential to manifest an entirely different threat profile.</p>
-                    
-                    <p>Her fighting rhythm is built on continuous forward pressure. She favors initiating engagements with rapid movement and layered attacks designed to overwhelm an opponent's ability to track her weapon transitions. A single combination may begin with rapid suppressive fire from the revolver's standard configuration, seamlessly transition into a close-range burst from the knife gun form to destabilize defenses, and conclude with precision piercing attacks using the light blade configuration. These transitions occur without visible delay, giving her combat style an almost musical flow of escalating intensity.</p>
+                    <p>Unlike traditional weapon specialists who commit to a single armament or stance, Alulu treats her
+                        arsenal as a fluid extension of motion itself. The Light Blade Revolver is not simply wielded—it
+                        is invoked at the exact moment her physical momentum demands it, appearing only long enough to
+                        deliver maximum impact before dissolving back into dormant form. This creates an unpredictable
+                        combat cadence where each strike carries the potential to manifest an entirely different threat
+                        profile.</p>
+
+                    <p>Her fighting rhythm is built on continuous forward pressure. She favors initiating engagements
+                        with rapid movement and layered attacks designed to overwhelm an opponent's ability to track her
+                        weapon transitions. A single combination may begin with rapid suppressive fire from the
+                        revolver's standard configuration, seamlessly transition into a close-range burst from the knife
+                        gun form to destabilize defenses, and conclude with precision piercing attacks using the light
+                        blade configuration. These transitions occur without visible delay, giving her combat style an
+                        almost musical flow of escalating intensity.</p>
                 </div>
             </section>
 
@@ -579,20 +785,24 @@
                     <h3 class="section-subtitle">Standard Configurations</h3>
                     <ul>
                         <li><strong>Revolver Form:</strong> Rapid suppressive fire for maintaining pressure</li>
-                        <li><strong>Sniper Configuration:</strong> Long-range precision elimination deployed mid-motion</li>
+                        <li><strong>Sniper Configuration:</strong> Long-range precision elimination deployed mid-motion
+                        </li>
                         <li><strong>Knife Gun Form:</strong> Close-range explosive bursts that destabilize defenses</li>
                         <li><strong>Light Blade:</strong> Precision piercing attacks with thrusting capability</li>
-                        <li><strong>Whip Blade:</strong> Expanded threat radius for spacing manipulation and entanglement</li>
+                        <li><strong>Whip Blade:</strong> Expanded threat radius for spacing manipulation and
+                            entanglement</li>
                         <li><strong>Scythe Gun:</strong> Rapid dismemberment and mobility denial configurations</li>
                     </ul>
 
                     <h3 class="section-subtitle">EX Manifestations</h3>
                     <ul>
-                        <li><strong>Enhanced Light Blade:</strong> Amplified cutting power with maintained thrusting precision</li>
+                        <li><strong>Enhanced Light Blade:</strong> Amplified cutting power with maintained thrusting
+                            precision</li>
                         <li><strong>EX Scythe Guns:</strong> Devastating wide-area attacks for decisive phases</li>
                     </ul>
-                    
-                    <p>EX forms are devastating but taxing, consuming significant magical reserves. They are deployed only during decisive combat phases or finishing sequences.</p>
+
+                    <p>EX forms are devastating but taxing, consuming significant magical reserves. They are deployed
+                        only during decisive combat phases or finishing sequences.</p>
                 </div>
             </section>
 
@@ -601,14 +811,18 @@
                 <div class="section-content">
                     <h3 class="section-subtitle">Weapon Transition Mastery</h3>
                     <ul>
-                        <li><strong>Seamless Summoning:</strong> Weapons appear at optimal attack vectors without delay</li>
-                        <li><strong>Momentum Integration:</strong> Each manifestation extends rather than interrupts physical motion</li>
+                        <li><strong>Seamless Summoning:</strong> Weapons appear at optimal attack vectors without delay
+                        </li>
+                        <li><strong>Momentum Integration:</strong> Each manifestation extends rather than interrupts
+                            physical motion</li>
                         <li><strong>Unpredictable Cadence:</strong> Constant shifting prevents defensive adaptation</li>
-                        <li><strong>Musical Flow:</strong> Escalating intensity that feels choreographed yet overwhelming</li>
+                        <li><strong>Musical Flow:</strong> Escalating intensity that feels choreographed yet
+                            overwhelming</li>
                     </ul>
 
                     <h3 class="section-subtitle">Strategic Repositioning</h3>
-                    <p>Alulu's use of the revolver's long-range sniper configuration reflects her strategic patience and battlefield awareness:</p>
+                    <p>Alulu's use of the revolver's long-range sniper configuration reflects her strategic patience and
+                        battlefield awareness:</p>
                     <ul>
                         <li>Sudden disengagements that transition into precision strikes</li>
                         <li>Acrobatic repositioning that creates unexpected angles</li>
@@ -617,20 +831,25 @@
                     </ul>
 
                     <h3 class="section-subtitle">Martial Arts Foundation</h3>
-                    <p>Despite the complexity of her arsenal, Alulu's movements remain tightly coordinated and purposeful:</p>
+                    <p>Despite the complexity of her arsenal, Alulu's movements remain tightly coordinated and
+                        purposeful:</p>
                     <ul>
                         <li><strong>Rotational Force:</strong> Using body mechanics to amplify each strike</li>
-                        <li><strong>Controlled Footwork:</strong> Maintaining optimal positioning throughout transitions</li>
+                        <li><strong>Controlled Footwork:</strong> Maintaining optimal positioning throughout transitions
+                        </li>
                         <li><strong>Precise Strike Alignment:</strong> Ensuring weapons emerge at ideal vectors</li>
-                        <li><strong>Physical Discipline:</strong> Synthesizing instantaneous armament with refined technique</li>
+                        <li><strong>Physical Discipline:</strong> Synthesizing instantaneous armament with refined
+                            technique</li>
                     </ul>
 
                     <h3 class="section-subtitle">Psychological Warfare</h3>
                     <ul>
-                        <li><strong>Unpredictability:</strong> Opponents cannot anticipate ballistic, blade, or sweep attacks</li>
+                        <li><strong>Unpredictability:</strong> Opponents cannot anticipate ballistic, blade, or sweep
+                            attacks</li>
                         <li><strong>Sustained Aggression:</strong> Refusing to allow defensive stabilization</li>
                         <li><strong>Composure Erosion:</strong> Forcing adversaries into reactive patterns</li>
-                        <li><strong>Strategic Cohesion Collapse:</strong> Breaking down organized defense through chaos</li>
+                        <li><strong>Strategic Cohesion Collapse:</strong> Breaking down organized defense through chaos
+                        </li>
                     </ul>
                 </div>
             </section>
@@ -674,28 +893,52 @@
                             <span class="stat-value">Terminal Finality</span>
                         </div>
                     </div>
-
-                    <div class="character-quote">"Every movement is the natural continuation of the one before it."</div>
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
+                    <div class="character-quote">"Every movement is the natural continuation of the one before it."
+                    </div>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Alulu Akụkụ mirrors the foundational combat doctrine of Alulu Dayk, maintaining the same relentless hand-to-hand engagement style supported by instantaneous weapon manifestation. However, her presence carries a profound sense of terminal certainty, as though each movement is guided by the inevitability of final outcomes rather than the mere pursuit of victory.</p>
-                    
-                    <p>Where Dayk's strikes overwhelm through decisive force and adaptive weapon transitions, Akụkụ's blows feel deliberate, absolute, and impossibly difficult to recover from once they land.</p>
+                    <p>Alulu Akụkụ mirrors the foundational combat doctrine of Alulu Dayk, maintaining the same
+                        relentless hand-to-hand engagement style supported by instantaneous weapon manifestation.
+                        However, her presence carries a profound sense of terminal certainty, as though each movement is
+                        guided by the inevitability of final outcomes rather than the mere pursuit of victory.</p>
+
+                    <p>Where Dayk's strikes overwhelm through decisive force and adaptive weapon transitions, Akụkụ's
+                        blows feel deliberate, absolute, and impossibly difficult to recover from once they land.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Combat Philosophy</h2>
                 <div class="section-content">
-                    <p>Unlike her predecessor, Akụkụ demonstrates an uncanny economy of movement. She wastes no motion, no step, and no gesture. Each attack chain flows into the next with surgical inevitability, producing the impression that she is not reacting to her opponent but instead guiding them toward predetermined conclusions.</p>
-                    
-                    <p>Her transitions between unarmed strikes and weapon summoning are nearly imperceptible, often creating the illusion that her blows themselves are conjuring the instruments of her offense.</p>
-                    
-                    <p>Akụkụ favors precise targeting over widespread battlefield disruption. She identifies structural weaknesses in both defensive technique and physical durability with unsettling speed, delivering focused strikes designed to end confrontations rather than prolong them. When she escalates pressure, she does so through increasingly narrow windows of opportunity, collapsing defensive options until opponents find themselves unable to retreat, counterattack, or even stabilize their footing.</p>
+                    <p>Unlike her predecessor, Akụkụ demonstrates an uncanny economy of movement. She wastes no motion,
+                        no step, and no gesture. Each attack chain flows into the next with surgical inevitability,
+                        producing the impression that she is not reacting to her opponent but instead guiding them
+                        toward predetermined conclusions.</p>
+
+                    <p>Her transitions between unarmed strikes and weapon summoning are nearly imperceptible, often
+                        creating the illusion that her blows themselves are conjuring the instruments of her offense.
+                    </p>
+
+                    <p>Akụkụ favors precise targeting over widespread battlefield disruption. She identifies structural
+                        weaknesses in both defensive technique and physical durability with unsettling speed, delivering
+                        focused strikes designed to end confrontations rather than prolong them. When she escalates
+                        pressure, she does so through increasingly narrow windows of opportunity, collapsing defensive
+                        options until opponents find themselves unable to retreat, counterattack, or even stabilize
+                        their footing.</p>
                 </div>
             </section>
 
@@ -703,7 +946,8 @@
                 <h2 class="section-title">Combat Techniques</h2>
                 <div class="section-content">
                     <h3 class="section-subtitle">Refined Weapon Integration</h3>
-                    <p>Her combat methodology remains centered around summoning the various forms of the Light Blade Revolver in seamless succession:</p>
+                    <p>Her combat methodology remains centered around summoning the various forms of the Light Blade
+                        Revolver in seamless succession:</p>
                     <ul>
                         <li><strong>Standard Gun:</strong> Rapid ranged suppressive barrages</li>
                         <li><strong>Sniper Rifle:</strong> Devastating long-range finishing blows</li>
@@ -716,8 +960,10 @@
                     <h3 class="section-subtitle">Economy of Movement</h3>
                     <ul>
                         <li><strong>Zero Wasted Motion:</strong> Every action serves a precise purpose</li>
-                        <li><strong>Surgical Flow:</strong> Attack chains that feel predetermined rather than reactive</li>
-                        <li><strong>Imperceptible Transitions:</strong> Weapon summoning hidden within strike execution</li>
+                        <li><strong>Surgical Flow:</strong> Attack chains that feel predetermined rather than reactive
+                        </li>
+                        <li><strong>Imperceptible Transitions:</strong> Weapon summoning hidden within strike execution
+                        </li>
                         <li><strong>Guided Outcomes:</strong> Opponents feel shepherded toward inevitable defeat</li>
                     </ul>
 
@@ -732,7 +978,8 @@
                     <h3 class="section-subtitle">Psychological Dominance</h3>
                     <p>Her presence on the battlefield produces a palpable psychological weight:</p>
                     <ul>
-                        <li><strong>Sensation of Slipping Survival:</strong> Each exchange feels like approaching an end</li>
+                        <li><strong>Sensation of Slipping Survival:</strong> Each exchange feels like approaching an end
+                        </li>
                         <li><strong>Aura of Finality:</strong> Combat carries the weight of inevitable conclusion</li>
                         <li><strong>Calm Precision:</strong> No urgency, aggression, or visible strain</li>
                         <li><strong>Natural Continuation:</strong> Every movement feels unavoidable</li>
@@ -787,7 +1034,16 @@
                             <span class="stat-value">Profound Stillness</span>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">"Confrontation reaches its natural and unavoidable terminus."</div>
                 </div>
             </section>
@@ -795,20 +1051,31 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Alulu Ọnwụ represents the ultimate ascension of Alulu's combat evolution, advancing far beyond the already overwhelming precision and finality displayed in her prior forms. While she retains the foundational principles established by Alulu Dayk and refined through Alulu² Akụkụ, her presence on the battlefield transforms confrontation into something far more absolute.</p>
-                    
-                    <p>Opponents do not merely face defeat when engaging her—they face the quiet certainty that every exchange brings them closer to an unavoidable ending.</p>
+                    <p>Alulu Ọnwụ represents the ultimate ascension of Alulu's combat evolution, advancing far beyond
+                        the already overwhelming precision and finality displayed in her prior forms. While she retains
+                        the foundational principles established by Alulu Dayk and refined through Alulu² Akụkụ, her
+                        presence on the battlefield transforms confrontation into something far more absolute.</p>
+
+                    <p>Opponents do not merely face defeat when engaging her—they face the quiet certainty that every
+                        exchange brings them closer to an unavoidable ending.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Combat Philosophy</h2>
                 <div class="section-content">
-                    <p>Ọnwụ demonstrates a level of movement economy that surpasses even Akụkụ's surgical efficiency. Every step, pivot, strike, and summoning gesture unfolds with flawless inevitability, creating the unsettling impression that combat itself bends to accommodate her advance.</p>
-                    
-                    <p>Her transitions between ranged and melee combat occur without perceptible delay, allowing her to dismantle defensive strategies before they can properly form.</p>
-                    
-                    <p>Unlike Dayk's overwhelming force or Akụkụ's surgical finality, Ọnwụ embodies total cessation of resistance. She does not escalate engagements through rising intensity. Instead, she maintains a steady, oppressive rhythm that erodes an opponent's capacity to react, adapt, or survive. Attempts to prolong battle often accelerate its conclusion, as she demonstrates an extraordinary ability to identify the precise moment where endurance collapses into vulnerability.</p>
+                    <p>Ọnwụ demonstrates a level of movement economy that surpasses even Akụkụ's surgical efficiency.
+                        Every step, pivot, strike, and summoning gesture unfolds with flawless inevitability, creating
+                        the unsettling impression that combat itself bends to accommodate her advance.</p>
+
+                    <p>Her transitions between ranged and melee combat occur without perceptible delay, allowing her to
+                        dismantle defensive strategies before they can properly form.</p>
+
+                    <p>Unlike Dayk's overwhelming force or Akụkụ's surgical finality, Ọnwụ embodies total cessation of
+                        resistance. She does not escalate engagements through rising intensity. Instead, she maintains a
+                        steady, oppressive rhythm that erodes an opponent's capacity to react, adapt, or survive.
+                        Attempts to prolong battle often accelerate its conclusion, as she demonstrates an extraordinary
+                        ability to identify the precise moment where endurance collapses into vulnerability.</p>
                 </div>
             </section>
 
@@ -816,10 +1083,13 @@
                 <h2 class="section-title">Combat Techniques</h2>
                 <div class="section-content">
                     <h3 class="section-subtitle">Weapon Manifestation Perfection</h3>
-                    <p>Her combat style maintains the seamless fusion of hand-to-hand combat and instantaneous Light Blade Revolver manifestation, yet her weapon transitions occur with an eerie fluidity that borders on preordination:</p>
+                    <p>Her combat style maintains the seamless fusion of hand-to-hand combat and instantaneous Light
+                        Blade Revolver manifestation, yet her weapon transitions occur with an eerie fluidity that
+                        borders on preordination:</p>
                     <ul>
                         <li>Standard gun, sniper rifle, knife gun, light blade forms appear with flawless timing</li>
-                        <li>Whip blade and scythe gun configurations materialize at exact moments of defensive failure</li>
+                        <li>Whip blade and scythe gun configurations materialize at exact moments of defensive failure
+                        </li>
                         <li>EX manifestations deployed only when absolute conclusion is required</li>
                         <li>Each use carries catastrophic finishing authority that rarely permits survival</li>
                     </ul>
@@ -827,18 +1097,23 @@
                     <h3 class="section-subtitle">Unparalleled Lethality</h3>
                     <p>Her targeting discipline reaches unparalleled levels:</p>
                     <ul>
-                        <li><strong>Multi-Layered Targeting:</strong> Simultaneously prioritizing structural, magical, and psychological fault lines</li>
-                        <li><strong>Total Collapse:</strong> Offensive sequences that eliminate all avenues of recovery</li>
-                        <li><strong>Devastatingly Concise:</strong> Finishing commitments delivered in measured bursts</li>
+                        <li><strong>Multi-Layered Targeting:</strong> Simultaneously prioritizing structural, magical,
+                            and psychological fault lines</li>
+                        <li><strong>Total Collapse:</strong> Offensive sequences that eliminate all avenues of recovery
+                        </li>
+                        <li><strong>Devastatingly Concise:</strong> Finishing commitments delivered in measured bursts
+                        </li>
                         <li><strong>Immaculate Execution:</strong> Strike chains that permit no defensive response</li>
                     </ul>
 
                     <h3 class="section-subtitle">Battlefield Presence</h3>
-                    <p>The space around Ọnwụ is accompanied by profound stillness that contrasts with her destructive efficiency:</p>
+                    <p>The space around Ọnwụ is accompanied by profound stillness that contrasts with her destructive
+                        efficiency:</p>
                     <ul>
                         <li><strong>Suffocating Sense:</strong> Time narrowing around opponents</li>
                         <li><strong>Closing Threshold:</strong> Every second accelerating toward an unseen end</li>
-                        <li><strong>Psychological Fracture:</strong> Resistance breaking before physical defeat occurs</li>
+                        <li><strong>Psychological Fracture:</strong> Resistance breaking before physical defeat occurs
+                        </li>
                         <li><strong>Oppressive Calm:</strong> No aggression, only inevitable progression</li>
                     </ul>
 
@@ -887,16 +1162,22 @@
             <h2 class="section-title">Thematic Significance</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Archetype</h3>
-                <p>Tiala embodies the <strong>Driven Seeker</strong> archetype—someone willing to sacrifice everything, including their own humanity, in pursuit of a goal that may save or doom everything. Her evolution through combat forms represents escalating commitment and the gradual loss of what makes victory meaningful.</p>
+                <p>Tiala embodies the <strong>Driven Seeker</strong> archetype—someone willing to sacrifice everything,
+                    including their own humanity, in pursuit of a goal that may save or doom everything. Her evolution
+                    through combat forms represents escalating commitment and the gradual loss of what makes victory
+                    meaningful.</p>
 
                 <h3 class="section-subtitle">Core Themes</h3>
                 <ul>
-                    <li><strong>Cost of Ambition:</strong> Exploring what one sacrifices in pursuit of ultimate goals</li>
+                    <li><strong>Cost of Ambition:</strong> Exploring what one sacrifices in pursuit of ultimate goals
+                    </li>
                     <li><strong>Grief as Catalyst:</strong> Loss of Xīwàng as transformative tragedy</li>
                     <li><strong>Moral Erosion:</strong> Gradual descent into increasingly destructive actions</li>
                     <li><strong>Self-Awareness in Darkness:</strong> Recognizing one's path while continuing anyway</li>
-                    <li><strong>Evolution as Loss:</strong> Each combat form represents further detachment from humanity</li>
-                    <li><strong>Inevitable Conclusion:</strong> The Ọnwụ form embodies the ultimate end of her journey</li>
+                    <li><strong>Evolution as Loss:</strong> Each combat form represents further detachment from humanity
+                    </li>
+                    <li><strong>Inevitable Conclusion:</strong> The Ọnwụ form embodies the ultimate end of her journey
+                    </li>
                 </ul>
 
                 <h3 class="section-subtitle">Combat Evolution Symbolism</h3>
@@ -906,12 +1187,18 @@
                     <li><strong>Ọnwụ (Ultimate Ascension):</strong> Complete cessation and irreversible finality</li>
                 </ul>
 
-                <p>Each evolution represents not just increased power, but increased detachment from the emotional connections that once defined her. The progression from overwhelming to surgical to absolute mirrors her psychological journey from driven to detached to terminal.</p>
+                <p>Each evolution represents not just increased power, but increased detachment from the emotional
+                    connections that once defined her. The progression from overwhelming to surgical to absolute mirrors
+                    her psychological journey from driven to detached to terminal.</p>
 
                 <h3 class="section-subtitle">Narrative Function</h3>
-                <p>Tiala serves as a cautionary exploration of how grief and determination can transform someone into something unrecognizable. Her quest to access the Akashic Record—merging mythic domains and claiming legendary artifacts—positions her as either potential savior or catalyst of catastrophe.</p>
-                
-                <p>The ambiguity surrounding her motivations creates narrative tension: Is she trying to prevent disaster or cause it? Is she acting rationally or has grief broken her judgment? The answer may be that she herself doesn't know.</p>
+                <p>Tiala serves as a cautionary exploration of how grief and determination can transform someone into
+                    something unrecognizable. Her quest to access the Akashic Record—merging mythic domains and claiming
+                    legendary artifacts—positions her as either potential savior or catalyst of catastrophe.</p>
+
+                <p>The ambiguity surrounding her motivations creates narrative tension: Is she trying to prevent
+                    disaster or cause it? Is she acting rationally or has grief broken her judgment? The answer may be
+                    that she herself doesn't know.</p>
             </div>
         </section>
 
@@ -919,14 +1206,20 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> "Tiala" derives from celestial and light-related roots. "Hartlight" combines "heart" with "light," suggesting illumination through emotion or emotional burden. The progression to "Alulu" forms represents transformation and assumption through titles: Dayk (honored warrior), Akụkụ (aspect), Ọnwụ (ultimate ascension/death). Dayk is the phonetic pronunciation of the Igbo word for warrior, Dike.</li>
+                    <li><strong>Name Etymology:</strong> "Tiala" derives from celestial and light-related roots.
+                        "Hartlight" combines "heart" with "light," suggesting illumination through emotion or emotional
+                        burden. The progression to "Alulu" forms represents transformation and assumption through
+                        titles: Dayk (honored warrior), Akụkụ (aspect), Ọnwụ (ultimate ascension/death). Dayk is the
+                        phonetic pronunciation of the Igbo word for warrior, Dike.</li>
                     <li>She leads Destiny's Penance, one of the factions that split from Praxis Verax Affinas</li>
                     <li>Tiala merged the mythic domains of Atlantis, Mu, and Lemuria into a single convergent realm</li>
-                    <li>She seeks legendary artifacts such as the Ars Goetia, Tablet of Destinies, and Book of Raziel</li>
+                    <li>She seeks legendary artifacts such as the Ars Goetia, Tablet of Destinies, and Book of Raziel
+                    </li>
                     <li>The loss of her best friend Xīwàng Tiānshàng is considered a pivotal turning point</li>
                     <li>She wears glasses and has charcoal hair with distinctive teal ends</li>
                     <li>Alulu Dayk spent two years training with the Light Blade Revolver after claiming it</li>
-                    <li>The Light Blade Revolver has multiple configurations: standard gun, sniper, knife gun, light blade, whip blade, scythe gun, and EX forms</li>
+                    <li>The Light Blade Revolver has multiple configurations: standard gun, sniper, knife gun, light
+                        blade, whip blade, scythe gun, and EX forms</li>
                     <li>Each evolution represents increased detachment from humanity and emotional connection</li>
                     <li>Ọnwụ's presence creates a sensation that time itself is narrowing around opponents</li>
                     <li>Her true identity connects to Tiala Corsolis from Nexsicon</li>
@@ -955,4 +1248,5 @@
         }
     </script>
 </body>
+
 </html>

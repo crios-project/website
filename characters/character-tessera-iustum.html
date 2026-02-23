@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tessera Iustum // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -95,8 +98,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-visual {
@@ -322,8 +332,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
@@ -331,18 +478,36 @@
         <section class="character-header">
             <div class="character-visual">
                 <img src="../assets/characters/Tessera Iustum.png" alt="Tessera Iustum" class="character-image">
-                <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas" class="faction-logo">
+                <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas"
+                    class="faction-logo">
             </div>
             <div class="character-info">
                 <h1 class="character-name">Tessera Iustum</h1>
                 <p class="character-title">Adaptive Trickster-Combatant</p>
                 <div class="stats-grid">
-                    <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a></span></div>
-                    <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Magical Girl</span></div>
-                    <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Adaptive Improvisation</span></div>
-                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Fallire Fanale</span></div>
-                    <div class="stat-item"><span class="stat-label">Specialty</span><span class="stat-value">Environmental Manipulation</span></div>
-                    <div class="stat-item"><span class="stat-label">Approach</span><span class="stat-value">Misdirection & Momentum</span></div>
+                    <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a
+                                href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax
+                                Affinas</a></span></div>
+                    <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Magical
+                            Girl</span></div>
+                    <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Adaptive
+                            Improvisation</span></div>
+                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Fallire
+                            Fanale</span></div>
+                    <div class="stat-item"><span class="stat-label">Specialty</span><span
+                            class="stat-value">Environmental Manipulation</span></div>
+                    <div class="stat-item"><span class="stat-label">Approach</span><span class="stat-value">Misdirection
+                            & Momentum</span></div>
+                </div>
+                <div class="theme-player disabled">
+                    <div class="theme-player-header">
+                        <span class="theme-player-icon">♪</span>
+                        <span class="theme-player-title">Character Theme</span>
+                    </div>
+                    <audio controls disabled>
+                        <source src="#" type="audio/mpeg">
+                    </audio>
+                    <p class="theme-coming-soon">Music composition in progress</p>
                 </div>
                 <div class="character-quote">"The battlefield itself is an extension of my arsenal."</div>
             </div>
@@ -351,31 +516,63 @@
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p>Tessera Iustum is the magical girl form of <a href="character-claris-quies.html" class="wiki-link">Claris Quies</a>, though at this point in the timeline, she is actually the second magical girl transformation of <a href="character-zafara-quedar.html" class="wiki-link">Zafara Quedar</a>. She represents a unique intersection of identity and power within the <a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> faction.</p>
-                
-                <p>Tessera practices a highly adaptive, improvisational combat style built around environmental manipulation, misdirection, and fluid transitions between offense and defense. Her approach mirrors the unpredictability and kinetic creativity of an expert trickster-combatant, blending acrobatics, object interaction, and precise blade work into a seamless and often overwhelming fighting rhythm.</p>
+                <p>Tessera Iustum is the magical girl form of <a href="character-claris-quies.html"
+                        class="wiki-link">Claris Quies</a>, though at this point in the timeline, she is actually the
+                    second magical girl transformation of <a href="character-zafara-quedar.html"
+                        class="wiki-link">Zafara Quedar</a>. She represents a unique intersection of identity and power
+                    within the <a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax
+                        Affinas</a> faction.</p>
+
+                <p>Tessera practices a highly adaptive, improvisational combat style built around environmental
+                    manipulation, misdirection, and fluid transitions between offense and defense. Her approach mirrors
+                    the unpredictability and kinetic creativity of an expert trickster-combatant, blending acrobatics,
+                    object interaction, and precise blade work into a seamless and often overwhelming fighting rhythm.
+                </p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Combat Philosophy</h2>
             <div class="section-content">
-                <p>Unlike conventional swordsmen who maintain strict stances or formalized technique chains, Tessera treats the battlefield itself as an extension of her arsenal. She instinctively incorporates surrounding terrain, loose objects, and structural features into her attacks and evasions. Furniture, debris, railings, or even an opponent's weapon can become tools for deflection, redirection, or sudden counterstrikes. This constant adaptation makes her movements difficult to anticipate or strategically counter.</p>
+                <p>Unlike conventional swordsmen who maintain strict stances or formalized technique chains, Tessera
+                    treats the battlefield itself as an extension of her arsenal. She instinctively incorporates
+                    surrounding terrain, loose objects, and structural features into her attacks and evasions.
+                    Furniture, debris, railings, or even an opponent's weapon can become tools for deflection,
+                    redirection, or sudden counterstrikes. This constant adaptation makes her movements difficult to
+                    anticipate or strategically counter.</p>
 
-                <p>Tessera favors mobility and momentum over direct confrontation. She employs rapid directional shifts, rolling recoveries, vaulting maneuvers, and exaggerated but controlled falls that double as defensive evasions or setup opportunities. Many of her attacks appear spontaneous, yet they are guided by sharp situational awareness and tactical intuition. She excels at turning disadvantageous positions into sudden counteroffensive openings.</p>
+                <p>Tessera favors mobility and momentum over direct confrontation. She employs rapid directional shifts,
+                    rolling recoveries, vaulting maneuvers, and exaggerated but controlled falls that double as
+                    defensive evasions or setup opportunities. Many of her attacks appear spontaneous, yet they are
+                    guided by sharp situational awareness and tactical intuition. She excels at turning disadvantageous
+                    positions into sudden counteroffensive openings.</p>
 
-                <p>Her combat presence often appears chaotic or playful, masking a lethally efficient precision. Tessera deliberately creates confusion through erratic rhythm changes, feigned clumsiness, and unconventional attack patterns. Opponents frequently underestimate her during these moments, only to find themselves caught in precisely timed and highly targeted finishing strikes.</p>
+                <p>Her combat presence often appears chaotic or playful, masking a lethally efficient precision. Tessera
+                    deliberately creates confusion through erratic rhythm changes, feigned clumsiness, and
+                    unconventional attack patterns. Opponents frequently underestimate her during these moments, only to
+                    find themselves caught in precisely timed and highly targeted finishing strikes.</p>
 
-                <p>While she rarely relies on overwhelming force, Tessera demonstrates exceptional control, accuracy, and reaction speed. Her fighting philosophy centers on adaptability, opportunism, and the belief that victory belongs to the combatant who best understands and exploits the shifting conditions of battle.</p>
+                <p>While she rarely relies on overwhelming force, Tessera demonstrates exceptional control, accuracy,
+                    and reaction speed. Her fighting philosophy centers on adaptability, opportunism, and the belief
+                    that victory belongs to the combatant who best understands and exploits the shifting conditions of
+                    battle.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Weapon: Fallire Fanale</h2>
             <div class="section-content">
-                <p>Her katana, <strong>Fallire Fanale</strong>, is central to her fighting methodology. The weapon's ability to manifest and dematerialize at will allows Tessera to weaponize timing and deception. She frequently dismisses the blade mid-motion to evade grapples, slip through narrow defensive openings, or bait opponents into misjudging her reach. The blade can then be instantly reformed to deliver rapid follow-up strikes, often from unexpected angles or positions. This ability allows her to transition between unarmed martial techniques and armed swordplay without interrupting her combat flow.</p>
+                <p>Her katana, <strong>Fallire Fanale</strong>, is central to her fighting methodology. The weapon's
+                    ability to manifest and dematerialize at will allows Tessera to weaponize timing and deception. She
+                    frequently dismisses the blade mid-motion to evade grapples, slip through narrow defensive openings,
+                    or bait opponents into misjudging her reach. The blade can then be instantly reformed to deliver
+                    rapid follow-up strikes, often from unexpected angles or positions. This ability allows her to
+                    transition between unarmed martial techniques and armed swordplay without interrupting her combat
+                    flow.</p>
 
-                <p>Tessera generally carries the bladeless hilt of Fallire Fanale when not in combat, but she can summon the weapon to the ready in a microsecond. Notably, the weapon hasn't fully accepted Tessera as its wielder yet, suggesting a deeper narrative tension between the blade and its current bearer.</p>
+                <p>Tessera generally carries the bladeless hilt of Fallire Fanale when not in combat, but she can summon
+                    the weapon to the ready in a microsecond. Notably, the weapon hasn't fully accepted Tessera as its
+                    wielder yet, suggesting a deeper narrative tension between the blade and its current bearer.</p>
             </div>
         </section>
 
@@ -383,7 +580,8 @@
             <h2 class="section-title">Combat Techniques</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Environmental Manipulation</h3>
-                <p>Tessera's signature approach involves turning the battlefield into her weapon. She demonstrates an innate ability to read spatial dynamics and identify improvised tools within her surroundings:</p>
+                <p>Tessera's signature approach involves turning the battlefield into her weapon. She demonstrates an
+                    innate ability to read spatial dynamics and identify improvised tools within her surroundings:</p>
                 <ul>
                     <li>Using furniture and debris for deflection and redirection</li>
                     <li>Incorporating structural features into attack trajectories</li>
@@ -397,25 +595,33 @@
                     <li><strong>Grapple Evasion:</strong> Dismissing the blade to slip through holds or binds</li>
                     <li><strong>Reach Deception:</strong> Creating uncertainty about attack range and timing</li>
                     <li><strong>Seamless Transitions:</strong> Moving fluidly between armed and unarmed techniques</li>
-                    <li><strong>Angle Exploitation:</strong> Reforming the blade from unexpected positions for surprise attacks</li>
+                    <li><strong>Angle Exploitation:</strong> Reforming the blade from unexpected positions for surprise
+                        attacks</li>
                 </ul>
 
                 <h3 class="section-subtitle">Movement Philosophy</h3>
                 <p>Tessera's kinetic approach emphasizes:</p>
                 <ul>
-                    <li><strong>Rapid Directional Shifts:</strong> Unpredictable movement patterns that confound tracking</li>
-                    <li><strong>Rolling Recoveries:</strong> Converting defensive maneuvers into offensive opportunities</li>
-                    <li><strong>Vaulting Integration:</strong> Using elevation changes and obstacles as tactical advantages</li>
-                    <li><strong>Controlled Falls:</strong> Exaggerated movements that serve dual defensive and positioning purposes</li>
+                    <li><strong>Rapid Directional Shifts:</strong> Unpredictable movement patterns that confound
+                        tracking</li>
+                    <li><strong>Rolling Recoveries:</strong> Converting defensive maneuvers into offensive opportunities
+                    </li>
+                    <li><strong>Vaulting Integration:</strong> Using elevation changes and obstacles as tactical
+                        advantages</li>
+                    <li><strong>Controlled Falls:</strong> Exaggerated movements that serve dual defensive and
+                        positioning purposes</li>
                 </ul>
 
                 <h3 class="section-subtitle">Psychological Warfare</h3>
                 <p>Beyond physical technique, Tessera employs mental tactics:</p>
                 <ul>
-                    <li><strong>Chaotic Presentation:</strong> Appearing playful or erratic while executing precise plans</li>
-                    <li><strong>Rhythm Variation:</strong> Constantly changing attack tempo to prevent pattern recognition</li>
+                    <li><strong>Chaotic Presentation:</strong> Appearing playful or erratic while executing precise
+                        plans</li>
+                    <li><strong>Rhythm Variation:</strong> Constantly changing attack tempo to prevent pattern
+                        recognition</li>
                     <li><strong>Feigned Vulnerability:</strong> Using apparent clumsiness to bait overconfidence</li>
-                    <li><strong>Delayed Precision:</strong> Allowing confusion to settle before striking with lethal accuracy</li>
+                    <li><strong>Delayed Precision:</strong> Allowing confusion to settle before striking with lethal
+                        accuracy</li>
                 </ul>
             </div>
         </section>
@@ -440,19 +646,30 @@
             <h2 class="section-title">Thematic Significance</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Archetype</h3>
-                <p>Tessera embodies the <strong>Adaptive Trickster</strong> archetype—a combatant who succeeds not through overwhelming power but through superior understanding of circumstances and creative exploitation of opportunities.</p>
+                <p>Tessera embodies the <strong>Adaptive Trickster</strong> archetype—a combatant who succeeds not
+                    through overwhelming power but through superior understanding of circumstances and creative
+                    exploitation of opportunities.</p>
 
                 <h3 class="section-subtitle">Core Themes</h3>
                 <ul>
-                    <li><strong>Adaptability vs. Rigidity:</strong> Tessera represents the triumph of flexibility over fixed methodologies</li>
-                    <li><strong>Perception vs. Reality:</strong> Her chaotic appearance masks precise execution, exploring the gap between how things seem and how they are</li>
-                    <li><strong>Environmental Symbiosis:</strong> Her fighting style embodies integration with surroundings rather than domination of them</li>
-                    <li><strong>Identity Multiplicity:</strong> As a second magical girl form with complex identity connections, she reflects themes of layered selfhood</li>
-                    <li><strong>Incomplete Acceptance:</strong> Fallire Fanale's reluctance to fully bond with her suggests ongoing internal or external conflicts</li>
+                    <li><strong>Adaptability vs. Rigidity:</strong> Tessera represents the triumph of flexibility over
+                        fixed methodologies</li>
+                    <li><strong>Perception vs. Reality:</strong> Her chaotic appearance masks precise execution,
+                        exploring the gap between how things seem and how they are</li>
+                    <li><strong>Environmental Symbiosis:</strong> Her fighting style embodies integration with
+                        surroundings rather than domination of them</li>
+                    <li><strong>Identity Multiplicity:</strong> As a second magical girl form with complex identity
+                        connections, she reflects themes of layered selfhood</li>
+                    <li><strong>Incomplete Acceptance:</strong> Fallire Fanale's reluctance to fully bond with her
+                        suggests ongoing internal or external conflicts</li>
                 </ul>
 
                 <h3 class="section-subtitle">Narrative Function</h3>
-                <p>Tessera serves as a representation of improvisational mastery and the power of tactical thinking over brute force. Her complex identity connections to both Claris Quies and Zafara Quedar position her as a narrative bridge between different aspects of character development and transformation. The tension with Fallire Fanale introduces potential for character growth and exploration of worthiness, belonging, and acceptance.</p>
+                <p>Tessera serves as a representation of improvisational mastery and the power of tactical thinking over
+                    brute force. Her complex identity connections to both Claris Quies and Zafara Quedar position her as
+                    a narrative bridge between different aspects of character development and transformation. The
+                    tension with Fallire Fanale introduces potential for character growth and exploration of worthiness,
+                    belonging, and acceptance.</p>
             </div>
         </section>
 
@@ -460,16 +677,25 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> "Tessera" derives from Latin meaning "a small cube" or "token," often used in mosaics—symbolizing how she pieces together disparate elements into a cohesive whole. "Iustum" means "just" or "righteous" in Latin, suggesting moral alignment and proper action within her complex identity framework.</li>
-                    <li>She represents a unique case of dual magical girl transformation, being both Claris Quies's form and Zafara Quedar's second transformation</li>
-                    <li>Fallire Fanale can be summoned to combat readiness in microseconds despite typically existing as just a hilt</li>
-                    <li>The weapon's incomplete acceptance of Tessera as its wielder creates an ongoing tension in their bond</li>
-                    <li>Her combat style deliberately incorporates what appears to be mistakes or clumsiness as tactical deception</li>
-                    <li>Tessera's approach to combat emphasizes understanding and exploiting battlefield conditions over raw power application</li>
+                    <li><strong>Name Etymology:</strong> "Tessera" derives from Latin meaning "a small cube" or "token,"
+                        often used in mosaics—symbolizing how she pieces together disparate elements into a cohesive
+                        whole. "Iustum" means "just" or "righteous" in Latin, suggesting moral alignment and proper
+                        action within her complex identity framework.</li>
+                    <li>She represents a unique case of dual magical girl transformation, being both Claris Quies's form
+                        and Zafara Quedar's second transformation</li>
+                    <li>Fallire Fanale can be summoned to combat readiness in microseconds despite typically existing as
+                        just a hilt</li>
+                    <li>The weapon's incomplete acceptance of Tessera as its wielder creates an ongoing tension in their
+                        bond</li>
+                    <li>Her combat style deliberately incorporates what appears to be mistakes or clumsiness as tactical
+                        deception</li>
+                    <li>Tessera's approach to combat emphasizes understanding and exploiting battlefield conditions over
+                        raw power application</li>
                     <li>She excels at converting disadvantageous positions into sudden counteroffensive advantages</li>
                 </ul>
             </div>
         </section>
     </div>
 </body>
+
 </html>

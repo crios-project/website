@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kesshō Kawa // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -95,8 +98,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-visual {
@@ -322,8 +332,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
@@ -331,18 +478,36 @@
         <section class="character-header">
             <div class="character-visual">
                 <img src="../assets/characters/Kesshō Kawa.png" alt="Kesshō Kawa" class="character-image">
-                <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas" class="faction-logo">
+                <img src="../assets/icons/Praxis Verax Affinas Icon.png" alt="Praxis Verax Affinas"
+                    class="faction-logo">
             </div>
             <div class="character-info">
                 <h1 class="character-name">Kesshō Kawa</h1>
                 <p class="character-title">Predatory Acrobat</p>
                 <div class="stats-grid">
-                    <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a></span></div>
-                    <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Magical Girl</span></div>
-                    <div class="stat-item"><span class="stat-label">Combat Style</span><span class="stat-value">Acrobatic Predation</span></div>
-                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Tenebris Operiet</span></div>
-                    <div class="stat-item"><span class="stat-label">Specialty</span><span class="stat-value">Aerial Mobility</span></div>
-                    <div class="stat-item"><span class="stat-label">Approach</span><span class="stat-value">Relentless Offense</span></div>
+                    <div class="stat-item"><span class="stat-label">Faction</span><span class="stat-value"><a
+                                href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax
+                                Affinas</a></span></div>
+                    <div class="stat-item"><span class="stat-label">Role</span><span class="stat-value">Magical
+                            Girl</span></div>
+                    <div class="stat-item"><span class="stat-label">Combat Style</span><span
+                            class="stat-value">Acrobatic Predation</span></div>
+                    <div class="stat-item"><span class="stat-label">Weapon</span><span class="stat-value">Tenebris
+                            Operiet</span></div>
+                    <div class="stat-item"><span class="stat-label">Specialty</span><span class="stat-value">Aerial
+                            Mobility</span></div>
+                    <div class="stat-item"><span class="stat-label">Approach</span><span class="stat-value">Relentless
+                            Offense</span></div>
+                </div>
+                <div class="theme-player disabled">
+                    <div class="theme-player-header">
+                        <span class="theme-player-icon">♪</span>
+                        <span class="theme-player-title">Character Theme</span>
+                    </div>
+                    <audio controls disabled>
+                        <source src="#" type="audio/mpeg">
+                    </audio>
+                    <p class="theme-coming-soon">Music composition in progress</p>
                 </div>
                 <div class="character-quote">"Combat should resemble a flawless performance."</div>
             </div>
@@ -351,31 +516,55 @@
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p>Kesshō Kawa is the magical girl form of <a href="character-ji-lian-xia.html" class="wiki-link">Jí Lián Xiá</a>, though at this point in the timeline, she is actually the transformed state of <a href="character-takino-retsu.html" class="wiki-link">Takino Retsu</a>. She represents a unique intersection of identity and power within the <a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> faction.</p>
-                
-                <p>Kesshō employs an acrobatic, predatory combat methodology characterized by relentless speed, aerial mobility, and flowing blade choreography. Her fighting style emphasizes overwhelming opponents through constant motion and unpredictable attack vectors rather than brute strength or defensive posture.</p>
+                <p>Kesshō Kawa is the magical girl form of <a href="character-ji-lian-xia.html" class="wiki-link">Jí
+                        Lián Xiá</a>, though at this point in the timeline, she is actually the transformed state of <a
+                        href="character-takino-retsu.html" class="wiki-link">Takino Retsu</a>. She represents a unique
+                    intersection of identity and power within the <a
+                        href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a>
+                    faction.</p>
+
+                <p>Kesshō employs an acrobatic, predatory combat methodology characterized by relentless speed, aerial
+                    mobility, and flowing blade choreography. Her fighting style emphasizes overwhelming opponents
+                    through constant motion and unpredictable attack vectors rather than brute strength or defensive
+                    posture.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Combat Philosophy</h2>
             <div class="section-content">
-                <p>Her movements resemble a dance of calculated aggression. She frequently utilizes spinning strikes, inverted lunges, and mid-air directional shifts to maintain offensive pressure while minimizing exposure to counterattacks. Kesshō rarely remains grounded for extended periods, often using leaps, wall rebounds, and aerial pivots to create multidimensional engagement angles.</p>
+                <p>Her movements resemble a dance of calculated aggression. She frequently utilizes spinning strikes,
+                    inverted lunges, and mid-air directional shifts to maintain offensive pressure while minimizing
+                    exposure to counterattacks. Kesshō rarely remains grounded for extended periods, often using leaps,
+                    wall rebounds, and aerial pivots to create multidimensional engagement angles.</p>
 
-                <p>Much like a storm that never settles, she favors continuous attack chains designed to disorient adversaries and force them into reactive defensive patterns. She excels at striking during transitional moments—such as when opponents recover from dodges or prepare counter techniques—demonstrating precise timing and battlefield awareness.</p>
+                <p>Much like a storm that never settles, she favors continuous attack chains designed to disorient
+                    adversaries and force them into reactive defensive patterns. She excels at striking during
+                    transitional moments—such as when opponents recover from dodges or prepare counter
+                    techniques—demonstrating precise timing and battlefield awareness.</p>
 
-                <p>Kesshō integrates flowing weapon manipulation into her combat rhythm, transitioning seamlessly between rapid slashing sequences and sudden, high-impact finishing strikes. Her blade control allows her to redirect momentum mid-combination, creating deceptive feints that mask her true attack trajectory.</p>
+                <p>Kesshō integrates flowing weapon manipulation into her combat rhythm, transitioning seamlessly
+                    between rapid slashing sequences and sudden, high-impact finishing strikes. Her blade control allows
+                    her to redirect momentum mid-combination, creating deceptive feints that mask her true attack
+                    trajectory.</p>
 
-                <p>Despite her aggressive style, Kesshō demonstrates exceptional spatial awareness and balance, allowing her to evade attacks with minimal wasted movement. Her approach prioritizes efficiency, grace, and sustained pressure, embodying a philosophy that combat should resemble a flawless performance rather than a chaotic clash.</p>
+                <p>Despite her aggressive style, Kesshō demonstrates exceptional spatial awareness and balance, allowing
+                    her to evade attacks with minimal wasted movement. Her approach prioritizes efficiency, grace, and
+                    sustained pressure, embodying a philosophy that combat should resemble a flawless performance rather
+                    than a chaotic clash.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Weapon: Tenebris Operiet</h2>
             <div class="section-content">
-                <p>Her weapon of choice is <strong>Tenebris Operiet</strong>, a blade that complements her flowing, acrobatic combat style. The weapon serves as an extension of her relentless offensive philosophy, enabling rapid strikes and seamless transitions between attack sequences.</p>
+                <p>Her weapon of choice is <strong>Tenebris Operiet</strong>, a blade that complements her flowing,
+                    acrobatic combat style. The weapon serves as an extension of her relentless offensive philosophy,
+                    enabling rapid strikes and seamless transitions between attack sequences.</p>
 
-                <p>Tenebris Operiet's design supports Kesshō's preference for continuous motion and multidimensional engagement, allowing her to maintain pressure while executing her signature aerial maneuvers and spinning attacks.</p>
+                <p>Tenebris Operiet's design supports Kesshō's preference for continuous motion and multidimensional
+                    engagement, allowing her to maintain pressure while executing her signature aerial maneuvers and
+                    spinning attacks.</p>
             </div>
         </section>
 
@@ -385,19 +574,25 @@
                 <h3 class="section-subtitle">Aerial Dominance</h3>
                 <p>Kesshō's mastery of three-dimensional combat creates overwhelming tactical advantages:</p>
                 <ul>
-                    <li><strong>Spinning Strikes:</strong> Rotational attacks that generate momentum and unpredictability</li>
+                    <li><strong>Spinning Strikes:</strong> Rotational attacks that generate momentum and
+                        unpredictability</li>
                     <li><strong>Inverted Lunges:</strong> Unconventional attack angles from airborne positions</li>
-                    <li><strong>Mid-Air Directional Shifts:</strong> Sudden trajectory changes that confound defensive predictions</li>
-                    <li><strong>Wall Rebounds:</strong> Environmental exploitation to maintain continuous aerial presence</li>
-                    <li><strong>Aerial Pivots:</strong> Dynamic repositioning that creates multidimensional engagement angles</li>
+                    <li><strong>Mid-Air Directional Shifts:</strong> Sudden trajectory changes that confound defensive
+                        predictions</li>
+                    <li><strong>Wall Rebounds:</strong> Environmental exploitation to maintain continuous aerial
+                        presence</li>
+                    <li><strong>Aerial Pivots:</strong> Dynamic repositioning that creates multidimensional engagement
+                        angles</li>
                 </ul>
 
                 <h3 class="section-subtitle">Continuous Attack Philosophy</h3>
                 <p>Kesshō's offensive methodology centers on unrelenting pressure:</p>
                 <ul>
-                    <li><strong>Attack Chain Mastery:</strong> Flowing combinations designed to prevent opponent recovery</li>
+                    <li><strong>Attack Chain Mastery:</strong> Flowing combinations designed to prevent opponent
+                        recovery</li>
                     <li><strong>Transitional Exploitation:</strong> Striking during opponent vulnerability windows</li>
-                    <li><strong>Momentum Redirection:</strong> Converting defensive energy into offensive opportunities</li>
+                    <li><strong>Momentum Redirection:</strong> Converting defensive energy into offensive opportunities
+                    </li>
                     <li><strong>Deceptive Feinting:</strong> Masking true attack trajectories through misdirection</li>
                 </ul>
 
@@ -413,9 +608,11 @@
                 <h3 class="section-subtitle">Psychological Warfare</h3>
                 <p>Beyond physical technique, Kesshō employs mental dominance:</p>
                 <ul>
-                    <li><strong>Oppressive Presence:</strong> Creating psychological inevitability through relentless offense</li>
+                    <li><strong>Oppressive Presence:</strong> Creating psychological inevitability through relentless
+                        offense</li>
                     <li><strong>Calculated Calm:</strong> Maintaining unsettling focus amid chaotic movement</li>
-                    <li><strong>Panic Inducement:</strong> Using speed and fluidity to destabilize opponent decision-making</li>
+                    <li><strong>Panic Inducement:</strong> Using speed and fluidity to destabilize opponent
+                        decision-making</li>
                     <li><strong>Timing Manipulation:</strong> Creating uncertainty about when attacks will land</li>
                 </ul>
 
@@ -450,19 +647,29 @@
             <h2 class="section-title">Thematic Significance</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Archetype</h3>
-                <p>Kesshō embodies the <strong>Predatory Performer</strong> archetype—a combatant who treats battle as both hunt and art form, merging lethal efficiency with aesthetic grace.</p>
+                <p>Kesshō embodies the <strong>Predatory Performer</strong> archetype—a combatant who treats battle as
+                    both hunt and art form, merging lethal efficiency with aesthetic grace.</p>
 
                 <h3 class="section-subtitle">Core Themes</h3>
                 <ul>
-                    <li><strong>Motion vs. Stillness:</strong> Kesshō represents perpetual movement as both philosophy and survival strategy</li>
-                    <li><strong>Aggression as Art:</strong> Her combat style explores violence as performance, challenging distinctions between brutality and beauty</li>
-                    <li><strong>Predator Psychology:</strong> She embodies calculated hunting instincts wrapped in graceful execution</li>
-                    <li><strong>Identity Complexity:</strong> As both Jí Lián Xiá's form and Takino Retsu's transformed state, she reflects layered selfhood</li>
-                    <li><strong>Pressure as Power:</strong> Her philosophy suggests that sustained aggression creates inevitability</li>
+                    <li><strong>Motion vs. Stillness:</strong> Kesshō represents perpetual movement as both philosophy
+                        and survival strategy</li>
+                    <li><strong>Aggression as Art:</strong> Her combat style explores violence as performance,
+                        challenging distinctions between brutality and beauty</li>
+                    <li><strong>Predator Psychology:</strong> She embodies calculated hunting instincts wrapped in
+                        graceful execution</li>
+                    <li><strong>Identity Complexity:</strong> As both Jí Lián Xiá's form and Takino Retsu's transformed
+                        state, she reflects layered selfhood</li>
+                    <li><strong>Pressure as Power:</strong> Her philosophy suggests that sustained aggression creates
+                        inevitability</li>
                 </ul>
 
                 <h3 class="section-subtitle">Narrative Function</h3>
-                <p>Kesshō serves as a representation of relentless pursuit and the overwhelming power of sustained offensive pressure. Her complex identity connections to both Jí Lián Xiá and Takino Retsu position her as a narrative bridge between different aspects of character development and transformation. Her combat philosophy—that battle should resemble flawless performance—suggests themes of control, mastery, and the aesthetic dimensions of conflict.</p>
+                <p>Kesshō serves as a representation of relentless pursuit and the overwhelming power of sustained
+                    offensive pressure. Her complex identity connections to both Jí Lián Xiá and Takino Retsu position
+                    her as a narrative bridge between different aspects of character development and transformation. Her
+                    combat philosophy—that battle should resemble flawless performance—suggests themes of control,
+                    mastery, and the aesthetic dimensions of conflict.</p>
             </div>
         </section>
 
@@ -470,17 +677,24 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> "Kesshō" (結晶) means "crystal" in Japanese, suggesting both beauty and hardness, while "Kawa" (川) means "river," symbolizing flowing motion—together representing crystalline fluidity and the marriage of grace with relentless force.</li>
-                    <li>She represents a unique case of dual magical girl transformation, being both Jí Lián Xiá's form and Takino Retsu's transformed state</li>
+                    <li><strong>Name Etymology:</strong> "Kesshō" (結晶) means "crystal" in Japanese, suggesting both
+                        beauty and hardness, while "Kawa" (川) means "river," symbolizing flowing motion—together
+                        representing crystalline fluidity and the marriage of grace with relentless force.</li>
+                    <li>She represents a unique case of dual magical girl transformation, being both Jí Lián Xiá's form
+                        and Takino Retsu's transformed state</li>
                     <li>Her combat philosophy explicitly treats battle as performance art rather than mere violence</li>
-                    <li>Kesshō rarely remains grounded, preferring three-dimensional aerial combat over traditional ground-based fighting</li>
-                    <li>Her psychological warfare centers on creating a sense of inevitability through relentless pressure</li>
+                    <li>Kesshō rarely remains grounded, preferring three-dimensional aerial combat over traditional
+                        ground-based fighting</li>
+                    <li>Her psychological warfare centers on creating a sense of inevitability through relentless
+                        pressure</li>
                     <li>Despite her aggressive style, she demonstrates exceptional balance and spatial awareness</li>
-                    <li>Her timing allows her to strike during opponent transitional moments when defenses are weakest</li>
+                    <li>Her timing allows her to strike during opponent transitional moments when defenses are weakest
+                    </li>
                     <li>Tenebris Operiet enables both rapid slashing sequences and high-impact finishing strikes</li>
                 </ul>
             </div>
         </section>
     </div>
 </body>
+
 </html>

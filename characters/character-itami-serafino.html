@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Itami Serafino // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -133,8 +136,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-header {
@@ -376,8 +386,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
@@ -435,10 +582,20 @@
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">Faction</span>
-                            <span class="stat-value"><a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> (Secret)</span>
+                            <span class="stat-value"><a href="../factions/faction-starlite-7th.html"
+                                    class="wiki-link">Starlite 7th</a> (Secret)</span>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "That's not what I— But I didn't— Please don't— !" <em>*sniffles and begins crying*</em>
                     </div>
@@ -448,18 +605,27 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Itami Serafino stands at the intersection of public adoration and concealed authority. To the world, she is one half of the internationally celebrated idol duo <strong>Rainbow Star</strong>, beloved for her emotional openness and theatrical sincerity.</p>
+                    <p>Itami Serafino stands at the intersection of public adoration and concealed authority. To the
+                        world, she is one half of the internationally celebrated idol duo <strong>Rainbow Star</strong>,
+                        beloved for her emotional openness and theatrical sincerity.</p>
 
-                    <p>Her dual identity reflects a contrast between perceived vulnerability and overwhelming battlefield dominance. Where public perception frames her as delicate and easily overwhelmed, her operational reality reveals a tactician and frontline commander capable of directing engagements with near-precognitive precision.</p>
+                    <p>Her dual identity reflects a contrast between perceived vulnerability and overwhelming
+                        battlefield dominance. Where public perception frames her as delicate and easily overwhelmed,
+                        her operational reality reveals a tactician and frontline commander capable of directing
+                        engagements with near-precognitive precision.</p>
 
-                    <p>Unknown to the public, Itami is the commanding leader of <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> and one of the highest-ranking Runic Knights operating within <a href="../realms/realm-royastella.html" class="wiki-link">Royastella</a>.</p>
+                    <p>Unknown to the public, Itami is the commanding leader of <a
+                            href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> and one of
+                        the highest-ranking Runic Knights operating within <a href="../realms/realm-royastella.html"
+                            class="wiki-link">Royastella</a>.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Appearance</h2>
                 <div class="section-content">
-                    <p>Itami presents an immediately commanding visual profile, combining regal ornamentation with idol-stage theatricality.</p>
+                    <p>Itami presents an immediately commanding visual profile, combining regal ornamentation with
+                        idol-stage theatricality.</p>
 
                     <h3 class="section-subtitle">Physical Characteristics</h3>
                     <ul>
@@ -486,7 +652,8 @@
                         <li>Coordinated wrist and ankle ornamentation</li>
                     </ul>
 
-                    <p>The repeated visual motifs of roses, gemstones, and layered ruffles reinforce her thematic identity as both ceremonial royalty and performance icon.</p>
+                    <p>The repeated visual motifs of roses, gemstones, and layered ruffles reinforce her thematic
+                        identity as both ceremonial royalty and performance icon.</p>
                 </div>
             </section>
 
@@ -511,12 +678,17 @@
                         <li>Prone to tears</li>
                     </ul>
 
-                    <p>While these impressions are partially accurate, they are often misunderstood. Itami's emotional expression is not instability but <strong>transparency</strong>. Her feelings manifest visibly and immediately, allowing audiences to interpret her reactions as genuine and deeply human.</p>
+                    <p>While these impressions are partially accurate, they are often misunderstood. Itami's emotional
+                        expression is not instability but <strong>transparency</strong>. Her feelings manifest visibly
+                        and immediately, allowing audiences to interpret her reactions as genuine and deeply human.</p>
 
-                    <p>This sincerity forms the cornerstone of her popularity. Fans and critics alike cite her as one of the most emotionally authentic performers in contemporary entertainment culture.</p>
+                    <p>This sincerity forms the cornerstone of her popularity. Fans and critics alike cite her as one of
+                        the most emotionally authentic performers in contemporary entertainment culture.</p>
 
                     <h3 class="section-subtitle">The Reality</h3>
-                    <p>Her emotional reactions occur quickly and visibly, but they do not impair decision-making. Instead, they function as a secondary perception layer, allowing her to intuitively assess morale, danger escalation, and interpersonal strain within her team.</p>
+                    <p>Her emotional reactions occur quickly and visibly, but they do not impair decision-making.
+                        Instead, they function as a secondary perception layer, allowing her to intuitively assess
+                        morale, danger escalation, and interpersonal strain within her team.</p>
 
                     <p><strong>Core Value:</strong> Emotional honesty as strength; vulnerability as leadership tool</p>
                 </div>
@@ -535,16 +707,21 @@
                         <li>Subtle blush or stress shading beneath the eyes</li>
                     </ul>
 
-                    <p>She frequently appears startled or overwhelmed even while maintaining full situational control. This contradiction reinforces her public persona while masking her tactical composure.</p>
+                    <p>She frequently appears startled or overwhelmed even while maintaining full situational control.
+                        This contradiction reinforces her public persona while masking her tactical composure.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Rainbow Star</h2>
                 <div class="section-content">
-                    <p>Itami is widely recognized as a pop idol alongside her sister through their group <strong>Rainbow Star</strong>, a critically acclaimed and globally successful musical act.</p>
+                    <p>Itami is widely recognized as a pop idol alongside her sister through their group <strong>Rainbow
+                            Star</strong>, a critically acclaimed and globally successful musical act.</p>
 
-                    <p>The duo's success stems from Itami's emotional authenticity combined with her sister's complementary performance style. Their popularity provides perfect cover for their Runic Knight activities—after all, who would suspect internationally famous idols of being elite magical combatants?</p>
+                    <p>The duo's success stems from Itami's emotional authenticity combined with her sister's
+                        complementary performance style. Their popularity provides perfect cover for their Runic Knight
+                        activities—after all, who would suspect internationally famous idols of being elite magical
+                        combatants?</p>
                 </div>
             </section>
         </div>
@@ -595,7 +772,16 @@
                             <span class="stat-value">Most Formidable Combatant</span>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "Stars! Light my crown and strike down my foes! Starlit Empress, shining justice!"
                     </div>
@@ -605,22 +791,28 @@
             <section class="content-section">
                 <h2 class="section-title">Combat Profile</h2>
                 <div class="section-content">
-                    <p>As <strong>Starlit Empress</strong>, Itami is widely regarded within Runic Knight circles as <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>'s most formidable combatant and serves as the team's commanding leader.</p>
+                    <p>As <strong>Starlit Empress</strong>, Itami is widely regarded within Runic Knight circles as <a
+                            href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>'s most
+                        formidable combatant and serves as the team's commanding leader.</p>
 
-                    <p>Her combat methodology prioritizes overwhelming precision and predictive positioning, allowing her to dominate engagements before opponents fully understand the threat vector.</p>
+                    <p>Her combat methodology prioritizes overwhelming precision and predictive positioning, allowing
+                        her to dominate engagements before opponents fully understand the threat vector.</p>
 
                     <h3 class="section-subtitle">Auroral Throneblade</h3>
-                    <p>Itami wields the <strong>Auroral Throneblade</strong>, the most powerful weapon within the Runic Knight arsenal.</p>
+                    <p>Itami wields the <strong>Auroral Throneblade</strong>, the most powerful weapon within the Runic
+                        Knight arsenal.</p>
 
                     <ul>
                         <li>Massive two-handed greatblade optimized for sweeping battlefield control</li>
                         <li>Generates <strong>Blade Beam</strong>—a crescent-shaped energy projection</li>
                         <li>Blade Beam exhibits homing properties, tracking targets after release</li>
-                        <li>Designed for both destructive output and suppression of multiple adversaries simultaneously</li>
+                        <li>Designed for both destructive output and suppression of multiple adversaries simultaneously
+                        </li>
                     </ul>
 
                     <h3 class="section-subtitle">Combat Philosophy</h3>
-                    <p>Dominance through precision and foresight—overwhelming opponents before they recognize the danger.</p>
+                    <p>Dominance through precision and foresight—overwhelming opponents before they recognize the
+                        danger.</p>
                 </div>
             </section>
 
@@ -636,7 +828,9 @@
                     </ul>
 
                     <h3 class="section-subtitle">Tactical Implications</h3>
-                    <p>Future Sight provides Itami with unparalleled micro-temporal battlefield awareness. Rather than functioning as magic, Starlight Blessings operate as System-granted skill protocols within Royastella's universal progression framework.</p>
+                    <p>Future Sight provides Itami with unparalleled micro-temporal battlefield awareness. Rather than
+                        functioning as magic, Starlight Blessings operate as System-granted skill protocols within
+                        Royastella's universal progression framework.</p>
 
                     <p>In combat, Future Sight enables:</p>
                     <ul>
@@ -646,7 +840,8 @@
                         <li>Predictive team coordination</li>
                     </ul>
 
-                    <p>Itami often appears to react <em>before</em> events occur, reinforcing her reputation as a battlefield sovereign.</p>
+                    <p>Itami often appears to react <em>before</em> events occur, reinforcing her reputation as a
+                        battlefield sovereign.</p>
                 </div>
             </section>
 
@@ -663,7 +858,8 @@
                         <li>Accepts personal burden as a natural extension of authority</li>
                     </ul>
 
-                    <p>Her leadership often appears gentle or uncertain externally, yet operational data consistently shows her strategies result in extremely high mission survival rates.</p>
+                    <p>Her leadership often appears gentle or uncertain externally, yet operational data consistently
+                        shows her strategies result in extremely high mission survival rates.</p>
                 </div>
             </section>
         </div>
@@ -671,7 +867,7 @@
         <!-- Shared Sections -->
         <section class="content-section">
             <h2 class="section-title">Relationships</h2>
-            
+
             <div class="relationships-grid">
                 <a href="character-shini-thana.html" class="relationship-card">
                     <div class="relationship-name">Shini Thana</div>
@@ -696,7 +892,7 @@
                 <p><strong>Archetype:</strong> The Emotional Sovereign</p>
                 <p><strong>Story Function:</strong> Leader / Protector</p>
                 <p><strong>Character Arc:</strong> Embracing vulnerability as strength</p>
-                
+
                 <p><strong>Themes Represented:</strong></p>
                 <ul>
                     <li>The coexistence of emotional vulnerability and supreme authority</li>
@@ -706,7 +902,9 @@
                     <li>Power emerging through sincerity rather than detachment</li>
                 </ul>
 
-                <p><strong>Narrative Function:</strong> Challenges the assumption that composure is required for leadership strength. Demonstrates that emotional transparency can be a tactical advantage rather than weakness.</p>
+                <p><strong>Narrative Function:</strong> Challenges the assumption that composure is required for
+                    leadership strength. Demonstrates that emotional transparency can be a tactical advantage rather
+                    than weakness.</p>
             </div>
         </section>
 
@@ -714,13 +912,21 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> Itami (痛み) — Japanese for "pain," reflecting her emotional permeability and capacity to internalize the suffering of others; Serafino — Derived from "Seraph," referencing celestial hierarchy and divine guardianship</li>
-                    <li><strong>Design Notes:</strong> Roses, gemstones, and layered ruffles reinforce ceremonial royalty meets performance icon aesthetic</li>
-                    <li><strong>Symbolism:</strong> Gold eyes as luminous authority; twin-tails as idol iconography; greatblade as sovereignty</li>
-                    <li><strong>Inspiration:</strong> Emotional idol archetypes; future-seeing tactical leaders; empathetic monarchs</li>
-                    <li><strong>Author Notes:</strong> Her emotional transparency is not weakness—it's her superpower. Future Sight plus emotional intelligence creates unmatched battlefield awareness</li>
-                    <li><strong>Weapon Significance:</strong> Auroral Throneblade is the most powerful Runic Knight weapon, befitting her status as leader</li>
-                    <li><strong>Reputation:</strong> Most formidable combatant in Starlite 7th; extremely high mission survival rates under her command</li>
+                    <li><strong>Name Etymology:</strong> Itami (痛み) — Japanese for "pain," reflecting her emotional
+                        permeability and capacity to internalize the suffering of others; Serafino — Derived from
+                        "Seraph," referencing celestial hierarchy and divine guardianship</li>
+                    <li><strong>Design Notes:</strong> Roses, gemstones, and layered ruffles reinforce ceremonial
+                        royalty meets performance icon aesthetic</li>
+                    <li><strong>Symbolism:</strong> Gold eyes as luminous authority; twin-tails as idol iconography;
+                        greatblade as sovereignty</li>
+                    <li><strong>Inspiration:</strong> Emotional idol archetypes; future-seeing tactical leaders;
+                        empathetic monarchs</li>
+                    <li><strong>Author Notes:</strong> Her emotional transparency is not weakness—it's her superpower.
+                        Future Sight plus emotional intelligence creates unmatched battlefield awareness</li>
+                    <li><strong>Weapon Significance:</strong> Auroral Throneblade is the most powerful Runic Knight
+                        weapon, befitting her status as leader</li>
+                    <li><strong>Reputation:</strong> Most formidable combatant in Starlite 7th; extremely high mission
+                        survival rates under her command</li>
                 </ul>
             </div>
         </section>
@@ -745,4 +951,5 @@
         }
     </script>
 </body>
+
 </html>

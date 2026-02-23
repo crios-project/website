@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pyara Dana // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -133,8 +136,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-header {
@@ -394,8 +404,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
@@ -453,7 +600,8 @@
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Faction</span>
-                                <span class="stat-value"><a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a></span>
+                                <span class="stat-value"><a href="../factions/faction-heart-melody.html"
+                                        class="wiki-link">Heart Melody</a></span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Status</span>
@@ -461,7 +609,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "This is not how this ends."
                     </div>
@@ -471,11 +628,19 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Pyara Dana is the emotional heart and original leader of the <a href="../factions/faction-heart-melody.html" class="wiki-link">Lovely Hearts</a>. Bright, optimistic, and seemingly unshakable, Pyara approaches life with the firm belief that things will work out simply because they must. Her carefree demeanor masks an immense well of natural magical power, much of which she wields instinctively rather than through conscious control.</p>
+                    <p>Pyara Dana is the emotional heart and original leader of the <a
+                            href="../factions/faction-heart-melody.html" class="wiki-link">Lovely Hearts</a>. Bright,
+                        optimistic, and seemingly unshakable, Pyara approaches life with the firm belief that things
+                        will work out simply because they must. Her carefree demeanor masks an immense well of natural
+                        magical power, much of which she wields instinctively rather than through conscious control.</p>
 
-                    <p>Pyara's unwavering trust in others—especially her older sister <a href="character-kali-dana.html" class="wiki-link">Kali</a>—defines her relationships. She inspires loyalty not through command, but through joy. To Pyara, protecting her friends is as natural as breathing, and she never considers the possibility of failure.</p>
+                    <p>Pyara's unwavering trust in others—especially her older sister <a href="character-kali-dana.html"
+                            class="wiki-link">Kali</a>—defines her relationships. She inspires loyalty not through
+                        command, but through joy. To Pyara, protecting her friends is as natural as breathing, and she
+                        never considers the possibility of failure.</p>
 
-                    <p>In civilian form, Pyara possessed an unassuming physical presence, contrasted sharply by the overwhelming luminosity of her transformed states.</p>
+                    <p>In civilian form, Pyara possessed an unassuming physical presence, contrasted sharply by the
+                        overwhelming luminosity of her transformed states.</p>
                 </div>
             </section>
 
@@ -486,7 +651,8 @@
                     <ul>
                         <li><strong>Compassionate:</strong> Deeply empathetic and emotionally attuned to others</li>
                         <li><strong>Resolute:</strong> Unwavering in commitments and beliefs</li>
-                        <li><strong>Self-sacrificing:</strong> Places others' wellbeing above her own without hesitation</li>
+                        <li><strong>Self-sacrificing:</strong> Places others' wellbeing above her own without hesitation
+                        </li>
                         <li><strong>Joyful:</strong> Approaches challenges with infectious optimism</li>
                     </ul>
 
@@ -510,7 +676,8 @@
                     <p><strong>Core Motivation:</strong> Love and responsibility toward others</p>
                     <p><strong>Core Value:</strong> Collective good over self-preservation</p>
                     <p><strong>Moral Alignment:</strong> Lawful Good</p>
-                    <p><strong>Internal Question:</strong> Whether her life was worth more than the world she protected</p>
+                    <p><strong>Internal Question:</strong> Whether her life was worth more than the world she protected
+                    </p>
                 </div>
             </section>
 
@@ -568,7 +735,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "Let's go home together."
                     </div>
@@ -578,7 +754,9 @@
             <section class="content-section">
                 <h2 class="section-title">Heart Aria Powers</h2>
                 <div class="section-content">
-                    <p>As <strong>Heart Aria</strong>, Pyara functions as the conductor of the collective. Rather than dominating combat through raw power, she enables and stabilizes the magic of every other Heart. Her voice anchors group casting and unlocks advanced cooperative spells.</p>
+                    <p>As <strong>Heart Aria</strong>, Pyara functions as the conductor of the collective. Rather than
+                        dominating combat through raw power, she enables and stabilizes the magic of every other Heart.
+                        Her voice anchors group casting and unlocks advanced cooperative spells.</p>
 
                     <h3 class="section-subtitle">Abilities</h3>
                     <ul>
@@ -597,7 +775,8 @@
                     </ul>
 
                     <p><strong>Philosophy:</strong> Perseverance through joy and unity</p>
-                    <p><strong>Combat Approach:</strong> Melodic leadership; fights not to defeat enemies, but to ensure friends make it home together</p>
+                    <p><strong>Combat Approach:</strong> Melodic leadership; fights not to defeat enemies, but to ensure
+                        friends make it home together</p>
                 </div>
             </section>
         </div>
@@ -645,13 +824,19 @@
             <section class="content-section">
                 <h2 class="section-title">Heart Beat Ascension</h2>
                 <div class="section-content">
-                    <p><strong>Heart Beat</strong> represents Pyara's first ascension through the Coralas artifact. In this state, she gains access to all Tier 2 Entwinements—cooperative magic that requires synchronization between multiple Hearts.</p>
+                    <p><strong>Heart Beat</strong> represents Pyara's first ascension through the Coralas artifact. In
+                        this state, she gains access to all Tier 2 Entwinements—cooperative magic that requires
+                        synchronization between multiple Hearts.</p>
 
-                    <p>The ascension dramatically amplifies her power but introduces dangerous instability. Her luminous presence becomes overwhelming, and the harmonic strain on her physical form begins to show.</p>
+                    <p>The ascension dramatically amplifies her power but introduces dangerous instability. Her luminous
+                        presence becomes overwhelming, and the harmonic strain on her physical form begins to show.</p>
 
-                    <p><strong>Coralas Artifact:</strong> An Ascension Artifact in the form of a sword. Becomes more elaborate as the wielder gains power, allowing Heart Aria to access the transformation into Heart Beat and eventually to ascend into Concerto Pulse.</p>
+                    <p><strong>Coralas Artifact:</strong> An Ascension Artifact in the form of a sword. Becomes more
+                        elaborate as the wielder gains power, allowing Heart Aria to access the transformation into
+                        Heart Beat and eventually to ascend into Concerto Pulse.</p>
 
-                    <p>Radiant light manifestation during ascension creates visual parallels to demonic dissolution—a deliberate design choice emphasizing the metaphysical cost of such power.</p>
+                    <p>Radiant light manifestation during ascension creates visual parallels to demonic dissolution—a
+                        deliberate design choice emphasizing the metaphysical cost of such power.</p>
                 </div>
             </section>
         </div>
@@ -699,16 +884,28 @@
             <section class="content-section">
                 <h2 class="section-title">The Final Transformation</h2>
                 <div class="section-content">
-                    <p><strong>Concerto Pulse</strong> is Pyara's ultimate manifestation—a Tier 3 ascension that briefly grants access to Lúmira-level resonance. In this form, she becomes pure harmonic light, stabilizing reality across all of <a href="../realms/realm-beeston.html" class="wiki-link">Beeston</a>.</p>
+                    <p><strong>Concerto Pulse</strong> is Pyara's ultimate manifestation—a Tier 3 ascension that briefly
+                        grants access to Lúmira-level resonance. In this form, she becomes pure harmonic light,
+                        stabilizing reality across all of <a href="../realms/realm-beeston.html"
+                            class="wiki-link">Beeston</a>.</p>
 
-                    <p>However, the transformation was interrupted by <a href="character-dissonant-discord.html" class="wiki-link">dissonant discord</a>'s Tier 4 harmonic strike, causing a <strong>Desynchronization Event</strong> that fractured Pyara's lodesoul-level essence across realities.</p>
+                    <p>However, the transformation was interrupted by <a href="character-dissonant-discord.html"
+                            class="wiki-link">dissonant discord</a>'s Tier 4 harmonic strike, causing a
+                        <strong>Desynchronization Event</strong> that fractured Pyara's lodesoul-level essence across
+                        realities.</p>
 
-                    <p>The extraction of her ascended essence resulted in complete metaphysical annihilation, creating permanent damage to the Harmonic Lattice and leaving an unresolved absence that <a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a> has never recovered from.</p>
+                    <p>The extraction of her ascended essence resulted in complete metaphysical annihilation, creating
+                        permanent damage to the Harmonic Lattice and leaving an unresolved absence that <a
+                            href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a> has never
+                        recovered from.</p>
 
                     <h3 class="section-subtitle">The Mahana Paradox</h3>
-                    <p>The entity known as <a href="character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a> originates from this Desynchronization Event. Whether she is Pyara's reincarnation, a harmonically displaced echo, or an entirely new entity remains deliberately ambiguous.</p>
+                    <p>The entity known as <a href="character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a>
+                        originates from this Desynchronization Event. Whether she is Pyara's reincarnation, a
+                        harmonically displaced echo, or an entirely new entity remains deliberately ambiguous.</p>
 
-                    <p>Mahana is a reconstructed harmonic echo attempting to stabilize a melody that was never meant to continue.</p>
+                    <p>Mahana is a reconstructed harmonic echo attempting to stabilize a melody that was never meant to
+                        continue.</p>
                 </div>
             </section>
         </div>
@@ -716,7 +913,7 @@
         <!-- Shared Sections -->
         <section class="content-section">
             <h2 class="section-title">Relationships</h2>
-            
+
             <div class="relationships-grid">
                 <a href="character-kali-dana.html" class="relationship-card">
                     <div class="relationship-name">Kali Dana</div>
@@ -746,7 +943,7 @@
                 <p><strong>Archetype:</strong> Sacrificial Hero</p>
                 <p><strong>Character Arc:</strong> Ascension through sacrifice</p>
                 <p><strong>Arc Status:</strong> Tragic</p>
-                
+
                 <p><strong>Themes Represented:</strong></p>
                 <ul>
                     <li>Love as literal magical force</li>
@@ -756,9 +953,12 @@
                     <li>Music as final harmony before silence</li>
                 </ul>
 
-                <p><strong>Foil to:</strong> <a href="character-dissonant-discord.html" class="wiki-link">dissonant discord</a> — harmony versus dissonance</p>
+                <p><strong>Foil to:</strong> <a href="character-dissonant-discord.html" class="wiki-link">dissonant
+                        discord</a> — harmony versus dissonance</p>
 
-                <p><strong>Narrative Function:</strong> Pyara's death establishes irreversible stakes for the entire Crios narrative, proving that even protagonists with lodesoul-class power cannot escape consequence.</p>
+                <p><strong>Narrative Function:</strong> Pyara's death establishes irreversible stakes for the entire
+                    Crios narrative, proving that even protagonists with lodesoul-class power cannot escape consequence.
+                </p>
             </div>
         </section>
 
@@ -766,12 +966,17 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> Pyara – modification of Pyārā (प्यारा), meaning "cute" or "beloved" in Hindi; Dana – modification of Dānā (दाना), meaning "mage"</li>
-                    <li><strong>Design Notes:</strong> Ascension visually mirrors demonic dissolution to emphasize metaphysical cost</li>
-                    <li><strong>Symbolism:</strong> Music as final harmony; radiant light as both salvation and destruction</li>
+                    <li><strong>Name Etymology:</strong> Pyara – modification of Pyārā (प्यारा), meaning "cute" or
+                        "beloved" in Hindi; Dana – modification of Dānā (दाना), meaning "mage"</li>
+                    <li><strong>Design Notes:</strong> Ascension visually mirrors demonic dissolution to emphasize
+                        metaphysical cost</li>
+                    <li><strong>Symbolism:</strong> Music as final harmony; radiant light as both salvation and
+                        destruction</li>
                     <li><strong>Inspiration:</strong> Magical girl martyr archetypes</li>
-                    <li><strong>Author Notes:</strong> Pyara's death establishes irreversible stakes and fundamentally changes Heart Melody's dynamic</li>
-                    <li><strong>Continuity Flags:</strong> Lodesoul implications ripple into later arcs; her death directly catalyzes multiple character transformations</li>
+                    <li><strong>Author Notes:</strong> Pyara's death establishes irreversible stakes and fundamentally
+                        changes Heart Melody's dynamic</li>
+                    <li><strong>Continuity Flags:</strong> Lodesoul implications ripple into later arcs; her death
+                        directly catalyzes multiple character transformations</li>
                     <li><strong>Reputation:</strong> Revered posthumously as Beeston's greatest protector</li>
                 </ul>
             </div>
@@ -797,4 +1002,5 @@
         }
     </script>
 </body>
+
 </html>

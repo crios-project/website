@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kali Dana // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -133,8 +136,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-header {
@@ -394,8 +404,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
@@ -451,7 +598,8 @@
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Faction</span>
-                                <span class="stat-value"><a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a></span>
+                                <span class="stat-value"><a href="../factions/faction-heart-melody.html"
+                                        class="wiki-link">Heart Melody</a></span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Weapon</span>
@@ -459,7 +607,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "If we must die, then we'll die together."
                     </div>
@@ -469,11 +626,20 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Kali Dana is serious, vigilant, and perpetually worried—especially when it comes to her younger sister <a href="character-pyara-dana.html" class="wiki-link">Pyara</a>. Orphaned young, Kali built her entire identity around keeping Pyara safe, often at the expense of her own well-being. She is pragmatic, disciplined, and far more perceptive than she lets on.</p>
+                    <p>Kali Dana is serious, vigilant, and perpetually worried—especially when it comes to her younger
+                        sister <a href="character-pyara-dana.html" class="wiki-link">Pyara</a>. Orphaned young, Kali
+                        built her entire identity around keeping Pyara safe, often at the expense of her own well-being.
+                        She is pragmatic, disciplined, and far more perceptive than she lets on.</p>
 
-                    <p>Even outside of her magical role, Kali is dangerous: a skilled knife fighter who wields twin daggers with lethal precision. Where Pyara trusts easily, Kali questions everything. Her hypervigilance has kept them alive through Beeston's prolonged war, but at tremendous personal cost.</p>
+                    <p>Even outside of her magical role, Kali is dangerous: a skilled knife fighter who wields twin
+                        daggers with lethal precision. Where Pyara trusts easily, Kali questions everything. Her
+                        hypervigilance has kept them alive through Beeston's prolonged war, but at tremendous personal
+                        cost.</p>
 
-                    <p>Kali carries herself with rigid composure. Even out of transformation, her posture and gaze suggest constant readiness, as if she is perpetually braced for catastrophe. Her short, asymmetrical bob—mostly dark gray with a bold purple streak on the longer side—frames a face that rarely shows expression.</p>
+                    <p>Kali carries herself with rigid composure. Even out of transformation, her posture and gaze
+                        suggest constant readiness, as if she is perpetually braced for catastrophe. Her short,
+                        asymmetrical bob—mostly dark gray with a bold purple streak on the longer side—frames a face
+                        that rarely shows expression.</p>
                 </div>
             </section>
 
@@ -507,7 +673,8 @@
                     <p><strong>Core Fear:</strong> Failure through inaction; losing loved ones due to hesitation</p>
                     <p><strong>Core Motivation:</strong> Responsibility as survival—keeping Pyara and her team alive</p>
                     <p><strong>Core Value:</strong> Order, preparedness, sacrifice</p>
-                    <p><strong>Moral Alignment:</strong> Lawful Neutral (later shifts to Lawful Dark as Odisse Nocere)</p>
+                    <p><strong>Moral Alignment:</strong> Lawful Neutral (later shifts to Lawful Dark as Odisse Nocere)
+                    </p>
                     <p><strong>Emotional Triggers:</strong> Perceived recklessness; betrayal</p>
                     <p><strong>Habits:</strong> Hypervigilant scanning; clenched fists when stressed</p>
                     <p><strong>Internal Question:</strong> Does protection justify cruelty?</p>
@@ -517,15 +684,20 @@
             <section class="content-section">
                 <h2 class="section-title">Backstory & Trauma</h2>
                 <div class="section-content">
-                    <p>Orphaned at a young age, Kali assumed the role of Pyara's primary caregiver and protector. This responsibility shaped her entire identity—every decision, every action filtered through the question: <em>Will this keep Pyara safe?</em></p>
+                    <p>Orphaned at a young age, Kali assumed the role of Pyara's primary caregiver and protector. This
+                        responsibility shaped her entire identity—every decision, every action filtered through the
+                        question: <em>Will this keep Pyara safe?</em></p>
 
-                    <p>Her vigilance kept them alive through Beeston's prolonged war against demonic forces, but it came at tremendous personal cost. Kali suppressed her own needs, fears, and desires to maintain the rigid discipline required for survival.</p>
+                    <p>Her vigilance kept them alive through Beeston's prolonged war against demonic forces, but it came
+                        at tremendous personal cost. Kali suppressed her own needs, fears, and desires to maintain the
+                        rigid discipline required for survival.</p>
 
                     <h3 class="section-subtitle">Formative Events</h3>
                     <ul>
                         <li>The prolonged war against demonic forces in Beeston</li>
                         <li>The fall of the Demon General and the collapsing citadel</li>
-                        <li>The ambush by <a href="character-dissonant-discord.html" class="wiki-link">dissonant discord</a> following apparent victory</li>
+                        <li>The ambush by <a href="character-dissonant-discord.html" class="wiki-link">dissonant
+                                discord</a> following apparent victory</li>
                         <li>Pyara's death during Aria Caesura—the failure that shatters Kali's entire worldview</li>
                     </ul>
                 </div>
@@ -534,13 +706,23 @@
             <section class="content-section">
                 <h2 class="section-title">Future Path: Odisse Nocere</h2>
                 <div class="section-content">
-                    <p>Following Pyara's death, Kali's carefully maintained emotional control shatters. The one thing she had built her entire existence around—keeping Pyara safe—had failed catastrophically.</p>
+                    <p>Following Pyara's death, Kali's carefully maintained emotional control shatters. The one thing
+                        she had built her entire existence around—keeping Pyara safe—had failed catastrophically.</p>
 
-                    <p>Unable to process her grief and consumed by rage, Kali undergoes a fundamental identity transformation into <strong><a href="character-odisse-nocere.html" class="wiki-link">Odisse Nocere</a></strong>. This is not a separate persona, but rather Kali stripped of all restraint and focused singularly on vengeance against Tiala Hartlight (discord's true identity).</p>
+                    <p>Unable to process her grief and consumed by rage, Kali undergoes a fundamental identity
+                        transformation into <strong><a href="character-odisse-nocere.html" class="wiki-link">Odisse
+                                Nocere</a></strong>. This is not a separate persona, but rather Kali stripped of all
+                        restraint and focused singularly on vengeance against Tiala Hartlight (discord's true identity).
+                    </p>
 
-                    <p>As Odisse, she joins <a href="../factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a>, viewing the organization purely as a pathway toward discord's eventual destruction. Her loyalty to the faction is conditional—she tolerates other members only insofar as they facilitate her revenge.</p>
+                    <p>As Odisse, she joins <a href="../factions/faction-reason-theory.html" class="wiki-link">Reason
+                            Theory</a>, viewing the organization purely as a pathway toward discord's eventual
+                        destruction. Her loyalty to the faction is conditional—she tolerates other members only insofar
+                        as they facilitate her revenge.</p>
 
-                    <p><strong>Note:</strong> This transformation represents a continuation of Kali's character, not a replacement. See the separate <a href="character-odisse-nocere.html" class="wiki-link">Odisse Nocere</a> profile for her post-fracture identity.</p>
+                    <p><strong>Note:</strong> This transformation represents a continuation of Kali's character, not a
+                        replacement. See the separate <a href="character-odisse-nocere.html" class="wiki-link">Odisse
+                            Nocere</a> profile for her post-fracture identity.</p>
                 </div>
             </section>
         </div>
@@ -586,7 +768,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "I'll be the last one standing."
                     </div>
@@ -596,12 +787,17 @@
             <section class="content-section">
                 <h2 class="section-title">Heart Seria Powers</h2>
                 <div class="section-content">
-                    <p>As <strong>Heart Seria</strong>, Kali serves as the <a href="../factions/faction-heart-melody.html" class="wiki-link">Lovely Hearts</a>' defensive backbone. She positions herself between danger and her teammates, prioritizing Pyara's safety above all else. Her magic emphasizes protection, barriers, and countermeasures.</p>
+                    <p>As <strong>Heart Seria</strong>, Kali serves as the <a
+                            href="../factions/faction-heart-melody.html" class="wiki-link">Lovely Hearts</a>' defensive
+                        backbone. She positions herself between danger and her teammates, prioritizing Pyara's safety
+                        above all else. Her magic emphasizes protection, barriers, and countermeasures.</p>
 
                     <h3 class="section-subtitle">Abilities</h3>
                     <ul>
-                        <li><strong>Defensive Resonance:</strong> Creates protective barriers and shielding harmonics</li>
-                        <li><strong>Stabilization Fields:</strong> Prevents magical disruption and environmental collapse</li>
+                        <li><strong>Defensive Resonance:</strong> Creates protective barriers and shielding harmonics
+                        </li>
+                        <li><strong>Stabilization Fields:</strong> Prevents magical disruption and environmental
+                            collapse</li>
                         <li><strong>Team Support Harmonics:</strong> Amplifies allies' defensive capabilities</li>
                         <li><strong>Suppression Strikes:</strong> Neutralizes enemy casting</li>
                     </ul>
@@ -614,9 +810,12 @@
                         <li>Defensive specialization limits offensive options</li>
                     </ul>
 
-                    <p><strong>Philosophy:</strong> Protection through loyalty—if the team must fall, Kali intends to be the last one standing.</p>
-                    
-                    <p><strong>Combat Approach:</strong> Positions herself between threats and allies, prioritizing threat neutralization and team protection. Even in civilian form, she maintains combat readiness through knife fighting expertise.</p>
+                    <p><strong>Philosophy:</strong> Protection through loyalty—if the team must fall, Kali intends to be
+                        the last one standing.</p>
+
+                    <p><strong>Combat Approach:</strong> Positions herself between threats and allies, prioritizing
+                        threat neutralization and team protection. Even in civilian form, she maintains combat readiness
+                        through knife fighting expertise.</p>
                 </div>
             </section>
         </div>
@@ -624,7 +823,7 @@
         <!-- Shared Sections -->
         <section class="content-section">
             <h2 class="section-title">Relationships</h2>
-            
+
             <div class="relationships-grid">
                 <a href="character-pyara-dana.html" class="relationship-card">
                     <div class="relationship-name">Pyara Dana</div>
@@ -660,7 +859,7 @@
                 <p><strong>Story Function:</strong> Deuteragonist → Antagonistic Force</p>
                 <p><strong>Character Arc:</strong> Protector → Avenger</p>
                 <p><strong>Arc Status:</strong> Tragic</p>
-                
+
                 <p><strong>Themes Represented:</strong></p>
                 <ul>
                     <li>Duty transforming into obsession</li>
@@ -670,9 +869,11 @@
                     <li>Stability turning into rigidity</li>
                 </ul>
 
-                <p><strong>Foil to:</strong> <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a> — where Pyara trusted and loved freely, Kali questioned and protected fiercely</p>
+                <p><strong>Foil to:</strong> <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a> —
+                    where Pyara trusted and loved freely, Kali questioned and protected fiercely</p>
 
-                <p><strong>Narrative Function:</strong> Kali's transformation into Odisse Nocere demonstrates how grief can corrupt even the most protective impulses. Her fall is meant to feel inevitable, not sudden.</p>
+                <p><strong>Narrative Function:</strong> Kali's transformation into Odisse Nocere demonstrates how grief
+                    can corrupt even the most protective impulses. Her fall is meant to feel inevitable, not sudden.</p>
             </div>
         </section>
 
@@ -680,13 +881,18 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> Kali (काली) — Hindu deity associated with time, destruction, and inevitability; Dana – modification of Dānā (दाना), meaning "mage"</li>
-                    <li><strong>Design Notes:</strong> Kali's severity deliberately contrasts with Pyara's warmth; asymmetrical bob represents internal imbalance</li>
+                    <li><strong>Name Etymology:</strong> Kali (काली) — Hindu deity associated with time, destruction,
+                        and inevitability; Dana – modification of Dānā (दाना), meaning "mage"</li>
+                    <li><strong>Design Notes:</strong> Kali's severity deliberately contrasts with Pyara's warmth;
+                        asymmetrical bob represents internal imbalance</li>
                     <li><strong>Symbolism:</strong> Stability turning into rigidity; protection becoming prison</li>
                     <li><strong>Inspiration:</strong> Mythic guardians and lawful avengers</li>
-                    <li><strong>Author Notes:</strong> Her fall is meant to feel inevitable, not sudden—every protective impulse contains the seed of obsession</li>
-                    <li><strong>Continuity:</strong> Odisse Nocere is a continuation, not a replacement—fundamentally the same person stripped of restraint</li>
-                    <li><strong>Reputation:</strong> Known among allies as unbreakable—and among enemies as relentless</li>
+                    <li><strong>Author Notes:</strong> Her fall is meant to feel inevitable, not sudden—every protective
+                        impulse contains the seed of obsession</li>
+                    <li><strong>Continuity:</strong> Odisse Nocere is a continuation, not a replacement—fundamentally
+                        the same person stripped of restraint</li>
+                    <li><strong>Reputation:</strong> Known among allies as unbreakable—and among enemies as relentless
+                    </li>
                 </ul>
             </div>
         </section>
@@ -711,4 +917,5 @@
         }
     </script>
 </body>
+
 </html>

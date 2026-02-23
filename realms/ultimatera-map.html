@@ -1,271 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
   <title>Ultimatera Map</title>
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Archivo:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
+    /* CSS Variables matching CRIOS theme */
+    :root {
+      --primary-burgundy: #6b0f1a;
+      --secondary-pink: #e91e63;
+      --accent-cyan: #00d9ff;
+      --dark-bg: #0a0a0f;
+      --dark-panel: #141419;
+      --text-primary: #e8e8f0;
+      --text-dim: #8888a8;
+      --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
+      --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+    }
+
+    /* Remove all default margins and scrollbars */
+    html, body {
       margin: 0;
-      background: #0b0f18;
-      color: #e2e8f0;
-      font-family: system-ui;
-    }
-
-    .map-wrapper {
-      display: flex;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    #base-map {
+      padding: 0;
+      height: 100%;
       width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* LEFT SIDE */
-
-    .map-container {
-      position: relative;
-      width: 900px;
       overflow: hidden;
-      border-radius: 14px;
+      background: var(--dark-bg);
     }
 
-    #map-inner {
-      position: relative;
-      transform-origin: top left;
-    }
-
-    #base-map {
-      width: 100%;
+    /* Set the map to fill the entire viewport */
+    #map {
+      width: 100vw;
+      height: 100vh;
       display: block;
+      background: var(--dark-bg);
     }
 
-    #marker-layer {
+    /* Position dimension buttons over the map */
+    .map-controls {
+      position: absolute;
+      top: 80px;
+      left: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .control-section-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+      margin-top: 8px;
+    }
+
+    .map-controls button {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 12px 24px;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+      border: 2px solid var(--secondary-pink);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-controls button::before {
+      content: '';
       position: absolute;
       top: 0;
-      left: 0;
+      left: -100%;
       width: 100%;
       height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.4s ease;
     }
 
-    .marker {
-      cursor: pointer;
-      transition: transform 0.15s ease;
+    .map-controls button:hover::before {
+      left: 100%;
+    }
+    
+    .map-controls button:hover {
+      box-shadow: var(--glow-pink);
+      transform: scale(1.05);
+      border-color: var(--accent-cyan);
     }
 
-    .marker:hover {
-      transform: scale(1.3);
+    .map-controls button:active {
+      transform: scale(0.98);
     }
 
-    /* TOOLTIP (hover) */
+    /* Active dimension/realm button styling */
+    .map-controls button.active {
+      background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+      border-color: var(--accent-cyan);
+      box-shadow: var(--glow-cyan);
+    }
 
-    #tooltip {
-      position: fixed;
-      pointer-events: none;
-      background: rgba(15, 23, 42, 0.95);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      display: none;
-      white-space: nowrap;
+    /* Realm filter controls */
+    .realm-controls {
+      position: absolute;
+      top: 80px;
+      right: 20px;
       z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    /* RIGHT INFO PANEL (click persistent) */
-
-    #info-panel {
-      width: 320px;
-      background: #111827;
-      padding: 20px;
-      border-radius: 14px;
-      display: none;
-    }
-
-    #info-panel h2 {
-      margin-top: 0;
-    }
-
-    .close-btn {
-      margin-top: 12px;
+    .realm-controls button {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 10px 20px;
       cursor: pointer;
-      background: #1f2937;
-      padding: 6px 10px;
-      border-radius: 6px;
-      display: inline-block;
+      background: rgba(20, 20, 25, 0.8);
+      border: 2px solid var(--text-dim);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* CONTROLS */
-
-    .controls {
-      margin-bottom: 12px;
+    .realm-controls button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.4s ease;
     }
 
-    button {
-      margin-right: 6px;
+    .realm-controls button:hover::before {
+      left: 100%;
+    }
+
+    .realm-controls button:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: var(--glow-cyan);
+      transform: scale(1.05);
+    }
+
+    /* Active realm filter */
+    .realm-controls button.active {
+      background: linear-gradient(135deg, rgba(233, 30, 99, 0.3), rgba(0, 217, 255, 0.2));
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+    }
+
+    /* "All" button special styling */
+    .realm-controls button.all-realms {
+      background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+      border-color: var(--secondary-pink);
+    }
+
+    .realm-controls button.all-realms.active {
+      background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+      border-color: var(--accent-cyan);
+      box-shadow: var(--glow-cyan);
+    }
+
+    /* Custom Leaflet Zoom Controls */
+    .leaflet-control-zoom {
+      border: 2px solid var(--secondary-pink) !important;
+      border-radius: 8px !important;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, rgba(107, 15, 26, 0.95), rgba(20, 20, 25, 0.95)) !important;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
+    .leaflet-control-zoom a {
+      font-family: 'Orbitron', sans-serif !important;
+      font-size: 1.2rem !important;
+      font-weight: 700 !important;
+      width: 36px !important;
+      height: 36px !important;
+      line-height: 36px !important;
+      color: var(--text-primary) !important;
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid rgba(233, 30, 99, 0.3) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .leaflet-control-zoom a:last-child {
+      border-bottom: none !important;
+    }
+
+    .leaflet-control-zoom a:hover {
+      color: var(--accent-cyan) !important;
+      background: rgba(233, 30, 99, 0.2) !important;
+    }
+
+    .leaflet-control-zoom a:active {
+      background: rgba(233, 30, 99, 0.4) !important;
+    }
+
+    /* Hide default Leaflet disabled state */
+    .leaflet-control-zoom-in.leaflet-disabled,
+    .leaflet-control-zoom-out.leaflet-disabled {
+      opacity: 0.4 !important;
+      cursor: not-allowed !important;
+    }
+
+    /* Custom Attribution Styling */
+    .leaflet-control-attribution {
+      font-family: 'Archivo', sans-serif !important;
+      font-size: 0.7rem !important;
+      background: rgba(20, 20, 25, 0.9) !important;
+      color: var(--text-dim) !important;
+      border: 1px solid rgba(233, 30, 99, 0.2) !important;
+      border-radius: 4px !important;
+      padding: 4px 8px !important;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(5px);
+    }
+
+    .leaflet-control-attribution a {
+      color: var(--accent-cyan) !important;
+    }
+
+    /* Dimension Label */
+    .dimension-label {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      z-index: 1000;
+      pointer-events: none;
+      text-shadow: 0 2px 10px rgba(233, 30, 99, 0.5);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .map-controls {
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .map-controls button {
+        font-size: 0.7rem;
+        padding: 8px 16px;
+        flex: 1;
+        min-width: 70px;
+      }
+
+      .control-section-label {
+        display: none;
+      }
+
+      .realm-controls {
+        top: auto;
+        bottom: 15px;
+        right: 15px;
+        left: 15px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .realm-controls button {
+        font-size: 0.65rem;
+        padding: 8px 12px;
+        flex: 1;
+        min-width: 60px;
+      }
+
+      .dimension-label {
+        font-size: 1rem;
+        top: auto;
+        bottom: 75px;
+        right: 10px;
+      }
+
+      .leaflet-control-zoom {
+        margin-right: 10px !important;
+        margin-top: 80px !important;
+      }
     }
   </style>
 </head>
 
 <body>
-
-  <div class="map-wrapper">
-
-    <div>
-      <div class="controls">
-        <button id="zoom-in">+</button>
-        <button id="zoom-out">−</button>
-      </div>
-
-      <div class="map-container">
-        <div id="map-inner">
-          <img src="../assets/images/ultimatera.webp" id="base-map" alt="Ultimatera world map">
-          <svg id="marker-layer" viewBox="0 0 5632 5632" preserveAspectRatio="xMidYMid meet">
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <div id="info-panel">
-      <h2 id="info-title"></h2>
-      <p id="info-desc"></p>
-      <div class="close-btn" id="close-info">Close</div>
-    </div>
-
+  <div class="map-controls">
+    <div class="control-section-label">Dimensions</div>
+    <button id="btn-normal" class="active" onclick="switchDimension('normal')">World</button>
+    <button id="btn-sky" onclick="switchDimension('sky')">Sky</button>
+    <button id="btn-cyber" onclick="switchDimension('cyber')">Cyber</button>
+    <button id="btn-space" onclick="switchDimension('space')">Space</button>
   </div>
 
-  <div id="tooltip"></div>
+  <div class="realm-controls">
+    <div class="control-section-label">Realms</div>
+    <button id="btn-all" class="all-realms active" onclick="toggleRealmFilter('all')">All</button>
+    <button id="btn-beeston" onclick="toggleRealmFilter('beeston')">Beeston</button>
+    <button id="btn-royastella" onclick="toggleRealmFilter('royastella')">Royastella</button>
+    <button id="btn-nexsicon" onclick="toggleRealmFilter('nexsicon')">Nexsicon</button>
+    <button id="btn-ultimatera" onclick="toggleRealmFilter('ultimatera')">Ultimatera</button>
+    <button id="btn-antiquity" onclick="toggleRealmFilter('antiquity')">Realms of Antiquity</button>
+  </div>
 
+  <div id="dimensionLabel" class="dimension-label">World</div>
+  
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="locations.js"></script>
   <script>
+    // Track current dimension and active realms
+    let currentDimension = 'normal';
+    let activeRealms = new Set(['all', 'beeston', 'royastella', 'nexsicon', 'ultimatera']);
 
-    /* ============================
-       DATA MODEL
-    ============================ */
+    // Update active dimension button state
+    function updateButtonStates(dimension) {
+      // Remove active class from all dimension buttons
+      document.querySelectorAll('.map-controls button').forEach(btn => {
+        btn.classList.remove('active');
+      });
 
-    const locations = [
-      {
-        name: "Crimson Spire",
-        x: 2100,
-        y: 1500,
-        realm: "Aether",
-        zone: "Northreach",
-        description: "A jagged arcane tower piercing the upper currents."
-      },
-      {
-        name: "Ashen Harbor",
-        x: 1300,
-        y: 2100,
-        realm: "Emberfall",
-        zone: "Coastal Verge",
-        description: "Trade port built on cooled volcanic glass."
-      }
-    ];
+      // Add active class to selected dimension button
+      const buttonId = 'btn-' + dimension;
+      document.getElementById(buttonId).classList.add('active');
 
-
-    /* ============================
-       STATE
-    ============================ */
-
-    let scale = 1;
-    let pinnedLocation = null;
-
-    const mapInner = document.getElementById("map-inner");
-    const svg = document.getElementById("marker-layer");
-    const tooltip = document.getElementById("tooltip");
-    const infoPanel = document.getElementById("info-panel");
-
-    /* ============================
-       ZOOM
-    ============================ */
-
-    function setZoom(newScale) {
-      scale = Math.min(Math.max(0.5, newScale), 3);
-      mapInner.style.transform = `scale(${scale})`;
+      // Update dimension label
+      const labels = {
+        'normal': 'World',
+        'sky': 'Sky',
+        'cyber': 'Cyber',
+        'space': 'Space'
+      };
+      document.getElementById('dimensionLabel').textContent = labels[dimension] || 'World';
     }
 
-    document.getElementById("zoom-in").onclick =
-      () => setZoom(scale + 0.2);
+    // Update realm filter button states
+    function updateRealmButtonStates() {
+      const realmButtons = document.querySelectorAll('.realm-controls button:not(.all-realms)');
+      const allButton = document.getElementById('btn-all');
+      
+      // Update individual realm buttons
+      realmButtons.forEach(btn => {
+        const realm = btn.id.replace('btn-', '');
+        if (activeRealms.has(realm)) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
 
-    document.getElementById("zoom-out").onclick =
-      () => setZoom(scale - 0.2);
+      // Update "All" button based on whether all realms are active
+      const allRealmsActive = ['beeston', 'royastella', 'nexsicon', 'ultimatera'].every(r => activeRealms.has(r));
+      if (allRealmsActive) {
+        allButton.classList.add('active');
+      } else {
+        allButton.classList.remove('active');
+      }
+    }
 
-    mapInner.addEventListener("wheel", e => {
-      e.preventDefault();
-      setZoom(scale + (e.deltaY < 0 ? 0.1 : -0.1));
+    // Toggle realm filter
+    function toggleRealmFilter(realm) {
+      if (realm === 'all') {
+        // Toggle all realms
+        if (activeRealms.has('all')) {
+          // If "All" is active, deactivate everything
+          activeRealms.clear();
+        } else {
+          // If "All" is inactive, activate everything
+          activeRealms = new Set(['all', 'beeston', 'royastella', 'nexsicon', 'ultimatera']);
+        }
+      } else {
+        // Toggle individual realm
+        if (activeRealms.has(realm)) {
+          activeRealms.delete(realm);
+          activeRealms.delete('all'); // Remove "all" since not all are active anymore
+        } else {
+          activeRealms.add(realm);
+          // Check if all individual realms are now active
+          if (['beeston', 'royastella', 'nexsicon', 'ultimatera'].every(r => activeRealms.has(r))) {
+            activeRealms.add('all');
+          }
+        }
+      }
+
+      updateRealmButtonStates();
+      applyFilters();
+    }
+
+    // Switch dimension function
+    function switchDimension(dimension) {
+      currentDimension = dimension;
+      updateButtonStates(dimension);
+      applyFilters();
+    }
+
+    // Apply all filters to map
+function applyFilters() {
+    // 1. Switch the base map dimension
+    if (typeof window.switchDimension === 'function') {
+        window.switchDimension(currentDimension);
+    }
+
+    // 2. Loop through ALL dimension layers to manage visibility
+    Object.keys(layers).forEach(dim => {
+        const layerGroup = layers[dim];
+        
+        layerGroup.eachLayer(function(marker) {
+            // Get realm from popup and normalize to lowercase
+            const markerRealm = marker.getPopup().getContent().split('<br>')[1].trim().toLowerCase();
+            
+            const isCorrectDimension = (dim === currentDimension);
+            const isAllActive = activeRealms.has('all');
+            const realmIsSelected = activeRealms.has(markerRealm);
+
+            // Logic: Show marker ONLY if it's the right dimension AND matches realm filters
+            if (isCorrectDimension && (isAllActive || realmIsSelected)) {
+                if (!map.hasLayer(marker)) {
+                    marker.addTo(map); 
+                }
+            } else {
+                // Remove from map, but NOT from the layerGroup
+                if (map.hasLayer(marker)) {
+                    map.removeLayer(marker);
+                }
+            }
+        });
     });
-
-
-    /* ============================
-       MARKER CREATION
-    ============================ */
-
-    locations.forEach(loc => {
-
-      const marker = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-
-      marker.setAttribute("cx", loc.x);
-      marker.setAttribute("cy", loc.y);
-      marker.setAttribute("r", 8);
-      marker.setAttribute("fill", "#f472b6");
-      marker.setAttribute("stroke", "#0f172a");
-      marker.setAttribute("stroke-width", "2");
-      marker.classList.add("marker");
-
-      /* HOVER */
-      marker.addEventListener("mouseenter", e => {
-        if (pinnedLocation) return;
-        tooltip.style.display = "block";
-        tooltip.textContent = loc.name;
-      });
-
-      marker.addEventListener("mousemove", e => {
-        if (pinnedLocation) return;
-        tooltip.style.left = e.clientX + 12 + "px";
-        tooltip.style.top = e.clientY + 12 + "px";
-      });
-
-      marker.addEventListener("mouseleave", () => {
-        if (pinnedLocation) return;
-        tooltip.style.display = "none";
-      });
-
-      /* CLICK (PIN) */
-      marker.addEventListener("click", () => {
-        pinnedLocation = loc;
-        tooltip.style.display = "none";
-
-        document.getElementById("info-title").textContent = loc.name;
-        document.getElementById("info-desc").textContent = loc.description;
-        infoPanel.style.display = "block";
-      });
-
-      svg.appendChild(marker);
-    });
-
-
-    /* ============================
-       CLOSE PANEL
-    ============================ */
-
-    document.getElementById("close-info").onclick = () => {
-      pinnedLocation = null;
-      infoPanel.style.display = "none";
-    };
-
+}
+    // Initialize button states
+    updateButtonStates('normal');
+    updateRealmButtonStates();
   </script>
-
+  <script src="map.js"></script>
 </body>
-
 </html>

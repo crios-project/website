@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jí Lián Xiá // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -133,8 +136,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-header {
@@ -376,8 +386,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
@@ -433,14 +580,24 @@
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">Faction</span>
-                            <span class="stat-value"><a href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a></span>
+                            <span class="stat-value"><a href="../factions/faction-destinys-penance.html"
+                                    class="wiki-link">Destiny's Penance</a></span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">Key Attribute</span>
                             <span class="stat-value">Uninterested</span>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">"But can we like, not tho?"</div>
                 </div>
             </section>
@@ -448,30 +605,43 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Jí Lián Xiá maintains a calm and emotionally detached demeanor. She generally shows little concern for external events and avoids unnecessary involvement in conflict. She prefers stability and comfort, engaging with others only when she has a clear purpose or need.</p>
+                    <p>Jí Lián Xiá maintains a calm and emotionally detached demeanor. She generally shows little
+                        concern for external events and avoids unnecessary involvement in conflict. She prefers
+                        stability and comfort, engaging with others only when she has a clear purpose or need.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Appearance</h2>
                 <div class="section-content">
-                    <p>Jí Lián presents with a distinctive aesthetic that reflects her preference for indoor, controlled environments. Her long, flowing hair reaches her waist and features a striking gradient: dark blue fading into dark violet and finally black. Her grayish blue eyes convey quiet observation rather than active engagement.</p>
-                    
-                    <p>Her notably pale complexion results from consistent avoidance of direct sunlight. When visiting the beach—one of her few outdoor interests—she employs extensive sun protection including large protective umbrellas and high-grade sun-blocking lotion.</p>
+                    <p>Jí Lián presents with a distinctive aesthetic that reflects her preference for indoor, controlled
+                        environments. Her long, flowing hair reaches her waist and features a striking gradient: dark
+                        blue fading into dark violet and finally black. Her grayish blue eyes convey quiet observation
+                        rather than active engagement.</p>
+
+                    <p>Her notably pale complexion results from consistent avoidance of direct sunlight. When visiting
+                        the beach—one of her few outdoor interests—she employs extensive sun protection including large
+                        protective umbrellas and high-grade sun-blocking lotion.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Personality</h2>
                 <div class="section-content">
-                    <p>While previously socially awkward, Jí Lián has grown more composed and is capable of initiating interaction when required. However, she still prefers solitude and quiet environments over social gatherings or high-energy situations.</p>
-                    
+                    <p>While previously socially awkward, Jí Lián has grown more composed and is capable of initiating
+                        interaction when required. However, she still prefers solitude and quiet environments over
+                        social gatherings or high-energy situations.</p>
+
                     <h3 class="section-subtitle">Core Traits</h3>
                     <ul>
-                        <li><strong>Reserved & Introspective:</strong> Values internal reflection over external engagement</li>
-                        <li><strong>Selectively Approachable:</strong> Engages socially when beneficial or necessary</li>
-                        <li><strong>Minimal Expressiveness:</strong> Shows little emotional reaction to external events</li>
-                        <li><strong>Comfort-Oriented:</strong> Prioritizes predictability and low-stimulation environments</li>
+                        <li><strong>Reserved & Introspective:</strong> Values internal reflection over external
+                            engagement</li>
+                        <li><strong>Selectively Approachable:</strong> Engages socially when beneficial or necessary
+                        </li>
+                        <li><strong>Minimal Expressiveness:</strong> Shows little emotional reaction to external events
+                        </li>
+                        <li><strong>Comfort-Oriented:</strong> Prioritizes predictability and low-stimulation
+                            environments</li>
                         <li><strong>Generally Passive:</strong> Avoids action unless circumstances demand it</li>
                     </ul>
 
@@ -485,7 +655,9 @@
                     </ul>
 
                     <h3 class="section-subtitle">Personal Growth</h3>
-                    <p>Jí Lián displays subtle but meaningful personal growth in social capability. While maintaining her preference for solitude, she has developed the ability to navigate social situations more effectively when circumstances require her participation.</p>
+                    <p>Jí Lián displays subtle but meaningful personal growth in social capability. While maintaining
+                        her preference for solitude, she has developed the ability to navigate social situations more
+                        effectively when circumstances require her participation.</p>
                 </div>
             </section>
 
@@ -500,7 +672,10 @@
                     </ul>
 
                     <h3 class="section-subtitle">Habits</h3>
-                    <p>Jí Lián frequently reads during her leisure time, often choosing secluded and quiet locations. Her beach visits represent a paradox—she enjoys the environment but takes extensive precautions to avoid direct sunlight, demonstrating her characteristic approach of selective engagement with the world.</p>
+                    <p>Jí Lián frequently reads during her leisure time, often choosing secluded and quiet locations.
+                        Her beach visits represent a paradox—she enjoys the environment but takes extensive precautions
+                        to avoid direct sunlight, demonstrating her characteristic approach of selective engagement with
+                        the world.</p>
                 </div>
             </section>
         </div>
@@ -543,62 +718,99 @@
                             <span class="stat-value">Victory Through Transformation</span>
                         </div>
                     </div>
-
-                    <div class="character-quote">"Victory is achieved through the mastery of transformation itself."</div>
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
+                    <div class="character-quote">"Victory is achieved through the mastery of transformation itself."
+                    </div>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Kesshō Yīng exhibits a matured and highly disciplined evolution of the aggressive, velocity-driven combat doctrine associated with her earlier fighting lineage. Where her younger counterpart <a href="character-kessho-kawa.html" class="wiki-link">Kesshō Kawa</a> emphasizes overwhelming momentum and relentless pursuit, Yīng refines those principles into a calculated and multifaceted sword discipline centered around adaptability, spatial dominance, and deliberate escalation of threat levels.</p>
+                    <p>Kesshō Yīng exhibits a matured and highly disciplined evolution of the aggressive,
+                        velocity-driven combat doctrine associated with her earlier fighting lineage. Where her younger
+                        counterpart <a href="character-kessho-kawa.html" class="wiki-link">Kesshō Kawa</a> emphasizes
+                        overwhelming momentum and relentless pursuit, Yīng refines those principles into a calculated
+                        and multifaceted sword discipline centered around adaptability, spatial dominance, and
+                        deliberate escalation of threat levels.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Weapon: Tenebris Operiet</h2>
                 <div class="section-content">
-                    <p>Her weapon, <strong>Tenebris Operiet</strong>, serves as both the core of her combat identity and a physical manifestation of her tactical philosophy. The blade's transformative architecture allows Yīng to alter her fighting methodology dynamically in response to battlefield conditions, opponent temperament, and engagement distance.</p>
-                    
-                    <p>Rather than committing to a singular weapon style, she treats each configuration of Tenebris Operiet as a distinct combat doctrine, transitioning between them with fluid mechanical precision and minimal telegraphing.</p>
+                    <p>Her weapon, <strong>Tenebris Operiet</strong>, serves as both the core of her combat identity and
+                        a physical manifestation of her tactical philosophy. The blade's transformative architecture
+                        allows Yīng to alter her fighting methodology dynamically in response to battlefield conditions,
+                        opponent temperament, and engagement distance.</p>
+
+                    <p>Rather than committing to a singular weapon style, she treats each configuration of Tenebris
+                        Operiet as a distinct combat doctrine, transitioning between them with fluid mechanical
+                        precision and minimal telegraphing.</p>
 
                     <h3 class="section-subtitle">Configuration 1: Standard Longsword + Sheath</h3>
-                    <p>In its standard form, Tenebris Operiet manifests as a double-edged longsword paired with a sheath. In this configuration, Yīng favors controlled dueling techniques built around:</p>
+                    <p>In its standard form, Tenebris Operiet manifests as a double-edged longsword paired with a
+                        sheath. In this configuration, Yīng favors controlled dueling techniques built around:</p>
                     <ul>
                         <li><strong>Refined Footwork:</strong> Precise positioning for optimal strike delivery</li>
                         <li><strong>Thrust Vectors:</strong> Measured probing for structural weaknesses</li>
                         <li><strong>Disciplined Parry Mechanics:</strong> Efficient defensive integration</li>
-                        <li><strong>Edge Alignment Control:</strong> Seamless transitions between slashing and piercing</li>
+                        <li><strong>Edge Alignment Control:</strong> Seamless transitions between slashing and piercing
+                        </li>
                     </ul>
-                    <p>This form represents her most balanced combat state, prioritizing versatility and measured pressure.</p>
+                    <p>This form represents her most balanced combat state, prioritizing versatility and measured
+                        pressure.</p>
 
                     <h3 class="section-subtitle">Configuration 2: Dual-Wielding (Separated Sheath)</h3>
-                    <p>When the sheath separates and transforms into a secondary blade, Yīng adopts an advanced dual-wielding methodology:</p>
+                    <p>When the sheath separates and transforms into a secondary blade, Yīng adopts an advanced
+                        dual-wielding methodology:</p>
                     <ul>
-                        <li><strong>Layered Offensive Timing:</strong> Synchronized and staggered strikes creating deceptive cadences</li>
-                        <li><strong>Asymmetric Attack Patterns:</strong> Overwhelming defensive prediction through varied rhythms</li>
-                        <li><strong>Independent Off-Hand Use:</strong> Secondary blade for interception, counter-thrusting, and guard disruption</li>
-                        <li><strong>Multi-Vector Control:</strong> Maintaining continuous pressure across multiple threat angles</li>
+                        <li><strong>Layered Offensive Timing:</strong> Synchronized and staggered strikes creating
+                            deceptive cadences</li>
+                        <li><strong>Asymmetric Attack Patterns:</strong> Overwhelming defensive prediction through
+                            varied rhythms</li>
+                        <li><strong>Independent Off-Hand Use:</strong> Secondary blade for interception,
+                            counter-thrusting, and guard disruption</li>
+                        <li><strong>Multi-Vector Control:</strong> Maintaining continuous pressure across multiple
+                            threat angles</li>
                     </ul>
                     <p>Particularly dangerous against groups or highly defensive opponents.</p>
 
                     <h3 class="section-subtitle">Configuration 3: Double-Ended Butterfly Sword</h3>
-                    <p>By attaching the sheath at the hilt to form a double-ended butterfly sword, Yīng transitions into a rotational combat paradigm:</p>
+                    <p>By attaching the sheath at the hilt to form a double-ended butterfly sword, Yīng transitions into
+                        a rotational combat paradigm:</p>
                     <ul>
                         <li><strong>Centrifugal Momentum:</strong> Spinning slashes and pivot-driven deflections</li>
-                        <li><strong>Sweeping Area Denial:</strong> Wide rotational arcs controlling engagement zones</li>
+                        <li><strong>Sweeping Area Denial:</strong> Wide rotational arcs controlling engagement zones
+                        </li>
                         <li><strong>Continuous Directional Transitions:</strong> Highly kinetic fighting style</li>
-                        <li><strong>Blurred Defense/Offense:</strong> Rotations that serve both purposes simultaneously</li>
+                        <li><strong>Blurred Defense/Offense:</strong> Rotations that serve both purposes simultaneously
+                        </li>
                     </ul>
-                    <p>Exceptional spatial awareness allows control of large areas while suppressing opponent mobility.</p>
+                    <p>Exceptional spatial awareness allows control of large areas while suppressing opponent mobility.
+                    </p>
 
                     <h3 class="section-subtitle">Configuration 4: Elongated Greatblade</h3>
-                    <p>The final transformation—attaching the sheath to the distal end—produces an elongated greatblade:</p>
+                    <p>The final transformation—attaching the sheath to the distal end—produces an elongated greatblade:
+                    </p>
                     <ul>
-                        <li><strong>Long-Range Dominance:</strong> Extraordinary reach dictating engagement distance</li>
-                        <li><strong>Precision & Intimidation:</strong> Sweeping cleaves and delayed thrusts exploiting reach</li>
-                        <li><strong>Territorial Control:</strong> Extended feint chains capitalizing on opponent misjudgment</li>
-                        <li><strong>Remarkable Handling:</strong> Maintaining speed despite apparent size through grip transitions</li>
+                        <li><strong>Long-Range Dominance:</strong> Extraordinary reach dictating engagement distance
+                        </li>
+                        <li><strong>Precision & Intimidation:</strong> Sweeping cleaves and delayed thrusts exploiting
+                            reach</li>
+                        <li><strong>Territorial Control:</strong> Extended feint chains capitalizing on opponent
+                            misjudgment</li>
+                        <li><strong>Remarkable Handling:</strong> Maintaining speed despite apparent size through grip
+                            transitions</li>
                     </ul>
                 </div>
             </section>
@@ -606,13 +818,30 @@
             <section class="content-section">
                 <h2 class="section-title">Combat Philosophy</h2>
                 <div class="section-content">
-                    <p>Yīng's combat rhythm is characterized by smooth, deliberate transitions between weapon configurations. She often alters Tenebris Operiet's form mid-engagement to disrupt opponent pattern recognition, weaponizing unpredictability as a strategic advantage. These transformations are executed with near-seamless integration into her movement sequences, allowing her to convert defensive recoveries into offensive initiations without pause.</p>
+                    <p>Yīng's combat rhythm is characterized by smooth, deliberate transitions between weapon
+                        configurations. She often alters Tenebris Operiet's form mid-engagement to disrupt opponent
+                        pattern recognition, weaponizing unpredictability as a strategic advantage. These
+                        transformations are executed with near-seamless integration into her movement sequences,
+                        allowing her to convert defensive recoveries into offensive initiations without pause.</p>
 
-                    <p>Her mobility reflects a balance between elegance and lethality. Yīng favors gliding footwork, controlled lunging advances, and rotational disengagements that maintain her positional advantage. She rarely wastes motion, ensuring each step contributes either to angle acquisition, strike preparation, or defensive repositioning. Her battlefield presence often feels methodical and oppressive, as she steadily constricts opponent maneuvering options while expanding her own.</p>
+                    <p>Her mobility reflects a balance between elegance and lethality. Yīng favors gliding footwork,
+                        controlled lunging advances, and rotational disengagements that maintain her positional
+                        advantage. She rarely wastes motion, ensuring each step contributes either to angle acquisition,
+                        strike preparation, or defensive repositioning. Her battlefield presence often feels methodical
+                        and oppressive, as she steadily constricts opponent maneuvering options while expanding her own.
+                    </p>
 
-                    <p>Psychologically, Yīng conveys a composed and calculating demeanor in combat. She approaches engagements as exercises in technical mastery rather than raw dominance, frequently studying an opponent's rhythm before escalating her offensive output. Unlike more impulsive duelists, she demonstrates patience, allowing conflicts to unfold at a pace that favors her adaptability and weapon versatility.</p>
+                    <p>Psychologically, Yīng conveys a composed and calculating demeanor in combat. She approaches
+                        engagements as exercises in technical mastery rather than raw dominance, frequently studying an
+                        opponent's rhythm before escalating her offensive output. Unlike more impulsive duelists, she
+                        demonstrates patience, allowing conflicts to unfold at a pace that favors her adaptability and
+                        weapon versatility.</p>
 
-                    <p>While her fighting style is rooted in sword mastery, Yīng's greatest strength lies in her ability to transform both her weapon and her tactical identity in real time. She embodies a philosophy that victory is achieved not through singular excellence, but through the mastery of transformation itself—adapting shape, rhythm, and reach until resistance becomes structurally impossible.</p>
+                    <p>While her fighting style is rooted in sword mastery, Yīng's greatest strength lies in her ability
+                        to transform both her weapon and her tactical identity in real time. She embodies a philosophy
+                        that victory is achieved not through singular excellence, but through the mastery of
+                        transformation itself—adapting shape, rhythm, and reach until resistance becomes structurally
+                        impossible.</p>
                 </div>
             </section>
         </div>
@@ -655,7 +884,16 @@
                             <span class="stat-value">Tactical Severity</span>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">"Resistance collapses under sustained pressure."</div>
                 </div>
             </section>
@@ -663,22 +901,37 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Kesshō Tǐ mirrors the refined, flowing lethality displayed by Kesshō Yīng, maintaining the same foundation of elegant, high-speed bladework and aerial maneuverability. However, where Yīng embodies grace and precision as an art, Tǐ expresses combat as an unrelenting campaign of calculated domination.</p>
+                    <p>Kesshō Tǐ mirrors the refined, flowing lethality displayed by Kesshō Yīng, maintaining the same
+                        foundation of elegant, high-speed bladework and aerial maneuverability. However, where Yīng
+                        embodies grace and precision as an art, Tǐ expresses combat as an unrelenting campaign of
+                        calculated domination.</p>
 
-                    <p>Her movements retain their dancer-like fluidity, but each step advances territory, each strike establishes control, and every motion pressures opponents into defensive collapse. She fights with the mentality of overwhelming inevitability—never rushing blindly, yet never allowing adversaries the stability needed to recover or regroup.</p>
+                    <p>Her movements retain their dancer-like fluidity, but each step advances territory, each strike
+                        establishes control, and every motion pressures opponents into defensive collapse. She fights
+                        with the mentality of overwhelming inevitability—never rushing blindly, yet never allowing
+                        adversaries the stability needed to recover or regroup.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Combat Philosophy</h2>
                 <div class="section-content">
-                    <p>Tǐ favors aggressive forward momentum. She chains attacks into prolonged offensive sequences designed to exhaust resistance through layered strike patterns. Rather than relying solely on surgical eliminations, she destabilizes opponents through sustained pressure, forcing errors that she exploits with devastating finishing blows.</p>
+                    <p>Tǐ favors aggressive forward momentum. She chains attacks into prolonged offensive sequences
+                        designed to exhaust resistance through layered strike patterns. Rather than relying solely on
+                        surgical eliminations, she destabilizes opponents through sustained pressure, forcing errors
+                        that she exploits with devastating finishing blows.</p>
 
-                    <p>Unlike Yīng's emphasis on beauty and technical mastery, Tǐ demonstrates tactical severity. She anticipates counterattacks several exchanges ahead and adapts instantly, turning enemy momentum into opportunities for escalation. When facing multiple opponents, she instinctively prioritizes targets whose defeat will cause the greatest strategic collapse among their allies.</p>
+                    <p>Unlike Yīng's emphasis on beauty and technical mastery, Tǐ demonstrates tactical severity. She
+                        anticipates counterattacks several exchanges ahead and adapts instantly, turning enemy momentum
+                        into opportunities for escalation. When facing multiple opponents, she instinctively prioritizes
+                        targets whose defeat will cause the greatest strategic collapse among their allies.</p>
 
-                    <p>Her presence on the battlefield often alters the rhythm of combat entirely. Opponents are forced into reactionary fighting, struggling to reclaim initiative as she dictates pacing, spacing, and engagement flow with commanding authority.</p>
+                    <p>Her presence on the battlefield often alters the rhythm of combat entirely. Opponents are forced
+                        into reactionary fighting, struggling to reclaim initiative as she dictates pacing, spacing, and
+                        engagement flow with commanding authority.</p>
 
-                    <p>At her peak, Tǐ's combat becomes less a duel and more a systematic conquest of the battlefield itself, where victory is achieved through relentless advancement and absolute control.</p>
+                    <p>At her peak, Tǐ's combat becomes less a duel and more a systematic conquest of the battlefield
+                        itself, where victory is achieved through relentless advancement and absolute control.</p>
                 </div>
             </section>
 
@@ -687,7 +940,8 @@
                 <div class="section-content">
                     <h3 class="section-subtitle">Sustained Offensive Pressure</h3>
                     <ul>
-                        <li><strong>Prolonged Attack Chains:</strong> Exhausting resistance through layered strike patterns</li>
+                        <li><strong>Prolonged Attack Chains:</strong> Exhausting resistance through layered strike
+                            patterns</li>
                         <li><strong>Error Exploitation:</strong> Forcing mistakes through sustained aggression</li>
                         <li><strong>Destabilization Focus:</strong> Breaking defensive cohesion before finishing</li>
                         <li><strong>Territorial Advancement:</strong> Each step claims battlefield space</li>
@@ -714,7 +968,8 @@
                     <ul>
                         <li><strong>Rhythm Control:</strong> Dictating pacing of entire engagements</li>
                         <li><strong>Spacing Dominance:</strong> Forcing opponents into reactive positioning</li>
-                        <li><strong>Initiative Suppression:</strong> Preventing adversaries from reclaiming offensive</li>
+                        <li><strong>Initiative Suppression:</strong> Preventing adversaries from reclaiming offensive
+                        </li>
                         <li><strong>Flow Command:</strong> Determining when and how combat escalates</li>
                     </ul>
                 </div>
@@ -759,7 +1014,16 @@
                             <span class="stat-value">Terrifying Composure</span>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">"Combat unfolds according to a rhythm I alone conduct."</div>
                 </div>
             </section>
@@ -767,20 +1031,36 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Kesshō Zhàn represents the apex convergence of speed, discipline, and annihilating efficiency. Where earlier evolutions of Kesshō Yīng and Kesshō² Tǐ refine technique or expand battlefield authority, Zhàn operates with terrifying composure, blending absolute precision with sustained, overwhelming force.</p>
+                    <p>Kesshō Zhàn represents the apex convergence of speed, discipline, and annihilating efficiency.
+                        Where earlier evolutions of Kesshō Yīng and Kesshō² Tǐ refine technique or expand battlefield
+                        authority, Zhàn operates with terrifying composure, blending absolute precision with sustained,
+                        overwhelming force.</p>
 
-                    <p>Her movements are no longer simply fluid or aggressive—they are perfectly synchronized with the natural escalation of combat itself, as though every clash unfolds according to a rhythm she alone conducts.</p>
+                    <p>Her movements are no longer simply fluid or aggressive—they are perfectly synchronized with the
+                        natural escalation of combat itself, as though every clash unfolds according to a rhythm she
+                        alone conducts.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Combat Philosophy</h2>
                 <div class="section-content">
-                    <p>Her fighting style is defined by seamless transition between offensive and defensive states, eliminating the traditional distinction between the two. Every block becomes a strike. Every evasion becomes a counteroffensive. Opponents attempting to create distance find themselves intercepted mid-action, while those who attempt direct confrontation are dismantled through cascading chains of perfectly timed blows.</p>
+                    <p>Her fighting style is defined by seamless transition between offensive and defensive states,
+                        eliminating the traditional distinction between the two. Every block becomes a strike. Every
+                        evasion becomes a counteroffensive. Opponents attempting to create distance find themselves
+                        intercepted mid-action, while those who attempt direct confrontation are dismantled through
+                        cascading chains of perfectly timed blows.</p>
 
-                    <p>Zhàn demonstrates total mastery over engagement tempo. She accelerates exchanges to disorient foes, then abruptly slows her motion to create false openings that lure opponents into fatal miscalculations. Her strikes carry extraordinary density of force, often collapsing defenses with minimal visible effort. Even restrained attacks possess finishing-level lethality, forcing adversaries into constant retreat or catastrophic overextension.</p>
+                    <p>Zhàn demonstrates total mastery over engagement tempo. She accelerates exchanges to disorient
+                        foes, then abruptly slows her motion to create false openings that lure opponents into fatal
+                        miscalculations. Her strikes carry extraordinary density of force, often collapsing defenses
+                        with minimal visible effort. Even restrained attacks possess finishing-level lethality, forcing
+                        adversaries into constant retreat or catastrophic overextension.</p>
 
-                    <p>At full exertion, Zhàn's presence transforms battlefields into environments where resistance steadily erodes under unceasing assault. Engagement against her becomes less a contest of strength and more a matter of survival against a force that advances with relentless certainty, leaving devastation in perfectly measured intervals.</p>
+                    <p>At full exertion, Zhàn's presence transforms battlefields into environments where resistance
+                        steadily erodes under unceasing assault. Engagement against her becomes less a contest of
+                        strength and more a matter of survival against a force that advances with relentless certainty,
+                        leaving devastation in perfectly measured intervals.</p>
                 </div>
             </section>
 
@@ -789,18 +1069,24 @@
                 <div class="section-content">
                     <h3 class="section-subtitle">Seamless State Transitions</h3>
                     <ul>
-                        <li><strong>Unified Defense/Offense:</strong> Every block becomes a strike, every evasion a counteroffensive</li>
-                        <li><strong>Mid-Action Interception:</strong> Catching opponents during distance creation attempts</li>
-                        <li><strong>Cascading Chains:</strong> Perfectly timed blow sequences that dismantle confrontation</li>
-                        <li><strong>No Traditional Distinction:</strong> Offensive and defensive states merged completely</li>
+                        <li><strong>Unified Defense/Offense:</strong> Every block becomes a strike, every evasion a
+                            counteroffensive</li>
+                        <li><strong>Mid-Action Interception:</strong> Catching opponents during distance creation
+                            attempts</li>
+                        <li><strong>Cascading Chains:</strong> Perfectly timed blow sequences that dismantle
+                            confrontation</li>
+                        <li><strong>No Traditional Distinction:</strong> Offensive and defensive states merged
+                            completely</li>
                     </ul>
 
                     <h3 class="section-subtitle">Tempo Mastery</h3>
                     <ul>
                         <li><strong>Acceleration:</strong> Disorienting foes through sudden speed increases</li>
                         <li><strong>Abrupt Deceleration:</strong> Creating false openings for fatal miscalculations</li>
-                        <li><strong>Force Density:</strong> Strikes carrying extraordinary impact with minimal visible effort</li>
-                        <li><strong>Finishing-Level Restraint:</strong> Even controlled attacks possess lethal potency</li>
+                        <li><strong>Force Density:</strong> Strikes carrying extraordinary impact with minimal visible
+                            effort</li>
+                        <li><strong>Finishing-Level Restraint:</strong> Even controlled attacks possess lethal potency
+                        </li>
                     </ul>
 
                     <h3 class="section-subtitle">Aerial Omnipresence</h3>
@@ -816,8 +1102,10 @@
                     <p>When facing multiple enemies, Zhàn does not divide attention—she dissolves opposition:</p>
                     <ul>
                         <li><strong>Rapid Prioritization:</strong> Surgical elimination in rapid succession</li>
-                        <li><strong>Structural Weakness Identification:</strong> Instinctively targeting coordination gaps</li>
-                        <li><strong>Formation Dismantling:</strong> Removing key combatants to collapse entire groups</li>
+                        <li><strong>Structural Weakness Identification:</strong> Instinctively targeting coordination
+                            gaps</li>
+                        <li><strong>Formation Dismantling:</strong> Removing key combatants to collapse entire groups
+                        </li>
                         <li><strong>Thriving in Chaos:</strong> Combat flow accelerates amid escalating numbers</li>
                     </ul>
 
@@ -853,30 +1141,43 @@
             <h2 class="section-title">Thematic Significance</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Archetype</h3>
-                <p>Jí Lián embodies the <strong>Reluctant Participant</strong> archetype—someone fundamentally disinterested in conflict who nonetheless possesses overwhelming capability when circumstances force engagement. Her evolution through combat forms represents the gradual loss of passive detachment.</p>
+                <p>Jí Lián embodies the <strong>Reluctant Participant</strong> archetype—someone fundamentally
+                    disinterested in conflict who nonetheless possesses overwhelming capability when circumstances force
+                    engagement. Her evolution through combat forms represents the gradual loss of passive detachment.
+                </p>
 
                 <h3 class="section-subtitle">Core Themes</h3>
                 <ul>
-                    <li><strong>Apathy vs. Necessity:</strong> The tension between preference for non-involvement and unavoidable participation</li>
+                    <li><strong>Apathy vs. Necessity:</strong> The tension between preference for non-involvement and
+                        unavoidable participation</li>
                     <li><strong>Hidden Capability:</strong> Extreme power concealed beneath disinterested exterior</li>
-                    <li><strong>Evolution Through Engagement:</strong> Each combat form represents increased commitment</li>
+                    <li><strong>Evolution Through Engagement:</strong> Each combat form represents increased commitment
+                    </li>
                     <li><strong>Loss of Passivity:</strong> Gradual transformation from observer to active force</li>
-                    <li><strong>Comfort vs. Duty:</strong> Conflict between personal preference and imposed responsibility</li>
+                    <li><strong>Comfort vs. Duty:</strong> Conflict between personal preference and imposed
+                        responsibility</li>
                 </ul>
 
                 <h3 class="section-subtitle">Combat Evolution Symbolism</h3>
                 <ul>
                     <li><strong>Yīng (Master of Transformation):</strong> Adaptability and technical refinement</li>
                     <li><strong>Tǐ (Calculated Domination):</strong> Sustained pressure and tactical severity</li>
-                    <li><strong>Zhàn (Apex Convergence):</strong> Perfect synchronization and annihilating efficiency</li>
+                    <li><strong>Zhàn (Apex Convergence):</strong> Perfect synchronization and annihilating efficiency
+                    </li>
                 </ul>
 
-                <p>Each evolution represents not just increased power, but increased engagement with a world she would rather observe from a distance. The progression from adaptive to dominant to overwhelming mirrors her psychological journey from reluctant to committed to inevitable.</p>
+                <p>Each evolution represents not just increased power, but increased engagement with a world she would
+                    rather observe from a distance. The progression from adaptive to dominant to overwhelming mirrors
+                    her psychological journey from reluctant to committed to inevitable.</p>
 
                 <h3 class="section-subtitle">Narrative Function</h3>
-                <p>Jí Lián serves as a counterpoint to characters driven by ambition or ideology. She represents the individual pulled into conflict against their natural inclination, whose quiet preference for comfort transforms into overwhelming force when circumstances demand action.</p>
+                <p>Jí Lián serves as a counterpoint to characters driven by ambition or ideology. She represents the
+                    individual pulled into conflict against their natural inclination, whose quiet preference for
+                    comfort transforms into overwhelming force when circumstances demand action.</p>
 
-                <p>Her connection to Takino Retsu as an original identity suggests complex layering of selfhood across different contexts and allegiances. The transformation from a Royastellan identity to participation in Destiny's Penance marks a significant shift in engagement level.</p>
+                <p>Her connection to Takino Retsu as an original identity suggests complex layering of selfhood across
+                    different contexts and allegiances. The transformation from a Royastellan identity to participation
+                    in Destiny's Penance marks a significant shift in engagement level.</p>
             </div>
         </section>
 
@@ -884,14 +1185,18 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> "Jí Lián" (集聯) can mean "cascade" while "Xiá" (峽) means "hero". "Kesshō" (結晶) means "crystal" in Japanese representing clarity and hardness. Yīng (影) means "crystal" as well in Chinese while Tǐ (體) means "aspect," and Zhàn (戰) means "battle/war."</li>
+                    <li><strong>Name Etymology:</strong> "Jí Lián" (集聯) can mean "cascade" while "Xiá" (峽) means "hero".
+                        "Kesshō" (結晶) means "crystal" in Japanese representing clarity and hardness. Yīng (影) means
+                        "crystal" as well in Chinese while Tǐ (體) means "aspect," and Zhàn (戰) means "battle/war."</li>
                     <li>She maintains one of the palest complexions among characters due to extreme sun avoidance</li>
                     <li>Despite enjoying beaches, she uses large umbrellas and high-grade sun-blocking lotion</li>
                     <li>Her hair features a distinctive gradient: dark blue → violet → black</li>
                     <li>Jí Lián has grown from socially awkward to composed, though still prefers solitude</li>
-                    <li>Her signature quote "But can we like, not tho?" perfectly encapsulates her disinterested demeanor</li>
+                    <li>Her signature quote "But can we like, not tho?" perfectly encapsulates her disinterested
+                        demeanor</li>
                     <li>She wields Tenebris Operiet, which has four distinct configurations</li>
-                    <li>Each Kesshō form represents escalating engagement with combat despite her natural inclination to avoid it</li>
+                    <li>Each Kesshō form represents escalating engagement with combat despite her natural inclination to
+                        avoid it</li>
                     <li>Zhàn can seamlessly merge offensive and defensive states into unified action</li>
                     <li>Her combat philosophy centers on transformation—of both weapon and tactical identity</li>
                     <li>Member of Destiny's Penance despite her preference for non-involvement</li>
@@ -919,4 +1224,5 @@
         }
     </script>
 </body>
+
 </html>

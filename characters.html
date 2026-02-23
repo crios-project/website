@@ -59,6 +59,7 @@
             position: sticky;
             top: 0;
             background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(233, 30, 99, 0.2);
             padding: 16px 24px;
@@ -474,7 +475,7 @@
 
                 <div class="filter-group">
                     <label class="filter-label">Faction</label>
-                    <select id="faction-filter" class="filter-select">
+                    <select aria-label="Select faction" id="faction-filter" class="filter-select">
                         <option value="all">All Factions</option>
                         <option value="Heart Melody">Heart Melody</option>
                         <option value="Starlite 7th">Starlite 7th</option>
@@ -487,7 +488,7 @@
 
                 <div class="filter-group">
                     <label class="filter-label">Realm</label>
-                    <select id="realm-filter" class="filter-select">
+                    <select aria-label="Select realm" id="realm-filter" class="filter-select">
                         <option value="all">All Realms</option>
                         <option value="Beeston">Beeston</option>
                         <option value="Royastella">Royastella</option>
@@ -724,7 +725,7 @@
                 </div>
                 <div class="character-info">
                     <div class="character-name">BLADE GUILLOTINE</div>
-                    <div class="character-realm">Royalstella</div>
+                    <div class="character-realm">Royastella</div>
                 </div>
             </a>
 
@@ -903,7 +904,7 @@
                     <div class="character-name">Caie Ascala</div>
                     <div class="character-role">Grand Researcher</div>
                     <div class="character-faction">Unaffiliated</div>
-                    <div class="character-realm">A Realm of Antiquity</div>
+                    <div class="character-realm">Antiquity</div>
                 </div>
             </a>
 
@@ -915,7 +916,7 @@
                     <div class="character-name">Clarisieandra</div>
                     <div class="character-role">Princess</div>
                     <div class="character-faction">Unaffiliated</div>
-                    <div class="character-realm">A Realm of Antiquity</div>
+                    <div class="character-realm">Antiquity</div>
                 </div>
             </a>
 
@@ -927,7 +928,7 @@
                     <div class="character-name">Windelateami</div>
                     <div class="character-role">Queen</div>
                     <div class="character-faction">Unaffiliated</div>
-                    <div class="character-realm">A Realm of Antiquity</div>
+                    <div class="character-realm">Antiquity</div>
                 </div>
             </a>
 
@@ -939,7 +940,7 @@
                     <div class="character-name">Rafé Lliama</div>
                     <div class="character-role">Final Hero</div>
                     <div class="character-faction">Unaffiliated</div>
-                    <div class="character-realm">A Realm of Antiquity</div>
+                    <div class="character-realm">Antiquity</div>
                 </div>
             </a>
 
@@ -1028,69 +1029,83 @@
         </section>
     </div>
 
-    <script>
-        // Get filter elements
-        const searchInput = document.getElementById('search-input');
-        const factionFilter = document.getElementById('faction-filter');
-        const realmFilter = document.getElementById('realm-filter');
-        const characterGrid = document.getElementById('character-grid');
-        const resultsCount = document.getElementById('results-count');
-        const noResults = document.getElementById('no-results');
+<script>
+    // 1. Get filter elements
+    const searchInput = document.getElementById('search-input');
+    const factionFilter = document.getElementById('faction-filter');
+    const realmFilter = document.getElementById('realm-filter');
+    const characterGrid = document.getElementById('character-grid');
+    const resultsCount = document.getElementById('results-count');
+    const noResults = document.getElementById('no-results');
 
-        // Filter function
-        function filterCharacters() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const selectedFaction = factionFilter.value;
-            const selectedRealm = realmFilter.value;
+    // 2. Filter function
+    function filterCharacters() {
+        // Safety check: if searchInput is commented out, use an empty string
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        const selectedFaction = factionFilter.value;
+        const selectedRealm = realmFilter.value;
 
-            const cards = characterGrid.querySelectorAll('.character-card');
-            let visibleCount = 0;
+        const cards = characterGrid.querySelectorAll('.character-card');
+        let visibleCount = 0;
 
-            cards.forEach(card => {
-                const name = card.getAttribute('data-name').toLowerCase();
-                const faction = card.getAttribute('data-faction');
-                const realm = card.getAttribute('data-realm');
+        cards.forEach(card => {
+            const name = (card.getAttribute('data-name') || "").toLowerCase();
+            const faction = card.getAttribute('data-faction');
+            const realm = card.getAttribute('data-realm');
 
-                const matchesSearch = name.includes(searchTerm);
-                const matchesFaction = selectedFaction === 'all' || faction === selectedFaction;
-                const matchesRealm = selectedRealm === 'all' || realm === selectedRealm;
+            const matchesSearch = name.includes(searchTerm);
+            const matchesFaction = selectedFaction === 'all' || faction === selectedFaction;
+            
+            // Logic fix: This ensures "A Realm of Antiquity" matches the "Antiquity" filter option
+            const matchesRealm = selectedRealm === 'all' || 
+                                realm === selectedRealm || 
+                                (selectedRealm === 'Antiquity' && realm === 'A Realm of Antiquity');
 
-                if (matchesSearch && matchesFaction && matchesRealm) {
-                    card.style.display = 'flex';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Update results count
-            resultsCount.textContent = visibleCount;
-
-            // Show/hide no results message
-            if (visibleCount === 0) {
-                noResults.classList.add('visible');
-                characterGrid.style.display = 'none';
+            if (matchesSearch && matchesFaction && matchesRealm) {
+                card.style.display = 'flex';
+                visibleCount++;
             } else {
-                noResults.classList.remove('visible');
-                characterGrid.style.display = 'grid';
+                card.style.display = 'none';
             }
+        });
+
+        // Update results count
+        resultsCount.textContent = visibleCount;
+
+        // Show/hide no results message
+        if (visibleCount === 0) {
+            noResults.classList.add('visible');
+            characterGrid.style.display = 'none';
+        } else {
+            noResults.classList.remove('visible');
+            characterGrid.style.display = 'grid';
         }
+    }
 
-        // Clear filters
-        function clearFilters() {
-            searchInput.value = '';
-            factionFilter.value = 'all';
-            realmFilter.value = 'all';
-            filterCharacters();
-        }
-
-        // Add event listeners
-        searchInput.addEventListener('input', filterCharacters);
-        factionFilter.addEventListener('change', filterCharacters);
-        realmFilter.addEventListener('change', filterCharacters);
-
-        // Initialize
+    // 3. Clear filters function
+    function clearFilters() {
+        if (searchInput) searchInput.value = '';
+        factionFilter.value = 'all';
+        realmFilter.value = 'all';
         filterCharacters();
-    </script>
+    }
+
+    // 4. Add event listeners (The Critical Fix)
+    // We only add the listener if the element actually exists in the HTML
+    if (searchInput) {
+        searchInput.addEventListener('input', filterCharacters);
+    }
+    
+    if (factionFilter) {
+        factionFilter.addEventListener('change', filterCharacters);
+    }
+    
+    if (realmFilter) {
+        realmFilter.addEventListener('change', filterCharacters);
+    }
+
+    // 5. Initialize the grid view
+    filterCharacters();
+</script>
 </body>
 </html>

@@ -2,144 +2,731 @@
 <html lang="en">
 
 <head>
-
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Odisse Nocere // CRIOS Character Profile</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
   <style>
-    body {
-      background: #00091B;
-      color: #fff;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
+    :root {
+      --primary-burgundy: #6b0f1a;
+      --secondary-pink: #e91e63;
+      --accent-cyan: #00d9ff;
+      --dark-bg: #0a0a0f;
+      --dark-panel: #141419;
+      --text-primary: #e8e8f0;
+      --text-dim: #8888a8;
+      --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+    }
+
+    body {
+      font-family: 'Archivo', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    .bg-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .header-nav {
+      position: sticky;
+      top: 0;
+      background: rgba(10, 10, 15, 0.95);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+      padding: 16px 24px;
+      z-index: 100;
+    }
+
+    .back-link {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-cyan);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .character-header {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+      animation: fadeIn 0.8s ease-out;
+    }
 
     @keyframes fadeIn {
       from {
-        top: 20%;
         opacity: 0;
+        transform: translateY(20px);
       }
 
       to {
-        top: 100;
         opacity: 1;
+        transform: translateY(0);
       }
-
     }
 
-    @-webkit-keyframes fadeIn {
-      from {
-        top: 20%;
-        opacity: 0;
-      }
-
-      to {
-        top: 100;
-        opacity: 1;
-      }
-
-    }
-
-    .wrapper {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-      -webkit-animation: fadeIn 1000ms ease;
-      animation: fadeIn 1000ms ease;
-    }
-
-    h1 {
-      font-size: 50px;
-      font-family: 'Poppins', sans-serif;
-      margin-bottom: 0;
-      line-height: 1;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .dot {
-      color: #4FEBFE;
-    }
-
-    p {
-      text-align: center;
-      margin: 18px;
-      font-family: 'Muli', sans-serif;
-      font-weight: normal;
-
-    }
-
-    .icons {
-      text-align: center;
-
-    }
-
-    .icons i {
-      color: #00091B;
-      background: #fff;
-      height: 15px;
-      width: 15px;
-      padding: 13px;
-      margin: 0 10px;
-      border-radius: 50px;
-      border: 2px solid #fff;
-      transition: all 200ms ease;
-      text-decoration: none;
+    .character-visual {
       position: relative;
     }
 
-    .icons i:hover,
-    .icons i:active {
-      color: #fff;
-      background: none;
-      cursor: pointer !important;
-      -webkit-transform: scale(1.2);
-      transform: scale(1.2);
-      text-decoration: none;
-
+    .character-image {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 2px solid rgba(233, 30, 99, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     }
 
-    .back-button {
-      background-color: #23406F;
-      /* A nice blue color */
-      border: none;
-      color: white;
-      /* White text */
-      padding: 10px 20px;
-      /* Spacing inside the button */
-      text-align: center;
-      text-decoration: none;
-      /* Remove underline from <a> tags if used */
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      /* Change cursor on hover */
+    .faction-logo {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 80px;
+      height: auto;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+    }
+
+    .character-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .character-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+
+    .character-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 32px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      background: var(--dark-panel);
+      border: 1px solid rgba(233, 30, 99, 0.2);
       border-radius: 8px;
-      /* Rounded corners */
+      padding: 24px;
     }
 
-    .back-button:hover {
-      background-color: #FFFFFF;
-      /* Change background on hover */
-      color: #23406F;
-      /* Change text color on hover */
-      border: 1px solid #23406F;
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-family: 'Archivo', sans-serif;
+      font-size: 1rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .character-quote {
+      margin-top: 32px;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
+      border-left: 4px solid var(--secondary-pink);
+      border-radius: 4px;
+      font-family: 'Archivo', sans-serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-primary);
+    }
+
+    .content-section {
+      background: var(--dark-panel);
+      border: 1px solid rgba(233, 30, 99, 0.2);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--secondary-pink);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-subtitle {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      margin-top: 24px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-content {
+      color: var(--text-dim);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .section-content p {
+      margin-bottom: 16px;
+    }
+
+    .section-content ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 16px 0;
+    }
+
+    .section-content li {
+      padding-left: 24px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .section-content li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--secondary-pink);
+    }
+
+    .wiki-link {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .wiki-link:hover {
+      color: white;
+      border-bottom-color: var(--accent-cyan);
+      text-shadow: 0 0 8px var(--accent-cyan);
+    }
+
+    .relationships-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .relationship-card {
+      background: rgba(20, 20, 25, 0.5);
+      border: 1px solid rgba(233, 30, 99, 0.2);
+      border-radius: 8px;
+      padding: 16px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+    }
+
+    .relationship-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+    }
+
+    .relationship-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .relationship-type {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 1024px) {
+      .character-header {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .character-visual {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .character-name {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .content-section {
+        padding: 24px;
+      }
+    }
+
+    /* ==================== */
+    /* ACTIVE PLAYER STYLES */
+    /* ==================== */
+
+    .theme-player {
+      background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+      border: 1px solid rgba(233, 30, 99, 0.3);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .theme-player:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+    }
+
+    .theme-player-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .theme-player-icon {
+      font-size: 1.5rem;
+      color: var(--secondary-pink);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.6;
+      }
+    }
+
+    .theme-player-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .theme-player audio {
+      width: 100%;
+      height: 32px;
+    }
+
+    /* ======================= */
+    /* DISABLED PLAYER STYLES  */
+    /* ======================= */
+
+    .theme-player.disabled {
+      background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+      border: 1px solid rgba(136, 136, 168, 0.2);
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .theme-player.disabled:hover {
+      border-color: rgba(136, 136, 168, 0.2);
+      box-shadow: none;
+    }
+
+    .theme-player.disabled .theme-player-icon {
+      color: var(--text-dim);
+      animation: none;
+    }
+
+    .theme-player.disabled .theme-player-title {
+      color: var(--text-dim);
+    }
+
+    .theme-player.disabled audio {
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    .theme-coming-soon {
+      font-family: 'Archivo', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      font-style: italic;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    /* ======================== */
+    /* PLACEHOLDER BOX VERSION  */
+    /* ======================== */
+
+    .theme-player-placeholder {
+      background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+      border: 1px solid rgba(136, 136, 168, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .theme-placeholder-icon {
+      font-size: 2rem;
+      color: var(--text-dim);
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+
+    .theme-placeholder-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .theme-placeholder-message {
+      font-family: 'Archivo', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      opacity: 0.7;
+      font-style: italic;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrapper">
-    <h1>Character Profile <span class="dot">Odisse Nocere</span> coming soon<span class="dot">.</span></h1>
-    <button class="back-button" onclick="history.back()">Go Back</button>
+  <div class="bg-grid"></div>
+  <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
+  <div class="container">
+    <section class="character-header">
+      <div class="character-visual">
+        <img src="../assets/characters/Odisse Nocere.png" alt="Odisse Nocere" class="character-image">
+        <img src="../assets/icons/Reason Theory Icon.png" alt="Reason Theory" class="faction-logo">
+      </div>
+      <div class="character-info">
+        <h1 class="character-name">Odisse Nocere</h1>
+        <p class="character-title">The Fallen Guardian</p>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-label">True Identity</span>
+            <span class="stat-value">Fallen Form of <a href="character-kali-dana.html" class="wiki-link">Kali
+                Dana</a></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Weapon</span>
+            <span class="stat-value">Nameless (Cybernetic Katana)</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Affiliation</span>
+            <span class="stat-value"><a href="../factions/faction-reason-theory.html" class="wiki-link">Reason
+                Theory</a></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Combat Style</span>
+            <span class="stat-value">Assassination Doctrine</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Philosophy</span>
+            <span class="stat-value">One Strike, One Kill</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Primary Target</span>
+            <span class="stat-value"><a href="character-tiala-hartlight.html" class="wiki-link">Tiala
+                Hartlight</a></span>
+          </div>
+        </div>
+        <div class="theme-player disabled">
+          <div class="theme-player-header">
+            <span class="theme-player-icon">♪</span>
+            <span class="theme-player-title">Character Theme</span>
+          </div>
+          <audio controls disabled>
+            <source src="#" type="audio/mpeg">
+          </audio>
+          <p class="theme-coming-soon">Music composition in progress</p>
+        </div>
+        <div class="character-quote">"Every encounter is another iteration in perfecting the strike that will define my
+          existence."</div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-title">Overview</h2>
+      <div class="section-content">
+        <p>Odisse Nocere is the fallen form of <a href="character-kali-dana.html" class="wiki-link">Kali Dana</a> and
+          seeks vengeance on <a href="character-tiala-hartlight.html" class="wiki-link">Tiala Hartlight</a> for
+          murdering her sister <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a>. She has joined <a
+            href="../factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a> to accomplish this goal.
+        </p>
+
+        <p>Odisse practices an assassination doctrine defined by absolute precision, emotional detachment, and terminal
+          efficiency. Her combat philosophy is distilled into a singular operational principle: one strike, one kill.
+          Every motion, tactical decision, and preparatory action is optimized toward achieving a decisive execution
+          with minimal exposure, minimal resistance, and zero redundancy.</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-title">Combat Philosophy</h2>
+      <div class="section-content">
+        <p>Unlike conventional duelists or battlefield combatants, Odisse treats combat as a calculated elimination
+          sequence rather than an exchange of blows. She avoids prolonged engagements whenever possible, preferring
+          ambush vectors, blind-angle infiltration, and surgical strike opportunities.</p>
+
+        <p>She demonstrates extraordinary patience, often observing targets for extended periods to catalog movement
+          patterns, defensive habits, and psychological vulnerabilities before committing to an attack. To Odisse, a
+          failed assassination is not a setback—it is a fundamental error in preparation.</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-title">Weapon: Nameless</h2>
+      <div class="section-content">
+        <p>Her weapon, <strong>Nameless</strong>, is a cybernetic katana engineered specifically for lethal penetration
+          and silent termination. The blade is designed for minimal drag and maximal cutting continuity, allowing Odisse
+          to complete lethal strike arcs without interrupting her momentum.</p>
+
+        <h3 class="section-subtitle">Technical Capabilities</h3>
+        <ul>
+          <li><strong>Adaptive Energy Modulation:</strong> Adjusts cutting resonance to bypass armor density, magical
+            reinforcement, or kinetic shielding</li>
+          <li><strong>Silent Operation:</strong> Produces almost no audible or visual signature during deployment</li>
+          <li><strong>Minimal Drag Design:</strong> Optimized for uninterrupted strike completion</li>
+          <li><strong>Lethal Penetration:</strong> Engineered for terminal efficiency</li>
+        </ul>
+
+        <p>The weapon produces almost no audible or visual signature during deployment, reinforcing her stealth-based
+          execution style.</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-title">Combat Techniques</h2>
+      <div class="section-content">
+        <h3 class="section-subtitle">Physical Methodology</h3>
+        <p>Odisse's physical combat methodology emphasizes direct-line lethality:</p>
+        <ul>
+          <li><strong>Linear Advance Bursts:</strong> Sudden forward movement to collapse reaction windows</li>
+          <li><strong>Blink-Step Repositioning:</strong> Instantaneous spatial adjustments</li>
+          <li><strong>Velocity Spikes:</strong> Sudden acceleration designed to overwhelm defensive responses</li>
+          <li><strong>Vital Targeting:</strong> Cervical severance, cardiac penetration, central nervous disruption</li>
+          <li><strong>Refined Timing:</strong> Strikes delivered with such precision that defensive countermeasures
+            often fail to activate before damage is complete</li>
+        </ul>
+
+        <h3 class="section-subtitle">Defensive Strategy</h3>
+        <p>She rarely engages in defensive posture, relying instead on predictive avoidance and positional invisibility.
+          Rather than blocking attacks, Odisse removes herself from attack trajectories entirely through minimal,
+          energy-efficient motion.</p>
+
+        <p>This economy of movement allows her to:</p>
+        <ul>
+          <li>Preserve stamina</li>
+          <li>Maintain readiness for immediate lethal retaliation</li>
+          <li>Stay outside opponent awareness rather than actively defending</li>
+          <li>Convert defensive situations into offensive opportunities</li>
+        </ul>
+
+        <h3 class="section-subtitle">Mental Conditioning</h3>
+        <p>Odisse demonstrates extreme mental conditioning. Emotional interference, battlefield noise, or environmental
+          chaos rarely disrupt her focus once a target has been designated.</p>
+
+        <p>Her singular fixation on eliminating Tiala has elevated her skill ceiling to an obsessive degree. She
+          continuously refines her technique under the assumption that she will only ever be granted one opportunity to
+          complete that objective. Every simulated strike, every rehearsal pattern, and every training engagement is
+          structured around perfecting that hypothetical encounter.</p>
+
+        <h3 class="section-subtitle">Extended Combat Adaptation</h3>
+        <p>In rare extended combat scenarios, Odisse adapts by increasing tempo and unpredictability rather than
+          expanding her move repertoire. She chains assassination vectors into cascading kill sequences, transitioning
+          between feints, phantom withdrawals, and mirrored approach angles designed to force opponents into defensive
+          overcorrection before delivering a finishing strike.</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-title">Psychological Profile</h2>
+      <div class="section-content">
+        <p>Psychologically, Odisse projects an unsettling absence rather than intimidation. Her presence is quiet,
+          controlled, and emotionally vacant, creating an atmosphere where opponents often fail to recognize imminent
+          danger until engagement has already concluded.</p>
+
+        <p>Her refusal to posture, boast, or escalate theatrics further reinforces the perception that she is not
+          fighting an opponent—she is executing a predetermined outcome.</p>
+
+        <p>Odisse does not fight for dominance, honor, or survival. She fights to fulfill a singular, meticulously
+          rehearsed purpose. Every encounter, whether successful or aborted, is simply another iteration in perfecting
+          the strike she believes will define her existence.</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-title">The Fall</h2>
+      <div class="section-content">
+        <p>Odisse Nocere is the manifestation of <a href="character-kali-dana.html" class="wiki-link">Kali Dana</a>'s
+          transformation after the murder of her sister <a href="character-pyara-dana.html" class="wiki-link">Pyara
+            Dana</a> by <a href="character-tiala-hartlight.html" class="wiki-link">Tiala Hartlight</a>. What was once
+          protective vigilance and disciplined responsibility has been refined into pure assassination doctrine.</p>
+
+        <p>Where Kali positioned herself between danger and her teammates, Odisse positions herself in the exact
+          location where her target will die. Where Kali served as Heart Melody's defensive backbone, Odisse serves as a
+          scalpel aimed at a single throat.</p>
+
+        <p>Her singular fixation represents the complete weaponization of grief—every skill, every habit, every
+          protective instinct that once kept Pyara safe has been inverted into the methodology that will end Tiala's
+          life.</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-title">Relationships</h2>
+      <div class="section-content">
+        <div class="relationships-grid">
+          <a href="character-kali-dana.html" class="relationship-card">
+            <div class="relationship-name">Kali Dana</div>
+            <div class="relationship-type">Former Self / Heart Seria</div>
+          </a>
+          <a href="character-pyara-dana.html" class="relationship-card">
+            <div class="relationship-name">Pyara Dana</div>
+            <div class="relationship-type">Murdered Sister</div>
+          </a>
+          <a href="character-tiala-hartlight.html" class="relationship-card">
+            <div class="relationship-name">Tiala Hartlight</div>
+            <div class="relationship-type">Target / Sister's Murderer</div>
+          </a>
+          <a href="../factions/faction-reason-theory.html" class="relationship-card">
+            <div class="relationship-name">Reason Theory</div>
+            <div class="relationship-type">Current Affiliation</div>
+          </a>
+          <a href="character-windi-lightfall.html" class="relationship-card">
+            <div class="relationship-name">Windi Lightfall</div>
+            <div class="relationship-type">Reason Theory Ally</div>
+          </a>
+          <a href="character-ami-hartbreak.html" class="relationship-card">
+            <div class="relationship-name">Ami Hartbreak</div>
+            <div class="relationship-type">Reason Theory Ally</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-title">Thematic Significance</h2>
+      <div class="section-content">
+        <h3 class="section-subtitle">Archetype</h3>
+        <p>Odisse embodies the <strong>Fallen Guardian</strong> archetype—someone whose protective instincts have been
+          weaponized into pure vengeance, whose discipline has been refined into lethal precision.</p>
+
+        <h3 class="section-subtitle">Core Themes</h3>
+        <ul>
+          <li><strong>Grief as Weapon:</strong> Loss transformed into methodology</li>
+          <li><strong>Protection Inverted:</strong> Defensive instincts becoming offensive doctrine</li>
+          <li><strong>Singular Purpose:</strong> Existence reduced to one objective</li>
+          <li><strong>Patience as Power:</strong> Time invested in perfecting the perfect strike</li>
+          <li><strong>Emotional Absence:</strong> Detachment as strength and tragedy</li>
+          <li><strong>Inevitable Conclusion:</strong> Every action leading to one moment</li>
+        </ul>
+
+        <h3 class="section-subtitle">Narrative Function</h3>
+        <p>Odisse represents the cost of loss and the danger of singular fixation. Her transformation from Kali to
+          Odisse demonstrates how protective love can become destructive obsession when twisted by grief.</p>
+
+        <p>She serves as a constant threat to Tiala's ambitions and a reminder that actions have consequences that
+          persist beyond immediate outcomes. Every choice Tiala made that led to Pyara's death continues to hunt her in
+          the form of a blade that never stops training for the perfect strike.</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-title">Trivia</h2>
+      <div class="section-content">
+        <ul>
+          <li><strong>Name Etymology:</strong> "Odisse" — Latin for "to hate"; "Nocere" — Latin for "to hurt"</li>
+          <li>Fallen form of Kali Dana (Heart Seria from Heart Melody)</li>
+          <li>Joined Reason Theory specifically to gain resources for killing Tiala Hartlight</li>
+          <li>Wields Nameless, a cybernetic katana engineered for silent assassination</li>
+          <li>Every training session is rehearsal for killing Tiala</li>
+          <li>Projects emotional absence rather than intimidation</li>
+          <li>Treats failed assassinations as fundamental preparation errors</li>
+          <li>Demonstrates extraordinary patience in target observation</li>
+          <li>Rarely engages in extended combat, preferring single decisive strikes</li>
+          <li>Mental conditioning prevents emotional interference during assassination attempts</li>
+          <li>Originally served as Heart Melody's defensive backbone before Pyara's murder</li>
+          <li>Transformation represents complete weaponization of protective instincts</li>
+          <li>Operates under the assumption she will only get one chance to kill Tiala</li>
+          <li>Refuses to posture or boast, treating combat as predetermined execution</li>
+        </ul>
+      </div>
+    </section>
   </div>
 </body>
 

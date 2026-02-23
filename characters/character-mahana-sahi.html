@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahana Sahi // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -133,8 +136,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-header {
@@ -394,8 +404,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
@@ -453,7 +600,8 @@
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Faction</span>
-                                <span class="stat-value"><a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a></span>
+                                <span class="stat-value"><a href="../factions/faction-heart-melody.html"
+                                        class="wiki-link">Heart Melody</a></span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Status</span>
@@ -461,7 +609,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "Threats only work on people with something to lose."
                     </div>
@@ -471,11 +628,21 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Mahana Sahi is gentle, cheerful, and profoundly powerful, despite having little confidence in herself. She is easily deceived and painfully naive, yet her kindness is unwavering. Despite her uncertainty, Mahana never gives up. She stumbles, fails, and gets back up smiling every time.</p>
+                    <p>Mahana Sahi is gentle, cheerful, and profoundly powerful, despite having little confidence in
+                        herself. She is easily deceived and painfully naive, yet her kindness is unwavering. Despite her
+                        uncertainty, Mahana never gives up. She stumbles, fails, and gets back up smiling every time.
+                    </p>
 
-                    <p>Mahana bears a striking resemblance to <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a> and suffers from severe memory loss—a coincidence that deeply unsettles <a href="character-kali-dana.html" class="wiki-link">Kali</a>. Little is known about Mahana's early life prior to joining <a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a>.</p>
+                    <p>Mahana bears a striking resemblance to <a href="character-pyara-dana.html"
+                            class="wiki-link">Pyara Dana</a> and suffers from severe memory loss—a coincidence that
+                        deeply unsettles <a href="character-kali-dana.html" class="wiki-link">Kali</a>. Little is known
+                        about Mahana's early life prior to joining <a href="../factions/faction-heart-melody.html"
+                            class="wiki-link">Heart Melody</a>.</p>
 
-                    <p>Mahana presents with an open, energetic physicality. Her long, voluminous hair—upper layer dark gray, lower layer vivid purple that fades toward the tips—is swept to one side with a few loose front strands. Her bright green eyes are prominent and expressive, radiating optimism even in dire circumstances.</p>
+                    <p>Mahana presents with an open, energetic physicality. Her long, voluminous hair—upper layer dark
+                        gray, lower layer vivid purple that fades toward the tips—is swept to one side with a few loose
+                        front strands. Her bright green eyes are prominent and expressive, radiating optimism even in
+                        dire circumstances.</p>
                 </div>
             </section>
 
@@ -507,7 +674,8 @@
                     </ul>
 
                     <p><strong>Core Fear:</strong> Failing to live up to Pyara's legacy</p>
-                    <p><strong>Core Motivation:</strong> Preservation of harmony through action—keep Heart Melody together and prevent further loss</p>
+                    <p><strong>Core Motivation:</strong> Preservation of harmony through action—keep Heart Melody
+                        together and prevent further loss</p>
                     <p><strong>Core Value:</strong> Cooperation, forward momentum, shared responsibility</p>
                     <p><strong>Moral Alignment:</strong> Neutral Good</p>
                     <p><strong>Emotional Triggers:</strong> Perceived abandonment; unresolved grief</p>
@@ -519,16 +687,21 @@
             <section class="content-section">
                 <h2 class="section-title">The Mahana Paradox</h2>
                 <div class="section-content">
-                    <p>Mahana's origin is deliberately ambiguous and represents one of the core mysteries of the Crios narrative. Her striking resemblance to Pyara, combined with severe memory loss and unexplained harmonic capacity, raises questions that have no clear answers:</p>
+                    <p>Mahana's origin is deliberately ambiguous and represents one of the core mysteries of the Crios
+                        narrative. Her striking resemblance to Pyara, combined with severe memory loss and unexplained
+                        harmonic capacity, raises questions that have no clear answers:</p>
 
                     <ul>
                         <li>Is she Pyara's reincarnation following the Desynchronization Event?</li>
-                        <li>A harmonically displaced echo attempting to stabilize a melody that was never meant to continue?</li>
+                        <li>A harmonically displaced echo attempting to stabilize a melody that was never meant to
+                            continue?</li>
                         <li>An entirely new entity born from fractured lodesoul essence?</li>
                         <li>Something else entirely?</li>
                     </ul>
 
-                    <p>The narrative deliberately leaves this unresolved. Mahana exists as a reconstructed harmonic echo—whether that makes her Pyara, a continuation of Pyara, or something new is a question the story refuses to answer definitively.</p>
+                    <p>The narrative deliberately leaves this unresolved. Mahana exists as a reconstructed harmonic
+                        echo—whether that makes her Pyara, a continuation of Pyara, or something new is a question the
+                        story refuses to answer definitively.</p>
                 </div>
             </section>
 
@@ -587,7 +760,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "I'll keep everyone together. I promise."
                     </div>
@@ -597,16 +779,21 @@
             <section class="content-section">
                 <h2 class="section-title">Heart Symphony Powers</h2>
                 <div class="section-content">
-                    <p>As <strong>Heart Symphony</strong>, Mahana inherits leadership after Pyara's death. Her fighting style is direct and overwhelming, fueled by raw magical output rather than finesse. She fights to honor what was lost, striving to prove herself worthy of the role she never asked for.</p>
+                    <p>As <strong>Heart Symphony</strong>, Mahana inherits leadership after Pyara's death. Her fighting
+                        style is direct and overwhelming, fueled by raw magical output rather than finesse. She fights
+                        to honor what was lost, striving to prove herself worthy of the role she never asked for.</p>
 
-                    <p>Her transformed attire emphasizes motion and upward flow, with angular gold tracery over deep violet fabric. The design suggests amplification and expansion rather than containment.</p>
+                    <p>Her transformed attire emphasizes motion and upward flow, with angular gold tracery over deep
+                        violet fabric. The design suggests amplification and expansion rather than containment.</p>
 
                     <h3 class="section-subtitle">Abilities</h3>
                     <ul>
-                        <li><strong>Broad Elemental Access:</strong> Can access all Tier 1 and Tier 2 Essentia types</li>
+                        <li><strong>Broad Elemental Access:</strong> Can access all Tier 1 and Tier 2 Essentia types
+                        </li>
                         <li><strong>Harmonic Escalation:</strong> Power increases under pressure</li>
                         <li><strong>Leadership Coordination:</strong> Synchronizes team magic like Aria before her</li>
-                        <li><strong>Raw Output:</strong> Overwhelming magical force compensating for lack of finesse</li>
+                        <li><strong>Raw Output:</strong> Overwhelming magical force compensating for lack of finesse
+                        </li>
                     </ul>
 
                     <h3 class="section-subtitle">Limitations</h3>
@@ -616,7 +803,8 @@
                         <li>Relies on escalation rather than precision</li>
                     </ul>
 
-                    <p><strong>Philosophy:</strong> Remembrance and inherited responsibility—carrying forward what Pyara started</p>
+                    <p><strong>Philosophy:</strong> Remembrance and inherited responsibility—carrying forward what Pyara
+                        started</p>
                 </div>
             </section>
         </div>
@@ -664,11 +852,17 @@
             <section class="content-section">
                 <h2 class="section-title">Heart Crescendo Ascension</h2>
                 <div class="section-content">
-                    <p><strong>Heart Crescendo</strong> represents Mahana's first ascension through the Ambrasis artifact, granting access to Tier 3 (Lúmira) harmonic resonance. Like Pyara's ascension before her, this amplifies power dramatically but introduces dangerous instability.</p>
+                    <p><strong>Heart Crescendo</strong> represents Mahana's first ascension through the Ambrasis
+                        artifact, granting access to Tier 3 (Lúmira) harmonic resonance. Like Pyara's ascension before
+                        her, this amplifies power dramatically but introduces dangerous instability.</p>
 
-                    <p>The ascension visually manifests as increasing elaboration of form and escalating harmonic output. Purple tones deepen, gold tracery becomes more complex, and the upward flow of her design intensifies.</p>
+                    <p>The ascension visually manifests as increasing elaboration of form and escalating harmonic
+                        output. Purple tones deepen, gold tracery becomes more complex, and the upward flow of her
+                        design intensifies.</p>
 
-                    <p><strong>Ambrasis Artifact:</strong> An Ascension Artifact in the form of a sword. Becomes more elaborate as the wielder gains power, enabling transformation from Symphony to Crescendo and eventually to Finalis Grande.</p>
+                    <p><strong>Ambrasis Artifact:</strong> An Ascension Artifact in the form of a sword. Becomes more
+                        elaborate as the wielder gains power, enabling transformation from Symphony to Crescendo and
+                        eventually to Finalis Grande.</p>
                 </div>
             </section>
         </div>
@@ -716,12 +910,15 @@
             <section class="content-section">
                 <h2 class="section-title">The Final Escalation</h2>
                 <div class="section-content">
-                    <p><strong>Finalis Grande</strong> is Mahana's ultimate manifestation—reaching Tier 4 (Ómura) with the capacity for a singular, non-repeatable Tier 5 (Æónel) expression. This level of power exceeds safe harmonic limits and risks complete metaphysical collapse.</p>
+                    <p><strong>Finalis Grande</strong> is Mahana's ultimate manifestation—reaching Tier 4 (Ómura) with
+                        the capacity for a singular, non-repeatable Tier 5 (Æónel) expression. This level of power
+                        exceeds safe harmonic limits and risks complete metaphysical collapse.</p>
 
                     <h3 class="section-subtitle">Power Tiers</h3>
                     <ul>
                         <li><strong>Tier 4 (Ómura):</strong> Reality-distorting harmonic output</li>
-                        <li><strong>Tier 5 (Æónel):</strong> Absolute override—singular, unrepeatable expression that rewrites fundamental harmonic laws</li>
+                        <li><strong>Tier 5 (Æónel):</strong> Absolute override—singular, unrepeatable expression that
+                            rewrites fundamental harmonic laws</li>
                     </ul>
 
                     <h3 class="section-subtitle">Critical Limitations</h3>
@@ -732,9 +929,12 @@
                         <li>Ultimate power exceeds Mahana's understanding or control</li>
                     </ul>
 
-                    <p><strong>Philosophy:</strong> Orchestral culmination—bearing the full weight of a harmony meant for many, compressed into one</p>
+                    <p><strong>Philosophy:</strong> Orchestral culmination—bearing the full weight of a harmony meant
+                        for many, compressed into one</p>
 
-                    <p>Mahana embodies escalation, endurance, and the burden of carrying a harmony that was never meant to be singular. Her ultimate power exceeds safe harmonic limits—she can reach heights Pyara couldn't, but at catastrophic cost.</p>
+                    <p>Mahana embodies escalation, endurance, and the burden of carrying a harmony that was never meant
+                        to be singular. Her ultimate power exceeds safe harmonic limits—she can reach heights Pyara
+                        couldn't, but at catastrophic cost.</p>
                 </div>
             </section>
         </div>
@@ -742,7 +942,7 @@
         <!-- Shared Sections -->
         <section class="content-section">
             <h2 class="section-title">Relationships</h2>
-            
+
             <div class="relationships-grid">
                 <a href="character-pyara-dana.html" class="relationship-card">
                     <div class="relationship-name">Pyara Dana</div>
@@ -773,7 +973,7 @@
                 <p><strong>Story Function:</strong> Deuteragonist → Leader</p>
                 <p><strong>Character Arc:</strong> Growth through overload</p>
                 <p><strong>Arc Status:</strong> Evolving</p>
-                
+
                 <p><strong>Themes Represented:</strong></p>
                 <ul>
                     <li>Inheritance without certainty</li>
@@ -783,9 +983,11 @@
                     <li>Whether a song can continue after losing its melody</li>
                 </ul>
 
-                <p><strong>Foil to:</strong> <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a> — Conductor versus solo performer; collective harmony versus overwhelming force</p>
+                <p><strong>Foil to:</strong> <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a> —
+                    Conductor versus solo performer; collective harmony versus overwhelming force</p>
 
-                <p><strong>Narrative Function:</strong> Embodies the question of continuation—can what was lost truly be replaced, or only echoed?</p>
+                <p><strong>Narrative Function:</strong> Embodies the question of continuation—can what was lost truly be
+                    replaced, or only echoed?</p>
             </div>
         </section>
 
@@ -793,13 +995,20 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> Mahana — from Sanskrit "mahāna" meaning "great"; Sahi — meaning "right" or "correct"</li>
-                    <li><strong>Design Notes:</strong> Emphasis on upward lines and open posture to suggest amplification and expansion</li>
-                    <li><strong>Symbolism:</strong> Purple tones reflect transformation through strain; Symphony as orchestral culmination; Crescendo as escalating intensity; Finalis Grande as ultimate resolution</li>
+                    <li><strong>Name Etymology:</strong> Mahana — from Sanskrit "mahāna" meaning "great"; Sahi — meaning
+                        "right" or "correct"</li>
+                    <li><strong>Design Notes:</strong> Emphasis on upward lines and open posture to suggest
+                        amplification and expansion</li>
+                    <li><strong>Symbolism:</strong> Purple tones reflect transformation through strain; Symphony as
+                        orchestral culmination; Crescendo as escalating intensity; Finalis Grande as ultimate resolution
+                    </li>
                     <li><strong>Inspiration:</strong> Musical crescendo structures; the burden of conducting alone</li>
-                    <li><strong>Author Notes:</strong> Mahana's ultimate power exceeds safe harmonic limits—she can reach heights Pyara couldn't, but at catastrophic cost</li>
-                    <li><strong>Continuity:</strong> Tier 5 expression is singular and non-repeatable; relationship to Pyara deliberately ambiguous</li>
-                    <li><strong>Musical Note:</strong> "Symphony" is a full orchestral work; "Crescendo" is a gradual increase in volume; "Finalis Grande" suggests grand finale</li>
+                    <li><strong>Author Notes:</strong> Mahana's ultimate power exceeds safe harmonic limits—she can
+                        reach heights Pyara couldn't, but at catastrophic cost</li>
+                    <li><strong>Continuity:</strong> Tier 5 expression is singular and non-repeatable; relationship to
+                        Pyara deliberately ambiguous</li>
+                    <li><strong>Musical Note:</strong> "Symphony" is a full orchestral work; "Crescendo" is a gradual
+                        increase in volume; "Finalis Grande" suggests grand finale</li>
                 </ul>
             </div>
         </section>
@@ -824,4 +1033,5 @@
         }
     </script>
 </body>
+
 </html>

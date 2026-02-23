@@ -163,30 +163,6 @@
             animation: fadeIn 0.8s ease-out;
         }
 
-        /* Header */
-        .header-nav {
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 15, 0.95);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
-            padding: 16px 24px;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--secondary-pink);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -220,32 +196,20 @@
             margin: 0 auto;
         }
 
-        /* Section Header */
+        /* Section Headers */
         .section-header {
-            margin-bottom: 40px;
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            margin: 60px 0 40px;
+            text-align: center;
         }
 
         .section-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--secondary-pink);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
         }
 
         .section-subtitle {
@@ -258,39 +222,22 @@
         /* Realm Grid */
         .realm-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
-            margin-bottom: 80px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
         }
 
+        /* Realm Cards */
         .realm-card {
             background: var(--dark-panel);
             border: 2px solid rgba(233, 30, 99, 0.2);
-            border-radius: 16px;
+            border-radius: 12px;
             padding: 40px 32px;
             text-decoration: none;
-            display: flex;
-            flex-direction: column;
+            display: block;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: fadeInUp 0.6s ease-out both;
-        }
-
-        .realm-card:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .realm-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .realm-card:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .realm-card:nth-child(4) {
-            animation-delay: 0.4s;
         }
 
         .realm-card::before {
@@ -300,103 +247,71 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(233, 30, 99, 0.08), rgba(0, 217, 255, 0.03));
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.4s ease;
         }
 
         .realm-card:hover::before {
             opacity: 1;
         }
 
-        .realm-card::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(233, 30, 99, 0.2), transparent);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-
-        .realm-card:hover::after {
-            width: 600px;
-            height: 600px;
-        }
-
         .realm-card:hover {
             border-color: var(--accent-cyan);
-            box-shadow: 0 12px 48px rgba(0, 217, 255, 0.4);
-            transform: translateY(-12px);
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-8px);
         }
 
         .realm-logo-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 28px;
-            min-height: 120px;
+            margin-bottom: 24px;
             position: relative;
             z-index: 1;
         }
 
         .realm-logo {
-            max-width: 180px;
-            max-height: 100px;
-            height: auto;
-            filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.5));
-            transition: all 0.5s ease;
-        }
-
-        .realm-card:hover .realm-logo {
-            filter: drop-shadow(var(--glow-pink));
-            transform: scale(1.08);
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(233, 30, 99, 0.3));
         }
 
         .realm-info {
             position: relative;
             z-index: 1;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
         }
 
         .realm-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
             margin-bottom: 12px;
-            text-align: center;
         }
 
         .realm-tagline {
             font-family: 'Archivo', sans-serif;
             font-size: 0.95rem;
-            font-style: italic;
             color: var(--text-dim);
+            font-style: italic;
+            line-height: 1.5;
             margin-bottom: 24px;
-            line-height: 1.6;
-            text-align: center;
-            flex: 1;
         }
 
         .realm-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(233, 30, 99, 0.2);
         }
 
         .stat-item {
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
         .stat-label {
@@ -405,30 +320,26 @@
             color: var(--text-dim);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 4px;
-            display: block;
         }
 
         .stat-value {
             font-family: 'Archivo', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 0.9rem;
             color: var(--text-primary);
+            font-weight: 600;
         }
 
         .stat-value.highlight {
             color: var(--accent-cyan);
-            font-weight: 700;
         }
 
         /* Other Realms Section */
         .other-realms {
-            background: var(--dark-panel);
+            background: rgba(20, 20, 25, 0.6);
             border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 16px;
-            padding: 48px 40px;
-            margin-bottom: 60px;
-            animation: fadeIn 0.8s ease-out 0.6s both;
+            border-radius: 12px;
+            padding: 60px 40px;
+            margin: 80px 0;
         }
 
         .other-realms-title {
@@ -437,77 +348,80 @@
             font-weight: 700;
             color: var(--secondary-pink);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
+            letter-spacing: 4px;
             text-align: center;
+            margin-bottom: 40px;
         }
 
         .other-realms-content {
             max-width: 800px;
             margin: 0 auto;
-            text-align: center;
         }
 
         .other-realms-text {
             font-family: 'Archivo', sans-serif;
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: var(--text-dim);
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 32px;
         }
 
         .realm-mention {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-top: 24px;
-            padding: 16px 24px;
-            background: rgba(233, 30, 99, 0.05);
-            border-left: 4px solid var(--secondary-pink);
+            background: rgba(10, 10, 15, 0.6);
+            border-left: 3px solid var(--secondary-pink);
+            padding: 20px 24px;
             border-radius: 4px;
-            display: inline-block;
+        }
+
+        .realm-mention div:first-child {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .realm-mention-desc {
             font-family: 'Archivo', sans-serif;
             font-size: 0.9rem;
-            font-style: italic;
             color: var(--text-dim);
-            margin-top: 8px;
+            line-height: 1.6;
+            font-style: italic;
         }
 
-        /* Call to Action */
+        /* CTA Section */
         .cta-section {
             text-align: center;
-            padding: 60px 40px;
-            background: var(--dark-panel);
-            border: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 60px 24px;
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.2), rgba(20, 20, 25, 0.4));
             border-radius: 12px;
-            animation: fadeIn 0.8s ease-out 0.8s both;
+            border: 1px solid rgba(233, 30, 99, 0.2);
         }
 
         .cta-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--secondary-pink);
-            margin-bottom: 16px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
         }
 
         .cta-text {
             font-family: 'Archivo', sans-serif;
             font-size: 1rem;
             color: var(--text-dim);
-            margin-bottom: 32px;
-            line-height: 1.7;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 32px;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -515,61 +429,51 @@
         .cta-button {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.9rem;
-            padding: 14px 32px;
-            background: transparent;
-            border: 2px solid var(--secondary-pink);
-            color: var(--secondary-pink);
-            border-radius: 6px;
+            font-weight: 700;
+            color: var(--text-primary);
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            border: 2px solid var(--secondary-pink);
+            border-radius: 8px;
             transition: all 0.3s ease;
-            display: inline-block;
         }
 
         .cta-button:hover {
-            background: var(--secondary-pink);
-            color: var(--dark-bg);
             box-shadow: var(--glow-pink);
             transform: translateY(-2px);
         }
 
         .cta-button.secondary {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
+            background: transparent;
+            border-color: var(--text-dim);
         }
 
         .cta-button.secondary:hover {
-            background: var(--accent-cyan);
+            border-color: var(--accent-cyan);
             box-shadow: var(--glow-cyan);
         }
-button {
-  display: block;  /* Makes the button a block element */
-  margin: 0 auto;  /* Centers horizontally */
-  /* Optionally set a width, as block elements are 100% wide by default */
-  /* width: 100px; */
-}
+
+        /* Map Button */
         .map-btn {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--text-primary);
             text-transform: uppercase;
             letter-spacing: 4px;
-            padding: 32px 96px;
+            padding: 16px 48px;
             background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
             border: 2px solid var(--secondary-pink);
-            border-radius: 16px;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.4s ease;
-            margin-bottom: 80px;
+            margin: 40px auto;
+            display: block;
             position: relative;
             overflow: hidden;
-            z-index: 1;
-        }
-        .map-btn {
-            font-size: 1.925rem;
-            padding: 24px 64px;
         }
 
         .map-btn::before {
@@ -581,7 +485,6 @@ button {
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s ease;
-            z-index: -1;
         }
 
         .map-btn:hover::before {
@@ -592,6 +495,109 @@ button {
             box-shadow: var(--glow-pink);
             transform: scale(1.05);
             border-color: var(--accent-cyan);
+        }
+
+        /* Map Lightbox */
+        .map-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            animation: fadeInLightbox 0.3s ease-out;
+        }
+
+        .map-lightbox.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeInLightbox {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .map-container {
+            position: relative;
+            width: 95%;
+            height: 95vh;
+            background: var(--dark-panel);
+            border: 3px solid var(--secondary-pink);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(233, 30, 99, 0.5);
+            animation: slideInMap 0.4s ease-out;
+        }
+
+        @keyframes slideInMap {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .map-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .map-close:hover {
+            background: var(--secondary-pink);
+            transform: rotate(90deg);
+            box-shadow: var(--glow-pink);
+        }
+
+        .map-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .map-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         /* Responsive */
@@ -611,6 +617,20 @@ button {
             .other-realms,
             .cta-section {
                 padding: 40px 24px;
+            }
+
+            .map-container {
+                width: 98%;
+                height: 98vh;
+            }
+
+            .map-title {
+                font-size: 1.3rem;
+            }
+
+            .map-btn {
+                font-size: 0.9rem;
+                padding: 12px 32px;
             }
         }
     </style>
@@ -763,7 +783,7 @@ button {
             </a>
         </div>
 
-        <button class="map-btn" onclick="document.location='realms/ultimatera-map.html'">Ultimatera Map</button>
+        <button class="map-btn" onclick="openMap()">Ultimatera Map</button>
 
         <!-- Other Realms Section -->
         <section class="other-realms">
@@ -802,6 +822,40 @@ button {
             </div>
         </section>
     </div>
+
+    <!-- Map Lightbox -->
+    <div id="mapLightbox" class="map-lightbox" onclick="closeMapOnOutsideClick(event)">
+        <div class="map-container">
+            <button class="map-close" onclick="closeMap()">×</button>
+            <h2 class="map-title">Ultimatera</h2>
+            <iframe id="mapIframe" class="map-iframe" src="realms/ultimatera-map.html"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function openMap() {
+            const lightbox = document.getElementById('mapLightbox');
+            lightbox.classList.add('active');
+        }
+
+        function closeMap() {
+            const lightbox = document.getElementById('mapLightbox');
+            lightbox.classList.remove('active');
+        }
+
+        function closeMapOnOutsideClick(event) {
+            if (event.target.id === 'mapLightbox') {
+                closeMap();
+            }
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMap();
+            }
+        });
+    </script>
 </body>
 
 </html>

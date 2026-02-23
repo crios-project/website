@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amare // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -57,9 +60,9 @@
             position: sticky;
             top: 0;
             background: rgba(10, 10, 15, 0.95);
--webkit-backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
-                        border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
             padding: 16px 24px;
             z-index: 100;
         }
@@ -95,8 +98,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-visual {
@@ -137,10 +147,19 @@
             letter-spacing: 3px;
             margin-bottom: 32px;
         }
-        .character-quote { margin-top: 32px; padding: 20px 24px;
+
+        .character-quote {
+            margin-top: 32px;
+            padding: 20px 24px;
             background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
-            border-left: 4px solid var(--secondary-pink); border-radius: 4px; font-family: 'Archivo', sans-serif;
-            font-size: 1.1rem; font-style: italic; color: var(--text-primary); }
+            border-left: 4px solid var(--secondary-pink);
+            border-radius: 4px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -304,8 +323,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
@@ -324,7 +480,8 @@
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Common Manifestation</span>
-                        <span class="stat-value"><a href="../characters/character-velia-traicerum.html" class="wiki-link">Velia Traicerem</a></span>
+                        <span class="stat-value"><a href="../characters/character-velia-traicerum.html"
+                                class="wiki-link">Velia Traicerem</a></span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Species</span>
@@ -343,25 +500,43 @@
                         <span class="stat-value">Presence-Oriented Entity</span>
                     </div>
                 </div>
-                <div class="character-quote">"I am small enough to hold your hand, yet vast enough to never let it go."</div>
+                <div class="theme-player disabled">
+                    <div class="theme-player-header">
+                        <span class="theme-player-icon">♪</span>
+                        <span class="theme-player-title">Character Theme</span>
+                    </div>
+                    <audio controls disabled>
+                        <source src="#" type="audio/mpeg">
+                    </audio>
+                    <p class="theme-coming-soon">Music composition in progress</p>
+                </div>
+                <div class="character-quote">"I am small enough to hold your hand, yet vast enough to never let it go."
+                </div>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p>Amare is a Velitrice Dragon whose existence operates across conceptual, emotional, and dimensional thresholds. Unlike draconic entities associated with conquest, destruction, or territorial dominion, Amare embodies magnitude expressed through gentleness, awareness, and relational presence.</p>
-                
-                <p>Her humanoid manifestation, <a href="../characters/character-velia-traicerum.html" class="wiki-link">Velia Traicerem</a>, is not a disguise or concealment. It is a deliberate contraction of scale, perception, and existential density allowing Amare to interact with smaller, more fragile realities without overwhelming them.</p>
+                <p>Amare is a Velitrice Dragon whose existence operates across conceptual, emotional, and dimensional
+                    thresholds. Unlike draconic entities associated with conquest, destruction, or territorial dominion,
+                    Amare embodies magnitude expressed through gentleness, awareness, and relational presence.</p>
 
-                <p>Where Velia moves through social and political structures as a cheerful anomaly, Amare exists as the full, uncompressed continuity of that same being—vast, serene, and quietly inevitable.</p>
+                <p>Her humanoid manifestation, <a href="../characters/character-velia-traicerum.html"
+                        class="wiki-link">Velia Traicerem</a>, is not a disguise or concealment. It is a deliberate
+                    contraction of scale, perception, and existential density allowing Amare to interact with smaller,
+                    more fragile realities without overwhelming them.</p>
+
+                <p>Where Velia moves through social and political structures as a cheerful anomaly, Amare exists as the
+                    full, uncompressed continuity of that same being—vast, serene, and quietly inevitable.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Appearance</h2>
             <div class="section-content">
-                <p>Amare manifests as a large, serpentine dragon whose form emphasizes elegance and fluid continuity over brute physical intimidation.</p>
+                <p>Amare manifests as a large, serpentine dragon whose form emphasizes elegance and fluid continuity
+                    over brute physical intimidation.</p>
 
                 <h3 class="section-subtitle">Physical Characteristics</h3>
                 <ul>
@@ -372,21 +547,27 @@
                     <li>Aura characterized by a soft, rhythmic luminescence</li>
                 </ul>
 
-                <p>Her design intentionally contrasts traditional draconic archetypes centered on dominance or catastrophe, emphasizing emotional and conceptual scale over physical destructive capability.</p>
+                <p>Her design intentionally contrasts traditional draconic archetypes centered on dominance or
+                    catastrophe, emphasizing emotional and conceptual scale over physical destructive capability.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Presence & Behavior</h2>
             <div class="section-content">
-                <p>As a presence-oriented entity, Amare’s primary mode of interaction is observational and resonant. Her behavioral patterns reflect the same authenticity found in her manifestation, Velia.</p>
+                <p>As a presence-oriented entity, Amare’s primary mode of interaction is observational and resonant. Her
+                    behavioral patterns reflect the same authenticity found in her manifestation, Velia.</p>
 
                 <h3 class="section-subtitle">Observed Patterns</h3>
                 <ul>
-                    <li><strong>Existential Authenticity:</strong> Her actions and presence serve as a stabilizing cosmic force.</li>
-                    <li><strong>Magnitude through Restraint:</strong> Rarely demonstrates overt offensive or destructive behaviors despite possessing the scale to do so.</li>
-                    <li><strong>Compassionate Inevitability:</strong> Resolves conflict through presence and connection rather than authority or conquest.</li>
-                    <li><strong>Non-Linear Awareness:</strong> Operates with a multi-perspective temporal awareness that makes her influence appear coincidental.</li>
+                    <li><strong>Existential Authenticity:</strong> Her actions and presence serve as a stabilizing
+                        cosmic force.</li>
+                    <li><strong>Magnitude through Restraint:</strong> Rarely demonstrates overt offensive or destructive
+                        behaviors despite possessing the scale to do so.</li>
+                    <li><strong>Compassionate Inevitability:</strong> Resolves conflict through presence and connection
+                        rather than authority or conquest.</li>
+                    <li><strong>Non-Linear Awareness:</strong> Operates with a multi-perspective temporal awareness that
+                        makes her influence appear coincidental.</li>
                 </ul>
             </div>
         </section>
@@ -394,13 +575,18 @@
         <section class="content-section">
             <h2 class="section-title">Abilities</h2>
             <div class="section-content">
-                <p>While Amare’s full capabilities remain largely undocumented, observed phenomena suggest vast metaphysical influence:</p>
+                <p>While Amare’s full capabilities remain largely undocumented, observed phenomena suggest vast
+                    metaphysical influence:</p>
                 <ul>
-                    <li><strong>Dimensional Scale Modulation:</strong> The ability to compress and expand existential density to navigate various realities.</li>
-                    <li><strong>Emotional Resonance Manipulation:</strong> Utilizing connection as a structural force rather than a transient state.</li>
+                    <li><strong>Dimensional Scale Modulation:</strong> The ability to compress and expand existential
+                        density to navigate various realities.</li>
+                    <li><strong>Emotional Resonance Manipulation:</strong> Utilizing connection as a structural force
+                        rather than a transient state.</li>
                     <li><strong>Conceptual Durability:</strong> Resistance against reality-altering forces.</li>
-                    <li><strong>Environmental Harmonization:</strong> Seamless alignment across diverse magical and metaphysical systems.</li>
-                    <li><strong>Multi-Perspective Awareness:</strong> Simultaneous perception across temporal and conceptual crossroads.</li>
+                    <li><strong>Environmental Harmonization:</strong> Seamless alignment across diverse magical and
+                        metaphysical systems.</li>
+                    <li><strong>Multi-Perspective Awareness:</strong> Simultaneous perception across temporal and
+                        conceptual crossroads.</li>
                 </ul>
             </div>
         </section>
@@ -408,13 +594,17 @@
         <section class="content-section">
             <h2 class="section-title">Relationship to Velia Traicerem</h2>
             <div class="section-content">
-                <p>The relationship between Amare and Velia Traicerem is structured around the theme of voluntary limitation.</p>
+                <p>The relationship between Amare and Velia Traicerem is structured around the theme of voluntary
+                    limitation.</p>
 
                 <h3 class="section-subtitle">Existential Compression</h3>
                 <ul>
-                    <li><strong>Identity Continuity:</strong> Velia maintains full continuity of identity with Amare despite the reduction in scale.</li>
-                    <li><strong>Intimacy through Limitation:</strong> The compression is a narrative exploration of intimacy, allowing a cosmic entity to achieve genuine proximity.</li>
-                    <li><strong>Emotional Inverse:</strong> Velia is constructed as the emotional inverse of traditional secret-bearing cosmic entities—transparent rather than hidden.</li>
+                    <li><strong>Identity Continuity:</strong> Velia maintains full continuity of identity with Amare
+                        despite the reduction in scale.</li>
+                    <li><strong>Intimacy through Limitation:</strong> The compression is a narrative exploration of
+                        intimacy, allowing a cosmic entity to achieve genuine proximity.</li>
+                    <li><strong>Emotional Inverse:</strong> Velia is constructed as the emotional inverse of traditional
+                        secret-bearing cosmic entities—transparent rather than hidden.</li>
                 </ul>
 
                 <h3 class="section-subtitle">Anagram Connection</h3>
@@ -439,14 +629,20 @@
             <div class="section-content">
                 <h3 class="section-subtitle">Core Themes</h3>
                 <ul>
-                    <li><strong>Identity Multiplicity without Deception:</strong> Existing in multiple forms without concealing the true self.</li>
-                    <li><strong>Power through Presence:</strong> Asserting influence by existing within a space rather than through violence.</li>
-                    <li><strong>The Coexistence of Enormity and Gentleness:</strong> Balancing vast existential scale with soft, relational engagement.</li>
-                    <li><strong>Connection as a Structural Force:</strong> Viewing emotional authenticity as a stabilizing factor in the cosmos.</li>
+                    <li><strong>Identity Multiplicity without Deception:</strong> Existing in multiple forms without
+                        concealing the true self.</li>
+                    <li><strong>Power through Presence:</strong> Asserting influence by existing within a space rather
+                        than through violence.</li>
+                    <li><strong>The Coexistence of Enormity and Gentleness:</strong> Balancing vast existential scale
+                        with soft, relational engagement.</li>
+                    <li><strong>Connection as a Structural Force:</strong> Viewing emotional authenticity as a
+                        stabilizing factor in the cosmos.</li>
                 </ul>
 
                 <h3 class="section-subtitle">Narrative Function</h3>
-                <p>Amare serves as a subversion of the typical draconic archetype. Instead of a territorial or destructive force, she represents an <strong>Accessible Vastness</strong>—a being that chooses to make itself smaller to understand and be understood.</p>
+                <p>Amare serves as a subversion of the typical draconic archetype. Instead of a territorial or
+                    destructive force, she represents an <strong>Accessible Vastness</strong>—a being that chooses to
+                    make itself smaller to understand and be understood.</p>
             </div>
         </section>
 
@@ -454,15 +650,22 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> "Amare" derives from Latin meaning "to love," reflecting her foundational principle of connection.</li>
-                    <li>Her true form is a serpentine dragon with canine-draconic features and a pale pink/white color palette.</li>
-                    <li>The "Velitrice Dragon" concept focuses on emotional and conceptual scale rather than physical destruction.</li>
-                    <li>She rarely demonstrations overt power, preferring subtle intervention that often appears coincidental.</li>
-                    <li>She maintains full continuity with Velia Traicerem, meaning her manifestation's experiences are her own.</li>
-                    <li>Her existence destabilizes traditional hierarchies not through attack, but through the simple fact of her serene presence.</li>
+                    <li><strong>Name Etymology:</strong> "Amare" derives from Latin meaning "to love," reflecting her
+                        foundational principle of connection.</li>
+                    <li>Her true form is a serpentine dragon with canine-draconic features and a pale pink/white color
+                        palette.</li>
+                    <li>The "Velitrice Dragon" concept focuses on emotional and conceptual scale rather than physical
+                        destruction.</li>
+                    <li>She rarely demonstrations overt power, preferring subtle intervention that often appears
+                        coincidental.</li>
+                    <li>She maintains full continuity with Velia Traicerem, meaning her manifestation's experiences are
+                        her own.</li>
+                    <li>Her existence destabilizes traditional hierarchies not through attack, but through the simple
+                        fact of her serene presence.</li>
                 </ul>
             </div>
         </section>
     </div>
 </body>
+
 </html>

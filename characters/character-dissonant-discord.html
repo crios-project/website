@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dissonant discord // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -95,8 +98,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-visual {
@@ -317,8 +327,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
@@ -347,7 +494,8 @@
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Realm</span>
-                        <span class="stat-value"><a href="../realms/realm-beeston.html" class="wiki-link">Beeston</a></span>
+                        <span class="stat-value"><a href="../realms/realm-beeston.html"
+                                class="wiki-link">Beeston</a></span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Classification</span>
@@ -370,7 +518,16 @@
                         <span class="stat-value">Self-directed</span>
                     </div>
                 </div>
-
+                <div class="theme-player disabled">
+                    <div class="theme-player-header">
+                        <span class="theme-player-icon">♪</span>
+                        <span class="theme-player-title">Character Theme</span>
+                    </div>
+                    <audio controls disabled>
+                        <source src="#" type="audio/mpeg">
+                    </audio>
+                    <p class="theme-coming-soon">Music composition in progress</p>
+                </div>
                 <div class="character-quote">
                     "Your song ascends in fragile measured grace,<br>
                     Allow me now to break its perfect time."
@@ -381,11 +538,17 @@
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p>dissonant discord is an enigma—at once antagonist, ally, and existential threat. Cloaked in mystery and operating solely for her own ends, discord intervenes in the affairs of the <a href="../factions/faction-heart-melody.html" class="wiki-link">Lovely Hearts</a> whenever it suits her goals.</p>
+                <p>dissonant discord is an enigma—at once antagonist, ally, and existential threat. Cloaked in mystery
+                    and operating solely for her own ends, discord intervenes in the affairs of the <a
+                        href="../factions/faction-heart-melody.html" class="wiki-link">Lovely Hearts</a> whenever it
+                    suits her goals.</p>
 
-                <p>She is overwhelmingly powerful, capable of holding off the entire team alone, and has annihilated threats the Lovely Hearts could not hope to overcome. Her presence on the battlefield is absolute; a single lapse in attention can mean death.</p>
+                <p>She is overwhelmingly powerful, capable of holding off the entire team alone, and has annihilated
+                    threats the Lovely Hearts could not hope to overcome. Her presence on the battlefield is absolute; a
+                    single lapse in attention can mean death.</p>
 
-                <p>Despite her hostility, discord has saved the team on multiple occasions, preventing catastrophes with cold efficiency. Her motivations remain unclear, her allegiance nonexistent.</p>
+                <p>Despite her hostility, discord has saved the team on multiple occasions, preventing catastrophes with
+                    cold efficiency. Her motivations remain unclear, her allegiance nonexistent.</p>
 
                 <p>dissonant discord fights for herself—and whatever future she believes must come to pass.</p>
             </div>
@@ -394,9 +557,12 @@
         <section class="content-section">
             <h2 class="section-title">Appearance</h2>
             <div class="section-content">
-                <p>discord's visual design incorporates teal and black color motifs, creating a tech-forward aesthetic that stands distinct from traditional magical girl coding. Her attire features high collars and angular armor-like panels, emphasizing a non-frilled, precise silhouette.</p>
+                <p>discord's visual design incorporates teal and black color motifs, creating a tech-forward aesthetic
+                    that stands distinct from traditional magical girl coding. Her attire features high collars and
+                    angular armor-like panels, emphasizing a non-frilled, precise silhouette.</p>
 
-                <p>Her presence alone often produces psychological destabilization among both allies and enemies. There is something fundamentally <em>wrong</em> about her—an uncanny quality that defies explanation.</p>
+                <p>Her presence alone often produces psychological destabilization among both allies and enemies. There
+                    is something fundamentally <em>wrong</em> about her—an uncanny quality that defies explanation.</p>
             </div>
         </section>
 
@@ -429,25 +595,38 @@
                     <li>Demonstrates curiosity rather than malice</li>
                 </ul>
 
-                <p><strong>Core Motivation:</strong> Unknown—possibly guiding events toward a specific outcome only she understands</p>
+                <p><strong>Core Motivation:</strong> Unknown—possibly guiding events toward a specific outcome only she
+                    understands</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Combat Profile</h2>
             <div class="section-content">
-                <p>dissonant discord employs a predatory, tempo-dominant combat style that blends elegant swordsmanship with unnaturally rapid Tier 4 dark magic execution. Her methodology is built around rhythmic precision, overwhelming magical superiority, and psychological destabilization of opponents through deliberate control of battlefield pacing.</p>
+                <p>dissonant discord employs a predatory, tempo-dominant combat style that blends elegant swordsmanship
+                    with unnaturally rapid Tier 4 dark magic execution. Her methodology is built around rhythmic
+                    precision, overwhelming magical superiority, and psychological destabilization of opponents through
+                    deliberate control of battlefield pacing.</p>
 
                 <h3 class="section-subtitle">Combat Philosophy</h3>
-                <p>discord does not overpower opponents—she <strong>desynchronizes</strong> them. She destabilizes coordinated magical resonance, forcing collapse through timing interference and gravitational distortion.</p>
+                <p>discord does not overpower opponents—she <strong>desynchronizes</strong> them. She destabilizes
+                    coordinated magical resonance, forcing collapse through timing interference and gravitational
+                    distortion.</p>
 
                 <h3 class="section-subtitle">Atonality - Slashing Épée</h3>
-                <p>At the center of her combat identity is her slashing épée, <strong>Atonality</strong>, a weapon that mirrors her philosophy of breaking structure and rewriting harmonic order. Unlike traditional épée combat, which emphasizes thrusting and linear precision, discord uses wide, flowing slashing arcs that blur the line between fencing technique and ritual casting.</p>
+                <p>At the center of her combat identity is her slashing épée, <strong>Atonality</strong>, a weapon that
+                    mirrors her philosophy of breaking structure and rewriting harmonic order. Unlike traditional épée
+                    combat, which emphasizes thrusting and linear precision, discord uses wide, flowing slashing arcs
+                    that blur the line between fencing technique and ritual casting.</p>
 
-                <p>Each blade motion serves as both a physical strike and a conduit for dark spell manifestation, allowing her attacks to operate on simultaneous martial and metaphysical layers.</p>
+                <p>Each blade motion serves as both a physical strike and a conduit for dark spell manifestation,
+                    allowing her attacks to operate on simultaneous martial and metaphysical layers.</p>
 
                 <h3 class="section-subtitle">Rhythmic Dominance</h3>
-                <p>discord's movement pattern is unmistakably rhythmic. She advances, retreats, pivots, and strikes with metronomic consistency, maintaining an eerie and unbroken tempo throughout battle. This rhythmic motion functions as an internal casting cadence that allows her to channel Tier 4 dark magic at speeds that defy conventional casting limitations.</p>
+                <p>discord's movement pattern is unmistakably rhythmic. She advances, retreats, pivots, and strikes with
+                    metronomic consistency, maintaining an eerie and unbroken tempo throughout battle. This rhythmic
+                    motion functions as an internal casting cadence that allows her to channel Tier 4 dark magic at
+                    speeds that defy conventional casting limitations.</p>
 
                 <h3 class="section-subtitle">Dark Magic Arsenal</h3>
                 <ul>
@@ -461,23 +640,38 @@
                 </ul>
 
                 <h3 class="section-subtitle">Theatrical Combat</h3>
-                <p>A defining characteristic of discord's combat behavior is her theatrical dominance. She frequently engages opponents with a composed smile and visible amusement, often prolonging encounters instead of concluding them efficiently. She has been known to deliberately empower or allow opponents to escalate their abilities, treating combat as a form of performance or experimentation.</p>
+                <p>A defining characteristic of discord's combat behavior is her theatrical dominance. She frequently
+                    engages opponents with a composed smile and visible amusement, often prolonging encounters instead
+                    of concluding them efficiently. She has been known to deliberately empower or allow opponents to
+                    escalate their abilities, treating combat as a form of performance or experimentation.</p>
 
-                <p>This tendency is not rooted in mercy, but in intellectual and emotional stimulation; she seeks opponents capable of disrupting her rhythm or forcing her to adapt.</p>
+                <p>This tendency is not rooted in mercy, but in intellectual and emotional stimulation; she seeks
+                    opponents capable of disrupting her rhythm or forcing her to adapt.</p>
 
                 <h3 class="section-subtitle">Multi-Target Engagement</h3>
-                <p>When facing multiple adversaries, discord demonstrates exceptional battlefield partitioning. She manipulates positioning and gravitational pressure to isolate individual targets while maintaining defensive awareness across the entire engagement space. Her ability to control tempo allows her to simultaneously suppress group coordination, effectively enabling her to hold off entire teams without surrendering strategic control.</p>
+                <p>When facing multiple adversaries, discord demonstrates exceptional battlefield partitioning. She
+                    manipulates positioning and gravitational pressure to isolate individual targets while maintaining
+                    defensive awareness across the entire engagement space. Her ability to control tempo allows her to
+                    simultaneously suppress group coordination, effectively enabling her to hold off entire teams
+                    without surrendering strategic control.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Relationship with Heart Melody</h2>
             <div class="section-content">
-                <p>dissonant discord serves as a recurring catastrophic variable within the operational and emotional history of <a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a>.</p>
+                <p>dissonant discord serves as a recurring catastrophic variable within the operational and emotional
+                    history of <a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a>.</p>
 
-                <p>She has repeatedly disrupted Heart Melody's harmonic synchronization abilities, demonstrated targeted fascination with their emotional resonance stability, and appeared during critical emotional and narrative turning points tied to their growth. She withdraws only after forcing them into states of harmonic instability or forced evolution.</p>
+                <p>She has repeatedly disrupted Heart Melody's harmonic synchronization abilities, demonstrated targeted
+                    fascination with their emotional resonance stability, and appeared during critical emotional and
+                    narrative turning points tied to their growth. She withdraws only after forcing them into states of
+                    harmonic instability or forced evolution.</p>
 
-                <p>Heart Melody initially does not view discord as a conventional enemy, but as a potential future ally. This perspective lasts until <strong>Aria Caesura</strong>, where she kills <a href="character-pyara-dana.html" class="wiki-link">Heart Aria</a> and shatters the Heart Melody team, wholly destabilizing Beeston and cementing herself as their enemy.</p>
+                <p>Heart Melody initially does not view discord as a conventional enemy, but as a potential future ally.
+                    This perspective lasts until <strong>Aria Caesura</strong>, where she kills <a
+                        href="character-pyara-dana.html" class="wiki-link">Heart Aria</a> and shatters the Heart Melody
+                    team, wholly destabilizing Beeston and cementing herself as their enemy.</p>
 
                 <h3 class="section-subtitle">Behavioral Patterns</h3>
                 <ul>
@@ -493,7 +687,7 @@
 
         <section class="content-section">
             <h2 class="section-title">Relationships</h2>
-            
+
             <div class="relationships-grid">
                 <a href="character-pyara-dana.html" class="relationship-card">
                     <div class="relationship-name">Pyara Dana</div>
@@ -523,7 +717,7 @@
                 <p><strong>Archetype:</strong> The Antithesis</p>
                 <p><strong>Story Function:</strong> Catastrophic Variable / Destabilizing Force</p>
                 <p><strong>Character Role:</strong> Antagonist / Ambiguous Ally</p>
-                
+
                 <p><strong>Themes Represented:</strong></p>
                 <ul>
                     <li>The fragility of unity</li>
@@ -533,7 +727,9 @@
                     <li>The inevitability of entropy within structured systems</li>
                 </ul>
 
-                <p><strong>Narrative Function:</strong> discord exists to challenge the permanence of emotional and magical stability. She represents the concept of unavoidable narrative entropy—the understanding that even the most perfect harmony must eventually face disruption.</p>
+                <p><strong>Narrative Function:</strong> discord exists to challenge the permanence of emotional and
+                    magical stability. She represents the concept of unavoidable narrative entropy—the understanding
+                    that even the most perfect harmony must eventually face disruption.</p>
             </div>
         </section>
 
@@ -541,16 +737,25 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Convention:</strong> Her name is ALWAYS written entirely in lowercase—"dissonant discord"—never capitalized</li>
-                    <li><strong>Speech Pattern:</strong> discord speaks exclusively in iambic pentameter as an affectation. During Aria Caesura, when she breaks character and simply says "Gotcha," the moment is significant but never explicitly called out</li>
-                    <li><strong>Design Notes:</strong> Teal/black color palette; tech-forward, non-magical-girl-coded aesthetic</li>
-                    <li><strong>Symbolism:</strong> Musical dissonance theory; gravitational inevitability; controlled chaos versus structured harmony</li>
-                    <li><strong>Inspiration:</strong> Musical dissonance theory and gravitational inevitability metaphors</li>
-                    <li><strong>Combat Philosophy:</strong> Controlled dissonance—deliberate disruption of harmony to assert dominance over both physical combat and magical structure</li>
-                    <li><strong>Author Notes:</strong> One of the most dangerous and unpredictable adversaries within any engagement; her presence alone can redefine battlefield tempo</li>
+                    <li><strong>Name Convention:</strong> Her name is ALWAYS written entirely in lowercase—"dissonant
+                        discord"—never capitalized</li>
+                    <li><strong>Speech Pattern:</strong> discord speaks exclusively in iambic pentameter as an
+                        affectation. During Aria Caesura, when she breaks character and simply says "Gotcha," the moment
+                        is significant but never explicitly called out</li>
+                    <li><strong>Design Notes:</strong> Teal/black color palette; tech-forward, non-magical-girl-coded
+                        aesthetic</li>
+                    <li><strong>Symbolism:</strong> Musical dissonance theory; gravitational inevitability; controlled
+                        chaos versus structured harmony</li>
+                    <li><strong>Inspiration:</strong> Musical dissonance theory and gravitational inevitability
+                        metaphors</li>
+                    <li><strong>Combat Philosophy:</strong> Controlled dissonance—deliberate disruption of harmony to
+                        assert dominance over both physical combat and magical structure</li>
+                    <li><strong>Author Notes:</strong> One of the most dangerous and unpredictable adversaries within
+                        any engagement; her presence alone can redefine battlefield tempo</li>
                 </ul>
             </div>
         </section>
     </div>
 </body>
+
 </html>

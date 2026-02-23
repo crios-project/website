@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ami Hartbreak // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -133,8 +136,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-header {
@@ -376,8 +386,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
@@ -431,42 +578,68 @@
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">Affiliation</span>
-                            <span class="stat-value"><a href="../factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a></span>
+                            <span class="stat-value"><a href="../factions/faction-reason-theory.html"
+                                    class="wiki-link">Reason Theory</a></span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">Key Attribute</span>
                             <span class="stat-value">Graceful</span>
                         </div>
                     </div>
-
-                    <div class="character-quote">"If you're going to make an entrance, make sure they never forget it."</div>
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
+                    <div class="character-quote">"If you're going to make an entrance, make sure they never forget it."
+                    </div>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Ami Hartbreak carries herself with effortless elegance paired with a mischievous, playful disposition. Once closely tied to <a href="../factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a>, Ami distanced herself following personal conflict and has since redefined herself through independence, style, and calculated irreverence.</p>
-                    
-                    <p>While she projects poise and approachability, her playful subversion often reveals itself through elaborate but harmless pranks.</p>
+                    <p>Ami Hartbreak carries herself with effortless elegance paired with a mischievous, playful
+                        disposition. Once closely tied to <a href="../factions/faction-praxis-verax-affinas.html"
+                            class="wiki-link">Praxis Verax Affinas</a>, Ami distanced herself following personal
+                        conflict and has since redefined herself through independence, style, and calculated
+                        irreverence.</p>
+
+                    <p>While she projects poise and approachability, her playful subversion often reveals itself through
+                        elaborate but harmless pranks.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Appearance</h2>
                 <div class="section-content">
-                    <p>Ami presents with effortless style and meticulous visual presentation. Her hair features a striking gradient from light red to amaranth with amaranth streaked highlights. The style is distinctive: hair falls over one eye while the opposite side displays half cornrow braids, with a wavy, styled ponytail draped elegantly over her shoulder.</p>
-                    
-                    <p>Her turquoise eyes provide striking contrast against her skin tone and hair coloration, contributing to her memorable presence.</p>
+                    <p>Ami presents with effortless style and meticulous visual presentation. Her hair features a
+                        striking gradient from light red to amaranth with amaranth streaked highlights. The style is
+                        distinctive: hair falls over one eye while the opposite side displays half cornrow braids, with
+                        a wavy, styled ponytail draped elegantly over her shoulder.</p>
+
+                    <p>Her turquoise eyes provide striking contrast against her skin tone and hair coloration,
+                        contributing to her memorable presence.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Personality</h2>
                 <div class="section-content">
-                    <p>Ami blends charm, composure, and humor into a carefully balanced social presence. She rarely appears flustered or hurried, maintaining a naturally refined aura that draws others toward her. Her easygoing demeanor makes her highly approachable, though she uses this trust as the perfect setup for her mischievous tendencies.</p>
+                    <p>Ami blends charm, composure, and humor into a carefully balanced social presence. She rarely
+                        appears flustered or hurried, maintaining a naturally refined aura that draws others toward her.
+                        Her easygoing demeanor makes her highly approachable, though she uses this trust as the perfect
+                        setup for her mischievous tendencies.</p>
 
-                    <p>Her sense of humor leans toward theatrical irony and lighthearted manipulation. While she enjoys creating chaos for entertainment, she draws a firm personal boundary against causing genuine harm. Her pranks are designed to surprise, embarrass, or inconvenience—never to damage or destroy.</p>
+                    <p>Her sense of humor leans toward theatrical irony and lighthearted manipulation. While she enjoys
+                        creating chaos for entertainment, she draws a firm personal boundary against causing genuine
+                        harm. Her pranks are designed to surprise, embarrass, or inconvenience—never to damage or
+                        destroy.</p>
 
                     <h3 class="section-subtitle">Behavioral Traits</h3>
                     <ul>
@@ -482,45 +655,65 @@
             <section class="content-section">
                 <h2 class="section-title">Identity & Name Change</h2>
                 <div class="section-content">
-                    <p>Ami's adoption of the surname <strong>Hartbreak</strong> was a deliberate act of provocation directed toward <a href="character-tiala-hartlight.html" class="wiki-link">Tiala</a> following their falling out. The change reflects both her willingness to weaponize symbolism and her inclination toward theatrical personal expression.</p>
-                    
-                    <p>Despite its outwardly comedic nature, the name represents unresolved emotional complexity beneath her carefree exterior. The fact that she maintains this provocative surname suggests lingering emotional investment in a relationship she claims to have moved past.</p>
+                    <p>Ami's adoption of the surname <strong>Hartbreak</strong> was a deliberate act of provocation
+                        directed toward <a href="character-tiala-hartlight.html" class="wiki-link">Tiala</a> following
+                        their falling out. The change reflects both her willingness to weaponize symbolism and her
+                        inclination toward theatrical personal expression.</p>
+
+                    <p>Despite its outwardly comedic nature, the name represents unresolved emotional complexity beneath
+                        her carefree exterior. The fact that she maintains this provocative surname suggests lingering
+                        emotional investment in a relationship she claims to have moved past.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Alliance with Windi</h2>
                 <div class="section-content">
-                    <p>After leaving Praxis Verax Affinas, Ami formed an alliance with <a href="character-windi-lightfall.html" class="wiki-link">Windi Lightfall</a>. Their partnership centers on disrupting the ambitions of their respective siblings.</p>
-                    
-                    <p>Ami's motivations are rooted in amusement and rebellion, whereas Windi's reasons remain largely undisclosed, creating a partnership built on asymmetrical intent. This dynamic adds complexity to their alliance—they share a goal but not necessarily a vision.</p>
+                    <p>After leaving Praxis Verax Affinas, Ami formed an alliance with <a
+                            href="character-windi-lightfall.html" class="wiki-link">Windi Lightfall</a>. Their
+                        partnership centers on disrupting the ambitions of their respective siblings.</p>
+
+                    <p>Ami's motivations are rooted in amusement and rebellion, whereas Windi's reasons remain largely
+                        undisclosed, creating a partnership built on asymmetrical intent. This dynamic adds complexity
+                        to their alliance—they share a goal but not necessarily a vision.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Social Dynamics</h2>
                 <div class="section-content">
-                    <p>Ami is widely admired and socially magnetic. Her natural elegance and relaxed confidence cause others to gravitate toward her easily. However, acquaintances often find themselves unexpectedly targeted by her pranks, resulting in a reputation that balances admiration with cautious wariness.</p>
-                    
-                    <p>This duality serves her well—people are drawn to her charm while remaining perpetually uncertain whether they're about to become her next target.</p>
+                    <p>Ami is widely admired and socially magnetic. Her natural elegance and relaxed confidence cause
+                        others to gravitate toward her easily. However, acquaintances often find themselves unexpectedly
+                        targeted by her pranks, resulting in a reputation that balances admiration with cautious
+                        wariness.</p>
+
+                    <p>This duality serves her well—people are drawn to her charm while remaining perpetually uncertain
+                        whether they're about to become her next target.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Relationship with Tiala</h2>
                 <div class="section-content">
-                    <p>Ami and Tiala's relationship deteriorated following Xīwàng's disappearance, culminating in a significant emotional rupture. While Ami outwardly treats the conflict with humor and irreverence, her continued symbolic provocations suggest lingering emotional investment beneath her composed exterior.</p>
-                    
-                    <p>The "Hartbreak" surname stands as a constant reminder of their fractured relationship, simultaneously mocking and acknowledging the pain between them.</p>
+                    <p>Ami and Tiala's relationship deteriorated following Xīwàng's disappearance, culminating in a
+                        significant emotional rupture. While Ami outwardly treats the conflict with humor and
+                        irreverence, her continued symbolic provocations suggest lingering emotional investment beneath
+                        her composed exterior.</p>
+
+                    <p>The "Hartbreak" surname stands as a constant reminder of their fractured relationship,
+                        simultaneously mocking and acknowledging the pain between them.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Personal Philosophy</h2>
                 <div class="section-content">
-                    <p>Ami believes life should be enjoyed with style, wit, and controlled unpredictability. She values freedom of expression and views rigid seriousness as something to be gently mocked rather than confronted directly.</p>
-                    
-                    <p>Her approach to conflict emphasizes subversion over direct confrontation, humor over hostility, and independence over allegiance.</p>
+                    <p>Ami believes life should be enjoyed with style, wit, and controlled unpredictability. She values
+                        freedom of expression and views rigid seriousness as something to be gently mocked rather than
+                        confronted directly.</p>
+
+                    <p>Her approach to conflict emphasizes subversion over direct confrontation, humor over hostility,
+                        and independence over allegiance.</p>
                 </div>
             </section>
         </div>
@@ -529,7 +722,8 @@
         <div id="hartfall-form" class="character-form">
             <section class="character-header">
                 <div class="character-visual">
-                    <img src="../assets/characters/Amaranthine Hartfall.png" alt="Amaranthine Hartfall" class="character-image">
+                    <img src="../assets/characters/Amaranthine Hartfall.png" alt="Amaranthine Hartfall"
+                        class="character-image">
                     <img src="../assets/icons/Reason Theory Icon.png" alt="Reason Theory" class="faction-logo">
                 </div>
 
@@ -563,7 +757,16 @@
                             <span class="stat-value">Inevitability Through Control</span>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">"Power, grace, and mastery converge."</div>
                 </div>
             </section>
@@ -571,31 +774,50 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Amaranthine Hartfall is the magical girl form of Ami Hartbreak. Her combat style has refined from that of <a href="character-amaranthine-breaklight.html" class="wiki-link">Amaranthine Breaklight</a>, becoming more graceful and with less wasted energy.</p>
-                    
-                    <p>Amaranthine Hartfall demonstrates a refined evolution of her earlier combat methodology, transitioning from overwhelming force projection into a style defined by elegance, efficiency, and disciplined power control. While she retains the devastating offensive capacity associated with her younger counterpart, her movements are now more economical, her strikes more deliberate, and her overall battlefield presence more composed and authoritative.</p>
+                    <p>Amaranthine Hartfall is the magical girl form of Ami Hartbreak. Her combat style has refined from
+                        that of <a href="character-amaranthine-breaklight.html" class="wiki-link">Amaranthine
+                            Breaklight</a>, becoming more graceful and with less wasted energy.</p>
+
+                    <p>Amaranthine Hartfall demonstrates a refined evolution of her earlier combat methodology,
+                        transitioning from overwhelming force projection into a style defined by elegance, efficiency,
+                        and disciplined power control. While she retains the devastating offensive capacity associated
+                        with her younger counterpart, her movements are now more economical, her strikes more
+                        deliberate, and her overall battlefield presence more composed and authoritative.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Weapon: Fate</h2>
                 <div class="section-content">
-                    <p>Her broadsword, <strong>Fate</strong>, remains the centerpiece of her arsenal, but Hartfall wields the weapon with significantly greater fluidity. Her increased physical strength and slightly taller frame allow her to manipulate the blade's mass with improved balance and rotational precision.</p>
-                    
-                    <p>Rather than relying on raw momentum alone, she now integrates controlled arc redirection, mid-swing stance adjustments, and seamless directional transitions that allow her to maintain continuous offensive pressure while conserving stamina.</p>
+                    <p>Her broadsword, <strong>Fate</strong>, remains the centerpiece of her arsenal, but Hartfall
+                        wields the weapon with significantly greater fluidity. Her increased physical strength and
+                        slightly taller frame allow her to manipulate the blade's mass with improved balance and
+                        rotational precision.</p>
+
+                    <p>Rather than relying on raw momentum alone, she now integrates controlled arc redirection,
+                        mid-swing stance adjustments, and seamless directional transitions that allow her to maintain
+                        continuous offensive pressure while conserving stamina.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Combat Philosophy</h2>
                 <div class="section-content">
-                    <p>Hartfall's combat rhythm emphasizes graceful motion and uninterrupted flow. She frequently chains attacks into circular movement patterns, allowing her to reposition while maintaining striking range. This creates a combat presence that feels both relentless and visually composed, as each attack appears to emerge naturally from the previous motion.</p>
-                    
-                    <p>Her blade work balances power and finesse, delivering strikes that remain devastating while eliminating unnecessary expenditure of energy.</p>
+                    <p>Hartfall's combat rhythm emphasizes graceful motion and uninterrupted flow. She frequently chains
+                        attacks into circular movement patterns, allowing her to reposition while maintaining striking
+                        range. This creates a combat presence that feels both relentless and visually composed, as each
+                        attack appears to emerge naturally from the previous motion.</p>
 
-                    <p>Psychologically, Hartfall projects a calm and resolute authority. Where her earlier combat persona radiated overwhelming inevitability through escalating power, her matured style conveys quiet certainty. She rarely rushes engagements unnecessarily, instead guiding the battle's tempo through controlled pacing and calculated escalation.</p>
-                    
-                    <p>Opponents frequently find themselves drawn into engagements on her terms, gradually overwhelmed by her ability to outmaneuver, outlast, and outclass them simultaneously.</p>
+                    <p>Her blade work balances power and finesse, delivering strikes that remain devastating while
+                        eliminating unnecessary expenditure of energy.</p>
+
+                    <p>Psychologically, Hartfall projects a calm and resolute authority. Where her earlier combat
+                        persona radiated overwhelming inevitability through escalating power, her matured style conveys
+                        quiet certainty. She rarely rushes engagements unnecessarily, instead guiding the battle's tempo
+                        through controlled pacing and calculated escalation.</p>
+
+                    <p>Opponents frequently find themselves drawn into engagements on her terms, gradually overwhelmed
+                        by her ability to outmaneuver, outlast, and outclass them simultaneously.</p>
                 </div>
             </section>
 
@@ -604,9 +826,12 @@
                 <div class="section-content">
                     <h3 class="section-subtitle">Blade Mastery</h3>
                     <ul>
-                        <li><strong>Controlled Arc Redirection:</strong> Adjusting strike trajectories mid-swing with precision</li>
-                        <li><strong>Mid-Swing Stance Adjustments:</strong> Repositioning without disrupting attack flow</li>
-                        <li><strong>Seamless Directional Transitions:</strong> Maintaining pressure while conserving stamina</li>
+                        <li><strong>Controlled Arc Redirection:</strong> Adjusting strike trajectories mid-swing with
+                            precision</li>
+                        <li><strong>Mid-Swing Stance Adjustments:</strong> Repositioning without disrupting attack flow
+                        </li>
+                        <li><strong>Seamless Directional Transitions:</strong> Maintaining pressure while conserving
+                            stamina</li>
                         <li><strong>Circular Movement Patterns:</strong> Chaining attacks while repositioning</li>
                         <li><strong>Graceful Motion:</strong> Each strike emerging naturally from the previous</li>
                     </ul>
@@ -619,10 +844,15 @@
                         <li><strong>Acceleration Bursts:</strong> Sudden speed increases at critical moments</li>
                         <li><strong>Localized Elemental Surges:</strong> Precise magical enhancements</li>
                         <li><strong>Luminous Trails:</strong> Graceful expansions of sword arcs</li>
-                        <li><strong>Controlled Energy Crescents:</strong> Extending effective range without compromising mobility</li>
+                        <li><strong>Controlled Energy Crescents:</strong> Extending effective range without compromising
+                            mobility</li>
                     </ul>
 
-                    <p>These enhancements are deployed with surgical timing rather than explosive spectacle, allowing her to maintain constant battlefield control without telegraphing her intentions. Her spellcasting often manifests as graceful expansions of her sword arcs, producing luminous trails or controlled energy crescents that extend her effective range without compromising mobility.</p>
+                    <p>These enhancements are deployed with surgical timing rather than explosive spectacle, allowing
+                        her to maintain constant battlefield control without telegraphing her intentions. Her
+                        spellcasting often manifests as graceful expansions of her sword arcs, producing luminous trails
+                        or controlled energy crescents that extend her effective range without compromising mobility.
+                    </p>
 
                     <h3 class="section-subtitle">Defensive Methodology</h3>
                     <p>Her defensive methodology reflects strong influences from high-level magical duelists:</p>
@@ -634,7 +864,9 @@
                         <li><strong>Engagement Distance Control:</strong> Maintaining optimal spacing</li>
                     </ul>
 
-                    <p>Rather than absorbing damage through durability alone, she now prioritizes redirection and evasion, maintaining control over engagement distance while forcing opponents to expend resources attempting to track her movement.</p>
+                    <p>Rather than absorbing damage through durability alone, she now prioritizes redirection and
+                        evasion, maintaining control over engagement distance while forcing opponents to expend
+                        resources attempting to track her movement.</p>
 
                     <h3 class="section-subtitle">Aerial Combat Capability</h3>
                     <p>Hartfall's aerial combat capability has also matured significantly:</p>
@@ -647,10 +879,14 @@
                         <li>Seamless disengagement and reengagement at will</li>
                     </ul>
 
-                    <p>Her aerial presence enhances her battlefield versatility, making her difficult to corner or contain.</p>
+                    <p>Her aerial presence enhances her battlefield versatility, making her difficult to corner or
+                        contain.</p>
 
                     <h3 class="section-subtitle">Finishing Techniques</h3>
-                    <p>Despite her increased composure and efficiency, Hartfall retains access to catastrophic finishing techniques when circumstances demand it. However, these techniques are now executed with precision timing and minimal energy waste, often appearing as singular, perfectly delivered concluding strikes rather than extended displays of destructive output.</p>
+                    <p>Despite her increased composure and efficiency, Hartfall retains access to catastrophic finishing
+                        techniques when circumstances demand it. However, these techniques are now executed with
+                        precision timing and minimal energy waste, often appearing as singular, perfectly delivered
+                        concluding strikes rather than extended displays of destructive output.</p>
                 </div>
             </section>
         </div>
@@ -680,25 +916,35 @@
             <h2 class="section-title">Thematic Significance</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Archetype</h3>
-                <p>Ami embodies the <strong>Graceful Provocateur</strong> archetype—someone who wields style, humor, and theatrical rebellion as weapons against rigidity and seriousness.</p>
+                <p>Ami embodies the <strong>Graceful Provocateur</strong> archetype—someone who wields style, humor, and
+                    theatrical rebellion as weapons against rigidity and seriousness.</p>
 
                 <h3 class="section-subtitle">Core Themes</h3>
                 <ul>
-                    <li><strong>Style as Statement:</strong> Visual presentation and personal expression as forms of resistance</li>
+                    <li><strong>Style as Statement:</strong> Visual presentation and personal expression as forms of
+                        resistance</li>
                     <li><strong>Humor as Defense:</strong> Masking deeper emotions behind playful irreverence</li>
                     <li><strong>Symbolic Provocation:</strong> Weaponizing names and gestures for emotional impact</li>
-                    <li><strong>Independence Through Distance:</strong> Maintaining emotional autonomy via separation</li>
+                    <li><strong>Independence Through Distance:</strong> Maintaining emotional autonomy via separation
+                    </li>
                     <li><strong>Refinement as Evolution:</strong> Combat style maturing from force to elegance</li>
                     <li><strong>Controlled Chaos:</strong> Creating disruption without causing genuine harm</li>
                 </ul>
 
                 <h3 class="section-subtitle">Combat Evolution Symbolism</h3>
-                <p>The evolution from Amaranthine Breaklight to Amaranthine Hartfall mirrors Ami's personal growth—from overwhelming force to refined control, from raw power to elegant precision. This represents maturation without loss of capability, suggesting that true strength comes from mastery rather than magnitude.</p>
+                <p>The evolution from Amaranthine Breaklight to Amaranthine Hartfall mirrors Ami's personal growth—from
+                    overwhelming force to refined control, from raw power to elegant precision. This represents
+                    maturation without loss of capability, suggesting that true strength comes from mastery rather than
+                    magnitude.</p>
 
                 <h3 class="section-subtitle">Narrative Function</h3>
-                <p>Ami serves as a counterpoint to characters driven purely by ideology or ambition. She represents the individual who has stepped away from grand conflicts to pursue personal freedom, yet remains entangled through unresolved emotional connections.</p>
-                
-                <p>Her adoption of "Hartbreak" as a surname demonstrates how personal wounds can be transformed into theatrical statements—neither fully embracing nor fully releasing the pain, but instead wearing it as performative armor.</p>
+                <p>Ami serves as a counterpoint to characters driven purely by ideology or ambition. She represents the
+                    individual who has stepped away from grand conflicts to pursue personal freedom, yet remains
+                    entangled through unresolved emotional connections.</p>
+
+                <p>Her adoption of "Hartbreak" as a surname demonstrates how personal wounds can be transformed into
+                    theatrical statements—neither fully embracing nor fully releasing the pain, but instead wearing it
+                    as performative armor.</p>
             </div>
         </section>
 
@@ -706,8 +952,11 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> "Hartbreak" - deliberate antagonistic provocation toward Tiala Hartlight after their falling out, weaponizing symbolism through theatrical personal expression</li>
-                    <li>Hair features distinctive styling: gradient from light red to amaranth with streaked highlights</li>
+                    <li><strong>Name Etymology:</strong> "Hartbreak" - deliberate antagonistic provocation toward Tiala
+                        Hartlight after their falling out, weaponizing symbolism through theatrical personal expression
+                    </li>
+                    <li>Hair features distinctive styling: gradient from light red to amaranth with streaked highlights
+                    </li>
                     <li>Half cornrow braids on one side with hair falling over opposite eye</li>
                     <li>Wavy, styled ponytail draped over shoulder</li>
                     <li>Turquoise eyes provide striking contrast</li>
@@ -745,4 +994,5 @@
         }
     </script>
 </body>
+
 </html>

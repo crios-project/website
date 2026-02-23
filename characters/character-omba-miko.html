@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Omba Miko // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -133,8 +136,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-header {
@@ -394,8 +404,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
@@ -451,15 +598,26 @@
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Faction</span>
-                                <span class="stat-value"><a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a></span>
+                                <span class="stat-value"><a href="../factions/faction-heart-melody.html"
+                                        class="wiki-link">Heart Melody</a></span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Twin</span>
-                                <span class="stat-value"><a href="character-oktusha-miko.html" class="wiki-link">Oktusha Miko</a> (Younger)</span>
+                                <span class="stat-value"><a href="character-oktusha-miko.html" class="wiki-link">Oktusha
+                                        Miko</a> (Younger)</span>
                             </div>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "Vengeance is justice without the sheen of respectability."
                     </div>
@@ -469,11 +627,20 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Omba Miko is precise, composed, and intensely professional. In stark contrast to her younger twin <a href="character-oktusha-miko.html" class="wiki-link">Oktusha</a>, she prefers structure and planning over improvisation. Omba approaches problems analytically, often identifying flaws and contingencies others overlook.</p>
+                    <p>Omba Miko is precise, composed, and intensely professional. In stark contrast to her younger twin
+                        <a href="character-oktusha-miko.html" class="wiki-link">Oktusha</a>, she prefers structure and
+                        planning over improvisation. Omba approaches problems analytically, often identifying flaws and
+                        contingencies others overlook.</p>
 
-                    <p>A technological prodigy, Omba designed much of the <a href="../factions/faction-heart-melody.html" class="wiki-link">Lovely Hearts</a>' communications and tactical infrastructure. She is known for her bluntness and meticulous attention to detail—even tracking her age in half-years.</p>
+                    <p>A technological prodigy, Omba designed much of the <a
+                            href="../factions/faction-heart-melody.html" class="wiki-link">Lovely Hearts</a>'
+                        communications and tactical infrastructure. She is known for her bluntness and meticulous
+                        attention to detail—even tracking her age in half-years.</p>
 
-                    <p>Omba's design emphasizes balance and solidity. Even in moments of chaos, her physical presence conveys control and measured intent rather than speed or aggression. She carries herself with upright posture and composed body language, always equipped with her black headset and tablet for tactical coordination.</p>
+                    <p>Omba's design emphasizes balance and solidity. Even in moments of chaos, her physical presence
+                        conveys control and measured intent rather than speed or aggression. She carries herself with
+                        upright posture and composed body language, always equipped with her black headset and tablet
+                        for tactical coordination.</p>
                 </div>
             </section>
 
@@ -515,7 +682,8 @@
                 <div class="section-content">
                     <ul>
                         <li>Formation of Heart Melody and establishment as tactical coordinator</li>
-                        <li>Witnessing <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a>'s death during Aria Caesura</li>
+                        <li>Witnessing <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a>'s death
+                            during Aria Caesura</li>
                         <li>Assuming increased responsibility for team stability post-loss</li>
                     </ul>
                 </div>
@@ -535,7 +703,7 @@
                     <p class="character-title">Tactical Analyst</p>
 
                     <div class="stats-container">
-                        <img src="../assets/hearts/Omba heart.png" alt="Omba's Heart" class="heart-symbol">
+                        <img src="../assets/hearts/Rayen heart.png" alt="Omba's Heart" class="heart-symbol">
                         <div class="stats-grid">
                             <div class="stat-item">
                                 <span class="stat-label">Role</span>
@@ -555,7 +723,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "I'll keep us alive long enough to win."
                     </div>
@@ -565,26 +742,39 @@
             <section class="content-section">
                 <h2 class="section-title">Heart Verismo Powers</h2>
                 <div class="section-content">
-                    <p>As <strong>Heart Verismo</strong>, Omba functions as the team's tactical mind. While <a href="character-pyara-dana.html" class="wiki-link">Aria</a> decides what the team will do, Verismo determines how. Her magic emphasizes foresight, coordination, and battlefield control through freezing, containment, and strategic positioning.</p>
+                    <p>As <strong>Heart Verismo</strong>, Omba functions as the team's tactical mind. While <a
+                            href="character-pyara-dana.html" class="wiki-link">Aria</a> decides what the team will do,
+                        Verismo determines how. Her magic emphasizes foresight, coordination, and battlefield control
+                        through freezing, containment, and strategic positioning.</p>
 
                     <p><strong>Essentia:</strong> Crýalune (Ice) - Creates stasis fields and preservation zones</p>
 
-                    <p><strong>Abilities:</strong> Magical stabilization that prevents collapse during high-output scenarios; rhythm-based reinforcement of team structures; team-synchronizing resonance patterns; battlefield tempo control through freezing and containment.</p>
+                    <p><strong>Abilities:</strong> Magical stabilization that prevents collapse during high-output
+                        scenarios; rhythm-based reinforcement of team structures; team-synchronizing resonance patterns;
+                        battlefield tempo control through freezing and containment.</p>
 
-                    <p><strong>Philosophy:</strong> Truth through restraint and memory—Omba fights not for glory, but to ensure a future exists at all.</p>
+                    <p><strong>Philosophy:</strong> Truth through restraint and memory—Omba fights not for glory, but to
+                        ensure a future exists at all.</p>
 
-                    <p><strong>Combat Role:</strong> Defensive and structural, prioritizing battlefield control over direct offense. Controls tempo through freezing, containment, and strategic positioning with magic focused on preservation and long-term control.</p>
+                    <p><strong>Combat Role:</strong> Defensive and structural, prioritizing battlefield control over
+                        direct offense. Controls tempo through freezing, containment, and strategic positioning with
+                        magic focused on preservation and long-term control.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Post-Aria Caesura</h2>
                 <div class="section-content">
-                    <p>Following Pyara's death, Omba's role within Heart Melody intensified dramatically. With the loss of their emotional anchor and conductor, the burden of maintaining team cohesion fell disproportionately on Verismo's structural magic.</p>
+                    <p>Following Pyara's death, Omba's role within Heart Melody intensified dramatically. With the loss
+                        of their emotional anchor and conductor, the burden of maintaining team cohesion fell
+                        disproportionately on Verismo's structural magic.</p>
 
-                    <p>Her tactical responsibilities expanded to include not just battlefield strategy, but emotional management—using her ice-based Essentia to literally freeze moments of panic or despair, giving the team breathing room to regroup.</p>
+                    <p>Her tactical responsibilities expanded to include not just battlefield strategy, but emotional
+                        management—using her ice-based Essentia to literally freeze moments of panic or despair, giving
+                        the team breathing room to regroup.</p>
 
-                    <p>Viewed by allies as dependable and unshakable, Omba is often underestimated by adversaries who mistake her reserved demeanor for weakness.</p>
+                    <p>Viewed by allies as dependable and unshakable, Omba is often underestimated by adversaries who
+                        mistake her reserved demeanor for weakness.</p>
                 </div>
             </section>
         </div>
@@ -592,7 +782,7 @@
         <!-- Shared Sections -->
         <section class="content-section">
             <h2 class="section-title">Relationships</h2>
-            
+
             <div class="relationships-grid">
                 <a href="character-oktusha-miko.html" class="relationship-card">
                     <div class="relationship-name">Oktusha Miko</div>
@@ -629,7 +819,8 @@
                     <li>Truth versus comfort</li>
                 </ul>
 
-                <p><strong>Foil to:</strong> Characters driven by emotional excess—Omba's restraint contrasts with impulsive action</p>
+                <p><strong>Foil to:</strong> Characters driven by emotional excess—Omba's restraint contrasts with
+                    impulsive action</p>
             </div>
         </section>
 
@@ -638,9 +829,11 @@
             <div class="section-content">
                 <ul>
                     <li><strong>Name Etymology:</strong> Omba — Choctaw for "Rain"; Miko — Choctaw for "Chief"</li>
-                    <li><strong>Design Notes:</strong> Emphasizes symmetry and grounded silhouettes; bob haircut represents precision</li>
+                    <li><strong>Design Notes:</strong> Emphasizes symmetry and grounded silhouettes; bob haircut
+                        represents precision</li>
                     <li><strong>Symbolism:</strong> Rain as stability amid chaos; ice as preservation</li>
-                    <li><strong>Author Notes:</strong> Omba's role increases significantly after Pyara's death; designed to prevent team collapse</li>
+                    <li><strong>Author Notes:</strong> Omba's role increases significantly after Pyara's death; designed
+                        to prevent team collapse</li>
                     <li><strong>Continuity:</strong> Name previously misspelled as "Umba" in early drafts</li>
                     <li><strong>Technical Detail:</strong> Tracks age in half-years due to meticulous nature</li>
                 </ul>
@@ -667,4 +860,5 @@
         }
     </script>
 </body>
+
 </html>

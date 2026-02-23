@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zafara Quedar // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -133,8 +136,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-header {
@@ -394,8 +404,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
@@ -451,7 +598,8 @@
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Faction</span>
-                                <span class="stat-value"><a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a></span>
+                                <span class="stat-value"><a href="../factions/faction-heart-melody.html"
+                                        class="wiki-link">Heart Melody</a></span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Distinguishing Feature</span>
@@ -459,7 +607,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "Life is more fun when you decide to have fun."
                     </div>
@@ -469,11 +626,20 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Zafara Quedar serves as <a href="../factions/faction-heart-melody.html" class="wiki-link">Heart Melody</a>'s quiet stabilizer, offering endurance and regeneration rather than immediate solutions. Her appearance is understated and gentle—she blends easily into the background, both socially and visually.</p>
+                    <p>Zafara Quedar serves as <a href="../factions/faction-heart-melody.html" class="wiki-link">Heart
+                            Melody</a>'s quiet stabilizer, offering endurance and regeneration rather than immediate
+                        solutions. Her appearance is understated and gentle—she blends easily into the background, both
+                        socially and visually.</p>
 
-                    <p>Raised in <a href="../realms/realm-beeston.html" class="wiki-link">Beeston</a>, Zafara grew up surrounded by living systems—gardens, natural growth cycles, and emotional environments shaped by Lúmenai resonance. She learned through observation and repetition rather than instruction, developing an intuitive understanding of patience and continuity.</p>
+                    <p>Raised in <a href="../realms/realm-beeston.html" class="wiki-link">Beeston</a>, Zafara grew up
+                        surrounded by living systems—gardens, natural growth cycles, and emotional environments shaped
+                        by Lúmenai resonance. She learned through observation and repetition rather than instruction,
+                        developing an intuitive understanding of patience and continuity.</p>
 
-                    <p>With her short, wavy bob of light blonde hair tipped with orange-red, golden eyes, and a confident or mischievous expression, Zafara presents as approachable and harmless. This often works to her advantage—people underestimate her until they realize she's the one keeping everything from falling apart.</p>
+                    <p>With her short, wavy bob of light blonde hair tipped with orange-red, golden eyes, and a
+                        confident or mischievous expression, Zafara presents as approachable and harmless. This often
+                        works to her advantage—people underestimate her until they realize she's the one keeping
+                        everything from falling apart.</p>
                 </div>
             </section>
 
@@ -505,7 +671,8 @@
                     </ul>
 
                     <p><strong>Core Fear:</strong> Sudden change; irreversible loss</p>
-                    <p><strong>Core Motivation:</strong> Continuity over disruption—preserve harmony and allow things to grow naturally</p>
+                    <p><strong>Core Motivation:</strong> Continuity over disruption—preserve harmony and allow things to
+                        grow naturally</p>
                     <p><strong>Core Value:</strong> Growth requires time; force invites collapse</p>
                     <p><strong>Moral Alignment:</strong> Neutral Good</p>
                     <p><strong>Emotional Triggers:</strong> Witnessing reckless destruction</p>
@@ -519,7 +686,8 @@
                 <div class="section-content">
                     <ul>
                         <li>Awakening as Heart Adagio through connection with natural growth cycles</li>
-                        <li>The death of <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a>, which challenged her belief that patience alone is enough</li>
+                        <li>The death of <a href="character-pyara-dana.html" class="wiki-link">Pyara Dana</a>, which
+                            challenged her belief that patience alone is enough</li>
                         <li>Learning that sometimes growth requires intervention, not just waiting</li>
                     </ul>
                 </div>
@@ -539,7 +707,7 @@
                     <p class="character-title">Disruption Specialist</p>
 
                     <div class="stats-container">
-                        <img src="../assets/hearts/Zafara heart.png" alt="Zafara's Heart" class="heart-symbol">
+                        <img src="../assets/hearts/Claris heart.png" alt="Zafara's Heart" class="heart-symbol">
                         <div class="stats-grid">
                             <div class="stat-item">
                                 <span class="stat-label">Role</span>
@@ -567,7 +735,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "Give it time. Things grow."
                     </div>
@@ -577,14 +754,20 @@
             <section class="content-section">
                 <h2 class="section-title">Heart Adagio Powers</h2>
                 <div class="section-content">
-                    <p>As <strong>Heart Adagio</strong>, Zafara manipulates growth-based Essentia through <strong>Víratha</strong>, the Plant Entwinement (combining Water and Earth). She excels in battlefield regeneration, terrain manipulation, and chaotic diversion through living structures.</p>
+                    <p>As <strong>Heart Adagio</strong>, Zafara manipulates growth-based Essentia through
+                        <strong>Víratha</strong>, the Plant Entwinement (combining Water and Earth). She excels in
+                        battlefield regeneration, terrain manipulation, and chaotic diversion through living structures.
+                    </p>
 
-                    <p>Her design incorporates organic lines and plant-like ornamentation, emphasizing continuity rather than aggression. Where others strike decisively, Zafara acts through persistence.</p>
+                    <p>Her design incorporates organic lines and plant-like ornamentation, emphasizing continuity rather
+                        than aggression. Where others strike decisively, Zafara acts through persistence.</p>
 
                     <h3 class="section-subtitle">Abilities</h3>
                     <ul>
-                        <li><strong>Plant Growth and Manipulation:</strong> Controls living vegetation for offense and defense</li>
-                        <li><strong>Regenerative Field Growth:</strong> Creates zones that heal and restore allies over time</li>
+                        <li><strong>Plant Growth and Manipulation:</strong> Controls living vegetation for offense and
+                            defense</li>
+                        <li><strong>Regenerative Field Growth:</strong> Creates zones that heal and restore allies over
+                            time</li>
                         <li><strong>Terrain Shaping:</strong> Alters battlefield through living structures</li>
                         <li><strong>Binding Vines:</strong> Restrains and immobilizes enemies</li>
                         <li><strong>Living Barriers:</strong> Creates walls and shields from plant matter</li>
@@ -598,20 +781,29 @@
                         <li>Requires time to establish control over an area</li>
                     </ul>
 
-                    <p><strong>Philosophy:</strong> Growth through persistence and improvisation—force invites collapse, but steady cultivation creates lasting change</p>
+                    <p><strong>Philosophy:</strong> Growth through persistence and improvisation—force invites collapse,
+                        but steady cultivation creates lasting change</p>
 
-                    <p><strong>Combat Approach:</strong> Defensive, area-control, attritional. Adagio fights not through overwhelming power but through making the battlefield itself inhospitable to enemies while nurturing allies.</p>
+                    <p><strong>Combat Approach:</strong> Defensive, area-control, attritional. Adagio fights not through
+                        overwhelming power but through making the battlefield itself inhospitable to enemies while
+                        nurturing allies.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">The Gardener</h2>
                 <div class="section-content">
-                    <p>Within Heart Melody, Zafara embodies patience, growth, and quiet continuity. She's the one who maintains stability when everything else is falling apart—not through dramatic intervention, but through reliable, persistent effort.</p>
+                    <p>Within Heart Melody, Zafara embodies patience, growth, and quiet continuity. She's the one who
+                        maintains stability when everything else is falling apart—not through dramatic intervention, but
+                        through reliable, persistent effort.</p>
 
-                    <p>Seen as gentle, dependable, and easy to overlook, Zafara's true strength becomes apparent when battles extend beyond a single decisive moment. Where explosive force fails, patient cultivation succeeds.</p>
+                    <p>Seen as gentle, dependable, and easy to overlook, Zafara's true strength becomes apparent when
+                        battles extend beyond a single decisive moment. Where explosive force fails, patient cultivation
+                        succeeds.</p>
 
-                    <p>Adagio represents non-reactive power—the understanding that not every problem requires immediate, forceful resolution. Sometimes the answer is simply to nurture, wait, and allow growth to take its natural course.</p>
+                    <p>Adagio represents non-reactive power—the understanding that not every problem requires immediate,
+                        forceful resolution. Sometimes the answer is simply to nurture, wait, and allow growth to take
+                        its natural course.</p>
                 </div>
             </section>
         </div>
@@ -619,7 +811,7 @@
         <!-- Shared Sections -->
         <section class="content-section">
             <h2 class="section-title">Relationships</h2>
-            
+
             <div class="relationships-grid">
                 <a href="character-pyara-dana.html" class="relationship-card">
                     <div class="relationship-name">Pyara Dana</div>
@@ -650,7 +842,7 @@
                 <p><strong>Story Function:</strong> Sustainer / Emotional Grounding</p>
                 <p><strong>Character Arc:</strong> Learning when growth requires intervention</p>
                 <p><strong>Arc Status:</strong> Evolving</p>
-                
+
                 <p><strong>Themes Represented:</strong></p>
                 <ul>
                     <li>Patience as strength, not weakness</li>
@@ -660,9 +852,11 @@
                     <li>The necessity of stillness and cultivation</li>
                 </ul>
 
-                <p><strong>Foil to:</strong> <a href="character-aran-letale.html" class="wiki-link">Aran Letale</a> (force versus growth; decisive action versus patient cultivation)</p>
+                <p><strong>Foil to:</strong> <a href="character-aran-letale.html" class="wiki-link">Aran Letale</a>
+                    (force versus growth; decisive action versus patient cultivation)</p>
 
-                <p><strong>Narrative Function:</strong> Represents non-reactive power and the value of long-term thinking in a world that demands immediate results.</p>
+                <p><strong>Narrative Function:</strong> Represents non-reactive power and the value of long-term
+                    thinking in a world that demands immediate results.</p>
             </div>
         </section>
 
@@ -670,13 +864,20 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> Zafara — from Spanish "Zafar" meaning "clear" or "to free"; Quedar — from Spanish "Quedar" meaning "to remain" or "to rest"</li>
-                    <li><strong>Design Notes:</strong> Emphasizes stillness and continuity; flowing, nature-motif attire as Heart Adagio</li>
-                    <li><strong>Symbolism:</strong> Adagio as slow, deliberate progression; plants as patient persistence; growth as inevitable change</li>
-                    <li><strong>Inspiration:</strong> Nature-as-endurance archetypes; the gardener who tends rather than forces</li>
-                    <li><strong>Author Notes:</strong> Represents non-reactive power—not every problem requires force</li>
-                    <li><strong>Reputation:</strong> Gentle, harmless—often to others' regret when they realize she's been cultivating victory all along</li>
-                    <li><strong>Musical Note:</strong> "Adagio" in music means "at ease" or "slowly"—fitting for a patient, growth-oriented character</li>
+                    <li><strong>Name Etymology:</strong> Zafara — from Spanish "Zafar" meaning "clear" or "to free";
+                        Quedar — from Spanish "Quedar" meaning "to remain" or "to rest"</li>
+                    <li><strong>Design Notes:</strong> Emphasizes stillness and continuity; flowing, nature-motif attire
+                        as Heart Adagio</li>
+                    <li><strong>Symbolism:</strong> Adagio as slow, deliberate progression; plants as patient
+                        persistence; growth as inevitable change</li>
+                    <li><strong>Inspiration:</strong> Nature-as-endurance archetypes; the gardener who tends rather than
+                        forces</li>
+                    <li><strong>Author Notes:</strong> Represents non-reactive power—not every problem requires force
+                    </li>
+                    <li><strong>Reputation:</strong> Gentle, harmless—often to others' regret when they realize she's
+                        been cultivating victory all along</li>
+                    <li><strong>Musical Note:</strong> "Adagio" in music means "at ease" or "slowly"—fitting for a
+                        patient, growth-oriented character</li>
                 </ul>
             </div>
         </section>
@@ -701,4 +902,5 @@
         }
     </script>
 </body>
+
 </html>

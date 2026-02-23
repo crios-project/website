@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Velia Traicerem // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -95,8 +98,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-visual {
@@ -330,8 +340,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <nav class="header-nav"><a href="../characters.html" class="back-link">← All Characters</a></nav>
@@ -347,7 +494,8 @@
                 <div class="stats-grid">
                     <div class="stat-item">
                         <span class="stat-label">True Nature</span>
-                        <span class="stat-value">Manifestation of <a href="../characters/character-amare.html" class="wiki-link">Amare</a></span>
+                        <span class="stat-value">Manifestation of <a href="../characters/character-amare.html"
+                                class="wiki-link">Amare</a></span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Species</span>
@@ -375,28 +523,48 @@
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Affiliation</span>
-                        <span class="stat-value"><a href="../factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a></span>
+                        <span class="stat-value"><a href="../factions/faction-destinys-penance.html"
+                                class="wiki-link">Destiny's Penance</a></span>
                     </div>
                 </div>
-                <div class="character-quote">"If destiny is broken, why do we shout at each other instead of fixing it?"</div>
+                <div class="theme-player disabled">
+                    <div class="theme-player-header">
+                        <span class="theme-player-icon">♪</span>
+                        <span class="theme-player-title">Character Theme</span>
+                    </div>
+                    <audio controls disabled>
+                        <source src="#" type="audio/mpeg">
+                    </audio>
+                    <p class="theme-coming-soon">Music composition in progress</p>
+                </div>
+                <div class="character-quote">"If destiny is broken, why do we shout at each other instead of fixing it?"
+                </div>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
             <div class="section-content">
-                <p>Velia Traicerem is a cheerful, socially radiant figure whose presence introduces tonal dissonance into environments defined by secrecy, ideological conflict, and emotional repression. She is widely perceived as an enthusiastic outsider whose behavior oscillates between charming eccentricity and quiet existential anomaly.</p>
-                
-                <p>Velia is not an independent entity separate from <a href="../characters/character-amare.html" class="wiki-link">Amare, velitrice dragon</a>, but rather a deliberately reduced manifestation designed to interact with structured societies, interpersonal relationships, and emotionally dense narratives without destabilizing them.</p>
+                <p>Velia Traicerem is a cheerful, socially radiant figure whose presence introduces tonal dissonance
+                    into environments defined by secrecy, ideological conflict, and emotional repression. She is widely
+                    perceived as an enthusiastic outsider whose behavior oscillates between charming eccentricity and
+                    quiet existential anomaly.</p>
 
-                <p>Her existence prioritizes proximity, curiosity, and emotional accessibility over authority or strategic dominance.</p>
+                <p>Velia is not an independent entity separate from <a href="../characters/character-amare.html"
+                        class="wiki-link">Amare, velitrice dragon</a>, but rather a deliberately reduced manifestation
+                    designed to interact with structured societies, interpersonal relationships, and emotionally dense
+                    narratives without destabilizing them.</p>
+
+                <p>Her existence prioritizes proximity, curiosity, and emotional accessibility over authority or
+                    strategic dominance.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Appearance</h2>
             <div class="section-content">
-                <p>Velia presents as a young woman whose design communicates openness, cosmopolitan warmth, and subtle otherness without overt signals of power.</p>
+                <p>Velia presents as a young woman whose design communicates openness, cosmopolitan warmth, and subtle
+                    otherness without overt signals of power.</p>
 
                 <h3 class="section-subtitle">Physical Characteristics</h3>
                 <ul>
@@ -412,10 +580,12 @@
                     <li>Asymmetrical shawl or poncho-like garment with soft draped folds</li>
                     <li>Short skirt featuring tonal striping</li>
                     <li>Knee-high boots with segmented strap detailing and metallic accents</li>
-                    <li>Long, dangling earrings and wrist accessories referencing draconic or arcane motifs in subtle, non-aggressive forms</li>
+                    <li>Long, dangling earrings and wrist accessories referencing draconic or arcane motifs in subtle,
+                        non-aggressive forms</li>
                 </ul>
 
-                <p>Velia's design deliberately avoids conventional visual indicators of combat capability, leadership authority, or supernatural hierarchy.</p>
+                <p>Velia's design deliberately avoids conventional visual indicators of combat capability, leadership
+                    authority, or supernatural hierarchy.</p>
             </div>
         </section>
 
@@ -427,19 +597,22 @@
                 <h3 class="section-subtitle">Core Behavioral Traits</h3>
                 <ul>
                     <li><strong>Constant Genuine Excitement:</strong> Toward new people, plans, and environments</li>
-                    <li><strong>Persistent Admiration:</strong> Encouragement directed at allies and strangers alike</li>
+                    <li><strong>Persistent Admiration:</strong> Encouragement directed at allies and strangers alike
+                    </li>
                     <li><strong>Fascinated by Danger:</strong> Approaches threats with curiosity rather than fear</li>
                     <li><strong>Socially Expressive:</strong> Emotionally transparent in all interactions</li>
                 </ul>
 
-                <p>Her happiness is not performative or strategic. It is authentic, persistent, and resistant to environmental cynicism.</p>
+                <p>Her happiness is not performative or strategic. It is authentic, persistent, and resistant to
+                    environmental cynicism.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Communication Style</h2>
             <div class="section-content">
-                <p>Velia speaks fluent but rhythmically unconventional English. Her speech patterns are characterized by:</p>
+                <p>Velia speaks fluent but rhythmically unconventional English. Her speech patterns are characterized
+                    by:</p>
                 <ul>
                     <li>Technically correct grammar with irregular cadence</li>
                     <li>Idioms used in unexpected or partially inverted contexts</li>
@@ -447,16 +620,19 @@
                 </ul>
 
                 <p>Example conversational rhythm:</p>
-                <blockquote>"Ah! Yes yes, this plan, it is very… how you say… pointy forward! I like it much!"</blockquote>
+                <blockquote>"Ah! Yes yes, this plan, it is very… how you say… pointy forward! I like it much!"
+                </blockquote>
 
-                <p>Her accent cannot be traced to any known culture, realm, or linguistic lineage, contributing to the persistent perception that she is foreign in a way that resists classification.</p>
+                <p>Her accent cannot be traced to any known culture, realm, or linguistic lineage, contributing to the
+                    persistent perception that she is foreign in a way that resists classification.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Social Presence</h2>
             <div class="section-content">
-                <p>Velia's emotional transparency functions as both a social disarming mechanism and a perceptual blind spot.</p>
+                <p>Velia's emotional transparency functions as both a social disarming mechanism and a perceptual blind
+                    spot.</p>
 
                 <p>She:</p>
                 <ul>
@@ -465,14 +641,16 @@
                     <li>Demonstrates intense listening engagement when others explain their motivations or trauma</li>
                 </ul>
 
-                <p>Because she rarely challenges others through confrontation, individuals often underestimate her observational acuity and emotional comprehension.</p>
+                <p>Because she rarely challenges others through confrontation, individuals often underestimate her
+                    observational acuity and emotional comprehension.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Cognitive Characteristics</h2>
             <div class="section-content">
-                <p>Velia displays an unusual imbalance between macro-system comprehension and micro-social processing.</p>
+                <p>Velia displays an unusual imbalance between macro-system comprehension and micro-social processing.
+                </p>
 
                 <h3 class="section-subtitle">Observed Patterns</h3>
                 <ul>
@@ -482,14 +660,16 @@
                     <li>Conceptualizes time, distance, and causality as fluid constructs</li>
                 </ul>
 
-                <p>She occasionally experiences brief perceptual interruptions, often pausing mid-conversation before resuming with visible amusement or dismissal of the lapse.</p>
+                <p>She occasionally experiences brief perceptual interruptions, often pausing mid-conversation before
+                    resuming with visible amusement or dismissal of the lapse.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Emotional & Philosophical Outlook</h2>
             <div class="section-content">
-                <p>Velia demonstrates profound confusion toward ideological hostility and inherited conflict structures.</p>
+                <p>Velia demonstrates profound confusion toward ideological hostility and inherited conflict structures.
+                </p>
 
                 <h3 class="section-subtitle">Common Areas of Curiosity</h3>
                 <ul>
@@ -498,14 +678,18 @@
                     <li>The normalization of suffering as inevitability</li>
                 </ul>
 
-                <p>She frequently asks questions that appear naïve but directly destabilize entrenched belief systems. Her inquiries rarely contain accusation or judgment, which often prevents defensive reactions from those around her.</p>
+                <p>She frequently asks questions that appear naïve but directly destabilize entrenched belief systems.
+                    Her inquiries rarely contain accusation or judgment, which often prevents defensive reactions from
+                    those around her.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Relationship to Amare</h2>
             <div class="section-content">
-                <p>Velia is not a disguise worn by <a href="character-amare-velitrice-dragon.html" class="wiki-link">Amare, velitrice dragon</a>. She is a voluntary reduction of existential scale.</p>
+                <p>Velia is not a disguise worn by <a href="character-amare-velitrice-dragon.html"
+                        class="wiki-link">Amare, velitrice dragon</a>. She is a voluntary reduction of existential
+                    scale.</p>
 
                 <h3 class="section-subtitle">Key Characteristics of the Manifestation</h3>
                 <ul>
@@ -524,7 +708,8 @@
         <section class="content-section">
             <h2 class="section-title">Abilities</h2>
             <div class="section-content">
-                <p>While Velia rarely demonstrates overt supernatural power, her presence is associated with subtle and often unrecognized phenomena:</p>
+                <p>While Velia rarely demonstrates overt supernatural power, her presence is associated with subtle and
+                    often unrecognized phenomena:</p>
                 <ul>
                     <li>Accelerated comprehension of complex systems</li>
                     <li>Emotional diffusion of hostility within groups</li>
@@ -532,7 +717,8 @@
                     <li>Perceptual irregularities related to temporal or conceptual awareness</li>
                 </ul>
 
-                <p>Velia intentionally avoids utilizing abilities that would draw attention to her deeper nature unless circumstances render subtlety impossible.</p>
+                <p>Velia intentionally avoids utilizing abilities that would draw attention to her deeper nature unless
+                    circumstances render subtlety impossible.</p>
             </div>
         </section>
 
@@ -556,29 +742,41 @@
             <h2 class="section-title">Thematic Significance</h2>
             <div class="section-content">
                 <h3 class="section-subtitle">Archetype</h3>
-                <p>Velia embodies the <strong>Accessible Vastness</strong> archetype—cosmic magnitude expressed through cheerful proximity, power demonstrated through genuine connection rather than authority.</p>
+                <p>Velia embodies the <strong>Accessible Vastness</strong> archetype—cosmic magnitude expressed through
+                    cheerful proximity, power demonstrated through genuine connection rather than authority.</p>
 
                 <h3 class="section-subtitle">Core Themes</h3>
                 <ul>
-                    <li><strong>Accessibility Through Humility:</strong> Vastness made approachable via voluntary limitation</li>
-                    <li><strong>Emotional Sincerity as Disruption:</strong> Authentic joy destabilizing cynicism and conflict</li>
+                    <li><strong>Accessibility Through Humility:</strong> Vastness made approachable via voluntary
+                        limitation</li>
+                    <li><strong>Emotional Sincerity as Disruption:</strong> Authentic joy destabilizing cynicism and
+                        conflict</li>
                     <li><strong>Power Through Connection:</strong> Influence via relationship rather than dominance</li>
-                    <li><strong>Joy and Inevitability Coexisting:</strong> Happiness maintained despite cosmic awareness</li>
-                    <li><strong>Identity as Scale Modulation:</strong> Not transformation but deliberate compression</li>
-                    <li><strong>Intimacy Through Limitation:</strong> Closeness achieved by reducing existential scale</li>
+                    <li><strong>Joy and Inevitability Coexisting:</strong> Happiness maintained despite cosmic awareness
+                    </li>
+                    <li><strong>Identity as Scale Modulation:</strong> Not transformation but deliberate compression
+                    </li>
+                    <li><strong>Intimacy Through Limitation:</strong> Closeness achieved by reducing existential scale
+                    </li>
                 </ul>
 
                 <h3 class="section-subtitle">Narrative Function</h3>
                 <p>Velia serves as:</p>
                 <ul>
-                    <li>A <strong>social blind spot</strong> within politically charged or conspiratorial environments</li>
+                    <li>A <strong>social blind spot</strong> within politically charged or conspiratorial environments
+                    </li>
                     <li>A <strong>tonal disruptor</strong> capable of diffusing tension through emotional sincerity</li>
-                    <li>A <strong>narrative compression point</strong>, containing far greater existential magnitude than she outwardly expresses</li>
+                    <li>A <strong>narrative compression point</strong>, containing far greater existential magnitude
+                        than she outwardly expresses</li>
                 </ul>
 
-                <p>Her presence introduces structural unpredictability not through manipulation, but through authentic emotional engagement. She represents the possibility that cosmic entities might choose proximity over power, relationship over domination.</p>
+                <p>Her presence introduces structural unpredictability not through manipulation, but through authentic
+                    emotional engagement. She represents the possibility that cosmic entities might choose proximity
+                    over power, relationship over domination.</p>
 
-                <p>The Velia-Amare relationship emphasizes voluntary existential compression as a narrative exploration of intimacy and scale—suggesting that true closeness sometimes requires making oneself smaller, more accessible, more human.</p>
+                <p>The Velia-Amare relationship emphasizes voluntary existential compression as a narrative exploration
+                    of intimacy and scale—suggesting that true closeness sometimes requires making oneself smaller, more
+                    accessible, more human.</p>
             </div>
         </section>
 
@@ -586,26 +784,36 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> "Traicerem" derives from Latin "cross," reflecting Velia's function as a being existing at conceptual and dimensional crossroads. "Velia Traicerem" is a perfect anagram of "Amare Velitrice."</li>
-                    <li>She is not a separate entity but a deliberately reduced manifestation of Amare, velitrice dragon</li>
-                    <li>Her birthday is unknown because she forgot it—a detail suggesting her relationship to time differs from mortals</li>
+                    <li><strong>Name Etymology:</strong> "Traicerem" derives from Latin "cross," reflecting Velia's
+                        function as a being existing at conceptual and dimensional crossroads. "Velia Traicerem" is a
+                        perfect anagram of "Amare Velitrice."</li>
+                    <li>She is not a separate entity but a deliberately reduced manifestation of Amare, velitrice dragon
+                    </li>
+                    <li>Her birthday is unknown because she forgot it—a detail suggesting her relationship to time
+                        differs from mortals</li>
                     <li>Stands at 6'2" with medium-dark brown skin and silver-blue hair</li>
                     <li>Violet eyes often coordinated with softly reflective makeup</li>
                     <li>Speaks fluent but rhythmically unconventional English with untraceable accent</li>
                     <li>Her speech uses technically correct grammar with irregular cadence and inverted idioms</li>
                     <li>Treats dangerous circumstances as intriguing adventures rather than threats</li>
-                    <li>Displays rapid mastery of complex metaphysical systems but occasional difficulty with minor personal details</li>
+                    <li>Displays rapid mastery of complex metaphysical systems but occasional difficulty with minor
+                        personal details</li>
                     <li>Occasionally experiences brief perceptual interruptions mid-conversation</li>
                     <li>Her questions appear naïve but directly destabilize entrenched belief systems</li>
                     <li>Maintains full identity continuity with Amare despite compression</li>
-                    <li>Intentionally constructed as emotional inverse of traditional secret-bearing cosmic entities</li>
-                    <li>Design deliberately avoids conventional indicators of power, combat capability, or supernatural hierarchy</li>
+                    <li>Intentionally constructed as emotional inverse of traditional secret-bearing cosmic entities
+                    </li>
+                    <li>Design deliberately avoids conventional indicators of power, combat capability, or supernatural
+                        hierarchy</li>
                     <li>Affiliated with Destiny's Penance despite her cosmic nature</li>
-                    <li>Her personality is intentionally constructed as the emotional inverse of traditional secret-bearing cosmic entities</li>
-                    <li>Her linguistic cadence is designed to feel correct but subtly displaced, reinforcing her thematic identity as something familiar yet unplaceable</li>
+                    <li>Her personality is intentionally constructed as the emotional inverse of traditional
+                        secret-bearing cosmic entities</li>
+                    <li>Her linguistic cadence is designed to feel correct but subtly displaced, reinforcing her
+                        thematic identity as something familiar yet unplaceable</li>
                 </ul>
             </div>
         </section>
     </div>
 </body>
+
 </html>

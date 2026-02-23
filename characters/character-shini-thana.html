@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shini Thana // CRIOS Character Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -133,8 +136,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .character-header {
@@ -376,8 +386,145 @@
                 padding: 24px;
             }
         }
+
+        /* ==================== */
+        /* ACTIVE PLAYER STYLES */
+        /* ==================== */
+
+        .theme-player {
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(20, 20, 25, 0.8));
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .theme-player:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .theme-player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .theme-player-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .theme-player-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .theme-player audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* ======================= */
+        /* DISABLED PLAYER STYLES  */
+        /* ======================= */
+
+        .theme-player.disabled {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .theme-player.disabled:hover {
+            border-color: rgba(136, 136, 168, 0.2);
+            box-shadow: none;
+        }
+
+        .theme-player.disabled .theme-player-icon {
+            color: var(--text-dim);
+            animation: none;
+        }
+
+        .theme-player.disabled .theme-player-title {
+            color: var(--text-dim);
+        }
+
+        .theme-player.disabled audio {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .theme-coming-soon {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* ======================== */
+        /* PLACEHOLDER BOX VERSION  */
+        /* ======================== */
+
+        .theme-player-placeholder {
+            background: linear-gradient(135deg, rgba(40, 40, 45, 0.3), rgba(20, 20, 25, 0.5));
+            border: 1px solid rgba(136, 136, 168, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-placeholder-icon {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .theme-placeholder-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .theme-placeholder-message {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
@@ -435,10 +582,20 @@
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">Faction</span>
-                            <span class="stat-value"><a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a> (Secret)</span>
+                            <span class="stat-value"><a href="../factions/faction-starlite-7th.html"
+                                    class="wiki-link">Starlite 7th</a> (Secret)</span>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "You have forgotten your guilt. I shall remind you in blood and fire."
                     </div>
@@ -448,18 +605,26 @@
             <section class="content-section">
                 <h2 class="section-title">Overview</h2>
                 <div class="section-content">
-                    <p>Shini Thana exists as both mirror and counterbalance to <a href="character-itami-serafino.html" class="wiki-link">Itami Serafino</a>. Where the Starlit Empress is openly expressive, the Starlit Sultana is internally volatile yet externally immaculate. Her presence is characterized by immaculate composure, aristocratic self-assurance, and calculated detachment.</p>
+                    <p>Shini Thana exists as both mirror and counterbalance to <a href="character-itami-serafino.html"
+                            class="wiki-link">Itami Serafino</a>. Where the Starlit Empress is openly expressive, the
+                        Starlit Sultana is internally volatile yet externally immaculate. Her presence is characterized
+                        by immaculate composure, aristocratic self-assurance, and calculated detachment.</p>
 
-                    <p>She performs publicly as one half of the globally renowned idol group <strong>Rainbow Star</strong>, alongside her elder sister Itami. Unknown to the public, Shini is a vampire, second-in-command of <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite 7th</a>, and one of its most dangerous operatives.</p>
+                    <p>She performs publicly as one half of the globally renowned idol group <strong>Rainbow
+                            Star</strong>, alongside her elder sister Itami. Unknown to the public, Shini is a vampire,
+                        second-in-command of <a href="../factions/faction-starlite-7th.html" class="wiki-link">Starlite
+                            7th</a>, and one of its most dangerous operatives.</p>
 
-                    <p>Her vampiric nature introduces additional layers of permanence and predation, transforming her from a conventional Runic Knight into something older, sharper, and far more patient.</p>
+                    <p>Her vampiric nature introduces additional layers of permanence and predation, transforming her
+                        from a conventional Runic Knight into something older, sharper, and far more patient.</p>
                 </div>
             </section>
 
             <section class="content-section">
                 <h2 class="section-title">Appearance</h2>
                 <div class="section-content">
-                    <p>Shini's visual design communicates speed, dominance, and disciplined athleticism while retaining subtle ornamental symbolism.</p>
+                    <p>Shini's visual design communicates speed, dominance, and disciplined athleticism while retaining
+                        subtle ornamental symbolism.</p>
 
                     <h3 class="section-subtitle">Physical Characteristics</h3>
                     <ul>
@@ -482,11 +647,13 @@
                         <li>Fitted black mobility shorts</li>
                         <li>Twin red belt loops that extend outward, creating motion emphasis</li>
                         <li>Fingerless tactical gloves</li>
-                        <li>Asymmetrical legwear: one leg reinforced by mid-thigh armored boot, opposite leg wrapped in red ribbon lattice ending in black combat shoe</li>
+                        <li>Asymmetrical legwear: one leg reinforced by mid-thigh armored boot, opposite leg wrapped in
+                            red ribbon lattice ending in black combat shoe</li>
                         <li>Silver heart-shaped buckle accent integrated into thigh strap</li>
                     </ul>
 
-                    <p>The repeated red harness motifs reinforce her identity as restrained aggression, while the heart symbol subtly reflects concealed emotional vulnerability.</p>
+                    <p>The repeated red harness motifs reinforce her identity as restrained aggression, while the heart
+                        symbol subtly reflects concealed emotional vulnerability.</p>
                 </div>
             </section>
 
@@ -501,7 +668,8 @@
                         <li><strong>Absolutely Loyal:</strong> Toward chosen bonds (especially Itami)</li>
                         <li><strong>Calculated Cruelty:</strong> Toward perceived enemies</li>
                         <li><strong>Perfectionist:</strong> Self-discipline in all things</li>
-                        <li><strong>Concealed Depth:</strong> Emotional extremity hidden behind superiority performance</li>
+                        <li><strong>Concealed Depth:</strong> Emotional extremity hidden behind superiority performance
+                        </li>
                     </ul>
 
                     <h3 class="section-subtitle">Public Persona</h3>
@@ -513,14 +681,19 @@
                         <li>Consistently immaculate in presentation</li>
                     </ul>
 
-                    <p>Her vanity is not shallow narcissism but a carefully curated identity standard. She believes in perfection because she has spent countless hours refining herself toward it.</p>
+                    <p>Her vanity is not shallow narcissism but a carefully curated identity standard. She believes in
+                        perfection because she has spent countless hours refining herself toward it.</p>
 
                     <h3 class="section-subtitle">Emotional Reality</h3>
-                    <p>Unlike Itami's visible emotional transparency, Shini experiences emotion with overwhelming intensity while maintaining an almost impenetrable exterior. Love, loyalty, resentment, and fury exist within her in absolute extremes.</p>
+                    <p>Unlike Itami's visible emotional transparency, Shini experiences emotion with overwhelming
+                        intensity while maintaining an almost impenetrable exterior. Love, loyalty, resentment, and fury
+                        exist within her in absolute extremes.</p>
 
-                    <p>The sole consistent exception to her emotional restraint is Itami, toward whom Shini displays visible softness and protective devotion.</p>
+                    <p>The sole consistent exception to her emotional restraint is Itami, toward whom Shini displays
+                        visible softness and protective devotion.</p>
 
-                    <p>Her vanity manifests as a survival philosophy. She believes weakness invites destruction and therefore refuses to present it, even when experiencing profound internal conflict.</p>
+                    <p>Her vanity manifests as a survival philosophy. She believes weakness invites destruction and
+                        therefore refuses to present it, even when experiencing profound internal conflict.</p>
 
                     <p><strong>Core Value:</strong> Perfection as armor; emotional concealment as survival strategy</p>
                 </div>
@@ -529,7 +702,8 @@
             <section class="content-section">
                 <h2 class="section-title">Vampiric Physiology</h2>
                 <div class="section-content">
-                    <p>Shini has existed as a vampire for an unspecified duration, resulting in biological age stasis at seventeen.</p>
+                    <p>Shini has existed as a vampire for an unspecified duration, resulting in biological age stasis at
+                        seventeen.</p>
 
                     <h3 class="section-subtitle">Adaptations</h3>
                     <ul>
@@ -538,7 +712,8 @@
                         <li>Heightened resilience compared to standard Runic Knights</li>
                     </ul>
 
-                    <p>Her vampirism introduces subtle thematic irony, particularly in her involvement in acts of preservation and salvation.</p>
+                    <p>Her vampirism introduces subtle thematic irony, particularly in her involvement in acts of
+                        preservation and salvation.</p>
                 </div>
             </section>
 
@@ -606,7 +781,16 @@
                             <span class="stat-value">Infiltration / Intelligence</span>
                         </div>
                     </div>
-
+                    <div class="theme-player disabled">
+                        <div class="theme-player-header">
+                            <span class="theme-player-icon">♪</span>
+                            <span class="theme-player-title">Character Theme</span>
+                        </div>
+                        <audio controls disabled>
+                            <source src="#" type="audio/mpeg">
+                        </audio>
+                        <p class="theme-coming-soon">Music composition in progress</p>
+                    </div>
                     <div class="character-quote">
                         "Your mistake was believing you had any chance at all."
                     </div>
@@ -616,9 +800,12 @@
             <section class="content-section">
                 <h2 class="section-title">Combat Profile</h2>
                 <div class="section-content">
-                    <p>As the <strong>Starlit Sultana</strong>, Shini serves as Starlite 7th's infiltration specialist, intelligence gatherer, and operational contingency executor.</p>
+                    <p>As the <strong>Starlit Sultana</strong>, Shini serves as Starlite 7th's infiltration specialist,
+                        intelligence gatherer, and operational contingency executor.</p>
 
-                    <p>Within Starlite 7th, she functions as second-in-command, intelligence operative, and strategic executioner. While Itami commands the battlefield's future, Shini governs its unseen corridors, ensuring enemies collapse before engagements formally begin.</p>
+                    <p>Within Starlite 7th, she functions as second-in-command, intelligence operative, and strategic
+                        executioner. While Itami commands the battlefield's future, Shini governs its unseen corridors,
+                        ensuring enemies collapse before engagements formally begin.</p>
 
                     <h3 class="section-subtitle">Operational Roles</h3>
                     <ul>
@@ -628,7 +815,9 @@
                         <li>Strategic elimination</li>
                     </ul>
 
-                    <p>Shini is known to uncover critical enemy vulnerabilities, though she selectively determines which findings are shared with the team. This selective disclosure reinforces her role as both protector and independent operator.</p>
+                    <p>Shini is known to uncover critical enemy vulnerabilities, though she selectively determines which
+                        findings are shared with the team. This selective disclosure reinforces her role as both
+                        protector and independent operator.</p>
                 </div>
             </section>
 
@@ -644,14 +833,17 @@
                         <li>Functions as both physical barrier and spatial stabilizer</li>
                     </ul>
 
-                    <p>Sanctum Majestra allows Shini to dominate battlefield positioning by denying opponents any reliable offensive progression. While she is not traditionally viewed as a striker, her counteroffensive applications frequently determine battle outcomes.</p>
+                    <p>Sanctum Majestra allows Shini to dominate battlefield positioning by denying opponents any
+                        reliable offensive progression. While she is not traditionally viewed as a striker, her
+                        counteroffensive applications frequently determine battle outcomes.</p>
 
                     <h3 class="section-subtitle">Vampiric Modifications</h3>
                     <p>Her Runic uniform incorporates specialized modifications:</p>
                     <ul>
                         <li>Sunlight-resistant material layering</li>
                         <li>Fire-dampening defensive runes</li>
-                        <li>Integrated blood collection reservoirs designed for battlefield harvesting and later consumption</li>
+                        <li>Integrated blood collection reservoirs designed for battlefield harvesting and later
+                            consumption</li>
                     </ul>
                 </div>
             </section>
@@ -659,7 +851,8 @@
             <section class="content-section">
                 <h2 class="section-title">Starlight Blessing: Teleportation</h2>
                 <div class="section-content">
-                    <p><strong>Function:</strong> Allows Shini to relocate instantly between two spatial coordinates.</p>
+                    <p><strong>Function:</strong> Allows Shini to relocate instantly between two spatial coordinates.
+                    </p>
 
                     <h3 class="section-subtitle">Properties</h3>
                     <ul>
@@ -677,7 +870,9 @@
                         <li>Execute rapid, unpredictable defensive interceptions</li>
                     </ul>
 
-                    <p>Like all Starlight Blessings, Teleportation is a System-granted skill rather than a magical phenomenon. The Royastellan System is recognized as a stabilizing and benevolent progression framework.</p>
+                    <p>Like all Starlight Blessings, Teleportation is a System-granted skill rather than a magical
+                        phenomenon. The Royastellan System is recognized as a stabilizing and benevolent progression
+                        framework.</p>
                 </div>
             </section>
         </div>
@@ -696,13 +891,14 @@
                     <li>Displays emotional openness exclusively in Itami's presence</li>
                 </ul>
 
-                <p>Their partnership forms a dual monarchy of emotional openness and emotional concealment. Where Itami leads through vulnerability, Shini protects through perfection.</p>
+                <p>Their partnership forms a dual monarchy of emotional openness and emotional concealment. Where Itami
+                    leads through vulnerability, Shini protects through perfection.</p>
             </div>
         </section>
 
         <section class="content-section">
             <h2 class="section-title">Relationships</h2>
-            
+
             <div class="relationships-grid">
                 <a href="character-itami-serafino.html" class="relationship-card">
                     <div class="relationship-name">Itami Serafino</div>
@@ -727,7 +923,7 @@
                 <p><strong>Archetype:</strong> The Perfect Predator / Guardian</p>
                 <p><strong>Story Function:</strong> Second-in-Command / Intelligence Operative</p>
                 <p><strong>Character Arc:</strong> Perfection as prison versus vulnerability as connection</p>
-                
+
                 <p><strong>Themes Represented:</strong></p>
                 <ul>
                     <li>Beauty weaponized into authority</li>
@@ -737,7 +933,8 @@
                     <li>The predator who chooses guardianship over dominance</li>
                 </ul>
 
-                <p><strong>Narrative Function:</strong> Introduces tension between perfection and humanity, questioning whether emotional concealment is strength or self-imprisonment.</p>
+                <p><strong>Narrative Function:</strong> Introduces tension between perfection and humanity, questioning
+                    whether emotional concealment is strength or self-imprisonment.</p>
             </div>
         </section>
 
@@ -745,13 +942,21 @@
             <h2 class="section-title">Trivia</h2>
             <div class="section-content">
                 <ul>
-                    <li><strong>Name Etymology:</strong> Shini (死ぬ) — Japanese verb meaning "to die," reflecting her vampiric transformation and association with mortality; Thana — Evokes death-related linguistic roots across multiple cultures, reinforcing thematic alignment with endings and inevitability</li>
-                    <li><strong>Design Notes:</strong> Red harness motifs as restrained aggression; heart symbol as concealed emotional vulnerability; asymmetrical legwear emphasizes speed and mobility</li>
-                    <li><strong>Symbolism:</strong> Gold eyes as mirror to Itami; vampire as immortal guardian; shield as protective authority; teleportation as untethered freedom</li>
-                    <li><strong>Inspiration:</strong> Aristocratic vampires; defensive specialists who control through denial; perfect exteriors concealing volatile interiors</li>
-                    <li><strong>Author Notes:</strong> Vanity as survival strategy, not weakness. Shini's emotional extremity is as intense as Itami's—she just refuses to show it</li>
+                    <li><strong>Name Etymology:</strong> Shini (死ぬ) — Japanese verb meaning "to die," reflecting her
+                        vampiric transformation and association with mortality; Thana — Evokes death-related linguistic
+                        roots across multiple cultures, reinforcing thematic alignment with endings and inevitability
+                    </li>
+                    <li><strong>Design Notes:</strong> Red harness motifs as restrained aggression; heart symbol as
+                        concealed emotional vulnerability; asymmetrical legwear emphasizes speed and mobility</li>
+                    <li><strong>Symbolism:</strong> Gold eyes as mirror to Itami; vampire as immortal guardian; shield
+                        as protective authority; teleportation as untethered freedom</li>
+                    <li><strong>Inspiration:</strong> Aristocratic vampires; defensive specialists who control through
+                        denial; perfect exteriors concealing volatile interiors</li>
+                    <li><strong>Author Notes:</strong> Vanity as survival strategy, not weakness. Shini's emotional
+                        extremity is as intense as Itami's—she just refuses to show it</li>
                     <li><strong>Biological Status:</strong> Age locked at 17 due to vampirism; duration unknown</li>
-                    <li><strong>Reputation:</strong> Second-in-command; intelligence specialist; selective information sharer; Itami's operational safeguard</li>
+                    <li><strong>Reputation:</strong> Second-in-command; intelligence specialist; selective information
+                        sharer; Itami's operational safeguard</li>
                 </ul>
             </div>
         </section>
@@ -776,4 +981,5 @@
         }
     </script>
 </body>
+
 </html>

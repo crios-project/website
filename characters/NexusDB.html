@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERSONNEL_NEXUS // CHARACTER_DATABASE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyan: #00f2ff;
+            --bg: #050608;
+            --panel-bg: rgba(10, 12, 16, 0.9);
+            --border: 1px solid rgba(0, 242, 255, 0.2);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 350px 1fr 450px;
+            overflow: hidden;
+            text-transform: uppercase;
+        }
+
+        /* Ambient scanline effect */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Left Sidebar: Character List */
+        .directory {
+            background: rgba(0, 0, 0, 0.5);
+            border-right: var(--border);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .dir-header {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--cyan);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--cyan);
+            padding-bottom: 5px;
+        }
+
+        .subject-card {
+            background: var(--panel-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .subject-card:hover { border-color: var(--cyan); background: rgba(0, 242, 255, 0.05); }
+        .subject-card.active { border-color: var(--cyan); background: rgba(0, 242, 255, 0.15); }
+
+        /* Center: Portrait Display */
+        .focus-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: var(--border);
+            background: radial-gradient(circle, rgba(0,242,255,0.05) 0%, transparent 70%);
+        }
+
+        #main-portrait {
+            max-height: 85%;
+            max-width: 90%;
+            object-fit: contain;
+        }
+
+        /* Right: Info Panels */
+        .intel-panel {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .data-block {
+            background: var(--panel-bg);
+            border: var(--border);
+            padding: 20px;
+        }
+
+        .subject-title { font-size: 2.2rem; margin: 0; color: var(--cyan); }
+        .alias-list { font-size: 0.8rem; opacity: 0.7; margin-bottom: 10px; }
+
+        .relationship-feed {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #9db2bf;
+            line-height: 1.5;
+            text-transform: none;
+        }
+
+        .label { color: var(--cyan); font-weight: bold; margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+    <aside class="directory">
+        <div class="dir-header">SUBJECT_DIRECTORY</div>
+        <div id="roster-container"></div>
+    </aside>
+
+    <section class="focus-area">
+        <img src="" id="main-portrait" alt="Subject Art">
+    </section>
+
+    <main class="intel-panel">
+        <div class="data-block">
+            <h1 class="subject-title" id="display-name">NO_SELECTION</h1>
+            <div class="alias-list" id="display-alias">---</div>
+            <p id="display-status" style="color: var(--cyan); margin: 0;">STATUS: STDBY</p>
+        </div>
+
+        <div class="data-block">
+            <p id="display-bio" style="text-transform: none;">Select a subject from the left directory to initialize profile.</p>
+        </div>
+
+        <div class="data-block" style="flex-grow: 1;">
+            <div class="relationship-feed" id="display-relation">
+                <span class="label">//:</span> CLICK SECOND SUBJECT TO ESTABLISH LINK
+            </div>
+        </div>
+    </main>
+
+<script>
+    /** * ==========================================
+     * CHARACTER DATA REPOSITORY
+     * ==========================================
+     * PASTE YOUR CHARACTER INFO BLOCKS BELOW:
+     */
+
+    const characterDatabase = {
+        "Tiala": {
+            name: "Tiala Hartlight",
+            alias: "Tiala Corsolis, Alulu Caelum, Alulu Dayk, dissonant discord, BLADE GUILLOTINE, Alulu Akụkụ, Alulu Ọnwụ, Caie Ascala",
+            status: "Active",
+            bio: "Former leader of Praxis Verax Affinas, current leader of Destiny’s Penance. The Driven Seeker.",
+            headshot: "../assets/headshots/tea.png",
+            relationships: {
+                "Jí Lián": {
+                    connection: "Best friend and closest ally",
+                    notes: "She tends to be the one to get Tiala out of trouble. SPECIAL: Alulu and Kesshō can merge with the Paradox Bracers to form Corstilla."
+                },
+                "Claris": {
+                    connection: "Vitriolic best bud",
+                    notes: "They argue constantly but fight in perfect sync against groups. SPECIAL: Alulu and Tessera can merge with the Paradox Bracers to form Solamor."
+                },
+                "Xīwàng": {
+                    connection: "Most precious friend",
+                    notes: "Her disappearance haunts Tiala; Tiala will do anything to get her back."
+                },
+                "Fú cì": {
+                    connection: "Ward / Protected interest",
+                    notes: "Tiala feels a need to protect her after Xīwàng's disappearance. She trusts Ami to keep her safe despite her misgivings."
+                },
+                "Amare": {
+                    connection: "Observation Subject",
+                    notes: "Tiala is utterly baffled by why a dragon is so interested in her, but doesn't argue with a dragon's presence."
+                },
+                "Ami": {
+                    connection: "Little Sister",
+                    notes: "Equal parts endearing and infuriating. Tiala knows Reason Theory was formed just to trip her up, but has more pressing issues."
+                },
+                "Windi": {
+                    connection: "Ideological Opponent",
+                    notes: "Opposed in theory, but Windi is mainly just helping Ami with her plans to disrupt Tiala."
+                },
+                "Kali": {
+                    connection: "Respected Rival / Threat",
+                    notes: "Tiala knows Kali hates her for unknown reasons. Aware Kali is stronger, Tiala avoids direct combat."
+                },
+                "Pyara": {
+                    connection: "Victim (Casualty of dissonant discord)",
+                    notes: "Tiala is directly responsible for her death. She believes Pyara reincarnated into Mahana."
+                },
+                "Oktusha": {
+                    connection: "Target of forced growth",
+                    notes: "Antagonized by Tiala (as dissonant discord) to force her to grow stronger."
+                },
+                "Omba": {
+                    connection: "Target of forced growth",
+                    notes: "Antagonized by Tiala (as dissonant discord) to force her to grow stronger."
+                },
+                "Mahana": {
+                    connection: "Target / Reincarnation Candidate",
+                    notes: "Antagonized by by Tiala (as dissonant discord). Tiala abducted her to Nexsicon, triggering Beeston's eventual realm merging."
+                },
+                "Itami": {
+                    connection: "Test Subject (Vetting for Royastella Lodesoul)",
+                    notes: "Antagonized by Tiala (as BLADE GUILLOTINE). Tiala almost killed her before realizing she wasn't the Lodesoul."
+                },
+                "Shini": {
+                    connection: "Target of forced growth",
+                    notes: "Antagonized by Tiala (as BLADE GUILLOTINE) to force her to grow stronger."
+                },
+                "Kayre": {
+                    connection: "Target of forced growth",
+                    notes: "Antagonized by Tiala (as BLADE GUILLOTINE) to force them to grow stronger."
+                },
+                "Riasa": {
+                    connection: "Target of forced growth",
+                    notes: "Antagonized by Tiala (as BLADE GUILLOTINE) to force her to grow stronger."
+                },
+                "Daeon": {
+                    connection: "Target of forced growth",
+                    notes: "Antagonized by Tiala (as BLADE GUILLOTINE) to force him to grow stronger."
+                },
+                "Marate": {
+                    connection: "Father / Primary Target",
+                    notes: "Antagonized the Starlite 7th as BLADE GUILLOTINE to draw him out. Tiala abducted him to Nexsicon, triggering Royastella's realm merging."
+                },
+                "Celesin": {
+                    connection: "None",
+                    notes: "Tiala and Celesin never directly interact."
+                },
+                "Astarri": {
+                    connection: "Scout / Tool",
+                    notes: "Used Astarri to find Fú cì. The mission was successful, though Tiala never discovered that it worked."
+                }
+            }
+        }
+    };
+    
+    const characterDatabase = {
+    "Jí Lián": {
+        name: "Jí Lián Xiá",
+        alias: "Takino Retsu, Starlit Mikado, Kesshō Kawa, Kesshō Yīng, Kesshō Tǐ, Kesshō Zhàn",
+        status: "Active",
+        bio: "Former Phasewalked member of Starlite 7th, current member of Destiny’s Penance. Known as the Uninterested Observer, she provides a tactical, detached perspective to her team, often acting as the anchor that keeps Tiala from drifting into disaster.",
+        headshot: "../assets/headshots/esh.png",
+        relationships: {
+            "Tiala": {
+                connection: "Best friend and closest ally",
+                notes: "She is the grounding force that pulls Tiala out of poorly thought-out situations. SPECIAL: Alulu and Kesshō can merge with the Paradox Bracers to form Corstilla."
+            },
+            "Claris": {
+                connection: "Annoying friend",
+                notes: "Jí Lián will absolutely hit her with a book if she gets too irritating. SPECIAL: Kesshō and Tessera can merge with the Paradox Bracers to form Pluere."
+            },
+            "Xīwàng": {
+                connection: "Acquaintance",
+                notes: "Jí Lián appreciates that Xīwàng usually leaves her alone to read, though she occasionally enjoys being forced to go out and get made up."
+            },
+            "Fú cì": {
+                connection: "Protective Interest",
+                notes: "Following the Tiānshàng massacre, Jí Lián sought to protect her and is relieved she found a home with Ami and Windi."
+            },
+            "Amare": {
+                connection: "Wary Ally",
+                notes: "Maintains her distance and stays on her best side. Regardless of how non-threatening she seems, Jí Lián respects the fact that she is a dragon."
+            },
+            "Ami": {
+                connection: "Friend's Sister",
+                notes: "Tiala's younger sister; the two rarely interact."
+            },
+            "Windi": {
+                connection: "Former Ally / Rival",
+                notes: "As Takino and Wentea, they were close Starlite 7th teammates. Now, they are vague rivals on opposing teams."
+            },
+            "Kali": {
+                connection: "Threat",
+                notes: "Aware Kali is stronger than her and Tiala combined; she uses Kali's obsession with Tiala to create distractions for escape."
+            },
+            "Pyara": {
+                connection: "None",
+                notes: "They have never met."
+            },
+            "Oktusha": {
+                connection: "Occasional Ally/Rival",
+                notes: "Interactions are brief through the shifting alliance between Starlite 7th and Heart Melody."
+            },
+            "Omba": {
+                connection: "Occasional Ally/Rival",
+                notes: "Interactions are brief through the shifting alliance between Starlite 7th and Heart Melody."
+            },
+            "Mahana": {
+                connection: "Occasional Ally/Rival",
+                notes: "Interactions are brief through the shifting alliance between Starlite 7th and Heart Melody."
+            },
+            "Itami": {
+                connection: "Former Mentor / Rival",
+                notes: "As Takino, she looked up to Itami as a leader; currently, they oscillate between being allies and rivals."
+            },
+            "Shini": {
+                connection: "Former Sisterly Bond / Rival",
+                notes: "As Takino, she treated Shini like an annoying but cute younger sister; currently rivals."
+            },
+            "Kayre": {
+                connection: "Former Teammate / Rival",
+                notes: "As Takino, she used to successfully wheedle custom outfits out of Kayre; currently rivals."
+            },
+            "Riasa": {
+                connection: "Former Teammate / Rival",
+                notes: "As Takino, she used to hide from Riasa to avoid being used as a human dress-up doll; currently rivals."
+            },
+            "Daeon": {
+                connection: "Former Tech Partner / Rival",
+                notes: "As Takino, she assisted Daeon with Day Enterprises prototypes; currently rivals."
+            },
+            "Marate": {
+                connection: "Avoided Target",
+                notes: "Purposely avoids interaction to keep her connection to Tiala a secret."
+            },
+            "Celesin": {
+                connection: "None",
+                notes: "They have never met."
+            },
+            "Astarri": {
+                connection: "None",
+                notes: "They have never met."
+            }
+        }
+    }
+};
+
+		const characterDatabase = {
+    "Claris": {
+        name: "Claris Quies",
+        alias: "Zafara Quedar, Heart Adagio, Tessera Iustum, Tessera Vis, Tessera Ratio, Vastatio Tessera, Princess Clarisieandra",
+        status: "Active",
+        bio: "Former Phasewalked member of Heart Melody, current member of Destiny’s Penance. A Chaotic Burst of Energy who brings unpredictable power and high-stakes pranks to the team.",
+        headshot: "../assets/headshots/kwe.png",
+        relationships: {
+            "Tiala": {
+                connection: "Target for pranks",
+                notes: "Claris is relentlessly determined to prank Tiala. If she thinks there's even a slight chance it will work, she’s going to try it. SPECIAL: Tessera and Alulu can merge with the Paradox Bracers to form Solamor."
+            },
+            "Jí Lián": {
+                connection: "Dangerous target for pranks",
+                notes: "Pranking Jí Lián is a high-risk game that ends in either hilarity or pain. Claris has become an expert at dodging the books Jí Lián throws at her. SPECIAL: Tessera and Kesshō can merge with the Paradox Bracers to form Pluere."
+            },
+            "Xīwàng": {
+                connection: "Regretted distance",
+                notes: "They didn't interact much before Xīwàng disappeared; Claris carries a lingering regret that she didn't get to know her better."
+            },
+            "Fú cì": {
+                connection: "Doted-upon Ward",
+                notes: "Driven by her regret regarding Xīwàng, Claris is desperate to protect and dote on Fú cì. She was relieved to find her safe with Ami and Windi."
+            },
+            "Amare": {
+                connection: "Unfazed Ally",
+                notes: "Claris is completely unbothered by the fact that Amare is a dragon, a trait that Amare finds highly amusing."
+            },
+            "Ami": {
+                connection: "Rival / Kindred Spirit",
+                notes: "They get along 'like a house on fire,' though their different factions create a constant underlying tension."
+            },
+            "Windi": {
+                connection: "Elder Sister",
+                notes: "Claris has spent years searching for Windi in hopes of having her return to the throne."
+            },
+            "Kali": {
+                connection: "Former Ally / Mediator",
+                notes: "As Zafara, they were close allies. As Claris, she tries to talk Kali down from her quest for revenge, though she knows Kali's hatred for Tiala is deep."
+            },
+            "Pyara": {
+                connection: "Haunting Memory",
+                notes: "She trusted Pyara completely as Zafara. Though she understands Tiala’s actions, Pyara’s death still weighs heavily on her."
+            },
+            "Oktusha": {
+                connection: "Former Ally",
+                notes: "Worked well together when Claris was Zafara, but they rarely interact in their current forms."
+            },
+            "Omba": {
+                connection: "Former Ally",
+                notes: "Worked well together when Claris was Zafara, but they rarely interact in their current forms."
+            },
+            "Mahana": {
+                connection: "Source of Comfort",
+                notes: "Believes Mahana is Pyara’s reincarnation, which helps Claris process the guilt of Pyara's death."
+            },
+            "Itami": {
+                connection: "Fan",
+                notes: "Never met personally, but Claris is a major fan of Rainbow Star's music."
+            },
+            "Shini": {
+                connection: "Fan",
+                notes: "Never met personally, but Claris is a major fan of Rainbow Star's music."
+            },
+            "Kayre": {
+                connection: "Fan",
+                notes: "Never met personally, but Claris is a huge fan of Kayre’s fashion designs."
+            },
+            "Riasa": {
+                connection: "None",
+                notes: "They have never met."
+            },
+            "Daeon": {
+                connection: "None",
+                notes: "They have never met."
+            },
+            "Marate": {
+                connection: "Avoided Target",
+                notes: "Claris goes out of her way to ensure she and Marate never cross paths."
+            },
+            "Celesin": {
+                connection: "Empowered Identity",
+                notes: "Celesin is her mentor fairy who empowers her as Heart Adagio, though Claris has never met her directly."
+            },
+            "Astarri": {
+                connection: "None",
+                notes: "They have never met."
+            }
+        }
+    }
+};
+
+			const characterDatabase = {
+    "Xīwàng": {
+        name: "Xīwàng Tiānshàng",
+        alias: "The Magicless Prodigy",
+        status: "Missing",
+        bio: "The strongest girl in the world. As the Magicless Prodigy, she defied all known limits of power. Her disappearance left a void in her sister Fú cì's life and a permanent shadow over her partner, Tiala.",
+        headshot: "../assets/headshots/com.png",
+        relationships: {
+            "Tiala": {
+                connection: "Soulmate / Partner",
+                notes: "Tiala is her everything. Together, they were considered an unstoppable force."
+            },
+            "Jí Lián": {
+                connection: "Fashion Project",
+                notes: "Xīwàng viewed Jí Lián as a waste of beauty and would frequently force her to get 'dolled up' and go out."
+            },
+            "Claris": {
+                connection: "Coworker",
+                notes: "They worked together briefly, but never had the chance to truly get to know one another."
+            },
+            "Fú cì": {
+                connection: "Precious Younger Sister",
+                notes: "Xīwàng protected her fiercely. She fully believed that Fú cì was destined to activate the Tiānshàng legacy and earn her true name. SPECIAL: When they were together, Fú cì still used the surname Ánguāng."
+            },
+            "Amare": {
+                connection: "Sparring Partner",
+                notes: "The only one strong enough to spar with the dragon, even if Amare doesn't fully grasp what is happening during their bouts."
+            },
+            "Ami": {
+                connection: "Doted-upon Younger Sister",
+                notes: "As Tiala's sister, Xīwàng excessively dotes on her; Ami secretly loves the attention despite her outward reluctance."
+            },
+            "Windi": {
+                connection: "None",
+                notes: "They never met."
+            },
+            "Kali": {
+                connection: "Hypothetical Rival",
+                notes: "Never met, though the idea of the 'Strongest Girl' vs. the 'Deadliest Assassin' is legendary lore."
+            },
+            "Pyara": {
+                connection: "None",
+                notes: "They never met."
+            },
+            "Oktusha": {
+                connection: "None",
+                notes: "They never met."
+            },
+            "Omba": {
+                connection: "None",
+                notes: "They never met."
+            },
+            "Mahana": {
+                connection: "Distant Awareness",
+                notes: "They never officially met, but Xīwàng was acutely aware of Mahana’s existence."
+            },
+            "Itami": {
+                connection: "None",
+                notes: "They never met."
+            },
+            "Shini": {
+                connection: "None",
+                notes: "They never met."
+            },
+            "Kayre": {
+                connection: "Missed Opportunity",
+                notes: "Tragically never met; a collaboration between their fashion sensibilities would have been epic."
+            },
+            "Riasa": {
+                connection: "None",
+                notes: "They never met."
+            },
+            "Daeon": {
+                connection: "None",
+                notes: "They never met."
+            },
+            "Marate": {
+                connection: "Hypothetical Approval",
+                notes: "They never met, but Marate certainly would have approved of her character and strength."
+            },
+            "Celesin": {
+                connection: "None",
+                notes: "They never met."
+            },
+            "Astarri": {
+                connection: "Hypothetical Connection",
+                notes: "They never met, but Astarri would have loved her."
+            }
+        }
+    }
+};
+    /** * ==========================================
+     * END OF CHARACTER DATA
+     * ==========================================
+     */
+
+    let activeSubject = null;
+
+    function init() {
+        const container = document.getElementById('roster-container');
+        Object.keys(characterDatabase).forEach(key => {
+            const card = document.createElement('div');
+            card.className = 'subject-card';
+            card.innerHTML = `<strong>${key}</strong>`;
+            card.onclick = () => selectSubject(key, card);
+            container.appendChild(card);
+        });
+    }
+
+    function selectSubject(key, element) {
+        if (!activeSubject) {
+            // First select: Set the main profile
+            activeSubject = key;
+            document.querySelectorAll('.subject-card').forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+            updateProfile(key);
+        } else if (activeSubject === key) {
+            // Clicked same person: Reset
+            activeSubject = null;
+            element.classList.remove('active');
+            resetUI();
+        } else {
+            // Clicked second person: Show relationship
+            const rel = characterDatabase[activeSubject].relationships[key];
+            const output = document.getElementById('display-relation');
+            if (rel) {
+                output.innerHTML = `<span class="label">LINK [${key}]:</span> <span style="color:var(--cyan)">${rel.connection}</span><br><br>${rel.notes}`;
+            } else {
+                output.innerHTML = `<span class="label">LINK [${key}]:</span> NO DATA FOUND.`;
+            }
+        }
+    }
+
+    function updateProfile(key) {
+        const data = characterDatabase[key];
+        document.getElementById('display-name').innerText = data.name;
+        document.getElementById('display-alias').innerText = `AKA: ${data.alias}`;
+        document.getElementById('display-status').innerText = `STATUS: ${data.status}`;
+        document.getElementById('display-bio').innerText = data.bio;
+        document.getElementById('main-portrait').src = data.headshot;
+        document.getElementById('display-relation').innerHTML = `<span class="label">READY:</span> TARGET SECONDARY SUBJECT TO ESTABLISH LINK.`;
+    }
+
+    function resetUI() {
+        document.getElementById('display-name').innerText = "NO_SELECTION";
+        document.getElementById('display-alias').innerText = "---";
+        document.getElementById('display-bio').innerText = "Select a subject from the left directory to initialize profile.";
+        document.getElementById('main-portrait').src = "";
+        document.getElementById('display-relation').innerText = "CLICK SECOND SUBJECT TO ESTABLISH LINK";
+    }
+
+    init();
+</script>
+</body>
+</html>

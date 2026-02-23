@@ -1,2 +1,0 @@
-name = "crios-interweave"
-pages_build_output_dir = "./" # This tells Cloudflare to look in your main folder for the HTML
