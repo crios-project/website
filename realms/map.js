@@ -40,7 +40,7 @@ map.fitBounds(bounds);
 // 3. MARKER LOGIC
 // ===============================
 const realmColors = {
-  Beeston: "#ff0000", Royastella: "#712065", Nexsicon: "#58b1f3",
+  Beeston: "#fc87ed", Royastella: "#712065", Nexsicon: "#58b1f3",
   Ultimatera: "#000000", Antiquity: "#dba448"
 };
 
