@@ -1,120 +1,557 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-<meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Hearts - Coming Soon</title>
 
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Hearts // CRIOS Short Story</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.9;
+            overflow-x: hidden;
+        }
 
+        /* Animated background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+            animation: gridFloat 20s linear infinite;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        @keyframes gridFloat {
+            0% {
+                transform: translateY(0);
+            }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+            100% {
+                transform: translateY(40px);
+            }
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  -webkit-animation: fadeIn 1000ms ease;
-  animation: fadeIn 1000ms ease;
-}
+        /* Gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -200px;
+            animation: orbFloat1 20s ease-in-out infinite;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: orbFloat2 25s ease-in-out infinite;
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        @keyframes orbFloat1 {
 
-.icons {
-  text-align: center;
-  
-}
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+            50% {
+                transform: translate(-100px, 100px);
+            }
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  -webkit-transform: scale(1.2);
-  transform: scale(1.2);
-  text-decoration: none;
-}
+        @keyframes orbFloat2 {
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+            50% {
+                transform: translate(100px, -80px);
+            }
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Short story <span class="dot">"New Hearts"</span> coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        /* Header nav */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Story header */
+        .story-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .story-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: 3px;
+            line-height: 1.2;
+        }
+
+        .story-meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
+        }
+
+        .meta-item {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .meta-item .label {
+            color: var(--accent-cyan);
+        }
+
+        /* Story content */
+        .story-content {
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .story-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 28px;
+            color: var(--text-primary);
+        }
+
+        .story-content p:first-of-type::first-letter {
+            font-size: 4rem;
+            line-height: 1;
+            float: left;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--secondary-pink);
+            margin: 4px 12px 0 0;
+        }
+
+        /* Emphasis text */
+        .story-content strong {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .story-content em {
+            color: var(--secondary-pink);
+            font-style: italic;
+        }
+
+        /* Thought text */
+        .thought {
+            font-style: italic;
+            color: var(--text-dim);
+        }
+
+        /* Special moments - dramatic reveals */
+        .dramatic {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 48px 0;
+            padding: 24px;
+            border-top: 2px solid rgba(233, 30, 99, 0.3);
+            border-bottom: 2px solid rgba(233, 30, 99, 0.3);
+        }
+
+        /* Section breaks */
+        .break {
+            text-align: center;
+            margin: 60px 0;
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            letter-spacing: 8px;
+        }
+
+        /* Character tags */
+        .character-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+
+        .character-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        /* Related stories footer */
+        .related-section {
+            margin-top: 120px;
+            padding: 48px 0;
+            border-top: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .related-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .related-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2);
+        }
+
+        .related-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .related-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .story-title {
+                font-size: 2.2rem;
+            }
+
+            .story-content p {
+                font-size: 1.05rem;
+            }
+
+            .story-meta {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .story-content p:first-of-type::first-letter {
+                font-size: 3rem;
+                margin: 2px 8px 0 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <nav class="header-nav">
+        <a href="../stories.html" class="back-link">← All Stories</a>
+    </nav>
+
+    <div class="container">
+        <!-- Story Header -->
+        <header class="story-header">
+            <h1 class="story-title">New Hearts</h1>
+            <div class="story-meta">
+                <div class="meta-item"><span class="label">Era:</span> Beeston Arc 1</div>
+                <div class="meta-item"><span class="label">Featured:</span> Pyara Dana, Heart Aria</div>
+                <div class="meta-item"><span class="label">Type:</span> Origin Story</div>
+            </div>
+        </header>
+
+        <!-- Story Content -->
+        <article class="story-content">
+            <p><span class="thought">I've lost my mind.</span></p>
+
+            <p>This is the only logical conclusion Pyara Dana can come to. She's experiencing a psychotic break and has
+                been hallucinating. That's much better than the alternative.</p>
+
+            <p><span class="thought">I really hope I've lost my mind.</span></p>
+
+            <p>But... if she hasn't lost her mind...</p>
+
+            <p>She looks down at her hand. At the conductor's baton she still clutches in said hand. It's white. No
+                wait. She holds it up to the pristine white walls of Cadence Academy. Not quite white. White with a
+                slight pink tilt.</p>
+
+            <p>The conductor's baton she got from a fairy.</p>
+
+            <p>No. NO. She's lost her mind. Fairies aren't real. And there's no chance in hell that Beeston was going to
+                be attacked by a horde of demons. Are demons a horde? Do demons have a collective word? A hatred!
+                There's no way Beeston was going to be attacked by a hatred of demons.</p>
+
+            <p>Pyara looks at the baton again. It's very difficult to convince yourself something didn't happen when you
+                have physical proof that it in fact did.</p>
+
+            <p>Even if she wasn't crazy, this still made no sense. Why would she of all people be chosen to protect the
+                world? I mean, Kali is right there. Her older sister was bigger, smarter, stronger. Her only real
+                problem was that she worried too much about Pyara. Not that Pyara blamed her overmuch. When your sister
+                is the only family you have left then yeah. You worry.</p>
+
+            <p>A fairy though? Telling her that she was intended to save the world from a <s>horde</s> <em>hatred</em>
+                of demons? This is insane. She's 14. She's barely started her Lúmenai lessons. She's not even a Melodist
+                yet. Shouldn't this responsibility have gone to a Harmacist or better yet a Symphalist? Anyone other
+                than a child who barely knew the basics of casting magic?</p>
+
+            <p><span class="thought">If the world really is counting on me, the world's in trouble.</span></p>
+
+            <p>As if provoked by her thoughts, she hears a loud roar up ahead. Her head snaps toward the sound. There's
+                smoke rising from the quad at Cadence. That's... not good. Before she even realizes she's doing it,
+                she's sprinting through the entrance arch and towards whatever's burning. The screams make her run
+                faster. And then she's drawn to an involuntary halt. Several students lie on the grass. Thankfully they
+                seem uninjured, just startled. But that's not what pulled Pyara up short. No, that task was accomplished
+                by what could only be one of the fairy's Demons.</p>
+
+            <p><span class="thought">Not crazy after all. Probably.</span></p>
+
+            <p>The Demon, and yes it earns that capitalization, is a massive beast and not a one of fur and fang. It is
+                something else entirely.</p>
+
+            <p>It stands upright and deliberate. Intentional. Its body looks carved rather than born, all sharp planes
+                and brutal geometry, like someone had sculpted a warrior from obsidian and starlight and then decided
+                flesh was optional. Every muscle is defined beneath a bronzed surface that wasn't quite armor and wasn't
+                quite skin. Faceted. Metallic. Too perfect.</p>
+
+            <p>Two horns curve from its head in heavy arcs, thick and brutal, sweeping upward like crowns forged for a
+                tyrant. Not decorative. Nothing is decorative. Weaponized stillness.</p>
+
+            <p>Its face hides behind an angular helm, expression locked in cold permanence. No lips to curl. No brow to
+                furrow. Just narrow slits of pale, merciless light where eyes should be. Not rage. Assessment.</p>
+
+            <p>And then there's its chest.</p>
+
+            <p>At the center of its torso burns a star.</p>
+
+            <p>Not a symbol. Not a gem. A <em>star</em>. Brilliant and searing, its light cuts through the sharp ridges
+                of its body and spilling across the quad in fractured beams. Veins of faint blue energy trace outward
+                from that blazing core, skittering along its arms like restrained lightning, pulsing in slow, patient
+                rhythm.</p>
+
+            <p>Its fists are clenched. Massive. The forearms flare into bladed ridges, edges sharp enough to split
+                stone. Or people. It doesn't roar again. It doesn't thrash about.</p>
+
+            <p>It simply stands there.</p>
+
+            <p>As if it has arrived exactly where it means to be. As if the devastation around it were not chaos, but
+                procedure. And Pyara knew it had locked in on her.</p>
+
+            <p>The baton pulses. No <em>human</em> eyes are looking at her. If not now...</p>
+
+            <p>She raises the baton and silently counts time like an orchestral conductor. 1.. 2.. 3.. 4.. 1.. 2.. 3..
+                4.. She releases the baton, which transforms into a ball of light and continues to count the beat.</p>
+
+            <p><span class="thought">Here goes nothing. Or everything.</span></p>
+
+            <div class="dramatic">
+                Play, orchestra of love!<br>
+                Heart Aria,<br>
+                The solo that awakens the morning sun!
+            </div>
+
+            <p>The ball of light turns as she names herself and plunges into her chest, no, into her heart. She carries
+                on.</p>
+
+            <div class="dramatic">
+                Sing,<br>
+                For a divine future!<br>
+                I am,<br>
+                Heart Melody, Lovely Hearts!
+            </div>
+
+            <p>And she's posing. Why is she posing. And what is she wearing?</p>
+
+            <p>Her outfit has radically changed. She now wears a vibrant, tiered skirt of shocking fuchsia, lined with
+                delicate white ruffles that shimmer with an inner light. A crisp white tunic-like top, edged in pink and
+                emblazoned with a stylized heart-and-wing crest, hugs her torso. The most jarring addition is the hood:
+                a deep pink garment with two white, horn-like protrusions that mirror the silhouette of the very Demon
+                she is facing.</p>
+
+            <p>White gloves reach past her elbows, and her legs are encased in white stockings crisscrossed with pink
+                ribbons, ending in dainty but sturdy shoes. It is flamboyant, completely impractical for a 14-year-old
+                student, and utterly nonsensical.</p>
+
+            <p>"It's weird," she whispers to herself, the pink fabric of her long, flowing cape snapping in the wind.
+                "This is definitely weird. But... it's actually kind of cute?"</p>
+
+            <p>The Demon doesn't give her another second for fashion critiques. With a sound like grinding tectonic
+                plates, it lunges, its massive, bladed forearm swinging in a lethal arc.</p>
+
+            <p>Instinct takes over: not the instinct of a trained warrior, but the rhythmic reflex of a conductor.
+                Pyara's hand clamps onto a heavy, metallic weight she hadn't realized she was holding. She swings it
+                upward, catching the Demon's faceted arm in a shower of sparks.</p>
+
+            <p>The weapon is the Serrata Glissando, a specialized zhua. To Pyara's untrained eyes, it looks like a "mini
+                scythe" with a curved, crescent blade and a heart-shaped counterweight. The impact rattles her teeth,
+                but she doesn't buckle. Instead, she feels a strange, buoyant momentum. She doesn't just block; she
+                instinctively steps into the blow, using the curve of the scythe to redirect the Demon's "weaponized
+                stillness" into the dirt.</p>
+
+            <p>The beast recoils, its pale eye-slits pulsing with a cold, neutral magical energy. It raises a fist, and
+                a wave of raw, colorless force erupts toward her.</p>
+
+            <p>Pyara panics, her Lúmenai lessons barely having covered basic theory. But as she throws her hand up in a
+                desperate defensive gesture, the air around her doesn't just move, it <em>ignites</em>. A wall of the
+                flames of Tânor aspected magic flares into existence, swallowing the neutral blast, followed immediately
+                by a wind gust of the Gwynt aspect that propels her backward into a graceful, if accidental, flip.</p>
+
+            <p>She lands in a crouch, her heart hammering a frantic rhythm against her ribs. She can feel it. She can
+                access it all: fire, water, wind, and earth. She isn't a Melodist yet, but the music of the Tier 1
+                elements is singing through her fingertips.</p>
+
+            <p>She stands up, a shaky but determined smile spreading across her face. She doesn't have a plan, but she
+                has the beat, and for the first time in her life, she definitely knows the tune.</p>
+
+            <p><span class="thought">I can't wait to tell Kali about this. Wonder if she can become a Lovely Heart
+                    too?</span></p>
+        </article>
+
+        <!-- Related Stories Section -->
+        <section class="related-section">
+            <h2 class="related-title">Related Stories</h2>
+            <div class="related-grid">
+                <a href="story-aria-caesura.html" class="related-card">
+                    <div class="related-card-title">Aria Caesura</div>
+                    <div class="related-card-desc">The climax of the conflict between Pyara Dana and dissonant discord.
+                    </div>
+                </a>
+                <a href="story-symphonic-overture.html" class="related-card">
+                    <div class="related-card-title">Symphonic Overture</div>
+                    <div class="related-card-desc">Mahana Sahi's appearance in Royastella marks the start of a new
+                        conflict for the Starlite 7th.</div>
+                </a>
+                <a href="story-bluish-green-truths.html" class="related-card">
+                    <div class="related-card-title">Bluish-Green Truths</div>
+                    <div class="related-card-desc">Alulu and Claris meet after a failed attempt at corporate espionage.
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+
+</body>
+
 </html>
