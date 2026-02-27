@@ -43,6 +43,29 @@
             min-height: 100vh;
         }
 
+        .press-start {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            margin-top: 20px;
+            animation: blink 3s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
         /* Animated background grid */
         .bg-grid {
             position: fixed;
@@ -176,60 +199,6 @@
             }
         }
 
-        .logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 12px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            filter: drop-shadow(var(--glow-pink));
-            position: relative;
-        }
-
-        /* Header */
-        .header-nav {
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 15, 0.95);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
-            padding: 16px 24px;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--secondary-pink);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .logo-text::after {
-            content: 'CRIOS';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(107, 15, 26, 0.3), rgba(233, 30, 99, 0.3), rgba(0, 217, 255, 0.3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: blur(20px);
-            z-index: -1;
-        }
-
         .tagline {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.9rem;
@@ -247,6 +216,91 @@
             color: var(--text-dim);
             font-style: italic;
             letter-spacing: 1px;
+        }
+
+        /* Updates Section */
+        .updates-section {
+            max-width: 1200px;
+            width: 100%;
+            margin: 50px auto 80px;
+            padding: 0 20px;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .updates-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .updates-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+        }
+
+        .updates-prefix {
+            color: var(--text-dim);
+        }
+
+        /* 3D Flip Container */
+        .updates-flip {
+            display: inline-block;
+            position: relative;
+            height: 1.2em;
+            perspective: 1000px;
+            vertical-align: middle;
+            min-width: 400px;
+            /* Adjust based on content length */
+        }
+
+        .updates-flip-item {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .updates-flip-item a {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            left: 0;
+            top: 0;
+            text-decoration: none;
+            color: var(--secondary-pink);
+            font-weight: 600;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .updates-flip-item a:hover {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 8px rgba(0, 217, 255, 0.5);
+        }
+
+        .current-side {
+            transform: rotateX(0deg) translateZ(0.6em);
+        }
+
+        .next-side {
+            transform: rotateX(-90deg) translateZ(0.6em);
+        }
+
+        .is-flipping {
+            transform: rotateX(90deg);
         }
 
         /* Navigation cards */
@@ -285,40 +339,6 @@
             display: block;
         }
 
-        .nav-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(0, 217, 255, 0.05));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .nav-card:hover::before {
-            opacity: 1;
-        }
-
-        .nav-card::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(233, 30, 99, 0.3), transparent);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-
-        .nav-card:hover::after {
-            width: 500px;
-            height: 500px;
-        }
-
         .nav-card:hover {
             border-color: var(--secondary-pink);
             box-shadow: var(--glow-pink);
@@ -331,11 +351,9 @@
             font-weight: 900;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 16px;
-            position: relative;
-            z-index: 1;
         }
 
         .nav-card-title {
@@ -346,8 +364,6 @@
             margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            position: relative;
-            z-index: 1;
         }
 
         .nav-card-desc {
@@ -356,8 +372,6 @@
             font-weight: 300;
             color: var(--text-dim);
             line-height: 1.6;
-            position: relative;
-            z-index: 1;
         }
 
         /* Info panel */
@@ -366,21 +380,11 @@
             background: rgba(20, 20, 25, 0.8);
             border: 1px solid rgba(233, 30, 99, 0.2);
             border-radius: 12px;
-            padding: 32px;
+            padding: 28px;
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             animation: fadeIn 1s ease-out 0.6s both;
             margin-bottom: 40px;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
         }
 
         .info-title {
@@ -447,66 +451,26 @@
                 letter-spacing: 6px;
             }
 
-            .tagline {
-                font-size: 0.75rem;
-                letter-spacing: 4px;
+            .updates-container {
+                font-size: 1rem;
+                flex-direction: column;
             }
 
-            .subtagline {
-                font-size: 0.9rem;
+            .updates-flip {
+                min-width: 100%;
+                text-align: center;
             }
 
             .nav-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .nav-card {
-                padding: 32px 24px;
-            }
-
-            .nav-card-icon {
-                font-size: 2.5rem;
-            }
-
-            .nav-card-title {
-                font-size: 1.3rem;
-            }
-
-            .info-panel {
-                padding: 24px;
-            }
-        }
-
-        /* Press Start effect */
-        .press-start {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-align: center;
-            margin-top: 40px;
-            animation: blink 2s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.3;
             }
         }
 
         .fadein {
             position: relative;
             width: 100%;
-            max-width: 485px;
-            aspect-ratio: 485 / 256;
+            max-width: 500px;
+            aspect-ratio: 500 / 265;
             margin: 0 auto 20px auto;
         }
 
@@ -560,26 +524,9 @@
             z-index: 1;
         }
 
-        .prologue-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-            z-index: -1;
-        }
-
-        .prologue-btn:hover::before {
-            left: 100%;
-        }
-
         .prologue-btn:hover {
             box-shadow: var(--glow-pink);
             transform: scale(1.05);
-            border-color: var(--accent-cyan);
         }
 
         /* Video Lightbox */
@@ -594,23 +541,12 @@
             z-index: 9999;
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
-            animation: fadeInLightbox 0.3s ease-out;
         }
 
         .video-lightbox.active {
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        @keyframes fadeInLightbox {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
         }
 
         .video-container {
@@ -621,20 +557,6 @@
             border: 3px solid var(--secondary-pink);
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 0 60px rgba(233, 30, 99, 0.5);
-            animation: slideInVideo 0.4s ease-out;
-        }
-
-        @keyframes slideInVideo {
-            from {
-                opacity: 0;
-                transform: scale(0.8) translateY(-50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
         }
 
         .video-close {
@@ -643,70 +565,31 @@
             right: -15px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
-            border: 2px solid var(--accent-cyan);
-            border-radius: 50%;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .video-close:hover {
             background: var(--secondary-pink);
-            transform: rotate(90deg);
-            box-shadow: var(--glow-pink);
-        }
-
-        .video-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-align: center;
-            margin-bottom: 20px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
         }
 
         .video-wrapper {
-            position: relative;
             width: 100%;
             max-width: 1200px;
             aspect-ratio: 16 / 9;
-            background: #000;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
         }
 
         .video-wrapper video {
             width: 100%;
             height: 100%;
-            display: block;
         }
 
-        @media (max-width: 768px) {
-            .video-container {
-                max-width: 95%;
-                padding: 15px;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
             }
 
-            .video-title {
-                font-size: 1.3rem;
-            }
-
-            .prologue-btn {
-                font-size: 0.9rem;
-                padding: 12px 32px;
+            to {
+                opacity: 1;
             }
         }
     </style>
@@ -719,7 +602,6 @@
     <div class="orb orb-3"></div>
 
     <div class="container">
-        <!-- Logo Section -->
         <div class="logo-section">
             <div class="fadein">
                 <img src="assets/icons/Crios2020S.png" alt="CRIOS Logo Variant A">
@@ -729,8 +611,6 @@
             <p class="subtagline">A Transmedia Storytelling Universe</p>
         </div>
 
-
-        <!-- Main Navigation -->
         <div class="nav-grid">
             <a href="timeline.html" class="nav-card">
                 <div class="nav-card-icon">⟡</div>
@@ -754,7 +634,6 @@
             </a>
         </div>
 
-        <!-- Info Panel -->
         <div class="info-panel">
             <h3 class="info-title">What is Crios?</h3>
             <p class="info-text">
@@ -764,13 +643,19 @@
             </p>
             <p class="info-text">
                 The goal is not only to entertain but to craft something that uses storytelling in every medium to tell
-                a story that can only be told through that medium. A universe where harmonic resonance governs reality,
-                where realms converge, and where the line between hero and antagonist blurs.
+                a story that can only be told through that medium.
             </p>
             <p class="info-signature">— Davisem, Creator and Architect of the Crios Project</p>
         </div>
 
-        <!-- Footer Links -->
+        <div class="updates-section">
+            <div class="updates-label">Latest Updates</div>
+            <div class="updates-container">
+                <div class="updates-flip">
+                </div>
+            </div>
+        </div>
+
         <div class="footer-links">
             <a href="characters.html" class="footer-link">Characters</a>
             <a href="realms.html" class="footer-link">Realms</a>
@@ -778,20 +663,19 @@
             <a href="magic.html" class="footer-link">Magic</a>
             <a href="arsenal.html" class="footer-link">Arsenal</a>
             <a href="glossary.html" class="footer-link">Glossary</a>
-            <a href="roadmap.html" class="footer-link">Roadmap</a>
+            <a href="stories.html" class="footer-link">Stories</a>
         </div>
 
-        <!-- Prologue Button -->
         <button class="prologue-btn" onclick="openVideo()">Prologue</button>
-
         <p class="press-start">[ Select to Continue ]</p>
     </div>
 
-    <!-- Video Lightbox -->
     <div id="videoLightbox" class="video-lightbox" onclick="closeVideoOnOutsideClick(event)">
         <div class="video-container">
             <button class="video-close" onclick="closeVideo()">×</button>
-            <h2 class="video-title">Prologue</h2>
+            <h2 class="video-title"
+                style="text-align: center; color: var(--secondary-pink); font-family: 'Orbitron'; margin-bottom: 15px;">
+                Prologue</h2>
             <div class="video-wrapper">
                 <video id="prologueVideo" controls>
                     <source src="assets/videos/prologue.mp4" type="video/mp4">
@@ -801,40 +685,86 @@
         </div>
     </div>
 
+
+
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var video = document.getElementById("prologueVideo");
-            // Set the volume to 0.1 (10% volume)
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById("prologueVideo");
             video.volume = 0.1;
         });
 
         function openVideo() {
-            const lightbox = document.getElementById('videoLightbox');
-            const video = document.getElementById('prologueVideo');
-            lightbox.classList.add('active');
-            video.play();
+            document.getElementById('videoLightbox').classList.add('active');
+            document.getElementById('prologueVideo').play();
         }
 
         function closeVideo() {
-            const lightbox = document.getElementById('videoLightbox');
             const video = document.getElementById('prologueVideo');
-            lightbox.classList.remove('active');
+            document.getElementById('videoLightbox').classList.remove('active');
             video.pause();
             video.currentTime = 0;
         }
 
         function closeVideoOnOutsideClick(event) {
-            if (event.target.id === 'videoLightbox') {
-                closeVideo();
-            }
+            if (event.target.id === 'videoLightbox') closeVideo();
         }
 
-        // Close on ESC key
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                closeVideo();
+        // --- Updates Rotation System (Aceternity Style) ---
+        const updates = [
+            { text: "New Hearts - Pyara's First Transformation", link: "stories/story-new-hearts.html" },
+            { text: "Character Database - Explore relationships", link: "NexusDB.html" },
+            { text: "Ultimatera Map - Interactive realm exploration", link: "ultimatera-map.html" },
+            { text: "Enemy Factions - Crystallines & Demons unveiled", link: "enemies.html" }
+        ];
+
+        let currentUpdateIndex = 0;
+        let isPaused = false;
+        const flipContainer = document.querySelector('.updates-flip');
+
+        // Initial setup of the 3D structure
+        flipContainer.innerHTML = `
+            <div class="updates-flip-item">
+                <a href="${updates[0].link}" class="current-side">${updates[0].text}</a>
+                <a href="#" class="next-side"></a>
+            </div>
+        `;
+
+        const flipItem = flipContainer.querySelector('.updates-flip-item');
+
+        function performFlip() {
+            if (isPaused) {
+                setTimeout(performFlip, 1000);
+                return;
             }
-        });
+
+            const nextIndex = (currentUpdateIndex + 1) % updates.length;
+            const nextSide = flipItem.querySelector('.next-side');
+            const currentSide = flipItem.querySelector('.current-side');
+
+            nextSide.innerText = updates[nextIndex].text;
+            nextSide.href = updates[nextIndex].link;
+
+            flipItem.classList.add('is-flipping');
+
+            setTimeout(() => {
+                currentSide.innerText = updates[nextIndex].text;
+                currentSide.href = updates[nextIndex].link;
+
+                flipItem.style.transition = 'none';
+                flipItem.classList.remove('is-flipping');
+                void flipItem.offsetWidth; // Trigger reflow
+                flipItem.style.transition = '';
+
+                currentUpdateIndex = nextIndex;
+                setTimeout(performFlip, 6000); // 6 second wait after reset
+            }, 600);
+        }
+
+        flipContainer.addEventListener('mouseenter', () => { isPaused = true; });
+        flipContainer.addEventListener('mouseleave', () => { isPaused = false; });
+
+        // Start the first flip after initial delay
+        setTimeout(performFlip, 6000);
     </script>
 </body>
 
