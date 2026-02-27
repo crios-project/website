@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -10,144 +11,401 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character Database // CRIOS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-burgundy: #6b0f1a; --secondary-pink: #e91e63; --accent-cyan: #00d9ff;
-            --dark-bg: #0a0a0f; --dark-panel: #141419; --text-primary: #e8e8f0; --text-dim: #8888a8;
-            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6); --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
+            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
         }
+
         body {
-            font-family: 'Archivo', sans-serif; background: var(--dark-bg); color: var(--text-primary);
-            min-height: 100vh; overflow-x: hidden;
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
+
         .bg-grid {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px; pointer-events: none; z-index: 0; opacity: 0.5;
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
         }
-        .orb { position: fixed; border-radius: 50%; filter: blur(100px); opacity: 0.15; pointer-events: none; z-index: 0; }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .orb-1 {
-            width: 500px; height: 500px; background: radial-gradient(circle, var(--primary-burgundy), transparent);
-            top: -200px; right: -150px; animation: orbFloat1 20s ease-in-out infinite;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -150px;
+            animation: orbFloat1 20s ease-in-out infinite;
         }
+
         .orb-2 {
-            width: 400px; height: 400px; background: radial-gradient(circle, var(--secondary-pink), transparent);
-            bottom: -150px; left: -100px; animation: orbFloat2 25s ease-in-out infinite;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -100px;
+            animation: orbFloat2 25s ease-in-out infinite;
         }
-        @keyframes orbFloat1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-80px, 80px); } }
-        @keyframes orbFloat2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(80px, -60px); } }
+
+        @keyframes orbFloat1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-80px, 80px);
+            }
+        }
+
+        @keyframes orbFloat2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(80px, -60px);
+            }
+        }
+
         .header-nav {
-            position: sticky; top: 0; background: rgba(10, 10, 15, 0.95); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2); padding: 16px 24px; z-index: 100;
-            display: flex; justify-content: space-between; align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
         .header-link {
-            font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
         }
-        .header-link:hover { color: var(--accent-cyan); }
+
+        .header-link:hover {
+            color: var(--accent-cyan);
+        }
+
         .header-title {
-            font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; color: var(--secondary-pink);
-            text-transform: uppercase; letter-spacing: 3px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
+
         .database-container {
-            position: relative; z-index: 1; display: grid; grid-template-columns: 350px 1fr 450px;
-            min-height: calc(100vh - 57px); gap: 1px; background: rgba(233, 30, 99, 0.1);
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 350px 1fr 450px;
+            min-height: calc(100vh - 57px);
+            gap: 1px;
+            background: rgba(233, 30, 99, 0.1);
         }
+
         .directory {
-            background: rgba(10, 10, 15, 0.8); border-right: 1px solid rgba(233, 30, 99, 0.2);
-            padding: 24px; overflow-y: auto; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+            background: rgba(10, 10, 15, 0.8);
+            border-right: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 24px;
+            overflow-y: auto;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
         }
+
         .dir-header {
-            font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px;
-            color: var(--accent-cyan); margin-bottom: 20px; padding-bottom: 10px;
-            border-bottom: 2px solid var(--secondary-pink); text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-pink);
+            text-transform: uppercase;
         }
+
         .subject-card {
-            background: rgba(20, 20, 25, 0.6); border: 1px solid rgba(233, 30, 99, 0.2);
-            padding: 14px 16px; margin-bottom: 8px; cursor: pointer; transition: all 0.3s ease; border-radius: 4px;
-            font-family: 'Orbitron', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 1px;
+            background: rgba(20, 20, 25, 0.6);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
+
         .subject-card:hover {
-            border-color: var(--accent-cyan); background: rgba(0, 217, 255, 0.1); transform: translateX(4px);
+            border-color: var(--accent-cyan);
+            background: rgba(0, 217, 255, 0.1);
+            transform: translateX(4px);
         }
+
         .subject-card.active {
             border-color: var(--secondary-pink);
             background: linear-gradient(135deg, rgba(107, 15, 26, 0.4), rgba(233, 30, 99, 0.2));
             box-shadow: var(--glow-pink);
         }
+
         .focus-area {
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: radial-gradient(circle, rgba(0, 217, 255, 0.05) 0%, transparent 70%);
-            border-right: 1px solid rgba(233, 30, 99, 0.2); padding: 40px; position: relative;
+            border-right: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 40px;
+            position: relative;
         }
+
         #main-portrait {
-            max-height: 85vh; max-width: 100%; object-fit: contain; border-radius: 8px;
+            max-height: 85vh;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 8px;
             filter: drop-shadow(0 0 20px rgba(233, 30, 99, 0.3));
         }
+
         .portrait-placeholder {
-            font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--text-dim);
-            text-align: center; text-transform: uppercase; letter-spacing: 3px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
+
         .intel-panel {
-            padding: 30px; display: flex; flex-direction: column; gap: 20px;
-            background: rgba(10, 10, 15, 0.6); overflow-y: auto;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: rgba(10, 10, 15, 0.6);
+            overflow-y: auto;
         }
+
         .data-block {
-            background: rgba(20, 20, 25, 0.8); border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 8px; padding: 24px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+            background: rgba(20, 20, 25, 0.8);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
         }
+
         .subject-title {
-            font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 900; margin: 0 0 8px 0;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            margin: 0 0 8px 0;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            text-transform: uppercase; letter-spacing: 2px;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
+
         .alias-list {
-            font-family: 'Archivo', sans-serif; font-size: 0.85rem; color: var(--text-dim);
-            font-style: italic; margin-bottom: 12px;
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-bottom: 12px;
         }
+
         .status-line {
-            font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: var(--accent-cyan);
-            margin: 0; text-transform: uppercase; letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .bio-text { font-family: 'Archivo', sans-serif; font-size: 1rem; line-height: 1.8; color: var(--text-primary); }
-        .relationship-feed { font-family: 'Archivo', sans-serif; font-size: 0.95rem; color: var(--text-primary); line-height: 1.7; }
+
+        .bio-text {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .relationship-feed {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
         .label {
-            font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); font-weight: 700;
-            margin-right: 8px; text-transform: uppercase; letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            margin-right: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .relation-connection { color: var(--secondary-pink); font-weight: 600; }
-        @media (max-width: 1400px) { .database-container { grid-template-columns: 300px 1fr 400px; } }
+
+        .relation-connection {
+            color: var(--secondary-pink);
+            font-weight: 600;
+        }
+
+        @media (max-width: 1400px) {
+            .database-container {
+                grid-template-columns: 300px 1fr 400px;
+            }
+        }
+
         @media (max-width: 1024px) {
-            .database-container { grid-template-columns: 1fr; grid-template-rows: auto auto auto; min-height: auto; }
-            .directory { border-right: none; border-bottom: 1px solid rgba(233, 30, 99, 0.2); max-height: 400px; }
-            .focus-area { border-right: none; border-bottom: 1px solid rgba(233, 30, 99, 0.2); min-height: 400px; padding: 20px; }
-            #main-portrait { max-height: 500px; }
-            .intel-panel { padding: 24px; }
-            .subject-card:hover { transform: none; }
+            .database-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                min-height: auto;
+            }
+
+            .directory {
+                border-right: none;
+                border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+                max-height: 400px;
+            }
+
+            .focus-area {
+                border-right: none;
+                border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+                min-height: 400px;
+                padding: 20px;
+            }
+
+            #main-portrait {
+                max-height: 500px;
+            }
+
+            .intel-panel {
+                padding: 24px;
+            }
+
+            .subject-card:hover {
+                transform: none;
+            }
         }
+
         @media (max-width: 768px) {
-            .header-title { font-size: 0.85rem; }
-            .header-link { font-size: 0.75rem; }
-            .directory { padding: 16px; max-height: 300px; }
-            .dir-header { font-size: 0.75rem; }
-            .subject-card { font-size: 0.85rem; padding: 12px 14px; }
-            .subject-title { font-size: 1.5rem; }
-            .intel-panel { padding: 16px; }
-            .data-block { padding: 20px; }
-            .focus-area { min-height: 300px; }
-            #main-portrait { max-height: 400px; }
+            .header-title {
+                font-size: 0.85rem;
+            }
+
+            .header-link {
+                font-size: 0.75rem;
+            }
+
+            .directory {
+                padding: 16px;
+                max-height: 300px;
+            }
+
+            .dir-header {
+                font-size: 0.75rem;
+            }
+
+            .subject-card {
+                font-size: 0.85rem;
+                padding: 12px 14px;
+            }
+
+            .subject-title {
+                font-size: 1.5rem;
+            }
+
+            .intel-panel {
+                padding: 16px;
+            }
+
+            .data-block {
+                padding: 20px;
+            }
+
+            .focus-area {
+                min-height: 300px;
+            }
+
+            #main-portrait {
+                max-height: 400px;
+            }
         }
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: rgba(20, 20, 25, 0.5); }
-        ::-webkit-scrollbar-thumb { background: var(--secondary-pink); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 20, 25, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary-pink);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan);
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <div class="orb orb-1"></div>
@@ -176,7 +434,8 @@
                 <p class="bio-text" id="display-bio">Select a subject from the left directory to initialize profile.</p>
             </div>
             <div class="data-block">
-                <div class="relationship-feed" id="display-relation">Click a second subject to establish relationship link.</div>
+                <div class="relationship-feed" id="display-relation">Click a second subject to establish relationship
+                    link.</div>
             </div>
         </main>
     </div>
@@ -196,16 +455,16 @@
                     "Amare": { connection: "Observation Subject", notes: "Tiala is utterly baffled by why a dragon is so interested in her." },
                     "Ami": { connection: "Little Sister", notes: "Equal parts endearing and infuriating." },
                     "Windi": { connection: "Ideological Opponent", notes: "Opposed in theory, but Windi is mainly just helping Ami." },
-                    "Kali": { connection: "Respected Rival / Threat", notes: "Tiala knows Kali hates her for unknown reasons." },
+                    "Kali": { connection: "Respected Rival / Threat", notes: "Tiala knows Kali hates her but feels it's not for valid reasons." },
                     "Pyara": { connection: "Victim (Casualty of dissonant discord)", notes: "Tiala is directly responsible for her death." },
-                    "Oktusha": { connection: "Target of forced growth", notes: "Antagonized by Tiala (as dissonant discord)." },
-                    "Omba": { connection: "Target of forced growth", notes: "Antagonized by Tiala (as dissonant discord)." },
-                    "Mahana": { connection: "Target / Reincarnation Candidate", notes: "Antagonized by by Tiala (as dissonant discord)." },
-                    "Itami": { connection: "Test Subject (Vetting for Royastella Lodesoul)", notes: "Antagonized by Tiala (as BLADE GUILLOTINE)." },
-                    "Shini": { connection: "Target of forced growth", notes: "Antagonized by Tiala (as BLADE GUILLOTINE)." },
-                    "Kayre": { connection: "Target of forced growth", notes: "Antagonized by Tiala (as BLADE GUILLOTINE)." },
-                    "Riasa": { connection: "Target of forced growth", notes: "Antagonized by Tiala (as BLADE GUILLOTINE)." },
-                    "Daeon": { connection: "Target of forced growth", notes: "Antagonized by Tiala (as BLADE GUILLOTINE)." },
+                    "Oktusha": { connection: "Target of forced growth", notes: "Antagonized by dissonant discord." },
+                    "Omba": { connection: "Target of forced growth", notes: "Antagonized by dissonant discord." },
+                    "Mahana": { connection: "Target / Reincarnation Candidate", notes: "Antagonized by by dissonant discord." },
+                    "Itami": { connection: "Test Subject (Vetting for Royastella Lodesoul)", notes: "Antagonized by BLADE GUILLOTINE." },
+                    "Shini": { connection: "Target of forced growth", notes: "Antagonized by BLADE GUILLOTINE." },
+                    "Kayre": { connection: "Target of forced growth", notes: "Antagonized by BLADE GUILLOTINE." },
+                    "Riasa": { connection: "Target of forced growth", notes: "Antagonized by BLADE GUILLOTINE." },
+                    "Daeon": { connection: "Target of forced growth", notes: "Antagonized by BLADE GUILLOTINE." },
                     "Marate": { connection: "Father / Primary Target", notes: "Antagonized the Starlite 7th as BLADE GUILLOTINE." },
                     "Celesin": { connection: "None", notes: "Tiala and Celesin never directly interact." },
                     "Astarri": { connection: "Scout / Tool", notes: "Used Astarri to find Fú cì." }
@@ -338,7 +597,7 @@
                     "Jí Lián": { connection: "Distanced Curiosity", notes: "Noticed Jí Lián's caution toward her dragon form; however, Jí Lián became even more wary after the human-sized Velia appeared." },
                     "Claris": { connection: "Playful Dynamic", notes: "One of the few people who bonded with Velia. Amare's lack of social context makes her the perfect, unsuspecting target for Claris's pranks." },
                     "Xīwàng": { connection: "Playmate", notes: "Always ready to 'play' with Xīwàng. She is unaware that their sparring sessions are capable of obliterating landmasses." },
-                    "Fú cì": { connection: "Accidental Guardian", notes: "Protected Fú cì after the massacre because she thought the pursuing assassins wanted to 'play' with her, obliterating them in the process." },
+                    "Fú cì": { connection: "Accidental Guardian", notes: "Protected Fú cì after the massacre because she thought some pursuing assassins wanted to 'play' with her, obliterating them in the process." },
                     "Ami": { connection: "Cosmic Mystery", notes: "Fascinated by Ami; she detects the presence of a Lodesoul within her despite Ami lacking the traditional markers." },
                     "Windi": { connection: "Distant Presence", notes: "Has encountered Windi many times over the years but rarely interacts directly; unaware of Windi's relation to Claris." },
                     "Kali": { connection: "Confusion", notes: "Fails to understand why the human known as Odisse is perpetually angry." },
@@ -392,26 +651,26 @@
                 bio: "Former Phasewalked member of Starlite 7th and founder of Reason Theory. A Genius Nihilist who views world events with an aloof detachment, though she remains a highly effective combatant and a loyal, if silent, friend to a select few.",
                 headshot: "../assets/characters/Windi_Lightfall.png",
                 relationships: {
-                    "Tiala": {connection: "Philosophical Opposite",notes: "Views Tiala as a fool for her tireless efforts to save everyone; doesn't share her sister's optimism."},
-                    "Jí Lián": {connection: "Non-Entity",notes: "Despite direct interactions, it is unclear if Windi even registers Jí Lián's existence."},
-                    "Claris": {connection: "Little Sister",notes: "Keeps her distance while Claris searches for her. She believes Claris is capable of ruling but ultimately thinks the throne itself is meaningless."},
-                    "Xīwàng": {connection: "None",notes: "They've never met."},
-                    "Fú cì": {connection: "Informal Guardian",notes: "Saved Fú cì by accidentally obliterating her assassins. Her nihilistic influence actually helped unlock Fú cì's transformation into Zhòu-chún."},
-                    "Amare": {connection: "Mutual Indifference",notes: "They have met, but neither entity finds the other particularly noteworthy."},
-                    "Ami": {connection: "Business Partner",notes: "Co-founder of Reason Theory. Thinks the faction name is stupid but can't be bothered to suggest a replacement."},
-                    "Kali": {connection: "Tactical Asset",notes: "Views Odisse primarily as a useful tool to achieve her specific goals."},
-                    "Pyara": {connection: "None",notes: "They've never met."},
-                    "Oktusha": {connection: "None",notes: "They've never met."},
-                    "Omba": {connection: "None",notes: "They've never met."},
-                    "Mahana": {connection: "Potential Tool",notes: "Never met, which is lucky for Mahana, as Windi would have used her as a tool for chaos."},
-                    "Itami": {connection: "Strained Respect",notes: "Itami disliked Wentea's aloofness but respected her combat effectiveness."},
-                    "Shini": {connection: "Unaware",notes: "Completely oblivious to the active disdain Shini feels toward her."},
-                    "Kayre": {connection: "Best Friend / Model",notes: "Part of her core trio; frequently models Kayre's clothing designs in her civilian life."},
-                    "Riasa": {connection: "Critical Observer",notes: "One of the few people she notices; privately views her as a 'clumsy overspirited fool'."},
-                    "Daeon": {connection: "Best Friend",notes: "Completes the trio with Kayre. They are so close that rumors persist about two of the three dating."},
-                    "Marate": {connection: "Confidant",notes: "One of the few people she actively respects; frequently seeks his life advice."},
-                    "Celesin": {connection: "None",notes: "They've never met."},
-                    "Astarri": {connection: "Total Soft Spot",notes: "The only thing that breaks her nihilism. If she finds Astarri, she immediately confirms Fú cì's safety, then demands cuddles."}
+                    "Tiala": { connection: "Philosophical Opposite", notes: "Views Tiala as a fool for her tireless efforts to save everyone; doesn't share her sister's optimism." },
+                    "Jí Lián": { connection: "Non-Entity", notes: "Despite direct interactions, it is unclear if Windi even registers Jí Lián's existence." },
+                    "Claris": { connection: "Little Sister", notes: "Keeps her distance while Claris searches for her. She believes Claris is capable of ruling but ultimately thinks the throne itself is meaningless." },
+                    "Xīwàng": { connection: "None", notes: "They've never met." },
+                    "Fú cì": { connection: "Informal Guardian", notes: "Saved Fú cì by accidentally obliterating her assassins. Her nihilistic influence actually helped unlock Fú cì's transformation into Zhòu-chún." },
+                    "Amare": { connection: "Mutual Indifference", notes: "They have met, but neither entity finds the other particularly noteworthy." },
+                    "Ami": { connection: "Business Partner", notes: "Co-founder of Reason Theory. Thinks the faction name is stupid but can't be bothered to suggest a replacement." },
+                    "Kali": { connection: "Tactical Asset", notes: "Views Odisse primarily as a useful tool to achieve her specific goals." },
+                    "Pyara": { connection: "None", notes: "They've never met." },
+                    "Oktusha": { connection: "None", notes: "They've never met." },
+                    "Omba": { connection: "None", notes: "They've never met." },
+                    "Mahana": { connection: "Potential Tool", notes: "Never met, which is lucky for Mahana, as Windi would have used her as a tool for chaos." },
+                    "Itami": { connection: "Strained Respect", notes: "Itami disliked Wentea's aloofness but respected her combat effectiveness." },
+                    "Shini": { connection: "Unaware", notes: "Completely oblivious to the active disdain Shini feels toward her." },
+                    "Kayre": { connection: "Best Friend / Model", notes: "Part of her core trio; frequently models Kayre's clothing designs in her civilian life." },
+                    "Riasa": { connection: "Critical Observer", notes: "One of the few people she notices; privately views her as a 'clumsy overspirited fool'." },
+                    "Daeon": { connection: "Best Friend", notes: "Completes the trio with Kayre. They are so close that rumors persist about two of the three dating." },
+                    "Marate": { connection: "Confidant", notes: "One of the few people she actively respects; frequently seeks his life advice." },
+                    "Celesin": { connection: "None", notes: "They've never met." },
+                    "Astarri": { connection: "Total Soft Spot", notes: "The only thing that breaks her nihilism. If she finds Astarri, she immediately confirms Fú cì's safety, then demands cuddles." }
                 }
             },
             "Kali": {
@@ -421,26 +680,26 @@
                 bio: "Fallen member of Heart Melody and current heavy-hitter for Reason Theory. Known as the Fallen Guardian, she rejected her original magical girl powers to pursue a darker, more lethal combat style fueled by an all-consuming need for vengeance.",
                 headshot: "../assets/characters/Kali_Dana.png",
                 relationships: {
-                    "Tiala": {connection: "Arch-Nemesis",notes: "Her sole reason for living. She seeks to kill Tiala to avenge the death of her sister, Pyara."},
-                    "Jí Lián": {connection: "Annoyance",notes: "Views Jí Lián as an irritating obstacle that constantly interferes with her attempts on Tiala's life."},
-                    "Claris": {connection: "Former Teammate",notes: "Holds a slight soft spot for her, but not so soft as to forestall killing Tiala."},
-                    "Xīwàng": {connection: "None",notes: "They've never met. A theoretical 'unstoppable force vs. immovable object' matchup."},
-                    "Fú cì": {connection: "Subtle Protégé",notes: "Resonates with her emotionally and dotes on her in a quiet, thoughtful way without knowing her full history."},
-                    "Amare": {connection: "None",notes: "They've never met."},
-                    "Ami": {connection: "Informant",notes: "Met Ami after escaping a gravity well. Unaware of Ami's blood relation to Tiala, but values her for outing Tiala's secret identity."},
-                    "Windi": {connection: "Strategic Alliance",notes: "Fully aware Windi uses her as a tool and is completely fine with it, so long as it leads to Tiala."},
-                    "Pyara": {connection: "Deceased Sister",notes: "The center of her world. Her death shattered Kali and triggered her transformation into Odisse."},
-                    "Oktusha": {connection: "Reliable Ally",notes: "Respected her as a dependable teammate during their time in Heart Melody."},
-                    "Omba": {connection: "Kindred Spirit",notes: "Bonded over the shared struggle of being protective older sisters to rambunctious siblings."},
-                    "Mahana": {connection: "Tragic Catalyst",notes: "Desperately hoped Mahana was Pyara reborn. Her rash attempt to save Mahana from discord resulted in her year-long imprisonment."},
+                    "Tiala": { connection: "Arch-Nemesis", notes: "Her sole reason for living. She seeks to kill Tiala to avenge the death of her sister, Pyara." },
+                    "Jí Lián": { connection: "Annoyance", notes: "Views Jí Lián as an irritating obstacle that constantly interferes with her attempts on Tiala's life." },
+                    "Claris": { connection: "Former Teammate", notes: "Holds a slight soft spot for her, but not so soft as to forestall killing Tiala." },
+                    "Xīwàng": { connection: "None", notes: "They've never met. A theoretical 'unstoppable force vs. immovable object' matchup." },
+                    "Fú cì": { connection: "Subtle Protégé", notes: "Resonates with her emotionally and dotes on her in a quiet, thoughtful way without knowing her full history." },
+                    "Amare": { connection: "None", notes: "They've never met." },
+                    "Ami": { connection: "Informant", notes: "Met Ami after escaping a gravity well. Unaware of Ami's blood relation to Tiala, but values her for outing Tiala's secret identity." },
+                    "Windi": { connection: "Strategic Alliance", notes: "Fully aware Windi uses her as a tool and is completely fine with it, so long as it leads to Tiala." },
+                    "Pyara": { connection: "Deceased Sister", notes: "The center of her world. Her death shattered Kali and triggered her transformation into Odisse." },
+                    "Oktusha": { connection: "Reliable Ally", notes: "Respected her as a dependable teammate during their time in Heart Melody." },
+                    "Omba": { connection: "Kindred Spirit", notes: "Bonded over the shared struggle of being protective older sisters to rambunctious siblings." },
+                    "Mahana": { connection: "Tragic Catalyst", notes: "Desperately hoped Mahana was Pyara reborn. Her rash attempt to save Mahana from discord resulted in her year-long imprisonment." },
                     "Itami": { connection: "None", notes: "They've never met." },
                     "Shini": { connection: "None", notes: "They've never met." },
                     "Kayre": { connection: "None", notes: "They've never met." },
                     "Riasa": { connection: "None", notes: "They've never met." },
                     "Daeon": { connection: "None", notes: "They've never met." },
                     "Marate": { connection: "None", notes: "They've never met." },
-                    "Celesin": {connection: "Former Mentor",notes: "The fairy who granted her the Heart Seria powers, which Kali eventually rejected as insufficient for her revenge."},
-                    "Astarri": {connection: "Secretly Affectionate",notes: "Highly circumspect about it, but she has a hidden fondness for the dreampup."}
+                    "Celesin": { connection: "Former Mentor", notes: "The fairy who granted her the Heart Seria powers, which Kali eventually rejected as insufficient for her revenge." },
+                    "Astarri": { connection: "Secretly Affectionate", notes: "Highly circumspect about it, but she has a hidden fondness for the dreampup." }
                 }
             },
             "Pyara": {
@@ -450,22 +709,22 @@
                 bio: "The Lodesoul of Beeston and the strategic heart of Heart Melody. A sacrificial hero who was tragically struck down by dissonant discord during her ultimate ascension, dissolving into stardust.",
                 headshot: "../assets/characters/Pyara_Dana.png",
                 relationships: {
-                    "Tiala": {connection: "Killer",notes: "Struck down by discord during her ascension to Concerto Pulse; her magic and mentor were ripped from her chest."},
+                    "Tiala": { connection: "Killer", notes: "Struck down by discord during her ascension to Concerto Pulse; her magic and mentor were ripped from her chest." },
                     "Jí Lián": { connection: "None", notes: "They've never met." },
-                    "Claris": {connection: "Meditative Friend",notes: "Shared a surprisingly sedate and quiet friendship with Zafara, contrasting their usual high energy."},
-                    "Kali": {connection: "Protected Younger Sister",notes: "Trusted her big sister implicitly and counted on her to always have her back."},
-                    "Ami": {connection: "Idolized Friend",notes: "Deeply admired Ami and aspired to be more like her; treasured their friendship."},
+                    "Claris": { connection: "Meditative Friend", notes: "Shared a surprisingly sedate and quiet friendship with Zafara, contrasting their usual high energy." },
+                    "Kali": { connection: "Protected Younger Sister", notes: "Trusted her big sister implicitly and counted on her to always have her back." },
+                    "Ami": { connection: "Idolized Friend", notes: "Deeply admired Ami and aspired to be more like her; treasured their friendship." },
                     "Windi": { connection: "None", notes: "They've never met." },
-                    "Oktusha": {connection: "Sparring Partner",notes: "Respected teammate; the two frequently sparred to hone their combat abilities."},
-                    "Omba": {connection: "Tactical Executioner",notes: "Indispensable teammate who executed the strategic plans Pyara conceived."},
-                    "Mahana": {connection: "None",notes: "Never met, despite their haunting physical resemblance."},
+                    "Oktusha": { connection: "Sparring Partner", notes: "Respected teammate; the two frequently sparred to hone their combat abilities." },
+                    "Omba": { connection: "Tactical Executioner", notes: "Indispensable teammate who executed the strategic plans Pyara conceived." },
+                    "Mahana": { connection: "None", notes: "Never met, despite their haunting physical resemblance." },
                     "Itami": { connection: "None", notes: "They've never met." },
                     "Shini": { connection: "None", notes: "They've never met." },
                     "Riasa": { connection: "None", notes: "They've never met." },
                     "Kayre": { connection: "None", notes: "They've never met." },
                     "Daeon": { connection: "None", notes: "They've never met." },
                     "Marate": { connection: "None", notes: "They've never met." },
-                    "Celesin": {connection: "Symbiotic Mentor",notes: "Merged with Pyara to form Heart Beat; the bond was severed violently by discord."},
+                    "Celesin": { connection: "Symbiotic Mentor", notes: "Merged with Pyara to form Heart Beat; the bond was severed violently by discord." },
                     "Astarri": { connection: "None", notes: "They've never met." },
                     "Fú cì": { connection: "None", notes: "They've never met." },
                     "Amare": { connection: "None", notes: "They've never met." },
@@ -479,15 +738,15 @@
                 bio: "Reality displaced Vanguard of Heart Melody and twin sister to Omba. A high-energy combatant and subtle prankster who publicly champions Mahana as the reincarnation of her fallen student, Pyara.",
                 headshot: "../assets/characters/Oktusha_Miko.png",
                 relationships: {
-                    "Tiala": {connection: "Hated Rival",notes: "Viewed discord as a rival until Pyara's death; now, the name alone triggers a violent rage."},
-                    "Jí Lián": {connection: "Acquaintance",notes: "Brief interactions only; neither knows the other's name."},
-                    "Claris": {connection: "The Hidden Prankster",notes: "Secretly counter-pranked Zafara for years; Zafara never realized her 'bad luck' was Oktusha's doing."},
-                    "Kali": {connection: "Reliable Teammate",notes: "Tried to support Kali after the tragedy. Her current knowledge of Kali's status is uncertain."},
-                    "Ami": {connection: "Suspicious Target",notes: "Subjected Ami to counter-pranks. Ami is the only one who suspects Oktusha is the source of her 'bad luck'."},
-                    "Pyara": {connection: "Student / Best Memory",notes: "Training Pyara was her life's highlight; failing to save her is her life's greatest haunting."},
-                    "Omba": {connection: "Twin Sister",notes: "Provides the frenetic energy to Omba's methodical calm; they are a matched set."},
-                    "Mahana": {connection: "Spiritual Proxy",notes: "Publicly claims Mahana is Pyara reborn, likely to cope with the loss of her student."},
-                    "Celesin": {connection: "Mentor Fairy",notes: "The guardian who enables her transformation into Heart Rhythm."},
+                    "Tiala": { connection: "Hated Rival", notes: "Viewed discord as a rival until Pyara's death; now, the name alone triggers a violent rage." },
+                    "Jí Lián": { connection: "Acquaintance", notes: "Brief interactions only; neither knows the other's name." },
+                    "Claris": { connection: "The Hidden Prankster", notes: "Secretly counter-pranked Zafara for years; Zafara never realized her 'bad luck' was Oktusha's doing." },
+                    "Kali": { connection: "Reliable Teammate", notes: "Tried to support Kali after the tragedy. Her current knowledge of Kali's status is uncertain." },
+                    "Ami": { connection: "Suspicious Target", notes: "Subjected Ami to counter-pranks. Ami is the only one who suspects Oktusha is the source of her 'bad luck'." },
+                    "Pyara": { connection: "Student / Best Memory", notes: "Training Pyara was her life's highlight; failing to save her is her life's greatest haunting." },
+                    "Omba": { connection: "Twin Sister", notes: "Provides the frenetic energy to Omba's methodical calm; they are a matched set." },
+                    "Mahana": { connection: "Spiritual Proxy", notes: "Publicly claims Mahana is Pyara reborn, likely to cope with the loss of her student." },
+                    "Celesin": { connection: "Mentor Fairy", notes: "The guardian who enables her transformation into Heart Rhythm." },
                     "Windi": { connection: "None", notes: "They've never met." },
                     "Amare": { connection: "None", notes: "They've never met." },
                     "Fú cì": { connection: "None", notes: "They've never met." },
@@ -508,15 +767,15 @@
                 bio: "Reality displaced Tactical Analyst of Heart Melody. The methodical 'guard rails' for her twin Oktusha, she carries the heavy burden of leadership thrust upon her by Celesin after the death of Pyara, despite her struggle with PTSD.",
                 headshot: "../assets/characters/Omba_Miko.png",
                 relationships: {
-                    "Tiala": {connection: "The Trigger",notes: "Never trusted discord; the trauma of Pyara's death left her with severe PTSD, specifically triggered by the color teal."},
+                    "Tiala": { connection: "The Trigger", notes: "Never trusted discord; the trauma of Pyara's death left her with severe PTSD, specifically triggered by the color teal." },
                     "Jí Lián": { connection: "Acquaintance", notes: "Barely know each other." },
-                    "Claris": {connection: "The Disciplinarian",notes: "Was the strict enforcer who handed out punishments when Zafara's pranks went too far."},
-                    "Kali": {connection: "Guilt-Ridden Ally",notes: "Fears Kali resents her for failing to prevent Pyara's death; carries deep emotional weight toward her."},
-                    "Ami": {connection: "Lenient Observer",notes: "Respected the effort Aran took to conceal her 'crimes' and frequently let her off the hook."},
-                    "Pyara": {connection: "Strategic Partner",notes: "The 'means' to Pyara's 'ends.' Haunted by the fact that her tactical intellect failed to save her."},
-                    "Oktusha": {connection: "Older Twin Sister",notes: "Acts as the guard rails to keep Oktusha's frenetic impulses on course toward her goals."},
-                    "Mahana": {connection: "New Leader",notes: "Decided that Mahana's status as leader takes precedence over the mystery of her identity."},
-                    "Celesin": {connection: "Mentor Fairy",notes: "Entrusted Omba with holding the team together after Pyara's fall."},
+                    "Claris": { connection: "The Disciplinarian", notes: "Was the strict enforcer who handed out punishments when Zafara's pranks went too far." },
+                    "Kali": { connection: "Guilt-Ridden Ally", notes: "Fears Kali resents her for failing to prevent Pyara's death; carries deep emotional weight toward her." },
+                    "Ami": { connection: "Lenient Observer", notes: "Respected the effort Aran took to conceal her 'crimes' and frequently let her off the hook." },
+                    "Pyara": { connection: "Strategic Partner", notes: "The 'means' to Pyara's 'ends.' Haunted by the fact that her tactical intellect failed to save her." },
+                    "Oktusha": { connection: "Older Twin Sister", notes: "Acts as the guard rails to keep Oktusha's frenetic impulses on course toward her goals." },
+                    "Mahana": { connection: "New Leader", notes: "Decided that Mahana's status as leader takes precedence over the mystery of her identity." },
+                    "Celesin": { connection: "Mentor Fairy", notes: "Entrusted Omba with holding the team together after Pyara's fall." },
                     "Windi": { connection: "None", notes: "They've never met." },
                     "Amare": { connection: "None", notes: "They've never met." },
                     "Fú cì": { connection: "None", notes: "They've never met." },
@@ -537,21 +796,21 @@
                 bio: "The Successor Leader of Heart Melody. Discovered in Royastella by Shini during a vampire attack, she possesses power levels that exceed those of the Starlite 7th. She eventually returned to Beeston with the help of Daeon and the assistance of Celesin, having successfully been hidden from Marate to prevent her from being drafted into his plans.",
                 headshot: "../assets/characters/Mahana_Sahi.png",
                 relationships: {
-                    "Tiala": {connection: "Twisted Catalyst",notes: "Their violent first clash forced Mahana to realize the gap in their power. Before leaving, dissonant discord broke character to tell the team to 'get stronger'."},
-                    "Jí Lián": {connection: "The Escapist",notes: "Takino happily 'sacrifices' Mahana to Riasa to escape the latter's overbearing affection."},
-                    "Claris": {connection: "Loyal Teammate",notes: "Zafara embraced her quickly as leader, though she initially struggled not to call her Pyara."},
-                    "Kali": {connection: "Uncomfortable Debt",notes: "Uncomfortable with Kali's intense gaze. Kali's reckless failure against dissonant discord forced Mahana to stand the team down."},
-                    "Ami": {connection: "Silent Observer",notes: "Aran has reached a secret, unshared conclusion about whether Mahana and Pyara are truly the same."},
-                    "Pyara": {connection: "Mystic Echo",notes: "Despite not seeing the physical resemblance, Mahana possesses memories and knowledge that should belong to Pyara."},
-                    "Oktusha": {connection: "Eager Ally",notes: "Accepts Mahana quickly, desperately hoping her old friend has returned."},
-                    "Omba": {connection: "Trusted Strategist",notes: "Fully accepted Mahana as leader after the kidnapping incident."},
-                    "Itami": {connection: "Protective Guardian",notes: "Hides Mahana from Marate's ambitions; trusts the mentor but fears his 'crowning' tendencies."},
-                    "Shini": {connection: "First Savior",notes: "Found Mahana in Royastella and recognized her immense power potential."},
-                    "Kayre": {connection: "Artistic Muse",notes: "Was so visually stunned by Mahana that she inspired Kayre's entire seasonal fashion line."},
-                    "Riasa": {connection: "Doting Idol",notes: "Dotes on Mahana intensely; a relationship facilitated by Takino's avoidance tactics."},
-                    "Daeon": {connection: "Technical Benefactor",notes: "Used the resources of Day Enterprises to pinpoint Beeston and send Mahana home."},
-                    "Windi": {connection: "Sincere Friend",notes: "Met as Wentea; shared a rare moment of uncharacteristic sincerity regarding Mahana's origins."},
-                    "Celesin": {connection: "Mentor & Cosmic Key",notes: "The resonance between them allowed Daeon to calculate the path back to Beeston."},
+                    "Tiala": { connection: "Twisted Catalyst", notes: "Their violent first clash forced Mahana to realize the gap in their power. Before leaving, dissonant discord broke character to tell the team to 'get stronger'." },
+                    "Jí Lián": { connection: "The Escapist", notes: "Takino happily 'sacrifices' Mahana to Riasa to escape the latter's overbearing affection." },
+                    "Claris": { connection: "Loyal Teammate", notes: "Zafara embraced her quickly as leader, though she initially struggled not to call her Pyara." },
+                    "Kali": { connection: "Uncomfortable Debt", notes: "Uncomfortable with Kali's intense gaze. Kali's reckless failure against dissonant discord forced Mahana to stand the team down." },
+                    "Ami": { connection: "Silent Observer", notes: "Aran has reached a secret, unshared conclusion about whether Mahana and Pyara are truly the same." },
+                    "Pyara": { connection: "Mystic Echo", notes: "Despite not seeing the physical resemblance, Mahana possesses memories and knowledge that should belong to Pyara." },
+                    "Oktusha": { connection: "Eager Ally", notes: "Accepts Mahana quickly, desperately hoping her old friend has returned." },
+                    "Omba": { connection: "Trusted Strategist", notes: "Fully accepted Mahana as leader after the kidnapping incident." },
+                    "Itami": { connection: "Protective Guardian", notes: "Hides Mahana from Marate's ambitions; trusts the mentor but fears his 'crowning' tendencies." },
+                    "Shini": { connection: "First Savior", notes: "Found Mahana in Royastella and recognized her immense power potential." },
+                    "Kayre": { connection: "Artistic Muse", notes: "Was so visually stunned by Mahana that she inspired Kayre's entire seasonal fashion line." },
+                    "Riasa": { connection: "Doting Idol", notes: "Dotes on Mahana intensely; a relationship facilitated by Takino's avoidance tactics." },
+                    "Daeon": { connection: "Technical Benefactor", notes: "Used the resources of Day Enterprises to pinpoint Beeston and send Mahana home." },
+                    "Windi": { connection: "Sincere Friend", notes: "Met as Wentea; shared a rare moment of uncharacteristic sincerity regarding Mahana's origins." },
+                    "Celesin": { connection: "Mentor & Cosmic Key", notes: "The resonance between them allowed Daeon to calculate the path back to Beeston." },
                     "Marate": { connection: "Concealed", notes: "Hidden from him by the team to prevent her being crowned as a member of his group." },
                     "Amare": { connection: "None", notes: "They've never met." },
                     "Fú cì": { connection: "None", notes: "They've never met." },
@@ -566,21 +825,21 @@
                 bio: "Reality displaced leader of Starlite 7th. A frontline commander who balances the weight of leadership with a deep, protective instinct for her team and those she takes under her wing.",
                 headshot: "../assets/characters/Itami_Serafino.png",
                 relationships: {
-                    "Tiala": {connection: "Chaotic Traitor",notes: "Endured a cycle of betrayal and training by Tiala, culminating in Tiala kidnapping Marate."},
-                    "Jí Lián": {connection: "Mystery Teammate",notes: "Wary after learning Takino was not chosen by her or Marate, despite Takino's friendliness."},
+                    "Tiala": { connection: "Chaotic Traitor", notes: "Endured a cycle of betrayal and training by Tiala, culminating in Tiala kidnapping Marate." },
+                    "Jí Lián": { connection: "Mystery Teammate", notes: "Wary after learning Takino was not chosen by her or Marate, despite Takino's friendliness." },
                     "Claris": { connection: "None", notes: "They've never met." },
                     "Kali": { connection: "None", notes: "They've never met." },
                     "Ami": { connection: "None", notes: "They've never met." },
                     "Pyara": { connection: "None", notes: "They've never met." },
                     "Oktusha": { connection: "None", notes: "They've never met." },
                     "Omba": { connection: "None", notes: "They've never met." },
-                    "Mahana": {connection: "Protective Guardian",notes: "Hides Mahana from Marate's ambitions; trusts the mentor but fears his 'crowning' tendencies."},
-                    "Shini": {connection: "Sister / Idol Partner",notes: "Together they form 'Rainbow Star'; their bond is the core of the team's public identity."},
-                    "Kayre": {connection: "Long-time Designer",notes: "Provided their first costumes; her success is historically tied to Rainbow Star's rise."},
-                    "Riasa": {connection: "Secret Best Friend",notes: "The duo gossips like schoolgirls in private, a stark contrast to their public distance."},
-                    "Daeon": {connection: "Financier / Fan",notes: "The money behind the group who harbors a deep love for Itami's singing voice."},
-                    "Windi": {connection: "One-Sided Rival",notes: "Itami competes with her for popularity; Wentea remains blissfully unaware."},
-                    "Marate": {connection: "Secretive Mentor",notes: "Views him as a father figure but withholds full trust due to his hidden agendas."},
+                    "Mahana": { connection: "Protective Guardian", notes: "Hides Mahana from Marate's ambitions; trusts the mentor but fears his 'crowning' tendencies." },
+                    "Shini": { connection: "Sister / Idol Partner", notes: "Together they form 'Rainbow Star'; their bond is the core of the team's public identity." },
+                    "Kayre": { connection: "Long-time Designer", notes: "Provided their first costumes; her success is historically tied to Rainbow Star's rise." },
+                    "Riasa": { connection: "Secret Best Friend", notes: "The duo gossips like schoolgirls in private, a stark contrast to their public distance." },
+                    "Daeon": { connection: "Financier / Fan", notes: "The money behind the group who harbors a deep love for Itami's singing voice." },
+                    "Windi": { connection: "One-Sided Rival", notes: "Itami competes with her for popularity; Wentea remains blissfully unaware." },
+                    "Marate": { connection: "Secretive Mentor", notes: "Views him as a father figure but withholds full trust due to his hidden agendas." },
                     "Celesin": { connection: "None", notes: "They've never met." },
                     "Amare": { connection: "None", notes: "They've never met." },
                     "Fú cì": { connection: "None", notes: "They've never met." },
@@ -595,15 +854,15 @@
                 bio: "Reality displaced Intelligence Operative of Starlite 7th. A secret vampire whose bleak, sultry aesthetic masks a fierce devotion to her sister, Itami. She turned Mahana into a vampire after rescuing her and is constantly looking for ways to remove anyone she perceives as a threat or rival to Itami's happiness.",
                 headshot: "../assets/characters/Shini_Thana.png",
                 relationships: {
-                    "Tiala": {connection: "Traitorous Instructor",notes: "Accepted training from discord to better protect Itami; devastated by the reveal of Tiala's dual identity."},
-                    "Jí Lián": {connection: "Indifferent Ally",notes: "Dismissive of Takino, prioritizing Itami's interests above all else."},
-                    "Itami": {connection: "Sister / Idol Partner",notes: "The dark, sultry half of Rainbow Star. Her life revolves around supporting and protecting Itami."},
-                    "Mahana": {connection: "Sire",notes: "Rescued Mahana from a vampire attack but ironically later turned her into a vampire as well."},
-                    "Marate": {connection: "Suspicious Mentor",notes: "Aligns with Itami's distrust; watches him closely through the lens of an intelligence operative."},
-                    "Kayre": {connection: "Acquaintance",notes: "Values Kayre only for the happiness new clothing designs bring to Itami."},
-                    "Riasa": {connection: "Acquaintance",notes: "Tolerates her gossip as it serves as a social outlet for her sister."},
-                    "Daeon": {connection: "Financial Supporter",notes: "Approves of him only because he recognizes the objective brilliance of Itami's voice."},
-                    "Windi": {connection: "The Nuisance",notes: "Views Wentea as a rival to be dealt with; currently scouting ways to sabotage her."},
+                    "Tiala": { connection: "Traitorous Instructor", notes: "Accepted training from discord to better protect Itami; devastated by the reveal of Tiala's dual identity." },
+                    "Jí Lián": { connection: "Indifferent Ally", notes: "Dismissive of Takino, prioritizing Itami's interests above all else." },
+                    "Itami": { connection: "Sister / Idol Partner", notes: "The dark, sultry half of Rainbow Star. Her life revolves around supporting and protecting Itami." },
+                    "Mahana": { connection: "Sire", notes: "Rescued Mahana from a vampire attack but ironically later turned her into a vampire as well." },
+                    "Marate": { connection: "Suspicious Mentor", notes: "Aligns with Itami's distrust; watches him closely through the lens of an intelligence operative." },
+                    "Kayre": { connection: "Acquaintance", notes: "Values Kayre only for the happiness new clothing designs bring to Itami." },
+                    "Riasa": { connection: "Acquaintance", notes: "Tolerates her gossip as it serves as a social outlet for her sister." },
+                    "Daeon": { connection: "Financial Supporter", notes: "Approves of him only because he recognizes the objective brilliance of Itami's voice." },
+                    "Windi": { connection: "The Nuisance", notes: "Views Wentea as a rival to be dealt with; currently scouting ways to sabotage her." },
                     "Claris": { connection: "None", notes: "They've never met." },
                     "Kali": { connection: "None", notes: "They've never met." },
                     "Ami": { connection: "None", notes: "They've never met." },
@@ -624,15 +883,15 @@
                 bio: "Reality displaced member of Starlite 7th. A telepathic coordinator and high-end fashion designer who views the world through the lens of aesthetic palettes and artistic statements.",
                 headshot: "../assets/characters/Kayre.png",
                 relationships: {
-                    "Tiala": {connection: "Stylistic Statement",notes: "Unfazed by her betrayals, focusing instead on the excellence of her Teal/Black/White aesthetic."},
-                    "Jí Lián": {connection: "Aspirational Peer",notes: "Highly respects Takino's gothic punk execution, specifically the skull hair clip accent."},
-                    "Itami": {connection: "Euphoric Canvas",notes: "The primary outlet for Kayre's brighter, more celebratory design passions."},
-                    "Shini": {connection: "Sultry Canvas",notes: "The primary outlet for Kayre's darker, bleaker, yet sophisticated design impulses."},
-                    "Mahana": {connection: "Magical Muse",notes: "Sensed the magical girl 'magic' immediately; Mahana serves as the inspiration for an entire seasonal line."},
-                    "Riasa": {connection: "Tacky Colleague",notes: "Privately thinks her style is gauche, but keeps the telepathic critique to themselves."},
-                    "Daeon": {connection: "Best Friend",notes: "Part of the inner trio; Daeon's financial backing launched Kayre's career."},
-                    "Windi": {connection: "Best Friend",notes: "Part of the inner trio; Wentea's impromptu modeling saved Kayre's first show."},
-                    "Marate": {connection: "Trusted Mentor",notes: "Trusts him completely; finds his pinstripe suit and secretive nature perfectly acceptable."},
+                    "Tiala": { connection: "Stylistic Statement", notes: "Unfazed by her betrayals, focusing instead on the excellence of her Teal/Black/White aesthetic." },
+                    "Jí Lián": { connection: "Aspirational Peer", notes: "Highly respects Takino's gothic punk execution, specifically the skull hair clip accent." },
+                    "Itami": { connection: "Euphoric Canvas", notes: "The primary outlet for Kayre's brighter, more celebratory design passions." },
+                    "Shini": { connection: "Sultry Canvas", notes: "The primary outlet for Kayre's darker, bleaker, yet sophisticated design impulses." },
+                    "Mahana": { connection: "Magical Muse", notes: "Sensed the magical girl 'magic' immediately; Mahana serves as the inspiration for an entire seasonal line." },
+                    "Riasa": { connection: "Tacky Colleague", notes: "Privately thinks her style is gauche, but keeps the telepathic critique to themselves." },
+                    "Daeon": { connection: "Best Friend", notes: "Part of the inner trio; Daeon's financial backing launched Kayre's career." },
+                    "Windi": { connection: "Best Friend", notes: "Part of the inner trio; Wentea's impromptu modeling saved Kayre's first show." },
+                    "Marate": { connection: "Trusted Mentor", notes: "Trusts him completely; finds his pinstripe suit and secretive nature perfectly acceptable." },
                     "Claris": { connection: "None", notes: "They've never met." },
                     "Kali": { connection: "None", notes: "They've never met." },
                     "Ami": { connection: "None", notes: "They've never met." },
@@ -653,16 +912,16 @@
                 bio: "Reality displaced member of Starlite 7th. A strategic architect and the financial powerhouse behind the group. He leverages Day Enterprises to shield the team from threats and uses his silver tongue to protect the privacy of his inner circle.",
                 headshot: "../assets/characters/Daeon_Liàng.png",
                 relationships: {
-                    "Tiala": {connection: "Consolidated Rival",notes: "Finds mathematical comfort in the fact that BLADE and discord are the same person."},
-                    "Jí Lián": {connection: "Business Associate",notes: "Stopped underestimating her after she solved a complex problem for him; now involves her in his business."},
-                    "Itami": {connection: "Number One Fan",notes: "Deeply loves her talent; terrified she will see his secret collection of Itami-themed merchandise."},
-                    "Shini": {connection: "Validating Ally",notes: "Shini knows about his merch horde and fully supports the obsession as a logical lifestyle choice."},
-                    "Mahana": {connection: "Tactical Extraction",notes: "Used every resource available to send her home before the Crystallines could weaponize her power."},
-                    "Celesin": {connection: "First Contact",notes: "The only member of the 7th to meet the mentor fairy; still in logical denial about her existence."},
-                    "Kayre": {connection: "Best Friend / Protector",notes: "The 'spokesman' of their trio who expertly declines to answer prying questions from rumor mongers."},
-                    "Windi": {connection: "Best Friend",notes: "Uses his eloquence to completely derail anyone questioning the romantic nature of their friendship."},
-                    "Riasa": {connection: "Validated Assumption",notes: "Attempted to give her a fair chance, but his original skepticism was ultimately proven right."},
-                    "Marate": {connection: "Ambitious Student",notes: "Regularly challenges Marate to sparring sessions, well aware of the gap between his MMA skills and Marate's mastery."},
+                    "Tiala": { connection: "Consolidated Rival", notes: "Finds mathematical comfort in the fact that BLADE and discord are the same person." },
+                    "Jí Lián": { connection: "Business Associate", notes: "Stopped underestimating her after she solved a complex problem for him; now involves her in his business." },
+                    "Itami": { connection: "Number One Fan", notes: "Deeply loves her talent; terrified she will see his secret collection of Itami-themed merchandise." },
+                    "Shini": { connection: "Validating Ally", notes: "Shini knows about his merch horde and fully supports the obsession as a logical lifestyle choice." },
+                    "Mahana": { connection: "Tactical Extraction", notes: "Used every resource available to send her home before the Crystallines could weaponize her power." },
+                    "Celesin": { connection: "First Contact", notes: "The only member of the 7th to meet the mentor fairy; still in logical denial about her existence." },
+                    "Kayre": { connection: "Best Friend / Protector", notes: "The 'spokesman' of their trio who expertly declines to answer prying questions from rumor mongers." },
+                    "Windi": { connection: "Best Friend", notes: "Uses his eloquence to completely derail anyone questioning the romantic nature of their friendship." },
+                    "Riasa": { connection: "Validated Assumption", notes: "Attempted to give her a fair chance, but his original skepticism was ultimately proven right." },
+                    "Marate": { connection: "Ambitious Student", notes: "Regularly challenges Marate to sparring sessions, well aware of the gap between his MMA skills and Marate's mastery." },
                     "Claris": { connection: "None", notes: "They've never met." },
                     "Kali": { connection: "None", notes: "They've never met." },
                     "Ami": { connection: "None", notes: "They've never met." },
@@ -682,15 +941,15 @@
                 bio: "Reality displaced member of Starlite 7th. An aerial crusader with a high-energy personality and a deep desire for connection. Despite being a frequent target for humiliation by Tiala, she remains a loyal member of the team and a secret confidante to Itami.",
                 headshot: "../assets/characters/Riasa_Sungbae.png",
                 relationships: {
-                    "Tiala": {connection: "Combat Tormentor",notes: "Frequently humiliated in battle by Tiala, often being the first teammate to fall or be rendered useless."},
-                    "Jí Lián": {connection: "Doting Target (Former)",notes: "Previously focused her intense affection on Takino until the latter learned to avoid her."},
-                    "Itami": {connection: "Secret Confidante",notes: "Engages in private, schoolgirl-style gossip sessions with the leader while acting unconnected in public."},
-                    "Shini": {connection: "Ally",notes: "Tolerated by Shini specifically because her friendship brings joy to Itami."},
-                    "Kayre": {connection: "Teammate",notes: "Unaware that Kayre finds her personal style and 'Pasha' aesthetic somewhat tacky."},
-                    "Mahana": {connection: "Current Doting Target",notes: "Has redirected her nurturing energy toward Mahana, much to her own delight."},
-                    "Daeon": {connection: "One-Sided Brotherly Bond",notes: "Views him as a reliable older brother, oblivious to the fact that he finds her presence undesired."},
-                    "Windi": {connection: "Teammate",notes: "Part of the broader team dynamic; respects her success but lacks the 'trio' bond."},
-                    "Marate": {connection: "Respected Mentor",notes: "Calls him 'Mr. Jalo' and holds his guidance in the highest esteem."},
+                    "Tiala": { connection: "Combat Tormentor", notes: "Frequently humiliated in battle by Tiala, often being the first teammate to fall or be rendered useless." },
+                    "Jí Lián": { connection: "Doting Target (Former)", notes: "Previously focused her intense affection on Takino until the latter learned to avoid her." },
+                    "Itami": { connection: "Secret Confidante", notes: "Engages in private, schoolgirl-style gossip sessions with the leader while acting unconnected in public." },
+                    "Shini": { connection: "Ally", notes: "Tolerated by Shini specifically because her friendship brings joy to Itami." },
+                    "Kayre": { connection: "Teammate", notes: "Unaware that Kayre finds her personal style and 'Pasha' aesthetic somewhat tacky." },
+                    "Mahana": { connection: "Current Doting Target", notes: "Has redirected her nurturing energy toward Mahana, much to her own delight." },
+                    "Daeon": { connection: "One-Sided Brotherly Bond", notes: "Views him as a reliable older brother, oblivious to the fact that he finds her presence undesired." },
+                    "Windi": { connection: "Teammate", notes: "Part of the broader team dynamic; respects her success but lacks the 'trio' bond." },
+                    "Marate": { connection: "Respected Mentor", notes: "Calls him 'Mr. Jalo' and holds his guidance in the highest esteem." },
                     "Claris": { connection: "None", notes: "They've never met." },
                     "Kali": { connection: "None", notes: "They've never met." },
                     "Ami": { connection: "None", notes: "They've never met." },
@@ -711,19 +970,19 @@
                 bio: "The Apex Authority and Final Safeguard. Husband to Celesin and father to Tiala and Ami. A combat master whose strategic intent for his team was overruled by 'the System,' forcing him to adapt his plans for the Starlite 7th.",
                 headshot: "../assets/characters/Marate_Jalo.png",
                 relationships: {
-                    "Tiala": {connection: "Eldest Daughter / Kidnapper",notes: "Unaware of her identity until recently; currently released in Nexsicon."},
-                    "Ami": {connection: "Youngest Daughter",notes: "Watches her from afar, leaving the resolution of her sibling rivalry to fate."},
-                    "Celesin": {connection: "Wife",notes: "A humanoid-capable fairy who taught him the art of phasewalking."},
-                    "Fú cì": {connection: "Wiped Witness",notes: "Automatically erased her memory after she spotted him unmasked in Nexsicon."},
-                    "Amare": {connection: "Old Friend",notes: "Has complicated feelings regarding her 'Velia' form being modeled after his daughter."},
-                    "Astarri": {connection: "Noble Spirit",notes: "Approves of the animal's noble character and spiritual depth."},
-                    "Itami": {connection: "The System's Leader",notes: "Trusts her as commander, despite her distrust of him and his original preference for Kayre."},
-                    "Shini": {connection: "Vigilant Ward",notes: "Monitors her closely as one of the few who knows she is a vampire."},
-                    "Jí Lián": {connection: "The Blind Spot",notes: "An anomaly he cannot detect or read, despite his ability to sense other phasewalkers."},
-                    "Daeon": {connection: "Persistent Student",notes: "Respects his drive to spar, even if the difference in their power is absolute."},
-                    "Windi": {connection: "Detected Traveler",notes: "Clearly senses her phasewalker status, highlighting the mystery of why he can't sense Takino."},
-                    "Kayre": {connection: "Preferred Successor",notes: "Recognizes their brilliant mind; would have made them leader if the System allowed it."},
-                    "Riasa": {connection: "The Trier",notes: "Appreciates her effort, but remains unimpressed by her actual combat competency."},
+                    "Tiala": { connection: "Eldest Daughter / Kidnapper", notes: "Unaware of her identity until recently; currently released in Nexsicon." },
+                    "Ami": { connection: "Youngest Daughter", notes: "Watches her from afar, leaving the resolution of her sibling rivalry to fate." },
+                    "Celesin": { connection: "Wife", notes: "A humanoid-capable fairy who taught him the art of phasewalking." },
+                    "Fú cì": { connection: "Wiped Witness", notes: "Automatically erased her memory after she spotted him unmasked in Nexsicon." },
+                    "Amare": { connection: "Old Friend", notes: "Has complicated feelings regarding her 'Velia' form being modeled after his daughter." },
+                    "Astarri": { connection: "Noble Spirit", notes: "Approves of the animal's noble character and spiritual depth." },
+                    "Itami": { connection: "The System's Leader", notes: "Trusts her as commander, despite her distrust of him and his original preference for Kayre." },
+                    "Shini": { connection: "Vigilant Ward", notes: "Monitors her closely as one of the few who knows she is a vampire." },
+                    "Jí Lián": { connection: "The Blind Spot", notes: "An anomaly he cannot detect or read, despite his ability to sense other phasewalkers." },
+                    "Daeon": { connection: "Persistent Student", notes: "Respects his drive to spar, even if the difference in their power is absolute." },
+                    "Windi": { connection: "Detected Traveler", notes: "Clearly senses her phasewalker status, highlighting the mystery of why he can't sense Takino." },
+                    "Kayre": { connection: "Preferred Successor", notes: "Recognizes their brilliant mind; would have made them leader if the System allowed it." },
+                    "Riasa": { connection: "The Trier", notes: "Appreciates her effort, but remains unimpressed by her actual combat competency." },
                     "Claris": { connection: "None", notes: "They've never met." },
                     "Kali": { connection: "None", notes: "They've never met." },
                     "Pyara": { connection: "None", notes: "They've never met." },
@@ -739,7 +998,7 @@
                 bio: "Mentor Fairy and Harmonic Guide to Heart Melody. Wife of Marate and mother to Tiala and Ami. She navigates the complex melodies of grief, family secrets, and cosmic war with a grace that hides her personal suffering.",
                 headshot: "../assets/characters/Celesin_the_Philharmonious.png",
                 relationships: {
-                    "Tiala": { connection: "Eldest Daughter", notes: "Knows Tiala's true goal as BLADE; pained by the cost of her daughter's path." },
+                    "Tiala": { connection: "Eldest Daughter", notes: "Knows Tiala's true goal as discord; pained by the cost of her daughter's path." },
                     "Ami": { connection: "Youngest Daughter", notes: "Mentors her in secret, hiding their true bond to maintain team balance." },
                     "Mahana": { connection: "Protégé", notes: "Rescued her from Royastella; assisted her transition into leadership." },
                     "Amare": { connection: "Rival / Matchmaker", notes: "Amare set her up with Marate and finds their relationship hilarious." },
@@ -829,22 +1088,22 @@
         }
 
         function updateProfile(key) {
-    const data = characterDatabase[key];
-    const portrait = document.getElementById('main-portrait');
-    const placeholder = document.getElementById('portrait-placeholder');
+            const data = characterDatabase[key];
+            const portrait = document.getElementById('main-portrait');
+            const placeholder = document.getElementById('portrait-placeholder');
 
-    document.getElementById('display-name').innerText = data.name;
-    document.getElementById('display-alias').innerText = `AKA: ${data.alias}`;
-    document.getElementById('display-status').innerText = `STATUS: ${data.status}`;
-    document.getElementById('display-bio').innerText = data.bio;
-    
-    // UPDATED BITS BELOW
-    portrait.src = data.headshot;
-    portrait.style.display = 'block'; // Make the image visible
-    placeholder.style.display = 'none'; // Hide the "Select Character" text
-    
-    document.getElementById('display-relation').innerHTML = `<span class="label">READY:</span> TARGET SECONDARY SUBJECT TO ESTABLISH LINK.`;
-}
+            document.getElementById('display-name').innerText = data.name;
+            document.getElementById('display-alias').innerText = `AKA: ${data.alias}`;
+            document.getElementById('display-status').innerText = `STATUS: ${data.status}`;
+            document.getElementById('display-bio').innerText = data.bio;
+
+            // UPDATED BITS BELOW
+            portrait.src = data.headshot;
+            portrait.style.display = 'block'; // Make the image visible
+            placeholder.style.display = 'none'; // Hide the "Select Character" text
+
+            document.getElementById('display-relation').innerHTML = `<span class="label">READY:</span> TARGET SECONDARY SUBJECT TO ESTABLISH LINK.`;
+        }
 
         function resetUI() {
             document.getElementById('display-name').innerText = "NO_SELECTION";
@@ -858,4 +1117,5 @@
 
     </script>
 </body>
+
 </html>

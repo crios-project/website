@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRIOS Timeline // Harmonic Convergence</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -38,6 +41,7 @@
             overflow-x: hidden;
             position: relative;
         }
+
         .back-link {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.85rem;
@@ -51,6 +55,7 @@
         .back-link:hover {
             color: var(--accent-cyan);
         }
+
         /* Animated background grid */
         body::before {
             content: '';
@@ -59,7 +64,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
@@ -69,8 +74,13 @@
         }
 
         @keyframes gridScroll {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(50px); }
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(50px);
+            }
         }
 
         /* Gradient orb effects */
@@ -102,13 +112,27 @@
         }
 
         @keyframes orbFloat1 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-100px, 100px); }
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-100px, 100px);
+            }
         }
 
         @keyframes orbFloat2 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(100px, -80px); }
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(100px, -80px);
+            }
         }
 
         .container {
@@ -125,6 +149,7 @@
             margin-bottom: 80px;
             animation: fadeInDown 1s ease-out;
         }
+
         /* Header */
         .header-nav {
             position: sticky;
@@ -139,6 +164,7 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .header-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 1rem;
@@ -147,11 +173,13 @@
             text-transform: uppercase;
             letter-spacing: 3px;
         }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -190,8 +218,13 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .toggle-btn {
@@ -262,6 +295,7 @@
                 opacity: 0;
                 transform: translateY(40px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -491,11 +525,19 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -519,27 +561,35 @@
 
         <!-- NARRATIVE VIEW -->
         <div class="timeline-view active" id="narrative-view">
-            
+
             <div class="note-box" style="margin-bottom: 60px;">
-                The Narrative Timeline reflects the order in which events are revealed to the audience, not the chronological order in which they occurred.
+                The Narrative Timeline reflects the order in which events are revealed to the audience, not the
+                chronological order in which they occurred.
             </div>
 
             <!-- Arc I -->
             <div class="era-section">
                 <h2 class="era-title">I. Beeston Arc 1 — Lovely Hearts Genesis</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Formation of Heart Melody Collective</h3>
                     <div class="event-content">
-                        <p>Magical harmonic defenders emerge to preserve emotional and existential equilibrium within <a href="realms/realm-beeston.html" class="wiki-link">Beeston</a>.</p>
+                        <p>Magical harmonic defenders emerge to preserve emotional and existential equilibrium within <a
+                                href="realms/realm-beeston.html" class="wiki-link">Beeston</a>.</p>
                         <p style="margin-top: 12px;"><strong>Core Team Formation:</strong></p>
                         <ul>
-                            <li><a href="characters/character-pyara-dana.html" class="wiki-link">Pyara Dana</a> — Heart Aria (Leader)</li>
-                            <li><a href="characters/character-kali-dana.html" class="wiki-link">Kali Dana</a> — Heart Seria</li>
-                            <li><a href="characters/character-oktusha-miko.html" class="wiki-link">Oktusha Miko</a> — Heart Rhythm</li>
-                            <li><a href="characters/character-omba-miko.html" class="wiki-link">Omba Miko</a> — Heart Verismo</li>
-                            <li><a href="characters/character-zafara-quedar.html" class="wiki-link">Zafara Quedar</a> — Heart Adagio</li>
-                            <li><a href="characters/character-aran-letale.html" class="wiki-link">Aran Letale</a> — Heart Sonata</li>
+                            <li><a href="characters/character-pyara-dana.html" class="wiki-link">Pyara Dana</a> — Heart
+                                Aria (Leader)</li>
+                            <li><a href="characters/character-kali-dana.html" class="wiki-link">Kali Dana</a> — Heart
+                                Seria</li>
+                            <li><a href="characters/character-oktusha-miko.html" class="wiki-link">Oktusha Miko</a> —
+                                Heart Rhythm</li>
+                            <li><a href="characters/character-omba-miko.html" class="wiki-link">Omba Miko</a> — Heart
+                                Verismo</li>
+                            <li><a href="characters/character-zafara-quedar.html" class="wiki-link">Zafara Quedar</a> —
+                                Heart Adagio</li>
+                            <li><a href="characters/character-aran-letale.html" class="wiki-link">Aran Letale</a> —
+                                Heart Sonata</li>
                         </ul>
                     </div>
                 </div>
@@ -547,12 +597,14 @@
                 <div class="event">
                     <h3 class="event-title">Aria Caesura Event</h3>
                     <div class="event-content">
-                        <p><a href="characters/character-dissonant-discord.html" class="wiki-link">dissonant discord</a> executes a Tier 4 Ómura Desynchronization Strike.</p>
+                        <p><a href="characters/character-dissonant-discord.html" class="wiki-link">dissonant discord</a>
+                            executes a Tier 4 Ómura Desynchronization Strike.</p>
                         <ul>
                             <li><a href="stories/story-aria-caesura.html" class="wiki-link">Death of Pyara Dana</a></li>
                             <li>Collapse of Lovely Hearts harmonic lattice</li>
                             <li>Displacement of core melodic continuity</li>
-                            <li>Foreshadowing emergence of <a href="characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a></li>
+                            <li>Foreshadowing emergence of <a href="characters/character-mahana-sahi.html"
+                                    class="wiki-link">Mahana Sahi</a></li>
                         </ul>
                     </div>
                 </div>
@@ -561,20 +613,28 @@
             <!-- Arc II -->
             <div class="era-section">
                 <h2 class="era-title">II. Royastella Arc 1 — Starlite 7th Emergence</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Formation of Starlite 7th</h3>
                     <div class="event-content">
-                        <p><a href="stories/story-crowned.html" class="wiki-link">System-selected champions are assembled</a> to defend <a href="realms/realm-royastella.html" class="wiki-link">Royastella</a>.</p>
+                        <p><a href="stories/story-crowned.html" class="wiki-link">System-selected champions are
+                                assembled</a> to defend <a href="realms/realm-royastella.html"
+                                class="wiki-link">Royastella</a>.</p>
                         <p style="margin-top: 12px;"><strong>Core Team:</strong></p>
                         <ul>
-                            <li><a href="characters/character-itami-serafino.html" class="wiki-link">Itami Serafino</a> — Starlit Empress</li>
-                            <li><a href="characters/character-shini-thana.html" class="wiki-link">Shini Thana</a> — Starlit Sultana</li>
-                            <li><a href="characters/character-wentea-liso.html" class="wiki-link">Wentea Liso</a> — Starlit Dynast</li>
-                            <li><a href="characters/character-takino-retsu.html" class="wiki-link">Takino Retsu</a> — Starlit Mikado</li>
-                            <li><a href="characters/character-riasa-sungbae.html" class="wiki-link">Riasa Sungbae</a> — Starlit Pasha</li>
+                            <li><a href="characters/character-itami-serafino.html" class="wiki-link">Itami Serafino</a>
+                                — Starlit Empress</li>
+                            <li><a href="characters/character-shini-thana.html" class="wiki-link">Shini Thana</a> —
+                                Starlit Sultana</li>
+                            <li><a href="characters/character-wentea-liso.html" class="wiki-link">Wentea Liso</a> —
+                                Starlit Dynast</li>
+                            <li><a href="characters/character-takino-retsu.html" class="wiki-link">Takino Retsu</a> —
+                                Starlit Mikado</li>
+                            <li><a href="characters/character-riasa-sungbae.html" class="wiki-link">Riasa Sungbae</a> —
+                                Starlit Pasha</li>
                             <li><a href="characters/character-kayre.html" class="wiki-link">Kayre</a> — Starlit Rex</li>
-                            <li><a href="characters/character-daeon-liang.html" class="wiki-link">Daeon Liàng</a> — Starlit Czar</li>
+                            <li><a href="characters/character-daeon-liang.html" class="wiki-link">Daeon Liàng</a> —
+                                Starlit Czar</li>
                         </ul>
                     </div>
                 </div>
@@ -582,7 +642,8 @@
                 <div class="event">
                     <h3 class="event-title">BLADE GUILLOTINE Infiltration</h3>
                     <div class="event-content">
-                        <p>Starlite 7th encounters BLADE GUILLOTINE. Alternates between ally and antagonist behavior.</p>
+                        <p>Starlite 7th encounters BLADE GUILLOTINE. Alternates between ally and antagonist behavior.
+                        </p>
                     </div>
                 </div>
 
@@ -590,7 +651,8 @@
                     <h3 class="event-title">Betrayal & Skyrift Opening</h3>
                     <div class="event-content">
                         <ul>
-                            <li><a href="stories/story-regicide.html" class="wiki-link">BLADE betrays Starlite 7th</a></li>
+                            <li><a href="stories/story-regicide.html" class="wiki-link">BLADE betrays Starlite 7th</a>
+                            </li>
                             <li>Dimensional barrier rupture destabilizes Royastella</li>
                         </ul>
                     </div>
@@ -599,7 +661,9 @@
                 <div class="event">
                     <h3 class="event-title">Symphonic Overture</h3>
                     <div class="event-content">
-                        <p><a href="stories/story-symphonic-overture.html" class="wiki-link">Major harmonic conflict event.</a> First appearance of Mahana Sahi in Royastella. Establishes cross-realm instability narrative.</p>
+                        <p><a href="stories/story-symphonic-overture.html" class="wiki-link">Major harmonic conflict
+                                event.</a> First appearance of Mahana Sahi in Royastella. Establishes cross-realm
+                            instability narrative.</p>
                     </div>
                 </div>
 
@@ -614,7 +678,7 @@
             <!-- Arc III -->
             <div class="era-section">
                 <h2 class="era-title">III. Beeston Arc 2 — Harmonic Succession</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Mahana Leadership Transition</h3>
                     <div class="event-content">
@@ -625,7 +689,9 @@
                 <div class="event">
                     <h3 class="event-title">Kidnapping Event</h3>
                     <div class="event-content">
-                        <p><a href="stories/story-avant-garde-composition.html" class="wiki-link">dissonant discord abducts Mahana.</a> Rift opened to <a href="realms/realm-nexsicon.html" class="wiki-link">Nexsicon</a>.</p>
+                        <p><a href="stories/story-avant-garde-composition.html" class="wiki-link">dissonant discord
+                                abducts Mahana.</a> Rift opened to <a href="realms/realm-nexsicon.html"
+                                class="wiki-link">Nexsicon</a>.</p>
                     </div>
                 </div>
 
@@ -652,7 +718,7 @@
             <!-- Arc IV -->
             <div class="era-section">
                 <h2 class="era-title">IV. Royastella Arc 2 — Revelation and Collapse</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">discord Returns as Mentor</h3>
                     <div class="event-content">
@@ -663,21 +729,24 @@
                 <div class="event">
                     <h3 class="event-title">Aura Manifestation Training</h3>
                     <div class="event-content">
-                        <p>discord trains Starlite 7th in Aura Manifestation, Element Core Evolution, and Harmonic Combat Restructuring.</p>
+                        <p>discord trains Starlite 7th in Aura Manifestation, Element Core Evolution, and Harmonic
+                            Combat Restructuring.</p>
                     </div>
                 </div>
 
                 <div class="event">
                     <h3 class="event-title">Revelation Confrontation</h3>
                     <div class="event-content">
-                        <p><a href="stories/story-falling-stars.html" class="wiki-link">discord reveals herself as the threat.</a> Transforms into <strong>BLADE GUILLOTINE</strong>.</p>
+                        <p><a href="stories/story-falling-stars.html" class="wiki-link">discord reveals herself as the
+                                threat.</a> Transforms into <strong>BLADE GUILLOTINE</strong>.</p>
                     </div>
                 </div>
 
                 <div class="event">
                     <h3 class="event-title">Starlit Alpha Intervention</h3>
                     <div class="event-content">
-                        <p><a href="characters/character-marate-jalo.html" class="wiki-link">Starlit Alpha</a> enters battle. Temporarily overwhelms BLADE.</p>
+                        <p><a href="characters/character-marate-jalo.html" class="wiki-link">Starlit Alpha</a> enters
+                            battle. Temporarily overwhelms BLADE.</p>
                     </div>
                 </div>
 
@@ -703,7 +772,7 @@
             <!-- Arc V -->
             <div class="era-section">
                 <h2 class="era-title">V. Nexsicon Arc — Cosmological Revelation</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Prehistoric & Metaphysical Backstory Reveals</h3>
                     <div class="event-content">
@@ -714,7 +783,8 @@
                             <li><a href="lore/lore-lodesoul-theorem.html" class="wiki-link">Lodesoul Theorum</a></li>
                             <li>Mythic Realms</li>
                             <li>Relic Systems</li>
-                            <li><a href="lore/lore-akashic-record.html" class="wiki-link">Akashic Record</a> Infrastructure</li>
+                            <li><a href="lore/lore-akashic-record.html" class="wiki-link">Akashic Record</a>
+                                Infrastructure</li>
                         </ul>
                     </div>
                 </div>
@@ -722,21 +792,26 @@
                 <div class="event">
                     <h3 class="event-title">Revelation of True Identities</h3>
                     <div class="event-content">
-                        <p><a href="characters/character-tiala-corsolis.html" class="wiki-link">Tiala Corsolis</a> revealed as both <strong>dissonant discord</strong> and <strong>BLADE GUILLOTINE</strong>.</p>
+                        <p><a href="characters/character-tiala-corsolis.html" class="wiki-link">Tiala Corsolis</a>
+                            revealed as both <strong>dissonant discord</strong> and <strong>BLADE GUILLOTINE</strong>.
+                        </p>
                     </div>
                 </div>
 
                 <div class="event">
                     <h3 class="event-title">Praxis Verax Affinas Exposure</h3>
                     <div class="event-content">
-                        <p>Structure and goals of <a href="factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> revealed. Internal ideological tensions surface.</p>
+                        <p>Structure and goals of <a href="factions/faction-praxis-verax-affinas.html"
+                                class="wiki-link">Praxis Verax Affinas</a> revealed. Internal ideological tensions
+                            surface.</p>
                     </div>
                 </div>
 
                 <div class="event">
                     <h3 class="event-title">Tiala's Grand Convergence Spell</h3>
                     <div class="event-content">
-                        <p>Attempt to <a href="stories/story-grand-convergence.html" class="wiki-link">forcibly accelerate realm integration</a>. Leads to catastrophic instability.</p>
+                        <p>Attempt to <a href="stories/story-grand-convergence.html" class="wiki-link">forcibly
+                                accelerate realm integration</a>. Leads to catastrophic instability.</p>
                     </div>
                 </div>
 
@@ -764,12 +839,15 @@
                 <div class="event">
                     <h3 class="event-title">Formation of New Factions</h3>
                     <div class="event-content">
-                        <p style="margin-bottom: 12px;"><strong><a href="factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a></strong> — Leader: Tiala Hartlight</p>
+                        <p style="margin-bottom: 12px;"><strong><a href="factions/faction-destinys-penance.html"
+                                    class="wiki-link">Destiny's Penance</a></strong> — Leader: Tiala Hartlight</p>
                         <ul>
                             <li>Members: Claris Quies, Jí Lián Xiá, Velia Traicerem</li>
                             <li>Goals: Acquire Akashic Record, pursue Ultimatera convergence</li>
                         </ul>
-                        <p style="margin: 16px 0 12px;"><strong><a href="factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a></strong> — Founders: Ami Hartbreak & Windi Lightfall</p>
+                        <p style="margin: 16px 0 12px;"><strong><a href="factions/faction-reason-theory.html"
+                                    class="wiki-link">Reason Theory</a></strong> — Founders: Ami Hartbreak & Windi
+                            Lightfall</p>
                         <ul>
                             <li>Goals: Oppose deterministic cosmology, resist Tiala's convergence doctrine</li>
                         </ul>
@@ -779,14 +857,16 @@
                 <div class="event">
                     <h3 class="event-title">Kali's Return</h3>
                     <div class="event-content">
-                        <p>Re-emerges as <a href="characters/character-odisse-nocere.html" class="wiki-link">Odisse Nocere</a>. Aligns with Reason Theory.</p>
+                        <p>Re-emerges as <a href="characters/character-odisse-nocere.html" class="wiki-link">Odisse
+                                Nocere</a>. Aligns with Reason Theory.</p>
                     </div>
                 </div>
 
                 <div class="event">
                     <h3 class="event-title">Fú cì Ánguāng Rescue & Adoption</h3>
                     <div class="event-content">
-                        <p>Windi rescues <a href="characters/character-fu-ci-tianshang.html" class="wiki-link">Fú cì Ánguāng</a>. Begins fractured restoration of Tiānshàng lineage.</p>
+                        <p>Windi rescues <a href="characters/character-fu-ci-tianshang.html" class="wiki-link">Fú cì
+                                Ánguāng</a>. Begins fractured restoration of Tiānshàng lineage.</p>
                     </div>
                 </div>
 
@@ -813,7 +893,7 @@
             <!-- Arc VI -->
             <div class="era-section">
                 <h2 class="era-title">VI. Ultimatera Arc — Final Convergence Era</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Final Existential War</h3>
                     <div class="event-content">
@@ -831,11 +911,11 @@
 
         <!-- CHRONOLOGICAL VIEW -->
         <div class="timeline-view" id="chronological-view">
-            
+
             <!-- Era I -->
             <div class="era-section">
                 <h2 class="era-title">I. Pre-History</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Primordial Era — Foundations of Reality</h3>
                     <div class="event-content">
@@ -850,7 +930,8 @@
                 <div class="event">
                     <h3 class="event-title">The Harmonic Genesis</h3>
                     <div class="event-content">
-                        <p>Creation of reality through harmonic frequency alignment. Establishment of resonance as the governing force behind magic, identity, narrative continuity, and realm stability.</p>
+                        <p>Creation of reality through harmonic frequency alignment. Establishment of resonance as the
+                            governing force behind magic, identity, narrative continuity, and realm stability.</p>
                     </div>
                 </div>
 
@@ -859,9 +940,12 @@
                     <div class="event-content">
                         <p>Separation of magic into localized interpretive systems:</p>
                         <ul>
-                            <li>Nexsican <a href="magic/magic-cymora.html" class="wiki-link">Cymora</a> harmonic structuring</li>
-                            <li>Royastellal <a href="magic/magic-element-core.html" class="wiki-link">Element Core</a> manifestation</li>
-                            <li>Beestonic <a href="magic/magic-lumenai.html" class="wiki-link" >Lúmenai</a> Essentia-based casting systems</li>
+                            <li>Nexsican <a href="magic/magic-cymora.html" class="wiki-link">Cymora</a> harmonic
+                                structuring</li>
+                            <li>Royastellal <a href="magic/magic-element-core.html" class="wiki-link">Element Core</a>
+                                manifestation</li>
+                            <li>Beestonic <a href="magic/magic-lumenai.html" class="wiki-link">Lúmenai</a>
+                                Essentia-based casting systems</li>
                         </ul>
                     </div>
                 </div>
@@ -869,7 +953,8 @@
                 <div class="event">
                     <h3 class="event-title">Realization of the Existence of Lodesouls</h3>
                     <div class="event-content">
-                        <p>Identification of singular beings whose existence anchors reality. Recognition that Lodesouls influence narrative gravity, and their removal or displacement destabilizes realms.</p>
+                        <p>Identification of singular beings whose existence anchors reality. Recognition that Lodesouls
+                            influence narrative gravity, and their removal or displacement destabilizes realms.</p>
                     </div>
                 </div>
             </div>
@@ -877,19 +962,23 @@
             <!-- Era II -->
             <div class="era-section">
                 <h2 class="era-title">II. Mythic Civilization Era</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Rise of Lost Realms</h3>
                     <div class="event-content">
-                        <p>Rise of advanced magical civilizations across multiple realms. Development of guardian-protected relic systems.</p>
-                        <p style="margin-top: 12px;">Emergence of mythic territories including Atlantis, Lemuria, Mu, Agartha, Avalon, Shangri-La, Shambhala, and the Seven Cities of Cíbola.</p>
+                        <p>Rise of advanced magical civilizations across multiple realms. Development of
+                            guardian-protected relic systems.</p>
+                        <p style="margin-top: 12px;">Emergence of mythic territories including Atlantis, Lemuria, Mu,
+                            Agartha, Avalon, Shangri-La, Shambhala, and the Seven Cities of Cíbola.</p>
                     </div>
                 </div>
 
                 <div class="event">
                     <h3 class="event-title">Formation of the Akashic Record</h3>
                     <div class="event-content">
-                        <p>Manifestation of universal informational archive. Guardians established across mythic convergence realms. <a href="lore/lore-akashic-record.html" class="wiki-link">Akashic</a> access restricted to harmonic resonance pathways.</p>
+                        <p>Manifestation of universal informational archive. Guardians established across mythic
+                            convergence realms. <a href="lore/lore-akashic-record.html" class="wiki-link">Akashic</a>
+                            access restricted to harmonic resonance pathways.</p>
                     </div>
                 </div>
             </div>
@@ -897,11 +986,12 @@
             <!-- Era III -->
             <div class="era-section">
                 <h2 class="era-title">III. Nexsicon Arc 1</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Nexsican Scientific Awakening</h3>
                     <div class="event-content">
-                        <p><a href="realms/realm-nexsicon.html" class="wiki-link">Nexsicon</a> becomes the primary hub of inter-realm magical science. Establishment of harmonic quantification research.</p>
+                        <p><a href="realms/realm-nexsicon.html" class="wiki-link">Nexsicon</a> becomes the primary hub
+                            of inter-realm magical science. Establishment of harmonic quantification research.</p>
                     </div>
                 </div>
 
@@ -919,7 +1009,8 @@
                 <div class="event">
                     <h3 class="event-title">The Lodesoul Theorem Proposed</h3>
                     <div class="event-content">
-                        <p>Scholars conclude that <a href="glossary.html#lodesoul" class="wiki-link">Lodesouls</a> anchor reality, and their removal destabilizes universes.</p>
+                        <p>Scholars conclude that <a href="glossary.html#lodesoul" class="wiki-link">Lodesouls</a>
+                            anchor reality, and their removal destabilizes universes.</p>
                     </div>
                 </div>
 
@@ -933,7 +1024,9 @@
                             <li>Lodesouls regenerate or transfer upon destruction</li>
                         </ul>
                         <div class="note-box">
-                            Experimental Proof: Scientist's daughter summons a Lodesoul from a non-magical realm. Realm merging occurs. Mythical civilizations re-materialize. Scientist does not reveal findings due to fear of repercussions. Counter-theory remains fringe until later events validate it.
+                            Experimental Proof: Scientist's daughter summons a Lodesoul from a non-magical realm. Realm
+                            merging occurs. Mythical civilizations re-materialize. Scientist does not reveal findings
+                            due to fear of repercussions. Counter-theory remains fringe until later events validate it.
                         </div>
                     </div>
                 </div>
@@ -945,10 +1038,12 @@
                         <ul>
                             <li>Enforcable with harsh penalties </li>
                             <li>Science goes into hiding</li>
-                            <li>Eventually scientist disappears entirely, leading to rumors they were silenced permanantly</li>
+                            <li>Eventually scientist disappears entirely, leading to rumors they were silenced
+                                permanantly</li>
                         </ul>
                         <div class="note-box">
-                            Unsatisfied with the official Nexsican stance, daughter quietly picks up the mantle and begins research anew, also seeking to reunite with her father.
+                            Unsatisfied with the official Nexsican stance, daughter quietly picks up the mantle and
+                            begins research anew, also seeking to reunite with her father.
                         </div>
                     </div>
                 </div>
@@ -956,8 +1051,10 @@
                 <div class="event">
                     <h3 class="event-title">Formation of Praxis Verax Affinas</h3>
                     <div class="event-content">
-                        <p><a href="factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax Affinas</a> forms as a multiversal research and stabilization organization.</p>
-                        <p style="margin-top: 12px;"><strong>Primary Objectives:</strong> Study Lodesouls, control realm convergence, prevent universal collapse, monitor cross-realm anomalies.</p>
+                        <p><a href="factions/faction-praxis-verax-affinas.html" class="wiki-link">Praxis Verax
+                                Affinas</a> forms as a multiversal research and stabilization organization.</p>
+                        <p style="margin-top: 12px;"><strong>Primary Objectives:</strong> Study Lodesouls, control realm
+                            convergence, prevent universal collapse, monitor cross-realm anomalies.</p>
                     </div>
                 </div>
 
@@ -967,11 +1064,16 @@
                         <p>PVA major players include:</p>
                         <ul>
                             <li><a href="characters/character-tiala-corsolis" class="wiki-link">Tiala Corsolis</a></li>
-                            <li><a href="characters/character-amaranthine-breaklight.html" class="wiki-link">Ami Hartbreak (as Amaranthine Breaklight)</a></li>
-                            <li><a href="characters/character-tessera-iustum.html" class="wiki-link">Claris Quies (as Tessera Iustum)</a></li>
-                            <li><a href="characters/character-kessho-kawa.html" class="wiki-link">Jí Lián Xiá (as Kesshō Kawa)</a></li>
-                            <li><a href="characters/character-xiwang-tianshang.html" class="wiki-link">Xīwàng Tiānshàng</a></li>
-                            <li><a href="characters/character-fu-ci-anguang.html" class="wiki-link">Fú cì Ánguāng, eventually as Zhòu-chún Shìfàng</a></li>
+                            <li><a href="characters/character-amaranthine-breaklight.html" class="wiki-link">Ami
+                                    Hartbreak (as Amaranthine Breaklight)</a></li>
+                            <li><a href="characters/character-tessera-iustum.html" class="wiki-link">Claris Quies (as
+                                    Tessera Iustum)</a></li>
+                            <li><a href="characters/character-kessho-kawa.html" class="wiki-link">Jí Lián Xiá (as Kesshō
+                                    Kawa)</a></li>
+                            <li><a href="characters/character-xiwang-tianshang.html" class="wiki-link">Xīwàng
+                                    Tiānshàng</a></li>
+                            <li><a href="characters/character-fu-ci-anguang.html" class="wiki-link">Fú cì Ánguāng,
+                                    eventually as Zhòu-chún Shìfàng</a></li>
                         </ul>
                     </div>
                 </div>
@@ -980,19 +1082,27 @@
             <!-- Era IV -->
             <div class="era-section">
                 <h2 class="era-title">IV. Beeston Arc 1 — Lovely Hearts Era</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Formation of Heart Melody Collective</h3>
                     <div class="event-content">
-                        <p><a href="stories/story-new-hearts.html" class="wiki-link">Magical harmonic defenders emerge</a> to maintain emotional and existential balance throughout <a href="realms/realm-beeston.html" class="wiki-link">Beeston</a>.</p>
+                        <p><a href="stories/story-new-hearts.html" class="wiki-link">Magical harmonic defenders
+                                emerge</a> to maintain emotional and existential balance throughout <a
+                                href="realms/realm-beeston.html" class="wiki-link">Beeston</a>.</p>
                         <p style="margin-top: 12px;"><strong>Core Members:</strong></p>
                         <ul>
-                            <li><a href="characters/character-pyara-dana.html" class="wiki-link">Pyara Dana</a> — Heart Aria (Leader)</li>
-                            <li><a href="characters/character-kali-dana.html" class="wiki-link">Kali Dana</a> — Heart Seria</li>
-                            <li><a href="characters/character-oktusha-miko.html" class="wiki-link">Oktusha Miko</a> — Heart Rhythm</li>
-                            <li><a href="characters/character-omba-miko.html" class="wiki-link">Omba Miko</a> — Heart Verismo</li>
-                            <li><a href="characters/character-zafara-quedar.html" class="wiki-link">Zafara Quedar</a> — Heart Adagio</li>
-                            <li><a href="characters/character-aran-letale.html" class="wiki-link">Aran Letale</a> — Heart Sonata</li>
+                            <li><a href="characters/character-pyara-dana.html" class="wiki-link">Pyara Dana</a> — Heart
+                                Aria (Leader)</li>
+                            <li><a href="characters/character-kali-dana.html" class="wiki-link">Kali Dana</a> — Heart
+                                Seria</li>
+                            <li><a href="characters/character-oktusha-miko.html" class="wiki-link">Oktusha Miko</a> —
+                                Heart Rhythm</li>
+                            <li><a href="characters/character-omba-miko.html" class="wiki-link">Omba Miko</a> — Heart
+                                Verismo</li>
+                            <li><a href="characters/character-zafara-quedar.html" class="wiki-link">Zafara Quedar</a> —
+                                Heart Adagio</li>
+                            <li><a href="characters/character-aran-letale.html" class="wiki-link">Aran Letale</a> —
+                                Heart Sonata</li>
                         </ul>
                     </div>
                 </div>
@@ -1000,11 +1110,14 @@
                 <div class="event">
                     <h3 class="event-title">Aria Caesura</h3>
                     <div class="event-content">
-                        <p><a href="characters/character-dissonant-discord.html" class="wiki-link">dissonant discord</a> begins interference operations and executes a Tier 4 Ómura Desynchronization Strike.</p>
+                        <p><a href="characters/character-dissonant-discord.html" class="wiki-link">dissonant discord</a>
+                            begins interference operations and executes a Tier 4 Ómura Desynchronization Strike.</p>
                         <ul>
                             <li>Death of Pyara Dana (Heart Aria) - Aria Caesura</li>
                             <li>Fragmentation of harmonic lattice of the Lovely Hearts</li>
-                            <li>Core melodic pattern displacement leading to <a href="characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a> eventually arriving in Royastella</li>
+                            <li>Core melodic pattern displacement leading to <a
+                                    href="characters/character-mahana-sahi.html" class="wiki-link">Mahana Sahi</a>
+                                eventually arriving in Royastella</li>
                         </ul>
                     </div>
                 </div>
@@ -1013,20 +1126,27 @@
             <!-- Era V -->
             <div class="era-section">
                 <h2 class="era-title">V. Royastella Arc 1 — Starlite 7th Era</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Formation of Starlite 7th</h3>
                     <div class="event-content">
-                        <p>Covert assembly of System-selected champions tasked with defending <a href="realms/realm-royastella.html" class="wiki-link">Royastella</a>.</p>
+                        <p>Covert assembly of System-selected champions tasked with defending <a
+                                href="realms/realm-royastella.html" class="wiki-link">Royastella</a>.</p>
                         <p style="margin-top: 12px;"><strong>Core Members:</strong></p>
                         <ul>
-                            <li><a href="characters/character-itami-serafino.html" class="wiki-link">Itami Serafino</a> — Starlit Empress</li>
-                            <li><a href="characters/character-shini-thana.html" class="wiki-link">Shini Thana</a> — Starlit Sultana</li>
-                            <li><a href="characters/character-wentea-liso.html" class="wiki-link">Wentea Liso</a> — Starlit Dynast</li>
-                            <li><a href="characters/character-takino-retsu.html" class="wiki-link">Takino Retsu</a> — Starlit Mikado</li>
-                            <li><a href="characters/character-riasa-sungbae.html" class="wiki-link">Riasa Sungbae</a> — Starlit Pasha</li>
+                            <li><a href="characters/character-itami-serafino.html" class="wiki-link">Itami Serafino</a>
+                                — Starlit Empress</li>
+                            <li><a href="characters/character-shini-thana.html" class="wiki-link">Shini Thana</a> —
+                                Starlit Sultana</li>
+                            <li><a href="characters/character-wentea-liso.html" class="wiki-link">Wentea Liso</a> —
+                                Starlit Dynast</li>
+                            <li><a href="characters/character-takino-retsu.html" class="wiki-link">Takino Retsu</a> —
+                                Starlit Mikado</li>
+                            <li><a href="characters/character-riasa-sungbae.html" class="wiki-link">Riasa Sungbae</a> —
+                                Starlit Pasha</li>
                             <li><a href="characters/character-kayre.html" class="wiki-link">Kayre</a> — Starlit Rex</li>
-                            <li><a href="characters/character-daeon-liang.html" class="wiki-link">Daeon Liàng</a> — Starlit Czar</li>
+                            <li><a href="characters/character-daeon-liang.html" class="wiki-link">Daeon Liàng</a> —
+                                Starlit Czar</li>
                         </ul>
                     </div>
                 </div>
@@ -1034,7 +1154,9 @@
                 <div class="event">
                     <h3 class="event-title">BLADE GUILLOTINE Infiltration</h3>
                     <div class="event-content">
-                        <p>dissonant discord appears in Royastella under the identity <strong>BLADE GUILLOTINE</strong>. <a href="characters/character-blade-guillotine.html" class="wiki-link">BLADE GUILLOTINE</a> begins both antagonizing and assisting Starlite 7th.</p>
+                        <p>dissonant discord appears in Royastella under the identity <strong>BLADE GUILLOTINE</strong>.
+                            <a href="characters/character-blade-guillotine.html" class="wiki-link">BLADE GUILLOTINE</a>
+                            begins both antagonizing and assisting Starlite 7th.</p>
                     </div>
                 </div>
 
@@ -1051,32 +1173,36 @@
                 <div class="event">
                     <h3 class="event-title">Symphonic Overture</h3>
                     <div class="event-content">
-                        <p>Major combat and harmonic destabilization event. Establishes elevated existential threats to Royastella. Mahana Sahi arrives in Royastella without most of her memories.</p>
+                        <p>Major combat and harmonic destabilization event. Establishes elevated existential threats to
+                            Royastella. Mahana Sahi arrives in Royastella without most of her memories.</p>
                     </div>
                 </div>
 
                 <div class="event">
                     <h3 class="event-title">Mahana Protection Mission</h3>
                     <div class="event-content">
-                        <p>Starlite 7th protects Mahana Sahi. Mahana eventually returned to Beeston. Reinforces cross-realm harmonic instability.</p>
+                        <p>Starlite 7th protects Mahana Sahi. Mahana eventually returned to Beeston. Reinforces
+                            cross-realm harmonic instability.</p>
                     </div>
                 </div>
 
                 <div class="note-box">
-                    <strong>Simultaneity Canon:</strong> The following events occur in overlapping sequence: Regicide, Aria Caesura, and Symphonic Overture.
+                    <strong>Simultaneity Canon:</strong> The following events occur in overlapping sequence: Regicide,
+                    Aria Caesura, and Symphonic Overture.
                 </div>
             </div>
 
             <!-- Era VI -->
             <div class="era-section">
                 <h2 class="era-title">VI. Beeston Arc 2</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Mahana Assumes Leadership</h3>
                     <div class="event-content">
                         <ul>
                             <li>Mahana becomes leader of the Lovely Hearts.</li>
-                            <li>Kali sees aspects of Pyara in Mahana, but eventually decides that Mahana and Pyara are different people.</li>
+                            <li>Kali sees aspects of Pyara in Mahana, but eventually decides that Mahana and Pyara are
+                                different people.</li>
                             <li>Kali swears revenge on discord for the death of Pyara.</li>
                         </ul>
                     </div>
@@ -1112,11 +1238,12 @@
             <!-- Era VII -->
             <div class="era-section">
                 <h2 class="era-title">VII. Royastella Arc 2</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">discord Returns as Mentor</h3>
                     <div class="event-content">
-                        <p>Warns Starlite 7th of impending existential threat. Claims destruction of Beeston has already occurred.</p>
+                        <p>Warns Starlite 7th of impending existential threat. Claims destruction of Beeston has already
+                            occurred.</p>
                         <p>Tells Starlite 7th the destroyer of Beeston is coming to destroy Royastella.</p>
                     </div>
                 </div>
@@ -1124,7 +1251,8 @@
                 <div class="event">
                     <h3 class="event-title">Aura Manifestation Training</h3>
                     <div class="event-content">
-                        <p>discord trains Starlite 7th in Aura Manifestation, Element Core evolution, and Harmonic restructuring combat.</p>
+                        <p>discord trains Starlite 7th in Aura Manifestation, Element Core evolution, and Harmonic
+                            restructuring combat.</p>
                     </div>
                 </div>
 
@@ -1132,10 +1260,12 @@
                     <h3 class="event-title">Revelation Encounter</h3>
                     <div class="event-content">
                         <ul>
-                        <li>discord guides team to confront threat. </li>
-                        <li>The threat revealed to be discord herself, who then transforms into BLADE GUILLOTINE.</li>
-                        <li>BLADE effortlessly defeats the Runic Knight, continuing a relentless assaul in an effort to draw out Starlit Alpha.</li>
-                    </ul>
+                            <li>discord guides team to confront threat. </li>
+                            <li>The threat revealed to be discord herself, who then transforms into BLADE GUILLOTINE.
+                            </li>
+                            <li>BLADE effortlessly defeats the Runic Knight, continuing a relentless assaul in an effort
+                                to draw out Starlit Alpha.</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -1163,11 +1293,14 @@
             <!-- Era VIII -->
             <div class="era-section">
                 <h2 class="era-title">VIII. Nexsicon Arc 2</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">The Grand Magic Catastrophe</h3>
                     <div class="event-content">
-                        <p>Tiala realizes that the Beeston and Royastella integration will take approximately ten years. iala initiates forced universal convergence spell to hasten merge. Spell partially succeeds but <a href="lore/lore-cascade-resonance.html" class="wiki-link">destabilizes reality.</a></p>
+                        <p>Tiala realizes that the Beeston and Royastella integration will take approximately ten years.
+                            iala initiates forced universal convergence spell to hasten merge. Spell partially succeeds
+                            but <a href="lore/lore-cascade-resonance.html" class="wiki-link">destabilizes reality.</a>
+                        </p>
                     </div>
                 </div>
 
@@ -1190,7 +1323,8 @@
                     <div class="event-content">
                         <p>Major emotional and narrative destabilization trigger.</p>
                         <ul>
-                            <li><a href="characters/character-fu-ci-anguang.html" class="wiki-link">Fú cì Ánguāng</a> loses the ability to become Zhòu-chún Shìfàng</li>
+                            <li><a href="characters/character-fu-ci-anguang.html" class="wiki-link">Fú cì Ánguāng</a>
+                                loses the ability to become Zhòu-chún Shìfàng</li>
                             <li>Xīwàng Tiānshàng disappears</li>
                         </ul>
                     </div>
@@ -1206,14 +1340,17 @@
                 <div class="event">
                     <h3 class="event-title">The Great Schism</h3>
                     <div class="event-content">
-                        <p>Ami leaves PVA. Public justification: Tiala is reckless. True motivation: boredom, amusement, emotional complexity.</p>
+                        <p>Ami leaves PVA. Public justification: Tiala is reckless. True motivation: boredom, amusement,
+                            emotional complexity.</p>
                         <p style="margin-top: 16px;"><strong>Factional Division:</strong></p>
-                        <p style="margin-top: 8px;"><a href="factions/faction-destinys-penance.html" class="wiki-link">Destiny's Penance</a> — Led by Tiala Hartlight</p>
+                        <p style="margin-top: 8px;"><a href="factions/faction-destinys-penance.html"
+                                class="wiki-link">Destiny's Penance</a> — Led by Tiala Hartlight</p>
                         <ul>
                             <li>Pursues Akashic Record acquisition</li>
                             <li>Accepts moral and metaphysical sacrifice</li>
                         </ul>
-                        <p style="margin-top: 8px;"><a href="factions/faction-reason-theory.html" class="wiki-link">Reason Theory</a> — Founded by Ami Hartbreak and Windi Lightfall</p>
+                        <p style="margin-top: 8px;"><a href="factions/faction-reason-theory.html"
+                                class="wiki-link">Reason Theory</a> — Founded by Ami Hartbreak and Windi Lightfall</p>
                         <ul>
                             <li>Opposes Destiny's Penance</li>
                             <li>Destabilizes destiny-driven power structures</li>
@@ -1226,7 +1363,8 @@
                     <div class="event-content">
                         <ul>
                             <li>Kali Dana returns from gravity well having aged an extra year</li>
-                            <li>She assumes the new identity of <a href="characters/character-odisse-nocere.html" class="wiki-link">Odisse Nocere</a></li>
+                            <li>She assumes the new identity of <a href="characters/character-odisse-nocere.html"
+                                    class="wiki-link">Odisse Nocere</a></li>
                             <li>Odisse meets Ami who reveals that dissonant discord is actually Tiala</li>
                             <li>Anti-Tiala operational alignment</li>
                         </ul>
@@ -1248,7 +1386,8 @@
                 <div class="event">
                     <h3 class="event-title">Realm Integration Phase</h3>
                     <div class="event-content">
-                        <p>Beeston and Royastella begin convergence into Nexsicon. Estimated integration timeline: Two Years.</p>
+                        <p>Beeston and Royastella begin convergence into Nexsicon. Estimated integration timeline: Two
+                            Years.</p>
                     </div>
                 </div>
             </div>
@@ -1256,7 +1395,7 @@
             <!-- Era IX -->
             <div class="era-section">
                 <h2 class="era-title">IX. Two-Year Time Skip</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Training and Faction Consolidation</h3>
                     <div class="event-content">
@@ -1271,7 +1410,8 @@
                 <div class="event">
                     <h3 class="event-title">Emergence of Mythic Realms</h3>
                     <div class="event-content">
-                        <p>Manifestation of previously lost civilizations: Atlantis, Lemuria, Mu, Avalon, Shangri-La, and additional mythic territories.</p>
+                        <p>Manifestation of previously lost civilizations: Atlantis, Lemuria, Mu, Avalon, Shangri-La,
+                            and additional mythic territories.</p>
                     </div>
                 </div>
             </div>
@@ -1279,7 +1419,7 @@
             <!-- Era X -->
             <div class="era-section">
                 <h2 class="era-title">X. Ultimatera Era</h2>
-                
+
                 <div class="event">
                     <h3 class="event-title">Final Convergence Begins</h3>
                     <div class="event-content">
@@ -1296,19 +1436,19 @@
 
     </div>
     <!-- Call to Action -->
-        <section class="cta-section">
-            <h2 class="cta-title">Explore the Multiverse</h2>
-            <p class="cta-text">
-                Dive deeper into the characters, realms, and conflicts that define the Crios universe. 
-                Each faction represents a unique philosophical stance on destiny, power, and convergence.
-            </p>
-            <div class="cta-buttons">
-                <a href="factions.html" class="cta-button">See Factions</a>
-                <a href="realms.html" class="cta-button secondary">Explore Realms</a>
-                <a href="characters.html" class="cta-button secondary">View All Characters</a>
-            </div>
-        </section>
-    
+    <section class="cta-section">
+        <h2 class="cta-title">Explore the Multiverse</h2>
+        <p class="cta-text">
+            Dive deeper into the characters, realms, and conflicts that define the Crios universe.
+            Each faction represents a unique philosophical stance on destiny, power, and convergence.
+        </p>
+        <div class="cta-buttons">
+            <a href="factions.html" class="cta-button">See Factions</a>
+            <a href="realms.html" class="cta-button secondary">Explore Realms</a>
+            <a href="characters.html" class="cta-button secondary">View All Characters</a>
+        </div>
+    </section>
+
     <script>
         // Toggle between Chronological and Narrative views
         const toggleButtons = document.querySelectorAll('.toggle-btn');
@@ -1317,11 +1457,11 @@
         toggleButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const targetView = button.getAttribute('data-view');
-                
+
                 // Update active button
                 toggleButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-                
+
                 // Update active view
                 timelineViews.forEach(view => {
                     view.classList.remove('active');
@@ -1347,4 +1487,5 @@
         });
     </script>
 </body>
+
 </html>
