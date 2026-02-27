@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRIOS // Signal Lost</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Archivo:wght@300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #0a0a0f;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+        }
+        body {
+            background: var(--dark-bg);
+            color: white;
+            font-family: 'Archivo', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        h1 { font-family: 'Orbitron'; color: var(--secondary-pink); letter-spacing: 5px; }
+        p { color: #8888a8; max-width: 300px; line-height: 1.6; }
+        .glitch-box { border: 1px solid var(--accent-cyan); padding: 20px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 217, 255, 0.2); }
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 1px solid var(--secondary-pink);
+            color: var(--secondary-pink);
+            text-decoration: none;
+            font-family: 'Orbitron';
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        .btn:hover { background: var(--secondary-pink); color: white; }
+    </style>
+</head>
+<body>
+    <div class="glitch-box">
+        <h1>SIGNAL LOST</h1>
+        <p>This sector of the Crios Universe has not been synchronized for offline access.</p>
+        <a href="/index.html" class="btn">Return to Nexus</a>
+    </div>
+</body>
+</html>
