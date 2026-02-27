@@ -504,8 +504,9 @@
 
         .fadein {
             position: relative;
-            width: 485px;
-            height: 256px;
+            width: 100%;
+            max-width: 485px;
+            aspect-ratio: 485 / 256;
             margin: 0 auto 20px auto;
         }
 
@@ -515,7 +516,8 @@
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: contain;
         }
 
         .fadein img:nth-child(1) {
