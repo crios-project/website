@@ -82,41 +82,43 @@
       background: radial-gradient(circle, #00d9ff, transparent)
     }
 
-        /* Header */
-        .header-nav {
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 15, 0.95);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
-            padding: 16px 24px;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--secondary-pink);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-        .back-link {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            color: var(--text-dim);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: color 0.3s ease;
-        }
+    /* Header */
+    .header-nav {
+      position: sticky;
+      top: 0;
+      background: rgba(10, 10, 15, 0.95);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+      padding: 16px 24px;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .back-link:hover {
-            color: var(--accent-cyan);
-        }
+    .header-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--secondary-pink);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .back-link {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent-cyan);
+    }
 
     .page-title {
       font-family: 'Orbitron', sans-serif;
@@ -299,7 +301,7 @@
   <div class="orb orb-2" aria-hidden="true"></div>
 
   <header class="header-nav">
-    <a class="back-link" href="index.html">◂ Back to Home</a>
+    <a class="back-link" href="home.html">◂ Back to Home</a>
     <div class="page-title">Icons + Logos</div>
   </header>
 
@@ -314,100 +316,100 @@
       <button class="nav" id="prev" aria-label="Previous">‹</button>
       <div class="carousel" id="carousel">
         <!-- items: icon image in assets/icons/ — data-logo points to the paired logo (if exists) -->
-<button class="carousel-item" data-logo="assets/icons/Antiquity_Logo.png" aria-hidden="false"><img
-src="assets/icons/Antiquity_Icon.png" alt="Antiquity"></button>
-<button class="carousel-item" data-logo="assets/icons/Beeston_Logo.png" aria-hidden="false"><img
-src="assets/icons/Beeston_Icon.png" alt="Beeston"></button>
-<button class="carousel-item" data-logo="assets/logos-added/BG_logo.png" aria-hidden="false"><img
-src="assets/logos-added/BG_Icon.png" alt="Blade Guillotine"></button>
-<button class="carousel-item" data-logo="assets/logos-added/ConcreteRose.png" aria-hidden="false"><img
-src="assets/logos-added/ConcreteRose.png" alt="Concrete Rose"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Crios_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Crios_Logo.png" alt="CRIOS"></button>
-<button class="carousel-item" data-logo="assets/icons/Crios2020.png" aria-hidden="false"><img
-src="assets/icons/Crios2020.png" alt="CRIOS 2020"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Cross_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Cross_Icon.png" alt="Cross"></button>
-<button class="carousel-item" data-logo="assets/icons/Destiny's_Penance_Logo.png" aria-hidden="false"><img
-src="assets/icons/Destiny's_Penance_Icon.png" alt="Destiny's Penance"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Digital_Passion_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Digital_Passion_logo.png" alt="Digital Passion"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Dissensio_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Dissensio_Logo.png" alt="Dissensio"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Dissonant_Discord_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Dissonant_Discord_Logo.png" alt="Dissonant Discord"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Draconic_Devotion_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Draconic_Devotion_Logo.png" alt="Draconic Devotion"></button>
-<button class="carousel-item" data-logo="assets/logos-added/end_of_line_logo.png" aria-hidden="false"><img
-src="assets/logos-added/end_of_line_logo.png" alt="End of Line"></button>
-<button class="carousel-item" data-logo="assets/logos-added/end_of_lion_logo.png" aria-hidden="false"><img
-src="assets/logos-added/end_of_lion_logo.png" alt="End of Lion"></button>
-<button class="carousel-item" data-logo="assets/logos-added/end_of_lying_logo.png" aria-hidden="false"><img
-src="assets/logos-added/end_of_lying_logo.png" alt="End of Lying"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Fall_logo.gif" aria-hidden="false"><img
-src="assets/logos-added/Fall_Icon.png" alt="Fall"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Fire_and_Blood_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Fire_and_Blood_logo.png" alt="Fire and Blood"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Glosuco_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Glosuco_logo.png" alt="Glosuco"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Graceful_Arts_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Graceful_Arts_logo.png" alt="Graceful Arts"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Heart_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Heart_logo.png" alt="Heart"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Honor_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Honor_logo.png" alt="Honor"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Hope_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Hope_logo.png" alt="Hope"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Ice_of_Sky_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Ice_of_Sky_logo.png" alt="Ice of Sky"></button>
-<button class="carousel-item" data-logo="assets/logos-added/into_the_Break_logo.png" aria-hidden="false"><img
-src="assets/logos-added/into_the_Break_logo.png" alt="Into the Break"></button>
-<button class="carousel-item" data-logo="assets/logos-added/KF_Logo.png" aria-hidden="false"><img
-src="assets/logos-added/KF_icon.png" alt="Knivefall"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Loss_and_Pain_Logo.png" aria-hidden="false"><img
-src="assets/logos-added/Loss_and_Pain_Logo.png" alt="Loss and Pain"></button>
-<button class="carousel-item" data-logo="assets/icons/Lovely_Hearts_Logo.png" aria-hidden="false"><img
-src="assets/icons/Lovely_Hearts_Icon.png" alt="Lovely Hearts"></button>
-<button class="carousel-item" data-logo="assets/logos-added/LC_2013_Logo.png" aria-hidden="false"><img
-src="assets/logos-added/LC_2013_Logo.png" alt="Lumetapa Chronicles 2013 version"></button>
-<button class="carousel-item" data-logo="assets/logos-added/LC_Final_Logo.png" aria-hidden="false"><img
-src="assets/logos-added/LC_Final_Logo.png" alt="Lumetapa Chronicles Final version"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Malevolence_Logo.png" aria-hidden="false"><img
-src="assets/logos-added/Malevolence_Logo.png" alt="Malevolence"></button>
-<button class="carousel-item" data-logo="assets/icons/Nexsicon_logo.png" aria-hidden="false"><img
-src="assets/icons/Nexsicon_icon.png" alt="Nexsicon"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Origin_of_all_Logo.png" aria-hidden="false"><img
-src="assets/logos-added/Origin_of_all_Logo.png" alt="Origin of All"></button>
-<button class="carousel-item" data-logo="assets/icons/Praxis_Verax_Affinas_logo.png" aria-hidden="false"><img
-src="assets/icons/Praxis_Verax_Affinas_icon.png" alt="Praxis Verax Affinas"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Raconteur_Productions_logo.png"
-aria-hidden="false"><img src="assets/logos-added/Raconteur_Productions_logo.png"
-alt="Raconteur Productions"></button>
-<button class="carousel-item" data-logo="assets/icons/Reason_Theory_Logo.png" aria-hidden="false"><img
-src="assets/icons/Reason_Theory_Icon.png" alt="Reason Theory"></button>
-<button class="carousel-item" data-logo="assets/icons/Royastella_Logo.png" aria-hidden="false"><img
-src="assets/icons/Royastella_Icon.png" alt="Royastella"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Sinner's_Lament_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Sinner's_Lament_logo.png" alt="Sinner's Lament"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Soul_Dominions_Aperture_logo.png"
-aria-hidden="false"><img src="assets/logos-added/Soul_Dominions_Aperture_logo.png"
-alt="Soul Dominions Aperture"></button>
-<button class="carousel-item" data-logo="assets/icons/Starlite_7th_logo.png" aria-hidden="false"><img
-src="assets/icons/Starlite_7th_icon.png" alt="Starlite 7th"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Studio_Reverse_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Studio_Reverse_logo.png" alt="Studio Reverse"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Take_Logo.png" aria-hidden="false"><img
-src="assets/logos-added/Take_Icon.png" alt="Take"></button>
-<button class="carousel-item" data-logo="assets/logos-added/TurntableGames.png" aria-hidden="false"><img
-src="assets/logos-added/TurntableGames.png" alt="Turntable Games"></button>
-<button class="carousel-item" data-logo="assets/icons/Ultimatera_logo.png" aria-hidden="false"><img
-src="assets/icons/Ultimatera_icon.png" alt="Ultimatera"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Venom_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Venom_logo.png" alt="Venom"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Viral_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Viral_logo.png" alt="Viral"></button>
-<button class="carousel-item" data-logo="assets/logos-added/Vitriol_logo.png" aria-hidden="false"><img
-src="assets/logos-added/Vitriol_logo.png" alt="Vitriol"></button>
+        <button class="carousel-item" data-logo="assets/icons/Antiquity_Logo.png" aria-hidden="false"><img
+            src="assets/icons/Antiquity_Icon.png" alt="Antiquity"></button>
+        <button class="carousel-item" data-logo="assets/icons/Beeston_Logo.png" aria-hidden="false"><img
+            src="assets/icons/Beeston_Icon.png" alt="Beeston"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/BG_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/BG_Icon.png" alt="Blade Guillotine"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/ConcreteRose.png" aria-hidden="false"><img
+            src="assets/logos-added/ConcreteRose.png" alt="Concrete Rose"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Crios_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Crios_Logo.png" alt="CRIOS"></button>
+        <button class="carousel-item" data-logo="assets/icons/Crios2020.png" aria-hidden="false"><img
+            src="assets/icons/Crios2020.png" alt="CRIOS 2020"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Cross_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Cross_Icon.png" alt="Cross"></button>
+        <button class="carousel-item" data-logo="assets/icons/Destiny's_Penance_Logo.png" aria-hidden="false"><img
+            src="assets/icons/Destiny's_Penance_Icon.png" alt="Destiny's Penance"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Digital_Passion_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Digital_Passion_logo.png" alt="Digital Passion"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Dissensio_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Dissensio_Logo.png" alt="Dissensio"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Dissonant_Discord_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Dissonant_Discord_Logo.png" alt="Dissonant Discord"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Draconic_Devotion_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Draconic_Devotion_Logo.png" alt="Draconic Devotion"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/end_of_line_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/end_of_line_logo.png" alt="End of Line"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/end_of_lion_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/end_of_lion_logo.png" alt="End of Lion"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/end_of_lying_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/end_of_lying_logo.png" alt="End of Lying"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Fall_logo.gif" aria-hidden="false"><img
+            src="assets/logos-added/Fall_Icon.png" alt="Fall"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Fire_and_Blood_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Fire_and_Blood_logo.png" alt="Fire and Blood"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Glosuco_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Glosuco_logo.png" alt="Glosuco"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Graceful_Arts_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Graceful_Arts_logo.png" alt="Graceful Arts"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Heart_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Heart_logo.png" alt="Heart"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Honor_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Honor_logo.png" alt="Honor"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Hope_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Hope_logo.png" alt="Hope"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Ice_of_Sky_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Ice_of_Sky_logo.png" alt="Ice of Sky"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/into_the_Break_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/into_the_Break_logo.png" alt="Into the Break"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/KF_Logo.png" aria-hidden="false"><img
+            src="assets/logos-added/KF_icon.png" alt="Knivefall"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Loss_and_Pain_Logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Loss_and_Pain_Logo.png" alt="Loss and Pain"></button>
+        <button class="carousel-item" data-logo="assets/icons/Lovely_Hearts_Logo.png" aria-hidden="false"><img
+            src="assets/icons/Lovely_Hearts_Icon.png" alt="Lovely Hearts"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/LC_2013_Logo.png" aria-hidden="false"><img
+            src="assets/logos-added/LC_2013_Logo.png" alt="Lumetapa Chronicles 2013 version"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/LC_Final_Logo.png" aria-hidden="false"><img
+            src="assets/logos-added/LC_Final_Logo.png" alt="Lumetapa Chronicles Final version"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Malevolence_Logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Malevolence_Logo.png" alt="Malevolence"></button>
+        <button class="carousel-item" data-logo="assets/icons/Nexsicon_logo.png" aria-hidden="false"><img
+            src="assets/icons/Nexsicon_icon.png" alt="Nexsicon"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Origin_of_all_Logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Origin_of_all_Logo.png" alt="Origin of All"></button>
+        <button class="carousel-item" data-logo="assets/icons/Praxis_Verax_Affinas_logo.png" aria-hidden="false"><img
+            src="assets/icons/Praxis_Verax_Affinas_icon.png" alt="Praxis Verax Affinas"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Raconteur_Productions_logo.png"
+          aria-hidden="false"><img src="assets/logos-added/Raconteur_Productions_logo.png"
+            alt="Raconteur Productions"></button>
+        <button class="carousel-item" data-logo="assets/icons/Reason_Theory_Logo.png" aria-hidden="false"><img
+            src="assets/icons/Reason_Theory_Icon.png" alt="Reason Theory"></button>
+        <button class="carousel-item" data-logo="assets/icons/Royastella_Logo.png" aria-hidden="false"><img
+            src="assets/icons/Royastella_Icon.png" alt="Royastella"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Sinner's_Lament_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Sinner's_Lament_logo.png" alt="Sinner's Lament"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Soul_Dominions_Aperture_logo.png"
+          aria-hidden="false"><img src="assets/logos-added/Soul_Dominions_Aperture_logo.png"
+            alt="Soul Dominions Aperture"></button>
+        <button class="carousel-item" data-logo="assets/icons/Starlite_7th_logo.png" aria-hidden="false"><img
+            src="assets/icons/Starlite_7th_icon.png" alt="Starlite 7th"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Studio_Reverse_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Studio_Reverse_logo.png" alt="Studio Reverse"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Take_Logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Take_Icon.png" alt="Take"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/TurntableGames.png" aria-hidden="false"><img
+            src="assets/logos-added/TurntableGames.png" alt="Turntable Games"></button>
+        <button class="carousel-item" data-logo="assets/icons/Ultimatera_logo.png" aria-hidden="false"><img
+            src="assets/icons/Ultimatera_icon.png" alt="Ultimatera"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Venom_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Venom_logo.png" alt="Venom"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Viral_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Viral_logo.png" alt="Viral"></button>
+        <button class="carousel-item" data-logo="assets/logos-added/Vitriol_logo.png" aria-hidden="false"><img
+            src="assets/logos-added/Vitriol_logo.png" alt="Vitriol"></button>
       </div>
       <button class="nav" id="next" aria-label="Next">›</button>
     </div>

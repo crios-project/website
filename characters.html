@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Characters // CRIOS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -45,7 +48,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -68,6 +71,7 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .header-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 1rem;
@@ -76,6 +80,7 @@
             text-transform: uppercase;
             letter-spacing: 3px;
         }
+
         .back-link {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.85rem;
@@ -109,8 +114,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .page-title {
@@ -142,8 +154,15 @@
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .filters-grid {
@@ -275,7 +294,8 @@
         .character-image-container {
             position: relative;
             width: 100%;
-            padding-top: 100%; /* 1:1 aspect ratio */
+            padding-top: 100%;
+            /* 1:1 aspect ratio */
             overflow: hidden;
             background: rgba(0, 0, 0, 0.3);
         }
@@ -449,12 +469,13 @@
         }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
     <!-- Header Navigation -->
     <nav class="header-nav">
-        <a href="index.html" class="back-link">← Home</a>
+        <a href="home.html" class="back-link">← Home</a>
         <div class="header-title">Character Index</div>
         <div style="width: 80px;"></div> <!-- Spacer for centering -->
     </nav>
@@ -508,7 +529,8 @@
         <!-- Character Grid -->
         <div class="character-grid" id="character-grid">
             <!-- Heart Melody Members -->
-            <a href="characters/character-pyara-dana.html" class="character-card" data-faction="Heart Melody" data-realm="Beeston" data-name="Pyara Dana">
+            <a href="characters/character-pyara-dana.html" class="character-card" data-faction="Heart Melody"
+                data-realm="Beeston" data-name="Pyara Dana">
                 <div class="character-image-container">
                     <img src="assets/headshots/HArHS.png" alt="Heart Aria" class="character-image">
                 </div>
@@ -520,7 +542,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-kali-dana.html" class="character-card" data-faction="Heart Melody" data-realm="Beeston" data-name="Heart Seria">
+            <a href="characters/character-kali-dana.html" class="character-card" data-faction="Heart Melody"
+                data-realm="Beeston" data-name="Heart Seria">
                 <div class="character-image-container">
                     <img src="assets/headshots/HSeHS.png" alt="Heart Seria" class="character-image">
                 </div>
@@ -532,7 +555,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-oktusha-miko.html" class="character-card" data-faction="Heart Melody" data-realm="Beeston" data-name="Oktusha Miko">
+            <a href="characters/character-oktusha-miko.html" class="character-card" data-faction="Heart Melody"
+                data-realm="Beeston" data-name="Oktusha Miko">
                 <div class="character-image-container">
                     <img src="assets/headshots/HRhHS.png" alt="Oktusha Miko" class="character-image">
                 </div>
@@ -544,19 +568,21 @@
                 </div>
             </a>
 
-            <a href="characters/character-omba-miko.html" class="character-card" data-faction="Heart Melody" data-realm="Beeston" data-name="Omba Miko">
+            <a href="characters/character-omba-miko.html" class="character-card" data-faction="Heart Melody"
+                data-realm="Beeston" data-name="Omba Miko">
                 <div class="character-image-container">
                     <img src="assets/headshots/HVeHS.png" alt="Omba Miko" class="character-image">
                 </div>
                 <div class="character-info">
                     <div class="character-name">Omba Miko</div>
                     <div class="character-role">Heart Verismo</div>
-                    <div class="character-faction">Heart Melody</div> 
+                    <div class="character-faction">Heart Melody</div>
                     <div class="character-realm">Beeston</div>
                 </div>
             </a>
 
-            <a href="characters/character-zafara-quedar.html" class="character-card" data-faction="Heart Melody" data-realm="Beeston" data-name="Zafara Quedar">
+            <a href="characters/character-zafara-quedar.html" class="character-card" data-faction="Heart Melody"
+                data-realm="Beeston" data-name="Zafara Quedar">
                 <div class="character-image-container">
                     <img src="assets/headshots/HAdHS.png" alt="Zafara Quedar" class="character-image">
                 </div>
@@ -568,7 +594,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-aran-letale.html" class="character-card" data-faction="Heart Melody" data-realm="Beeston" data-name="Aran Letale">
+            <a href="characters/character-aran-letale.html" class="character-card" data-faction="Heart Melody"
+                data-realm="Beeston" data-name="Aran Letale">
                 <div class="character-image-container">
                     <img src="assets/headshots/HSoHS.png" alt="Heart Sonata" class="character-image">
                 </div>
@@ -580,20 +607,22 @@
                 </div>
             </a>
 
-            <a href="characters/character-mahana-sahi.html" class="character-card" data-faction="Heart Melody" data-realm="Beeston" data-name="Mahana Sahi">
+            <a href="characters/character-mahana-sahi.html" class="character-card" data-faction="Heart Melody"
+                data-realm="Beeston" data-name="Mahana Sahi">
                 <div class="character-image-container">
                     <img src="assets/headshots/HSyHS.png" alt="Heart Symphony" class="character-image">
                 </div>
                 <div class="character-info">
                     <div class="character-name">Mahana Sahi</div>
                     <div class="character-role">Heart Symphony</div>
-                    <div class="character-faction">Heart Melody</div>  
+                    <div class="character-faction">Heart Melody</div>
                     <div class="character-realm">Beeston</div>
                 </div>
             </a>
 
             <!-- Heart Melody Mentor-->
-            <a href="characters/character-celesin.html" class="character-card" data-faction="Heart Melody" data-realm="Beeston" data-name="Celesin">
+            <a href="characters/character-celesin.html" class="character-card" data-faction="Heart Melody"
+                data-realm="Beeston" data-name="Celesin">
                 <div class="character-image-container">
                     <img src="assets/characters/Celesin_the_Philharmonious.png" alt="Celesin" class="character-image">
                 </div>
@@ -603,10 +632,11 @@
                     <div class="character-faction">Heart Melody</div>
                     <div class="character-realm">Beeston</div>
                 </div>
-            </a>      
+            </a>
 
             <!-- Heart Melody Antagonist -->
-            <a href="characters/character-dissonant-discord.html" class="character-card" data-faction="Unaffiliated" data-realm="Beeston" data-name="dissonant discord">
+            <a href="characters/character-dissonant-discord.html" class="character-card" data-faction="Unaffiliated"
+                data-realm="Beeston" data-name="dissonant discord">
                 <div class="character-image-container">
                     <img src="assets/headshots/DDHS.png" alt="dissonant discord" class="character-image">
                 </div>
@@ -617,7 +647,8 @@
             </a>
 
             <!-- Starlite 7th Members -->
-            <a href="characters/character-itami-serafino.html" class="character-card" data-faction="Starlite 7th" data-realm="Royastella" data-name="Itami Serafino">
+            <a href="characters/character-itami-serafino.html" class="character-card" data-faction="Starlite 7th"
+                data-realm="Royastella" data-name="Itami Serafino">
                 <div class="character-image-container">
                     <img src="assets/headshots/SEmHS.PNG" alt="Itami Serafino" class="character-image">
                 </div>
@@ -629,7 +660,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-shini-thana.html" class="character-card" data-faction="Starlite 7th" data-realm="Royastella" data-name="Shini Thana">
+            <a href="characters/character-shini-thana.html" class="character-card" data-faction="Starlite 7th"
+                data-realm="Royastella" data-name="Shini Thana">
                 <div class="character-image-container">
                     <img src="assets/headshots/SSuHS.PNG" alt="Shini Thana" class="character-image">
                 </div>
@@ -641,7 +673,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-daeon-liang.html" class="character-card" data-faction="Starlite 7th" data-realm="Royastella" data-name="Daeon Liàng">
+            <a href="characters/character-daeon-liang.html" class="character-card" data-faction="Starlite 7th"
+                data-realm="Royastella" data-name="Daeon Liàng">
                 <div class="character-image-container">
                     <img src="assets/headshots/SCzHS.PNG" alt="Daeon Liàng" class="character-image">
                 </div>
@@ -653,7 +686,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-kayre.html" class="character-card" data-faction="Starlite 7th" data-realm="Royastella" data-name="Kayre">
+            <a href="characters/character-kayre.html" class="character-card" data-faction="Starlite 7th"
+                data-realm="Royastella" data-name="Kayre">
                 <div class="character-image-container">
                     <img src="assets/headshots/SReHS.PNG" alt="Kayre" class="character-image">
                 </div>
@@ -665,7 +699,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-riasa-sungbae.html" class="character-card" data-faction="Starlite 7th" data-realm="Royastella" data-name="Riasa Sungbae">
+            <a href="characters/character-riasa-sungbae.html" class="character-card" data-faction="Starlite 7th"
+                data-realm="Royastella" data-name="Riasa Sungbae">
                 <div class="character-image-container">
                     <img src="assets/headshots/SPaHS.PNG" alt="Riasa Sungbae" class="character-image">
                 </div>
@@ -677,7 +712,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-wentea-liso.html" class="character-card" data-faction="Starlite 7th" data-realm="Royastella" data-name="Wentea Liso">
+            <a href="characters/character-wentea-liso.html" class="character-card" data-faction="Starlite 7th"
+                data-realm="Royastella" data-name="Wentea Liso">
                 <div class="character-image-container">
                     <img src="assets/headshots/SDyHS.PNG" alt="Wentea Liso" class="character-image">
                 </div>
@@ -689,7 +725,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-takino-retsu.html" class="character-card" data-faction="Starlite 7th" data-realm="Royastella" data-name="Takino Restu">
+            <a href="characters/character-takino-retsu.html" class="character-card" data-faction="Starlite 7th"
+                data-realm="Royastella" data-name="Takino Restu">
                 <div class="character-image-container">
                     <img src="assets/headshots/SMiHS.PNG" alt="Starlit Mikado" class="character-image">
                 </div>
@@ -702,7 +739,8 @@
             </a>
 
             <!-- Starlite 7th Mentor -->
-            <a href="characters/character-marate-jalo.html" class="character-card" data-faction="Starlite 7th" data-realm="Royastella" data-name="Marate Jalo">
+            <a href="characters/character-marate-jalo.html" class="character-card" data-faction="Starlite 7th"
+                data-realm="Royastella" data-name="Marate Jalo">
                 <div class="character-image-container">
                     <img src="assets/headshots/SAlHS.PNG" alt="Starlit Alpha" class="character-image">
                 </div>
@@ -712,10 +750,11 @@
                     <div class="character-faction">Starlite 7th</div>
                     <div class="character-realm">Royastella</div>
                 </div>
-            </a>           
+            </a>
 
             <!-- Starlite 7th Antagonist -->
-            <a href="characters/character-blade-guillotine.html" class="character-card" data-faction="Unaffiliated" data-realm="Royastella" data-name="BLADE GUILLOTINE">
+            <a href="characters/character-blade-guillotine.html" class="character-card" data-faction="Unaffiliated"
+                data-realm="Royastella" data-name="BLADE GUILLOTINE">
                 <div class="character-image-container">
                     <img src="assets/headshots/BGHS.png" alt="BLADE GUILLOTINE" class="character-image">
                 </div>
@@ -726,7 +765,8 @@
             </a>
 
             <!-- Praxis Verax Affinas Members-->
-            <a href="characters/character-tiala-corsolis.html" class="character-card" data-faction="Praxis Verax Affinas" data-realm="Nexsicon" data-name="Tiala Corsolis">
+            <a href="characters/character-tiala-corsolis.html" class="character-card"
+                data-faction="Praxis Verax Affinas" data-realm="Nexsicon" data-name="Tiala Corsolis">
                 <div class="character-image-container">
                     <img src="assets/headshots/com.png" alt="Tiala Corsolis" class="character-image">
                 </div>
@@ -738,7 +778,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-kessho-kawa.html" class="character-card" data-faction="Praxis Verax Affinas" data-realm="Nexsicon" data-name="Kesshō Kawa">
+            <a href="characters/character-kessho-kawa.html" class="character-card" data-faction="Praxis Verax Affinas"
+                data-realm="Nexsicon" data-name="Kesshō Kawa">
                 <div class="character-image-container">
                     <img src="assets/headshots/kes.png" alt="Kesshō Kawa" class="character-image">
                 </div>
@@ -749,7 +790,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-tessera-iustum.html" class="character-card" data-faction="Praxis Verax Affinas" data-realm="Nexsicon" data-name="Tessera Iustum">
+            <a href="characters/character-tessera-iustum.html" class="character-card"
+                data-faction="Praxis Verax Affinas" data-realm="Nexsicon" data-name="Tessera Iustum">
                 <div class="character-image-container">
                     <img src="assets/headshots/tes.png" alt="Tessera Iustum" class="character-image">
                 </div>
@@ -760,7 +802,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-amaranthine-breaklight.html" class="character-card" data-faction="Praxis Verax Affinas" data-realm="Nexsicon" data-name="Amaranthine Breaklight">
+            <a href="characters/character-amaranthine-breaklight.html" class="character-card"
+                data-faction="Praxis Verax Affinas" data-realm="Nexsicon" data-name="Amaranthine Breaklight">
                 <div class="character-image-container">
                     <img src="assets/headshots/ama.png" alt="Amaranthine Breaklight" class="character-image">
                 </div>
@@ -771,7 +814,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-xiwang-tianshang.html" class="character-card" data-faction="Praxis Verax Affinas" data-realm="Nexsicon" data-name="Xīwàng Tiānshàng">
+            <a href="characters/character-xiwang-tianshang.html" class="character-card"
+                data-faction="Praxis Verax Affinas" data-realm="Nexsicon" data-name="Xīwàng Tiānshàng">
                 <div class="character-image-container">
                     <img src="assets/headshots/com.png" alt="Xīwàng Tiānshàng" class="character-image">
                 </div>
@@ -782,7 +826,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-fu-ci-anguang.html" class="character-card" data-faction="Praxis Verax Affinas" data-realm="Nexsicon" data-name="Fú cì Ánguāng">
+            <a href="characters/character-fu-ci-anguang.html" class="character-card" data-faction="Praxis Verax Affinas"
+                data-realm="Nexsicon" data-name="Fú cì Ánguāng">
                 <div class="character-image-container">
                     <img src="assets/headshots/com.png" alt="Fú cì Ánguāng" class="character-image">
                 </div>
@@ -795,7 +840,8 @@
             </a>
 
             <!-- Destiny's Penance Members -->
-            <a href="characters/character-tiala-hartlight.html" class="character-card" data-faction="Destiny's Penance" data-realm="Ultimatera" data-name="Tiala Hartlight">
+            <a href="characters/character-tiala-hartlight.html" class="character-card" data-faction="Destiny's Penance"
+                data-realm="Ultimatera" data-name="Tiala Hartlight">
                 <div class="character-image-container">
                     <img src="assets/headshots/tea.png" alt="Tiala Hartlight" class="character-image">
                 </div>
@@ -807,7 +853,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-ji-lian-xia.html" class="character-card" data-faction="Destiny's Penance" data-realm="Ultimatera" data-name="Jí Lián Xiá">
+            <a href="characters/character-ji-lian-xia.html" class="character-card" data-faction="Destiny's Penance"
+                data-realm="Ultimatera" data-name="Jí Lián Xiá">
                 <div class="character-image-container">
                     <img src="assets/headshots/esh.png" alt="Jí Lián Xiá" class="character-image">
                 </div>
@@ -819,7 +866,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-claris-quies.html" class="character-card" data-faction="Destiny's Penance" data-realm="Ultimatera" data-name="Claris Quies">
+            <a href="characters/character-claris-quies.html" class="character-card" data-faction="Destiny's Penance"
+                data-realm="Ultimatera" data-name="Claris Quies">
                 <div class="character-image-container">
                     <img src="assets/headshots/kwe.png" alt="Claris Quies" class="character-image">
                 </div>
@@ -831,7 +879,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-velia-traicerum.html" class="character-card" data-faction="Destiny's Penance" data-realm="Ultimatera" data-name="Velia Traicerum ">
+            <a href="characters/character-velia-traicerum.html" class="character-card" data-faction="Destiny's Penance"
+                data-realm="Ultimatera" data-name="Velia Traicerum ">
                 <div class="character-image-container">
                     <img src="assets/headshots/com.png" alt="Velia Traicerum" class="character-image">
                 </div>
@@ -843,7 +892,8 @@
             </a>
 
             <!-- Reason Theory Members -->
-            <a href="characters/character-ami-hartbreak.html" class="character-card" data-faction="Reason Theory" data-realm="Ultimatera" data-name="Ami Hartbreak">
+            <a href="characters/character-ami-hartbreak.html" class="character-card" data-faction="Reason Theory"
+                data-realm="Ultimatera" data-name="Ami Hartbreak">
                 <div class="character-image-container">
                     <img src="assets/headshots/amy.png" alt="Ami Hartbreak" class="character-image">
                 </div>
@@ -852,10 +902,11 @@
                     <div class="character-role">Amaranthine Hartfall</div>
                     <div class="character-faction">Reason Theory</div>
                     <div class="character-realm">Ultimatera</div>
-                </div> 
+                </div>
             </a>
 
-            <a href="characters/character-windi-lightfall.html" class="character-card" data-faction="Reason Theory" data-realm="Ultimatera" data-name="Windi Lightfall">
+            <a href="characters/character-windi-lightfall.html" class="character-card" data-faction="Reason Theory"
+                data-realm="Ultimatera" data-name="Windi Lightfall">
                 <div class="character-image-container">
                     <img src="assets/headshots/win.png" alt="Windi Lightfall" class="character-image">
                 </div>
@@ -867,7 +918,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-odisse-nocere.html" class="character-card" data-faction="Reason Theory" data-realm="Ultimatera" data-name="Odisse Nocere">
+            <a href="characters/character-odisse-nocere.html" class="character-card" data-faction="Reason Theory"
+                data-realm="Ultimatera" data-name="Odisse Nocere">
                 <div class="character-image-container">
                     <img src="assets/headshots/odi.png" alt="Odisse Nocere" class="character-image">
                 </div>
@@ -879,7 +931,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-fu-ci-tianshang.html" class="character-card" data-faction="Reason Theory" data-realm="Ultimatera" data-name="Fú cì Tiānshàng">
+            <a href="characters/character-fu-ci-tianshang.html" class="character-card" data-faction="Reason Theory"
+                data-realm="Ultimatera" data-name="Fú cì Tiānshàng">
                 <div class="character-image-container">
                     <img src="assets/headshots/fuu.png" alt="Fú cì Tiānshàng" class="character-image">
                 </div>
@@ -892,7 +945,8 @@
             </a>
 
             <!-- Characters of Antiquity -->
-            <a href="characters/character-caie-ascala.html" class="character-card" data-faction="Unaffiliated" data-realm="Antiquity" data-name="Caie Ascala">
+            <a href="characters/character-caie-ascala.html" class="character-card" data-faction="Unaffiliated"
+                data-realm="Antiquity" data-name="Caie Ascala">
                 <div class="character-image-container">
                     <img src="assets/headshots/CA.PNG" alt="Caie Ascala" class="character-image">
                 </div>
@@ -904,7 +958,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-clarisieandra.html" class="character-card" data-faction="Unaffiliated" data-realm="Antiquity" data-name="Clarisieandra">
+            <a href="characters/character-clarisieandra.html" class="character-card" data-faction="Unaffiliated"
+                data-realm="Antiquity" data-name="Clarisieandra">
                 <div class="character-image-container">
                     <img src="assets/headshots/PC.png" alt="Clarisieandra" class="character-image">
                 </div>
@@ -916,7 +971,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-windelateami.html" class="character-card" data-faction="Unaffiliated" data-realm="Antiquity" data-name="Windelateami">
+            <a href="characters/character-windelateami.html" class="character-card" data-faction="Unaffiliated"
+                data-realm="Antiquity" data-name="Windelateami">
                 <div class="character-image-container">
                     <img src="assets/headshots/QW.PNG" alt="Windelateami" class="character-image">
                 </div>
@@ -928,7 +984,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-rafe-lliama.html" class="character-card" data-faction="Unaffiliated" data-realm="Antiquity" data-name="Rafé Lliama">
+            <a href="characters/character-rafe-lliama.html" class="character-card" data-faction="Unaffiliated"
+                data-realm="Antiquity" data-name="Rafé Lliama">
                 <div class="character-image-container">
                     <img src="assets/headshots/RL.PNG" alt="Rafé Lliama" class="character-image">
                 </div>
@@ -941,7 +998,8 @@
             </a>
 
             <!-- Novus Combinations -->
-             <a href="characters/character-solamor.html" class="character-card" data-faction="Destiny's Penance" data-realm="Nexsicon" data-name="Solamor">
+            <a href="characters/character-solamor.html" class="character-card" data-faction="Destiny's Penance"
+                data-realm="Nexsicon" data-name="Solamor">
                 <div class="character-image-container">
                     <img src="assets/headshots/SOL.png" alt="Solamor" class="character-image">
                 </div>
@@ -953,7 +1011,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-pluere.html" class="character-card" data-faction="Destiny's Penance" data-realm="Nexsicon" data-name="Pluere">
+            <a href="characters/character-pluere.html" class="character-card" data-faction="Destiny's Penance"
+                data-realm="Nexsicon" data-name="Pluere">
                 <div class="character-image-container">
                     <img src="assets/headshots/PLU.png" alt="Pluere" class="character-image">
                 </div>
@@ -965,7 +1024,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-corstilla.html" class="character-card" data-faction="Destiny's Penance" data-realm="Nexsicon" data-name="Corstilla">
+            <a href="characters/character-corstilla.html" class="character-card" data-faction="Destiny's Penance"
+                data-realm="Nexsicon" data-name="Corstilla">
                 <div class="character-image-container">
                     <img src="assets/headshots/COR.png" alt="Corstilla" class="character-image">
                 </div>
@@ -978,7 +1038,8 @@
             </a>
 
             <!-- Others -->
-            <a href="characters/character-amare.html" class="character-card" data-faction="Unaffiliated" data-realm="Nexsicon" data-name="Amare">
+            <a href="characters/character-amare.html" class="character-card" data-faction="Unaffiliated"
+                data-realm="Nexsicon" data-name="Amare">
                 <div class="character-image-container">
                     <img src="assets/headshots/com.png" alt="Amare" class="character-image">
                 </div>
@@ -990,7 +1051,8 @@
                 </div>
             </a>
 
-            <a href="characters/character-astarri.html" class="character-card" data-faction="Unaffiliated" data-realm="Nexsicon" data-name="Astarri">
+            <a href="characters/character-astarri.html" class="character-card" data-faction="Unaffiliated"
+                data-realm="Nexsicon" data-name="Astarri">
                 <div class="character-image-container">
                     <img src="assets/headshots/com.png" alt="Astarri" class="character-image">
                 </div>
@@ -1023,7 +1085,7 @@
         <section class="cta-section">
             <h2 class="cta-title">Explore the Multiverse</h2>
             <p class="cta-text">
-                Dive deeper into the characters, realms, and conflicts that define the Crios universe. 
+                Dive deeper into the characters, realms, and conflicts that define the Crios universe.
                 Each faction represents a unique philosophical stance on destiny, power, and convergence.
             </p>
             <div class="cta-buttons">
@@ -1034,83 +1096,84 @@
         </section>
     </div>
 
-<script>
-    // 1. Get filter elements
-    const searchInput = document.getElementById('search-input');
-    const factionFilter = document.getElementById('faction-filter');
-    const realmFilter = document.getElementById('realm-filter');
-    const characterGrid = document.getElementById('character-grid');
-    const resultsCount = document.getElementById('results-count');
-    const noResults = document.getElementById('no-results');
+    <script>
+        // 1. Get filter elements
+        const searchInput = document.getElementById('search-input');
+        const factionFilter = document.getElementById('faction-filter');
+        const realmFilter = document.getElementById('realm-filter');
+        const characterGrid = document.getElementById('character-grid');
+        const resultsCount = document.getElementById('results-count');
+        const noResults = document.getElementById('no-results');
 
-    // 2. Filter function
-    function filterCharacters() {
-        // Safety check: if searchInput is commented out, use an empty string
-        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-        const selectedFaction = factionFilter.value;
-        const selectedRealm = realmFilter.value;
+        // 2. Filter function
+        function filterCharacters() {
+            // Safety check: if searchInput is commented out, use an empty string
+            const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+            const selectedFaction = factionFilter.value;
+            const selectedRealm = realmFilter.value;
 
-        const cards = characterGrid.querySelectorAll('.character-card');
-        let visibleCount = 0;
+            const cards = characterGrid.querySelectorAll('.character-card');
+            let visibleCount = 0;
 
-        cards.forEach(card => {
-            const name = (card.getAttribute('data-name') || "").toLowerCase();
-            const faction = card.getAttribute('data-faction');
-            const realm = card.getAttribute('data-realm');
+            cards.forEach(card => {
+                const name = (card.getAttribute('data-name') || "").toLowerCase();
+                const faction = card.getAttribute('data-faction');
+                const realm = card.getAttribute('data-realm');
 
-            const matchesSearch = name.includes(searchTerm);
-            const matchesFaction = selectedFaction === 'all' || faction === selectedFaction;
-            
-            // Logic fix: This ensures "A Realm of Antiquity" matches the "Antiquity" filter option
-            const matchesRealm = selectedRealm === 'all' || 
-                                realm === selectedRealm || 
-                                (selectedRealm === 'Antiquity' && realm === 'A Realm of Antiquity');
+                const matchesSearch = name.includes(searchTerm);
+                const matchesFaction = selectedFaction === 'all' || faction === selectedFaction;
 
-            if (matchesSearch && matchesFaction && matchesRealm) {
-                card.style.display = 'flex';
-                visibleCount++;
+                // Logic fix: This ensures "A Realm of Antiquity" matches the "Antiquity" filter option
+                const matchesRealm = selectedRealm === 'all' ||
+                    realm === selectedRealm ||
+                    (selectedRealm === 'Antiquity' && realm === 'A Realm of Antiquity');
+
+                if (matchesSearch && matchesFaction && matchesRealm) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update results count
+            resultsCount.textContent = visibleCount;
+
+            // Show/hide no results message
+            if (visibleCount === 0) {
+                noResults.classList.add('visible');
+                characterGrid.style.display = 'none';
             } else {
-                card.style.display = 'none';
+                noResults.classList.remove('visible');
+                characterGrid.style.display = 'grid';
             }
-        });
-
-        // Update results count
-        resultsCount.textContent = visibleCount;
-
-        // Show/hide no results message
-        if (visibleCount === 0) {
-            noResults.classList.add('visible');
-            characterGrid.style.display = 'none';
-        } else {
-            noResults.classList.remove('visible');
-            characterGrid.style.display = 'grid';
         }
-    }
 
-    // 3. Clear filters function
-    function clearFilters() {
-        if (searchInput) searchInput.value = '';
-        factionFilter.value = 'all';
-        realmFilter.value = 'all';
+        // 3. Clear filters function
+        function clearFilters() {
+            if (searchInput) searchInput.value = '';
+            factionFilter.value = 'all';
+            realmFilter.value = 'all';
+            filterCharacters();
+        }
+
+        // 4. Add event listeners (The Critical Fix)
+        // We only add the listener if the element actually exists in the HTML
+        if (searchInput) {
+            searchInput.addEventListener('input', filterCharacters);
+        }
+
+        if (factionFilter) {
+            factionFilter.addEventListener('change', filterCharacters);
+        }
+
+        if (realmFilter) {
+            realmFilter.addEventListener('change', filterCharacters);
+        }
+
+        // 5. Initialize the grid view
         filterCharacters();
-    }
-
-    // 4. Add event listeners (The Critical Fix)
-    // We only add the listener if the element actually exists in the HTML
-    if (searchInput) {
-        searchInput.addEventListener('input', filterCharacters);
-    }
-    
-    if (factionFilter) {
-        factionFilter.addEventListener('change', filterCharacters);
-    }
-    
-    if (realmFilter) {
-        realmFilter.addEventListener('change', filterCharacters);
-    }
-
-    // 5. Initialize the grid view
-    filterCharacters();
-</script>
+    </script>
 </body>
+
 </html>

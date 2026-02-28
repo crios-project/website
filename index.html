@@ -12,7 +12,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRIOS PROJECT // A Transmedia Universe</title>
+    <title>CRIOS PROJECT // Enter</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap"
         rel="stylesheet">
@@ -39,31 +39,12 @@
             font-family: 'Archivo', sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
-            overflow-x: hidden;
+            overflow: hidden;
             min-height: 100vh;
-        }
-
-        .press-start {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-align: center;
-            margin-top: 20px;
-            animation: blink 3s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.3;
-            }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
 
         /* Animated background grid */
@@ -120,16 +101,6 @@
             animation: orbFloat2 25s ease-in-out infinite;
         }
 
-        .orb-3 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--accent-cyan), transparent);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: orbPulse 15s ease-in-out infinite;
-        }
-
         @keyframes orbFloat1 {
 
             0%,
@@ -138,7 +109,7 @@
             }
 
             50% {
-                transform: translate(-100px, 100px);
+                transform: translate(-80px, 80px);
             }
         }
 
@@ -150,174 +121,22 @@
             }
 
             50% {
-                transform: translate(100px, -80px);
+                transform: translate(80px, -60px);
             }
         }
 
-        @keyframes orbPulse {
-
-            0%,
-            100% {
-                opacity: 0.15;
-                transform: translate(-50%, -50%) scale(1);
-            }
-
-            50% {
-                opacity: 0.25;
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-        }
-
-        /* Main container */
-        .container {
+        /* Landing container */
+        .landing-container {
+            text-align: center;
             position: relative;
             z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
+            animation: fadeIn 1s ease-out;
         }
 
-        /* Logo section */
-        .logo-section {
-            text-align: center;
-            margin-bottom: 80px;
-            animation: fadeInScale 1.2s ease-out;
-        }
-
-        @keyframes fadeInScale {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.9) translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .tagline {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 400;
-            letter-spacing: 6px;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .subtagline {
-            font-family: 'Archivo', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 300;
-            color: var(--text-dim);
-            font-style: italic;
-            letter-spacing: 1px;
-        }
-
-        /* Updates Section */
-        .updates-section {
-            max-width: 1200px;
-            width: 100%;
-            margin: 50px auto 80px;
-            padding: 0 20px;
-            animation: fadeIn 1s ease-out 0.5s both;
-        }
-
-        .updates-label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--accent-cyan);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .updates-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            font-family: 'Archivo', sans-serif;
-            font-size: 1.15rem;
-            color: var(--text-primary);
-        }
-
-        .updates-prefix {
-            color: var(--text-dim);
-        }
-
-        /* 3D Flip Container */
-        .updates-flip {
-            display: inline-block;
-            position: relative;
-            height: 1.2em;
-            perspective: 1000px;
-            vertical-align: middle;
-            min-width: 400px;
-            /* Adjust based on content length */
-        }
-
-        .updates-flip-item {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .updates-flip-item a {
-            display: block;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            left: 0;
-            top: 0;
-            text-decoration: none;
-            color: var(--secondary-pink);
-            font-weight: 600;
-            transition: color 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .updates-flip-item a:hover {
-            color: var(--accent-cyan);
-            text-shadow: 0 0 8px rgba(0, 217, 255, 0.5);
-        }
-
-        .current-side {
-            transform: rotateX(0deg) translateZ(0.6em);
-        }
-
-        .next-side {
-            transform: rotateX(-90deg) translateZ(0.6em);
-        }
-
-        .is-flipping {
-            transform: rotateX(90deg);
-        }
-
-        /* Navigation cards */
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            width: 100%;
-            margin-bottom: 60px;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(-20px);
             }
 
             to {
@@ -326,155 +145,16 @@
             }
         }
 
-        .nav-card {
-            background: var(--dark-panel);
-            border: 2px solid rgba(233, 30, 99, 0.2);
-            border-radius: 16px;
-            padding: 40px 32px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Logo */
+        .logo-container {
             position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: block;
+            width: 1000px;
+            max-width: 80vw;
+            aspect-ratio: 1000 / 530;
+            margin: 0 auto 60px;
         }
 
-        .nav-card:hover {
-            border-color: var(--secondary-pink);
-            box-shadow: var(--glow-pink);
-            transform: translateY(-8px);
-        }
-
-        .nav-card-icon {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 16px;
-        }
-
-        .nav-card-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .nav-card-desc {
-            font-family: 'Archivo', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 300;
-            color: var(--text-dim);
-            line-height: 1.6;
-        }
-
-        /* Info panel */
-        .info-panel {
-            max-width: 800px;
-            background: rgba(20, 20, 25, 0.8);
-            border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px;
-            padding: 28px;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            animation: fadeIn 1s ease-out 0.6s both;
-            margin-bottom: 40px;
-        }
-
-        .info-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--secondary-pink);
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .info-text {
-            font-family: 'Archivo', sans-serif;
-            font-size: 1rem;
-            line-height: 1.8;
-            color: var(--text-dim);
-            margin-bottom: 16px;
-        }
-
-        .info-signature {
-            font-family: 'Archivo', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--accent-cyan);
-            font-style: italic;
-            text-align: right;
-            margin-top: 20px;
-        }
-
-        /* Footer links */
-        .footer-links {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-            animation: fadeIn 1s ease-out 0.9s both;
-        }
-
-        .footer-link {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-dim);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            padding: 12px 24px;
-            border: 1px solid rgba(233, 30, 99, 0.3);
-            border-radius: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--accent-cyan);
-            border-color: var(--accent-cyan);
-            box-shadow: var(--glow-cyan);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .logo-text {
-                font-size: 3rem;
-                letter-spacing: 6px;
-            }
-
-            .updates-container {
-                font-size: 1rem;
-                flex-direction: column;
-            }
-
-            .updates-flip {
-                min-width: 100%;
-                text-align: center;
-            }
-
-            .nav-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .fadein {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 500 / 265;
-            margin: 0 auto 20px auto;
-        }
-
-        .fadein img {
+        .logo-container img {
             position: absolute;
             top: 0;
             left: 50%;
@@ -484,112 +164,127 @@
             object-fit: contain;
         }
 
-        .fadein img:nth-child(1) {
+        .logo-shadow {
             z-index: 2;
-            animation: fadeOnce 3s ease-in-out 2s forwards;
+            animation: logoFade 3s ease-in-out 1s forwards;
         }
 
-        .fadein img:nth-child(2) {
+        .logo-color {
             z-index: 1;
             opacity: 1;
         }
 
-        @keyframes fadeOnce {
-            from {
-                opacity: 1;
-            }
-
+        @keyframes logoFade {
             to {
                 opacity: 0;
             }
         }
 
-        /* Prologue Button */
-        .prologue-btn {
+        /* Tagline */
+        .tagline {
             font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 6px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .subtagline {
+            font-family: 'Archivo', sans-serif;
             font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 300;
+            color: var(--text-dim);
+            font-style: italic;
+            letter-spacing: 1px;
+            margin-bottom: 80px;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        /* Continue button */
+        .continue-btn {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
             color: var(--text-primary);
+            background: transparent;
+            border: 2px solid var(--text-dim);
+            padding: 18px 50px;
+            cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 4px;
-            padding: 16px 48px;
-            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
-            border: 2px solid var(--secondary-pink);
             border-radius: 8px;
-            cursor: pointer;
             transition: all 0.4s ease;
-            margin-top: 40px;
             position: relative;
             overflow: hidden;
-            z-index: 1;
+            text-decoration: none;
+            display: inline-block;
+            animation: pulse 3s ease-in-out 2s infinite;
         }
 
-        .prologue-btn:hover {
-            box-shadow: var(--glow-pink);
-            transform: scale(1.05);
-        }
+        @keyframes pulse {
 
-        /* Video Lightbox */
-        .video-lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 9999;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-        }
-
-        .video-lightbox.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .video-container {
-            position: relative;
-            max-width: 90%;
-            max-height: 90vh;
-            background: var(--dark-panel);
-            border: 3px solid var(--secondary-pink);
-            border-radius: 16px;
-            padding: 20px;
-        }
-
-        .video-close {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            width: 50px;
-            height: 50px;
-            background: var(--secondary-pink);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            cursor: pointer;
-        }
-
-        .video-wrapper {
-            width: 100%;
-            max-width: 1200px;
-            aspect-ratio: 16 / 9;
-        }
-
-        .video-wrapper video {
-            width: 100%;
-            height: 100%;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
+            0%,
+            100% {
+                border-color: var(--text-dim);
+                box-shadow: none;
             }
 
-            to {
-                opacity: 1;
+            50% {
+                border-color: var(--secondary-pink);
+                box-shadow: 0 0 20px rgba(233, 30, 99, 0.5);
+            }
+        }
+
+        .continue-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(233, 30, 99, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .continue-btn:hover::before {
+            left: 100%;
+        }
+
+        .continue-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: var(--glow-cyan), var(--glow-pink);
+            transform: translateY(-3px);
+        }
+
+        .continue-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo-container {
+                max-width: 90vw;
+                margin-bottom: 40px;
+            }
+
+            .tagline {
+                font-size: 0.85rem;
+                letter-spacing: 4px;
+            }
+
+            .subtagline {
+                font-size: 1rem;
+                margin-bottom: 60px;
+            }
+
+            .continue-btn {
+                font-size: 0.85rem;
+                padding: 16px 40px;
+                letter-spacing: 3px;
             }
         }
     </style>
@@ -599,173 +294,16 @@
     <div class="bg-grid"></div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
 
-    <div class="container">
-        <div class="logo-section">
-            <div class="fadein">
-                <img src="assets/icons/Crios2020S.png" alt="CRIOS Logo Variant A">
-                <img src="assets/icons/Crios2020.png" alt="CRIOS Logo Variant B">
-            </div>
-            <p class="tagline">Harmonic Convergence</p>
-            <p class="subtagline">A Transmedia Storytelling Universe</p>
+    <div class="landing-container">
+        <div class="logo-container">
+            <img src="assets/icons/Crios2020S.png" alt="CRIOS Logo Shadow" class="logo-shadow">
+            <img src="assets/icons/Crios2020.png" alt="CRIOS Logo" class="logo-color">
         </div>
-
-        <div class="nav-grid">
-            <a href="timeline.html" class="nav-card">
-                <div class="nav-card-icon">⟡</div>
-                <h2 class="nav-card-title">Enter the World</h2>
-                <p class="nav-card-desc">Explore the narrative and chronological timelines. Witness the convergence of
-                    realms and the clash of destinies across multiple arcs.</p>
-            </a>
-
-            <a href="factions.html" class="nav-card">
-                <div class="nav-card-icon">◈</div>
-                <h2 class="nav-card-title">Explore Factions</h2>
-                <p class="nav-card-desc">Discover the five major factions: Heart Melody, Starlite 7th, Destiny's
-                    Penance, Reason Theory, and Praxis Verax Affinas.</p>
-            </a>
-
-            <a href="overview.html" class="nav-card">
-                <div class="nav-card-icon">✦</div>
-                <h2 class="nav-card-title">About the Project</h2>
-                <p class="nav-card-desc">Learn about the 16-year transmedia universe, the Versa card game, and the
-                    vision behind Crios.</p>
-            </a>
-        </div>
-
-        <div class="info-panel">
-            <h3 class="info-title">What is Crios?</h3>
-            <p class="info-text">
-                A <strong>crios</strong> is a multicolored woven woolen belt. In a similar sense, the Crios project is a
-                story woven with diverse characters and told through multiple mediums—video games, tabletop games,
-                comics, audio dramas, novels, animation, and more.
-            </p>
-            <p class="info-text">
-                The goal is not only to entertain but to craft something that uses storytelling in every medium to tell
-                a story that can only be told through that medium.
-            </p>
-            <p class="info-signature">— Davisem, Creator and Architect of the Crios Project</p>
-        </div>
-
-        <div class="updates-section">
-            <div class="updates-label">Latest Updates</div>
-            <div class="updates-container">
-                <div class="updates-flip">
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-links">
-            <a href="characters.html" class="footer-link">Characters</a>
-            <a href="realms.html" class="footer-link">Realms</a>
-            <a href="lore.html" class="footer-link">Lore</a>
-            <a href="magic.html" class="footer-link">Magic</a>
-            <a href="arsenal.html" class="footer-link">Arsenal</a>
-            <a href="glossary.html" class="footer-link">Glossary</a>
-            <a href="stories.html" class="footer-link">Stories</a>
-        </div>
-
-        <button class="prologue-btn" onclick="openVideo()">Prologue</button>
-        <p class="press-start">[ Select to Continue ]</p>
+        <p class="tagline">Harmonic Convergence</p>
+        <p class="subtagline">A Transmedia Storytelling Universe</p>
+        <a href="home.html" class="continue-btn">[ Enter the Crios Multiverse ]</a>
     </div>
-
-    <div id="videoLightbox" class="video-lightbox" onclick="closeVideoOnOutsideClick(event)">
-        <div class="video-container">
-            <button class="video-close" onclick="closeVideo()">×</button>
-            <h2 class="video-title"
-                style="text-align: center; color: var(--secondary-pink); font-family: 'Orbitron'; margin-bottom: 15px;">
-                Prologue</h2>
-            <div class="video-wrapper">
-                <video id="prologueVideo" controls>
-                    <source src="assets/videos/prologue.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-    </div>
-
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const video = document.getElementById("prologueVideo");
-            video.volume = 0.1;
-        });
-
-        function openVideo() {
-            document.getElementById('videoLightbox').classList.add('active');
-            document.getElementById('prologueVideo').play();
-        }
-
-        function closeVideo() {
-            const video = document.getElementById('prologueVideo');
-            document.getElementById('videoLightbox').classList.remove('active');
-            video.pause();
-            video.currentTime = 0;
-        }
-
-        function closeVideoOnOutsideClick(event) {
-            if (event.target.id === 'videoLightbox') closeVideo();
-        }
-
-        // --- Updates Rotation System (Aceternity Style) ---
-        const updates = [
-            { text: "New Hearts - Pyara's First Transformation", link: "stories/story-new-hearts.html" },
-            { text: "Character Database - Explore relationships", link: "NexusDB.html" },
-            { text: "Ultimatera Map - Interactive realm exploration", link: "ultimatera-map.html" },
-            { text: "Enemy Factions - Crystallines & Demons unveiled", link: "enemies.html" }
-        ];
-
-        let currentUpdateIndex = 0;
-        let isPaused = false;
-        const flipContainer = document.querySelector('.updates-flip');
-
-        // Initial setup of the 3D structure
-        flipContainer.innerHTML = `
-            <div class="updates-flip-item">
-                <a href="${updates[0].link}" class="current-side">${updates[0].text}</a>
-                <a href="#" class="next-side"></a>
-            </div>
-        `;
-
-        const flipItem = flipContainer.querySelector('.updates-flip-item');
-
-        function performFlip() {
-            if (isPaused) {
-                setTimeout(performFlip, 1000);
-                return;
-            }
-
-            const nextIndex = (currentUpdateIndex + 1) % updates.length;
-            const nextSide = flipItem.querySelector('.next-side');
-            const currentSide = flipItem.querySelector('.current-side');
-
-            nextSide.innerText = updates[nextIndex].text;
-            nextSide.href = updates[nextIndex].link;
-
-            flipItem.classList.add('is-flipping');
-
-            setTimeout(() => {
-                currentSide.innerText = updates[nextIndex].text;
-                currentSide.href = updates[nextIndex].link;
-
-                flipItem.style.transition = 'none';
-                flipItem.classList.remove('is-flipping');
-                void flipItem.offsetWidth; // Trigger reflow
-                flipItem.style.transition = '';
-
-                currentUpdateIndex = nextIndex;
-                setTimeout(performFlip, 6000); // 6 second wait after reset
-            }, 600);
-        }
-
-        flipContainer.addEventListener('mouseenter', () => { isPaused = true; });
-        flipContainer.addEventListener('mouseleave', () => { isPaused = false; });
-
-        // Start the first flip after initial delay
-        setTimeout(performFlip, 6000);
-    </script>
 </body>
 
 </html>

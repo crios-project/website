@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lore // CRIOS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -46,7 +49,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -108,6 +111,7 @@
             margin-bottom: 80px;
             animation: fadeIn 0.8s ease-out;
         }
+
         /* Header */
         .header-nav {
             position: sticky;
@@ -122,6 +126,7 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .header-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 1rem;
@@ -130,9 +135,17 @@
             text-transform: uppercase;
             letter-spacing: 3px;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .page-title {
@@ -162,14 +175,32 @@
             animation: fadeInUp 0.6s ease-out both;
         }
 
-        .accordion-section:nth-child(1) { animation-delay: 0.1s; }
-        .accordion-section:nth-child(2) { animation-delay: 0.2s; }
-        .accordion-section:nth-child(3) { animation-delay: 0.3s; }
-        .accordion-section:nth-child(4) { animation-delay: 0.4s; }
+        .accordion-section:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .accordion-section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .accordion-section:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .accordion-section:nth-child(4) {
+            animation-delay: 0.4s;
+        }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .accordion-header {
@@ -325,9 +356,18 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
+
         /* Coming soon */
-        .coming-soon-card { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
-        .coming-soon-card .story-type { color: var(--text-dim); }
+        .coming-soon-card {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .coming-soon-card .story-type {
+            color: var(--text-dim);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .page-title {
@@ -352,12 +392,13 @@
         }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
 
     <!-- Header Navigation -->
     <nav class="header-nav">
-        <a href="index.html" class="back-link">← Home</a>
+        <a href="home.html" class="back-link">← Home</a>
         <div class="header-title">Lore Index</div>
         <div style="width: 80px;"></div>
     </nav>
@@ -366,7 +407,8 @@
         <!-- Page Header -->
         <header class="page-header">
             <h1 class="page-title">LORE</h1>
-            <p class="page-subtitle">Delve into the foundational concepts, magical systems, and artifacts that define the Crios multiverse</p>
+            <p class="page-subtitle">Delve into the foundational concepts, magical systems, and artifacts that define
+                the Crios multiverse</p>
         </header>
 
         <!-- Magic Systems Section -->
@@ -383,7 +425,9 @@
                     <a href="magic/magic-lumenai.html" class="content-card">
                         <div class="content-card-title">Lúmenai</div>
                         <div class="content-card-desc">
-                            Harmonic resonance system where magic manifests through emotional, intentional, and spiritual consonance. Power arises when intent, emotion, and will synchronize into a cohesive metaphysical "voice."
+                            Harmonic resonance system where magic manifests through emotional, intentional, and
+                            spiritual consonance. Power arises when intent, emotion, and will synchronize into a
+                            cohesive metaphysical "voice."
                         </div>
                         <div class="content-card-tag">Beeston • Sung Magic</div>
                     </a>
@@ -391,7 +435,9 @@
                     <a href="magic/magic-element-core.html" class="content-card">
                         <div class="content-card-title">Element Core System</div>
                         <div class="content-card-desc">
-                            Tiered elemental framework ranging from foundational elements (Fire, Water, Earth, Wind) through advanced conjoinments (Ice, Lightning, Metal) to transcendent tiers (Light, Dark, Neon Ultra).
+                            Tiered elemental framework ranging from foundational elements (Fire, Water, Earth, Wind)
+                            through advanced conjoinments (Ice, Lightning, Metal) to transcendent tiers (Light, Dark,
+                            Neon Ultra).
                         </div>
                         <div class="content-card-tag">Royastella • Tiered Elements</div>
                     </a>
@@ -399,7 +445,9 @@
                     <a href="magic/magic-cymora.html" class="content-card">
                         <div class="content-card-title">Cymora</div>
                         <div class="content-card-desc">
-                            Linguistic magic system where reality responds to structured harmonic language. Practitioners manipulate existence through precise phonetic patterns and resonant frequencies embedded in speech.
+                            Linguistic magic system where reality responds to structured harmonic language.
+                            Practitioners manipulate existence through precise phonetic patterns and resonant
+                            frequencies embedded in speech.
                         </div>
                         <div class="content-card-tag">Nexsicon • Language Magic</div>
                     </a>
@@ -421,7 +469,8 @@
                     <a href="lore/lore-akashic-record.html" class="content-card">
                         <div class="content-card-title">Akashic Record</div>
                         <div class="content-card-desc">
-                            The metaphysical archive of all events, possibilities, and convergence pathways across the multiverse. A cosmic library containing every choice made and unmade.
+                            The metaphysical archive of all events, possibilities, and convergence pathways across the
+                            multiverse. A cosmic library containing every choice made and unmade.
                         </div>
                         <div class="content-card-tag">Metaphysical • Archive</div>
                     </a>
@@ -429,7 +478,8 @@
                     <a href="lore/lore-aspects-of-infinity.html" class="content-card">
                         <div class="content-card-title">Aspects of Infinity</div>
                         <div class="content-card-desc">
-                            Physical manifestations of abstract infinite concepts (e.g. Eternity, Void, Chaos) that, when harnessed, allow wielders to tap into unfathomable power at great risk.
+                            Physical manifestations of abstract infinite concepts (e.g. Eternity, Void, Chaos) that,
+                            when harnessed, allow wielders to tap into unfathomable power at great risk.
                         </div>
                         <div class="content-card-tag">Concept • Power Source</div>
                     </a>
@@ -437,7 +487,8 @@
                     <a href="lore/lore-cascade-resonance.html" class="content-card">
                         <div class="content-card-title">Cascade Resonance</div>
                         <div class="content-card-desc">
-                            Catastrophic event where harmonic instability propagates across multiple realms simultaneously, threatening structural integrity of dimensional boundaries.
+                            Catastrophic event where harmonic instability propagates across multiple realms
+                            simultaneously, threatening structural integrity of dimensional boundaries.
                         </div>
                         <div class="content-card-tag">Event • Crisis</div>
                     </a>
@@ -445,7 +496,8 @@
                     <a href="lore/lore-light-blade-revolver.html" class="content-card">
                         <div class="content-card-title">Light Blade Revolver</div>
                         <div class="content-card-desc">
-                            Signature weapon system of Alulu Dayk. Manifests tier-scaled ranged and melee weapons through rotating harmonic resonance chambers.
+                            Signature weapon system of Alulu Dayk. Manifests tier-scaled ranged and melee weapons
+                            through rotating harmonic resonance chambers.
                         </div>
                         <div class="content-card-tag">Weapon • Technology</div>
                     </a>
@@ -453,7 +505,8 @@
                     <a href="lore/lore-lodesoul-theorem.html" class="content-card">
                         <div class="content-card-title">Lodesoul Theorem</div>
                         <div class="content-card-desc">
-                            The principle that each realm possesses a central metaphysical anchor (lodesoul) which maintains its existential coherence and prevents dissolution into the void.
+                            The principle that each realm possesses a central metaphysical anchor (lodesoul) which
+                            maintains its existential coherence and prevents dissolution into the void.
                         </div>
                         <div class="content-card-tag">Theory • Cosmology</div>
                     </a>
@@ -461,7 +514,8 @@
                     <a href="lore/lore-paradox-bracers.html" class="content-card">
                         <div class="content-card-title">Paradox Bracers</div>
                         <div class="content-card-desc">
-                            Artifacts that allow limited manipulation of temporal causality. Dangerous to use due to their tendency to create cascading reality fractures.
+                            Artifacts that allow limited manipulation of temporal causality. Dangerous to use due to
+                            their tendency to create cascading reality fractures.
                         </div>
                         <div class="content-card-tag">Artifact • Temporal</div>
                     </a>
@@ -469,7 +523,8 @@
                     <a href="lore/lore-realm-convergence.html" class="content-card">
                         <div class="content-card-title">Realm Convergence</div>
                         <div class="content-card-desc">
-                            The prophesied collapse of dimensional barriers leading to the fusion of all parallel realities into a singular unified existence—Ultimatera.
+                            The prophesied collapse of dimensional barriers leading to the fusion of all parallel
+                            realities into a singular unified existence—Ultimatera.
                         </div>
                         <div class="content-card-tag">Prophecy • Convergence</div>
                     </a>
@@ -477,7 +532,8 @@
                     <a href="lore/lore-tianshang-legacy.html" class="content-card">
                         <div class="content-card-title">Tiānshàng Legacy</div>
                         <div class="content-card-desc">
-                            Ancient magical lineage tied to transformation and identity fragmentation. Central to the mystery surrounding Xīwàng's disappearance and Fú cì's current state.
+                            Ancient magical lineage tied to transformation and identity fragmentation. Central to the
+                            mystery surrounding Xīwàng's disappearance and Fú cì's current state.
                         </div>
                         <div class="content-card-tag">Lineage • Transformation</div>
                     </a>
@@ -497,78 +553,86 @@
             </div>
             <div class="accordion-content">
                 <div class="content-grid">
-                <div class="content-card coming-soon-card">
+                    <div class="content-card coming-soon-card">
                         <div class="content-card-title">New Hearts</div>
                         <div class="content-card-desc">
-                            The formation of Lovely Hearts and the rise of Pyara Dana. Explores the early days of the rebellion against the oppressive regime in Beeston and the establishment of their unique harmonic magic.
+                            The formation of Lovely Hearts and the rise of Pyara Dana. Explores the early days of the
+                            rebellion against the oppressive regime in Beeston and the establishment of their unique
+                            harmonic magic.
                         </div>
                         <div class="content-card-tag">Beeston • Origins </div>
-                </div>
+                    </div>
 
-                <a href="stories/story-aria-caesura.html" class="content-card">
+                    <a href="stories/story-aria-caesura.html" class="content-card">
                         <div class="content-card-title">Aria Caesura</div>
                         <div class="content-card-desc">
-                            Climax of the Lovely Hearts arc. Explores the consequences of dissonant discord's Tier 4 strike and the resulting harmonic collapse.
+                            Climax of the Lovely Hearts arc. Explores the consequences of dissonant discord's Tier 4
+                            strike and the resulting harmonic collapse.
                         </div>
                         <div class="content-card-tag">Beeston • Heart Melody</div>
-                </a>
+                    </a>
 
-                <div class="content-card coming-soon-card">
+                    <div class="content-card coming-soon-card">
                         <div class="content-card-title">Crowned</div>
                         <div class="content-card-desc">
-                            The selection and assembly of Starlite 7th. Focuses on the individual champions and their initial reactions to being chosen.
+                            The selection and assembly of Starlite 7th. Focuses on the individual champions and their
+                            initial reactions to being chosen.
                         </div>
                         <div class="content-card-tag">Royastella • Starlite 7th</div>
-                </div>
+                    </div>
 
-                <div class="content-card coming-soon-card">
+                    <div class="content-card coming-soon-card">
                         <div class="content-card-title">Regicide</div>
                         <div class="content-card-desc">
-                            The betrayel of Starlite 7th by BLADE GUILLOTINE. Increases the threat level of the enemy forces and puts the team on the back foot. First appearance of Starlite Alpha.
+                            The betrayel of Starlite 7th by BLADE GUILLOTINE. Increases the threat level of the enemy
+                            forces and puts the team on the back foot. First appearance of Starlite Alpha.
                         </div>
-                        <div class="content-card-tag">Royastella • Betrayal</div> 
-                </div>
+                        <div class="content-card-tag">Royastella • Betrayal</div>
+                    </div>
 
-                <a href="stories/story-symphonic-overture.html" class="content-card">
+                    <a href="stories/story-symphonic-overture.html" class="content-card">
                         <div class="content-card-title">Symphonic Overture</div>
                         <div class="content-card-desc">
-                            A major harmonic conflict event that marks the first appearance of Mahana Sahi in Royastella. Establishes the narrative of cross-realm instability and escalating tensions.
+                            A major harmonic conflict event that marks the first appearance of Mahana Sahi in
+                            Royastella. Establishes the narrative of cross-realm instability and escalating tensions.
                         </div>
                         <div class="content-card-tag">Royastella • Major Event</div>
-                </a> 
+                    </a>
 
-                <div class="content-card coming-soon-card">
+                    <div class="content-card coming-soon-card">
                         <div class="content-card-title">Avant-Garde Composition</div>
                         <div class="content-card-desc">
-                            The kidnapping of Mahana Sahi by dissonant discord and the opening of the rift to Nexsicon. Sets the stage for cross-realm conflict and the introduction of new characters.
+                            The kidnapping of Mahana Sahi by dissonant discord and the opening of the rift to Nexsicon.
+                            Sets the stage for cross-realm conflict and the introduction of new characters.
                         </div>
                         <div class="content-card-tag">Beeston • Crossover</div>
-                </div>
+                    </div>
 
-                <a href="stories/story-bluish-green-truths.html" class="content-card">
+                    <a href="stories/story-bluish-green-truths.html" class="content-card">
                         <div class="content-card-title">Bluish-Green Truths</div>
                         <div class="content-card-desc">
                             Alulu Caelum meets Claris Quies after a failed attempt at corporate espionage.
                         </div>
                         <div class="content-card-tag">Royastella • Aftermath</div>
-                </a>
+                    </a>
 
-                <a href="stories.html" class="content-card">
+                    <a href="stories.html" class="content-card">
                         <div class="content-card-title">View all stories</div>
                         <div class="content-card-desc">
-                            Browse the complete collection of short stories set in the Crios multiverse. Explore character backstories, side plots, and key events that enrich the main narrative.
+                            Browse the complete collection of short stories set in the Crios multiverse. Explore
+                            character backstories, side plots, and key events that enrich the main narrative.
                         </div>
                         <div class="content-card-tag">All Stories • Short Stories Collection</div>
-                </a>
+                    </a>
+                </div>
             </div>
-        </div>
         </div>
     </div>
 
     <script>
         function toggleAccordion(header) {
             const isActive = header.classList.contains('active');
-            
+
             // Close all accordions
             document.querySelectorAll('.accordion-header').forEach(h => {
                 h.classList.remove('active');
@@ -583,4 +647,5 @@
         }
     </script>
 </body>
+
 </html>
