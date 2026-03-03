@@ -668,84 +668,88 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const video = document.getElementById("prologueVideo");
-            video.volume = 0.1;
-        });
+    document.addEventListener('DOMContentLoaded', () => {
+        const video = document.getElementById("prologueVideo");
+        video.volume = 0.1;
+    });
 
-        function openVideo() {
-            document.getElementById('videoLightbox').classList.add('active');
-            document.getElementById('prologueVideo').play();
+    function openVideo() {
+        document.getElementById('videoLightbox').classList.add('active');
+        document.getElementById('prologueVideo').play();
+    }
+
+    function closeVideo() {
+        const video = document.getElementById('prologueVideo');
+        document.getElementById('videoLightbox').classList.remove('active');
+        video.pause();
+        video.currentTime = 0;
+    }
+
+    function closeVideoOnOutsideClick(event) {
+        if (event.target.id === 'videoLightbox') closeVideo();
+    }
+
+    // --- Updates Rotation System ---
+    const updates = [
+        { text: "New Hearts - Pyara's First Transformation", link: "stories/story-new-hearts.html" },
+        { text: "Character Database - Explore relationships", link: "characters/NexusDB.html" },
+        { text: "Ultimatera Map - Interactive realm exploration", link: "realms/ultimatera-map.html" },
+        { text: "Enemy Factions - Crystallines & Demons unveiled", link: "factions/enemy-factions.html" }
+    ];
+
+    let currentUpdateIndex = 0;
+    let isPaused = false;
+    const flipContainer = document.querySelector('.updates-flip');
+
+    // Initial setup 
+    flipContainer.innerHTML = `
+        <div class="updates-flip-item">
+            <a href="${updates[0].link}" class="current-side">${updates[0].text}</a>
+            <a href="#" class="next-side"></a>
+        </div>
+    `;
+
+    const flipItem = flipContainer.querySelector('.updates-flip-item');
+
+    function performFlip() {
+        if (isPaused) {
+            setTimeout(performFlip, 1000);
+            return;
         }
 
-        function closeVideo() {
-            const video = document.getElementById('prologueVideo');
-            document.getElementById('videoLightbox').classList.remove('active');
-            video.pause();
-            video.currentTime = 0;
-        }
+        const nextIndex = (currentUpdateIndex + 1) % updates.length;
+        const currentSide = flipItem.querySelector('.current-side');
+        const nextSide = flipItem.querySelector('.next-side');
 
-        function closeVideoOnOutsideClick(event) {
-            if (event.target.id === 'videoLightbox') closeVideo();
-        }
+        // 1. Prepare the back-face (nextSide) before the flip starts
+        nextSide.innerText = updates[nextIndex].text;
+        nextSide.href = updates[nextIndex].link;
 
-        // --- Updates Rotation System (Aceternity Style) ---
-        const updates = [
-            { text: "New Hearts - Pyara's First Transformation", link: "stories/story-new-hearts.html" },
-            { text: "Character Database - Explore relationships", link: "NexusDB.html" },
-            { text: "Ultimatera Map - Interactive realm exploration", link: "ultimatera-map.html" },
-            { text: "Enemy Factions - Crystallines & Demons unveiled", link: "enemies.html" }
-        ];
+        // 2. Trigger the CSS transition
+        flipItem.classList.add('is-flipping');
 
-        let currentUpdateIndex = 0;
-        let isPaused = false;
-        const flipContainer = document.querySelector('.updates-flip');
+        setTimeout(() => {
+            // 3. After the flip completes, update the front-face (currentSide)
+            // This ensures that when the animation resets, the link is correct.
+            currentSide.innerText = updates[nextIndex].text;
+            currentSide.href = updates[nextIndex].link;
 
-        // Initial setup of the 3D structure
-        flipContainer.innerHTML = `
-            <div class="updates-flip-item">
-                <a href="${updates[0].link}" class="current-side">${updates[0].text}</a>
-                <a href="#" class="next-side"></a>
-            </div>
-        `;
+            // 4. Instantly reset the rotation without animation
+            flipItem.style.transition = 'none';
+            flipItem.classList.remove('is-flipping');
+            void flipItem.offsetWidth; // Force DOM reflow
+            flipItem.style.transition = '';
 
-        const flipItem = flipContainer.querySelector('.updates-flip-item');
+            currentUpdateIndex = nextIndex;
+            setTimeout(performFlip, 6000); 
+        }, 600); // Matches the 0.6s transition in CSS
+    }
 
-        function performFlip() {
-            if (isPaused) {
-                setTimeout(performFlip, 1000);
-                return;
-            }
+    flipContainer.addEventListener('mouseenter', () => { isPaused = true; });
+    flipContainer.addEventListener('mouseleave', () => { isPaused = false; });
 
-            const nextIndex = (currentUpdateIndex + 1) % updates.length;
-            const nextSide = flipItem.querySelector('.next-side');
-            const currentSide = flipItem.querySelector('.current-side');
-
-            nextSide.innerText = updates[nextIndex].text;
-            nextSide.href = updates[nextIndex].link;
-
-            flipItem.classList.add('is-flipping');
-
-            setTimeout(() => {
-                currentSide.innerText = updates[nextIndex].text;
-                currentSide.href = updates[nextIndex].link;
-
-                flipItem.style.transition = 'none';
-                flipItem.classList.remove('is-flipping');
-                void flipItem.offsetWidth; // Trigger reflow
-                flipItem.style.transition = '';
-
-                currentUpdateIndex = nextIndex;
-                setTimeout(performFlip, 6000); // 6 second wait after reset
-            }, 600);
-        }
-
-        flipContainer.addEventListener('mouseenter', () => { isPaused = true; });
-        flipContainer.addEventListener('mouseleave', () => { isPaused = false; });
-
-        // Start the first flip after initial delay
-        setTimeout(performFlip, 6000);
-    </script>
+    setTimeout(performFlip, 6000);
+</script>
 </body>
 
 </html>
