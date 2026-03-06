@@ -1,119 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-<meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crios" />
-  <link rel="manifest" href="/site.webmanifest" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Regicide - Coming Soon</title>
-        <style>
+
+<head>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regicide // Coming Soon</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
+            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
         body {
-  background: #00091B;
-  color: #fff;
-}
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
+        /* Animated background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+            animation: gridFloat 20s linear infinite;
+        }
 
-@keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        @keyframes gridFloat {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(40px);
+            }
+        }
 
-@-webkit-keyframes fadeIn {
-  from {top: 20%; opacity: 0;}
-  to {top: 100; opacity: 1;}
-  
-}
+        /* Gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-.wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  -webkit-animation: fadeIn 1000ms ease;
-  animation: fadeIn 1000ms ease;
-}
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -200px;
+            animation: orbFloat1 20s ease-in-out infinite;
+        }
 
-h1 {
-  font-size: 50px;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0;
-  line-height: 1;
-  font-weight: 700;
-  text-align: center;
-}
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: orbFloat2 25s ease-in-out infinite;
+        }
 
-.dot {
-  color: #4FEBFE;
-}
+        @keyframes orbFloat1 {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(-100px, 100px);
+            }
+        }
 
-p {
-  text-align: center;
-  margin: 18px;
-  font-family: 'Muli', sans-serif;
-  font-weight: normal;
-  
-}
+        @keyframes orbFloat2 {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(100px, -80px);
+            }
+        }
 
-.icons {
-  text-align: center;
-  
-}
+        /* Content container */
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px;
+            animation: fadeIn 1s ease-out;
+        }
 
-.icons i {
-  color: #00091B;
-  background: #fff;
-  height: 15px;
-  width: 15px;
-  padding: 13px;
-  margin: 0 10px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  transition: all 200ms ease;
-  text-decoration: none;
-  position: relative;
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.icons i:hover, .icons i:active {
-  color: #fff;
-  background: none;
-  cursor: pointer !important;
-  -webkit-transform: scale(1.2);
-  transform: scale(1.2);
-  text-decoration: none;
-}
+        /* Title */
+        .coming-soon-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 40px;
+            line-height: 1.3;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
 
-.back-button {
-  background-color: #23406F; /* A nice blue color */
-  border: none;
-  color: white; /* White text */
-  padding: 10px 20px; /* Spacing inside the button */
-  text-align: center;
-  text-decoration: none; /* Remove underline from <a> tags if used */
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer; /* Change cursor on hover */
-  border-radius: 8px; /* Rounded corners */
-}
+        .story-label {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            font-weight: 400;
+            display: block;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+        }
 
-.back-button:hover {
-  background-color: #FFFFFF; /* Change background on hover */
-  color: #23406F; /* Change text color on hover */
-  border: 1px solid #23406F;
-}
+        .story-name {
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            animation: glow 3s ease-in-out infinite;
+        }
 
-</style>
-    </head>
-    <body>
-<div class="wrapper">
-  <h1>Short story <span class="dot">"Regicide"</span> coming soon<span class="dot">.</span></h1>
-<button class="back-button" onclick="history.back()">Go Back</button>
- </div>
-    </body>
+        @keyframes glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px rgba(233, 30, 99, 0.4));
+            }
+            50% {
+                filter: drop-shadow(0 0 25px rgba(233, 30, 99, 0.8)) drop-shadow(0 0 40px rgba(0, 217, 255, 0.4));
+            }
+        }
+
+        .coming-text {
+            color: var(--text-dim);
+            font-weight: 400;
+            letter-spacing: 4px;
+        }
+
+        .dot {
+            color: var(--accent-cyan);
+            font-weight: 900;
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 60px;
+            font-style: italic;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        /* Back button */
+        .back-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            background: transparent;
+            border: 2px solid var(--text-dim);
+            padding: 16px 40px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .back-button:hover::before {
+            left: 100%;
+        }
+
+        .back-button:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .back-button:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .coming-soon-title {
+                font-size: 2rem;
+            }
+
+            .story-label {
+                font-size: 0.9rem;
+                letter-spacing: 3px;
+            }
+
+            .story-name {
+                font-size: 2.5rem;
+            }
+
+            .coming-text {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .back-button {
+                font-size: 0.85rem;
+                padding: 14px 32px;
+            }
+
+            .wrapper {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="wrapper">
+        <h1 class="coming-soon-title">
+            <span class="story-label">Short Story</span>
+            <span class="story-name">Regicide</span>
+            <span class="coming-text">Coming Soon<span class="dot">.</span></span>
+        </h1>
+        <p class="subtitle">BLADE GUILLOTINE's betrayal unfolds soon.</p>
+        <button class="back-button" onclick="history.back()">← Go Back</button>
+    </div>
+</body>
+
 </html>
