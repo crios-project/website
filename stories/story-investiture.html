@@ -2,19 +2,11 @@
 <html lang="en">
 
 <head>
-
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Crios" />
-    <link rel="manifest" href="/site.webmanifest" />
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investiture // Coming Soon</title>
+    <title>Investiture // CRIOS Short Story</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
         rel="stylesheet">
     <style>
         * {
@@ -31,19 +23,15 @@
             --dark-panel: #141419;
             --text-primary: #e8e8f0;
             --text-dim: #8888a8;
-            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
-            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
 
         body {
             font-family: 'Archivo', sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            line-height: 1.9;
+            overflow-x: hidden;
         }
 
         /* Animated background */
@@ -53,8 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
@@ -67,6 +54,7 @@
             0% {
                 transform: translateY(0);
             }
+
             100% {
                 transform: translateY(40px);
             }
@@ -101,181 +89,252 @@
         }
 
         @keyframes orbFloat1 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0);
             }
+
             50% {
                 transform: translate(-100px, 100px);
             }
         }
 
         @keyframes orbFloat2 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0);
             }
+
             50% {
                 transform: translate(100px, -80px);
             }
         }
 
-        /* Content container */
-        .wrapper {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 40px;
-            animation: fadeIn 1s ease-out;
+        /* Header nav */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
         }
 
-        @keyframes fadeIn {
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Story header */
+        .story-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Title */
-        .coming-soon-title {
+        .story-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 3.5rem;
             font-weight: 900;
-            margin-bottom: 40px;
-            line-height: 1.3;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .story-label {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            font-weight: 400;
-            display: block;
-            margin-bottom: 20px;
-            letter-spacing: 4px;
-        }
-
-        .story-name {
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            display: block;
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            animation: glow 3s ease-in-out infinite;
+            margin-bottom: 16px;
+            letter-spacing: 3px;
+            line-height: 1.2;
         }
 
-        @keyframes glow {
-            0%, 100% {
-                filter: drop-shadow(0 0 10px rgba(233, 30, 99, 0.4));
-            }
-            50% {
-                filter: drop-shadow(0 0 25px rgba(233, 30, 99, 0.8)) drop-shadow(0 0 40px rgba(0, 217, 255, 0.4));
-            }
+        .story-meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
         }
 
-        .coming-text {
-            color: var(--text-dim);
-            font-weight: 400;
-            letter-spacing: 4px;
-        }
-
-        .dot {
-            color: var(--accent-cyan);
-            font-weight: 900;
-        }
-
-        /* Subtitle */
-        .subtitle {
-            font-family: 'Archivo', sans-serif;
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            margin-bottom: 60px;
-            font-style: italic;
-            animation: fadeIn 1s ease-out 0.3s both;
-        }
-
-        /* Back button */
-        .back-button {
+        .meta-item {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 0.8rem;
             color: var(--text-dim);
-            background: transparent;
-            border: 2px solid var(--text-dim);
-            padding: 16px 40px;
-            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .meta-item .label {
+            color: var(--accent-cyan);
+        }
+
+        /* Story content */
+        .story-content {
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+
+        .story-content p {
+            margin-bottom: 24px;
+        }
+
+        /* Drop cap */
+        .story-content p:first-of-type::first-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            line-height: 0.8;
+            float: left;
+            margin: 8px 14px 0 0;
+            color: var(--secondary-pink);
+        }
+
+        .story-content em {
+            color: var(--secondary-pink);
+            font-style: italic;
+        }
+
+        .story-content strong {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        /* Dramatic styling */
+        .dramatic {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 3px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-block;
-            animation: fadeIn 1s ease-out 0.5s both;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 48px 0;
+            padding: 24px;
+            border-top: 2px solid rgba(233, 30, 99, 0.3);
+            border-bottom: 2px solid rgba(233, 30, 99, 0.3);
         }
 
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .back-button:hover::before {
-            left: 100%;
-        }
-
-        .back-button:hover {
-            border-color: var(--accent-cyan);
+        /* Character links */
+        .character-link {
             color: var(--accent-cyan);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
-            transform: translateY(-2px);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
         }
 
-        .back-button:active {
-            transform: translateY(0);
+        .character-link:hover {
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px rgba(0, 217, 255, 0.6);
+        }
+
+        /* Thought text */
+        .thought {
+            font-style: italic;
+            color: var(--text-dim);
+        }
+
+        /* Related section */
+        .related-section {
+            margin-top: 100px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .related-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--secondary-pink);
+            margin-bottom: 40px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .related-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2);
+        }
+
+        .related-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .related-card-desc {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.6;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .coming-soon-title {
-                font-size: 2rem;
-            }
-
-            .story-label {
-                font-size: 0.9rem;
-                letter-spacing: 3px;
-            }
-
-            .story-name {
+            .story-title {
                 font-size: 2.5rem;
             }
 
-            .coming-text {
-                font-size: 1.8rem;
+            .story-meta {
+                flex-direction: column;
+                gap: 16px;
             }
 
-            .subtitle {
-                font-size: 1rem;
+            .container {
+                padding: 60px 20px 80px;
             }
 
-            .back-button {
-                font-size: 0.85rem;
-                padding: 14px 32px;
-            }
-
-            .wrapper {
-                padding: 24px;
+            .related-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -286,15 +345,121 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <div class="wrapper">
-        <h1 class="coming-soon-title">
-            <span class="story-label">Short Story</span>
-            <span class="story-name">Investiture</span>
-            <span class="coming-text">Coming Soon<span class="dot">.</span></span>
-        </h1>
-        <p class="subtitle">Starlite 7th unlock new potential.</p>
-        <button class="back-button" onclick="history.back()">← Go Back</button>
+    <nav class="header-nav">
+        <a href="../stories.html" class="back-link">← Stories</a>
+    </nav>
+
+    <div class="container">
+        <header class="story-header">
+            <h1 class="story-title">Investiture</h1>
+            <div class="story-meta">
+                <div class="meta-item"><span class="label">Era:</span> <a href="../realms/realm-royastella.html" class="back-link">Royalstella Arc 2</a></div>
+                <div class="meta-item"><span class="label">Featured:</span> <a href="../factions/faction-starlite-7th.html" class="back-link">Starlite 7th</a>, <a href="../characters/character-dissonant-discord.html" class="back-link">dissonant discord</a></div>
+                <div class="meta-item"><span class="label">Type:</span> Major Event</div>
+            </div>
+        </header>
+
+        <!-- Story Content -->
+        <article class="story-content">
+            <p>The situation was becoming untenable. Not only has the strength of the basic Crystallines increased, but enemies that previously required the entire team to confront are now appearing in groups. The Zodiarcal Dragon was a foe the team had only barely just defeated in a pre-rift scenario; two showing up and stronger ones at that were just a nightmare. The fact that they had managed to drive them off at all was a credit and should have been celebrated, but the fact of the matter is that the Starlite 7th won't be able to keep up for much longer. And all of that before adding in that the frequency of attacks meant that the team could hardly recover before needing to fight once more. No, this wasn't working and Itami needed a better solution. Not that the world was being particularly merciful at the moment.</p>
+
+            <p>"Empress, we got a situation. Major."</p>
+
+            <p>This is the last thing she needs. But duty is duty. Curse the stars that bore BLADE GUILLOTINE.</p>
+
+            <p>"What's up?"</p>
+
+            <p>Kayre, the Starlit Rex points at the massive viewing screen. There are many small blips indicating future Crystalline emergent zones, but none so soon that it requires immediate action. Then she sees it. Her heart drops.</p>
+
+            <p>"What the—Mahana is back?!"</p>
+
+            <p>All that trouble to try to return that poor girl back to her home only to end up here again? And this time Itami doesn't think she'll be lucky enough to prevent Marate from forcibly inducting the girl to her team.</p>
+
+            <p><strong>Her</strong> team. Was it really her team when she had so little choice in the forming? Her eyes glance over to Takino. The anomaly. The youngest and smallest member of the Starlite 7th and the only one that Itami hadn't picked to join. Quite likely a, well, not a spy exactly. More like a monitor? In any case, someone Marate clearly placed to keep an eye on them.</p>
+
+            <p>But back to the problem at hand. Mahana Sahi is back. Mahana Sahi is powerful. Too powerful. Mahana Sahi is highly likely to be captured by the Crystallines and converted into an incredibly potent power up. Something that the team can scarce afford when the Sky Rift courtesy of BLADE already had the Crystallines leveled up.</p>
+
+            <p>"Yeaaah, we gotta go save her."</p>
+
+            <p>The other Runic Knights are already in position, ready to SkyDrop from the Citadel right into the area Mahana is in. Itami puts on her helmet. The Starlit Empress is ready for battle.</p>
+
+            <p style="text-align: center;"><span class="dramatic">&#10070;&#10192;&#10070;&#10192;&#10070;&#10192;&#10070;</span></p>
+
+            <p>No matter how many times she does it, the sensation of falling from the sky at near subsonic speed without any parachutes is still a rush. Honestly, the SkyDrop might be the best part of being in Starlite 7th. The Runic Knights fall like stars, raining down as implacable devastation for their foes. This fact that it doesn't particularly play well with the laws of physics is a fun bonus.</p>
+
+            <p>With seven consecutive concussive impacts, Starlite 7th arrives on a scene of unexpected chaos. Empress expects a scene similar to the one from when they bid farewell to their realmward friend AKA with Crystallines surrounding and closing in. Standard scouting formation: Pasha, Rex, and Sultana as the vanguard, Empress in the rearguard, and the rest of the team in the midguard to assist if either finds trouble. Pasha flies high to see ahead, Rex telepathically links to Pasha to share her vision, and Sultana defends Rex to allow full focus on the telepathy. Standard scouting formation.</p>
+
+            <p>Not standard? The total lack of any Crystalline horde. With the amount of energy that Mahana is giving off, there should be no end of foes looking to acquire her. So where are they.</p>
+
+            <p>"Empress, you should get up here."<br>
+            "Leader, you need to see this."<br>
+            "Hurry."</p>
+
+            <p>The reports come almost on top of each other. The fact that Rex, Pasha, and Sultana were all speaking to her at once only underscores the urgency of whatever was happening. The fact that Sultana, the person closest to Mahana, was expressing neither the joy of reunion or the despair of failure adds a twist of mystery to the proceedings.</p>
+
+            <p>Empress and the remaining Knights join Pasha, Rex, and Sultana on a rocky outcropping overlooking a massive impact crater. And at the bottom of the crater fights what can only be described as a magical girl, wielding an epee and mixing slashing blows and emissive dark energy blasts to fell countless Crystallines. Instead of the desperate struggle they anticipated for Mahana Sahi, they witness a masterclass in lethal precision.</p>
+
+            <p><em>Could that—is that Mahana?</em></p>
+
+            <p>Below them, the stranger moves with a predatory, metronomic consistency. She does not trade blows with the Crystallines; she pivots through their lunges, her slashing epee tracing wide, flowing arcs that shimmer with dark resonance. With a single, rhythmic strike, she cleaves through a wolf's faceted anatomy, its luminous core shattering into dull, lightless shards before it can even let out a harmonic chime. A cluster of avian High-Flyers dives from the smoke, but she unleashes darkness, executing so rapidly it appears as a natural extension of her swordplay. The space around the birds collapses in a void distortion, crushing them into dust in a singular, catastrophic event.</p>
+
+            <p>The ground suddenly heaves as the Zodiarcal Cloud-Grazer manifests. The many-horned mountain spirit towers over the crater, its cloud-fleece crackling with light as it prepares to crush the intruder under its own weight. The girl below doesn't flinch; she meets the legendary beast with a composed, nigh theatrical dominance. As the Zodiarcal rears up, she executes a seamless transition from blade to spell, her casting cadence unhurried. With one precise motion of her blade, she severs the creature's gravitational anchor. Before the beast can roar, a follow-up blast of dark energy pierces its chest. The Zodiarcal, a foe the Starlite 7th could barely face before the empowerment of the the Sky Rift, is eliminated nearly as soon as it appears, vanishing into a fractured spray of light.</p>
+
+            <p>Empress and her team remain frozen in stunned disbelief. This isn't their friend Mahana. This isn't anyone they recognize. They came to save a friend, but they found a variable wielding strange power akin to that of their enemy.</p>
+
+            <p><em>"Did you enjoy my blade play Starlite 7th?"</em></p>
+
+            <p>The girl is facing away from them when she calls out. The team shares startled glances. They thought whoever this is couldn't see them. Clearly an incorrect assumption.</p>
+
+            <p><em>"I see you hiding there. Come down and talk."</em></p>
+
+            <p>Now the girl turns and faces the team's location fully. She remains at the nadir of the impact crater and waits.</p>
+
+            <p>The Starlit Empress descends from the rocky outcropping, her boots crunching on the shattered remains of the Crystalline horde as she closes the distance to the crater floor. She stops a respectful distance away, her gaze fixed on the unknown figure who remains perfectly composed amidst the lingering spatial distortions.</p>
+
+            <p>As Empress observes her, she sees a warrior whose presence is defined by a teal and black palette, reflecting a sharp, technical aesthetic rather than the ornate or frilled styles typical of the realm's guardians. The stranger wears a high-collared garment with angular, armor-like panels that give her a sleek, futuristic silhouette. Her hair is a striking, gravity-defying shock of pale blue and violet, contrasting with her dark mask that conceals her eyes behind glowing, slit-like apertures. Even in the aftermath of eliminating a Zodiarcal, the girl maintains an absolute, impassive poker face, her expression showing neither fatigue nor triumph.</p>
+
+            <p>Empress's eyes drop to the weapon held in the stranger's hand—a long, silver-bladed sword designed for slashing rather than the thrusting usually associated with such a thin profile. The hilt is dark and elegant, featuring a distinct heart-shaped gem at the crossguard and another at the very tip of the blade, pulsing with a faint, rhythmic resonance. To Empress, the combination of the girl's stylized appearance, her use of what can only be called dark magic, and her overwhelming power can only be summarized by one term she has decided upon: a "magical girl". Yet, this is a version of that concept that feels cold, efficient, and dangerously autonomous.</p>
+
+            <p>The air between them is heavy with weight as the stranger simply waits, her posture as unyielding and sharp as the blade she carries.</p>
+
+            <p>The magical girl speaks again.</p>
+
+            <p><em>"From Beeston's realm I come with heavy news.<br>
+            For Mahana is lost, her land destroyed.<br>
+            The one who broke that world now seeks this place."</em></p>
+
+            <p>The day's rollercoaster has clearly not finished with Empress. Through Rex's telepathic link, she feels the dismay of the rest of the team.</p>
+
+            <p><em>"Shall I prepare you for the coming storm?"</em></p>
+
+            <p>It's Mikado who prompts Empress's response:</p>
+
+            <p>"Who are you and how do you know all this?"</p>
+
+            <p style="text-align: center;"><strong>"I'm discord, the one who will make you strong."</strong></p>
+        </article>
+
+        <!-- Related Stories Section -->
+        <section class="related-section">
+            <h2 class="related-title">Related Stories</h2>
+            <div class="related-grid">
+                <a href="story-crowned.html" class="related-card">
+                    <div class="related-card-title">Crowned</div>
+                    <div class="related-card-desc">The formation of the Starlite 7th, as Itami assembles her team of Runic Knights to face the growing Crystalline threat.</div>
+                </a>
+                <a href="story-shadows-roses.html" class="related-card">
+                    <div class="related-card-title">Shadow's Roses</div>
+                    <div class="related-card-desc">Mahana Sahi's miraculous rescue and first encounter with the Starlite 7th in the aftermath of Beeston's fall.</div>
+                </a>
+                <a href="story-regicide.html" class="related-card">
+                    <div class="related-card-title">Regicide</div>
+                    <div class="related-card-desc">BLADE GUILLOTINE's betrayal and the creation of the Sky Rift that empowered the Crystallines.</div>
+                </a>
+            </div>
+        </section>
     </div>
+
 </body>
 
 </html>
