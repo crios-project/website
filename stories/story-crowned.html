@@ -2,19 +2,11 @@
 <html lang="en">
 
 <head>
-
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Crios" />
-    <link rel="manifest" href="/site.webmanifest" />
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crowned // Coming Soon</title>
+    <title>Crowned // CRIOS Short Story</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
         rel="stylesheet">
     <style>
         * {
@@ -31,19 +23,15 @@
             --dark-panel: #141419;
             --text-primary: #e8e8f0;
             --text-dim: #8888a8;
-            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
-            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
 
         body {
             font-family: 'Archivo', sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            line-height: 1.9;
+            overflow-x: hidden;
         }
 
         /* Animated background */
@@ -53,8 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
@@ -67,6 +54,7 @@
             0% {
                 transform: translateY(0);
             }
+
             100% {
                 transform: translateY(40px);
             }
@@ -101,181 +89,275 @@
         }
 
         @keyframes orbFloat1 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0);
             }
+
             50% {
                 transform: translate(-100px, 100px);
             }
         }
 
         @keyframes orbFloat2 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0);
             }
+
             50% {
                 transform: translate(100px, -80px);
             }
         }
 
-        /* Content container */
-        .wrapper {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 40px;
-            animation: fadeIn 1s ease-out;
+        /* Header nav */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
         }
 
-        @keyframes fadeIn {
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Story header */
+        .story-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Title */
-        .coming-soon-title {
+        .story-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 3.5rem;
             font-weight: 900;
-            margin-bottom: 40px;
-            line-height: 1.3;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .story-label {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            font-weight: 400;
-            display: block;
-            margin-bottom: 20px;
-            letter-spacing: 4px;
-        }
-
-        .story-name {
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            display: block;
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            animation: glow 3s ease-in-out infinite;
+            margin-bottom: 16px;
+            letter-spacing: 3px;
+            line-height: 1.2;
         }
 
-        @keyframes glow {
-            0%, 100% {
-                filter: drop-shadow(0 0 10px rgba(233, 30, 99, 0.4));
-            }
-            50% {
-                filter: drop-shadow(0 0 25px rgba(233, 30, 99, 0.8)) drop-shadow(0 0 40px rgba(0, 217, 255, 0.4));
-            }
+        .story-meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
         }
 
-        .coming-text {
+        .meta-item {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
             color: var(--text-dim);
-            font-weight: 400;
-            letter-spacing: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .dot {
+        .meta-item .label {
             color: var(--accent-cyan);
-            font-weight: 900;
         }
 
-        /* Subtitle */
-        .subtitle {
-            font-family: 'Archivo', sans-serif;
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            margin-bottom: 60px;
-            font-style: italic;
+        /* Story content */
+        .story-content {
             animation: fadeIn 1s ease-out 0.3s both;
         }
 
-        /* Back button */
-        .back-button {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .story-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 28px;
+            color: var(--text-primary);
+        }
+
+        .story-content p:first-of-type::first-letter {
+            font-size: 4rem;
+            line-height: 1;
+            float: left;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
+            color: var(--secondary-pink);
+            margin: 4px 12px 0 0;
+        }
+
+        /* Emphasis text */
+        .story-content strong {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .story-content em {
+            color: var(--secondary-pink);
+            font-style: italic;
+        }
+
+        /* Thought text */
+        .thought {
+            font-style: italic;
             color: var(--text-dim);
-            background: transparent;
-            border: 2px solid var(--text-dim);
-            padding: 16px 40px;
-            cursor: pointer;
+        }
+
+        /* Special moments - dramatic reveals */
+        .dramatic {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 3px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-block;
-            animation: fadeIn 1s ease-out 0.5s both;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 48px 0;
+            padding: 24px;
+            border-top: 2px solid rgba(233, 30, 99, 0.3);
+            border-bottom: 2px solid rgba(233, 30, 99, 0.3);
         }
 
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
-            transition: left 0.5s ease;
+        /* Section breaks */
+        .break {
+            text-align: center;
+            margin: 60px 0;
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            letter-spacing: 8px;
         }
 
-        .back-button:hover::before {
-            left: 100%;
-        }
-
-        .back-button:hover {
-            border-color: var(--accent-cyan);
+        /* Character tags */
+        .character-link {
             color: var(--accent-cyan);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
-            transform: translateY(-2px);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            font-weight: 600;
         }
 
-        .back-button:active {
-            transform: translateY(0);
+        .character-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
         }
 
-        /* Responsive */
+        /* Related stories footer */
+        .related-section {
+            margin-top: 120px;
+            padding: 48px 0;
+            border-top: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .related-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .related-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2);
+        }
+
+        .related-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .related-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
         @media (max-width: 768px) {
-            .coming-soon-title {
-                font-size: 2rem;
+            .story-title {
+                font-size: 2.2rem;
             }
 
-            .story-label {
-                font-size: 0.9rem;
-                letter-spacing: 3px;
+            .story-content p {
+                font-size: 1.05rem;
             }
 
-            .story-name {
-                font-size: 2.5rem;
+            .story-meta {
+                flex-direction: column;
+                gap: 12px;
             }
 
-            .coming-text {
-                font-size: 1.8rem;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-            }
-
-            .back-button {
-                font-size: 0.85rem;
-                padding: 14px 32px;
-            }
-
-            .wrapper {
-                padding: 24px;
+            .story-content p:first-of-type::first-letter {
+                font-size: 3rem;
+                margin: 2px 8px 0 0;
             }
         }
     </style>
@@ -286,15 +368,75 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <div class="wrapper">
-        <h1 class="coming-soon-title">
-            <span class="story-label">Short Story</span>
-            <span class="story-name">Crowned</span>
-            <span class="coming-text">Coming Soon<span class="dot">.</span></span>
-        </h1>
-        <p class="subtitle">Starlite 7th's formation story arrives soon.</p>
-        <button class="back-button" onclick="history.back()">← Go Back</button>
+    <nav class="header-nav">
+        <a href="../stories.html" class="back-link">← All Stories</a>
+    </nav>
+
+    <div class="container">
+        <!-- Story Header -->
+        <header class="story-header">
+            <h1 class="story-title">Crowned</h1>
+            <div class="story-meta">
+                <div class="meta-item"><span class="label">Era:</span> <a href="../realms/realm-royastella.html" class="back-link">Royastella Arc 1</a></div>
+                <div class="meta-item"><span class="label">Featured:</span> <a href="../characters/character-marate-jalo.html" class="back-link">Marate</a>, <a href="../factions/faction-starlite-7th.html" class="back-link">Starlite 7th</a></div>
+                <div class="meta-item"><span class="label">Type:</span> Origin Story</div>
+            </div>
+        </header>
+
+        <!-- Story Content -->
+        <article class="story-content">
+            <p><span class="thought">My power wanes.</span></p>
+
+            <p>The Gold Imperator could no longer afford to ignore the intrusive thought. With every victory in every battle fought, their power, their ability, their capability to protect the realm from its foes is lessened. The System's limitations, no, <em>restraints</em> on the power than could be brought to bear against foes grew ever tighter. Soon Starlit Alpha would no longer be capable of ascending to The Gold Imperator form without a System assisted trigger. It made a certain amount of sense: only allowing access to Gold Imperator when situations were at most dire made it more of a failsafe for if the Runic Knights were overwhelmed.</p>
+
+            <p>At least, that's what the System wanted Marate to believe. Marate had interacted with the System long enough to see its nature clearer than most. In fact, he was one of the few to know that "the System" has a proper name: the <strong>Glosuco Network</strong>. A cute abbreviation of Global Subconscious Collective Network. He knows the System. He knows that it isn't malicious or evil in the slightest. It legitimately wants to make every user live their best life. And yet…</p>
+
+            <p>Marate wasn't just the mentor of the Starlite 7th. He was more or less the creator of the concept. With his weaken power of futuresight, he saw that Royastella would eventually be overrun and overcome by the calamity of Crystallines. He also saw that his powers could be manifested through the system to create Starlit Alpha, a warrior to face the foes as well as a template to appoint more guardians for the realm. And by going through the System, he wouldn't wreak havoc on it as he did the first time he tapped into his Neon Ultra powers.</p>
+
+            <p>It was frustrating. He could possibly go all out against a number of calamities of Crystallines, working his way through the Zodiarcals and confront the leader (likely a dragon. This type of thing is always a dragon), but tapping into that much of his power outside of the System would surely rend the poor AI asunder. And frustrating as the whole situation was, he truly believed that losing Glosuco would be more problematic for Royastella than what damage the Crystallines could do.</p>
+
+            <p>So. Starlite 7th. The solution that he gave Glosuco and one it eagerly accepted. He even took the liberty of providing a list of suitable candidates as well as combat roles for said candidates to the System. The System decided to allow the team leader to pick the members themselves; a logical choice. What Marate found less logical was the subsequent choices.</p>
+
+            <p>The leader Glosuco picked was Itami Serafino. A teen pop singer from the idol group Rainbow Star. A wholly unconventional choice to start, particularly when you add in her public persona and penchant for bursting into tears. Really? Our best hope for facing the calamities is the Sobbing Songstress? Then Glosuco apparently decided that was enough work for the day and shuffled picking the rest of the team to Itami.</p>
+
+            <p>Naturally the next choice was her sister and co-member of Rainbow Star, Shini Thana. Unsurprising choice: why wouldn't she pick her sister to join her? But it almost seems like Itami is wholly unaware of her sister's condition. She has to know Shini is sanguina. That's not something easily hidden.</p>
+
+            <p>The final four picks also make sense. Daeon Liàng: a certified genius with a corporate empire and enough cash on hand to fund an army, let alone an elite strike team. Wentea Liso: close friend of Daeon that tends to make uncanny insights and shockingly practical choices considering her mostly disaffected demeanor. Riasa Sungbae: objectively questionable competence but relentless determination to improve and also a source of funds and material. And the mononymous Kayre: A quiet thinker that Marate personally proposed as the team leader. The fact that Kayre was in fact last to join was somewhat bothersome to him, but all in all a solid six choices.</p>
+
+            <p>But the seventh.</p>
+
+            <p>Takino Retsu. Not only is she significantly younger than the rest of the team, she's also the most mysterious. And not in the publicly mysterious ways of Wentea used by her management team to percolate the gossip rags and celebrity stories sites. No, Takino Retsu is wholly just a mystery. She shares nothing and the System has no info on her. Marate knows Itami doesn't wholly trust him since he keeps obvious secrets: the first time he rescued the team as Starlit Alpha was frustrating on both ends—Itami didn't like that Marate had access powers far stronger than the rest of the team and was "refusing" to assist them and Marate didn't like that the team needed rescue from such pathetic weaklings. If she only knew how much more powerful foes lied in wait. But regardless, she didn't fully trust him. And that must be the reason she put Takino on the team. Some kind of failsafe or maybe just a spy for herself. And to be fair, he has completely lost track of Takino and even the System had trouble tracking her.</p>
+
+            <p>But it was her team, not his. All he could do is mentor the team. Help train when they asked. Rescue them when they needed.</p>
+
+            <p>The last thing he wants it to lose them the way he lost his family. The way he lost his daughter.</p>
+            <p>The way he lost <em>everything</em>.</p>
+        </article>
+
+        <!-- Related Stories Section -->
+        <section class="related-section">
+            <h2 class="related-title">Related Stories</h2>
+            <div class="related-grid">
+                <a href="story-investiture.html" class="related-card">
+                    <div class="related-card-title">Investiture</div>
+                    <div class="related-card-desc">After the betrayal of BLADE GUILLOTINE, Starlite 7th struggles to face the
+                        increased power of the Crystalline. A fortuitous encounter with a powerful stranger allows the
+                        team to unlock new potential.</div>
+                </a>
+                <a href="story-regicide.html" class="related-card">
+                    <div class="related-card-title">Regicide</div>
+                    <div class="related-card-desc">After the defeat of the leader of the incursive forces, BLADE GUILLOTINE
+                        takes the leader's power for herself.</div>
+                </a>
+                <a href="story-symphonic-overture.html" class="related-card">
+                    <div class="related-card-title">Symphonic Overture</div>
+                    <div class="related-card-desc">Mahana Sahi's appearance in Royastella marks the start of a new
+                        conflict for the Starlite 7th.</div>
+                </a>
+            </div>
+        </section>
     </div>
+
 </body>
 
 </html>
