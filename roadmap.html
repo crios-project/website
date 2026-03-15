@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -17,6 +16,7 @@
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
         rel="stylesheet">
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -33,9 +33,6 @@
             --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
             --green: #00e676;
-            --yellow: #ffd740;
-            --red: #ff5252;
-            --purple: #ce93d8;
         }
 
         body {
@@ -43,8 +40,10 @@
             background: var(--dark-bg);
             color: var(--text-primary);
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
+        /* Animated background */
         .bg-grid {
             position: fixed;
             top: 0;
@@ -57,21 +56,84 @@
             pointer-events: none;
             z-index: 0;
             opacity: 0.5;
+            animation: gridFloat 20s linear infinite;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 24px;
-            position: relative;
-            z-index: 1;
+        @keyframes gridFloat {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(40px);
+            }
         }
 
-        /* Header */
-        .page-header {
-            text-align: center;
-            margin-bottom: 60px;
-            animation: fadeIn 0.8s ease-out;
+        /* Gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -200px;
+            animation: orbFloat1 20s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -150px;
+            animation: orbFloat2 25s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-100px, 100px);
+            }
+        }
+
+        @keyframes orbFloat2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(100px, -80px);
+            }
+        }
+
+        /* Header nav */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .back-link {
@@ -88,24 +150,35 @@
             color: var(--accent-cyan);
         }
 
-        .header-nav {
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 15, 0.95);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
-            padding: 16px 24px;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
-        @keyframes fadeIn {
+        /* Container */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 60px 24px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Page header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-30px);
             }
 
             to {
@@ -123,6 +196,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 12px;
+            letter-spacing: 3px;
         }
 
         .page-subtitle {
@@ -134,67 +208,58 @@
         }
 
         /* Progress Summary */
-        .progress-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            margin-bottom: 60px;
-        }
-
-        .progress-card {
+        .progress-summary {
             background: var(--dark-panel);
             border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 60px;
             text-align: center;
         }
 
-        .progress-card.done {
-            background: rgba(0, 230, 118, 0.05);
-            border-color: rgba(0, 230, 118, 0.25);
+        .progress-stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
         }
 
-        .progress-label {
+        .stat-large {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .progress-value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 4rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .header-title {
+        .stat-label {
             font-family: 'Orbitron', sans-serif;
             font-size: 1rem;
-            font-weight: 700;
-            color: var(--secondary-pink);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .progress-sub {
-            font-size: 0.8rem;
             color: var(--text-dim);
-            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 8px;
         }
 
-        /* Progress Bar */
-        .progress-bar-section {
-            background: var(--dark-panel);
-            border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px;
-            padding: 28px 32px;
-            margin-bottom: 40px;
+        .progress-bar-container {
+            margin-top: 24px;
+        }
+
+        .bar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 100px;
+            height: 16px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
+            transition: width 1s ease;
         }
 
         .bar-label {
@@ -208,265 +273,126 @@
             justify-content: space-between;
         }
 
-        .bar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 100px;
-            height: 12px;
-            overflow: hidden;
-            margin-bottom: 20px;
+        /* Arc sections */
+        .arc-section {
+            margin-bottom: 48px;
         }
 
-        .bar-fill {
-            height: 100%;
-            border-radius: 100px;
-            background: linear-gradient(90deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
-            transition: width 1s ease;
-        }
-
-        .bar-full {
-            height: 100%;
-            border-radius: 100px;
-            background: #50C878;
-            transition: width 1s ease;
-        }
-
-        /* Section */
-        .section {
-            background: var(--dark-panel);
-            border: 1px solid rgba(233, 30, 99, 0.2);
-            border-radius: 12px;
-            padding: 32px;
-            margin-bottom: 32px;
-        }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--secondary-pink);
+        .arc-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
             margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
         }
 
-        .section-title .count {
-            font-size: 1rem;
-            color: var(--text-dim);
-            font-weight: 400;
-        }
-
-        /* Status Legend */
-        .legend {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            color: var(--text-dim);
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .dot-done {
-            background: var(--green);
-            box-shadow: 0 0 8px var(--green);
-        }
-
-        .dot-partial {
-            background: var(--yellow);
-            box-shadow: 0 0 8px var(--yellow);
-        }
-
-        .dot-missing {
-            background: var(--red);
-            box-shadow: 0 0 8px var(--red);
-        }
-
-        .dot-note {
-            background: var(--purple);
-            box-shadow: 0 0 8px var(--purple);
-        }
-
-        /* Character Grid */
-        .char-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 12px;
-        }
-
-        .char-card {
-            border-radius: 8px;
-            padding: 14px 16px;
-            border: 1px solid;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .char-card.done {
-            background: rgba(0, 230, 118, 0.05);
-            border-color: rgba(0, 230, 118, 0.25);
-        }
-
-        .char-card.partial {
-            background: rgba(255, 215, 64, 0.05);
-            border-color: rgba(255, 215, 64, 0.25);
-        }
-
-        .char-card.missing {
-            background: rgba(255, 82, 82, 0.05);
-            border-color: rgba(255, 82, 82, 0.25);
-        }
-
-        .char-card.note {
-            background: rgba(206, 147, 216, 0.05);
-            border-color: rgba(206, 147, 216, 0.25);
-        }
-
-        .char-name {
+        .arc-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .char-status {
-            font-size: 0.78rem;
-        }
-
-        .char-card.done .char-status {
-            color: var(--green);
-        }
-
-        .char-card.partial .char-status {
-            color: var(--yellow);
-        }
-
-        .char-card.missing .char-status {
-            color: var(--red);
-        }
-
-        .char-card.note .char-status {
-            color: var(--purple);
-        }
-
-        .char-note {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-        }
-
-        /* Realm Grid */
-        .realm-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 12px;
-        }
-
-        .realm-card {
-            border-radius: 8px;
-            padding: 14px 16px;
-            border: 1px solid;
-        }
-
-        .realm-card.done {
-            background: rgba(0, 230, 118, 0.05);
-            border-color: rgba(0, 230, 118, 0.25);
-        }
-
-        .realm-card.missing {
-            background: rgba(255, 82, 82, 0.05);
-            border-color: rgba(255, 82, 82, 0.25);
-        }
-
-        .realm-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 2px;
-        }
-
-        .realm-status {
-            font-size: 0.78rem;
-        }
-
-        .realm-card.done .realm-status {
-            color: var(--green);
-        }
-
-        .realm-card.missing .realm-status {
-            color: var(--red);
-        }
-
-        /* Other pages */
-        .page-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 12px;
-        }
-
-        .page-card {
-            border-radius: 8px;
-            padding: 14px 16px;
-            border: 1px solid;
-        }
-
-        .page-card.done {
-            background: rgba(0, 230, 118, 0.05);
-            border-color: rgba(0, 230, 118, 0.25);
-        }
-
-        .page-card.missing {
-            background: rgba(255, 82, 82, 0.05);
-            border-color: rgba(255, 82, 82, 0.25);
-        }
-
-        .page-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 2px;
-        }
-
-        .page-status {
-            font-size: 0.78rem;
-        }
-
-        .page-card.done .page-status {
-            color: var(--green);
-        }
-
-        .page-card.missing .page-status {
-            color: var(--red);
-        }
-
-        /* Faction subheading */
-        .faction-label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--accent-cyan);
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin: 20px 0 10px;
         }
 
-        .faction-label:first-child {
-            margin-top: 0;
+        .arc-count {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            padding: 4px 12px;
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 20px;
+        }
+
+        .arc-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(233, 30, 99, 0.3), transparent);
+        }
+
+        /* Story Grid */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        .story-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 20px 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--secondary-pink);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .story-card.complete::before {
+            background: var(--green);
+            opacity: 1;
+        }
+
+        .story-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.15);
+        }
+
+        .story-card.complete {
+            background: rgba(0, 230, 118, 0.03);
+            border-color: rgba(0, 230, 118, 0.25);
+        }
+
+        .story-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .story-status {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .story-card.complete .story-status {
+            color: var(--green);
+        }
+
+        .status-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .story-card.complete .status-icon {
+            background: var(--green);
+            color: var(--dark-bg);
+        }
+
+        .story-card:not(.complete) .status-icon {
+            background: rgba(136, 136, 168, 0.2);
+            border: 2px solid var(--text-dim);
         }
 
         @media (max-width: 768px) {
@@ -474,217 +400,1419 @@
                 font-size: 2.2rem;
             }
 
-            .char-grid,
-            .realm-grid,
-            .page-grid {
-                grid-template-columns: 1fr 1fr;
+            .stat-large {
+                font-size: 3rem;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
             }
         }
+    
+        /* Game sections */
+        .game-section {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .game-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .game-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .game-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+        }
+
+        .task-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 12px;
+        }
+
+        .task-item {
+            background: rgba(20, 20, 25, 0.5);
+            border: 1px solid rgba(233, 30, 99, 0.15);
+            border-radius: 6px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .task-item:hover {
+            border-color: var(--accent-cyan);
+            transform: translateX(4px);
+        }
+
+        .task-item.complete {
+            background: rgba(0, 230, 118, 0.03);
+            border-color: rgba(0, 230, 118, 0.25);
+        }
+
+        .task-checkbox {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+
+        .task-item.complete .task-checkbox {
+            background: var(--green);
+            color: var(--dark-bg);
+        }
+
+        .task-item:not(.complete) .task-checkbox {
+            background: rgba(136, 136, 168, 0.1);
+            border: 2px solid var(--text-dim);
+        }
+
+        .task-name {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .task-item.complete .task-name {
+            color: var(--green);
+        }
+
+        .simple-project {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .simple-project:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.15);
+        }
+
+        .simple-project-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .simple-project-status {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            padding: 8px 16px;
+            background: rgba(136, 136, 168, 0.1);
+            border: 1px solid rgba(136, 136, 168, 0.3);
+            border-radius: 20px;
+        }
+
+        /* Art sections */
+        .art-section {
+            margin-bottom: 48px;
+        }
+
+        .art-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .art-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .art-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 6px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .art-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateX(4px);
+        }
+
+        .art-card.complete {
+            background: rgba(0, 230, 118, 0.03);
+            border-color: rgba(0, 230, 118, 0.25);
+        }
+
+        .art-checkbox {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        .art-card.complete .art-checkbox {
+            background: var(--green);
+            color: var(--dark-bg);
+        }
+
+        .art-card:not(.complete) .art-checkbox {
+            background: rgba(136, 136, 168, 0.1);
+            border: 2px solid var(--text-dim);
+        }
+
+        .art-name {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .art-card.complete .art-name {
+            color: var(--green);
+        }
+
+        /* Progress grid for art section */
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .progress-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .progress-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 100px;
+            height: 12px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
+            transition: width 1s ease;
+        }
+
+        .progress-percent {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
+
     </style>
 </head>
 
 <body>
-    <!-- Header Navigation -->
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
     <nav class="header-nav">
         <a href="home.html" class="back-link">← Home</a>
         <div class="header-title">ROADMAP</div>
-        <div style="width: 80px;"></div> <!-- Spacer for centering -->
+        <div style="width: 80px;"></div>
     </nav>
-    <div class="bg-grid"></div>
-    <div class="container">
 
+    <div class="container">
         <header class="page-header">
             <h1 class="page-title">CRIOS ROADMAP</h1>
-            <p class="page-subtitle">Project Status — All Pages & Content</p>
+            <p class="page-subtitle">Complete Project Status</p>
         </header>
 
-        <!-- Summary Stats -->
+        <!-- STORIES SECTION -->
+        <!-- Progress Summary -->
+        <div class="progress-summary">
+            <div class="progress-stats">
+                <div class="stat-large">8</div>
+                <div style="font-size: 2rem; color: var(--text-dim);">/</div>
+                <div class="stat-large">42</div>
+            </div>
+            <div class="stat-label">Stories Complete</div>
+            <div class="progress-bar-container">
+                <div class="bar-label">
+                    <span>Overall Progress</span>
+                    <span>19%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width: 19%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Beeston Arc 1 -->
+        <div class="arc-section">
+            <div class="arc-header">
+                <h2 class="arc-title">Beeston Arc 1</h2>
+                <div class="arc-count">2 / 3</div>
+                <div class="arc-line"></div>
+            </div>
+            <div class="story-grid">
+                <div class="story-card complete">
+                    <div class="story-name">New Hearts</div>
+                    <div class="story-status">
+                        <span class="status-icon">✓</span>
+                        Complete
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Heart's Wings</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card complete">
+                    <div class="story-name">Aria Caesura</div>
+                    <div class="story-status">
+                        <span class="status-icon">✓</span>
+                        Complete
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Royastella Arc 1 -->
+        <div class="arc-section">
+            <div class="arc-header">
+                <h2 class="arc-title">Royastella Arc 1</h2>
+                <div class="arc-count">2 / 3</div>
+                <div class="arc-line"></div>
+            </div>
+            <div class="story-grid">
+                <div class="story-card complete">
+                    <div class="story-name">Crowned</div>
+                    <div class="story-status">
+                        <span class="status-icon">✓</span>
+                        Complete
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Regicide</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card complete">
+                    <div class="story-name">Symphonic Overture</div>
+                    <div class="story-status">
+                        <span class="status-icon">✓</span>
+                        Complete
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Beeston Arc 2 -->
+        <div class="arc-section">
+            <div class="arc-header">
+                <h2 class="arc-title">Beeston Arc 2</h2>
+                <div class="arc-count">1 / 3</div>
+                <div class="arc-line"></div>
+            </div>
+            <div class="story-grid">
+                <div class="story-card">
+                    <div class="story-name">Attacca Subito</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Shadow's Roses</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card complete">
+                    <div class="story-name">Avant-Garde Composition</div>
+                    <div class="story-status">
+                        <span class="status-icon">✓</span>
+                        Complete
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Royastella Arc 2 -->
+        <div class="arc-section">
+            <div class="arc-header">
+                <h2 class="arc-title">Royastella Arc 2</h2>
+                <div class="arc-count">3 / 3</div>
+                <div class="arc-line"></div>
+            </div>
+            <div class="story-grid">
+                <div class="story-card complete">
+                    <div class="story-name">Investiture</div>
+                    <div class="story-status">
+                        <span class="status-icon">✓</span>
+                        Complete
+                    </div>
+                </div>
+                <div class="story-card complete">
+                    <div class="story-name">Bluish-Green Truths</div>
+                    <div class="story-status">
+                        <span class="status-icon">✓</span>
+                        Complete
+                    </div>
+                </div>
+                <div class="story-card complete">
+                    <div class="story-name">Falling Stars</div>
+                    <div class="story-status">
+                        <span class="status-icon">✓</span>
+                        Complete
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nexsicon Arc -->
+        <div class="arc-section">
+            <div class="arc-header">
+                <h2 class="arc-title">Nexsicon Arc</h2>
+                <div class="arc-count">0 / 6</div>
+                <div class="arc-line"></div>
+            </div>
+            <div class="story-grid">
+                <div class="story-card">
+                    <div class="story-name">The Grand Convergence and Cascade Resonance</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Reason Theory Origins: Ami and Windi.</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Astride the Dark</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Fú cì's no good very bad day</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Adventure!!</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Upgraded Executions</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ultimatera Arc -->
+        <div class="arc-section">
+            <div class="arc-header">
+                <h2 class="arc-title">Ultimatera Arc</h2>
+                <div class="arc-count">0 / 24</div>
+                <div class="arc-line"></div>
+            </div>
+            <div class="story-grid">
+                <div class="story-card">
+                    <div class="story-name">A War On All Fronts</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">The Price of Miracles</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Shackled by Fate</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Prelude to a Storm</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Liminal Paths</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Chimeric Traces</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Fractalis</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">War of Knives</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">The Harrowing</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Shadow Destruction</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">The Agony of Anticipation</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Bathed in Shadows</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Limit of Blades</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Ascetic Aesthetic</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Blood Blade Rebellion</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Chaotic Blade Insurrection</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Silence Blade Devastation</div>
+                    <div class="story-status">
+                        <span class="story-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Love and the Deathbreakers</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Light Shining in the Darkness</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Shadows Hiding in the Light</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Lovely Hearts</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Runic Knights</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Destiny's Penance</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+                <div class="story-card">
+                    <div class="story-name">Reason Theory</div>
+                    <div class="story-status">
+                        <span class="status-icon"></span>
+                        Not started
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+
+        <!-- GAMES SECTION -->
+        <!-- Progress Summary -->
+        <div class="progress-summary">
+            <div class="progress-stats">
+                <div class="stat-large">1</div>
+                <div style="font-size: 2rem; color: var(--text-dim);">/</div>
+                <div class="stat-large">14</div>
+            </div>
+            <div class="stat-label">Tasks Complete Across All Games</div>
+        </div>
+
+        <!-- Versa Card Game Rework -->
+        <div class="game-section">
+            <div class="game-header">
+                <h2 class="game-title">Versa Card Game Rework</h2>
+                <div class="game-count">0 / 7</div>
+                <div class="game-line"></div>
+            </div>
+            <div class="task-list">
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Story Rewrite</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Ami Deck</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Windi Deck</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Odisse Deck</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Fú cì and Astarri Deck</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Zhòu-chún Deck</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Larger Box Redesign</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dissensio Video Game -->
+        <div class="game-section">
+            <div class="game-header">
+                <h2 class="game-title">Dissensio Video Game</h2>
+                <div class="game-count">1 / 7</div>
+                <div class="game-line"></div>
+            </div>
+            <p class="game-subtitle">3D versus game</p>
+            <div class="task-list">
+                <div class="task-item complete">
+                    <div class="task-checkbox">✓</div>
+                    <div class="task-name">Logo Design</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Art Assets</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Combat engine building</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Stage building</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Item concepts</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Magic concepts</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Dual Tech designs</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Soul Dominions: Aperture -->
+        <div class="simple-project">
+            <div class="simple-project-title">Soul Dominions: Aperture</div>
+            <div class="simple-project-status">Survivors-like game • Not started</div>
+        </div>
+
+        <!-- Starlite 7th Game -->
+        <div class="simple-project">
+            <div class="simple-project-title">Starlite 7th Game</div>
+            <div class="simple-project-status">Not started</div>
+        </div>
+
+        <!-- Heart Melody Game -->
+        <div class="simple-project">
+            <div class="simple-project-title">Heart Melody Game</div>
+            <div class="simple-project-status">Not started</div>
+        </div>
+
+    
+
+        <!-- ART SECTION -->
+        <!-- Progress Cards -->
         <div class="progress-grid">
-            <div class="progress-card done">
-                <div class="progress-label">Characters Built</div>
-                <div class="progress-value">42</div>
-                <div class="progress-sub">of 42 character pages complete</div>
-            </div>
-            <div class="progress-card done">
-                <div class="progress-label">Realms</div>
-                <div class="progress-value">5</div>
-                <div class="progress-sub">of 5 realm pages complete</div>
-            </div>
-            <div class="progress-card done">
-                <div class="progress-label">Factions</div>
-                <div class="progress-value">6</div>
-                <div class="progress-sub">of 6 faction pages complete</div>
-            </div>
-            <div class="progress-card done">
-                <div class="progress-label">Magic Elements</div>
-                <div class="progress-value">14</div>
-                <div class="progress-sub">of 14 element pages</div>
-            </div>
-            <div class="progress-card done">
-                <div class="progress-label">Lore</div>
-                <div class="progress-value">8</div>
-                <div class="progress-sub">of 8 lore pages</div>
-            </div>
-            <div class="progress-card done">
-                <div class="progress-label">Magic Systems</div>
-                <div class="progress-value">3</div>
-                <div class="progress-sub">of 3 magic system pages</div>
-            </div>
             <div class="progress-card">
-                <div class="progress-label">Short Stories</div>
-                <div class="progress-value">4</div>
-                <div class="progress-sub">of 16 short story pages</div>
+                <div class="progress-card-title">Fullbody Commissions</div>
+                <div class="progress-stats">
+                    <div class="stat-large">30</div>
+                    <div style="font-size: 1.5rem; color: var(--text-dim);">/</div>
+                    <div class="stat-large">77</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 39%"></div>
+                </div>
+                <div class="progress-percent">39% Complete</div>
             </div>
-            <div class="progress-card done">
-                <div class="progress-label">Main Hub</div>
-                <div class="progress-value">12</div>
-                <div class="progress-sub">of 12 main hub pages</div>
-            </div>
+
             <div class="progress-card">
-                <div class="progress-label">Headshot Art</div>
-                <div class="progress-value">19</div>
-                <div class="progress-sub">of 41 headshot commissions</div>
+                <div class="progress-card-title">Headshot Commissions</div>
+                <div class="progress-stats">
+                    <div class="stat-large">17</div>
+                    <div style="font-size: 1.5rem; color: var(--text-dim);">/</div>
+                    <div class="stat-large">42</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 40%"></div>
+                </div>
+                <div class="progress-percent">40% Complete</div>
             </div>
+
             <div class="progress-card">
-                <div class="progress-label">Full Body Art</div>
-                <div class="progress-value">36</div>
-                <div class="progress-sub">of 41 full body commissions</div>
+                <div class="progress-card-title">Stylized Inks</div>
+                <div class="progress-stats">
+                    <div class="stat-large">8</div>
+                    <div style="font-size: 1.5rem; color: var(--text-dim);">/</div>
+                    <div class="stat-large">20</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 40%"></div>
+                </div>
+                <div class="progress-percent">40% Complete</div>
             </div>
         </div>
 
-        <!-- Overall Progress Bar -->
-        <div class="progress-bar-section">
-            <div class="bar-label"><span>Character Profile Completion</span><span>42 / 42</span></div>
-            <div class="bar-track">
-                <div class="bar-full" style="width: 100%"></div>
+        <!-- Fullbody Art -->
+        <div class="art-section">
+            <div class="art-header">
+                <h2 class="art-title">Fullbody Commissions</h2>
+                <div class="art-count">30 / 77</div>
+                <div class="art-line"></div>
             </div>
-
-            <div class="bar-label"><span>Realms Completion</span><span>5 / 5</span></div>
-            <div class="bar-track">
-                <div class="bar-full" style="width: 100%"></div>
-            </div>
-
-            <div class="bar-label"><span>Factions Completion</span><span>6 / 6</span></div>
-            <div class="bar-track">
-                <div class="bar-full" style="width: 100%"></div>
-            </div>
-
-            <div class="bar-label"><span>Magic Elements Completion</span><span>14 / 14</span></div>
-            <div class="bar-track">
-                <div class="bar-full" style="width: 100%"></div>
-            </div>
-
-            <div class="bar-label"><span>Lore Completion</span><span>8 / 8</span></div>
-            <div class="bar-track">
-                <div class="bar-full" style="width: 100%"></div>
-            </div>
-
-            <div class="bar-label"><span>Magic Systems Completion</span><span>3 / 3</span></div>
-            <div class="bar-track">
-                <div class="bar-full" style="width: 100%"></div>
-            </div>
-
-            <div class="bar-label"><span>Short Stories Completion</span><span>4 / 18</span></div>
-            <div class="bar-track">
-                <div class="bar-fill" style="width: 22.22%"></div>
-            </div>
-
-            <div class="bar-label"><span>Navigation Completion</span><span>12 / 12</span></div>
-            <div class="bar-track">
-                <div class="bar-full" style="width: 100%"></div>
-            </div>
-
-            <div class="bar-label"><span>Headshot Art Completion</span><span>19 / 41</span></div>
-            <div class="bar-track">
-                <div class="bar-fill" style="width: 46.34%"></div>
-            </div>
-
-            <div class="bar-label"><span>Full Body Art Completion</span><span>36 / 41</span></div>
-            <div class="bar-track">
-                <div class="bar-fill" style="width: 87.80%"></div>
+            <div class="art-grid">
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Pyara Dana</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Aria with Serrata Glissando</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Beat with Coralas</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Concerto Pulse with Coralas -Feather-</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Kali Dana</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Seria with Cadence Bastion</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Oktusha Miko</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Rhythm with Tempo Sever</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Omba Miko</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Verismo with Rotary Forte</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Zafara Quedar</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Adagio with Mirror Fugue</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Aran Letale</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Sonata with Cantabile Cleaver</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Mahana Sahi</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Symphony with Tearing Etude</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Crescendo with Ambrasis</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Finalis Grande with Ambrasis -Petal-</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Celesin the Philharmonious</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">dissonant discord with Atonality</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Itami Serafino</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Empress with Auroral Throneblade</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Daeon Liang</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Czar with Autarch Judicators</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Kayre</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Rex with Lionhearted Radiance</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Riasa Sungbae</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Pasha with Diadem Refrains</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Shini Thana</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Sultana with Sanctum Majestra</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Takino Retsu</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Mikado with Lotus Dominion</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Wentea Liso</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Dynast with Celestial Regnant</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Marate Jalo</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Starlit Alpha</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">The Gold Imperator</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">BLADE GUILLOTINE with Le Couteau</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Tiala Corsolis</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Alulu Caelum</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Amaranthine Breaklight</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Kesshō Kawa</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Tessera Ilustum</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Xīwàng Tiānshàng</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Fú cì Ánguāng</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Zhòu-chún Shìfàng</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Amare</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Tiala Hartlight</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Alulu Dayk</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Alulu Akụkụ</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Alulu Ọnwụ</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Jí Lián Xiá</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Kesshō Yīng</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Kesshō Tǐ</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Kesshō Zhàn</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Claris Quies</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Tessera Vis</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Tessera Ratio</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Vastatio Tessera</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Velia Traicerem</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Ami Hartbreak</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Amaranthine Hartfall</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Windi Lightfall</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Kweliana Winderial la Pax</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Fú cì Tiānshàng</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Astarri the Dreampup</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Zhòu-chún Tǎoyàn v1</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Zhòu-chún Tǎoyàn v2</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Zhòu-chún Tǎoyàn v3</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Zhòu-chún Tǎoyàn v4</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Zhòu-chún Tǎoyàn v5</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Zhòu-chún Tǎoyàn v6</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Zhòu-chún Tǎoyàn v7</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Caie Ascala</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Rafé Lliama</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Princess Clarisieandra</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Queen Windelateami</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Solamor</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Pluere</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Corstilla</div>
+                </div>
             </div>
         </div>
 
-        <!-- SITE PAGES -->
-        <div class="section">
-            <h2 class="section-title">Next Steps</h2>
-
-            <div class="faction-label">Story Pages</div>
-            <div class="page-grid">
-                <div class="page-card done">
-                    <div class="page-name">story-new-hearts.html</div>
-                    <div class="page-status">✓ Built</div>
+        <!-- Headshots -->
+        <div class="art-section">
+            <div class="art-header">
+                <h2 class="art-title">Headshot Commissions</h2>
+                <div class="art-count">17 / 42</div>
+                <div class="art-line"></div>
+            </div>
+            <div class="art-grid">
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Pyara Dana</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-hearts-wings.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Kali Dana</div>
                 </div>
-                <div class="page-card done">
-                    <div class="page-name">story-aria-caesura.html</div>
-                    <div class="page-status">✓ Built</div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Oktusha Miko</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-crowned.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Omba Miko</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-regicide.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Zafara Quedar</div>
                 </div>
-                <div class="page-card done">
-                    <div class="page-name">story-symphonic-overture.html</div>
-                    <div class="page-status">✓ Built</div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Aran Letale</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-attacca-subito.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Mahana Sahi</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-shadows-roses.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Celesin</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-avant-garde-composition.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">dissonant discord</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-investiture.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Empress Helmet</div>
                 </div>
-                <div class="page-card done">
-                    <div class="page-name">story-bluish-green-truths.html</div>
-                    <div class="page-status">✓ Built</div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Sultana Helmet</div>
                 </div>
-                <div class="page-card done">
-                    <div class="page-name">story-falling-stars.html</div>
-                    <div class="page-status">✓ Built</div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Czar Helmet</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-grand-convergence.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Rex Helmet</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-region-theory-origins.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Pasha Helmet</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-astride-the-dark.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Mikado Helmet</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-very-bad-day.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Dynast Helmet</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-adventure.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Alpha Helmet</div>
                 </div>
-                <div class="page-card missing">
-                    <div class="page-name">story-upgraded-executions.html</div>
-                    <div class="page-status">✗ Not built</div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">BLADE GUILLOTINE Helmet</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Tiala Corsolis</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Kesshō Kawa</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Tessera Iustum</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Amaranthine Breaklight</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Xīwàng Tiānshàng</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Fú cì Ánguāng</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Tiala Hartlight</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Jí Lián Xiá</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Claris Quies</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Velia Traicerum</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Ami Hartbreak</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Windi Lightfall</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Odisse Nocere</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Fú cì Tiānshàng</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Caie Ascala</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Clarisieandra</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Windelateami</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Rafé Lliama</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Solamor</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Pluere</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Corstilla</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Amare</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Astarri</div>
                 </div>
             </div>
         </div>
+
+        <!-- Stylized Inks -->
+        <div class="art-section">
+            <div class="art-header">
+                <h2 class="art-title">Stylized Inks (Outerring Style)</h2>
+                <div class="art-count">8 / 20</div>
+                <div class="art-line"></div>
+            </div>
+            <div class="art-grid">
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Solamor</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Pluere</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Corstilla</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Empress with Auroral Throneblade</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Aria with Serrata Glissando</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Alulu Dayk</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Kesshō Yīng</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Tessera Vis</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Amaranthine Hartbreak</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Zhòu-chún Shìfàng</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Kweliana De La Pax</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Xīwàng Tiānshàng</div>
+                </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Odisse Nocere</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Fú cì Tiānshàng and Astarri</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Mikado with Lotus Dominion</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Starlit Dynast with Celestial Regnant</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">BLADE GUILLOTINE with Le Couteau</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Adagio with Mirror Fugue</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Heart Sonata with Cantabile Cleaver</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">dissonant discord with Atonality</div>
+                </div>
+            </div>
+        </div>
+
+    
+
     </div>
 </body>
 
