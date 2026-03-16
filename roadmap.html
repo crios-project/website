@@ -33,6 +33,7 @@
             --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
             --green: #00e676;
+            --orange: #ff9800;
         }
 
         body {
@@ -294,6 +295,15 @@
             letter-spacing: 2px;
         }
 
+        .arc-title-complete {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
         .arc-count {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.9rem;
@@ -301,6 +311,16 @@
             padding: 4px 12px;
             background: rgba(0, 217, 255, 0.1);
             border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 20px;
+        }
+
+        .arc-count-complete {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--green);
+            padding: 4px 12px;
+            background: rgba(0, 255, 94, 0.1);
+            border: 1px solid var(--green);
             border-radius: 20px;
         }
 
@@ -393,6 +413,88 @@
         .story-card:not(.complete) .status-icon {
             background: rgba(136, 136, 168, 0.2);
             border: 2px solid var(--text-dim);
+        }
+
+
+        /* Subsection headers */
+        .subsection-header {
+            grid-column: 1 / -1;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+        }
+
+        .subsection-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subsection-title-complete {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+
+
+        /* In-progress status */
+        .art-card.in-progress {
+            background: rgba(255, 152, 0, 0.03);
+            border-color: rgba(255, 152, 0, 0.25);
+        }
+
+        .art-card.in-progress .art-checkbox {
+            background: var(--orange);
+            color: var(--dark-bg);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .art-card.in-progress .art-name {
+            color: var(--orange);
+        }
+
+        /* Stacked progress bars */
+        .progress-segments {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            border-radius: 100px;
+            overflow: visible;
+        }
+
+        .progress-segment {
+            height: 100%;
+            transition: width 1s ease;
+        }
+
+        .progress-segment.complete {
+            background: linear-gradient(90deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
+            border-radius: 100px 0 0 100px;
+        }
+
+        /* Fully round complete when it's the only visible segment */
+        .progress-segment.complete[style*="width: 39%"],
+        .progress-segment.complete[style*="width: 40%"] {
+            border-radius: 100px;
+        }
+
+        .progress-segment.in-progress {
+            background: linear-gradient(90deg, gold, yellow, var(--orange));
+            border-radius: 0 100px 100px 0;
+            margin-left: -1px; /* Overlap slightly to remove gap */
+        }
+
+        .progress-segment.not-started {
+            background: transparent;
         }
 
         @media (max-width: 768px) {
@@ -533,6 +635,7 @@
             background: rgba(136, 136, 168, 0.1);
             border: 1px solid rgba(136, 136, 168, 0.3);
             border-radius: 20px;
+            margin-bottom: 10px;
         }
 
         /* Art sections */
@@ -590,7 +693,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 12px;
             flex-shrink: 0;
         }
 
@@ -599,7 +702,7 @@
             color: var(--dark-bg);
         }
 
-        .art-card:not(.complete) .art-checkbox {
+        .art-card:not(.complete):not(.in-progress) .art-checkbox {
             background: rgba(136, 136, 168, 0.1);
             border: 2px solid var(--text-dim);
         }
@@ -649,6 +752,13 @@
             height: 100%;
             border-radius: 100px;
             background: linear-gradient(90deg, var(--primary-burgundy), var(--secondary-pink), var(--accent-cyan));
+            transition: width 1s ease;
+        }
+
+        .progress-complete {
+            height: 100%;
+            border-radius: 100px;
+            background: var(--green);
             transition: width 1s ease;
         }
 
@@ -798,8 +908,8 @@
         <!-- Royastella Arc 2 -->
         <div class="arc-section">
             <div class="arc-header">
-                <h2 class="arc-title">Royastella Arc 2</h2>
-                <div class="arc-count">3 / 3</div>
+                <h2 class="arc-title-complete">Royastella Arc 2</h2>
+                <div class="arc-count-complete">3 / 3</div>
                 <div class="arc-line"></div>
             </div>
             <div class="story-grid">
@@ -1059,15 +1169,13 @@
             </div>
         </div>
 
-    
-
         <!-- GAMES SECTION -->
         <!-- Progress Summary -->
         <div class="progress-summary">
             <div class="progress-stats">
-                <div class="stat-large">1</div>
+                <div class="stat-large">2</div>
                 <div style="font-size: 2rem; color: var(--text-dim);">/</div>
-                <div class="stat-large">14</div>
+                <div class="stat-large">28</div>
             </div>
             <div class="stat-label">Tasks Complete Across All Games</div>
         </div>
@@ -1115,10 +1223,10 @@
         <div class="game-section">
             <div class="game-header">
                 <h2 class="game-title">Dissensio Video Game</h2>
-                <div class="game-count">1 / 7</div>
+                <div class="game-count">1 / 9</div>
                 <div class="game-line"></div>
             </div>
-            <p class="game-subtitle">3D versus game</p>
+            <p class="simple-project-status">3D versus game</p>
             <div class="task-list">
                 <div class="task-item complete">
                     <div class="task-checkbox">✓</div>
@@ -1148,13 +1256,69 @@
                     <div class="task-checkbox"></div>
                     <div class="task-name">Dual Tech designs</div>
                 </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Enemy designs</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Boss designs</div>
+                </div>
             </div>
         </div>
 
         <!-- Soul Dominions: Aperture -->
+        <div class="game-section">
+            <div class="game-header">
+                <h2 class="game-title">Soul Dominions: Aperture</h2>
+                <div class="game-count">1 / 9</div>
+                <div class="game-line"></div>
+            </div>
+            <p class="simple-project-status">Survivors-like game</p>
+            <div class="task-list">
+                <div class="task-item complete">
+                    <div class="task-checkbox">✓</div>
+                    <div class="task-name">Logo Design</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Art Assets</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Combat engine building</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Stage building</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Item concepts</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Magic concepts</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Dual Tech designs</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Enemy designs</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-name">Boss designs</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teburu HeartDive Game -->
         <div class="simple-project">
-            <div class="simple-project-title">Soul Dominions: Aperture</div>
-            <div class="simple-project-status">Survivors-like game • Not started</div>
+            <div class="simple-project-title">HeartDive Teburu System Game</div>
+            <div class="simple-project-status">Not started</div>
         </div>
 
         <!-- Starlite 7th Game -->
@@ -1169,8 +1333,6 @@
             <div class="simple-project-status">Not started</div>
         </div>
 
-    
-
         <!-- ART SECTION -->
         <!-- Progress Cards -->
         <div class="progress-grid">
@@ -1182,7 +1344,11 @@
                     <div class="stat-large">77</div>
                 </div>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 39%"></div>
+                    <div class="progress-segments">
+                        <div class="progress-segment complete" style="width: 39%"></div>
+                        <div class="progress-segment in-progress" style="width: 0%"></div>
+                        <div class="progress-segment not-started" style="width: 61%"></div>
+                    </div>
                 </div>
                 <div class="progress-percent">39% Complete</div>
             </div>
@@ -1190,14 +1356,18 @@
             <div class="progress-card">
                 <div class="progress-card-title">Headshot Commissions</div>
                 <div class="progress-stats">
-                    <div class="stat-large">17</div>
+                    <div class="stat-large">16</div>
                     <div style="font-size: 1.5rem; color: var(--text-dim);">/</div>
                     <div class="stat-large">42</div>
                 </div>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 40%"></div>
+                    <div class="progress-segments">
+                        <div class="progress-segment complete" style="width: 38.1%"></div>
+                        <div class="progress-segment in-progress" style="width: 23.8%"></div>
+                        <div class="progress-segment not-started" style="width: 38.1%"></div>
+                    </div>
                 </div>
-                <div class="progress-percent">40% Complete</div>
+                <div class="progress-percent">38% Complete • 24% In Progress</div>
             </div>
 
             <div class="progress-card">
@@ -1208,7 +1378,11 @@
                     <div class="stat-large">20</div>
                 </div>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 40%"></div>
+                    <div class="progress-segments">
+                        <div class="progress-segment complete" style="width: 40%"></div>
+                        <div class="progress-segment in-progress" style="width: 0%"></div>
+                        <div class="progress-segment not-started" style="width: 60%"></div>
+                    </div>
                 </div>
                 <div class="progress-percent">40% Complete</div>
             </div>
@@ -1221,7 +1395,15 @@
                 <div class="art-count">30 / 77</div>
                 <div class="art-line"></div>
             </div>
+            <h3></h3>
             <div class="art-grid">
+                <div class="subsection-header">
+                    <div class="subsection-title">Beeston Characters - 2/20 
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 10%"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="art-card">
                     <div class="art-checkbox"></div>
                     <div class="art-name">Pyara Dana</div>
@@ -1302,6 +1484,13 @@
                     <div class="art-checkbox"></div>
                     <div class="art-name">dissonant discord with Atonality</div>
                 </div>
+                <div class="subsection-header">
+                    <div class="subsection-title">Royastella Characters - 8/18 
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 44.44444%"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="art-card complete">
                     <div class="art-checkbox">✓</div>
                     <div class="art-name">Itami Serafino</div>
@@ -1310,9 +1499,17 @@
                     <div class="art-checkbox"></div>
                     <div class="art-name">Starlit Empress with Auroral Throneblade</div>
                 </div>
+                <div class="art-card complete">
+                    <div class="art-checkbox">✓</div>
+                    <div class="art-name">Shini Thana</div>
+                </div>
                 <div class="art-card">
                     <div class="art-checkbox"></div>
-                    <div class="art-name">Daeon Liang</div>
+                    <div class="art-name">Starlit Sultana with Sanctum Majestra</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Daeon Liàng</div>
                 </div>
                 <div class="art-card">
                     <div class="art-checkbox"></div>
@@ -1333,14 +1530,6 @@
                 <div class="art-card">
                     <div class="art-checkbox"></div>
                     <div class="art-name">Starlit Pasha with Diadem Refrains</div>
-                </div>
-                <div class="art-card complete">
-                    <div class="art-checkbox">✓</div>
-                    <div class="art-name">Shini Thana</div>
-                </div>
-                <div class="art-card">
-                    <div class="art-checkbox"></div>
-                    <div class="art-name">Starlit Sultana with Sanctum Majestra</div>
                 </div>
                 <div class="art-card complete">
                     <div class="art-checkbox">✓</div>
@@ -1373,6 +1562,13 @@
                 <div class="art-card complete">
                     <div class="art-checkbox">✓</div>
                     <div class="art-name">BLADE GUILLOTINE with Le Couteau</div>
+                </div>
+                <div class="subsection-header">
+                    <div class="subsection-title">Nexsicon Characters - 5/9 
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 55.55555555555%"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="art-card complete">
                     <div class="art-checkbox">✓</div>
@@ -1409,6 +1605,13 @@
                 <div class="art-card complete">
                     <div class="art-checkbox">✓</div>
                     <div class="art-name">Amare</div>
+                </div>
+                <div class="subsection-header">
+                    <div class="subsection-title">Ultimatera Characters - 15/26 
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 57.692307692%"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="art-card complete">
                     <div class="art-checkbox">✓</div>
@@ -1514,6 +1717,13 @@
                     <div class="art-checkbox">✓</div>
                     <div class="art-name">Zhòu-chún Tǎoyàn v7</div>
                 </div>
+                <div class="subsection-header">
+                    <div class="subsection-title">Characters of Antiquity - 0/4 
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="art-card">
                     <div class="art-checkbox"></div>
                     <div class="art-name">Caie Ascala</div>
@@ -1529,6 +1739,13 @@
                 <div class="art-card">
                     <div class="art-checkbox"></div>
                     <div class="art-name">Queen Windelateami</div>
+                </div>
+                <div class="subsection-header">
+                    <div class="subsection-title">Novus Fusions - 0/3 
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="art-card">
                     <div class="art-checkbox"></div>
@@ -1549,8 +1766,16 @@
         <div class="art-section">
             <div class="art-header">
                 <h2 class="art-title">Headshot Commissions</h2>
-                <div class="art-count">17 / 42</div>
+                <div class="art-count">16 / 40 
+                    </div>
                 <div class="art-line"></div>
+            </div>
+            <div class="subsection-header">
+                <div class="subsection-title-complete">Beeston Characters 9/9
+                        <div class="progress-bar">
+                            <div class="progress-complete" style="width: 100%"></div>
+                        </div>
+                </div>
             </div>
             <div class="art-grid">
                 <div class="art-card complete">
@@ -1589,6 +1814,12 @@
                     <div class="art-checkbox">✓</div>
                     <div class="art-name">dissonant discord</div>
                 </div>
+                <div class="subsection-header">
+                    <div class="subsection-title">Royastella Characters - 0/9 
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div></div>
+                </div>
                 <div class="art-card">
                     <div class="art-checkbox"></div>
                     <div class="art-name">Starlit Empress Helmet</div>
@@ -1625,29 +1856,53 @@
                     <div class="art-checkbox"></div>
                     <div class="art-name">BLADE GUILLOTINE Helmet</div>
                 </div>
-                <div class="art-card">
-                    <div class="art-checkbox"></div>
+                <div class="subsection-header">
+                    <div class="subsection-title">Nexsicon Characters - 0/9 
+                        <div class="progress-bar">
+                            <div class="progress-segments">
+                                <div class="progress-segment complete" style="width: 0%"></div>
+                                <div class="progress-segment in-progress" style="width: 66.67%"></div>
+                                <div class="progress-segment not-started" style="width: 33.33%"></div>
+                            </div>
+                        </div></div>
+                </div>
+                <div class="art-card in-progress">
+                    <div class="art-checkbox">◐</div>
                     <div class="art-name">Tiala Corsolis</div>
                 </div>
-                <div class="art-card">
-                    <div class="art-checkbox"></div>
+                <div class="art-card in-progress">
+                    <div class="art-checkbox">◐</div>
                     <div class="art-name">Kesshō Kawa</div>
                 </div>
-                <div class="art-card">
-                    <div class="art-checkbox"></div>
+                <div class="art-card in-progress">
+                    <div class="art-checkbox">◐</div>
                     <div class="art-name">Tessera Iustum</div>
                 </div>
-                <div class="art-card complete">
-                    <div class="art-checkbox">✓</div>
+                <div class="art-card in-progress">
+                    <div class="art-checkbox">◐</div>
                     <div class="art-name">Amaranthine Breaklight</div>
                 </div>
-                <div class="art-card">
-                    <div class="art-checkbox"></div>
+                <div class="art-card in-progress">
+                    <div class="art-checkbox">◐</div>
                     <div class="art-name">Xīwàng Tiānshàng</div>
+                </div>
+                <div class="art-card in-progress">
+                    <div class="art-checkbox">◐</div>
+                    <div class="art-name">Fú cì Ánguāng</div>
                 </div>
                 <div class="art-card">
                     <div class="art-checkbox"></div>
-                    <div class="art-name">Fú cì Ánguāng</div>
+                    <div class="art-name">Amare</div>
+                </div>
+                <div class="subsection-header">
+                    <div class="subsection-title">Ultimatera Characters - 4/8 
+                        <div class="progress-bar">
+                            <div class="progress-segments">
+                                <div class="progress-segment complete" style="width: 50%"></div>
+                                <div class="progress-segment in-progress" style="width: 37.5%"></div>
+                                <div class="progress-segment not-started" style="width: 12.5%"></div>
+                            </div>
+                        </div></div>
                 </div>
                 <div class="art-card complete">
                     <div class="art-checkbox">✓</div>
@@ -1661,25 +1916,31 @@
                     <div class="art-checkbox">✓</div>
                     <div class="art-name">Claris Quies</div>
                 </div>
-                <div class="art-card">
-                    <div class="art-checkbox"></div>
+                <div class="art-card in-progress">
+                    <div class="art-checkbox">◐</div>
                     <div class="art-name">Velia Traicerum</div>
                 </div>
-                <div class="art-card">
-                    <div class="art-checkbox"></div>
-                    <div class="art-name">Ami Hartbreak</div>
-                </div>
-                <div class="art-card">
-                    <div class="art-checkbox"></div>
+                <div class="art-card in-progress">
+                    <div class="art-checkbox">◐</div>
                     <div class="art-name">Windi Lightfall</div>
                 </div>
-                <div class="art-card">
-                    <div class="art-checkbox"></div>
+                <div class="art-card in-progress">
+                    <div class="art-checkbox">◐</div>
                     <div class="art-name">Odisse Nocere</div>
                 </div>
                 <div class="art-card complete">
                     <div class="art-checkbox">✓</div>
                     <div class="art-name">Fú cì Tiānshàng</div>
+                </div>
+                <div class="art-card">
+                    <div class="art-checkbox"></div>
+                    <div class="art-name">Astarri</div>
+                </div>
+                <div class="subsection-header">
+                    <div class="subsection-title">Characters of Antiquity - 0/4 
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div></div>
                 </div>
                 <div class="art-card">
                     <div class="art-checkbox"></div>
@@ -1697,6 +1958,12 @@
                     <div class="art-checkbox"></div>
                     <div class="art-name">Rafé Lliama</div>
                 </div>
+                <div class="subsection-header">
+                    <div class="subsection-title-complete">Novus Fusions - 3/3 
+                        <div class="progress-bar">
+                            <div class="progress-complete" style="width: 100%"></div>
+                        </div></div>
+                </div>
                 <div class="art-card complete">
                     <div class="art-checkbox">✓</div>
                     <div class="art-name">Solamor</div>
@@ -1708,14 +1975,6 @@
                 <div class="art-card complete">
                     <div class="art-checkbox">✓</div>
                     <div class="art-name">Corstilla</div>
-                </div>
-                <div class="art-card">
-                    <div class="art-checkbox"></div>
-                    <div class="art-name">Amare</div>
-                </div>
-                <div class="art-card">
-                    <div class="art-checkbox"></div>
-                    <div class="art-name">Astarri</div>
                 </div>
             </div>
         </div>
@@ -1723,22 +1982,22 @@
         <!-- Stylized Inks -->
         <div class="art-section">
             <div class="art-header">
-                <h2 class="art-title">Stylized Inks (Outerring Style)</h2>
+                <h2 class="art-title">Stylized Inks (Outering Style)</h2>
                 <div class="art-count">8 / 20</div>
                 <div class="art-line"></div>
             </div>
             <div class="art-grid">
                 <div class="art-card">
                     <div class="art-checkbox"></div>
-                    <div class="art-name">Solamor</div>
+                    <div class="art-name">Solamor with Mors Lux</div>
                 </div>
                 <div class="art-card">
                     <div class="art-checkbox"></div>
-                    <div class="art-name">Pluere</div>
+                    <div class="art-name">Pluere with Wúxiàn Sǐwáng</div>
                 </div>
                 <div class="art-card">
                     <div class="art-checkbox"></div>
-                    <div class="art-name">Corstilla</div>
+                    <div class="art-name">Corstilla with Lucem Atra</div>
                 </div>
                 <div class="art-card">
                     <div class="art-checkbox"></div>
