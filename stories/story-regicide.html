@@ -2,19 +2,11 @@
 <html lang="en">
 
 <head>
-
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Crios" />
-    <link rel="manifest" href="/site.webmanifest" />
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regicide // Coming Soon</title>
+    <title>Regicide // CRIOS Short Story</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
         rel="stylesheet">
     <style>
         * {
@@ -31,19 +23,15 @@
             --dark-panel: #141419;
             --text-primary: #e8e8f0;
             --text-dim: #8888a8;
-            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
-            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
 
         body {
             font-family: 'Archivo', sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            line-height: 1.9;
+            overflow-x: hidden;
         }
 
         /* Animated background */
@@ -53,8 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
@@ -67,6 +54,7 @@
             0% {
                 transform: translateY(0);
             }
+
             100% {
                 transform: translateY(40px);
             }
@@ -101,181 +89,275 @@
         }
 
         @keyframes orbFloat1 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0);
             }
+
             50% {
                 transform: translate(-100px, 100px);
             }
         }
 
         @keyframes orbFloat2 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0);
             }
+
             50% {
                 transform: translate(100px, -80px);
             }
         }
 
-        /* Content container */
-        .wrapper {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 40px;
-            animation: fadeIn 1s ease-out;
+        /* Header nav */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
         }
 
-        @keyframes fadeIn {
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Story header */
+        .story-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Title */
-        .coming-soon-title {
+        .story-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 3.5rem;
             font-weight: 900;
-            margin-bottom: 40px;
-            line-height: 1.3;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .story-label {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            font-weight: 400;
-            display: block;
-            margin-bottom: 20px;
-            letter-spacing: 4px;
-        }
-
-        .story-name {
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            display: block;
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            animation: glow 3s ease-in-out infinite;
+            margin-bottom: 16px;
+            letter-spacing: 3px;
+            line-height: 1.2;
         }
 
-        @keyframes glow {
-            0%, 100% {
-                filter: drop-shadow(0 0 10px rgba(233, 30, 99, 0.4));
-            }
-            50% {
-                filter: drop-shadow(0 0 25px rgba(233, 30, 99, 0.8)) drop-shadow(0 0 40px rgba(0, 217, 255, 0.4));
-            }
+        .story-meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
         }
 
-        .coming-text {
+        .meta-item {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
             color: var(--text-dim);
-            font-weight: 400;
-            letter-spacing: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .dot {
+        .meta-item .label {
             color: var(--accent-cyan);
-            font-weight: 900;
         }
 
-        /* Subtitle */
-        .subtitle {
-            font-family: 'Archivo', sans-serif;
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            margin-bottom: 60px;
-            font-style: italic;
+        /* Story content */
+        .story-content {
             animation: fadeIn 1s ease-out 0.3s both;
         }
 
-        /* Back button */
-        .back-button {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .story-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 28px;
+            color: var(--text-primary);
+        }
+
+        .story-content p:first-of-type::first-letter {
+            font-size: 4rem;
+            line-height: 1;
+            float: left;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
+            color: var(--secondary-pink);
+            margin: 4px 12px 0 0;
+        }
+
+        /* Emphasis text */
+        .story-content strong {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .story-content em {
+            color: var(--secondary-pink);
+            font-style: italic;
+        }
+
+        /* Thought text */
+        .thought {
+            font-style: italic;
             color: var(--text-dim);
-            background: transparent;
-            border: 2px solid var(--text-dim);
-            padding: 16px 40px;
-            cursor: pointer;
+        }
+
+        /* Special moments - dramatic reveals */
+        .dramatic {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 3px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-block;
-            animation: fadeIn 1s ease-out 0.5s both;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 48px 0;
+            padding: 24px;
+            border-top: 2px solid rgba(233, 30, 99, 0.3);
+            border-bottom: 2px solid rgba(233, 30, 99, 0.3);
         }
 
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
-            transition: left 0.5s ease;
+        /* Section breaks */
+        .break {
+            text-align: center;
+            margin: 60px 0;
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            letter-spacing: 8px;
         }
 
-        .back-button:hover::before {
-            left: 100%;
-        }
-
-        .back-button:hover {
-            border-color: var(--accent-cyan);
+        /* Character tags */
+        .character-link {
             color: var(--accent-cyan);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
-            transform: translateY(-2px);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            font-weight: 600;
         }
 
-        .back-button:active {
-            transform: translateY(0);
+        .character-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
         }
 
-        /* Responsive */
+        /* Related stories footer */
+        .related-section {
+            margin-top: 120px;
+            padding: 48px 0;
+            border-top: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .related-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .related-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2);
+        }
+
+        .related-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .related-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
         @media (max-width: 768px) {
-            .coming-soon-title {
-                font-size: 2rem;
+            .story-title {
+                font-size: 2.2rem;
             }
 
-            .story-label {
-                font-size: 0.9rem;
-                letter-spacing: 3px;
+            .story-content p {
+                font-size: 1.05rem;
             }
 
-            .story-name {
-                font-size: 2.5rem;
+            .story-meta {
+                flex-direction: column;
+                gap: 12px;
             }
 
-            .coming-text {
-                font-size: 1.8rem;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-            }
-
-            .back-button {
-                font-size: 0.85rem;
-                padding: 14px 32px;
-            }
-
-            .wrapper {
-                padding: 24px;
+            .story-content p:first-of-type::first-letter {
+                font-size: 3rem;
+                margin: 2px 8px 0 0;
             }
         }
     </style>
@@ -286,15 +368,108 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <div class="wrapper">
-        <h1 class="coming-soon-title">
-            <span class="story-label">Short Story</span>
-            <span class="story-name">Regicide</span>
-            <span class="coming-text">Coming Soon<span class="dot">.</span></span>
-        </h1>
-        <p class="subtitle">BLADE GUILLOTINE's betrayal unfolds soon.</p>
-        <button class="back-button" onclick="history.back()">← Go Back</button>
+    <nav class="header-nav">
+        <a href="../stories.html" class="back-link">← All Stories</a>
+    </nav>
+
+    <div class="container">
+        <!-- Story Header -->
+        <header class="story-header">
+            <h1 class="story-title">Regicide</h1>
+            <div class="story-meta">
+                <div class="meta-item"><span class="label">Era:</span> <a href="../realms/realm-royastella.html" class="back-link">Royastella Arc 1</a></div>
+                <div class="meta-item"><span class="label">Featured:</span> <a href="../characters/character-starlite-7th.html" class="back-link">Starlite 7th</a>, <a href="../characters/character-blade-guillotine.html" class="back-link">BLADE GUILLOTINE</a></div>
+                <div class="meta-item"><span class="label">Type:</span> Short Story</div>
+            </div>
+        </header>
+
+        <!-- Story Content -->
+        <article class="story-content">
+            <p>"I don't trust her."</p>
+
+            <p>Shini glances over at Wentea but she doesn't acknowledge the statement for a couple reasons. One, she doesn't like the Starlit Dynast and has little desire to converse with her. Two, Shini doesn't want to undermine her sister Itami and acknowledge that she <em>also</em> doesn't trust BLADE GUILLOTINE. This is literally insane. The definition of insanity is doing the same thing and expecting a different result, right? By that definition Itami's actions are basically insane. BLADE GUILLOTINE is going to betray them. Or at the very least, beat them all up whilst dropping pithy lines that somehow sting more than the bruises. Not that Shini is going to complain. Keeping Itami happy is her number two priority.</p>
+
+            <p><em>"Maintain your guard and be sure to survive.<br>Your greatest foe still has yet to arrive."</em></p>
+
+            <p>Stars, she hates it when BLADE does that.</p>
+
+            <p>The severed arena where the Starlit 7th has been fighting is littered with shining crystal fragments and diamond dust. The team has destroyed dozens of Crystallines in hopes of forcing out the last three Zodiarcals. Czar noticed the pattern of the Zodiarcals and came to the conclusion that there were only three more foes they needed to face: the Boar Zodiarcal, the Horse Zodiarcal, and the Dragon Zodiarcal.</p>
+
+            <p>So here they are. Actually storming the enemy base and doing their best to bait out the last three Zodiarcals to finish this once and for all. Fortunately between their Starlight Blessings and the completely unexpected assistance of BLADE GUILLOTINE, the Abyss-Gorger and the Solar Flare are slain, their starbrights absorbed into herself, the Starlit Sultana and the team sniper Starlit Rex. Every member of the team thus far had empowered their cores by absorbing a Zodiarcal starbright, that distilled quintessence Zodiarcals left behind after being vanquished that somehow made them stronger. Every member actually now had two starbrights in their cores, save Mikado who only had the one and Empress who didn't have any. Yet.</p>
+
+            <p>It made complete sense. Empress was perfect and the leader, so the starbright for her must be the one from the leader of the Zodiarcals. And what better foe than a dragon. It's noble and elegant just like Itami was noble and elegant, so of course the most wonderful starbright would be for the most wonderful Starlit.</p>
+
+            <p>Yes.</p>
+
+            <p>A roar cracks the air like thunder. The dragon has arrived. A hideously majestic beast of shimmering crystal scales and cold precision.</p>
+
+            <div class="dramatic">
+                Entering Combat//The Infinite Sovereign<br>
+                <em>Longwang, the Dragon King of the Four Seas</em>
+            </div>
+
+            <p>Reality shifts. No longer are the Runic Knights in a destroyed wasteland, but mirrored salt flats. And before them is the dragon.</p>
+
+            <p>The humidity clots the air instantly, turning it into a heavy, suffocating shroud that Sultana can feel in her very lungs. Shini tightens her grip on Sanctum Majestra, her mind flickering back to Itami's questionable alliance. She doesn't trust the figure standing on the periphery, but there is no time for doubt. The mirrored ground beneath her boots ripples impossibly as Longwang dives into the salt, vanishing into the reflection only to erupt in a towering tsunami of brine and jagged crystal.</p>
+
+            <p>"Stars, Reign Down!" Itami's voice rings out with imperial authority, the Auroral Throneblade gleaming against the white expanse. The team moves as one.</p>
+
+            <p>The battle is a desperate, grinding nightmare. Pasha screams through the air as Rex keeps pace on the ground, their projectiles a constant, flickering rain that seems to do little more than irritate the mile-long Sovereign. Czar and Mikado are blurs of steel, dancing between the dragon's crystalline claws, while Dynast attempts to anchor the shifting reality of the flats. Sultana's shield, Sanctum Majestra, rings with the force of a thousand strikes, her vitality burning away as she intercepts blow after blow meant for her team.</p>
+
+            <p>Hours pass, or perhaps seconds; time has no meaning in the salt-blindness. The team is flagging, their movements heavy and ragged. They have fought to a standstill, a hollow draw that has left them trembling and drained. Longwang prepares for a final, crushing surge, its roar summoning hurricanes to finish the exhausted Starlit 7th.</p>
+
+            <p>Then, the air turns cold, sharper than the salt.</p>
+
+            <p>BLADE GUILLOTINE moves. It isn't a struggle; it's a conclusion. In a single, effortless motion that defies the dragon's absolute rule, she strikes. A silver flash severs the sky from the sea. The mile-long neck of the Infinite Sovereign is parted with terrifying ease. As the massive head falls, the salt flats begin to shatter, the dragon's imperial authority undone by a single swipe of blade.</p>
+
+            <p>The team is back at the wastes. BLADE is holding Itami's starbright. Frustrating.</p>
+
+            <p><em>"The time has come for you to finally see,<br>The great foe you must face is none but </em><strong>ME</strong><em>."</em></p>
+
+            <p>The rest of the team slumps. They just went through hell fighting a freaking DRAGON and now BLADE wants to spar? The team gets in a weary formation to humor their rival-turned-ally. Then it clicks into place for Shini.</p>
+
+            <p>BLADE isn't looking to spar. You don't release that much bloodlust and killing intent when you want to spar. And if there's one thing Shini knows, it's blood.</p>
+
+            <p>She's drained already, but keeping Itami safe is her number one priority. She activates her Starlit Blessing and just barely teleports in front of Itami to intercept what would almost certainly be a killing strike. Even so, the force of the blow sends her spiraling backwards with terrible speed, skipping across the ground in a boneless heap. It's enough to make the others realize BLADE is playing for keeps.</p>
+
+            <p><em>It's not even a fight.</em></p>
+
+            <p>BLADE doesn't do them the respect of using her weapon. She throws and uses body blows and dismantles the team without any effort at all. Then she drags their limp forms and props them up so they can see what she's doing. She has the starbright. <em>Itami's</em> starbright. And she holds it up above her head. A beam of light shoots into the sky and the sky tears open. There's a hole in the sky. And they are countless calamities of Crystalline visible on the other side of the hole.</p>
+
+            <p>"You all are too weak. Find someone who can make you strong."</p>
+
+            <p>BLADE seems disgusted with the team. She vanishes.</p>
+
+            <p>The proximity alerts for Crystalline emergents are going off like crazy. They might die here. Fortunately, they were in such a weakened state that Starlit Alpha would definitely get dispatched to rescue them. Pity he couldn't take care of BLADE too.</p>
+
+            <p>The worst part of this whole mess? Wentea was <strong>right</strong>.</p>
+
+        </article>
+
+        <!-- Related Stories Section -->
+        <section class="related-section">
+            <h2 class="related-title">Related Stories</h2>
+            <div class="related-grid">
+                <a href="story-crowned.html" class="related-card">
+                    <div class="related-card-title">Crowned</div>
+                    <div class="related-card-desc">System-selected champions are assembled to form the Starlite 7th,
+                        Royastella's premier defensive task force.</div>
+                </a>
+                <a href="story-investiture.html" class="related-card">
+                    <div class="related-card-title">Investiture</div>
+                    <div class="related-card-desc">After the betrayal of BLADE GUILLOTINE, Starlite 7th struggles to face the
+                        increased power of the Crystalline. A fortuitous encounter with a powerful stranger allows the
+                        team to unlock new potential.</div>
+                </a>
+                <a href="story-symphonic-overture.html" class="related-card">
+                    <div class="related-card-title">Symphonic Overture</div>
+                    <div class="related-card-desc">Mahana Sahi's appearance in Royastella marks the start of a new
+                        conflict for the Starlite 7th.</div>
+                </a>
+            </div>
+        </section>
     </div>
+
 </body>
 
 </html>
