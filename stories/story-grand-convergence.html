@@ -2,19 +2,11 @@
 <html lang="en">
 
 <head>
-
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Crios" />
-    <link rel="manifest" href="/site.webmanifest" />
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grand Convergence // Coming Soon</title>
+    <title>Grand Convergence // CRIOS Short Story</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
         rel="stylesheet">
     <style>
         * {
@@ -31,19 +23,15 @@
             --dark-panel: #141419;
             --text-primary: #e8e8f0;
             --text-dim: #8888a8;
-            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
-            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
 
         body {
             font-family: 'Archivo', sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            line-height: 1.9;
+            overflow-x: hidden;
         }
 
         /* Animated background */
@@ -53,8 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
@@ -67,6 +54,7 @@
             0% {
                 transform: translateY(0);
             }
+
             100% {
                 transform: translateY(40px);
             }
@@ -101,181 +89,275 @@
         }
 
         @keyframes orbFloat1 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0);
             }
+
             50% {
                 transform: translate(-100px, 100px);
             }
         }
 
         @keyframes orbFloat2 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0);
             }
+
             50% {
                 transform: translate(100px, -80px);
             }
         }
 
-        /* Content container */
-        .wrapper {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 40px;
-            animation: fadeIn 1s ease-out;
+        /* Header nav */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
         }
 
-        @keyframes fadeIn {
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Story header */
+        .story-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Title */
-        .coming-soon-title {
+        .story-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 3.5rem;
             font-weight: 900;
-            margin-bottom: 40px;
-            line-height: 1.3;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .story-label {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            font-weight: 400;
-            display: block;
-            margin-bottom: 20px;
-            letter-spacing: 4px;
-        }
-
-        .story-name {
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            display: block;
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            animation: glow 3s ease-in-out infinite;
+            margin-bottom: 16px;
+            letter-spacing: 3px;
+            line-height: 1.2;
         }
 
-        @keyframes glow {
-            0%, 100% {
-                filter: drop-shadow(0 0 10px rgba(233, 30, 99, 0.4));
-            }
-            50% {
-                filter: drop-shadow(0 0 25px rgba(233, 30, 99, 0.8)) drop-shadow(0 0 40px rgba(0, 217, 255, 0.4));
-            }
+        .story-meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
         }
 
-        .coming-text {
+        .meta-item {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
             color: var(--text-dim);
-            font-weight: 400;
-            letter-spacing: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .dot {
+        .meta-item .label {
             color: var(--accent-cyan);
-            font-weight: 900;
         }
 
-        /* Subtitle */
-        .subtitle {
-            font-family: 'Archivo', sans-serif;
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            margin-bottom: 60px;
-            font-style: italic;
+        /* Story content */
+        .story-content {
             animation: fadeIn 1s ease-out 0.3s both;
         }
 
-        /* Back button */
-        .back-button {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .story-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 28px;
+            color: var(--text-primary);
+        }
+
+        .story-content p:first-of-type::first-letter {
+            font-size: 4rem;
+            line-height: 1;
+            float: left;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
+            color: var(--secondary-pink);
+            margin: 4px 12px 0 0;
+        }
+
+        /* Emphasis text */
+        .story-content strong {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .story-content em {
+            color: var(--secondary-pink);
+            font-style: italic;
+        }
+
+        /* Thought text */
+        .thought {
+            font-style: italic;
             color: var(--text-dim);
-            background: transparent;
-            border: 2px solid var(--text-dim);
-            padding: 16px 40px;
-            cursor: pointer;
+        }
+
+        /* Special moments - dramatic reveals */
+        .dramatic {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 3px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-block;
-            animation: fadeIn 1s ease-out 0.5s both;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 48px 0;
+            padding: 24px;
+            border-top: 2px solid rgba(233, 30, 99, 0.3);
+            border-bottom: 2px solid rgba(233, 30, 99, 0.3);
         }
 
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
-            transition: left 0.5s ease;
+        /* Section breaks */
+        .break {
+            text-align: center;
+            margin: 60px 0;
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            letter-spacing: 8px;
         }
 
-        .back-button:hover::before {
-            left: 100%;
-        }
-
-        .back-button:hover {
-            border-color: var(--accent-cyan);
+        /* Character tags */
+        .character-link {
             color: var(--accent-cyan);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
-            transform: translateY(-2px);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            font-weight: 600;
         }
 
-        .back-button:active {
-            transform: translateY(0);
+        .character-link:hover {
+            color: white;
+            border-bottom-color: var(--accent-cyan);
+            text-shadow: 0 0 8px var(--accent-cyan);
         }
 
-        /* Responsive */
+        /* Related stories footer */
+        .related-section {
+            margin-top: 120px;
+            padding: 48px 0;
+            border-top: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .related-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .related-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2);
+        }
+
+        .related-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .related-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
         @media (max-width: 768px) {
-            .coming-soon-title {
-                font-size: 2rem;
+            .story-title {
+                font-size: 2.2rem;
             }
 
-            .story-label {
-                font-size: 0.9rem;
-                letter-spacing: 3px;
+            .story-content p {
+                font-size: 1.05rem;
             }
 
-            .story-name {
-                font-size: 2.5rem;
+            .story-meta {
+                flex-direction: column;
+                gap: 12px;
             }
 
-            .coming-text {
-                font-size: 1.8rem;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-            }
-
-            .back-button {
-                font-size: 0.85rem;
-                padding: 14px 32px;
-            }
-
-            .wrapper {
-                padding: 24px;
+            .story-content p:first-of-type::first-letter {
+                font-size: 3rem;
+                margin: 2px 8px 0 0;
             }
         }
     </style>
@@ -286,15 +368,258 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <div class="wrapper">
-        <h1 class="coming-soon-title">
-            <span class="story-label">Short Story</span>
-            <span class="story-name">Grand Convergence</span>
-            <span class="coming-text">Coming Soon<span class="dot">.</span></span>
-        </h1>
-        <p class="subtitle">Tiala Corsolis's catastrophic spell approaches.</p>
-        <button class="back-button" onclick="history.back()">← Go Back</button>
+    <nav class="header-nav">
+        <a href="../stories.html" class="back-link">← All Stories</a>
+    </nav>
+
+    <div class="container">
+        <!-- Story Header -->
+        <header class="story-header">
+            <h1 class="story-title">Grand Convergence</h1>
+            <div class="story-meta">
+                <div class="meta-item"><span class="label">Era:</span> <a href="../realms/realm-nexsicon.html" class="back-link">Nexsicon Arc</a></div>
+                <div class="meta-item"><span class="label">Featured:</span> <a href="../characters/character-praxis-verax-affinas.html" class="back-link">PRAXIS VERAX AFFINAS</a>, <a href="../characters/character-ji-lian-xia.html" class="back-link">Jí Lián Xiá</a></div>
+                <div class="meta-item"><span class="label">Type:</span> Catastrophe</div>
+            </div>
+        </header>
+
+        <!-- Story Content -->
+        <article class="story-content">
+            <p>"Do you think you'll ever become dissonant discord or BLADE GUILLOTINE again?"</p>
+
+            <p>Tiala Corsolis is clearly startled by the question. She sets her book down and turns to Jí Lián.</p>
+
+            <p>"I honestly don't know. I mean, Alulu is a much stronger form than BLADE or discord and I don't need to blend in with Beeston's Lúmenai or Royastella's Glusuco anymore. I guess not?"</p>
+
+            <p>Task successful. Tiala is no longer absorbed in the book which means:</p>
+
+            <p>"Oh wow. I'm starved. We got anything ready?"</p>
+
+            <p>And bingo. When Tiala is truly focused in her studies, it would take a tremendous amount of effort to break said focus. Jí Lián has discovered a clever work around: if you ask a diverting enough question, one that Tiala has to think about to answer, then she'll actually stop and reengage with her surroundings. For example, she might recall that she hasn't eaten in the last ten hours and will put something in her empty stomach.</p>
+
+            <p>"Yeah. Everyone is coming over too. Xīwàng is even bringing Fú cì along."</p>
+
+            <p>And now she knows Tiala won't immediately go back to her research. Tiala and Xīwàng share a peculiar connection. It's not romantic in the slightest. It's more like they are two halves of a complete concept. Yin and Yang. Dark and Light. Motion and Stillness. You could almost say that one defines the other. In any case, Xīwàng is someone that Tiala would and previously has dropped everything for.</p>
+
+            <p>Tiala follows Jí Lián down to the table and sure enough the whole crew is there. Ami and Claris are off in their own little world of conspiracies. Amare has miniaturized herself to about the size of a moderate reptile and is floating listlessly about the room. And without fail, Fú cì is just staring at the small dragon with rapt attention. Actually this might be the first time Fú cì has seen Amare in a small form. Jí Lián can't actually be sure, but then again she does her best to avoid the dragon. It's a <strong>DRAGON</strong>. And of course, watching over her star struck little sister with a smile is Xīwàng Tiānshàng.</p>
+
+            <p>"Looks like we're all here. Let's eat."</p>
+
+            <p>As the team eats, conversation drifts to recent events. Ami teases Claris about their time together in Heart Melody, mocking her for losing her memory when they phasewalked to Beeston. "I honestly can't believe you forgot yourself and fully became Zafara. Even as Aran, I remembered I was Ami too." Jí Lián doesn't cut in. She was somewhere between the two: Takino had forgotten who she was but as soon as BLADE showed up she remembered that that was Tiala and she was actually Jí Lián. Xīwàng is fake pouting at the end of the table, muttering about not getting the chance to phasewalk to another realm to join one of the protector groups. Fú cì hears her and comments, "But sister. Ami and Claris and Jí Lián all had to lose to Tiala. Could you even lose properly?" This earns her a laugh from Xīwàng and a tight squeeze. The rest of the table looks away awkwardly. <em>She's not wrong.</em> Xīwàng could wipe the floor with everyone there even if they all jumped her at once in their strongest forms. The only exception would be the dragon and she would fight Amare to a <strong>draw</strong>.</p>
+
+            <p>"Speaking of fighting, did you have to hit us so hard as discord?" Claris pipes up with a complaint that Jí Lián honestly has also, save her ire would be directed to BLADE instead of discord. Both are still Tiala so same difference.</p> 
+                
+            <p>"If I didn't fight you for real, neither Starlite 7th or Heart Melody would grow as strong as they need to be for the next phase. Honestly, both are still a little weak."</p>
+
+            <p>"In that case, I should have went! I would have made them much stronger."</p>
+
+            <p>Tiala sighs.</p>
+
+            <p>"There's a number of reasons that wouldn't work, Xīwàng. First, you absolutely don't know how to hold back. You would have just annihilated both teams and came back to Nexsicon without care in the world. Second, you can't transform, so there would be no way of hiding your identity. Third, you can't even use magic, so you wouldn't be able to train Starlite 7th on shifting elemental cores or aura manifesting. And last, you would have just killed Pyara outright instead of reconstituting her as Mahana. It just wouldn't work."</p>
+
+            <p>Xīwàng pouts for real. Ami hops in.</p>
+
+            <p>"Actually, you <em>did</em> kill Pyara. Mahana is <strong>not</strong> Pyara. No one on the team thinks they're the same. Especially Kali. When she escapes the Void Realm, she's absolutely going to murder you, sis."</p> 
+            
+            <p>Claris silently nods along and then adds, "Was it really necessary to kill Pyara like that?"</p>
+
+            <p>"Look, I didn't kill Pyara! If she's dead, then what is Mahana? And I feel like y'all aren't giving me enough credit for the safeguards I set up. Do you realize how difficult it was getting the timing down for that trick? First I had to teach Heart Melody the teleport spell. That's tier 4 magic! They shouldn't even be able to use it! Then I had help Starlite 7th kill three consecutive Zodiarcals including the dragon. Then I had to tear a rift in the sky in Royastella, phasewalk directly to Beeston, and desync Pyara immediately so just in case her lodesoul was lost I would know where she'd end up. It was a lot of work!"</p>
+
+            <p>"Yeah but why kill Pyara?"</p>
+
+            <p>"I thought if I used Desynchronization and Untethered her, I could easily move her lodesoul into Royastella and from there get her into Nexsicon."</p>
+
+            <p>"Wait, but Mahana showed up in Royastella alone. Why weren't you there immediately?"</p>
+
+            <p>Tiala doesn't respond.</p>
+
+            <p>"Tiala."</p>
+
+            <p>Tiala looks away.</p>
+
+            <p>"Tiala. Did you drop Pyara's soul when you tried to move her?"</p>
+
+            <p>"… no."</p>
+
+            <p>"What was that pause, Tiala?"</p>
+
+            <p>"…."</p>
+
+            <p>"Tiala did you drop Pyara's soul?"</p>
+
+            <p>"No! That dumb fairy struggled and escaped and the soul got separated in the confusion ."</p>
+
+            <p>"OMG you dropped my friend's soul!"</p>
+
+            <p>"Look! It worked out. I got Mahana here and I got our dad here too. That's two more lodesouls in this realm. Beeston and Royastella are going to merge into Nexsicon and that will give this realm enough ontological depth that all the realms of antiquity will eventually merge into this one."</p>
+
+            <p>"Yes yes. We know. Then you can open the way to the Akashic Record and gain enough knowledge to confront this 'vague threat' you've been telling us about."</p>
+
+            <p>The dragon speaks for the first time. Jí Lián had honestly forgotten the dragon was in the room with them. Ignorant bliss.</p>
+
+            <p>"The threat is real and it is coming. Your leader's choice is a valid defense for what comes."</p>
+
+            <p>The room falls silent, though Jí Lián can see that Ami is rankled by the dragon's words. She never likes to be reminded she's not in charge. It's a wonder she's stuck around this long to be honest.</p>
+
+            <p>Eventually Tiala starts up again.</p>
+
+            <p>"I've been doing some research about the convergence. According to my calculations it will take ten years for Beeston and Royastella to integrate and finally form Ultimatera. But the threat is about five years away. We'd run out of time and I need Starlite 7th, Heart Melody, and any other defenders of their realm to be here in time to stop it."</p>
+
+            <p>"Tiala no. This was a bad idea then and it's a bad idea now."</p>
+
+            <p>Ami seems to be in a particularly argumentative mood today.</p>
+
+            <p>"Ami, this is different. With the two I just added, there's a good number of lodesouls in Nexsicon now. That should be enough to greatly amplify my Beckoning skill and draw in the realms at an accelerated rate."</p>
+
+            <p>"Beckoning draws lodesouls from one realm to yours. How will it help when the lodesouls are already here? Make it make sense."</p>
+
+            <p>"I'm modifying my skill."</p>
+
+            <p>The room goes completely still. Even Amare pauses to look at Tiala.</p>
+
+            <p>"You can't change skills. They're immutable."</p>
+
+            <p>Even Jí Lián has to protest this concept. Not only is Tiala's proposal impossible, any path to it is incredibly dangerous. Nexsicona authorities are already attempting to "have a conversation" with Praxis Verax Affinas for their suspected interference in Beeston and Royastella. The only reason they weren't actively hositle to the group is that they had no evidence and both realms had been phaselocked and sealed temporally. Anyone they sent to investigate would immediately go into stasis until the realm was unsealed. Tiala's proposed action would undoubtedly draw the wrong sort of attention even if she succeeds.</p>
+
+            <p>"Modify how?"</p>
+
+            <p>Xīwàng's eyes are shining. Tiala grins back and begins to discuss the precise details of how she's changing and augmenting her skill to speed up the merging. It's actively a shame that Xīwàng is incompatible with Cymora, Lúmenai, Element Core, Philharmonial Transformation, Aspects of Infinity, and every other magic system found thus far. It's made her far too prone to pushing Tiala down less than ethical pursuits of knowledge. One day, Xīwàng will get everyone killed. Except herself. It's impossible to even conceive of something taking her out.</p>
+
+            <p>"That's all well and good really. Fantastic job, big sis. But what are the possible consequences?"</p>
+
+            <p>Ami can't keep the sarcasm out of her voice. Tiala actually looks uncomfortable with the question.</p>
+
+            <p>"I don't know. It could be something as small as a reality rift or as big as my erasure from reality, history, and memory. No one knows what happens when tier 5 spells fail."</p>
+
+            <p>"TIER 5?!"</p>
+
+            <p>Ami is now on her feet and yelling and Jí Lián doesn't blame her one bit. Even the dragon looks a little shocked. Stunned faces circle the room, save Xīwàng, who probably already knew given their closeness, and Fú cì, who is mildly confused about the conversation thus far and honestly more interested in her apple compote with whipped cream. Everyone dotes on the little girl, Jí Lián included. An hour in the kitchen is more than worth a little girl's smile In exchange.</p>
+
+            <p>Ami's tirade continues.</p>
+
+            <p>"–And if you honestly think I'm gonna stick around for this insanity, you've got another thing coming. If you do this, I'm absolutely leaving PVA. Hard line, Tiala."</p>
+
+            <p>Ami's turquoise eyes blaze into Tiala's purple ones. Tiala sighs.</p>
+
+            <p>"I don't have a choice, Ami."</p>
+
+            <p>"You do. And clearly you've already made it."</p>
+
+            <p>Ami whirls around and storms out. Moments later the front door is heard closing. Tiala sighs again. Jí Lián remains silent, but she noticed that Ami wasn't actually as angry as she seemed. She looked more… satisfied? Almost like Tiala had given her a justification to leave and maintain the moral high ground.</p>
+
+            <p>Whatever. Jí Lián is here to save Tiala from herself when she can and pick up the pieces when she can't.</p>
+
+            <p style="text-align: center;"><span class="dramatic">&#10070;&#10192;&#10070;&#10192;&#10070;&#10192;&#10070;</span></p>
+
+            <p>Xīwàng and Fú cì have returned to the Tiānshàng compound. Ami is off who knows where. Claris is scouting for her sister as always. And Amare is high above the clouds, floating like a wayward balloon.</p>
+
+            <p>"So are you sure about this?"</p>
+
+            <p>"Not even close." Tiala's response would be a surprise to anyone who didn't know her relationship with her little sister very well. Jí Lián however does. Tiala continues, "Well, she's been looking for an excuse to bail. I'm guessing this was a convenient way to exit and claim higher moral ground."</p>
+
+            <p>"You noticed too."</p>
+
+            <p>Tiala shrugs. "I am her big sister, after all."</p>
+
+            <p>"What do you need me to do?"</p>
+
+            <p>Tiala hands her a clipboard. On it is a typed sheet of paper.</p>
+
+            <p style="font-style: italic; padding: 20px; border-left: 3px solid var(--secondary-pink); margin: 30px 0;">If you do not recognize the girl in front of you, take your sword and slash the magic circle floating between her hands. Do it immediately because you won't have time for anything else. Trust yourself.<br>- Jí Lián Xiá</p>
+
+            <p>"Sign above your name."</p>
+
+            <p>Ah. A last resort. A <em>failsafe</em>. Tenebris Operiet should be able to safely dispel any major casting even if it's Tier 5. Jí Lián signs.</p>
+
+            <p>"Alright here I go."</p>
+
+            <p>The air is electric. Jí Lián can feel the power radiating off the spell's magic circle in waves of pressure. She's being pushed back in her seat. The word spellbinding has truly earned its meaning on this day. It's so distracting that she barely even notices the practitioner who is casting. An unbelievably complex spell pattern. She's not the scholar but even she can see the complexity on display. Whoever put this spell together must be a genius. She looks at the caster. Some strange girl she's never seen before. Wait. Why is she here watching this spell? Wait. Could this be dangerous? Wait wait. Is she the target of the spell? Jí Lián breaks out in a rare cold sweat. She's not tied down. Okay. She can just leave. Okay. She looks again at the unfamiliar girl. The caster is fully focused on the spell. The spell that seems to be going out of control. This is not good. She looks around again. She sees the clipboard in her lap. She reads. Oh. She transforms. She attacks the spell circle.</p>
+
+            <p>The spell circle&nbsp;&nbsp;&nbsp;s&nbsp;&nbsp;h&nbsp;&nbsp;a&nbsp;&nbsp;t&nbsp;&nbsp;t&nbsp;&nbsp;e&nbsp;&nbsp;r&nbsp;&nbsp;s....</p>
+
+            <p style="text-align: center; font-weight: 700; letter-spacing: 8px; margin: 40px 0;">And.<br>She.<br>Remembers.</p>
+
+            <p>Kesshō catches Tiala as she goes limp and then reverts back down to Jí Lián.</p>
+
+            <p>"You okay?"</p>
+
+            <p>"That… went poorly."</p>
+
+            <p>"You might say that. You triggered a Cascade Resonance, idiot sister."</p>
+
+            <p>Neither Jí Lián nor Tiala had seen Ami enter, but here she is. A Cascade Resonance. Not the worst thing but not the best.</p>
+
+            <p>"How bad?" Tiala's voice is raspy. Almost like she had being screaming for a long time. Maybe she had. Tier 5 is weird.</p>
+
+            <p>"Dunno. Looks like you've fractured causality at the very least."</p>
+
+            <p>Causality fracture. That means that the narrative flow of the universe was no longer bound. To put it in perspective, this means that Sherlock Holmes might fail to solve the case or Batman might get beaten by a group of thugs. The normal flow of cosmic storytelling was no longer in play.</p>
+
+            <p>This is not good.</p>
+
+            <p>"You should go and see about your invincible girl. Last I saw the Tiānshàng compound was on fire and surrounded by assassins."</p>
+
+            <p>This is very not good.</p>
+
+            <p>Tiala's eyes go wild. Jí Lián understands.</p>
+
+            <p>"I know the spell to check the timeline on the convergence." Tiala gives her a startled look. Jí Lián shrugs. "You wrote it down. I read things. No big. Go protect Xīwàng and Fú cì. I'll cast the spell." Tiala begins to protest but Jí Lián physically pushes her out the door. Tiala leaves to save her friend... if she can.</p>
+
+            <p>"You spoil her."</p>
+
+            <p>"I spoil you too, Ami." Ami just grins at Jí Lián in response. "You don't actually care about the Cascade Resonance. You just want an excuse to troll your sister. And throw some chaos into her plans." Ami's grin turns feral, her eyes sparkling in unrestrained glee. Jí Lián sighs. "Are you gonna help with the spell?"</p>
+
+            <p>"One last task before Praxis Verax Affinas is dissolved."</p>
+
+            <p>Ami and Jí Lián quickly set up the components to cast the spell. As the components hum to life, the feedback starts rolling in: a chaotic stream of data on how the realm was effected. Said effects were wide ranging but not catastrophic. Aside from causality being broken, it seems the spell also added an improbability factor into the merging process. Specifically, the lesser realms of antiquity now have a small possibility of merging into the realm in the wrong place. So a volcano might end up in a tundra. A swamp might end up in the desert. A domed forest might end up underwater.</p>
+
+            <p>Ultimatera is going to be messier than planned.</p>
+
+            <p>And speaking of Ultimatera…  "Two years." Tiala's spell had accelerated the convergence by a full 400%.</p>
+
+            <p>The risk was worth it.</p>
+
+            <p>Jí Lián gets a comm from Tiala.</p>
+
+            <p>"Hey, just finished the spell and it's go-"</p>
+
+            <p>"Xīwàng is missing. The Tiānshàng clan has been massacred and someone said that Xīwàng was buried in assassins. I can't find her. Fú cì is gone too." Jí Lián has never heard her friend sound so defeated. Broken. Devastated. "Ami was right. I shouldn't have done this."</p>
+
+            <p>"Did you have any other choice?"</p>
+
+            <p>"…."</p>
+
+            <p>"Tiala, did you have any other choice?"</p>
+
+            <p>"…. I shouldn't have done this."</p>
+
+            <p>The comm ends.</p>
+
+            <p>Was the risk worth it? Jí Lián isn't so sure anymore.</p>
+
+        </article>
+
+
+        <!-- Related Stories Section -->
+        <section class="related-section">
+            <h2 class="related-title">Related Stories</h2>
+            <div class="related-grid">
+                <a href="story-regicide.html" class="related-card">
+                    <div class="related-card-title">Regicide</div>
+                    <div class="related-card-desc">After the defeat of the leader of the incursive forces, BLADE GUILLOTINE takes the leader's power for herself.</div>
+                </a>
+                <a href="story-avant-garde.html" class="related-card">
+                    <div class="related-card-title">Avant-Garde Composition</div>
+                    <div class="related-card-desc">dissonant discord returns for a final confrontation with Mahana Sahi and the Lovely Hearts.</div>
+                </a>
+                <a href="story-investiture.html" class="related-card">
+                    <div class="related-card-title">Investiture</div>
+                    <div class="related-card-desc">After the betrayal of BLADE GUILLOTINE, Starlite 7th struggles to face the increased power of the Crystalline. A fortuitous encounter with a powerful stranger allows the team to unlock new potential.</div>
+                </a>
+            </div>
+        </section>
     </div>
+
 </body>
 
 </html>
