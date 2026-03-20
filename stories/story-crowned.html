@@ -33,7 +33,35 @@
             line-height: 1.9;
             overflow-x: hidden;
         }
+        .next-story-section {
+    margin-top: 40px;
+    padding: 0;
+    text-align: right;
+}
+/* Next story button */
+.next-story-button {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+    padding: 16px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(233, 30, 99, 0.3);
+    display: inline-block;
+    margin-left: 20px;
+    animation: fadeIn 1s ease-out 0.7s both;
+}
 
+.next-story-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(233, 30, 99, 0.4);
+    border-color: var(--accent-cyan);
+}
         /* Animated background */
         .bg-grid {
             position: fixed;
@@ -413,29 +441,32 @@
             <p>The way he lost <em>everything</em>.</p>
         </article>
 
+        <!-- Next Story Button -->
+        <section class="next-story-section">
+            <a href="story-regicide.html" class="next-story-button">Next Story →</a>
+        </section>
+
         <!-- Related Stories Section -->
         <section class="related-section">
-            <h2 class="related-title">Related Stories</h2>
+            <h2 class="related-title">Other Stories</h2>
             <div class="related-grid">
-                <a href="story-investiture.html" class="related-card">
-                    <div class="related-card-title">Investiture</div>
-                    <div class="related-card-desc">After the betrayal of BLADE GUILLOTINE, Starlite 7th struggles to face the
-                        increased power of the Crystalline. A fortuitous encounter with a powerful stranger allows the
-                        team to unlock new potential.</div>
-                </a>
-                <a href="story-regicide.html" class="related-card">
-                    <div class="related-card-title">Regicide</div>
-                    <div class="related-card-desc">After the defeat of the leader of the incursive forces, BLADE GUILLOTINE
-                        takes the leader's power for herself.</div>
-                </a>
-                <a href="story-symphonic-overture.html" class="related-card">
-                    <div class="related-card-title">Symphonic Overture</div>
-                    <div class="related-card-desc">Mahana Sahi's appearance in Royastella marks the start of a new
-                        conflict for the Starlite 7th.</div>
-                </a>
+                <!-- Stories will be populated by script -->
             </div>
         </section>
     </div>
+
+    <!-- Load external story list -->
+    <script src="stories.js"></script>
+    
+    <!-- Configure for this specific page -->
+    <script>
+        const currentStory = 'story-crowned.html';
+        const nextStory = 'story-regicide.html';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            populateOtherStories(currentStory, nextStory);
+        });
+    </script>
 
 </body>
 

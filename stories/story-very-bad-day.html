@@ -246,6 +246,31 @@
             transform: translateY(0);
         }
 
+        /* Next story button */
+        .next-story-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            padding: 16px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(233, 30, 99, 0.3);
+            display: inline-block;
+            margin-left: 20px;
+            animation: fadeIn 1s ease-out 0.7s both;
+        }
+
+        .next-story-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(233, 30, 99, 0.4);
+            border-color: var(--accent-cyan);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .coming-soon-title {
@@ -294,6 +319,7 @@
         </h1>
         <p class="subtitle">Fú cì's chaotic adventure is in development.</p>
         <button class="back-button" onclick="history.back()">← Go Back</button>
+        <a href="story-adventure.html" class="next-story-button">Next Story →</a>
     </div>
 </body>
 

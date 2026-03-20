@@ -288,7 +288,35 @@
             transition: all 0.2s ease;
             font-weight: 600;
         }
+        .next-story-section {
+    margin-top: 40px;
+    padding: 0;
+    text-align: right;
+}
+/* Next story button */
+.next-story-button {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+    padding: 16px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(233, 30, 99, 0.3);
+    display: inline-block;
+    margin-left: 20px;
+    animation: fadeIn 1s ease-out 0.7s both;
+}
 
+.next-story-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(233, 30, 99, 0.4);
+    border-color: var(--accent-cyan);
+}
         .character-link:hover {
             color: white;
             border-bottom-color: var(--accent-cyan);
@@ -545,29 +573,32 @@
             <p>For the first time since the alley, Mahana smiles. A real, unguarded one.</p>
         </article>
 
+        <!-- Next Story Button -->
+        <section class="next-story-section">
+            <a href="story-attacca-subito.html" class="next-story-button">Next Story →</a>
+        </section>
+
         <!-- Related Stories Section -->
         <section class="related-section">
-            <h2 class="related-title">Related Stories</h2>
+            <h2 class="related-title">Other Stories</h2>
             <div class="related-grid">
-                <a href="story-aria-caesura.html" class="related-card">
-                    <div class="related-card-title">Aria Caesura</div>
-                    <div class="related-card-desc">The climax of the conflict between Pyara Dana and dissonant discord.
-                    </div>
-                </a>
-                <a href="story-avant-garde-composition.html" class="related-card">
-                    <div class="related-card-title">Avant-Garde Composition</div>
-                    <div class="related-card-desc">dissonant discord abducts Mahana Sahi and opens a rift to Nexsicon.
-                        The
-                        Lovely Hearts pursue rescue.</div>
-                </a>
-                <a href="story-falling-stars.html" class="related-card">
-                    <div class="related-card-title">Falling Stars</div>
-                    <div class="related-card-desc">BLADE GUILLOTINE's betrayal of the Starlite 7th and the capture of
-                        Starlit Alpha.</div>
-                </a>
+                <!-- Stories will be populated by script -->
             </div>
         </section>
     </div>
+
+    <!-- Load external story list -->
+    <script src="stories.js"></script>
+    
+    <!-- Configure for this specific page -->
+    <script>
+        const currentStory = 'story-symphonic-overture.html';
+        const nextStory = 'story-attacca-subito.html';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            populateOtherStories(currentStory, nextStory);
+        });
+    </script>
 </body>
 
 </html>
