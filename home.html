@@ -16,6 +16,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -431,6 +432,37 @@
             box-shadow: var(--glow-cyan);
         }
 
+        /* Social media icons */
+        .social-section {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+            padding-bottom: 40px;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        .social-link {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            filter: drop-shadow(0 4px 8px rgba(233, 30, 99, 0.4));
+        }
+
+        .social-link img {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .logo-text {
@@ -693,6 +725,42 @@
             <a href="lore.html" class="footer-link">Lore</a>
             <a href="glossary.html" class="footer-link">Glossary</a>
             <a href="roadmap.html" class="footer-link">Roadmap</a>
+        </div>
+
+        <div class="social-section">
+            <a href="https://www.reddit.com/r/CriosProject/" target="_blank" rel="noopener" class="social-link" title="Reddit">
+                <i class="fa-brands fa-reddit"></i>
+            </a>
+            <a href="https://x.com/criosproject" target="_blank" rel="noopener" class="social-link" title="Twitter">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://bsky.app/profile/thecriosproject.bsky.social" target="_blank" rel="noopener" class="social-link" title="Bluesky">
+                <div style="width: 1.5rem; height: 1.5rem; background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan)); -webkit-mask: url('https://upload.wikimedia.org/wikipedia/commons/7/7a/Bluesky_Logo.svg') no-repeat center; mask: url('https://upload.wikimedia.org/wikipedia/commons/7/7a/Bluesky_Logo.svg') no-repeat center; -webkit-mask-size: contain; mask-size: contain;"></div>
+            </a>
+            <a href="https://www.facebook.com/thecriosproject" target="_blank" rel="noopener" class="social-link" title="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.tiktok.com/@criosproject" target="_blank" rel="noopener" class="social-link" title="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://www.instagram.com/criosproject" target="_blank" rel="noopener" class="social-link" title="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://pin.it/7DZgnu41K" target="_blank" rel="noopener" class="social-link" title="Pinterest">
+                <i class="fa-brands fa-pinterest"></i>
+            </a>
+            <a href="https://discord.gg/UCU3S9sXhC" target="_blank" rel="noopener" class="social-link" title="Discord">
+                <i class="fa-brands fa-discord"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/criosproject/" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://snapchat.com/t/ZaQM5Zu9" target="_blank" rel="noopener" class="social-link" title="Snapchat">
+                <i class="fa-brands fa-snapchat"></i>
+            </a>
+            <a href="https://wa.link/8m0jt5" target="_blank" rel="noopener" class="social-link" title="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
         </div>
 
 
