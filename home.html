@@ -160,7 +160,7 @@
         /* Logo section */
         .logo-section {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 30px;
             animation: fadeInScale 1.2s ease-out;
         }
 
@@ -309,7 +309,7 @@
             background: var(--dark-panel);
             border: 2px solid rgba(233, 30, 99, 0.2);
             border-radius: 16px;
-            padding: 40px 32px;
+            padding: 28px 32px;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
@@ -326,13 +326,20 @@
 
         .nav-card-icon {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: 900;
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 16px;
+            margin-right: 12px;
+            line-height: 1;
+        }
+
+        .nav-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
         }
 
         .nav-card-title {
@@ -340,9 +347,9 @@
             font-size: 1.6rem;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 12px;
             text-transform: uppercase;
             letter-spacing: 2px;
+            line-height: 1;
         }
 
         .nav-card-desc {
@@ -444,6 +451,10 @@
             .nav-grid {
                 grid-template-columns: 1fr;
             }
+
+            .button-container {
+                flex-direction: column;
+            }
         }
 
         .fadein {
@@ -484,8 +495,17 @@
             }
         }
 
-        /* Prologue Button */
-        .prologue-btn {
+        /* Button Container */
+        .button-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            justify-content: center;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .top-btn {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
@@ -498,14 +518,13 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.4s ease;
-            margin-top: -70px;
             position: relative;
             overflow: hidden;
-            z-index: 1;
-            margin-bottom: 15px;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .prologue-btn:hover {
+        .top-btn:hover {
             box-shadow: var(--glow-pink);
             transform: scale(1.05);
         }
@@ -591,27 +610,59 @@
             <p class="tagline">Harmonic Convergence</p>
             <p class="subtagline">A Transmedia Storytelling Universe</p>
         </div>
-        <button class="prologue-btn" onclick="openVideo()">Prologue</button>
+
+        <div class="button-container">
+            <a href="overview.html" class="top-btn">Overview</a>
+            <button class="top-btn" onclick="openVideo()">Prologue</button>
+        </div>
+
         <div class="nav-grid">
+            <a href="stories.html" class="nav-card">
+                <div class="nav-card-header">
+                    <div class="nav-card-icon">✦</div>
+                    <h2 class="nav-card-title">Stories</h2>
+                </div>
+                <p class="nav-card-desc">Read the interconnected tales across multiple realms. Follow character arcs, major events, and the convergence of destinies.</p>
+            </a>
+
+            <a href="characters.html" class="nav-card">
+                <div class="nav-card-header">
+                    <div class="nav-card-icon">◆</div>
+                    <h2 class="nav-card-title">Characters</h2>
+                </div>
+                <p class="nav-card-desc">Meet the heroes, rivals, and legends. Explore their backgrounds, abilities, and roles in the unfolding narrative.</p>
+            </a>
+
             <a href="timeline.html" class="nav-card">
-                <div class="nav-card-icon">⟡</div>
-                <h2 class="nav-card-title">Enter the World</h2>
-                <p class="nav-card-desc">Explore the narrative and chronological timelines. Witness the convergence of
-                    realms and the clash of destinies across multiple arcs.</p>
+                <div class="nav-card-header">
+                    <div class="nav-card-icon">⟡</div>
+                    <h2 class="nav-card-title">Timeline</h2>
+                </div>
+                <p class="nav-card-desc">Navigate the narrative and chronological timelines. Witness the convergence of realms and the clash of destinies.</p>
+            </a>
+
+            <a href="realms.html" class="nav-card">
+                <div class="nav-card-header">
+                    <div class="nav-card-icon">◈</div>
+                    <h2 class="nav-card-title">Realms</h2>
+                </div>
+                <p class="nav-card-desc">Discover the worlds of Beeston, Royastella, Nexsicon, and Ultimatera. Each realm holds its own mysteries and conflicts.</p>
+            </a>
+
+            <a href="magic.html" class="nav-card">
+                <div class="nav-card-header">
+                    <div class="nav-card-icon">✧</div>
+                    <h2 class="nav-card-title">Magic</h2>
+                </div>
+                <p class="nav-card-desc">Understand the systems of power that shape the universe. From transformation sequences to combat abilities.</p>
             </a>
 
             <a href="factions.html" class="nav-card">
-                <div class="nav-card-icon">◈</div>
-                <h2 class="nav-card-title">Explore Factions</h2>
-                <p class="nav-card-desc">Discover the five major factions: Heart Melody, Starlite 7th, Destiny's
-                    Penance, Reason Theory, and Praxis Verax Affinas.</p>
-            </a>
-
-            <a href="overview.html" class="nav-card">
-                <div class="nav-card-icon">✦</div>
-                <h2 class="nav-card-title">About the Project</h2>
-                <p class="nav-card-desc">Learn about the 16-year transmedia universe, the Versa card game, and the
-                    vision behind Crios.</p>
+                <div class="nav-card-header">
+                    <div class="nav-card-icon">⬡</div>
+                    <h2 class="nav-card-title">Factions</h2>
+                </div>
+                <p class="nav-card-desc">Learn about the major groups: Heart Melody, Starlite 7th, Destiny's Penance, Reason Theory, and Praxis Verax Affinas.</p>
             </a>
         </div>
 
@@ -638,13 +689,9 @@
         </div>
 
         <div class="footer-links">
-            <a href="characters.html" class="footer-link">Characters</a>
-            <a href="realms.html" class="footer-link">Realms</a>
-            <a href="lore.html" class="footer-link">Lore</a>
-            <a href="magic.html" class="footer-link">Magic</a>
             <a href="arsenal.html" class="footer-link">Arsenal</a>
+            <a href="lore.html" class="footer-link">Lore</a>
             <a href="glossary.html" class="footer-link">Glossary</a>
-            <a href="stories.html" class="footer-link">Stories</a>
             <a href="roadmap.html" class="footer-link">Roadmap</a>
         </div>
 
@@ -692,11 +739,11 @@
 
     // --- Updates Rotation System ---
     const updates = [
-        { text: "Crowned - The Starlite 7th assume the throne", link: "stories/story-crowned.html" },
-        { text: "Regicide - The final battle goes terribly wrong", link: "stories/story-regicide.html" },
-        { text: "Avant-Garde Composition - The rivalry hits a breaking point", link: "stories/story-avant-garde-composition.html" },
-        { text: "Grand Convergence - Truths are revealed and an alliance is irrevocably shattered", link: "stories/story-grand-convergence.html" },
-        { text: "Attacca Subito - Heart Melody's new leader struggles to find her place", link: "stories/story-attacca-subito.html"}
+        { text: "Coronation - Ascendancy Story", link: "stories/story-coronatiom.html" },
+        { text: "Regicide - Crisis Reversal", link: "stories/story-regicide.html" },
+        { text: "Avant-Garde Composition - Final Act", link: "stories/story-avant-garde-composition.html" },
+        { text: "Grand Convergence - Revelation Story", link: "stories/story-grand-convergence.html" },
+        { text: "Attacca Subito - Character Establishment", link: "stories/story-attacca-subito.html"}
     ];
 
     let currentUpdateIndex = 0;

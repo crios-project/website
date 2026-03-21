@@ -5,7 +5,7 @@ const ALL_STORIES = [
     { title: 'Aria Caesura', file: 'story-aria-caesura.html' },
     { title: 'Avant-Garde Composition', file: 'story-avant-garde-composition.html' },
     { title: 'Bluish-Green Truths', file: 'story-bluish-green-truths.html' },
-    { title: 'Crowned', file: 'story-crowned.html' },
+    { title: 'Coronation', file: 'story-coronation.html' },
     { title: 'Falling Stars', file: 'story-falling-stars.html' },
     { title: 'Grand Convergence', file: 'story-grand-convergence.html' },
     { title: 'Investiture', file: 'story-investiture.html' },
