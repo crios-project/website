@@ -2,19 +2,11 @@
 <html lang="en">
 
 <head>
-
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Crios" />
-    <link rel="manifest" href="/site.webmanifest" />
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart's Wings // Coming Soon</title>
+    <title>Heart's Wings // a CRIOS Short Story</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Archivo:wght@300;400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
         rel="stylesheet">
     <style>
         * {
@@ -31,19 +23,15 @@
             --dark-panel: #141419;
             --text-primary: #e8e8f0;
             --text-dim: #8888a8;
-            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
-            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+            --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
 
         body {
             font-family: 'Archivo', sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            line-height: 1.9;
+            overflow-x: hidden;
         }
 
         /* Animated background */
@@ -53,8 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+            background-image: linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
@@ -67,6 +54,7 @@
             0% {
                 transform: translateY(0);
             }
+
             100% {
                 transform: translateY(40px);
             }
@@ -101,153 +89,199 @@
         }
 
         @keyframes orbFloat1 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0);
             }
+
             50% {
                 transform: translate(-100px, 100px);
             }
         }
 
         @keyframes orbFloat2 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0);
             }
+
             50% {
                 transform: translate(100px, -80px);
             }
         }
 
-        /* Content container */
-        .wrapper {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 40px;
-            animation: fadeIn 1s ease-out;
+        /* Header nav */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
         }
 
-        @keyframes fadeIn {
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Story header */
+        .story-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Title */
-        .coming-soon-title {
+        .story-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 3.5rem;
             font-weight: 900;
-            margin-bottom: 40px;
-            line-height: 1.3;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .story-label {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            font-weight: 400;
-            display: block;
-            margin-bottom: 20px;
-            letter-spacing: 4px;
-        }
-
-        .story-name {
             background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            display: block;
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            animation: glow 3s ease-in-out infinite;
+            margin-bottom: 16px;
+            letter-spacing: 3px;
+            line-height: 1.2;
         }
 
-        @keyframes glow {
-            0%, 100% {
-                filter: drop-shadow(0 0 10px rgba(233, 30, 99, 0.4));
-            }
-            50% {
-                filter: drop-shadow(0 0 25px rgba(233, 30, 99, 0.8)) drop-shadow(0 0 40px rgba(0, 217, 255, 0.4));
-            }
+        .story-meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
         }
 
-        .coming-text {
+        .meta-item {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
             color: var(--text-dim);
-            font-weight: 400;
-            letter-spacing: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .dot {
+        .meta-item .label {
             color: var(--accent-cyan);
-            font-weight: 900;
         }
 
-        /* Subtitle */
-        .subtitle {
-            font-family: 'Archivo', sans-serif;
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            margin-bottom: 60px;
-            font-style: italic;
+        /* Story content */
+        .story-content {
             animation: fadeIn 1s ease-out 0.3s both;
         }
 
-        /* Back button */
-        .back-button {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .story-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 28px;
+            color: var(--text-primary);
+        }
+
+        .story-content p:first-of-type::first-letter {
+            font-size: 4rem;
+            line-height: 1;
+            float: left;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
+            color: var(--secondary-pink);
+            margin: 4px 12px 0 0;
+        }
+
+        /* Emphasis text */
+        .story-content strong {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .story-content em {
+            color: var(--secondary-pink);
+            font-style: italic;
+        }
+
+        /* Thought text */
+        .thought {
+            font-style: italic;
             color: var(--text-dim);
-            background: transparent;
-            border: 2px solid var(--text-dim);
-            padding: 16px 40px;
-            cursor: pointer;
+        }
+
+        /* Special moments - dramatic reveals */
+        .dramatic {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 3px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: inline-block;
-            animation: fadeIn 1s ease-out 0.5s both;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 48px 0;
+            padding: 24px;
+            border-top: 2px solid rgba(233, 30, 99, 0.3);
+            border-bottom: 2px solid rgba(233, 30, 99, 0.3);
         }
 
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .back-button:hover::before {
-            left: 100%;
-        }
-
-        .back-button:hover {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .back-button:active {
-            transform: translateY(0);
+        /* Section breaks */
+        .break {
+            text-align: center;
+            margin: 60px 0;
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            letter-spacing: 8px;
         }
 
         /* Next story button */
+        .next-story-section {
+            margin-top: 40px;
+            padding: 0;
+            text-align: right;
+        }
+
         .next-story-button {
+            display: inline-block;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.9rem;
             font-weight: 600;
@@ -260,9 +294,6 @@
             text-decoration: none;
             transition: all 0.3s ease;
             border: 1px solid rgba(233, 30, 99, 0.3);
-            display: inline-block;
-            margin-left: 20px;
-            animation: fadeIn 1s ease-out 0.7s both;
         }
 
         .next-story-button:hover {
@@ -271,36 +302,69 @@
             border-color: var(--accent-cyan);
         }
 
-        /* Responsive */
+        /* Other stories section */
+        .related-section {
+            margin-top: 60px;
+            padding: 48px 0 0;
+            border-top: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .related-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .related-card {
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            padding: 24px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2);
+        }
+
+        .related-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
         @media (max-width: 768px) {
-            .coming-soon-title {
-                font-size: 2rem;
+            .story-title {
+                font-size: 2.2rem;
             }
 
-            .story-label {
-                font-size: 0.9rem;
-                letter-spacing: 3px;
+            .story-content p {
+                font-size: 1.05rem;
             }
 
-            .story-name {
-                font-size: 2.5rem;
+            .story-meta {
+                flex-direction: column;
+                gap: 12px;
             }
 
-            .coming-text {
-                font-size: 1.8rem;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-            }
-
-            .back-button {
-                font-size: 0.85rem;
-                padding: 14px 32px;
-            }
-
-            .wrapper {
-                padding: 24px;
+            .story-content p:first-of-type::first-letter {
+                font-size: 3rem;
+                margin: 2px 8px 0 0;
             }
         }
     </style>
@@ -311,16 +375,148 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <div class="wrapper">
-        <h1 class="coming-soon-title">
-            <span class="story-label">Short Story</span>
-            <span class="story-name">Heart's Wings</span>
-            <span class="coming-text">Coming Soon<span class="dot">.</span></span>
-        </h1>
-        <p class="subtitle">Heart Beat's ascension tale coming soon.</p>
-        <button class="back-button" onclick="history.back()">← Go Back</button>
-        <a href="story-aria-caesura.html" class="next-story-button">Next Story →</a>
+    <nav class="header-nav">
+        <a href="../stories.html" class="back-link">← All Stories</a>
+    </nav>
+
+    <div class="container">
+        <!-- Story Header -->
+        <header class="story-header">
+            <h1 class="story-title">Heart's Wings</h1>
+            <div class="story-meta">
+                <div class="meta-item"><span class="label">Era:</span> <a href="../realms/realm-beeston.html" class="back-link">Beeston Arc 1</a></div>
+                <div class="meta-item"><span class="label">Featured:</span> <a href="../characters/character-celesin.html" class="back-link">Celesin</a>, <a href="../characters/character-pyara-dana.html" class="back-link">Pyara Dana</a></div>
+                <div class="meta-item"><span class="label">Type:</span> Arc Story</div>
+            </div>
+        </header>
+
+        <!-- Story Content -->
+        <article class="story-content">
+
+            <p>"No, you aren't a failure of a leader."</p>
+
+            <p>As much joy as there is in guiding magical girls, there's also these less fun parts. Celesin has yet to train a team without a crisis of confidence from the leader. In fact, it's so common now that she already knows the next lines of the conversation.</p>
+
+            <p>First she'll ask how Celesin know she isn't a failure.</p>
+
+            <p>Then she say she's too weak.</p>
+
+            <p>Next she's suggest a place to train and "level up", followed immediately with a "you know what I mean, tier up my magic."</p>
+
+            <p>Then finally she'll ask what she can do to get stronger. And that's the worrisome part.</p>
+
+            <p>The saying is that power corrupts and absolute power corrupts absolutely, but Celesin has discovered that there's more nuance than one expects when it comes to the nature of power versus personality. A more accurate statement would be power <strong>reveals</strong> and absolute power reveals completely. Gaining power won't turn you into a monster overnight. But if you so happen to be standing on a slope, then prepare for it to become quite slippery.</p>
+
+            <p>Therefore it made perfect sense for the Ascension Artifacts to be held in the Arena of Synchrony. Power may not corrupt, but it sure as hell gets you in tune with the type of person you are and will become. And that's why Celesin doesn't love this part. She especially hates all the lying.</p>
+
+            <p>"There's a chance you might not be deemed worthy."</p>
+            <p> A half truth. The Ascension Artifact doesn't pass judgment one way or the other. It's just a weapon.</p>
+
+            <p>"There's a chance you might fall to darkness."</p>
+            <p> Another half truth. This is mostly meant to scare off the timid. Anyone who falls to darkness does so of their own free will.</p>
+
+            <p>"You might even perish in the attempt." </p>
+            <p>This one is almost wholly a lie. The challenge is never more than a magical lead could reasonably withstand and even were it were, the contestant can freely surrender the attempt and escape with their life intact. There's not even a penalty that prevents trying again at a later date, save the injured pride and shame that accompanies the failure. Though to be fair, magical leads that fail to get their artifact tend to not have very long life expectancies.</p>
+
+            <p>No, the real issue is what happens when a magical girl <em>does</em> prove corrupt. The ability to ascend coupled with an impure heart can wreak untold havoc on a world unprepared for such a powerful entity. And to save said world, Celesin has to do her least favorite thing: burn the magic circuits right out of the fallen magical girl. And usually when magical leads are at the level of power that they begin to need an Ascension Artifact, their circuits are embedded in too deep. They can't survive having them removed.</p>
+
+            <p><span class="thought">At least, none have thus far.</span></p>
+
+            <p>Pyara is unfairly adept at wielding sad puppy eyes. Celesin doesn't like that one bit.</p>
+
+            <p>Pyara Dana. AKA Heart Aria. Beeston's great hope against being wholly overrun and consumed by countless hatreds of demons. (Side note: hatred is such a creative and accurate way to describe the demonic horde. She's deffo gonna have to share it with the other guardians and guides at the next meeting.)</p>
+
+            <p>To be perfectly fair, Pyara is a little different than other magical leads she's had in the past. Yes, she ran the conversation pattern like every other worried lead, but she also threw a few curveballs in there. For one, it's wholly irregular for a lead to ask about methods to also empower their allies. It's also kinda shocking it doesn't regularly come up. It's <em>not</em> possible of course, but a full team Ascended or Culminated would be more than enough to run the battle to and through the enemy. The mere thought gives shutters to Celesin.</p>
+
+            <p>Celesin is able to guess Pyara's next question and preempts it. "No, you can't have Kali take the trial instead." Pyara gets a complicated look. Really though, the poor girl needs to get over her inferiority complex towards her sister. Is Kali a more powerful Heart than Pyara? Yes, <em>but</em>. It's that second part that's crucial. The weight of that but is immense, because it reveals the difference in the two girls. Yes, Kali is a stronger Heart than Pyara, <strong>but</strong> that's only because she's obsessed with protecting Pyara above all else. Pyara would sacrifice herself to save the world. Kali would sacrifice the whole world to save Pyara. And that's not who you want leading the team.</p>
+
+            <p>Pyara's final unexpected question metaphorically floors Celesin.</p>
+
+            <p>"Could dissonant discord also get a trial?"</p>
+
+            <p>dissonant discord. The ruiner. The unmitigated risk factor in any given plan. The walking abyssal void. Even if she could take the trial, it's doubtful that an Artifact would make itself manifest for one such as she. And it's doubly doubtful that she could even grow further in power. discord strains the very concept of what makes a magical girl. Any more power would almost certainly tear a rift in the realm itself.</p>
+
+            <p>"No, she cannot. She draws her power from elsewhere and is incompatible with your own." </p><p>An outright lie on all fronts. They have the same power source. They are perfectly compatible. And Celesin could force a trial on discord, though it would cost the realm greatly. The Lovely Hearts need to face the Demonic threat else they will not be strong enough to face what comes. Forcing a trial on discord could very well expend the entirety of Beeston's Demonic Host trying to challenge her limits. There's always the option of supplementing the Demons with another entity, but most guardians are loath to weaken their team to assist another. ****** might approve of sending some ************ but that would mean unlocking sealed memories and frankly? Celesin ain't trying to catch that smoke.</p>
+
+            <p>"So what will you do Heart Aria Pyara Dana, first of Heart Melody and leader of the Lovely Hearts?"</p>
+
+            <p>One last deviation from the pattern. Pyara wasn't so bold as to immediately accept, nor was she so timid as to ask for time to think it over. She had all the info, so she stopped right there and <strong>thought</strong>. Pyara's vibrant green eyes lock onto the floating fairy.</p>
+
+            <p>"I'll take the trial."</p>
+
+            <p>"So shall it be."</p>
+
+            <p>Celesin teleports with Pyara to a sprawling, circular dais of translucent obsidian floating within a bruised navy void. The transition is instantaneous, leaving the scents of Beeston behind for the sterile, ozone-charged air of the Arena of Synchrony. Beneath Pyara's shoes, the floor is etched with glowing ley lines of cyan and magenta that pulse like a digital heartbeat, casting a rhythmic neon glow against her skin. There is no horizon here; only a swirling aurora of violet mists and shattered constellations that drift just beyond the arena's edge.</p>
+
+            <p>Above, the sky is illuminated by floating prisms of great crystal that hum with a low-frequency vibration, echoing the power of every lead who has stood here before. The perimeter is guarded by jagged neon-glass pillars, each vibrating in a different key, creating a perimeter that feels both like a sanctuary and a cage.</p>
+
+            <p>In the center of the dais, a single, unwavering pillar of light descends from the void. It marks where the Ascension Artifact remains phased out of reality, anchored to a thirty-minute countdown that has yet to begin. Already, the violet mists at the edges are curdling, manifesting the first hatreds of the demonic horde—flickering, glitch-like silhouettes that bleed into the arena's perfect, high-tech clarity.</p>
+
+            <p>Celesin hovers a few inches off the obsidian floor, her expression as unreadable as ever in the neon light. The Arena doesn't just test strength; it vibrates in tune with the soul, and right now, the silence is deafening.</p>
+
+            <p>"Where are we?"</p>
+
+            <p>"This is the Arena of Synchrony. Come here, Pyara."</p>
+
+            <p>The fairy floats just beyond the edge of the arena, which is where Pyara stops. The sight of endless void sends her stomach plummeting.</p>
+
+            <p>"Step forward."</p>
+
+            <p>"No. I'll fall."</p>
+
+            <p>"You won't."</p>
+
+            <p>Celesin can see the thoughts in Pyara's head. She thinks this is actually a secret test of character and by stepping forward she shows her trust and will thus complete the trial without combat.</p>
+
+            <p><span class="thought">No, sorry. This is just me showing you how you can escape.</span></p>
+
+            <p>Pyara's step meets Beeston ground and she startledly looks around. She knows where she is. Actually, they could have walked here.</p>
+
+            <p>"The Arena is in a severed space, but if you need to flee the trial, this is where you'll end up."</p>
+
+            <p>"Wait, so can I get knocked out of the trial?"</p>
+
+            <p>Ah yes. The second patterned conversation. This time the order of questions varies with the girl's personality, but inevitably all the same questions are raised. Time limit, enemies, prize, loss conditions, win conditions, potential for maiming (surprisingly common question to be honest), and the like.</p>
+
+            <p>"I can provide no further help. Will you continue, Heart Aria?"</p>
+
+            <p>"I will."</p>
+
+            <p>Celesin watches over Pyara Dana as she faces fears and terrors the like she's not seen previously. In thirty minutes, Pyara will have Coralas. In forty, they will return home after Pyara learns how to ascend to Heart Beat. In forty-five minutes, Kali will be yelling at Pyara about unnecessary risks, and at Celesin for being a terrible mentor. In an hour, Pyara will be showing the sword off to the others. And in 90 minutes, someone will be failing to even lift the sword.</p>
+
+            <p>It's all a pattern. Celesin hopes this one will be a merciful one.</p>
+
+        </article>
+
+        <!-- Next Story Button -->
+        <section class="next-story-section">
+            <a href="story-aria-caesura.html" class="next-story-button">Next Story →</a>
+        </section>
+
+        <!-- Related Stories Section -->
+        <section class="related-section">
+            <h2 class="related-title">Other Stories</h2>
+            <div class="related-grid">
+                <!-- Stories will be populated by script -->
+            </div>
+        </section>
     </div>
+
+    <!-- Load external story list -->
+    <script src="stories.js"></script>
+
+    <!-- Configure for this specific page -->
+    <script>
+        // ONLY EDIT THESE TWO LINES FOR EACH PAGE
+        const currentStory = 'story-hearts-wings.html';
+        const nextStory = 'story-aria-caesura.html';
+
+        // Populate other stories on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            populateOtherStories(currentStory, nextStory);
+        });
+    </script>
+
 </body>
 
 </html>

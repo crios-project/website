@@ -5,33 +5,34 @@ const ALL_STORIES = [
     { title: 'Aria Caesura', file: 'story-aria-caesura.html' },
     { title: 'Avant-Garde Composition', file: 'story-avant-garde-composition.html' },
     { title: 'Bluish-Green Truths', file: 'story-bluish-green-truths.html' },
-    { title: 'Coronation', file: 'story-coronation.html' },
+    { title: 'Crowned', file: 'story-crowned.html' },
     { title: 'Falling Stars', file: 'story-falling-stars.html' },
     { title: 'Grand Convergence', file: 'story-grand-convergence.html' },
     { title: 'Investiture', file: 'story-investiture.html' },
     { title: 'New Hearts', file: 'story-new-hearts.html' },
     { title: 'Regicide', file: 'story-regicide.html' },
+    { title: "Shadow's Roses", file: 'story-shadows-roses.html' },
     { title: 'Symphonic Overture', file: 'story-symphonic-overture.html' },
-    { title: 'Attacca Subito', file: 'story-attacca-subito.html' }
+    { title: 'Heart\'s Wings', file: 'story-hearts-wings.html' }
 ];
-
+ 
 // Populate Other Stories section
 function populateOtherStories(currentStory, nextStory) {
     // Filter out current and next story
     const availableStories = ALL_STORIES.filter(story => 
         story.file !== currentStory && story.file !== nextStory
     );
-
+ 
     // Shuffle and pick 3 random stories
     const shuffled = [...availableStories].sort(() => Math.random() - 0.5);
     const randomStories = shuffled.slice(0, 3);
-
+ 
     // Populate the grid
-    const grid = document.querySelector('.related-grid');
+    const grid = document.querySelector('#other-stories-grid');
     if (grid) {
         grid.innerHTML = randomStories.map(story => `
-            <a href="${story.file}" class="related-card">
-                <div class="related-card-title">${story.title}</div>
+            <a href="${story.file}" class="story-card">
+                <div class="story-card-title">${story.title}</div>
             </a>
         `).join('');
     }
