@@ -25,35 +25,7 @@
             --text-dim: #8888a8;
             --glow-pink: 0 0 20px rgba(233, 30, 99, 0.5);
         }
-        .next-story-section {
-    margin-top: 40px;
-    padding: 0;
-    text-align: right;
-}
-/* Next story button */
-.next-story-button {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--text-primary);
-    background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
-    padding: 16px 40px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(233, 30, 99, 0.3);
-    display: inline-block;
-    margin-left: 20px;
-    animation: fadeIn 1s ease-out 0.7s both;
-}
 
-.next-story-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(233, 30, 99, 0.4);
-    border-color: var(--accent-cyan);
-}
         body {
             font-family: 'Archivo', sans-serif;
             background: var(--dark-bg);
@@ -228,22 +200,45 @@
 
         /* Story content */
         .story-content {
-            font-size: 1.05rem;
-            line-height: 1.9;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .story-content p {
-            margin-bottom: 24px;
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 28px;
+            color: var(--text-primary);
         }
 
-        /* Drop cap */
         .story-content p:first-of-type::first-letter {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 5rem;
-            line-height: 0.8;
+            font-size: 4rem;
+            line-height: 1;
             float: left;
-            margin: 8px 14px 0 0;
+            font-family: 'Orbitron', sans-serif;
             color: var(--secondary-pink);
+            margin: 4px 12px 0 0;
+        }
+
+        /* Dialogue */
+        .story-content em {
+            font-style: italic;
+            color: #d4d4f0;
+        }
+
+        /* Emphasis text */
+        .story-content strong {
+            color: var(--accent-cyan);
+            font-weight: 700;
         }
 
         .story-content em {
@@ -251,12 +246,7 @@
             font-style: italic;
         }
 
-        .story-content strong {
-            color: var(--accent-cyan);
-            font-weight: 700;
-        }
-
-        /* Dramatic styling */
+        /* Special moments - dramatic reveals */
         .dramatic {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.3rem;
@@ -274,46 +264,79 @@
             border-bottom: 2px solid rgba(233, 30, 99, 0.3);
         }
 
+        /* Section breaks */
+        .break {
+            text-align: center;
+            margin: 60px 0;
+            font-size: 1.5rem;
+            color: var(--secondary-pink);
+            letter-spacing: 8px;
+        }
+
         /* Character links */
         .character-link {
             color: var(--accent-cyan);
             text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.2s ease;
+            font-weight: 600;
         }
+        .next-story-section {
+    margin-top: 40px;
+    padding: 0;
+    text-align: right;
+}
+/* Next story button */
+.next-story-button {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--primary-burgundy), var(--secondary-pink));
+    padding: 16px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(233, 30, 99, 0.3);
+    display: inline-block;
+    margin-left: 20px;
+    animation: fadeIn 1s ease-out 0.7s both;
+}
 
+.next-story-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(233, 30, 99, 0.4);
+    border-color: var(--accent-cyan);
+}
         .character-link:hover {
+            color: white;
             border-bottom-color: var(--accent-cyan);
-            text-shadow: 0 0 8px rgba(0, 217, 255, 0.6);
+            text-shadow: 0 0 8px var(--accent-cyan);
         }
 
-        /* Thought text */
-        .thought {
-            font-style: italic;
-            color: var(--text-dim);
-        }
-
-        /* Related section */
+        /* Related stories footer */
         .related-section {
-            margin-top: 100px;
-            padding-top: 60px;
+            margin-top: 120px;
+            padding: 48px 0;
             border-top: 1px solid rgba(233, 30, 99, 0.2);
         }
 
         .related-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--secondary-pink);
-            margin-bottom: 40px;
-            text-align: center;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
         }
 
         .related-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .related-card {
@@ -334,35 +357,30 @@
 
         .related-card-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 12px;
-            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
         .related-card-desc {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-dim);
             line-height: 1.6;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .story-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+
+            .story-content p {
+                font-size: 1.05rem;
             }
 
             .story-meta {
                 flex-direction: column;
-                gap: 16px;
-            }
-
-            .container {
-                padding: 60px 20px 80px;
-            }
-
-            .related-grid {
-                grid-template-columns: 1fr;
+                gap: 12px;
             }
         }
     </style>
@@ -478,7 +496,7 @@
         <!-- Related Stories Section -->
         <section class="related-section">
             <h2 class="related-title">Other Stories</h2>
-            <div class="related-grid">
+            <div class="related-grid" id="other-stories-grid">
                 <!-- Stories will be populated by script -->
             </div>
         </section>

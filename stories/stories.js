@@ -31,8 +31,8 @@ function populateOtherStories(currentStory, nextStory) {
     const grid = document.querySelector('#other-stories-grid');
     if (grid) {
         grid.innerHTML = randomStories.map(story => `
-            <a href="${story.file}" class="story-card">
-                <div class="story-card-title">${story.title}</div>
+            <a href="${story.file}" class="related-card">
+                <div class="related-card-title">${story.title}</div>
             </a>
         `).join('');
     }
