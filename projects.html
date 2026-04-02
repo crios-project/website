@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Crios" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects // CRIOS</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Archivo:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-burgundy: #6b0f1a;
+            --secondary-pink: #e91e63;
+            --accent-cyan: #00d9ff;
+            --dark-bg: #0a0a0f;
+            --dark-panel: #141419;
+            --text-primary: #e8e8f0;
+            --text-dim: #8888a8;
+            --glow-pink: 0 0 30px rgba(233, 30, 99, 0.6);
+            --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Background effects */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(233, 30, 99, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 99, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary-burgundy), transparent);
+            top: -200px;
+            right: -150px;
+            animation: orbFloat1 20s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--secondary-pink), transparent);
+            bottom: -150px;
+            left: -100px;
+            animation: orbFloat2 25s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-80px, 80px); }
+        }
+
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(80px, -60px); }
+        }
+
+        /* Header */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(233, 30, 99, 0.2);
+            padding: 16px 24px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            filter: drop-shadow(var(--glow-pink));
+        }
+
+        .page-subtitle {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Project Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: var(--dark-panel);
+            border: 2px solid rgba(233, 30, 99, 0.2);
+            border-radius: 16px;
+            padding: 50px 40px;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+        .project-card:nth-child(7) { animation-delay: 0.7s; }
+        .project-card:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.08), rgba(0, 217, 255, 0.03));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 12px 48px rgba(0, 217, 255, 0.4);
+            transform: translateY(-12px);
+        }
+
+        /* Logo container */
+        .project-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 32px;
+            min-height: 160px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-logo {
+            max-width: 100%;
+            max-height: 140px;
+            height: auto;
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
+            transition: all 0.5s ease;
+        }
+
+        .project-card:hover .project-logo {
+            filter: drop-shadow(var(--glow-pink));
+            transform: scale(1.05);
+        }
+
+        /* Logo placeholder for projects without logos */
+        .project-logo-placeholder {
+            width: 140px;
+            height: 140px;
+            border-radius: 12px;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(107, 15, 26, 0.4), rgba(20, 20, 25, 0.8));
+            transition: all 0.5s ease;
+        }
+
+        .project-card:hover .project-logo-placeholder {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .project-logo-placeholder span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            letter-spacing: 2px;
+            line-height: 1.3;
+        }
+
+        /* Project info */
+        .project-info {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .project-tagline {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-tagline {
+            opacity: 1;
+            color: var(--text-primary);
+        }
+
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Status badge colors */
+        .stat-value.status-concept { color: var(--text-dim); }
+        .stat-value.status-preproduction { color: #ff9800; }
+        .stat-value.status-development { color: var(--accent-cyan); }
+        .stat-value.status-complete { color: #00e676; }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--dark-panel);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            border-radius: 12px;
+        }
+
+        .cta-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-pink);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-text {
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dim);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            padding: 14px 32px;
+            background: transparent;
+            border: 2px solid var(--secondary-pink);
+            color: var(--secondary-pink);
+            border-radius: 6px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-pink);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-pink);
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--accent-cyan);
+            color: var(--dark-bg);
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .project-card {
+                padding: 40px 32px;
+            }
+
+            .project-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <a href="home.html" class="back-link">← Home</a>
+        <div class="header-title">Project Index</div>
+        <div style="width: 80px;"></div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1 class="page-title">PROJECTS</h1>
+            <p class="page-subtitle">Games, tabletop experiences, and interactive media set in the Crios multiverse</p>
+        </header>
+
+        <!-- Project Grid -->
+        <div class="project-grid">
+
+            <!-- Dissensio Survivors -->
+            <a href="projects/project-dissensio-survivors.html" class="project-card">
+                <div class="project-logo-container">
+                    <img src="assets/logos-added/Dissensio_Logo.png" alt="Dissensio Survivors" class="project-logo">
+                </div>
+                <div class="project-info">
+                    <p class="project-tagline">A 3D arena versus fighting game. Warriors from across the Crios multiverse clash in cross-faction combat.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">3D Versus</span>
+                            <span class="stat-label">Genre</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value status-preproduction">Pre-Production</span>
+                            <span class="stat-label">Status</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Digital</span>
+                            <span class="stat-label">Medium</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">All Factions</span>
+                            <span class="stat-label">Featured</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Soul Dominions: Aperture -->
+            <a href="projects/project-soul-dominions.html" class="project-card">
+                <div class="project-logo-container">
+                    <img src="assets/logos-added/Soul_Dominions_Aperture_logo.png" alt="Soul Dominions: Aperture" class="project-logo">
+                </div>
+                <div class="project-info">
+                    <p class="project-tagline">A bullet heaven game set across the realms. Hold the line against endless waves of enemies including the demonic incursion and Crystalline siege forces.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">Survivors</span>
+                            <span class="stat-label">Genre</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value status-preproduction">Pre-Production</span>
+                            <span class="stat-label">Status</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Digital</span>
+                            <span class="stat-label">Medium</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">All Factions</span>
+                            <span class="stat-label">Featured</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Versa Card Game Rework -->
+            <a href="projects/project-versa.html" class="project-card">
+                <div class="project-logo-container">
+                    <div class="project-logo-placeholder">
+                        <span>VERSA</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <p class="project-tagline">The fully rebuilt, canonically integrated edition of the Crios fighting card game. Twice the size of v1, with new decks, mechanics, and story alignment.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">Card Game</span>
+                            <span class="stat-label">Genre</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value status-development">In Development</span>
+                            <span class="stat-label">Status</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Physical</span>
+                            <span class="stat-label">Medium</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">All Factions</span>
+                            <span class="stat-label">Featured</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Variamon -->
+            <a href="projects/project-variamon.html" class="project-card">
+                <div class="project-logo-container">
+                    <div class="project-logo-placeholder">
+                        <span>VARIA<br>MON</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <p class="project-tagline">A creature-collecting RPG set across the realms of the Crios multiverse. Discover, battle, and evolve creatures of myth and legend.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">Creature RPG</span>
+                            <span class="stat-label">Genre</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value status-concept">Concept</span>
+                            <span class="stat-label">Status</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Digital</span>
+                            <span class="stat-label">Medium</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">All Realms</span>
+                            <span class="stat-label">Featured</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Heartdive -->
+            <a href="projects/project-heartdive.html" class="project-card">
+                <div class="project-logo-container">
+                    <div class="project-logo-placeholder">
+                        <span>HEART<br>DIVE</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <p class="project-tagline">Details forthcoming.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">TBD</span>
+                            <span class="stat-label">Genre</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value status-concept">Concept</span>
+                            <span class="stat-label">Status</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Digital</span>
+                            <span class="stat-label">Medium</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Crossover</span>
+                            <span class="stat-label">Featured</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Untitled Starlite 7th Game -->
+            <a href="projects/project-starlite-7th.html" class="project-card">
+                <div class="project-logo-container">
+                    <img src="assets/icons/Starlite_7th_Logo.png" alt="Starlite 7th Game" class="project-logo">
+                </div>
+                <div class="project-info">
+                    <p class="project-tagline">An untitled game following the Runic Knights of Starlite 7th. Defend Royastella from the Crystalline incursion.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">TBD</span>
+                            <span class="stat-label">Genre</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value status-concept">Concept</span>
+                            <span class="stat-label">Status</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">TBD</span>
+                            <span class="stat-label">Medium</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Starlite 7th</span>
+                            <span class="stat-label">Featured</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Untitled Heart Melody Game -->
+            <a href="projects/project-heart-melody.html" class="project-card">
+                <div class="project-logo-container">
+                    <img src="assets/icons/Lovely_Hearts_Logo.png" alt="Heart Melody Game" class="project-logo">
+                </div>
+                <div class="project-info">
+                    <p class="project-tagline">An untitled game following the Lovely Hearts of Beeston. Harmony is both weapon and shield.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">TBD</span>
+                            <span class="stat-label">Genre</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value status-concept">Concept</span>
+                            <span class="stat-label">Status</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">TBD</span>
+                            <span class="stat-label">Medium</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Heart Melody</span>
+                            <span class="stat-label">Featured</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Untitled Teburu Game -->
+            <a href="projects/project-teburu.html" class="project-card">
+                <div class="project-logo-container">
+                    <div class="project-logo-placeholder">
+                        <span>TEBURU</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <p class="project-tagline">A tabletop experience built on the Teburu platform, bringing the Crios multiverse to the table.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">Tabletop</span>
+                            <span class="stat-label">Genre</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value status-concept">Concept</span>
+                            <span class="stat-label">Status</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">Tabletop</span>
+                            <span class="stat-label">Medium</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">TBD</span>
+                            <span class="stat-label">Featured</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <h2 class="cta-title">Explore the Universe</h2>
+            <p class="cta-text">
+                Every project expands the Crios multiverse into a new medium. Dive into the stories, characters, and lore that power them all.
+            </p>
+            <div class="cta-buttons">
+                <a href="stories.html" class="cta-button">Read the Stories</a>
+                <a href="characters.html" class="cta-button secondary">Meet the Characters</a>
+                <a href="roadmap.html" class="cta-button secondary">View Roadmap</a>
+            </div>
+        </section>
+    </div>
+
+</body>
+
+</html>
